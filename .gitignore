@@ -1,0 +1,12 @@
+*.swp
+*.o
+*.root
+*.dat.gz
+
+/bib/
+/bin/*
+/data/*
+/data_s/*
+/analyzer/*
+/bu_analyzer/*
+/rootfile/*

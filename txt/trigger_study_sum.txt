@@ -1,0 +1,8 @@
+trigger make    rate       runnumber     
+
+mt              2M/spill   4462
+mt             20M/spill   4464
+
+coin            2M/spill   4465,4466,4468,4469
+coin           20M/spill   4470,4471,4472,4473
+
