@@ -134,18 +134,20 @@ void HodoParamMaker2(int runnum){
 
    TH1D *BTOF1[NumOfSegBH1]; 
       for (int i=0; i<NumOfSegBH1;i++) {
-        BTOF1[i] = new TH1D(Form("BTOF1_%d",i+1),Form("BTOF1_%d",i+1),100,-5,5);
+        BTOF1[i] = new TH1D(Form("BH1_%d_BH2_4",i+1),Form("BH1_%d_BH2_4",i+1),2800,-50,50);
       }
    TH1D *BTOF2[NumOfSegBH2]; 
       for (int i=0; i<NumOfSegBH2;i++) {
-        BTOF2[i] = new TH1D(Form("BTOF2_%d",i+1),Form("BTOF2_%d",i+1),100,-5,5);
+        BTOF2[i] = new TH1D(Form("BH1_6_x_BH2_%d",i+1),Form("BH1_6_x_BH2_%d",i+1),2800,-50,50);
       }
 
    Long64_t nentries = tree->GetEntries();
    double btof1[NumOfSegBH1]; 
+   double btof1ns2ch[NumOfSegBH1]; 
    double btof2[NumOfSegBH2]; 
 
    double l = 0.5;
+   double l_v = 1;
 
    TF1 *fit = new TF1("fit","gaus"); 
 
@@ -153,12 +155,13 @@ void HodoParamMaker2(int runnum){
    for (Long64_t i=0; i<nentries;i++) {
       nbytes += tree->GetEntry(i);
       for (int i=0; i<NumOfSegBH1;i++) {
-          if(bh1mt[i]>0 && bh2mt[4]>0){  
-              BTOF1[i]->Fill(bh1mt[i]-bh2mt[4]);
+          if(bh1mt[i]>-100 && bh2mt[3]>-100){  
+              BTOF1[i]->Fill(bh1mt[i]-bh2mt[3]);
           }
       }
+
       for (int i=0; i<NumOfSegBH2;i++) {
-          if(bh1mt[5]>0 && bh2mt[i]>0){  
+          if(bh1mt[5]>-100 && bh2mt[i]>-100 && bh2nhits == 1){  
              BTOF2[i]->Fill(bh1mt[5]-bh2mt[i]);
           }
       }
@@ -181,9 +184,8 @@ void HodoParamMaker2(int runnum){
        BTOF1[i]->Draw(); 
        BTOF1[i]->Fit("fit","","", btof1[i]-l, btof1[i]+l);  
        btof1[i] = fit->GetParameter(1);  
-       BTOF1[i]->GetXaxis()->SetRangeUser(btof1[i]-2,btof1[i]+4);   
+       BTOF1[i]->GetXaxis()->SetRangeUser(-l_v,2*l_v);   
    }
-   
    c1->Print(btof12pdf); 
 
    for (int i=0; i<NumOfSegBH2;i++) {
@@ -194,23 +196,84 @@ void HodoParamMaker2(int runnum){
        BTOF2[i]->Draw(); 
        BTOF2[i]->Fit("fit","","", btof2[i]-l, btof2[i]+l);  
        btof2[i] = fit->GetParameter(1);  
-       BTOF2[i]->GetXaxis()->SetRangeUser(btof2[i]-2,btof2[i]+4);   
+       BTOF2[i]->GetXaxis()->SetRangeUser(-l_v,2*l_v);   
    }
-
   c2 ->Print(btof12pdf); 
 
   c1->Print(btof12pdf+"]"); 
 
-  TString fout1 = (Form( "%s/hp_dat/HodoParam_BTOF1_%05d.dat", anadir.Data() ,runnum));  
+
+  TString prmdir=Form("%s/work/e40/ana/hp_dat",std::getenv("HOME")); 
+  TString filein1=Form("%s/HodoParam_BH1_TDCcalib_00001.dat",prmdir.Data()); 
+  TString filein2=Form("%s/HodoParam_BH2_TDCcalib_00001.dat",prmdir.Data()); 
+  TString filein3=Form("%s/HodoParam_BH1_TDC_%05d.dat",prmdir.Data(),runnum); 
+  std::ifstream fin1(filein1);
+  std::ifstream fin2(filein2);
+  std::ifstream fin3(filein3);
+  std::vector<std::vector<double>> BH1TDC; 
+  std::vector<std::vector<double>> BH2TDC; 
+  std::vector<std::vector<double>> bh1p0; 
+  std::string line;
+
+  while(std::getline(fin1, line)){
+    double a=-1, b=-1;
+    std::istringstream input_line( line );
+    std::vector<double> inner;
+    if( input_line >> a >> b ){
+      inner.push_back(a);
+      inner.push_back(b);
+      BH1TDC.push_back(inner);
+    }
+  }
+
+  while(std::getline(fin2, line)){
+    double a=-1, b=-1;
+    std::istringstream input_line( line );
+    std::vector<double> inner;
+    if( input_line >> a >> b ){
+      inner.push_back(a);
+      inner.push_back(b);
+      BH2TDC.push_back(inner);
+    }
+  }
+
+  while(std::getline(fin3, line)){
+    double a=-1, b=-1;
+    std::istringstream input_line( line );
+    std::vector<double> inner;
+    if( input_line >> a >> b ){
+      inner.push_back(a);
+      inner.push_back(b);
+      bh1p0.push_back(inner);
+    }
+  }
+
+  for(int i=0; i<NumOfSegBH1; i++){
+    for(int j=0; j<2; j++){
+      btof1ns2ch[i] = btof1ns2ch[i] + BH1TDC[i][j] + BH2TDC[3][j];
+    }
+    btof1ns2ch[i] = 1./(btof1ns2ch[i]*0.25);
+    bh1p0[i][0] = bh1p0[i][0] - btof1ns2ch[i] * btof1[i]; 
+    bh1p0[i][1] = bh1p0[i][1] - btof1ns2ch[i] * btof1[i]; 
+  }
+
+  TString fout1 = (Form( "%s/hp_dat/HodoParam_BH1_TDC_%05d.dat", anadir.Data() ,runnum));  
   std::ofstream fout_1(fout1.Data()); 
   for(int i=0; i<NumOfSegBH1; i++){
-     fout_1 << btof1[i] << endl;
+     fout_1 << bh1p0[i][0]  <<  "\t"  << bh1p0[i][1] << endl;
   }     
 
-  TString fout2 = (Form( "%s/hp_dat/HodoParam_BTOF2_%05d.dat", anadir.Data() ,runnum));  
+  TString fout2 = (Form( "%s/hp_dat/HodoParam_CableOffset_%05d.dat", anadir.Data() ,runnum));  
   std::ofstream fout_2(fout2.Data()); 
   for(int i=0; i<NumOfSegBH2; i++){
      fout_2 << btof2[i] << endl;
   }     
+
+  TString fout3 = (Form( "%s/hp_dat/HodoParam_BTOF1_%05d.dat", anadir.Data() ,runnum));  
+  std::ofstream fout_3(fout3.Data()); 
+  for(int i=0; i<NumOfSegBH1; i++){
+     fout_3 << btof1[i]  <<  "\t"  << btof1ns2ch[i] <<  "\t"  << btof1ns2ch[i] * btof1[i]  << endl;
+  }     
+
 
 }

@@ -1,0 +1,27 @@
+
+Processing ../macro/hodprm/HodoParamMaker2.C(4464)...
+Info in <TCanvas::Print>: pdf file /home/had/suharu/work/e40/ana/pdf/trigger_study/btof12_04464.pdf has been created
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Info in <TCanvas::Print>: Current canvas added to pdf file /home/had/suharu/work/e40/ana/pdf/trigger_study/btof12_04464.pdf
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Info in <TCanvas::Print>: Current canvas added to pdf file /home/had/suharu/work/e40/ana/pdf/trigger_study/btof12_04464.pdf
+Info in <TCanvas::Print>: pdf file /home/had/suharu/work/e40/ana/pdf/trigger_study/btof12_04464.pdf has been closed
+1.33user 0.24system 0:01.58elapsed 99%CPU (0avgtext+0avgdata 150064maxresident)k
+0inputs+0outputs (0major+42755minor)pagefaults 0swaps

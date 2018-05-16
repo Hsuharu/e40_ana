@@ -3,7 +3,6 @@
 *.root
 *.dat.gz
 *.tar.gz
-*.pdf
 
 /bib/
 /bin/*

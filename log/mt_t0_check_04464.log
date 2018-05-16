@@ -1,0 +1,58 @@
+
+Processing ../macro/hodprm/mt_t0_check.C(4464)...
+Info in <TCanvas::Print>: pdf file /home/had/suharu/work/e40/ana/pdf/trigger_study/mt_t0_04464.pdf has been created
+ FCN=104.781 FROM MIGRAD    STATUS=CONVERGED      67 CALLS          68 TOTAL
+                     EDM=2.03735e-07    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  Constant     3.04287e+01   1.59785e+00   5.54677e-03   3.15163e-04
+   2  Mean         6.19253e-03   1.44238e-02   6.68108e-05  -4.00932e-02
+   3  Sigma        3.57641e-01   1.42662e-02   4.32231e-05   8.17448e-03
+ FCN=174.293 FROM MIGRAD    STATUS=CONVERGED      68 CALLS          69 TOTAL
+                     EDM=1.13271e-11    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  Constant     1.14948e+02   2.81968e+00   1.33677e-02  -1.56248e-06
+   2  Mean        -5.58622e-02   7.23521e-03   4.65230e-05   3.75015e-04
+   3  Sigma        3.86340e-01   6.90890e-03   2.83237e-05  -8.18760e-04
+ FCN=157.068 FROM MIGRAD    STATUS=CONVERGED      65 CALLS          66 TOTAL
+                     EDM=4.27698e-09    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  Constant     2.20469e+02   3.54153e+00   1.67860e-02  -8.09883e-06
+   2  Mean        -1.17046e-01   5.67087e-03   3.47022e-05  -2.46178e-03
+   3  Sigma        4.28105e-01   4.95986e-03   1.88385e-05   1.74355e-02
+ FCN=233.328 FROM MIGRAD    STATUS=CONVERGED      66 CALLS          67 TOTAL
+                     EDM=8.79011e-08    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  Constant     2.77636e+02   4.07628e+00   2.30276e-02   5.48965e-05
+   2  Mean         5.24728e-02   5.03656e-03   3.76275e-05  -3.76278e-02
+   3  Sigma        4.25362e-01   4.64722e-03   2.12137e-05   1.27078e-01
+ FCN=152.623 FROM MIGRAD    STATUS=CONVERGED      66 CALLS          67 TOTAL
+                     EDM=6.96584e-10    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  Constant     2.14941e+02   3.71053e+00   1.67109e-02   7.42755e-06
+   2  Mean         1.05291e-01   5.55116e-03   3.31153e-05  -2.46293e-03
+   3  Sigma        4.06689e-01   5.14672e-03   1.91295e-05   1.14102e-02
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Info in <TCanvas::Print>: Current canvas added to pdf file /home/had/suharu/work/e40/ana/pdf/trigger_study/mt_t0_04464.pdf
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Warning in <Fit>: Fit data is empty 
+Info in <TCanvas::Print>: Current canvas added to pdf file /home/had/suharu/work/e40/ana/pdf/trigger_study/mt_t0_04464.pdf
+Info in <TCanvas::Print>: Current canvas added to pdf file /home/had/suharu/work/e40/ana/pdf/trigger_study/mt_t0_04464.pdf
+Info in <TCanvas::Print>: pdf file /home/had/suharu/work/e40/ana/pdf/trigger_study/mt_t0_04464.pdf has been closed
+1.22user 0.26system 0:01.56elapsed 94%CPU (0avgtext+0avgdata 133432maxresident)k
+0inputs+8outputs (0major+38308minor)pagefaults 0swaps
