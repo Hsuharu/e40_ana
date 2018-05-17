@@ -131,6 +131,10 @@ void HodoParamMaker_1tof(int runnum){
 // tree->SetBranchStatus("*",0);  // disable all branches
 // TTreePlayer->SetBranchStatus("branchname",1);  // activate branchname
 
+   int seg1 = 4; //1 origine
+   int seg2 = 4; //1 origine
+   int range1 = 0; //  
+   int range2 = 4; //  range1 < nhit < range2 
 
    TH1D *BH1UT[NumOfSegBH1]; 
    TH1D *BH1DT[NumOfSegBH1]; 
@@ -166,7 +170,7 @@ void HodoParamMaker_1tof(int runnum){
         BH2MT[i] = new TH1D(Form("BH2MT%d",i+1),Form("BH2MT%d",i+1),52,-1,1);
       }
 
-   TH1D *BTOF4_4 = new TH1D("BTOF4_4","BTOF4_4",106,-2,2); 
+   TH1D *BTOF = new TH1D(Form("BTOF%d_%d",seg1,seg2),Form("BTOF%d_%d",seg1,seg2),166,-2,4); 
 
    Long64_t nentries = tree->GetEntries();
    double fitprm[3];
@@ -175,8 +179,11 @@ void HodoParamMaker_1tof(int runnum){
 
    double bh2utprm[NumOfSegBH2]; 
    double bh2dtprm[NumOfSegBH2]; 
-   double l = 10;
-   double l2 = 7;
+//   double l = 10; //4465
+//   double l2 = 3;//4465
+//   double l3 = 12;//4465
+   double l = 15; //4462 & 4464
+   double l2 = 7; //4462 & 4464
 
    double btof1[NumOfSegBH1]; 
    double btof2[NumOfSegBH2]; 
@@ -194,14 +201,14 @@ void HodoParamMaker_1tof(int runnum){
    for (Long64_t i=0; i<nentries;i++) {
       nbytes += tree->GetEntry(i);
       for (int i=0; i<NumOfSegBH1;i++) {
-        if(bh1ut[i]>0 && bh1ut[i]>0){
+        if(bh1ut[i]>0 && bh1dt[i]>0  && bh1nhits < range2 && bh1nhits > range1 && bh2ut[seg2-1]>0 && bh2dt[seg2-1]>0 && bh2nhits < range2 && bh2nhits > range1){
           BH1UT[i]->Fill(bh1ut[i]);
           BH1DT[i]->Fill(bh1dt[i]);
         }
       }
 
       for (int i=0; i<NumOfSegBH2;i++) {
-        if(bh2ut[i]>0 && bh2ut[i]>0){
+        if(bh1ut[seg1-1]>0 && bh1dt[seg1-1]>0 && bh1nhits < range2 && bh1nhits > range1 && bh2ut[i]>0 && bh2dt[i]>0 && bh2nhits < range2 && bh2nhits > range1){
           BH2UT[i]->Fill(bh2ut[i]);
           BH2DT[i]->Fill(bh2dt[i]);
         }
@@ -209,7 +216,7 @@ void HodoParamMaker_1tof(int runnum){
    }
 
    
-   TString pdf = Form("%s/pdf/trigger_study/seg4_mean_%05d.pdf", anadir.Data(),runnum);
+   TString pdf = Form("%s/pdf/trigger_study/seg_mean_%05d.pdf", anadir.Data(),runnum);
    TCanvas *c1 = new TCanvas("c1","c1",800,700); 
    TCanvas *c2 = new TCanvas("c2","c2",800,700); 
    TCanvas *c3 = new TCanvas("c3","c3",800,700); 
@@ -224,13 +231,15 @@ void HodoParamMaker_1tof(int runnum){
        bh1utprm[i] = BH1UT[i]->GetXaxis()->GetBinCenter(bh1utprm[i]);  
        bh1dtprm[i] = BH1DT[i]->GetXaxis()->GetBinCenter(bh1dtprm[i]);  
 
-       BH1UT[i]->Fit("fit","","", bh1utprm[i]-l, bh1utprm[i]+l-2);  
+       BH1UT[i]->Fit("fit","","", bh1utprm[i]-l, bh1utprm[i]+l-2);  //4462 & 4464 
+//       BH1UT[i]->Fit("fit","","", bh1utprm[i]-l, bh1utprm[i]+l+2); //4465 
        bh1utprm[i] = fit->GetParameter(1);  
-       BH1UT[i]->GetXaxis()->SetRangeUser(860,970);  
+       BH1UT[i]->GetXaxis()->SetRangeUser(bh1utprm[i]-2*(l), bh1utprm[i]+4*(l)); 
 
-       BH1DT[i]->Fit("fit","","", bh1dtprm[i]-l-2, bh1dtprm[i]+l-2);  
+       BH1DT[i]->Fit("fit","","", bh1dtprm[i]-l-2, bh1dtprm[i]+l-2); //4462 & 4464 
+//       BH1DT[i]->Fit("fit","","", bh1dtprm[i]-l, bh1dtprm[i]+ 2*l); //4465  
        bh1dtprm[i] = fit->GetParameter(1);  
-       BH1DT[i]->GetXaxis()->SetRangeUser(860,970);  
+       BH1DT[i]->GetXaxis()->SetRangeUser(bh1dtprm[i]-2*(l), bh1dtprm[i]+4*(l));  
 
    }
 
@@ -242,13 +251,16 @@ void HodoParamMaker_1tof(int runnum){
        bh2utprm[i] = BH2UT[i]->GetXaxis()->GetBinCenter(bh2utprm[i]);  
        bh2dtprm[i] = BH2DT[i]->GetXaxis()->GetBinCenter(bh2dtprm[i]);  
 
-       BH2UT[i]->Fit("fit","","", bh2utprm[i]-l2, bh2utprm[i]+l2-2);  
+       BH2UT[i]->Fit("fit","","", bh2utprm[i]-l2, bh2utprm[i]+l2-1);  //4462 & 4464
+//       BH2UT[i]->Fit("fit","","", bh2utprm[i]-l3+1, bh2utprm[i]+l3);  //4465 
        bh2utprm[i] = fit->GetParameter(1);  
-       BH2UT[i]->GetXaxis()->SetRangeUser(310,370);  
+       BH2UT[i]->GetXaxis()->SetRangeUser(bh2utprm[i]-2*l2, bh2utprm[i]+4*(l2));  //4462 & 4464 
+//       BH2UT[i]->GetXaxis()->SetRangeUser(bh2utprm[i]-2*l3, bh2utprm[i]+4*(l3));  //4465  
 
-       BH2DT[i]->Fit("fit","","", bh2dtprm[i]-l2+1, bh2dtprm[i]+l2-2);  
+       BH2DT[i]->Fit("fit","","", bh2dtprm[i]-l2+1, bh2dtprm[i]+l2-1); //4462 & 4464 
+//       BH2DT[i]->Fit("fit","","", bh2dtprm[i]-l2+1, bh2dtprm[i]+l2);  //4465 
        bh2dtprm[i] = fit->GetParameter(1);  
-       BH2DT[i]->GetXaxis()->SetRangeUser(340,380);  
+       BH2DT[i]->GetXaxis()->SetRangeUser(bh2dtprm[i]-1*(l2+1), bh2dtprm[i]+4*(l2-1));  
 
    }
    
@@ -256,28 +268,28 @@ void HodoParamMaker_1tof(int runnum){
    c1->SetLogy();
    c1->SetGridx();
    c1->SetGridy();
-   BH1UT[3]->Draw(); 
+   BH1UT[seg1-1]->Draw(); 
    c1 ->Print(pdf); 
 
    c2->cd(); 
    c2->SetLogy();
    c2->SetGridx();
    c2->SetGridy();
-   BH1DT[3]->Draw(); 
+   BH1DT[seg1-1]->Draw(); 
    c2 ->Print(pdf); 
    
    c3->cd(); 
    c3->SetLogy();
    c3->SetGridx();
    c3->SetGridy();
-   BH2UT[3]->Draw(); 
+   BH2UT[seg2-1]->Draw(); 
    c3 ->Print(pdf); 
 
    c4->cd(); 
    c4->SetLogy();
    c4->SetGridx();
    c4->SetGridy();
-   BH2DT[3]->Draw(); 
+   BH2DT[seg2-1]->Draw(); 
    c4 ->Print(pdf); 
    
 
@@ -291,51 +303,51 @@ void HodoParamMaker_1tof(int runnum){
    for (Long64_t i=0; i<nentries;i++) {
       nbytes += tree->GetEntry(i);
       for (int i=0; i<NumOfSegBH1;i++) {
-        if(bh1ut[i]>0 && bh1ut[i]>0){
+        if(bh1ut[i]>0 && bh1dt[i]>0 && bh1nhits < range2 && bh1nhits > range1 && bh2ut[seg2-1]>0 && bh2dt[seg2-1]>0 && bh2nhits < range2 && bh2nhits > range1){
           BH1UT0[i]->Fill(bh1ut[i]-bh1utprm[i]);
           BH1DT0[i]->Fill(bh1dt[i]-bh1dtprm[i]);
         }
       }
 
       for (int i=0; i<NumOfSegBH2;i++) {
-        if(bh2ut[i]>0 && bh2ut[i]>0){
+        if(bh1ut[seg1-1]>0 && bh1dt[seg1-1]>0 && bh1nhits < range2 && bh1nhits > range1 && bh2ut[i]>0 && bh2dt[i]>0 && bh2nhits < range2 && bh2nhits > range1){
           BH2UT0[i]->Fill(bh2ut[i]-bh2utprm[i]);
           BH2DT0[i]->Fill(bh2dt[i]-bh2dtprm[i]);
         }
       }
    }
 
-   BH1UT0[3]->GetXaxis()->SetRangeUser(-50,50);  
-   BH1DT0[3]->GetXaxis()->SetRangeUser(-50,50);  
-   BH2UT0[3]->GetXaxis()->SetRangeUser(-10,10);  
-   BH2DT0[3]->GetXaxis()->SetRangeUser(-10,10);  
+   BH1UT0[seg1-1]->GetXaxis()->SetRangeUser(-50,50);  
+   BH1DT0[seg1-1]->GetXaxis()->SetRangeUser(-50,50);  
+   BH2UT0[seg2-1]->GetXaxis()->SetRangeUser(-50,50);  
+   BH2DT0[seg2-1]->GetXaxis()->SetRangeUser(-50,50);  
 
    c1->cd(); 
    c1->SetLogy();
    c1->SetGridx();
    c1->SetGridy();
-   BH1UT0[3]->Draw(); 
+   BH1UT0[seg1-1]->Draw(); 
    c1 ->Print(pdf); 
 
    c2->cd(); 
    c2->SetLogy();
    c2->SetGridx();
    c2->SetGridy();
-   BH1DT0[3]->Draw(); 
+   BH1DT0[seg1-1]->Draw(); 
    c2 ->Print(pdf); 
    
    c3->cd(); 
    c3->SetLogy();
    c3->SetGridx();
    c3->SetGridy();
-   BH2UT0[3]->Draw(); 
+   BH2UT0[seg2-1]->Draw(); 
    c3 ->Print(pdf); 
 
    c4->cd(); 
    c4->SetLogy();
    c4->SetGridx();
    c4->SetGridy();
-   BH2DT0[3]->Draw(); 
+   BH2DT0[seg2-1]->Draw(); 
    c4 ->Print(pdf); 
    
 
@@ -381,7 +393,7 @@ void HodoParamMaker_1tof(int runnum){
    for (Long64_t i=0; i<nentries;i++) {
       nbytes += tree->GetEntry(i);
       for (int i=0; i<NumOfSegBH1;i++) {
-        if(bh1ut[i]>0 && bh1ut[i]>0){
+        if(bh1ut[i]>0 && bh1dt[i]>0 && bh1nhits < range2 && bh1nhits > range1 && bh2ut[seg2-1]>0 && bh2dt[seg2-1]>0 && bh2nhits < range2 && bh2nhits > range1){
           BH1UTns[i]->Fill((bh1ut[i]-bh1utprm[i])*BH1TDC[i][0]);
           BH1DTns[i]->Fill((bh1dt[i]-bh1dtprm[i])*BH1TDC[i][1]);
           BH1MT[i]->Fill(((bh1dt[i]-bh1dtprm[i])*BH1TDC[i][0]+(bh1dt[i]-bh1dtprm[i])*BH1TDC[i][1])*0.5);
@@ -389,68 +401,69 @@ void HodoParamMaker_1tof(int runnum){
       }
 
       for (int i=0; i<NumOfSegBH2;i++) {
-        if(bh2ut[i]>0 && bh2ut[i]>0){
+        if(bh1ut[seg1-1]>0 && bh1dt[seg1-1]>0 && bh1nhits < range2 && bh1nhits > range1 && bh2ut[i]>0 && bh2dt[i]>0 && bh2nhits < range2 && bh2nhits > range1){
           BH2UTns[i]->Fill((bh2ut[i]-bh2utprm[i])*BH2TDC[i][0]);
           BH2DTns[i]->Fill((bh2dt[i]-bh2dtprm[i])*BH2TDC[i][1]);
           BH2MT[i]->Fill(((bh2dt[i]-bh2dtprm[i])*BH2TDC[i][0]+(bh2dt[i]-bh2dtprm[i])*BH2TDC[i][1])*0.5);
         }
       }
       
-      if(bh1ut[3]>0 && bh1ut[3]>0 && bh2ut[3]>0 && bh2ut[3]>0){
-        BTOF4_4->Fill(((bh1dt[3]-bh1dtprm[3])*BH1TDC[3][0]+(bh1dt[3]-bh1dtprm[3])*BH1TDC[3][1])*0.5-((bh2dt[3]-bh2dtprm[3])*BH2TDC[3][0]+(bh2dt[3]-bh2dtprm[3])*BH2TDC[3][1])*0.5);   
+      if(bh1ut[seg1-1]>0 && bh1dt[seg1-1]>0 && bh2ut[seg2-1]>0 && bh2dt[seg2-1]>0 && bh1nhits < range2 && bh1nhits > range1  && bh2nhits < range2 && bh2nhits > range1){
+        BTOF->Fill(((bh1dt[seg1-1]-bh1dtprm[seg1-1])*BH1TDC[seg1-1][0]+(bh1dt[seg1-1]-bh1dtprm[seg1-1])*BH1TDC[seg1-1][1])*0.5-((bh2dt[seg2-1]-bh2dtprm[seg2-1])*BH2TDC[seg2-1][0]+(bh2dt[seg2-1]-bh2dtprm[seg2-1])*BH2TDC[seg2-1][1])*0.5);   
       }
 
    }
 
-   BTOF4_4->Fit("fit","","",0.4,0.25);
+   TF1 *fit2 = new TF1("fit2","gaus"); 
+   BTOF->Fit("fit2","","", -0.5, 0.5);
 
    c1->cd(); 
    c1->SetLogy();
    c1->SetGridx();
    c1->SetGridy();
-   BH1UTns[3]->Draw(); 
+   BH1UTns[seg1-1]->Draw(); 
    c1 ->Print(pdf); 
 
    c2->cd(); 
    c2->SetLogy();
    c2->SetGridx();
    c2->SetGridy();
-   BH1DTns[3]->Draw(); 
+   BH1DTns[seg1-1]->Draw(); 
    c2 ->Print(pdf); 
    
    c3->cd(); 
    c3->SetLogy();
    c3->SetGridx();
    c3->SetGridy();
-   BH2UTns[3]->Draw(); 
+   BH2UTns[seg2-1]->Draw(); 
    c3 ->Print(pdf); 
 
    c4->cd(); 
    c4->SetLogy();
    c4->SetGridx();
    c4->SetGridy();
-   BH2DTns[3]->Draw(); 
+   BH2DTns[seg2-1]->Draw(); 
    c4 ->Print(pdf); 
    
    c1->cd(); 
    c1->SetLogy();
    c1->SetGridx();
    c1->SetGridy();
-   BH1MT[3]->Draw(); 
+   BH1MT[seg1-1]->Draw(); 
    c1 ->Print(pdf); 
 
    c2->cd(); 
    c2->SetLogy();
    c2->SetGridx();
    c2->SetGridy();
-   BH2MT[3]->Draw(); 
+   BH2MT[seg2-1]->Draw(); 
    c2 ->Print(pdf); 
    
    c3->cd(); 
    c3->SetLogy();
    c3->SetGridx();
    c3->SetGridy();
-   BTOF4_4->Draw(); 
+   BTOF->Draw(); 
    c3 ->Print(pdf); 
 
 
