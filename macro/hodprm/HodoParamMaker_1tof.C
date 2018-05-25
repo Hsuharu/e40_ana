@@ -467,7 +467,8 @@ void HodoParamMaker_1tof(int runnum){
       }
       
       if(bh1ut[seg1-1]>0 && bh1dt[seg1-1]>0 && bh2ut[seg2-1]>0 && bh2dt[seg2-1]>0 && bh1nhits < range2 && bh1nhits > range1  && bh2nhits  == 1){
-        BTOF->Fill(((bh1ut[seg1-1]-bh1utprm[seg1-1])*BH1TDC[seg1-1][0]+(bh1dt[seg1-1]-bh1dtprm[seg1-1])*BH1TDC[seg1-1][1])*0.5-((bh2ut[seg2-1]-bh2utprm[seg2-1])*BH2TDC[seg2-1][0]+(bh2dt[seg2-1]-bh2dtprm[seg2-1])*BH2TDC[seg2-1][1])*0.5);   
+//        BTOF->Fill(((bh1ut[seg1-1]-bh1utprm[seg1-1])*BH1TDC[seg1-1][0]+(bh1dt[seg1-1]-bh1dtprm[seg1-1])*BH1TDC[seg1-1][1])*0.5-((bh2ut[seg2-1]-bh2utprm[seg2-1])*BH2TDC[seg2-1][0]+(bh2dt[seg2-1]-bh2dtprm[seg2-1])*BH2TDC[seg2-1][1])*0.5);   
+        BTOF->Fill(((bh1ut[seg1-1]-bh1utprm[seg1-1])*BH1TDC[seg1-1][0]+(bh1dt[seg1-1]-bh1dtprm[seg1-1])*BH1TDC[seg1-1][1])*0.5-(bh2dt[seg2-1]-bh2dtprm[seg2-1])*BH2TDC[seg2-1][1]);   
       }
 
    }
