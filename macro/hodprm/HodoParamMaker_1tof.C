@@ -1,5 +1,12 @@
 #include "DetectorID.hh"
 
+//  double ff1(duble x,double a1,double a2,double a3){
+//  
+//  
+//  }
+
+
+
 void HodoParamMaker_1tof(int runnum){
 ////////////////////////////////////////////////////////////
 //   This file has been automatically generated           //
@@ -467,8 +474,7 @@ void HodoParamMaker_1tof(int runnum){
       }
       
       if(bh1ut[seg1-1]>0 && bh1dt[seg1-1]>0 && bh2ut[seg2-1]>0 && bh2dt[seg2-1]>0 && bh1nhits < range2 && bh1nhits > range1  && bh2nhits  == 1){
-//        BTOF->Fill(((bh1ut[seg1-1]-bh1utprm[seg1-1])*BH1TDC[seg1-1][0]+(bh1dt[seg1-1]-bh1dtprm[seg1-1])*BH1TDC[seg1-1][1])*0.5-((bh2ut[seg2-1]-bh2utprm[seg2-1])*BH2TDC[seg2-1][0]+(bh2dt[seg2-1]-bh2dtprm[seg2-1])*BH2TDC[seg2-1][1])*0.5);   
-        BTOF->Fill(((bh1ut[seg1-1]-bh1utprm[seg1-1])*BH1TDC[seg1-1][0]+(bh1dt[seg1-1]-bh1dtprm[seg1-1])*BH1TDC[seg1-1][1])*0.5-(bh2dt[seg2-1]-bh2dtprm[seg2-1])*BH2TDC[seg2-1][1]);   
+        BTOF->Fill(((bh1ut[seg1-1]-bh1utprm[seg1-1])*BH1TDC[seg1-1][0]+(bh1dt[seg1-1]-bh1dtprm[seg1-1])*BH1TDC[seg1-1][1])*0.5-((bh2ut[seg2-1]-bh2utprm[seg2-1])*BH2TDC[seg2-1][0]+(bh2dt[seg2-1]-bh2dtprm[seg2-1])*BH2TDC[seg2-1][1])*0.5);   
       }
 
    }
@@ -803,6 +809,17 @@ void HodoParamMaker_1tof(int runnum){
   graph->SetMarkerColor(2);
   graph->SetMarkerSize(0.5);
 
+  TF1 *ff1 = new TF1("ff1","[0]/sqrt( [1] - x ) + [2] ");
+  ff1->SetLineWidth(1);
+  ff1->SetParLimits(100,100.,100.);
+  ff1->SetParNames("a1","b1","c1");
+  graph->Fit("ff1","","",fit1min,fit1max);
+  double a[3];
+  a[0] = ff1->GetParameter(0);
+  a[1] = ff1->GetParameter(1);
+  a[2] = ff1->GetParameter(2);
+                             
+
   c1->cd(); 
   c1->SetGridx();
   c1->SetGridy();
@@ -812,16 +829,6 @@ void HodoParamMaker_1tof(int runnum){
   graph->Draw("psame"); 
   c1 ->Print(pdf); 
   
-  TF1 *ff1 = new TF1("ff1","[0]/sqrt( [1] - x ) + [2] ");
-  ff1->SetLineWidth(1);
-  ff1->SetParLimits(0,0.,100.);
-  ff1->SetParNames("a1","b1","c1");
-  graph->Fit("ff1","","",fit1min,fit1max);
-  double a[3];
-  a[0] = ff1->GetParameter(0);
-  a[1] = ff1->GetParameter(1);
-  a[2] = ff1->GetParameter(2);
-                             
                              
   c1->Print(pdf+"]");        
                              
