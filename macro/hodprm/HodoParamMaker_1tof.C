@@ -209,6 +209,7 @@ void HodoParamMaker_1tof(int runnum){
    TH1D *BH2HitPat = new TH1D("BH2HitPat","BH2HitPat",9,0,9);
 
    TH1D *BTOF = new TH1D(Form("BTOF%d_%d",seg1,seg2),Form("BTOF%d_%d",seg1,seg2),166,-3,3); 
+   TH1D *BTOFCORR1 = new TH1D(Form("BTOFCORR1%d_%d",seg1,seg2),Form("BTOFCORR1%d_%d",seg1,seg2),166,-3,3); 
 
    Long64_t nentries = tree->GetEntries();
    double fitprm[3];
@@ -769,8 +770,8 @@ void HodoParamMaker_1tof(int runnum){
   int x = 5, y =2, z = 10;
   int NofProject = z;
   int stepProject = xbin/NofProject;
-  double fit1min = 0;
-  double fit1max = 3;
+  double ff1min = 0.;
+  double ff1max = 2.5;
   double a[4][3];
   TCanvas *c5 = new TCanvas("c5","c5");
   c5->Divide(x,y);
@@ -816,7 +817,7 @@ void HodoParamMaker_1tof(int runnum){
     ff1->SetLineWidth(1);
 //     ff1->SetParLimits(100,100.,100.);
     ff1->SetParameters(1,1.,0.);
-    ff1->SetParNames("a1","b1","c1");
+    ff1->SetParNames("a0","a1","a3");
   
     c1->cd(); 
     c1->SetGridx();
@@ -825,12 +826,13 @@ void HodoParamMaker_1tof(int runnum){
     hist1[j]->SetYTitle("BTOF(BH1UT-BH2MT) [ns]"); 
     hist1[j]->Draw("colz"); 
     graph->Draw("psame"); 
-    graph->Fit("ff1");
+    graph->Fit("ff1","","",ff1min,ff1max);
     c1 ->Print(pdf); 
     
-    a[j][0] = ff1->GetParameter(0);
-    a[j][1] = ff1->GetParameter(1);
-    a[j][2] = ff1->GetParameter(2);
+    for(int k=0;k<3;k++){
+      a[j][k] = ff1->GetParameter(k);
+//      std::cout << a[j][k] << std::endl;
+    }
                                
   }
 
@@ -843,19 +845,17 @@ void HodoParamMaker_1tof(int runnum){
    for (Long64_t i=0; i<nentries;i++) {
       nbytes += tree->GetEntry(i);
 
+      if(bh1ut[seg1-1]>0 && bh1dt[seg1-1]>0 && bh2ut[seg2-1]>0 && bh2dt[seg2-1]>0 && bh1nhits < range2 && bh1nhits > range1  && bh2nhits  == 1){
       double bh1ude    = (bh1ua[seg1-1]-bh1ubgprm[seg1-1])/(bh1umipprm[seg1-1]-bh1ubgprm[seg1-1]);
       double bh1dde    = (bh1da[seg1-1]-bh1dbgprm[seg1-1])/(bh1dmipprm[seg1-1]-bh1dbgprm[seg1-1]);
-      double bh1ucorr  = ((bh1ut[seg1-1]-bh1utprm[seg1-1])*BH1TDC[seg1-1][0] - a[0][0]/sqrt(a[0][1] + bh1ude) + a[0][2]);
-      double bh1dcorr  = ((bh1dt[seg1-1]-bh1dtprm[seg1-1])*BH1TDC[seg1-1][1] - a[1][0]/sqrt(a[1][1] + bh1ude) + a[1][2]);
+      double bh1ucorr  = ((bh1ut[seg1-1]-bh1utprm[seg1-1])*BH1TDC[seg1-1][0] - (a[0][0]/sqrt(a[0][1] + bh1ude) + a[0][2]) );
+      double bh1dcorr  = ((bh1dt[seg1-1]-bh1dtprm[seg1-1])*BH1TDC[seg1-1][1] - (a[1][0]/sqrt(a[1][1] + bh1dde) + a[1][2]) );
       double bh1mtcorr = (bh1ucorr + bh1dcorr)*0.5;
       double bh2mtcalc = ((bh2ut[seg2-1]-bh2utprm[seg2-1])*BH2TDC[seg2-1][0]+(bh2dt[seg2-1]-bh2dtprm[seg2-1])*BH2TDC[seg2-1][1])*0.5 ;
 
-      if(bh1ut[seg1-1]>0 && bh1dt[seg1-1]>0 && bh2ut[seg2-1]>0 && bh2dt[seg2-1]>0 && bh1nhits < range2 && bh1nhits > range1  && bh2nhits  == 1){
         hist1[2]->Fill(bh1ude,bh1ucorr - bh2mtcalc);   
         hist1[3]->Fill(bh1dde,bh1dcorr - bh2mtcalc);   
-        hist1[4]->Fill(bh1dde,bh1mtcorr - bh2mtcalc);   
-        hist1[5]->Fill(bh1ude,bh1ucorr - bh2mtcalc);   
-        hist1[6]->Fill(bh1dde,bh1dcorr - bh2mtcalc);   
+        BTOFCORR1->Fill(bh1mtcorr - bh2mtcalc);   
       }
    }
 
@@ -876,6 +876,12 @@ void HodoParamMaker_1tof(int runnum){
    c2 ->Print(pdf); 
    
 
+   c3->cd(); 
+   c3->SetGridx();
+   c3->SetGridy();
+   BTOFCORR1->Fit("fit2","","", -0.5, 0.5);
+   BTOFCORR1->Draw(); 
+   c3 ->Print(pdf); 
                              
   c1->Print(pdf+"]");        
                              
