@@ -172,7 +172,7 @@ void HodoParamMaker_1tof(int runnum){
         BH1DBG[i] = new TH1D(Form("BH1DBG%d",i+1),Form("BH1DBG%d",i+1),600,0,600);
         BH1UdE[i] = new TH1D(Form("BH1UdE%d",i+1),Form("BH1UdE%d",i+1),xbin,0,3);
         BH1DdE[i] = new TH1D(Form("BH1DdE%d",i+1),Form("BH1DdE%d",i+1),xbin,0,3);
-        hist1[i] = new TH2F(Form("hist1_%d",i+1),Form("hist1_%d",i+1),600,0,3,162,-3,3);
+        hist1[i] = new TH2F(Form("hist1_%d",i+1),Form("hist1_%d",i+1),xbin,0,3,162,-3,3);
       }
    TH1D *BH1HitPat = new TH1D("BH1HitPat","BH1HitPat",12,0,12);
 
@@ -204,7 +204,7 @@ void HodoParamMaker_1tof(int runnum){
         BH2DBG[i] = new TH1D(Form("BH2DBG%d",i+1),Form("BH2DBG%d",i+1),600,0,600);
         BH2UdE[i] = new TH1D(Form("BH2UdE%d",i+1),Form("BH2UdE%d",i+1),xbin,0,3);
         BH2DdE[i] = new TH1D(Form("BH2DdE%d",i+1),Form("BH2DdE%d",i+1),xbin,0,3);
-        hist2[i] = new TH2F(Form("hist2_%d",i+1),Form("hist2_%d",i+1),600,0,3,162,-3,3);
+        hist2[i] = new TH2F(Form("hist2_%d",i+1),Form("hist2_%d",i+1),xbin,0,3,162,-3,3);
       }
    TH1D *BH2HitPat = new TH1D("BH2HitPat","BH2HitPat",9,0,9);
 
@@ -771,6 +771,7 @@ void HodoParamMaker_1tof(int runnum){
   int stepProject = xbin/NofProject;
   double fit1min = 0;
   double fit1max = 3;
+  double a[4][3];
   TCanvas *c5 = new TCanvas("c5","c5");
   c5->Divide(x,y);
 
@@ -784,53 +785,54 @@ void HodoParamMaker_1tof(int runnum){
   yval.resize(NofProject);
   eyval.resize(NofProject);
 
-  for(int i =0; i<NofProject; i++){
-    c5->cd(i+1);
-    int bin_min = i*stepProject+1;
-    int bin_max = (i+1)*stepProject;
-    TH1D *tmp1 = (TH1D*)hist1[0]->ProjectionY(Form("Projectoin%d",i+1),bin_min, bin_max);
-    double center = tmp1->GetBinCenter(tmp1->GetMaximumBin());
-    tmp1->Fit("fit","Q","",center - 0.2 ,center + 0.2  );
-    tmp1->Draw();
-
-    double x_min = hist1[0]->GetXaxis()->GetBinCenter(bin_min);
-    double x_max = hist1[0]->GetXaxis()->GetBinCenter(bin_max);
-    double x_center = (x_min + x_max)*0.5;
-
-    xval[i] = x_center;
-    exval[i] = 0.;
-    yval[i] = fit->GetParameter(1);
-    eyval[i] = fit->GetParError(1);
-  }
-  c5 ->Print(pdf); 
-
-  TGraphErrors *graph = new TGraphErrors(NofProject, &(xval[0]), &(yval[0]), &(exval[0]), &(eyval[0]));
-  graph->SetMarkerStyle(8);
-  graph->SetMarkerColor(2);
-  graph->SetMarkerSize(0.5);
-
-//  TF1 *ff1 = new TF1("ff1","[0]/sqrt([1]+x)+[2]");
-  TF1 *ff1 = new TF1("ff1","[0]/sqrt([1]+x)+[2]");
-  ff1->SetLineWidth(1);
-//   ff1->SetParLimits(100,100.,100.);
-  ff1->SetParameters(1,1.,0.);
-  ff1->SetParNames("a1","b1","c1");
-
-  c1->cd(); 
-  c1->SetGridx();
-  c1->SetGridy();
-  hist1[0]->SetXTitle("BH1_4_Up_mip"); 
-  hist1[0]->SetYTitle("BTOF(BH1UT-BH2MT) [ns]"); 
-  hist1[0]->Draw("colz"); 
-  graph->Draw("psame"); 
-  graph->Fit("ff1");
-  c1 ->Print(pdf); 
+  for(int j =  0; j<2; j++){
+    for(int i =0; i<NofProject; i++){
+      c5->cd(i+1);
+      int bin_min = i*stepProject+1;
+      int bin_max = (i+1)*stepProject;
+      TH1D *tmp1 = (TH1D*)hist1[j]->ProjectionY(Form("Projectoin%d",i+1),bin_min, bin_max);
+      double center = tmp1->GetBinCenter(tmp1->GetMaximumBin());
+      tmp1->Fit("fit","Q","",center - 0.2 ,center + 0.2  );
+      tmp1->Draw();
   
-  double a[3];
-  a[0] = ff1->GetParameter(0);
-  a[1] = ff1->GetParameter(1);
-  a[2] = ff1->GetParameter(2);
-                             
+      double x_min = hist1[j]->GetXaxis()->GetBinCenter(bin_min);
+      double x_max = hist1[j]->GetXaxis()->GetBinCenter(bin_max);
+      double x_center = (x_min + x_max)*0.5;
+  
+      xval[i] = x_center;
+      exval[i] = 0.;
+      yval[i] = fit->GetParameter(1);
+      eyval[i] = fit->GetParError(1);
+    }
+    c5 ->Print(pdf); 
+  
+    TGraphErrors *graph = new TGraphErrors(NofProject, &(xval[0]), &(yval[0]), &(exval[0]), &(eyval[0]));
+    graph->SetMarkerStyle(8);
+    graph->SetMarkerColor(2);
+    graph->SetMarkerSize(0.5);
+  
+//    TF1 *ff1 = new TF1("ff1","[0]/sqrt([1]+x)+[2]");
+    TF1 *ff1 = new TF1("ff1","[0]/sqrt([1]+x)+[2]");
+    ff1->SetLineWidth(1);
+//     ff1->SetParLimits(100,100.,100.);
+    ff1->SetParameters(1,1.,0.);
+    ff1->SetParNames("a1","b1","c1");
+  
+    c1->cd(); 
+    c1->SetGridx();
+    c1->SetGridy();
+    hist1[j]->SetXTitle("BH1_4_Up_mip"); 
+    hist1[j]->SetYTitle("BTOF(BH1UT-BH2MT) [ns]"); 
+    hist1[j]->Draw("colz"); 
+    graph->Draw("psame"); 
+    graph->Fit("ff1");
+    c1 ->Print(pdf); 
+    
+    a[j][0] = ff1->GetParameter(0);
+    a[j][1] = ff1->GetParameter(1);
+    a[j][2] = ff1->GetParameter(2);
+                               
+  }
 
                              
   c1->Print(pdf+"]");        
