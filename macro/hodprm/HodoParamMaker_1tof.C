@@ -793,7 +793,7 @@ void HodoParamMaker_1tof(int runnum){
       int bin_max = (i+1)*stepProject;
       TH1D *tmp1 = (TH1D*)hist1[j]->ProjectionY(Form("Projectoin%d",i+1),bin_min, bin_max);
       double center = tmp1->GetBinCenter(tmp1->GetMaximumBin());
-      tmp1->Fit("fit","Q","",center - 0.2 ,center + 0.2  );
+      tmp1->Fit("fit","Q","",center - 0.4 ,center + 0.4  );
       tmp1->Draw();
   
       double x_min = hist1[j]->GetXaxis()->GetBinCenter(bin_min);
