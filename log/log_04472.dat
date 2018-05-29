@@ -362,8 +362,8 @@
 #D GUnpacker::operator++()   exit loop
     n unpacked =  52843 (0xce6b)
 #DTimer [::main()] End of Analyzer 
-   Process Start   : Sat May 26 15:14:15 2018
-   Process Stop    : Sat May 26 15:16:22 2018
-   Processing Time : 0:02:07
-125.28user 0.71system 2:07.40elapsed 98%CPU (0avgtext+0avgdata 612420maxresident)k
-0inputs+8outputs (0major+128795minor)pagefaults 0swaps
+   Process Start   : Tue May 29 09:30:46 2018
+   Process Stop    : Tue May 29 09:32:54 2018
+   Processing Time : 0:02:08
+120.62user 1.15system 2:10.34elapsed 93%CPU (0avgtext+0avgdata 612336maxresident)k
+0inputs+0outputs (0major+128296minor)pagefaults 0swaps

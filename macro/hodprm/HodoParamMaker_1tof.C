@@ -226,11 +226,11 @@ void HodoParamMaker_1tof(int runnum){
    double bh2ubgprm[NumOfSegBH2]; 
    double bh2dbgprm[NumOfSegBH2]; 
 
-//   double l = 10; //4465
-//   double l2 = 3;//4465
-//   double l3 = 12;//4465
-   double l = 15; //4462 & 4464
-   double l2 = 7; //4462 & 4464
+   double l = 10; //4465
+   double l2 = 3;//4465
+   double l3 = 12;//4465
+//   double l = 15; //4462 & 4464
+//   double l2 = 7; //4462 & 4464
 
    double btof1[NumOfSegBH1]; 
    double btof2[NumOfSegBH2]; 
@@ -288,13 +288,13 @@ void HodoParamMaker_1tof(int runnum){
        bh1utprm[i] = BH1UT[i]->GetXaxis()->GetBinCenter(bh1utprm[i]);  
        bh1dtprm[i] = BH1DT[i]->GetXaxis()->GetBinCenter(bh1dtprm[i]);  
 
-       BH1UT[i]->Fit("fit","","", bh1utprm[i]-l, bh1utprm[i]+l-2);  //4462 & 4464 
-//       BH1UT[i]->Fit("fit","","", bh1utprm[i]-l, bh1utprm[i]+l+2); //4465 
+//       BH1UT[i]->Fit("fit","","", bh1utprm[i]-l, bh1utprm[i]+l-2);  //4462 & 4464 
+       BH1UT[i]->Fit("fit","","", bh1utprm[i]-l, bh1utprm[i]+l+2); //4465 
        bh1utprm[i] = fit->GetParameter(1);  
        BH1UT[i]->GetXaxis()->SetRangeUser(bh1utprm[i]-2*(l), bh1utprm[i]+4*(l)); 
 
-       BH1DT[i]->Fit("fit","","", bh1dtprm[i]-l-2, bh1dtprm[i]+l-2); //4462 & 4464 
-//       BH1DT[i]->Fit("fit","","", bh1dtprm[i]-l, bh1dtprm[i]+ 2*l); //4465  
+//       BH1DT[i]->Fit("fit","","", bh1dtprm[i]-l-2, bh1dtprm[i]+l-2); //4462 & 4464 
+       BH1DT[i]->Fit("fit","","", bh1dtprm[i]-l, bh1dtprm[i]+ 2*l); //4465  
        bh1dtprm[i] = fit->GetParameter(1);  
        BH1DT[i]->GetXaxis()->SetRangeUser(bh1dtprm[i]-2*(l), bh1dtprm[i]+4*(l));  
 
@@ -308,14 +308,14 @@ void HodoParamMaker_1tof(int runnum){
        bh2utprm[i] = BH2UT[i]->GetXaxis()->GetBinCenter(bh2utprm[i]);  
        bh2dtprm[i] = BH2DT[i]->GetXaxis()->GetBinCenter(bh2dtprm[i]);  
 
-       BH2UT[i]->Fit("fit","","", bh2utprm[i]-l2, bh2utprm[i]+l2-1);  //4462 & 4464
-//       BH2UT[i]->Fit("fit","","", bh2utprm[i]-l3+1, bh2utprm[i]+l3);  //4465 
+//       BH2UT[i]->Fit("fit","","", bh2utprm[i]-l2, bh2utprm[i]+l2-1);  //4462 & 4464
+       BH2UT[i]->Fit("fit","","", bh2utprm[i]-l3+1, bh2utprm[i]+l3);  //4465 
        bh2utprm[i] = fit->GetParameter(1);  
        BH2UT[i]->GetXaxis()->SetRangeUser(bh2utprm[i]-2*l2, bh2utprm[i]+4*(l2));  //4462 & 4464 
-//       BH2UT[i]->GetXaxis()->SetRangeUser(bh2utprm[i]-2*l3, bh2utprm[i]+4*(l3));  //4465  
+       BH2UT[i]->GetXaxis()->SetRangeUser(bh2utprm[i]-2*l3, bh2utprm[i]+4*(l3));  //4465  
 
-       BH2DT[i]->Fit("fit","","", bh2dtprm[i]-l2+1, bh2dtprm[i]+l2-1); //4462 & 4464 
-//       BH2DT[i]->Fit("fit","","", bh2dtprm[i]-l2+1, bh2dtprm[i]+l2);  //4465 
+//       BH2DT[i]->Fit("fit","","", bh2dtprm[i]-l2+1, bh2dtprm[i]+l2-1); //4462 & 4464 
+       BH2DT[i]->Fit("fit","","", bh2dtprm[i]-l2+1, bh2dtprm[i]+l2);  //4465 
        bh2dtprm[i] = fit->GetParameter(1);  
        BH2DT[i]->GetXaxis()->SetRangeUser(bh2dtprm[i]-1*(l2+1), bh2dtprm[i]+4*(l2-1));  
 
@@ -748,7 +748,7 @@ void HodoParamMaker_1tof(int runnum){
    c1->SetGridy();
    hist1[0]->SetXTitle("BH1_4_Up_mip"); 
    hist1[0]->SetYTitle("BTOF(BH1UT-BH2MT) [ns]"); 
-   hist1[0]->Draw(); 
+   hist1[0]->Draw("colz"); 
    c1 ->Print(pdf); 
 
    c2->cd(); 
@@ -756,7 +756,7 @@ void HodoParamMaker_1tof(int runnum){
    c2->SetGridy();
    hist1[1]->SetXTitle("BH1_4_Down_mip"); 
    hist1[1]->SetYTitle("BTOF(BH1DT-BH2MT) [ns]"); 
-   hist1[1]->Draw(); 
+   hist1[1]->Draw("colz"); 
    c2 ->Print(pdf); 
    
    
@@ -809,26 +809,29 @@ void HodoParamMaker_1tof(int runnum){
   graph->SetMarkerColor(2);
   graph->SetMarkerSize(0.5);
 
-  TF1 *ff1 = new TF1("ff1","[0]/sqrt([1]-x)+[2]");
+//  TF1 *ff1 = new TF1("ff1","[0]/sqrt([1]+x)+[2]");
+  TF1 *ff1 = new TF1("ff1","[0]/sqrt([1]+x)+[2]");
   ff1->SetLineWidth(1);
-  ff1->SetParLimits(100,100.,100.);
+//   ff1->SetParLimits(100,100.,100.);
+  ff1->SetParameters(1,1.,0.);
   ff1->SetParNames("a1","b1","c1");
-  graph->Fit("ff1");
-  double a[3];
-  a[0] = ff1->GetParameter(0);
-  a[1] = ff1->GetParameter(1);
-  a[2] = ff1->GetParameter(2);
-                             
 
   c1->cd(); 
   c1->SetGridx();
   c1->SetGridy();
   hist1[0]->SetXTitle("BH1_4_Up_mip"); 
   hist1[0]->SetYTitle("BTOF(BH1UT-BH2MT) [ns]"); 
-  hist1[0]->Draw(); 
-  graph->Draw("same"); 
+  hist1[0]->Draw("colz"); 
+  graph->Draw("psame"); 
+  graph->Fit("ff1");
   c1 ->Print(pdf); 
   
+  double a[3];
+  a[0] = ff1->GetParameter(0);
+  a[1] = ff1->GetParameter(1);
+  a[2] = ff1->GetParameter(2);
+                             
+
                              
   c1->Print(pdf+"]");        
                              
