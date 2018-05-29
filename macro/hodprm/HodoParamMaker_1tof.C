@@ -210,6 +210,7 @@ void HodoParamMaker_1tof(int runnum){
 
    TH1D *BTOF = new TH1D(Form("BTOF%d_%d",seg1,seg2),Form("BTOF%d_%d",seg1,seg2),166,-3,3); 
    TH1D *BTOFCORR1 = new TH1D(Form("BTOFCORR1%d_%d",seg1,seg2),Form("BTOFCORR1%d_%d",seg1,seg2),166,-3,3); 
+   TH1D *BTOFCORR2 = new TH1D(Form("BTOFCORR2%d_%d",seg1,seg2),Form("BTOFCORR2%d_%d",seg1,seg2),166,-3,3); 
 
    Long64_t nentries = tree->GetEntries();
    double fitprm[3];
@@ -954,11 +955,61 @@ void HodoParamMaker_1tof(int runnum){
     c1 ->Print(pdf); 
     
     for(int k=0;k<3;k++){
-      a[j][k] = ff1->GetParameter(k);
+      a[j+2][k] = ff1->GetParameter(k);
 //      std::cout << a[j][k] << std::endl;
     }
                                
   }
+
+   nbytes = 0;
+   for (Long64_t i=0; i<nentries;i++) {
+      nbytes += tree->GetEntry(i);
+
+      if(bh1ut[seg1-1]>0 && bh1dt[seg1-1]>0 && bh2ut[seg2-1]>0 && bh2dt[seg2-1]>0 && bh1nhits < range2 && bh1nhits > range1  && bh2nhits  == 1){
+        double bh1ude    = (bh1ua[seg1-1]-bh1ubgprm[seg1-1])/(bh1umipprm[seg1-1]-bh1ubgprm[seg1-1]);
+        double bh1dde    = (bh1da[seg1-1]-bh1dbgprm[seg1-1])/(bh1dmipprm[seg1-1]-bh1dbgprm[seg1-1]);
+        double bh1ucorr  = ((bh1ut[seg1-1]-bh1utprm[seg1-1])*BH1TDC[seg1-1][0] - (a[0][0]/sqrt(a[0][1] + bh1ude) + a[0][2]) );
+        double bh1dcorr  = ((bh1dt[seg1-1]-bh1dtprm[seg1-1])*BH1TDC[seg1-1][1] - (a[1][0]/sqrt(a[1][1] + bh1dde) + a[1][2]) );
+        double bh1mtcorr = (bh1ucorr + bh1dcorr)*0.5;
+        double bh2mtcalc = ((bh2ut[seg2-1]-bh2utprm[seg2-1])*BH2TDC[seg2-1][0]+(bh2dt[seg2-1]-bh2dtprm[seg2-1])*BH2TDC[seg2-1][1])*0.5 ;
+  
+        double bh2ude    = (bh2ua[seg1-1]-bh2ubgprm[seg1-1])/(bh2umipprm[seg1-1]-bh2ubgprm[seg1-1]);
+        double bh2dde    = (bh2da[seg1-1]-bh2dbgprm[seg1-1])/(bh2dmipprm[seg1-1]-bh2dbgprm[seg1-1]);
+        double bh2ucorr  = ((bh2ut[seg1-1]-bh2utprm[seg1-1])*BH2TDC[seg1-1][0] - (a[2][0]/sqrt(a[2][1] + bh1ude) + a[2][2]) );
+        double bh2dcorr  = ((bh2dt[seg1-1]-bh2dtprm[seg1-1])*BH2TDC[seg1-1][1] - (a[3][0]/sqrt(a[3][1] + bh1dde) + a[3][2]) );
+        double bh2mtcorr = (bh2ucorr + bh2dcorr)*0.5;
+
+        BTOFCORR2->Fill(bh1mtcorr - bh2mtcorr);   
+
+        hist2[2]->Fill(bh2ude,bh1mtcorr - bh2ucorr);   
+        hist2[3]->Fill(bh2dde,bh1mtcorr - bh2dcorr);   
+      }
+   }
+
+   c1->cd(); 
+   c1->SetGridx();
+   c1->SetGridy();
+   hist2[2]->SetXTitle("BH2_4_Up_mip"); 
+   hist2[2]->SetYTitle("BTOF(BH1UT_corr - BH2UT_corr) [ns]"); 
+   hist2[2]->Draw("colz"); 
+   c1 ->Print(pdf); 
+
+   c2->cd(); 
+   c2->SetGridx();
+   c2->SetGridy();
+   hist2[3]->SetXTitle("BH2_4_Down_mip"); 
+   hist2[3]->SetYTitle("BTOF(BH1DT_corr-BH2DT_corr) [ns]"); 
+   hist2[3]->Draw("colz"); 
+   c2 ->Print(pdf); 
+   
+   c3->cd(); 
+   c3->SetGridx();
+   c3->SetGridy();
+   BTOFCORR2->Fit("fit2","","", -0.5, 0.5);
+   BTOFCORR2->Draw(); 
+   c3 ->Print(pdf); 
+
+
                              
   c1->Print(pdf+"]");        
                              
