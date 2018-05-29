@@ -834,6 +834,48 @@ void HodoParamMaker_1tof(int runnum){
                                
   }
 
+/////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                         //
+//    BH1 corr                                                                             //
+//                                                                                         //
+/////////////////////////////////////////////////////////////////////////////////////////////
+   nbytes = 0;
+   for (Long64_t i=0; i<nentries;i++) {
+      nbytes += tree->GetEntry(i);
+
+      double bh1ude    = (bh1ua[seg1-1]-bh1ubgprm[seg1-1])/(bh1umipprm[seg1-1]-bh1ubgprm[seg1-1]);
+      double bh1dde    = (bh1da[seg1-1]-bh1dbgprm[seg1-1])/(bh1dmipprm[seg1-1]-bh1dbgprm[seg1-1]);
+      double bh1ucorr  = ((bh1ut[seg1-1]-bh1utprm[seg1-1])*BH1TDC[seg1-1][0] - a[0][0]/sqrt(a[0][1] + bh1ude) + a[0][2]);
+      double bh1dcorr  = ((bh1dt[seg1-1]-bh1dtprm[seg1-1])*BH1TDC[seg1-1][1] - a[1][0]/sqrt(a[1][1] + bh1ude) + a[1][2]);
+      double bh1mtcorr = (bh1ucorr + bh1dcorr)*0.5;
+      double bh2mtcalc = ((bh2ut[seg2-1]-bh2utprm[seg2-1])*BH2TDC[seg2-1][0]+(bh2dt[seg2-1]-bh2dtprm[seg2-1])*BH2TDC[seg2-1][1])*0.5 ;
+
+      if(bh1ut[seg1-1]>0 && bh1dt[seg1-1]>0 && bh2ut[seg2-1]>0 && bh2dt[seg2-1]>0 && bh1nhits < range2 && bh1nhits > range1  && bh2nhits  == 1){
+        hist1[2]->Fill(bh1ude,bh1ucorr - bh2mtcalc);   
+        hist1[3]->Fill(bh1dde,bh1dcorr - bh2mtcalc);   
+        hist1[4]->Fill(bh1dde,bh1mtcorr - bh2mtcalc);   
+        hist1[5]->Fill(bh1ude,bh1ucorr - bh2mtcalc);   
+        hist1[6]->Fill(bh1dde,bh1dcorr - bh2mtcalc);   
+      }
+   }
+
+   c1->cd(); 
+   c1->SetGridx();
+   c1->SetGridy();
+   hist1[2]->SetXTitle("BH1_4_Up_mip"); 
+   hist1[2]->SetYTitle("BTOF(BH1UT_corr - BH2MT) [ns]"); 
+   hist1[2]->Draw("colz"); 
+   c1 ->Print(pdf); 
+
+   c2->cd(); 
+   c2->SetGridx();
+   c2->SetGridy();
+   hist1[3]->SetXTitle("BH1_4_Down_mip"); 
+   hist1[3]->SetYTitle("BTOF(BH1DT_corr-BH2MT) [ns]"); 
+   hist1[3]->Draw("colz"); 
+   c2 ->Print(pdf); 
+   
+
                              
   c1->Print(pdf+"]");        
                              
