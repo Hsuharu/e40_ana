@@ -142,7 +142,7 @@ void HodoParamMaker_1tof(int runnum){
    int seg2 = 4; //1 origine
    int range1 = 0; //  
    int range2 = 3; //  range1 < nhit < range2 
-   int xbin = 600;
+   int xbin = 100;
 
    TH1D *BH1UT[NumOfSegBH1]; 
    TH1D *BH1DT[NumOfSegBH1]; 
@@ -766,7 +766,7 @@ void HodoParamMaker_1tof(int runnum){
 //                                                                                         //
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-  int x = 4, y =3, z = 12;
+  int x = 5, y =2, z = 10;
   int NofProject = z;
   int stepProject = xbin/NofProject;
   double fit1min = 0;
