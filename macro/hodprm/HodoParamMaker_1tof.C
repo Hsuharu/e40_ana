@@ -975,8 +975,8 @@ void HodoParamMaker_1tof(int runnum){
   
         double bh2ude    = (bh2ua[seg1-1]-bh2ubgprm[seg1-1])/(bh2umipprm[seg1-1]-bh2ubgprm[seg1-1]);
         double bh2dde    = (bh2da[seg1-1]-bh2dbgprm[seg1-1])/(bh2dmipprm[seg1-1]-bh2dbgprm[seg1-1]);
-        double bh2ucorr  = ((bh2ut[seg1-1]-bh2utprm[seg1-1])*BH2TDC[seg1-1][0] - (a[2][0]/sqrt(a[2][1] + bh2ude) + a[2][2]) );
-        double bh2dcorr  = ((bh2dt[seg1-1]-bh2dtprm[seg1-1])*BH2TDC[seg1-1][1] - (a[3][0]/sqrt(a[3][1] + bh2dde) + a[3][2]) );
+        double bh2ucorr  = ((bh2ut[seg1-1]-bh2utprm[seg1-1])*BH2TDC[seg1-1][0] + (a[2][0]/sqrt(a[2][1] + bh2ude) + a[2][2]) );
+        double bh2dcorr  = ((bh2dt[seg1-1]-bh2dtprm[seg1-1])*BH2TDC[seg1-1][1] + (a[3][0]/sqrt(a[3][1] + bh2dde) + a[3][2]) );
         double bh2mtcorr = (bh2ucorr + bh2dcorr)*0.5;
 
         BTOFCORR2->Fill(bh1mtcorr - bh2mtcorr);   
