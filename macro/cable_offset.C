@@ -1,4 +1,4 @@
-void cable_offset(int runnum){
+void cable_offset(int runnum, 1){
   gStyle->SetOptStat(1111110); 
   gStyle->SetOptFit(1); 
   gErrorIgnoreLevel=kWarning;
@@ -6,7 +6,7 @@ void cable_offset(int runnum){
 // TFile *f = TFile::Open("../rootfile/Hod04464.root");
 // TFile *f = TFile::Open("/home/had/suharu/work/e40/ana/rootfile/run04462_hodo.root");
  TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
- TFile *f = new TFile(Form("%s/rootfile/run%05d_hodo.root", anadir.Data() , runnum),"READ");
+ TFile *f = new TFile(Form("%s/analyzer_%3s/rootfile/run%05d_hodo.root", anadir.Data() ,month, runnum),"READ");
  TTree *t = (TTree*)f->Get("tree"); 
  
  TCanvas *c1 = new TCanvas;

@@ -8,6 +8,8 @@
 /bin/*
 /data/*
 /data_s/*
-/analyzer/*
+/analyzer_jan/*
+/analyzer_jun/*
 /bu_analyzer/*
+/bu1_analyzer/*
 /rootfile/*
