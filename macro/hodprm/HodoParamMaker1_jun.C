@@ -255,6 +255,11 @@ void HodoParamMaker1_jun( int month, int runnum){
    double l = 2000; //4462 & 4464
    double l2 = 1500; //4462 & 4464
 
+//gate range
+   double gr1 = 1000; //4462 & 4464
+   double gr2 = 1500; //4462 & 4464
+   double gr3 = 500; //4462 & 4464
+
 //Draw range
    int T0_range_min = -3000;
    int T0_range_max = 3000;
@@ -356,22 +361,22 @@ void HodoParamMaker1_jun( int month, int runnum){
    c1->SetGridx();
    c1->SetGridy();
 
-   for(int i=0; i<NumOfSegBH1; i++){
-     BH1UT[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-   for(int i=0; i<NumOfSegBH1; i++){
-     BH1DT[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-   for(int i=0; i<NumOfSegBH2; i++){
-     BH2UT[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-   for(int i=0; i<NumOfSegBH2; i++){
-     BH2DT[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
+//   for(int i=0; i<NumOfSegBH1; i++){
+//     BH1UT[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//   for(int i=0; i<NumOfSegBH1; i++){
+//     BH1DT[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//   for(int i=0; i<NumOfSegBH2; i++){
+//     BH2UT[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//   for(int i=0; i<NumOfSegBH2; i++){
+//     BH2DT[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
    
    
 
@@ -404,26 +409,26 @@ void HodoParamMaker1_jun( int month, int runnum){
    }
 
 
-   for(int i=0; i<NumOfSegBH1; i++){
-     BH1UT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
-     BH1UT0[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-   for(int i=0; i<NumOfSegBH1; i++){
-     BH1DT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
-     BH1DT0[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-   for(int i=0; i<NumOfSegBH2; i++){
-     BH2UT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
-     BH2UT0[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-   for(int i=0; i<NumOfSegBH2; i++){
-     BH2DT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
-     BH2DT0[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
+//   for(int i=0; i<NumOfSegBH1; i++){
+//     BH1UT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
+//     BH1UT0[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//   for(int i=0; i<NumOfSegBH1; i++){
+//     BH1DT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
+//     BH1DT0[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//   for(int i=0; i<NumOfSegBH2; i++){
+//     BH2UT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
+//     BH2UT0[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//   for(int i=0; i<NumOfSegBH2; i++){
+//     BH2DT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
+//     BH2DT0[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                         //
@@ -433,35 +438,41 @@ void HodoParamMaker1_jun( int month, int runnum){
    nbytes = 0;
    for (Long64_t i=0; i<nentries;i++) {
      nbytes += tree->GetEntry(i);
-     if(bh2nhits == 1){
+     if(bh1nhits < range2 && bh1nhits > range1 && bh2nhits == 1){
        int u_mipflg = 0;
        int d_mipflg = 0;
        for (int i=0; i<NumOfSegBH1;i++) {
          for (int j=0; j<MaxDepth;j++) {
-           if(bh1ut[i][j] > bh1utprm[i] - l && bh1ut[i][j] > bh1utprm[i] + l ) u_mipflg = true;
-           if(bh1dt[i][j] > bh1dtprm[i] - l && bh1dt[i][j] > bh1dtprm[i] + l ) d_mipflg = true;
+           if(bh1ut[i][j] > (bh1utprm[i] - gr1) && bh1ut[i][j] < (bh1utprm[i] + gr1) ) u_mipflg = 1;
+           if(bh1dt[i][j] > (bh1dtprm[i] - gr1) && bh1dt[i][j] < (bh1dtprm[i] + gr1) ) d_mipflg = 1;
          }
          if(u_mipflg && d_mipflg){
            BH1UMIP[i]->Fill(bh1ua[i]);
            BH1DMIP[i]->Fill(bh1da[i]);
-         }else{
+         }
+         if(u_mipflg==0 && d_mipflg==0){
            BH1UBG[i]->Fill(bh1ua[i]);
            BH1DBG[i]->Fill(bh1da[i]);
          }
+         u_mipflg = 0;
+         d_mipflg = 0;
        }
 
        for (int i=0; i<NumOfSegBH2;i++) {
          for (int j=0; j<MaxDepth;j++) {
-           if(bh2ut[i][j] > bh2utprm[i] - l2 && bh2ut[i][j] > bh2utprm[i] + l2 ) u_mipflg = true;
-           if(bh2dt[i][j] > bh2dtprm[i] - l2 && bh2dt[i][j] > bh2dtprm[i] + l2 ) d_mipflg = true;
+           if(bh2ut[i][j] > (bh2utprm[i] - gr2) && bh2ut[i][j] < (bh2utprm[i] + gr2) ) u_mipflg = 1;
+           if(bh2dt[i][j] > (bh2dtprm[i] - gr3) && bh2dt[i][j] < (bh2dtprm[i] + gr3) ) d_mipflg = 1;
          }
          if(u_mipflg && d_mipflg){
            BH2UMIP[i]->Fill(bh2ua[i]);
            BH2DMIP[i]->Fill(bh2da[i]);
-         }else{
+         }
+         if(u_mipflg==0 && d_mipflg==0){
            BH2UBG[i]->Fill(bh2ua[i]);
            BH2DBG[i]->Fill(bh2da[i]);
          }
+         u_mipflg = 0;
+         d_mipflg = 0;
        }
      }
    }
@@ -580,37 +591,55 @@ void HodoParamMaker1_jun( int month, int runnum){
    nbytes = 0;
    for (Long64_t i=0; i<nentries;i++) {
       nbytes += tree->GetEntry(i);
-      for (int i=0; i<NumOfSegBH1;i++) {
-        if(bh1ut[i]>0 && bh1dt[i]>0 && bh1nhits < range2 && bh1nhits > range1 && bh2nhits == 1 ){
-          BH1UdE[i]->Fill((bh1ua[i]-bh1ubgprm[i])/(bh1umipprm[i]-bh1ubgprm[i]));
-          BH1DdE[i]->Fill((bh1da[i]-bh1dbgprm[i])/(bh1dmipprm[i]-bh1dbgprm[i]));
-        }
-      }
+     if(bh1nhits < range2 && bh1nhits > range1 && bh2nhits == 1){
+       int u_mipflg = 0;
+       int d_mipflg = 0;
+       for (int i=0; i<NumOfSegBH1;i++) {
+         for (int j=0; j<MaxDepth;j++) {
+           if(bh1ut[i][j] > (bh1utprm[i] - gr1) && bh1ut[i][j] < (bh1utprm[i] + gr1) ) u_mipflg = 1;
+           if(bh1dt[i][j] > (bh1dtprm[i] - gr1) && bh1dt[i][j] < (bh1dtprm[i] + gr1) ) d_mipflg = 1;
+         }
+         if(u_mipflg ==1 && d_mipflg ==1){
+           BH1UdE[i]->Fill((bh1ua[i]-bh1ubgprm[i])/(bh1umipprm[i]-bh1ubgprm[i]));
+           BH1DdE[i]->Fill((bh1da[i]-bh1dbgprm[i])/(bh1dmipprm[i]-bh1dbgprm[i]));
+         }
+         u_mipflg = 0;
+         d_mipflg = 0;
+       }
 
-      for (int i=0; i<NumOfSegBH2;i++) {
-        if(bh1nhits < range2 && bh1nhits > range1 && bh2ut[i]>0 && bh2dt[i]>0 && bh2nhits  == 1){
-          BH2UdE[i]->Fill((bh2ua[i]-bh2ubgprm[i])/(bh2umipprm[i]-bh2ubgprm[i]));
-          BH2DdE[i]->Fill((bh2da[i]-bh2dbgprm[i])/(bh2dmipprm[i]-bh2dbgprm[i]));
-        }
-      }
+       u_mipflg = 0;
+       d_mipflg = 0;
+       for (int i=0; i<NumOfSegBH2;i++) {
+         for (int j=0; j<MaxDepth;j++) {
+           if(bh2ut[i][j] > (bh2utprm[i] - gr2) && bh2ut[i][j] < (bh2utprm[i] + gr2) ) u_mipflg = 1;
+           if(bh2dt[i][j] > (bh2dtprm[i] - gr3) && bh2dt[i][j] < (bh2dtprm[i] + gr3) ) d_mipflg = 1;
+         }
+         if(u_mipflg ==1  && d_mipflg ==1){
+           BH2UdE[i]->Fill((bh2ua[i]-bh2ubgprm[i])/(bh2umipprm[i]-bh2ubgprm[i]));
+           BH2DdE[i]->Fill((bh2da[i]-bh2dbgprm[i])/(bh2dmipprm[i]-bh2dbgprm[i]));
+         }
+         u_mipflg = 0;
+         d_mipflg = 0;
+       }
+     }
    }
 
-   for(int i=0; i<NumOfSegBH1; i++){
-     BH1UdE[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-   for(int i=0; i<NumOfSegBH1; i++){
-     BH1DdE[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-   for(int i=0; i<NumOfSegBH2; i++){
-     BH2UdE[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-   for(int i=0; i<NumOfSegBH2; i++){
-     BH2DdE[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
+//   for(int i=0; i<NumOfSegBH1; i++){
+//     BH1UdE[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//   for(int i=0; i<NumOfSegBH1; i++){
+//     BH1DdE[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//   for(int i=0; i<NumOfSegBH2; i++){
+//     BH2UdE[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//   for(int i=0; i<NumOfSegBH2; i++){
+//     BH2DdE[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
                              
   c1->Print(pdf+"]");        
    
