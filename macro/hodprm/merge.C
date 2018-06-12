@@ -25,12 +25,13 @@ double BH2 = 2;
 
 void merge( int month,int runnum){
   TString prmdir1=Form("%s/work/e40/ana/analyzer_%s/param/HDPRM",Month[month],std::getenv("HOME")); 
-  TString filein1=Form("%s/HodoParam_%05d",prmdir1.Data(),runnum); 
+//  TString filein1=Form("%s/HodoParam_%05d",prmdir1.Data(),runnum); 
+  TString filein1=Form("%s/HodoParam_2018Jun_0",prmdir1.Data()); 
   
   TString prmdir2=Form("%s/work/e40/ana/hp_dat",std::getenv("HOME")); 
-  TString filein2=Form("%s/HodoParamMaker1_BH1_ADC_%05d.dat",prmdir2.Data(),runnum); 
+//  TString filein2=Form("%s/HodoParamMaker1_BH1_ADC_%05d.dat",prmdir2.Data(),runnum); 
   TString filein3=Form("%s/HodoParamMaker1_BH1_TDC_%05d.dat",prmdir2.Data(),runnum); 
-  TString filein4=Form("%s/HodoParamMaker1_BH2_ADC_%05d.dat",prmdir2.Data(),runnum); 
+//  TString filein4=Form("%s/HodoParamMaker1_BH2_ADC_%05d.dat",prmdir2.Data(),runnum); 
   TString filein5=Form("%s/HodoParamMaker1_BH2_TDC_%05d.dat",prmdir2.Data(),runnum); 
   
   TString prmdir3=Form("%s/work/e40/ana/prm/HDPRM",std::getenv("HOME")); 
@@ -45,9 +46,9 @@ void merge( int month,int runnum){
   std::ofstream fout1(fileout1);
 
   std::vector<std::vector<double>> parameter; 
-  std::vector<std::vector<double>> BH1ADC; 
+//  std::vector<std::vector<double>> BH1ADC; 
   std::vector<std::vector<double>> BH1TDC; 
-  std::vector<std::vector<double>> BH2ADC; 
+//  std::vector<std::vector<double>> BH2ADC; 
   std::vector<std::vector<double>> BH2TDC; 
   std::vector<std::vector<double>> BH2CO; 
 
@@ -59,18 +60,18 @@ void merge( int month,int runnum){
     exit(0); 
   }  
 
-  while(std::getline(fin2, line)){
-    double a=-1, b=-1, c=-1, d=-1;
-    std::istringstream input_line( line );
-    std::vector<double> inner;
-    if( input_line >> a >> b >> c >> d ){
-      inner.push_back(a);
-      inner.push_back(b);
-      inner.push_back(c);
-      inner.push_back(d);
-      BH1ADC.push_back(inner);
-    }
-  }
+//  while(std::getline(fin2, line)){
+//    double a=-1, b=-1, c=-1, d=-1;
+//    std::istringstream input_line( line );
+//    std::vector<double> inner;
+//    if( input_line >> a >> b >> c >> d ){
+//      inner.push_back(a);
+//      inner.push_back(b);
+//      inner.push_back(c);
+//      inner.push_back(d);
+//      BH1ADC.push_back(inner);
+//    }
+//  }
 
   while(std::getline(fin3, line)){
     double a=-1, b=-1;
@@ -83,18 +84,18 @@ void merge( int month,int runnum){
     }
   }
 
-  while(std::getline(fin4, line)){
-    double a=-1, b=-1, c=-1, d=-1, e=-1;
-    std::istringstream input_line( line );
-    std::vector<double> inner;
-    if( input_line >> a >> b >> c >> d ){
-      inner.push_back(a);
-      inner.push_back(b);
-      inner.push_back(c);
-      inner.push_back(d);
-      BH2ADC.push_back(inner);
-    }
-  }
+//  while(std::getline(fin4, line)){
+//    double a=-1, b=-1, c=-1, d=-1, e=-1;
+//    std::istringstream input_line( line );
+//    std::vector<double> inner;
+//    if( input_line >> a >> b >> c >> d ){
+//      inner.push_back(a);
+//      inner.push_back(b);
+//      inner.push_back(c);
+//      inner.push_back(d);
+//      BH2ADC.push_back(inner);
+//    }
+//  }
 
   while(std::getline(fin5, line)){
     double a=-1, b=-1;
@@ -124,19 +125,20 @@ void merge( int month,int runnum){
         inner.push_back(at);
         inner.push_back(ud);
         if( cid == 1 ){
-          if( at == 0 ){
-            if( ud == 0){
-              p0 = BH1ADC[seg][0];
-              p1 = BH1ADC[seg][1];
-              inner.push_back(p0);
-              inner.push_back(p1);
-            }else if(ud == 1){
-              p0 = BH1ADC[seg][2];
-              p1 = BH1ADC[seg][3];
-              inner.push_back(p0);
-              inner.push_back(p1);
-            }
-          }else if(at == 1){
+//          if( at == 0 ){
+//            if( ud == 0){
+//              p0 = BH1ADC[seg][0];
+//              p1 = BH1ADC[seg][1];
+//              inner.push_back(p0);
+//              inner.push_back(p1);
+//            }else if(ud == 1){
+//              p0 = BH1ADC[seg][2];
+//              p1 = BH1ADC[seg][3];
+//              inner.push_back(p0);
+//              inner.push_back(p1);
+//            }
+//          }else if(at == 1){
+          if(at == 1){
             if( ud == 0){
               p0 = BH1TDC[seg][0];
               inner.push_back(p0);
@@ -148,19 +150,20 @@ void merge( int month,int runnum){
             }
           }
         }else if( cid == 2 ){
-          if( at == 0 ){
-            if( ud == 0){
-              p0 = BH2ADC[seg][0];
-              p1 = BH2ADC[seg][1];
-              inner.push_back(p0);
-              inner.push_back(p1);
-            }else if(ud == 1){
-              p0 = BH2ADC[seg][2];
-              p1 = BH2ADC[seg][3];
-              inner.push_back(p0);
-              inner.push_back(p1);
-            }
-          }else if(at == 1){
+//          if( at == 0 ){
+//            if( ud == 0){
+//              p0 = BH2ADC[seg][0];
+//              p1 = BH2ADC[seg][1];
+//              inner.push_back(p0);
+//              inner.push_back(p1);
+//            }else if(ud == 1){
+//              p0 = BH2ADC[seg][2];
+//              p1 = BH2ADC[seg][3];
+//              inner.push_back(p0);
+//              inner.push_back(p1);
+//            }
+//          }else if(at == 1){
+          if(at == 1){
             if( ud == 0){
               p0 = BH2TDC[seg][0];
               inner.push_back(p0);

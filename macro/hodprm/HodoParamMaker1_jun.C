@@ -267,10 +267,12 @@ void HodoParamMaker1_jun( int month, int runnum){
    double btof1[NumOfSegBH1]; 
    double btof2[NumOfSegBH2]; 
 
-   double l_mip = 50; 
-   double l_bg = 5; 
-   double l_bg1 = 3; 
-   double l_bg2 = 3; 
+   double l_mip = 40; 
+   double l_bg = 4; 
+   double l_bg1 = 4; 
+   double l_bg2 = 2; 
+//Draw range
+   double r_bg = 10; 
 
    TF1 *fit = new TF1("fit","gaus"); 
    
@@ -523,11 +525,11 @@ void HodoParamMaker1_jun( int month, int runnum){
 
        BH1UBG[i]->Fit("fit","","", bh1ubgprm[i]-l_bg, bh1ubgprm[i]+l_bg);  
        bh1ubgprm[i] = fit->GetParameter(1);  
-       BH1UBG[i]->GetXaxis()->SetRangeUser(bh1ubgprm[i]-2*(l_bg), bh1ubgprm[i]+4*(l_bg)); 
+       BH1UBG[i]->GetXaxis()->SetRangeUser(bh1ubgprm[i]-1*(r_bg), bh1ubgprm[i]+2*(r_bg)); 
 
        BH1DBG[i]->Fit("fit","","", bh1dbgprm[i]-l_bg1, bh1dbgprm[i]+l_bg1); 
        bh1dbgprm[i] = fit->GetParameter(1);  
-       BH1DBG[i]->GetXaxis()->SetRangeUser(bh1dbgprm[i]-2*(l_bg1), bh1dbgprm[i]+4*(l_bg1)); 
+       BH1DBG[i]->GetXaxis()->SetRangeUser(bh1dbgprm[i]-(r_bg), bh1dbgprm[i]+2*(r_bg)); 
 
    }
 
@@ -540,11 +542,11 @@ void HodoParamMaker1_jun( int month, int runnum){
 
        BH2UBG[i]->Fit("fit","","", bh2ubgprm[i]-l_bg2, bh2ubgprm[i]+l_bg2);
        bh2ubgprm[i] = fit->GetParameter(1);  
-       BH2UBG[i]->GetXaxis()->SetRangeUser(bh2ubgprm[i]-2*(l_bg2), bh2ubgprm[i]+4*(l_bg2)); 
+       BH2UBG[i]->GetXaxis()->SetRangeUser(bh2ubgprm[i]-2*(r_bg), bh2ubgprm[i]+4*(r_bg)); 
 
        BH2DBG[i]->Fit("fit","","", bh2dbgprm[i]-l_bg2, bh2dbgprm[i]+l_bg2); 
        bh2dbgprm[i] = fit->GetParameter(1);  
-       BH2DBG[i]->GetXaxis()->SetRangeUser(bh2dbgprm[i]-2*(l_bg2), bh2dbgprm[i]+4*(l_bg2)); 
+       BH2DBG[i]->GetXaxis()->SetRangeUser(bh2dbgprm[i]-2*(r_bg), bh2dbgprm[i]+4*(r_bg)); 
 
    }
 
