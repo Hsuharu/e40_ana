@@ -281,8 +281,8 @@ void HodoParamMaker1_jun( int month, int runnum){
 //                                                                                         //
 /////////////////////////////////////////////////////////////////////////////////////////////
    Long64_t nbytes = 0;
-   for (Long64_t i=0; i<nentries;i++) {
-      nbytes += tree->GetEntry(i);
+   for (Long64_t s=0; s<nentries;s++) {
+      nbytes += tree->GetEntry(s);
       for (int i=0; i<NumOfSegBH1;i++) {
         if(bh1ut[i]>0 && bh1dt[i]>0  && bh1nhits < range2 && bh1nhits > range1 && bh2nhits == 1){
           for(int j=0; j<MaxDepth; j++){
@@ -361,22 +361,22 @@ void HodoParamMaker1_jun( int month, int runnum){
    c1->SetGridx();
    c1->SetGridy();
 
-//   for(int i=0; i<NumOfSegBH1; i++){
-//     BH1UT[i]->Draw(); 
-//     c1 ->Print(pdf); 
-//   }
-//   for(int i=0; i<NumOfSegBH1; i++){
-//     BH1DT[i]->Draw(); 
-//     c1 ->Print(pdf); 
-//   }
-//   for(int i=0; i<NumOfSegBH2; i++){
-//     BH2UT[i]->Draw(); 
-//     c1 ->Print(pdf); 
-//   }
-//   for(int i=0; i<NumOfSegBH2; i++){
-//     BH2DT[i]->Draw(); 
-//     c1 ->Print(pdf); 
-//   }
+   for(int i=0; i<NumOfSegBH1; i++){
+     BH1UT[i]->Draw(); 
+     c1 ->Print(pdf); 
+   }
+   for(int i=0; i<NumOfSegBH1; i++){
+     BH1DT[i]->Draw(); 
+     c1 ->Print(pdf); 
+   }
+   for(int i=0; i<NumOfSegBH2; i++){
+     BH2UT[i]->Draw(); 
+     c1 ->Print(pdf); 
+   }
+   for(int i=0; i<NumOfSegBH2; i++){
+     BH2DT[i]->Draw(); 
+     c1 ->Print(pdf); 
+   }
    
    
 
@@ -387,10 +387,10 @@ void HodoParamMaker1_jun( int month, int runnum){
 //                                                                                         //
 /////////////////////////////////////////////////////////////////////////////////////////////
    nbytes = 0;
-   for (Long64_t i=0; i<nentries;i++) {
-      nbytes += tree->GetEntry(i);
+   for (Long64_t s=0; s<nentries;s++) {
+      nbytes += tree->GetEntry(s);
       for (int i=0; i<NumOfSegBH1;i++) {
-        if(bh1ut[i]>0 && bh1dt[i]>0 && bh1nhits < range2 && bh1nhits > range1&& bh2nhits == 1){
+        if(bh1ut[i]>0 && bh1dt[i]>0 && bh1nhits < range2 && bh1nhits > range1 && bh2nhits == 1){
           for(int j=0; j<MaxDepth; j++){
             BH1UT0[i]->Fill(bh1ut[i][j]-bh1utprm[i]);
             BH1DT0[i]->Fill(bh1dt[i][j]-bh1dtprm[i]);
@@ -409,26 +409,26 @@ void HodoParamMaker1_jun( int month, int runnum){
    }
 
 
-//   for(int i=0; i<NumOfSegBH1; i++){
-//     BH1UT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
-//     BH1UT0[i]->Draw(); 
-//     c1 ->Print(pdf); 
-//   }
-//   for(int i=0; i<NumOfSegBH1; i++){
-//     BH1DT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
-//     BH1DT0[i]->Draw(); 
-//     c1 ->Print(pdf); 
-//   }
-//   for(int i=0; i<NumOfSegBH2; i++){
-//     BH2UT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
-//     BH2UT0[i]->Draw(); 
-//     c1 ->Print(pdf); 
-//   }
-//   for(int i=0; i<NumOfSegBH2; i++){
-//     BH2DT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
-//     BH2DT0[i]->Draw(); 
-//     c1 ->Print(pdf); 
-//   }
+   for(int i=0; i<NumOfSegBH1; i++){
+     BH1UT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
+     BH1UT0[i]->Draw(); 
+     c1 ->Print(pdf); 
+   }
+   for(int i=0; i<NumOfSegBH1; i++){
+     BH1DT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
+     BH1DT0[i]->Draw(); 
+     c1 ->Print(pdf); 
+   }
+   for(int i=0; i<NumOfSegBH2; i++){
+     BH2UT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
+     BH2UT0[i]->Draw(); 
+     c1 ->Print(pdf); 
+   }
+   for(int i=0; i<NumOfSegBH2; i++){
+     BH2DT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
+     BH2DT0[i]->Draw(); 
+     c1 ->Print(pdf); 
+   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                         //
@@ -436,8 +436,8 @@ void HodoParamMaker1_jun( int month, int runnum){
 //                                                                                         //
 /////////////////////////////////////////////////////////////////////////////////////////////
    nbytes = 0;
-   for (Long64_t i=0; i<nentries;i++) {
-     nbytes += tree->GetEntry(i);
+   for (Long64_t s=0; s<nentries;s++) {
+     nbytes += tree->GetEntry(s);
      int u_mipflg = 0;
      int d_mipflg = 0;
      for (int i=0; i<NumOfSegBH1;i++) {
@@ -589,8 +589,8 @@ void HodoParamMaker1_jun( int month, int runnum){
 //                                                                                         //
 /////////////////////////////////////////////////////////////////////////////////////////////
    nbytes = 0;
-   for (Long64_t i=0; i<nentries;i++) {
-      nbytes += tree->GetEntry(i);
+   for (Long64_t s=0; s<nentries;s++) {
+      nbytes += tree->GetEntry(s);
      if(bh1nhits < range2 && bh1nhits > range1 && bh2nhits == 1){
        int u_mipflg = 0;
        int d_mipflg = 0;
