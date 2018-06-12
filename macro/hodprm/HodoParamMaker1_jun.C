@@ -438,42 +438,42 @@ void HodoParamMaker1_jun( int month, int runnum){
    nbytes = 0;
    for (Long64_t i=0; i<nentries;i++) {
      nbytes += tree->GetEntry(i);
-     if(bh1nhits < range2 && bh1nhits > range1 && bh2nhits == 1){
-       int u_mipflg = 0;
-       int d_mipflg = 0;
-       for (int i=0; i<NumOfSegBH1;i++) {
-         for (int j=0; j<MaxDepth;j++) {
-           if(bh1ut[i][j] > (bh1utprm[i] - gr1) && bh1ut[i][j] < (bh1utprm[i] + gr1) ) u_mipflg = 1;
-           if(bh1dt[i][j] > (bh1dtprm[i] - gr1) && bh1dt[i][j] < (bh1dtprm[i] + gr1) ) d_mipflg = 1;
-         }
-         if(u_mipflg && d_mipflg){
+     int u_mipflg = 0;
+     int d_mipflg = 0;
+     for (int i=0; i<NumOfSegBH1;i++) {
+       for (int j=0; j<MaxDepth;j++) {
+         if(bh1ut[i][j] > (bh1utprm[i] - gr1) && bh1ut[i][j] < (bh1utprm[i] + gr1) ) u_mipflg = 1;
+         if(bh1dt[i][j] > (bh1dtprm[i] - gr1) && bh1dt[i][j] < (bh1dtprm[i] + gr1) ) d_mipflg = 1;
+       }
+       if(u_mipflg && d_mipflg){
+         if(bh1nhits < range2 && bh1nhits > range1 && bh2nhits == 1){
            BH1UMIP[i]->Fill(bh1ua[i]);
            BH1DMIP[i]->Fill(bh1da[i]);
          }
-         if(u_mipflg==0 && d_mipflg==0){
-           BH1UBG[i]->Fill(bh1ua[i]);
-           BH1DBG[i]->Fill(bh1da[i]);
-         }
-         u_mipflg = 0;
-         d_mipflg = 0;
+       }else if(u_mipflg == 0 && d_mipflg == 0 ){
+         BH1UBG[i]->Fill(bh1ua[i]);
+         BH1DBG[i]->Fill(bh1da[i]);
        }
+       u_mipflg = 0;
+       d_mipflg = 0;
+     }
 
-       for (int i=0; i<NumOfSegBH2;i++) {
-         for (int j=0; j<MaxDepth;j++) {
-           if(bh2ut[i][j] > (bh2utprm[i] - gr2) && bh2ut[i][j] < (bh2utprm[i] + gr2) ) u_mipflg = 1;
-           if(bh2dt[i][j] > (bh2dtprm[i] - gr3) && bh2dt[i][j] < (bh2dtprm[i] + gr3) ) d_mipflg = 1;
-         }
-         if(u_mipflg && d_mipflg){
+     for (int i=0; i<NumOfSegBH2;i++) {
+       for (int j=0; j<MaxDepth;j++) {
+         if(bh2ut[i][j] > (bh2utprm[i] - gr2) && bh2ut[i][j] < (bh2utprm[i] + gr2) ) u_mipflg = 1;
+         if(bh2dt[i][j] > (bh2dtprm[i] - gr3) && bh2dt[i][j] < (bh2dtprm[i] + gr3) ) d_mipflg = 1;
+       }
+       if(u_mipflg && d_mipflg){
+         if(bh1nhits < range2 && bh1nhits > range1 && bh2nhits == 1){
            BH2UMIP[i]->Fill(bh2ua[i]);
            BH2DMIP[i]->Fill(bh2da[i]);
          }
-         if(u_mipflg==0 && d_mipflg==0){
-           BH2UBG[i]->Fill(bh2ua[i]);
-           BH2DBG[i]->Fill(bh2da[i]);
-         }
-         u_mipflg = 0;
-         d_mipflg = 0;
+       }else if(u_mipflg == 0 && d_mipflg == 0 ){
+         BH2UBG[i]->Fill(bh2ua[i]);
+         BH2DBG[i]->Fill(bh2da[i]);
        }
+       u_mipflg = 0;
+       d_mipflg = 0;
      }
    }
 
@@ -522,11 +522,11 @@ void HodoParamMaker1_jun( int month, int runnum){
        bh1dbgprm[i] = BH1DBG[i]->GetXaxis()->GetBinCenter(bh1dbgprm[i]);  
 
        BH1UBG[i]->Fit("fit","","", bh1ubgprm[i]-l_bg, bh1ubgprm[i]+l_bg);  
-       bh1ubgprm[i] = fit3->GetParameter(1);  
+       bh1ubgprm[i] = fit->GetParameter(1);  
        BH1UBG[i]->GetXaxis()->SetRangeUser(bh1ubgprm[i]-2*(l_bg), bh1ubgprm[i]+4*(l_bg)); 
 
        BH1DBG[i]->Fit("fit","","", bh1dbgprm[i]-l_bg1, bh1dbgprm[i]+l_bg1); 
-       bh1dbgprm[i] = fit3->GetParameter(1);  
+       bh1dbgprm[i] = fit->GetParameter(1);  
        BH1DBG[i]->GetXaxis()->SetRangeUser(bh1dbgprm[i]-2*(l_bg1), bh1dbgprm[i]+4*(l_bg1)); 
 
    }
@@ -539,11 +539,11 @@ void HodoParamMaker1_jun( int month, int runnum){
        bh2dbgprm[i] = BH2DBG[i]->GetXaxis()->GetBinCenter(bh2dbgprm[i]);  
 
        BH2UBG[i]->Fit("fit","","", bh2ubgprm[i]-l_bg2, bh2ubgprm[i]+l_bg2);
-       bh2ubgprm[i] = fit3->GetParameter(1);  
+       bh2ubgprm[i] = fit->GetParameter(1);  
        BH2UBG[i]->GetXaxis()->SetRangeUser(bh2ubgprm[i]-2*(l_bg2), bh2ubgprm[i]+4*(l_bg2)); 
 
        BH2DBG[i]->Fit("fit","","", bh2dbgprm[i]-l_bg2, bh2dbgprm[i]+l_bg2); 
-       bh2dbgprm[i] = fit3->GetParameter(1);  
+       bh2dbgprm[i] = fit->GetParameter(1);  
        BH2DBG[i]->GetXaxis()->SetRangeUser(bh2dbgprm[i]-2*(l_bg2), bh2dbgprm[i]+4*(l_bg2)); 
 
    }
@@ -607,8 +607,6 @@ void HodoParamMaker1_jun( int month, int runnum){
          d_mipflg = 0;
        }
 
-       u_mipflg = 0;
-       d_mipflg = 0;
        for (int i=0; i<NumOfSegBH2;i++) {
          for (int j=0; j<MaxDepth;j++) {
            if(bh2ut[i][j] > (bh2utprm[i] - gr2) && bh2ut[i][j] < (bh2utprm[i] + gr2) ) u_mipflg = 1;
@@ -624,22 +622,22 @@ void HodoParamMaker1_jun( int month, int runnum){
      }
    }
 
-//   for(int i=0; i<NumOfSegBH1; i++){
-//     BH1UdE[i]->Draw(); 
-//     c1 ->Print(pdf); 
-//   }
-//   for(int i=0; i<NumOfSegBH1; i++){
-//     BH1DdE[i]->Draw(); 
-//     c1 ->Print(pdf); 
-//   }
-//   for(int i=0; i<NumOfSegBH2; i++){
-//     BH2UdE[i]->Draw(); 
-//     c1 ->Print(pdf); 
-//   }
-//   for(int i=0; i<NumOfSegBH2; i++){
-//     BH2DdE[i]->Draw(); 
-//     c1 ->Print(pdf); 
-//   }
+   for(int i=0; i<NumOfSegBH1; i++){
+     BH1UdE[i]->Draw(); 
+     c1 ->Print(pdf); 
+   }
+   for(int i=0; i<NumOfSegBH1; i++){
+     BH1DdE[i]->Draw(); 
+     c1 ->Print(pdf); 
+   }
+   for(int i=0; i<NumOfSegBH2; i++){
+     BH2UdE[i]->Draw(); 
+     c1 ->Print(pdf); 
+   }
+   for(int i=0; i<NumOfSegBH2; i++){
+     BH2DdE[i]->Draw(); 
+     c1 ->Print(pdf); 
+   }
                              
   c1->Print(pdf+"]");        
    
@@ -648,25 +646,25 @@ void HodoParamMaker1_jun( int month, int runnum){
 //    BH1 & BH2 dat file maker                                                             //
 //                                                                                         //
 /////////////////////////////////////////////////////////////////////////////////////////////
-//  TString fout1 = (Form( "%s/hp_dat/HodoParamMaker1_BH1_TDC_%05d.dat", anadir.Data() ,runnum));  
-//  TString fout2 = (Form( "%s/hp_dat/HodoParamMaker1_BH1_ADC_%05d.dat", anadir.Data() ,runnum));  
-//   
-//  std::ofstream fout_1(fout1.Data()); 
-//  std::ofstream fout_2(fout2.Data()); 
-//  for(int i=0; i<NumOfSegBH1; i++){
-//     fout_1 << bh1utprm[i]  <<  "\t"  << bh1dtprm[i] << endl;
-//     fout_2 << bh1ubgprm[i]  <<  "\t" << bh1umipprm[i]  <<  "\t" << bh1dbgprm[i]  <<  "\t" << bh1dmipprm[i] << endl;
-//  }     
-//
-//  TString fout3 = (Form( "%s/hp_dat/HodoParamMaker1_BH2_TDC_%05d.dat", anadir.Data() ,runnum));  
-//  TString fout4 = (Form( "%s/hp_dat/HodoParamMaker1_BH2_ADC_%05d.dat", anadir.Data() ,runnum));  
-//   
-//  std::ofstream fout_3(fout3.Data()); 
-//  std::ofstream fout_4(fout4.Data()); 
-//  for(int i=0; i<NumOfSegBH2; i++){
-//     fout_1 << bh2utprm[i]  <<  "\t"  << bh2dtprm[i] << endl;
-//     fout_2 << bh2ubgprm[i]  <<  "\t" << bh2umipprm[i]  <<  "\t" << bh2dbgprm[i]  <<  "\t" << bh2dmipprm[i] << endl;
-//  }     
+  TString fout1 = (Form( "%s/hp_dat/HodoParamMaker1_BH1_TDC_%05d.dat", anadir.Data() ,runnum));  
+  TString fout2 = (Form( "%s/hp_dat/HodoParamMaker1_BH1_ADC_%05d.dat", anadir.Data() ,runnum));  
+   
+  std::ofstream fout_1(fout1.Data()); 
+  std::ofstream fout_2(fout2.Data()); 
+  for(int i=0; i<NumOfSegBH1; i++){
+     fout_1 << bh1utprm[i]  <<  "\t"  << bh1dtprm[i] << endl;
+     fout_2 << bh1ubgprm[i]  <<  "\t" << bh1umipprm[i]  <<  "\t" << bh1dbgprm[i]  <<  "\t" << bh1dmipprm[i] << endl;
+  }     
+
+  TString fout3 = (Form( "%s/hp_dat/HodoParamMaker1_BH2_TDC_%05d.dat", anadir.Data() ,runnum));  
+  TString fout4 = (Form( "%s/hp_dat/HodoParamMaker1_BH2_ADC_%05d.dat", anadir.Data() ,runnum));  
+   
+  std::ofstream fout_3(fout3.Data()); 
+  std::ofstream fout_4(fout4.Data()); 
+  for(int i=0; i<NumOfSegBH2; i++){
+     fout_1 << bh2utprm[i]  <<  "\t"  << bh2dtprm[i] << endl;
+     fout_2 << bh2ubgprm[i]  <<  "\t" << bh2umipprm[i]  <<  "\t" << bh2dbgprm[i]  <<  "\t" << bh2dmipprm[i] << endl;
+  }     
 
                              
 }                            

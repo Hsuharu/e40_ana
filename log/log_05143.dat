@@ -960,3 +960,67 @@
 #D UnpackerManager::show_event_number()
    (daq root data) 1840000 (0x1c1380)
    (counter)       1840000 (0x1c1380)
+#D UnpackerManager::show_event_number()
+   (daq root data) 1850000 (0x1c3a90)
+   (counter)       1850000 (0x1c3a90)
+#D UnpackerManager::show_event_number()
+   (daq root data) 1860000 (0x1c61a0)
+   (counter)       1860000 (0x1c61a0)
+#D UnpackerManager::show_event_number()
+   (daq root data) 1870000 (0x1c88b0)
+   (counter)       1870000 (0x1c88b0)
+#D UnpackerManager::show_event_number()
+   (daq root data) 1880000 (0x1cafc0)
+   (counter)       1880000 (0x1cafc0)
+#D UnpackerManager::show_event_number()
+   (daq root data) 1890000 (0x1cd6d0)
+   (counter)       1890000 (0x1cd6d0)
+#D UnpackerManager::show_event_number()
+   (daq root data) 1900000 (0x1cfde0)
+   (counter)       1900000 (0x1cfde0)
+#D UnpackerManager::show_event_number()
+   (daq root data) 1910000 (0x1d24f0)
+   (counter)       1910000 (0x1d24f0)
+#D UnpackerManager::show_event_number()
+   (daq root data) 1920000 (0x1d4c00)
+   (counter)       1920000 (0x1d4c00)
+#D UnpackerManager::show_event_number()
+   (daq root data) 1930000 (0x1d7310)
+   (counter)       1930000 (0x1d7310)
+#D UnpackerManager::show_event_number()
+   (daq root data) 1940000 (0x1d9a20)
+   (counter)       1940000 (0x1d9a20)
+#D UnpackerManager::show_event_number()
+   (daq root data) 1950000 (0x1dc130)
+   (counter)       1950000 (0x1dc130)
+#D UnpackerManager::show_event_number()
+   (daq root data) 1960000 (0x1de840)
+   (counter)       1960000 (0x1de840)
+#D UnpackerManager::show_event_number()
+   (daq root data) 1970000 (0x1e0f50)
+   (counter)       1970000 (0x1e0f50)
+#D UnpackerManager::show_event_number()
+   (daq root data) 1980000 (0x1e3660)
+   (counter)       1980000 (0x1e3660)
+#D UnpackerManager::show_event_number()
+   (daq root data) 1990000 (0x1e5d70)
+   (counter)       1990000 (0x1e5d70)
+#D UnpackerManager::show_event_number()
+   (daq root data) 2000000 (0x1e8480)
+   (counter)       2000000 (0x1e8480)
+
+#E EventReader::read() no data
+#D EventReader::read()
+ close stream
+#D IStream /ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05143.dat closed
+
+#E null stream
+    n unpacked =  2000026 (0x1e849a)
+#D GUnpacker::operator++()   exit loop
+    n unpacked =  2000026 (0x1e849a)
+#DTimer [::main()] End of Analyzer 
+   Process Start   : Tue Jun 12 13:36:15 2018
+   Process Stop    : Tue Jun 12 15:16:05 2018
+   Processing Time : 1:39:50
+5926.90user 34.72system 1:39:49elapsed 99%CPU (0avgtext+0avgdata 997932maxresident)k
+0inputs+0outputs (0major+141966minor)pagefaults 0swaps
