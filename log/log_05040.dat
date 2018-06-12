@@ -399,10 +399,40 @@
 #D UnpackerManager::set_parameter()
  key = print_cycle, value = 10000
 #D check mode = 01101001
-terminate called after throwing an instance of 'hddaq::FilesystemException'
-  what():  hddaq::FilesystemException:: 
- during hddaq::realpath() 
- cannot resolve: ./data/JPARC2018Jun/e40_2018jun/run05140.dat.gz
- no sush file
-4.12user 0.48system 0:11.17elapsed 41%CPU (0avgtext+0avgdata 280960maxresident)k
-0inputs+8outputs (0major+80482minor)pagefaults 0swaps
+
+#D ___________ GUnpacker::set_istream() __________
+   input stream = /ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05040.dat.gz
+
+#D GUnpacker::initialize()
+[0m
+#D EventReader::open()  data stream /ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05040.dat.gz
+#D GUnpacker skipped 0 events
+#D GUnpacker::initialize() ----> finished
+#D UnpackerManager::show_event_number()
+   (daq root data) 10000 (0x2710)
+   (counter)       10000 (0x2710)
+#D UnpackerManager::show_event_number()
+   (daq root data) 20000 (0x4e20)
+   (counter)       20000 (0x4e20)
+#D UnpackerManager::show_event_number()
+   (daq root data) 30000 (0x7530)
+   (counter)       30000 (0x7530)
+#D UnpackerManager::show_event_number()
+   (daq root data) 40000 (0x9c40)
+   (counter)       40000 (0x9c40)
+
+#E EventReader::read() no data
+#D EventReader::read()
+ close stream
+#D IStream /ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05040.dat.gz closed
+
+#E null stream
+    n unpacked =  45405 (0xb15d)
+#D GUnpacker::operator++()   exit loop
+    n unpacked =  45405 (0xb15d)
+#DTimer [::main()] End of Analyzer 
+   Process Start   : Tue Jun 12 11:19:06 2018
+   Process Stop    : Tue Jun 12 11:21:59 2018
+   Processing Time : 0:02:53
+167.45user 1.45system 2:55.13elapsed 96%CPU (0avgtext+0avgdata 807016maxresident)k
+0inputs+0outputs (0major+119754minor)pagefaults 0swaps

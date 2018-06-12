@@ -399,10 +399,64 @@
 #D UnpackerManager::set_parameter()
  key = print_cycle, value = 10000
 #D check mode = 01101001
-terminate called after throwing an instance of 'hddaq::FilesystemException'
-  what():  hddaq::FilesystemException:: 
- during hddaq::realpath() 
- cannot resolve: ./data/JPARC2018Jun/e40_2018jun/run05143.dat.gz
- no sush file
-4.12user 0.49system 0:11.18elapsed 41%CPU (0avgtext+0avgdata 280964maxresident)k
-0inputs+0outputs (0major+80546minor)pagefaults 0swaps
+
+#D ___________ GUnpacker::set_istream() __________
+   input stream = /ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05043.dat.gz
+
+#D GUnpacker::initialize()
+[0m
+#D EventReader::open()  data stream /ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05043.dat.gz
+#D GUnpacker skipped 0 events
+#D GUnpacker::initialize() ----> finished
+#D UnpackerManager::show_event_number()
+   (daq root data) 10000 (0x2710)
+   (counter)       10000 (0x2710)
+#D UnpackerManager::show_event_number()
+   (daq root data) 20000 (0x4e20)
+   (counter)       20000 (0x4e20)
+#D UnpackerManager::show_event_number()
+   (daq root data) 30000 (0x7530)
+   (counter)       30000 (0x7530)
+#D UnpackerManager::show_event_number()
+   (daq root data) 40000 (0x9c40)
+   (counter)       40000 (0x9c40)
+#D UnpackerManager::show_event_number()
+   (daq root data) 50000 (0xc350)
+   (counter)       50000 (0xc350)
+#D UnpackerManager::show_event_number()
+   (daq root data) 60000 (0xea60)
+   (counter)       60000 (0xea60)
+#D UnpackerManager::show_event_number()
+   (daq root data) 70000 (0x11170)
+   (counter)       70000 (0x11170)
+#D UnpackerManager::show_event_number()
+   (daq root data) 80000 (0x13880)
+   (counter)       80000 (0x13880)
+#D UnpackerManager::show_event_number()
+   (daq root data) 90000 (0x15f90)
+   (counter)       90000 (0x15f90)
+#D UnpackerManager::show_event_number()
+   (daq root data) 100000 (0x186a0)
+   (counter)       100000 (0x186a0)
+#D UnpackerManager::show_event_number()
+   (daq root data) 110000 (0x1adb0)
+   (counter)       110000 (0x1adb0)
+#D UnpackerManager::show_event_number()
+   (daq root data) 120000 (0x1d4c0)
+   (counter)       120000 (0x1d4c0)
+
+#E EventReader::read() no data
+#D EventReader::read()
+ close stream
+#D IStream /ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05043.dat.gz closed
+
+#E null stream
+    n unpacked =  127977 (0x1f3e9)
+#D GUnpacker::operator++()   exit loop
+    n unpacked =  127977 (0x1f3e9)
+#DTimer [::main()] End of Analyzer 
+   Process Start   : Tue Jun 12 11:19:06 2018
+   Process Stop    : Tue Jun 12 11:25:32 2018
+   Processing Time : 0:06:26
+378.52user 2.16system 6:28.40elapsed 98%CPU (0avgtext+0avgdata 987788maxresident)k
+0inputs+0outputs (0major+139688minor)pagefaults 0swaps

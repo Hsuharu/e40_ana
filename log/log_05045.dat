@@ -402,7 +402,7 @@
 terminate called after throwing an instance of 'hddaq::FilesystemException'
   what():  hddaq::FilesystemException:: 
  during hddaq::realpath() 
- cannot resolve: ./data/JPARC2018Jun/e40_2018jun/run05145.dat.gz
+ cannot resolve: ../data/JPARC2018Jun/e40_2018jun/run05045.dat.gz
  no sush file
-4.13user 0.48system 0:11.19elapsed 41%CPU (0avgtext+0avgdata 280964maxresident)k
-0inputs+8outputs (0major+80569minor)pagefaults 0swaps
+4.44user 0.48system 0:09.72elapsed 50%CPU (0avgtext+0avgdata 280984maxresident)k
+0inputs+0outputs (0major+80547minor)pagefaults 0swaps

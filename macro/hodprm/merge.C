@@ -6,15 +6,32 @@
 double BH1 = 1;
 double BH2 = 2;
 
-void merge(int runnum){
-  TString prmdir1=Form("%s/work/e40/ana/analyzer/param/HDPRM",std::getenv("HOME")); 
+ const char* Month[] =
+ {
+   "zero",
+   "jan",
+   "feb",
+   "mar",
+   "apr",
+   "may",
+   "jun",
+   "jly",
+   "agt",
+   "sep",
+   "oct",
+   "nov",
+   "dec",
+ };
+
+void merge( int month,int runnum){
+  TString prmdir1=Form("%s/work/e40/ana/analyzer_%s/param/HDPRM",Month[month],std::getenv("HOME")); 
   TString filein1=Form("%s/HodoParam_%05d",prmdir1.Data(),runnum); 
   
   TString prmdir2=Form("%s/work/e40/ana/hp_dat",std::getenv("HOME")); 
-  TString filein2=Form("%s/HodoParam_BH1_ADC_%05d.dat",prmdir2.Data(),runnum); 
-  TString filein3=Form("%s/HodoParam_BH1_TDC_%05d.dat",prmdir2.Data(),runnum); 
-  TString filein4=Form("%s/HodoParam_BH2_ADC_%05d.dat",prmdir2.Data(),runnum); 
-  TString filein5=Form("%s/HodoParam_BH2_TDC_%05d.dat",prmdir2.Data(),runnum); 
+  TString filein2=Form("%s/HodoParamMaker1_BH1_ADC_%05d.dat",prmdir2.Data(),runnum); 
+  TString filein3=Form("%s/HodoParamMaker1_BH1_TDC_%05d.dat",prmdir2.Data(),runnum); 
+  TString filein4=Form("%s/HodoParamMaker1_BH2_ADC_%05d.dat",prmdir2.Data(),runnum); 
+  TString filein5=Form("%s/HodoParamMaker1_BH2_TDC_%05d.dat",prmdir2.Data(),runnum); 
   
   TString prmdir3=Form("%s/work/e40/ana/prm/HDPRM",std::getenv("HOME")); 
   TString fileout1=Form("%s/HodoParam_%05d",prmdir3.Data(),runnum); 
