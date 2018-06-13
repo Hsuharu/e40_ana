@@ -24,9 +24,11 @@ double BH2 = 2;
  };
 
 void merge( int month,int runnum){
-  TString prmdir1=Form("%s/work/e40/ana/analyzer_%s/param/HDPRM",Month[month],std::getenv("HOME")); 
+  TString prmdir1=Form("%s/work/e40/ana/analyzer_%s/param/HDPRM",std::getenv("HOME"),Month[month]); 
 //  TString filein1=Form("%s/HodoParam_%05d",prmdir1.Data(),runnum); 
-  TString filein1=Form("%s/HodoParam_2018Jun_0",prmdir1.Data()); 
+  TString filein1=Form("%s/HodoParam_2018Jun_0",prmdir1.Data() ); 
+
+  std::cout << prmdir1 << std::endl;
   
   TString prmdir2=Form("%s/work/e40/ana/hp_dat",std::getenv("HOME")); 
 //  TString filein2=Form("%s/HodoParamMaker1_BH1_ADC_%05d.dat",prmdir2.Data(),runnum); 
@@ -36,14 +38,16 @@ void merge( int month,int runnum){
   
   TString prmdir3=Form("%s/work/e40/ana/prm/HDPRM",std::getenv("HOME")); 
   TString fileout1=Form("%s/HodoParam_%05d",prmdir3.Data(),runnum); 
+  TString fileout2=Form("%s/HodoParam_%05d",prmdir1.Data(),runnum); 
   
   std::ifstream fin1(filein1);
-  std::ifstream fin2(filein2);
+//  std::ifstream fin2(filein2);
   std::ifstream fin3(filein3);
-  std::ifstream fin4(filein4);
+//  std::ifstream fin4(filein4);
   std::ifstream fin5(filein5);
 
   std::ofstream fout1(fileout1);
+  std::ofstream fout2(fileout2);
 
   std::vector<std::vector<double>> parameter; 
 //  std::vector<std::vector<double>> BH1ADC; 
@@ -55,8 +59,23 @@ void merge( int month,int runnum){
   std::string line;
   std::vector<string> comment;
 
-  if(fin1.fail() || fin2.fail() || fin3.fail() || fin4.fail() || fin5.fail()){
-    std::cerr << "no file" << std::endl;
+//  if(fin1.fail() || fin2.fail() || fin3.fail() || fin4.fail() || fin5.fail()){
+//  if(fin1.fail() || fin3.fail() || fin5.fail()){
+//    std::cerr << "no file" << std::endl;
+//    exit(0); 
+//  }  
+  if(fin3.fail()){
+    std::cerr << "file3" << std::endl;
+    exit(0); 
+  }  
+
+  if(fin5.fail()){
+    std::cerr << "file5" << std::endl;
+    exit(0); 
+  }  
+
+  if(fin1.fail() ){
+    std::cerr << "file1" << std::endl;
     exit(0); 
   }  
 
@@ -112,6 +131,7 @@ void merge( int month,int runnum){
     if( line[0]=='#' || line.empty() ){
       comment.push_back(line);
       fout1 << line << endl;
+      fout2 << line << endl;
     }else{
       double cid=-1, plid=-1, seg=-1, at=-1, ud=-1;
       double p0=-9999., p1=-9999.;
@@ -125,7 +145,7 @@ void merge( int month,int runnum){
         inner.push_back(at);
         inner.push_back(ud);
         if( cid == 1 ){
-//          if( at == 0 ){
+          if( at == 0 ){
 //            if( ud == 0){
 //              p0 = BH1ADC[seg][0];
 //              p1 = BH1ADC[seg][1];
@@ -138,7 +158,9 @@ void merge( int month,int runnum){
 //              inner.push_back(p1);
 //            }
 //          }else if(at == 1){
-          if(at == 1){
+              inner.push_back(p0);
+              inner.push_back(p1);
+          }else if(at == 1){
             if( ud == 0){
               p0 = BH1TDC[seg][0];
               inner.push_back(p0);
@@ -150,7 +172,7 @@ void merge( int month,int runnum){
             }
           }
         }else if( cid == 2 ){
-//          if( at == 0 ){
+          if( at == 0 ){
 //            if( ud == 0){
 //              p0 = BH2ADC[seg][0];
 //              p1 = BH2ADC[seg][1];
@@ -163,7 +185,9 @@ void merge( int month,int runnum){
 //              inner.push_back(p1);
 //            }
 //          }else if(at == 1){
-          if(at == 1){
+              inner.push_back(p0);
+              inner.push_back(p1);
+          }else if(at == 1){
             if( ud == 0){
               p0 = BH2TDC[seg][0];
               inner.push_back(p0);
@@ -184,7 +208,8 @@ void merge( int month,int runnum){
         }
       }
       parameter.push_back(inner);
-      fout1 << cid << " " << plid << " " << seg << " " << at << " " << ud << " " << p0 << " " << p1 << endl; ;
+      fout1 << cid << "\t " << plid << "\t " << seg << "\t " << at << "\t " << ud << "\t " << p0 << "  \t  " << p1 << endl; ;
+      fout2 << cid << "\t " << plid << "\t " << seg << "\t " << at << "\t " << ud << "\t " << p0 << "  \t  " << p1 << endl; ;
       }
   }
 }

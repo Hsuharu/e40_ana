@@ -267,7 +267,7 @@ void HodoParamMaker1_jun( int month, int runnum){
    double btof1[NumOfSegBH1]; 
    double btof2[NumOfSegBH2]; 
 
-   double l_mip = 40; 
+   double l_mip = 30; 
    double l_bg = 4; 
    double l_bg1 = 4; 
    double l_bg2 = 2; 
@@ -512,7 +512,6 @@ void HodoParamMaker1_jun( int month, int runnum){
        BH2DMIP[i]->Fit("fit","","", bh2dmipprm[i]-l_mip, bh2dmipprm[i]+l_mip);
        bh2dmipprm[i] = fit->GetParameter(1);  
        BH2DMIP[i]->GetXaxis()->SetRangeUser(bh2dmipprm[i]-2*(l_mip), bh2dmipprm[i]+4*(l_mip)); 
-
    }
 
 
@@ -664,8 +663,8 @@ void HodoParamMaker1_jun( int month, int runnum){
   std::ofstream fout_3(fout3.Data()); 
   std::ofstream fout_4(fout4.Data()); 
   for(int i=0; i<NumOfSegBH2; i++){
-     fout_1 << bh2utprm[i]  <<  "\t"  << bh2dtprm[i] << endl;
-     fout_2 << bh2ubgprm[i]  <<  "\t" << bh2umipprm[i]  <<  "\t" << bh2dbgprm[i]  <<  "\t" << bh2dmipprm[i] << endl;
+     fout_3 << bh2utprm[i]  <<  "\t"  << bh2dtprm[i] << endl;
+     fout_4 << bh2ubgprm[i]  <<  "\t" << bh2umipprm[i]  <<  "\t" << bh2dbgprm[i]  <<  "\t" << bh2dmipprm[i] << endl;
   }     
 
                              
