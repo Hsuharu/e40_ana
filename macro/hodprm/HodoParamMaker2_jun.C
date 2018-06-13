@@ -234,9 +234,10 @@ void HodoParamMaker2_jun( int month, int runnum){
       }
    TH1D *BH2HitPat = new TH1D("BH2HitPat","BH2HitPat",9,0,9);
 
+   TH1D *BTOF[NumOfSegBH1][NumOfSegBH2]; 
    for (int i=0; i<NumOfSegBH1;i++) {
      for (int k=0; k<NumOfSegBH2;k++) {
-       TH1D *BTOF = new TH1D(Form("BTOF%d_%d",i+1,k+1),Form("BTOF%d_%d",i+1,k+1),166,-3,3); 
+       BTOF[i][k] = new TH1D(Form("BTOF%d_%d",i+1,k+1),Form("BTOF%d_%d",i+1,k+1),166,-3,3); 
      }
    }
 
