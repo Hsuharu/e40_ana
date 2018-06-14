@@ -1159,23 +1159,30 @@ void HodoParamMaker_1tof(int month,int runnum){
         double bh1dtime  = ((bh1dt[seg1-1]-bh1dtprm[seg1-1])*BH1TDC[seg1-1][1]);
         double bh1mtime = (bh1utime + bh1dtime)*0.5;
 
-        double bh1corr  = (bh1mtime - (b[0][0]/sqrt(b[0][1] + bh1ude) + b[0][2]) - (b[1][0]/sqrt(b[1][1] + bh1dde) + b[1][2]) );
+        double bh1ucorr  = (bh1mtime - (b[0][0]/sqrt(b[0][1] + bh1ude) + b[0][2]) );
+        double bh1dcorr  = (bh1mtime - (b[1][0]/sqrt(b[1][1] + bh1dde) + b[1][2]) );
+        double bh1corr  = (bh1mtime  - (b[0][0]/sqrt(b[0][1] + bh1ude) + b[0][2])- (b[1][0]/sqrt(b[1][1] + bh1dde) + b[1][2]) );
 
         double bh2utime  = ((bh2ut[seg1-1]-bh2utprm[seg1-1])*BH2TDC[seg1-1][0]);
         double bh2dtime  = ((bh2dt[seg1-1]-bh2dtprm[seg1-1])*BH2TDC[seg1-1][1]);
         double bh2mtime = (bh2utime + bh2dtime)*0.5;
 
+        double btime = bh1mtime - bh2mtime;
+        double c1ubtime = bh1ucorr - bh2mtime;
+        double c1dbtime = bh1dcorr - bh2mtime;
         double c1btime = bh1corr - bh2mtime;
 
         double bh2ude    = (bh2ua[seg1-1]-bh2ubgprm[seg1-1])/(bh2umipprm[seg1-1]-bh2ubgprm[seg1-1]);
         double bh2dde    = (bh2da[seg1-1]-bh2dbgprm[seg1-1])/(bh2dmipprm[seg1-1]-bh2dbgprm[seg1-1]);
 
-        hist3[2]->Fill(bh1ude,c1btime);   
-        hist3[3]->Fill(bh1dde,c1btime);   
+        hist3[2]->Fill(bh1ude,c1ubtime);   
+        hist3[3]->Fill(bh1dde,c1dbtime);   
         BTOFCORR3->Fill(c1btime);   
 
-        hist4[0]->Fill(bh2ude,c1btime);   
-        hist4[1]->Fill(bh2dde,c1btime);   
+//        hist4[0]->Fill(bh2ude,c1btime);   
+//        hist4[1]->Fill(bh2dde,c1btime);   
+        hist4[0]->Fill(bh2ude,btime);   
+        hist4[1]->Fill(bh2dde,btime);   
       }
    }
 
@@ -1297,15 +1304,19 @@ void HodoParamMaker_1tof(int month,int runnum){
         double bh2ude    = (bh2ua[seg1-1]-bh2ubgprm[seg1-1])/(bh2umipprm[seg1-1]-bh2ubgprm[seg1-1]);
         double bh2dde    = (bh2da[seg1-1]-bh2dbgprm[seg1-1])/(bh2dmipprm[seg1-1]-bh2dbgprm[seg1-1]);
 
+        double bh2ucorr  = (bh2mtime + (b[2][0]/sqrt(b[2][1] + bh2ude) + b[2][2]) );
+        double bh2dcorr  = (bh2mtime + (b[3][0]/sqrt(b[3][1] + bh2dde) + b[3][2]) );
         double bh2corr  = (bh2mtime + (b[2][0]/sqrt(b[2][1] + bh2ude) + b[2][2]) + (b[3][0]/sqrt(b[3][1] + bh2dde) + b[3][2]) );
 
         double c1btime = bh1corr - bh2mtime;
+        double c2ubtime = bh1mtime - bh2ucorr;
+        double c2dbtime = bh1mtime - bh2dcorr;
         double c2btime = bh1corr - bh2corr;
 
         BTOFCORR4->Fill(c2btime);   
 
-        hist4[2]->Fill(bh2ude,c2btime);   
-        hist4[3]->Fill(bh2dde,c2btime);   
+        hist4[2]->Fill(bh2ude,c2ubtime);   
+        hist4[3]->Fill(bh2dde,c2dbtime);   
       }
    }
 
