@@ -238,6 +238,8 @@ void HodoParamMaker1_jun( int month, int runnum){
    double bh1dmipprm[NumOfSegBH1]; 
    double bh1ubgprm[NumOfSegBH1]; 
    double bh1dbgprm[NumOfSegBH1]; 
+   double sigma_bh1ubgprm[NumOfSegBH1]; 
+   double sigma_bh1dbgprm[NumOfSegBH1]; 
 
    double bh2utprm[NumOfSegBH2]; 
    double bh2dtprm[NumOfSegBH2]; 
@@ -245,6 +247,8 @@ void HodoParamMaker1_jun( int month, int runnum){
    double bh2dmipprm[NumOfSegBH2]; 
    double bh2ubgprm[NumOfSegBH2]; 
    double bh2dbgprm[NumOfSegBH2]; 
+   double sigma_bh2ubgprm[NumOfSegBH2]; 
+   double sigma_bh2dbgprm[NumOfSegBH2]; 
 
 //Fit range
    double f_l  = 300; //4462 & 4464
@@ -431,6 +435,102 @@ void HodoParamMaker1_jun( int month, int runnum){
      BH2DT0[i]->Draw(); 
      c1 ->Print(pdf); 
    }
+   
+/////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                         //
+//    BH1 & BH2 ADC BG get                                                                 //
+//                                                                                         //
+/////////////////////////////////////////////////////////////////////////////////////////////
+   nbytes = 0;
+   for (Long64_t s=0; s<nentries;s++) {
+     nbytes += tree->GetEntry(s);
+     int u_mipflg = 0;
+     int d_mipflg = 0;
+     for (int i=0; i<NumOfSegBH1;i++) {
+       for (int j=0; j<MaxDepth;j++) {
+         if(bh1ut[i][j] > (bh1utprm[i] - gr1) && bh1ut[i][j] < (bh1utprm[i] + gr1) ) u_mipflg = 1;
+         if(bh1dt[i][j] > (bh1dtprm[i] - gr1) && bh1dt[i][j] < (bh1dtprm[i] + gr1) ) d_mipflg = 1;
+       }
+       if(u_mipflg == 0 && d_mipflg == 0 ){
+         BH1UBG[i]->Fill(bh1ua[i]);
+         BH1DBG[i]->Fill(bh1da[i]);
+       }
+       u_mipflg = 0;
+       d_mipflg = 0;
+     }
+
+     for (int i=0; i<NumOfSegBH2;i++) {
+       for (int j=0; j<MaxDepth;j++) {
+         if(bh2ut[i][j] > (bh2utprm[i] - gr2) && bh2ut[i][j] < (bh2utprm[i] + gr2) ) u_mipflg = 1;
+         if(bh2dt[i][j] > (bh2dtprm[i] - gr3) && bh2dt[i][j] < (bh2dtprm[i] + gr3) ) d_mipflg = 1;
+       }
+       if(u_mipflg == 0 && d_mipflg == 0 ){
+         BH2UBG[i]->Fill(bh2ua[i]);
+         BH2DBG[i]->Fill(bh2da[i]);
+       }
+       u_mipflg = 0;
+       d_mipflg = 0;
+     }
+   }
+
+   TF1 *fit3 = new TF1("fit3","landau"); 
+
+   for (int i=0; i<NumOfSegBH1;i++) {
+       bh1ubgprm[i] = BH1UBG[i]->GetMaximumBin();   
+       bh1dbgprm[i] = BH1DBG[i]->GetMaximumBin();   
+
+       bh1ubgprm[i] = BH1UBG[i]->GetXaxis()->GetBinCenter(bh1ubgprm[i]);  
+       bh1dbgprm[i] = BH1DBG[i]->GetXaxis()->GetBinCenter(bh1dbgprm[i]);  
+
+       BH1UBG[i]->Fit("fit","","", bh1ubgprm[i]-l_bg, bh1ubgprm[i]+l_bg);  
+       bh1ubgprm[i] = fit->GetParameter(1);  
+       sigma_bh1ubgprm[i] = fit->GetParameter(2);  
+       BH1UBG[i]->GetXaxis()->SetRangeUser(bh1ubgprm[i]-1*(r_bg), bh1ubgprm[i]+2*(r_bg)); 
+
+       BH1DBG[i]->Fit("fit","","", bh1dbgprm[i]-l_bg1, bh1dbgprm[i]+l_bg1); 
+       bh1dbgprm[i] = fit->GetParameter(1);  
+       sigma_bh1dbgprm[i] = fit->GetParameter(2);  
+       BH1DBG[i]->GetXaxis()->SetRangeUser(bh1dbgprm[i]-(r_bg), bh1dbgprm[i]+2*(r_bg)); 
+
+   }
+
+   for (int i=0; i<NumOfSegBH2;i++) {
+       bh2ubgprm[i] = BH2UBG[i]->GetMaximumBin();   
+       bh2dbgprm[i] = BH2DBG[i]->GetMaximumBin();   
+
+       bh2ubgprm[i] = BH2UBG[i]->GetXaxis()->GetBinCenter(bh2ubgprm[i]);  
+       bh2dbgprm[i] = BH2DBG[i]->GetXaxis()->GetBinCenter(bh2dbgprm[i]);  
+
+       BH2UBG[i]->Fit("fit","","", bh2ubgprm[i]-l_bg2, bh2ubgprm[i]+l_bg2);
+       bh2ubgprm[i] = fit->GetParameter(1);  
+       sigma_bh2ubgprm[i] = fit->GetParameter(2);  
+       BH2UBG[i]->GetXaxis()->SetRangeUser(bh2ubgprm[i]-2*(r_bg), bh2ubgprm[i]+4*(r_bg)); 
+
+       BH2DBG[i]->Fit("fit","","", bh2dbgprm[i]-l_bg2, bh2dbgprm[i]+l_bg2); 
+       bh2dbgprm[i] = fit->GetParameter(1);  
+       sigma_bh2dbgprm[i] = fit->GetParameter(2);  
+       BH2DBG[i]->GetXaxis()->SetRangeUser(bh2dbgprm[i]-2*(r_bg), bh2dbgprm[i]+4*(r_bg)); 
+
+   }
+
+   for(int i=0; i<NumOfSegBH1; i++){
+     BH1UBG[i]->Draw(); 
+     c1 ->Print(pdf); 
+   }
+   for(int i=0; i<NumOfSegBH1; i++){
+     BH1DBG[i]->Draw(); 
+     c1 ->Print(pdf); 
+   }
+   for(int i=0; i<NumOfSegBH2; i++){
+     BH2UBG[i]->Draw(); 
+     c1 ->Print(pdf); 
+   }
+   for(int i=0; i<NumOfSegBH2; i++){
+     BH2DBG[i]->Draw(); 
+     c1 ->Print(pdf); 
+   }
+
+   
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                         //
@@ -449,12 +549,9 @@ void HodoParamMaker1_jun( int month, int runnum){
        }
        if(u_mipflg && d_mipflg){
          if(bh1nhits < range2 && bh1nhits > range1 && bh2nhits == 1){
-           BH1UMIP[i]->Fill(bh1ua[i]);
-           BH1DMIP[i]->Fill(bh1da[i]);
+           if(bh1ua[i] > bh1ubgprm[i] + 2*sigma_bh1ubgprm[i]) BH1UMIP[i]->Fill(bh1ua[i]);
+           if(bh1da[i] > bh1dbgprm[i] + 2*sigma_bh1dbgprm[i]) BH1DMIP[i]->Fill(bh1da[i]);
          }
-       }else if(u_mipflg == 0 && d_mipflg == 0 ){
-         BH1UBG[i]->Fill(bh1ua[i]);
-         BH1DBG[i]->Fill(bh1da[i]);
        }
        u_mipflg = 0;
        d_mipflg = 0;
@@ -467,19 +564,15 @@ void HodoParamMaker1_jun( int month, int runnum){
        }
        if(u_mipflg && d_mipflg){
          if(bh1nhits < range2 && bh1nhits > range1 && bh2nhits == 1){
-           BH2UMIP[i]->Fill(bh2ua[i]);
-           BH2DMIP[i]->Fill(bh2da[i]);
+           if(bh2ua[i] > bh2ubgprm[i] + 2*sigma_bh2ubgprm[i]) BH2UMIP[i]->Fill(bh2ua[i]);
+           if(bh2da[i] > bh2dbgprm[i] + 2*sigma_bh2dbgprm[i]) BH2DMIP[i]->Fill(bh2da[i]);
          }
-       }else if(u_mipflg == 0 && d_mipflg == 0 ){
-         BH2UBG[i]->Fill(bh2ua[i]);
-         BH2DBG[i]->Fill(bh2da[i]);
        }
        u_mipflg = 0;
        d_mipflg = 0;
      }
    }
 
-   TF1 *fit3 = new TF1("fit3","landau"); 
 
    for (int i=0; i<NumOfSegBH1;i++) {
        bh1umipprm[i] = BH1UMIP[i]->GetMaximumBin();   
@@ -514,41 +607,6 @@ void HodoParamMaker1_jun( int month, int runnum){
        BH2DMIP[i]->GetXaxis()->SetRangeUser(bh2dmipprm[i]-2*(l_mip), bh2dmipprm[i]+4*(l_mip)); 
    }
 
-
-   for (int i=0; i<NumOfSegBH1;i++) {
-       bh1ubgprm[i] = BH1UBG[i]->GetMaximumBin();   
-       bh1dbgprm[i] = BH1DBG[i]->GetMaximumBin();   
-
-       bh1ubgprm[i] = BH1UBG[i]->GetXaxis()->GetBinCenter(bh1ubgprm[i]);  
-       bh1dbgprm[i] = BH1DBG[i]->GetXaxis()->GetBinCenter(bh1dbgprm[i]);  
-
-       BH1UBG[i]->Fit("fit","","", bh1ubgprm[i]-l_bg, bh1ubgprm[i]+l_bg);  
-       bh1ubgprm[i] = fit->GetParameter(1);  
-       BH1UBG[i]->GetXaxis()->SetRangeUser(bh1ubgprm[i]-1*(r_bg), bh1ubgprm[i]+2*(r_bg)); 
-
-       BH1DBG[i]->Fit("fit","","", bh1dbgprm[i]-l_bg1, bh1dbgprm[i]+l_bg1); 
-       bh1dbgprm[i] = fit->GetParameter(1);  
-       BH1DBG[i]->GetXaxis()->SetRangeUser(bh1dbgprm[i]-(r_bg), bh1dbgprm[i]+2*(r_bg)); 
-
-   }
-
-   for (int i=0; i<NumOfSegBH2;i++) {
-       bh2ubgprm[i] = BH2UBG[i]->GetMaximumBin();   
-       bh2dbgprm[i] = BH2DBG[i]->GetMaximumBin();   
-
-       bh2ubgprm[i] = BH2UBG[i]->GetXaxis()->GetBinCenter(bh2ubgprm[i]);  
-       bh2dbgprm[i] = BH2DBG[i]->GetXaxis()->GetBinCenter(bh2dbgprm[i]);  
-
-       BH2UBG[i]->Fit("fit","","", bh2ubgprm[i]-l_bg2, bh2ubgprm[i]+l_bg2);
-       bh2ubgprm[i] = fit->GetParameter(1);  
-       BH2UBG[i]->GetXaxis()->SetRangeUser(bh2ubgprm[i]-2*(r_bg), bh2ubgprm[i]+4*(r_bg)); 
-
-       BH2DBG[i]->Fit("fit","","", bh2dbgprm[i]-l_bg2, bh2dbgprm[i]+l_bg2); 
-       bh2dbgprm[i] = fit->GetParameter(1);  
-       BH2DBG[i]->GetXaxis()->SetRangeUser(bh2dbgprm[i]-2*(r_bg), bh2dbgprm[i]+4*(r_bg)); 
-
-   }
-
    for(int i=0; i<NumOfSegBH1; i++){
      BH1UMIP[i]->Draw(); 
      c1 ->Print(pdf); 
@@ -565,24 +623,6 @@ void HodoParamMaker1_jun( int month, int runnum){
      BH2DMIP[i]->Draw(); 
      c1 ->Print(pdf); 
    }
-
-   for(int i=0; i<NumOfSegBH1; i++){
-     BH1UBG[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-   for(int i=0; i<NumOfSegBH1; i++){
-     BH1DBG[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-   for(int i=0; i<NumOfSegBH2; i++){
-     BH2UBG[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-   for(int i=0; i<NumOfSegBH2; i++){
-     BH2DBG[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-
    
 /////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                         //
