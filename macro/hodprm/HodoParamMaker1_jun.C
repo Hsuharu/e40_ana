@@ -483,7 +483,7 @@ void HodoParamMaker1_jun( int month, int runnum){
        bh1ubgprm[i] = BH1UBG[i]->GetXaxis()->GetBinCenter(bh1ubgprm[i]);  
        bh1dbgprm[i] = BH1DBG[i]->GetXaxis()->GetBinCenter(bh1dbgprm[i]);  
 
-       BH1UBG[i]->Fit("fit","","", bh1ubgprm[i]-l_bg, bh1ubgprm[i]+l_bg);  
+       BH1UBG[i]->Fit("fit","","", bh1ubgprm[i]-l_bg1, bh1ubgprm[i]+l_bg1);  
        bh1ubgprm[i] = fit->GetParameter(1);  
        sigma_bh1ubgprm[i] = fit->GetParameter(2);  
        BH1UBG[i]->GetXaxis()->SetRangeUser(bh1ubgprm[i]-1*(r_bg), bh1ubgprm[i]+2*(r_bg)); 
