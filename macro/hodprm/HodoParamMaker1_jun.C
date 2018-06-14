@@ -564,8 +564,8 @@ void HodoParamMaker1_jun( int month, int runnum){
        }
        if(u_mipflg && d_mipflg){
          if(bh1nhits < range2 && bh1nhits > range1 && bh2nhits == 1){
-           if(bh2ua[i] > bh2ubgprm[i] + 2*sigma_bh2ubgprm[i]) BH2UMIP[i]->Fill(bh2ua[i]);
-           if(bh2da[i] > bh2dbgprm[i] + 2*sigma_bh2dbgprm[i]) BH2DMIP[i]->Fill(bh2da[i]);
+           if(bh2ua[i] > bh2ubgprm[i] + 4*sigma_bh2ubgprm[i]) BH2UMIP[i]->Fill(bh2ua[i]);
+           if(bh2da[i] > bh2dbgprm[i] + 4*sigma_bh2dbgprm[i]) BH2DMIP[i]->Fill(bh2da[i]);
          }
        }
        u_mipflg = 0;
