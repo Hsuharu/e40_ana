@@ -1090,8 +1090,8 @@ void HodoParamMaker_1tof(int month,int runnum){
   x = 5, y =2, z = 10;
   NofProject = z;
   stepProject = xbin/NofProject;
-  ff1min = 0.1;
-  ff1max = 2.5;
+  ff1min = 0.5;
+  ff1max = 2.0;
   double b[4][3];
 
   for(int j =  0; j<2; j++){
@@ -1179,10 +1179,8 @@ void HodoParamMaker_1tof(int month,int runnum){
         hist3[3]->Fill(bh1dde,c1dbtime);   
         BTOFCORR3->Fill(c1btime);   
 
-//        hist4[0]->Fill(bh2ude,c1btime);   
-//        hist4[1]->Fill(bh2dde,c1btime);   
-        hist4[0]->Fill(bh2ude,btime);   
-        hist4[1]->Fill(bh2dde,btime);   
+        hist4[0]->Fill(bh2ude,c1btime);   
+        hist4[1]->Fill(bh2dde,c1btime);   
       }
    }
 
@@ -1309,8 +1307,8 @@ void HodoParamMaker_1tof(int month,int runnum){
         double bh2corr  = (bh2mtime + (b[2][0]/sqrt(b[2][1] + bh2ude) + b[2][2]) + (b[3][0]/sqrt(b[3][1] + bh2dde) + b[3][2]) );
 
         double c1btime = bh1corr - bh2mtime;
-        double c2ubtime = bh1mtime - bh2ucorr;
-        double c2dbtime = bh1mtime - bh2dcorr;
+        double c2ubtime = bh1corr - bh2ucorr;
+        double c2dbtime = bh1corr - bh2dcorr;
         double c2btime = bh1corr - bh2corr;
 
         BTOFCORR4->Fill(c2btime);   
