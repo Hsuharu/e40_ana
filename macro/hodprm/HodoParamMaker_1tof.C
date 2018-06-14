@@ -5,9 +5,31 @@
 //  
 //  }
 
+ const char* Month[] =
+ {
+   "zero",
+   "jan",
+   "feb",
+   "mar",
+   "apr",
+   "may",
+   "jun",
+   "jly",
+   "agt",
+   "sep",
+   "oct",
+   "nov",
+   "dec",
+ };
+
+const char* ud[] = 
+{
+  "U",
+  "D",
+};
 
 
-void HodoParamMaker_1tof(int runnum){
+void HodoParamMaker_1tof(int month,int runnum){
 ////////////////////////////////////////////////////////////
 //   This file has been automatically generated           //
 //     (Sun Feb 25 23:10:42 2018 by ROOT version6.10/08)  //
@@ -22,7 +44,7 @@ void HodoParamMaker_1tof(int runnum){
    gROOT->Reset();
 //   TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("../rootfile/run04571_hodo.root");
    TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-   TFile *f = new TFile(Form("%s/rootfile/run%05d_hodo.root", anadir.Data() , runnum),"READ");
+   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_hodo.root", anadir.Data(),Month[month], runnum),"READ");
    if (!f) {
       f = new TFile(Form("%s/rootfile/run%05d_hodo.root", anadir.Data() , runnum));
    }
@@ -158,6 +180,7 @@ void HodoParamMaker_1tof(int runnum){
    TH1D *BH1UdE[NumOfSegBH1]; 
    TH1D *BH1DdE[NumOfSegBH1]; 
    TH2F *hist1[NumOfSegBH1]; 
+   TH2F *hist3[NumOfSegBH1]; 
       for (int i=0; i<NumOfSegBH1;i++) {
         BH1UT[i] = new TH1D(Form("BH1UT%d",i+1),Form("BH1UT%d",i+1),600,600,1200);
         BH1DT[i] = new TH1D(Form("BH1DT%d",i+1),Form("BH1DT%d",i+1),600,600,1200);
@@ -173,6 +196,7 @@ void HodoParamMaker_1tof(int runnum){
         BH1UdE[i] = new TH1D(Form("BH1UdE%d",i+1),Form("BH1UdE%d",i+1),xbin,0,3);
         BH1DdE[i] = new TH1D(Form("BH1DdE%d",i+1),Form("BH1DdE%d",i+1),xbin,0,3);
         hist1[i] = new TH2F(Form("hist1_%d",i+1),Form("hist1_%d",i+1),xbin,0,3,162,-3,3);
+        hist3[i] = new TH2F(Form("hist3_%d",i+1),Form("hist3_%d",i+1),xbin,0,3,162,-3,3);
       }
    TH1D *BH1HitPat = new TH1D("BH1HitPat","BH1HitPat",12,0,12);
 
@@ -190,6 +214,7 @@ void HodoParamMaker_1tof(int runnum){
    TH1D *BH2UdE[NumOfSegBH2]; 
    TH1D *BH2DdE[NumOfSegBH2]; 
    TH2F *hist2[NumOfSegBH2]; 
+   TH2F *hist4[NumOfSegBH2]; 
       for (int i=0; i<NumOfSegBH2;i++) {
         BH2UT[i] = new TH1D(Form("BH2UT%d",i+1),Form("BH2UT%d",i+1),400,200,600);
         BH2DT[i] = new TH1D(Form("BH2DT%d",i+1),Form("BH2DT%d",i+1),400,200,600);
@@ -205,12 +230,15 @@ void HodoParamMaker_1tof(int runnum){
         BH2UdE[i] = new TH1D(Form("BH2UdE%d",i+1),Form("BH2UdE%d",i+1),xbin,0,3);
         BH2DdE[i] = new TH1D(Form("BH2DdE%d",i+1),Form("BH2DdE%d",i+1),xbin,0,3);
         hist2[i] = new TH2F(Form("hist2_%d",i+1),Form("hist2_%d",i+1),xbin,0,3,162,-3,3);
+        hist4[i] = new TH2F(Form("hist4_%d",i+1),Form("hist4_%d",i+1),xbin,0,3,162,-3,3);
       }
    TH1D *BH2HitPat = new TH1D("BH2HitPat","BH2HitPat",9,0,9);
 
    TH1D *BTOF = new TH1D(Form("BTOF%d_%d",seg1,seg2),Form("BTOF%d_%d",seg1,seg2),166,-3,3); 
    TH1D *BTOFCORR1 = new TH1D(Form("BTOFCORR1%d_%d",seg1,seg2),Form("BTOFCORR1%d_%d",seg1,seg2),166,-3,3); 
    TH1D *BTOFCORR2 = new TH1D(Form("BTOFCORR2%d_%d",seg1,seg2),Form("BTOFCORR2%d_%d",seg1,seg2),166,-3,3); 
+   TH1D *BTOFCORR3 = new TH1D(Form("BTOFCORR3%d_%d",seg1,seg2),Form("BTOFCORR3%d_%d",seg1,seg2),166,-3,3); 
+   TH1D *BTOFCORR4 = new TH1D(Form("BTOFCORR4%d_%d",seg1,seg2),Form("BTOFCORR4%d_%d",seg1,seg2),166,-3,3); 
 
    Long64_t nentries = tree->GetEntries();
    double fitprm[3];
@@ -819,7 +847,7 @@ void HodoParamMaker_1tof(int runnum){
     c1->cd(); 
     c1->SetGridx();
     c1->SetGridy();
-    hist1[j]->SetXTitle("BH1_4_mip"); 
+    hist1[j]->SetXTitle(Form("BH1_4%s_mip",ud[j])); 
     hist1[j]->SetYTitle("BTOF(BH1T-BH2MT) [ns]"); 
     hist1[j]->Draw("colz"); 
     graph->Draw("psame"); 
@@ -892,15 +920,15 @@ void HodoParamMaker_1tof(int runnum){
    c1->SetGridx();
    c1->SetGridy();
    hist2[0]->SetXTitle("BH2_4_Up_mip"); 
-   hist2[0]->SetYTitle("BTOF(BH1MT_CORR-BH2UT) [ns]"); 
+   hist2[0]->SetYTitle("BTOF(BH1MT_corr-BH2UT) [ns]"); 
    hist2[0]->Draw("colz"); 
    c1 ->Print(pdf); 
 
    c2->cd(); 
    c2->SetGridx();
    c2->SetGridy();
-   hist1[1]->SetXTitle("BH2_4_Down_mip"); 
-   hist2[1]->SetYTitle("BTOF(BH1MT_CORR-BH2DT) [ns]"); 
+   hist2[1]->SetXTitle("BH2_4_Down_mip"); 
+   hist2[1]->SetYTitle("BTOF(BH1MT_corr-BH2DT) [ns]"); 
    hist2[1]->Draw("colz"); 
    c2 ->Print(pdf); 
    
@@ -947,7 +975,7 @@ void HodoParamMaker_1tof(int runnum){
     c1->cd(); 
     c1->SetGridx();
     c1->SetGridy();
-    hist2[j]->SetXTitle("BH2_4_Up_mip"); 
+    hist2[j]->SetXTitle(Form("BH2_4%s_mip",ud[j])); 
     hist2[j]->SetYTitle("BTOF(BH1MTCORR-BH2T) [ns]"); 
     hist2[j]->Draw("colz"); 
     graph->Draw("psame"); 
@@ -1007,6 +1035,301 @@ void HodoParamMaker_1tof(int runnum){
    c3->SetGridy();
    BTOFCORR2->Fit("fit2","","", -0.5, 0.5);
    BTOFCORR2->Draw(); 
+   c3 ->Print(pdf); 
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                         //
+//    BTOF for BH1 corr    MT ver                                                          //
+//                                                                                         //
+/////////////////////////////////////////////////////////////////////////////////////////////
+   nbytes = 0;
+   for (Long64_t i=0; i<nentries;i++) {
+      nbytes += tree->GetEntry(i);
+      if(bh1ut[seg1-1]>0 && bh1dt[seg1-1]>0 && bh2ut[seg2-1]>0 && bh2dt[seg2-1]>0 && bh1nhits < range2 && bh1nhits > range1  && bh2nhits  == 1){
+        double bh1ude    = (bh1ua[seg1-1]-bh1ubgprm[seg1-1])/(bh1umipprm[seg1-1]-bh1ubgprm[seg1-1]);
+        double bh1dde    = (bh1da[seg1-1]-bh1dbgprm[seg1-1])/(bh1dmipprm[seg1-1]-bh1dbgprm[seg1-1]);
+        
+        double bh1utime  = ((bh1ut[seg1-1]-bh1utprm[seg1-1])*BH1TDC[seg1-1][0]);
+        double bh1dtime  = ((bh1dt[seg1-1]-bh1dtprm[seg1-1])*BH1TDC[seg1-1][1]);
+        double bh1mtime = (bh1utime + bh1dtime)*0.5;
+
+        double bh2utime  = ((bh2ut[seg1-1]-bh2utprm[seg1-1])*BH2TDC[seg1-1][0]);
+        double bh2dtime  = ((bh2dt[seg1-1]-bh2dtprm[seg1-1])*BH2TDC[seg1-1][1]);
+        double bh2mtime = (bh2utime + bh2dtime)*0.5;
+
+        double btime = bh1mtime - bh2mtime;
+
+        hist3[0]->Fill(bh1ude,btime);   
+        hist3[1]->Fill(bh1dde,btime);   
+      }
+   }
+
+   c1->cd(); 
+   c1->SetGridx();
+   c1->SetGridy();
+   hist3[0]->SetXTitle("BH1_4_Up_mip"); 
+   hist3[0]->SetYTitle("BTOF(BH1MT-BH2MT) [ns]"); 
+   hist3[0]->Draw("colz"); 
+   c1 ->Print(pdf); 
+
+   c2->cd(); 
+   c2->SetGridx();
+   c2->SetGridy();
+   hist3[1]->SetXTitle("BH1_4_Down_mip"); 
+   hist3[1]->SetYTitle("BTOF(BH1MT-BH2MT) [ns]"); 
+   hist3[1]->Draw("colz"); 
+   c2 ->Print(pdf); 
+   
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                         //
+//    Thowing corr BH1  each MT ver                                                        //
+//                                                                                         //
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+  x = 5, y =2, z = 10;
+  NofProject = z;
+  stepProject = xbin/NofProject;
+  ff1min = 0.;
+  ff1max = 2.5;
+  double b[4][3];
+
+  for(int j =  0; j<2; j++){
+    for(int i =0; i<NofProject; i++){
+      c5->cd(i+1);
+      int bin_min = i*stepProject+1;
+      int bin_max = (i+1)*stepProject;
+      TH1D *tmp1 = (TH1D*)hist3[j]->ProjectionY(Form("Projectoin%d",i+1),bin_min, bin_max);
+      double center = tmp1->GetBinCenter(tmp1->GetMaximumBin());
+      tmp1->Fit("fit","Q","",center - 0.4 ,center + 0.4  );
+      tmp1->Draw();
+  
+      double x_min = hist3[j]->GetXaxis()->GetBinCenter(bin_min);
+      double x_max = hist3[j]->GetXaxis()->GetBinCenter(bin_max);
+      double x_center = (x_min + x_max)*0.5;
+  
+      xval[i] = x_center;
+      exval[i] = 0.;
+      yval[i] = fit->GetParameter(1);
+      eyval[i] = fit->GetParError(1);
+    }
+    c5 ->Print(pdf); 
+  
+    TGraphErrors *graph = new TGraphErrors(NofProject, &(xval[0]), &(yval[0]), &(exval[0]), &(eyval[0]));
+    graph->SetMarkerStyle(8);
+    graph->SetMarkerColor(2);
+    graph->SetMarkerSize(0.5);
+  
+    TF1 *ff1 = new TF1("ff1","[0]/sqrt([1]+x)+[2]");
+    ff1->SetLineWidth(1);
+//     ff1->SetParLimits(100,100.,100.);
+    ff1->SetParameters(1,1.,0.);
+    ff1->SetParNames("a0","a1","a3");
+  
+    c1->cd(); 
+    c1->SetGridx();
+    c1->SetGridy();
+    hist3[j]->SetXTitle(Form("BH1_4%s_mip",ud[j])); 
+    hist3[j]->SetYTitle("BTOF(BH1MT-BH2MT) [ns]"); 
+    hist3[j]->Draw("colz"); 
+    graph->Draw("psame"); 
+    graph->Fit("ff1","","",ff1min,ff1max);
+    c1 ->Print(pdf); 
+    
+    for(int k=0;k<3;k++){
+      b[j][k] = ff1->GetParameter(k);
+    }
+                               
+  }
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                         //
+//    BH1 corr                                                                             //
+//                                                                                         //
+/////////////////////////////////////////////////////////////////////////////////////////////
+   nbytes = 0;
+   for (Long64_t i=0; i<nentries;i++) {
+      nbytes += tree->GetEntry(i);
+
+      if(bh1ut[seg1-1]>0 && bh1dt[seg1-1]>0 && bh2ut[seg2-1]>0 && bh2dt[seg2-1]>0 && bh1nhits < range2 && bh1nhits > range1  && bh2nhits  == 1){
+        double bh1ude    = (bh1ua[seg1-1]-bh1ubgprm[seg1-1])/(bh1umipprm[seg1-1]-bh1ubgprm[seg1-1]);
+        double bh1dde    = (bh1da[seg1-1]-bh1dbgprm[seg1-1])/(bh1dmipprm[seg1-1]-bh1dbgprm[seg1-1]);
+        
+        double bh1utime  = ((bh1ut[seg1-1]-bh1utprm[seg1-1])*BH1TDC[seg1-1][0]);
+        double bh1dtime  = ((bh1dt[seg1-1]-bh1dtprm[seg1-1])*BH1TDC[seg1-1][1]);
+        double bh1mtime = (bh1utime + bh1dtime)*0.5;
+
+        double bh1corr  = (bh1mtime - (a[0][0]/sqrt(b[0][1] + bh1ude) + b[0][2]) - (a[1][0]/sqrt(b[1][1] + bh1dde) + b[1][2]) );
+
+        double bh2utime  = ((bh2ut[seg1-1]-bh2utprm[seg1-1])*BH2TDC[seg1-1][0]);
+        double bh2dtime  = ((bh2dt[seg1-1]-bh2dtprm[seg1-1])*BH2TDC[seg1-1][1]);
+        double bh2mtime = (bh2utime + bh2dtime)*0.5;
+
+        double c1btime = bh1corr - bh2mtime;
+
+        double bh2ude    = (bh2ua[seg1-1]-bh2ubgprm[seg1-1])/(bh2umipprm[seg1-1]-bh2ubgprm[seg1-1]);
+        double bh2dde    = (bh2da[seg1-1]-bh2dbgprm[seg1-1])/(bh2dmipprm[seg1-1]-bh2dbgprm[seg1-1]);
+
+        hist3[2]->Fill(bh1ude,c1btime);   
+        hist3[3]->Fill(bh1dde,c1btime);   
+        BTOFCORR3->Fill(c1btime);   
+
+        hist4[0]->Fill(bh2ude,c1btime);   
+        hist4[1]->Fill(bh2dde,c1btime);   
+      }
+   }
+
+   c1->cd(); 
+   c1->SetGridx();
+   c1->SetGridy();
+   hist3[2]->SetXTitle("BH1_4_Up_mip"); 
+   hist3[2]->SetYTitle("BTOF(BH1MT_corr - BH2MT) [ns]"); 
+   hist3[2]->Draw("colz"); 
+   c1 ->Print(pdf); 
+
+   c2->cd(); 
+   c2->SetGridx();
+   c2->SetGridy();
+   hist3[3]->SetXTitle("BH1_4_Down_mip"); 
+   hist3[3]->SetYTitle("BTOF(BH1MT_corr-BH2MT) [ns]"); 
+   hist3[3]->Draw("colz"); 
+   c2 ->Print(pdf); 
+   
+
+   c3->cd(); 
+   c3->SetGridx();
+   c3->SetGridy();
+   BTOFCORR3->Fit("fit2","","", -0.5, 0.5);
+   BTOFCORR3->Draw(); 
+   c3 ->Print(pdf); 
+
+   c1->cd(); 
+   c1->SetGridx();
+   c1->SetGridy();
+   hist4[0]->SetXTitle("BH2_4_Up_mip"); 
+   hist4[0]->SetYTitle("BTOF(BH1MT_corr-BH2MT) [ns]"); 
+   hist4[0]->Draw("colz"); 
+   c1 ->Print(pdf); 
+
+   c2->cd(); 
+   c2->SetGridx();
+   c2->SetGridy();
+   hist4[1]->SetXTitle("BH2_4_Down_mip"); 
+   hist4[1]->SetYTitle("BTOF(BH1MT_corr-BH2MT) [ns]"); 
+   hist4[1]->Draw("colz"); 
+   c2 ->Print(pdf); 
+   
+   
+/////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                         //
+//    Thowing corr BH2                                                                     //
+//                                                                                         //
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+  for(int j =  0; j<2; j++){
+    for(int i =0; i<NofProject; i++){
+      c5->cd(i+1);
+      int bin_min = i*stepProject+1;
+      int bin_max = (i+1)*stepProject;
+      TH1D *tmp1 = (TH1D*)hist4[j]->ProjectionY(Form("Projectoin%d",i+1),bin_min, bin_max);
+      double center = tmp1->GetBinCenter(tmp1->GetMaximumBin());
+      tmp1->Fit("fit","Q","",center - 0.4 ,center + 0.4  );
+      tmp1->Draw();
+  
+      double x_min = hist4[j]->GetXaxis()->GetBinCenter(bin_min);
+      double x_max = hist4[j]->GetXaxis()->GetBinCenter(bin_max);
+      double x_center = (x_min + x_max)*0.5;
+  
+      xval[i] = x_center;
+      exval[i] = 0.;
+      yval[i] = fit->GetParameter(1);
+      eyval[i] = fit->GetParError(1);
+    }
+    c5 ->Print(pdf); 
+  
+    TGraphErrors *graph = new TGraphErrors(NofProject, &(xval[0]), &(yval[0]), &(exval[0]), &(eyval[0]));
+    graph->SetMarkerStyle(8);
+    graph->SetMarkerColor(2);
+    graph->SetMarkerSize(0.5);
+  
+    TF1 *ff1 = new TF1("ff1","[0]/sqrt([1]+x)+[2]");
+    ff1->SetLineWidth(1);
+//     ff1->SetParLimits(100,100.,100.);
+    ff1->SetParameters(1,1.,0.);
+    ff1->SetParNames("a0","a1","a2");
+  
+    c1->cd(); 
+    c1->SetGridx();
+    c1->SetGridy();
+    hist4[j]->SetXTitle(Form("BH2_4%s_mip",ud[j])); 
+    hist4[j]->SetYTitle("BTOF(BH1MT_corr-BH2T) [ns]"); 
+    hist4[j]->Draw("colz"); 
+    graph->Draw("psame"); 
+    graph->Fit("ff1","","",ff1min,ff1max);
+    c1 ->Print(pdf); 
+    
+    for(int k=0;k<3;k++){
+      b[j+2][k] = ff1->GetParameter(k);
+//      std::cout << a[j][k] << std::endl;
+    }
+                               
+  }
+
+   nbytes = 0;
+   for (Long64_t i=0; i<nentries;i++) {
+      nbytes += tree->GetEntry(i);
+
+      if(bh1ut[seg1-1]>0 && bh1dt[seg1-1]>0 && bh2ut[seg2-1]>0 && bh2dt[seg2-1]>0 && bh1nhits < range2 && bh1nhits > range1  && bh2nhits  == 1){
+        double bh1ude    = (bh1ua[seg1-1]-bh1ubgprm[seg1-1])/(bh1umipprm[seg1-1]-bh1ubgprm[seg1-1]);
+        double bh1dde    = (bh1da[seg1-1]-bh1dbgprm[seg1-1])/(bh1dmipprm[seg1-1]-bh1dbgprm[seg1-1]);
+        
+        double bh1utime  = ((bh1ut[seg1-1]-bh1utprm[seg1-1])*BH1TDC[seg1-1][0]);
+        double bh1dtime  = ((bh1dt[seg1-1]-bh1dtprm[seg1-1])*BH1TDC[seg1-1][1]);
+        double bh1mtime = (bh1utime + bh1dtime)*0.5;
+
+        double bh1corr  = (bh1mtime - (a[0][0]/sqrt(b[0][1] + bh1ude) + b[0][2]) - (a[1][0]/sqrt(b[1][1] + bh1dde) + b[1][2]) );
+
+        double bh2utime  = ((bh2ut[seg1-1]-bh2utprm[seg1-1])*BH2TDC[seg1-1][0]);
+        double bh2dtime  = ((bh2dt[seg1-1]-bh2dtprm[seg1-1])*BH2TDC[seg1-1][1]);
+        double bh2mtime = (bh2utime + bh2dtime)*0.5;
+
+
+        double bh2ude    = (bh2ua[seg1-1]-bh2ubgprm[seg1-1])/(bh2umipprm[seg1-1]-bh2ubgprm[seg1-1]);
+        double bh2dde    = (bh2da[seg1-1]-bh2dbgprm[seg1-1])/(bh2dmipprm[seg1-1]-bh2dbgprm[seg1-1]);
+
+        double bh2corr  = (bh2mtime + (b[2][0]/sqrt(b[2][1] + bh2ude) + b[2][2]) + (b[3][0]/sqrt(b[3][1] + bh2dde) + b[3][2]) );
+
+        double c1btime = bh1corr - bh2mtime;
+        double c2btime = bh1corr - bh2corr;
+
+        BTOFCORR4->Fill(c2btime);   
+
+        hist4[2]->Fill(bh2ude,c2btime);   
+        hist4[3]->Fill(bh2dde,c2btime);   
+      }
+   }
+
+   c1->cd(); 
+   c1->SetGridx();
+   c1->SetGridy();
+   hist4[2]->SetXTitle("BH2_4_Up_mip"); 
+   hist4[2]->SetYTitle("BTOF(BH1MT_corr - BH2MT_corr) [ns]"); 
+   hist4[2]->Draw("colz"); 
+   c1 ->Print(pdf); 
+
+   c2->cd(); 
+   c2->SetGridx();
+   c2->SetGridy();
+   hist4[3]->SetXTitle("BH2_4_Down_mip"); 
+   hist4[3]->SetYTitle("BTOF(BH1MT_corr-BH2MT_corr) [ns]"); 
+   hist4[3]->Draw("colz"); 
+   c2 ->Print(pdf); 
+   
+   c3->cd(); 
+   c3->SetGridx();
+   c3->SetGridy();
+   BTOFCORR4->Fit("fit2","","", -0.5, 0.5);
+   BTOFCORR4->Draw(); 
    c3 ->Print(pdf); 
 
 
