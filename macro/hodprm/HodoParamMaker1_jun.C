@@ -159,7 +159,7 @@ void HodoParamMaker1_jun( int month, int runnum){
    int seg2 = 4; //1 origine
    int range1 = 0; //  
    int range2 = 3; //  range1 < nhit < range2 
-   int xbin = 100;
+   int xbin = 80;
 
    int MaxDepth = 16;
 
@@ -271,7 +271,8 @@ void HodoParamMaker1_jun( int month, int runnum){
    double btof1[NumOfSegBH1]; 
    double btof2[NumOfSegBH2]; 
 
-   double l_mip = 17; 
+   double l_mip = 20; 
+   double l_mip0 = 50;
    double l_bg = 4; 
    double l_bg1 = 3; 
    double l_bg2 = 2; 
@@ -592,6 +593,21 @@ void HodoParamMaker1_jun( int month, int runnum){
    }
 
    for (int i=0; i<NumOfSegBH2;i++) {
+     if(i == 0 ){
+       bh2umipprm[i] = BH2UMIP[i]->GetMaximumBin();   
+       bh2dmipprm[i] = BH2DMIP[i]->GetMaximumBin();   
+
+       bh2umipprm[i] = BH2UMIP[i]->GetXaxis()->GetBinCenter(bh2umipprm[i]);  
+       bh2dmipprm[i] = BH2DMIP[i]->GetXaxis()->GetBinCenter(bh2dmipprm[i]);  
+
+       BH2UMIP[i]->Fit("fit","","", bh2umipprm[i]-l_mip0, bh2umipprm[i]+l_mip0);
+       bh2umipprm[i] = fit->GetParameter(1);  
+       BH2UMIP[i]->GetXaxis()->SetRangeUser(bh2umipprm[i]-4*(l_mip0), bh2umipprm[i]+6*(l_mip0)); 
+
+       BH2DMIP[i]->Fit("fit","","", bh2dmipprm[i]-l_mip0, bh2dmipprm[i]+l_mip0);
+       bh2dmipprm[i] = fit->GetParameter(1);  
+       BH2DMIP[i]->GetXaxis()->SetRangeUser(bh2dmipprm[i]-4*(l_mip0), bh2dmipprm[i]+6*(l_mip0)); 
+     }else{
        bh2umipprm[i] = BH2UMIP[i]->GetMaximumBin();   
        bh2dmipprm[i] = BH2DMIP[i]->GetMaximumBin();   
 
@@ -605,6 +621,7 @@ void HodoParamMaker1_jun( int month, int runnum){
        BH2DMIP[i]->Fit("fit","","", bh2dmipprm[i]-l_mip, bh2dmipprm[i]+l_mip);
        bh2dmipprm[i] = fit->GetParameter(1);  
        BH2DMIP[i]->GetXaxis()->SetRangeUser(bh2dmipprm[i]-4*(l_mip), bh2dmipprm[i]+6*(l_mip)); 
+     }
    }
 
    for(int i=0; i<NumOfSegBH1; i++){
