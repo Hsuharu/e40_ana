@@ -113,8 +113,8 @@ void merge_user( int month,int runnum){
   }
   ave5 = ave5/(2*NumOfSegBH2);
 
-  double range1 = 1000;
-  double range2 = 500;
+  double range1 = 10000;
+  double range2 = 10000;
   std::vector<user_line> user;
 
   while(std::getline(fin1, line)){
