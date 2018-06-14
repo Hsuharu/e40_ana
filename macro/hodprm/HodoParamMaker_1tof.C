@@ -1090,7 +1090,7 @@ void HodoParamMaker_1tof(int month,int runnum){
   x = 5, y =2, z = 10;
   NofProject = z;
   stepProject = xbin/NofProject;
-  ff1min = 0.;
+  ff1min = 0.1;
   ff1max = 2.5;
   double b[4][3];
 
@@ -1101,7 +1101,7 @@ void HodoParamMaker_1tof(int month,int runnum){
       int bin_max = (i+1)*stepProject;
       TH1D *tmp1 = (TH1D*)hist3[j]->ProjectionY(Form("Projectoin%d",i+1),bin_min, bin_max);
       double center = tmp1->GetBinCenter(tmp1->GetMaximumBin());
-      tmp1->Fit("fit","Q","",center - 0.4 ,center + 0.4  );
+      tmp1->Fit("fit","","",center - 0.4 ,center + 0.4  );
       tmp1->Draw();
   
       double x_min = hist3[j]->GetXaxis()->GetBinCenter(bin_min);
@@ -1159,7 +1159,7 @@ void HodoParamMaker_1tof(int month,int runnum){
         double bh1dtime  = ((bh1dt[seg1-1]-bh1dtprm[seg1-1])*BH1TDC[seg1-1][1]);
         double bh1mtime = (bh1utime + bh1dtime)*0.5;
 
-        double bh1corr  = (bh1mtime - (a[0][0]/sqrt(b[0][1] + bh1ude) + b[0][2]) - (a[1][0]/sqrt(b[1][1] + bh1dde) + b[1][2]) );
+        double bh1corr  = (bh1mtime - (b[0][0]/sqrt(b[0][1] + bh1ude) + b[0][2]) - (b[1][0]/sqrt(b[1][1] + bh1dde) + b[1][2]) );
 
         double bh2utime  = ((bh2ut[seg1-1]-bh2utprm[seg1-1])*BH2TDC[seg1-1][0]);
         double bh2dtime  = ((bh2dt[seg1-1]-bh2dtprm[seg1-1])*BH2TDC[seg1-1][1]);
@@ -1233,7 +1233,7 @@ void HodoParamMaker_1tof(int month,int runnum){
       int bin_max = (i+1)*stepProject;
       TH1D *tmp1 = (TH1D*)hist4[j]->ProjectionY(Form("Projectoin%d",i+1),bin_min, bin_max);
       double center = tmp1->GetBinCenter(tmp1->GetMaximumBin());
-      tmp1->Fit("fit","Q","",center - 0.4 ,center + 0.4  );
+      tmp1->Fit("fit","","",center - 0.4 ,center + 0.4  );
       tmp1->Draw();
   
       double x_min = hist4[j]->GetXaxis()->GetBinCenter(bin_min);
@@ -1287,7 +1287,7 @@ void HodoParamMaker_1tof(int month,int runnum){
         double bh1dtime  = ((bh1dt[seg1-1]-bh1dtprm[seg1-1])*BH1TDC[seg1-1][1]);
         double bh1mtime = (bh1utime + bh1dtime)*0.5;
 
-        double bh1corr  = (bh1mtime - (a[0][0]/sqrt(b[0][1] + bh1ude) + b[0][2]) - (a[1][0]/sqrt(b[1][1] + bh1dde) + b[1][2]) );
+        double bh1corr  = (bh1mtime - (b[0][0]/sqrt(b[0][1] + bh1ude) + b[0][2]) - (b[1][0]/sqrt(b[1][1] + bh1dde) + b[1][2]) );
 
         double bh2utime  = ((bh2ut[seg1-1]-bh2utprm[seg1-1])*BH2TDC[seg1-1][0]);
         double bh2dtime  = ((bh2dt[seg1-1]-bh2dtprm[seg1-1])*BH2TDC[seg1-1][1]);
