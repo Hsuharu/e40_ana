@@ -271,7 +271,7 @@ void HodoParamMaker1_jun( int month, int runnum){
    double btof1[NumOfSegBH1]; 
    double btof2[NumOfSegBH2]; 
 
-   double l_mip = 15; 
+   double l_mip = 17; 
    double l_bg = 4; 
    double l_bg1 = 3; 
    double l_bg2 = 2; 
@@ -564,8 +564,8 @@ void HodoParamMaker1_jun( int month, int runnum){
        }
        if(u_mipflg && d_mipflg){
          if(bh1nhits < range2 && bh1nhits > range1 && bh2nhits == 1){
-           if(bh2ua[i] > bh2ubgprm[i] + 4*sigma_bh2ubgprm[i]) BH2UMIP[i]->Fill(bh2ua[i]);
-           if(bh2da[i] > bh2dbgprm[i] + 4*sigma_bh2dbgprm[i]) BH2DMIP[i]->Fill(bh2da[i]);
+           if(bh2ua[i] > bh2ubgprm[i] + 7*sigma_bh2ubgprm[i]) BH2UMIP[i]->Fill(bh2ua[i]);
+           if(bh2da[i] > bh2dbgprm[i] + 7*sigma_bh2dbgprm[i]) BH2DMIP[i]->Fill(bh2da[i]);
          }
        }
        u_mipflg = 0;
@@ -583,11 +583,11 @@ void HodoParamMaker1_jun( int month, int runnum){
 
        BH1UMIP[i]->Fit("fit","","", bh1umipprm[i]-l_mip, bh1umipprm[i]+l_mip); 
        bh1umipprm[i] = fit->GetParameter(1);  
-       BH1UMIP[i]->GetXaxis()->SetRangeUser(bh1umipprm[i]-2*(l_mip), bh1umipprm[i]+4*(l_mip)); 
+       BH1UMIP[i]->GetXaxis()->SetRangeUser(bh1umipprm[i]-4*(l_mip), bh1umipprm[i]+6*(l_mip)); 
 
        BH1DMIP[i]->Fit("fit","","", bh1dmipprm[i]-l_mip, bh1dmipprm[i]+l_mip);  
        bh1dmipprm[i] = fit->GetParameter(1);  
-       BH1DMIP[i]->GetXaxis()->SetRangeUser(bh1dmipprm[i]-2*(l_mip), bh1dmipprm[i]+4*(l_mip)); 
+       BH1DMIP[i]->GetXaxis()->SetRangeUser(bh1dmipprm[i]-4*(l_mip), bh1dmipprm[i]+6*(l_mip)); 
 
    }
 
@@ -600,11 +600,11 @@ void HodoParamMaker1_jun( int month, int runnum){
 
        BH2UMIP[i]->Fit("fit","","", bh2umipprm[i]-l_mip, bh2umipprm[i]+l_mip);
        bh2umipprm[i] = fit->GetParameter(1);  
-       BH2UMIP[i]->GetXaxis()->SetRangeUser(bh2umipprm[i]-2*(l_mip), bh2umipprm[i]+4*(l_mip)); 
+       BH2UMIP[i]->GetXaxis()->SetRangeUser(bh2umipprm[i]-4*(l_mip), bh2umipprm[i]+6*(l_mip)); 
 
        BH2DMIP[i]->Fit("fit","","", bh2dmipprm[i]-l_mip, bh2dmipprm[i]+l_mip);
        bh2dmipprm[i] = fit->GetParameter(1);  
-       BH2DMIP[i]->GetXaxis()->SetRangeUser(bh2dmipprm[i]-2*(l_mip), bh2dmipprm[i]+4*(l_mip)); 
+       BH2DMIP[i]->GetXaxis()->SetRangeUser(bh2dmipprm[i]-4*(l_mip), bh2dmipprm[i]+6*(l_mip)); 
    }
 
    for(int i=0; i<NumOfSegBH1; i++){
