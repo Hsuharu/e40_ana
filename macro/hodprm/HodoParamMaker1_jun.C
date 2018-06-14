@@ -159,7 +159,7 @@ void HodoParamMaker1_jun( int month, int runnum){
    int seg2 = 4; //1 origine
    int range1 = 0; //  
    int range2 = 3; //  range1 < nhit < range2 
-   int xbin = 80;
+   int xbin = 60;
 
    int MaxDepth = 16;
 
@@ -271,7 +271,7 @@ void HodoParamMaker1_jun( int month, int runnum){
    double btof1[NumOfSegBH1]; 
    double btof2[NumOfSegBH2]; 
 
-   double l_mip = 20; 
+   double l_mip = 17; 
    double l_mip0 = 50;
    double l_bg = 4; 
    double l_bg1 = 3; 
