@@ -796,7 +796,7 @@ void HodoParamMaker_1tof(int month,int runnum){
   int NofProject = z;
   int stepProject = xbin/NofProject;
   double ff1min = 0.;
-  double ff1max = 2.5;
+  double ff1max = 2.0;
   double a[4][3];
   TCanvas *c5 = new TCanvas("c5","c5");
   c5->Divide(x,y);
