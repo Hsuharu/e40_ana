@@ -1,0 +1,19 @@
+
+Processing ../macro/hodprm/HodoParamMaker1_jun.C(6,5086)...
+Error in <TFile::TFile>: file /home/had/suharu/work/e40/ana/analyzer_jun/rootfile/run05086_hodo.root does not exist
+#0  0x00007fe3042ce82e in waitpid () from /lib64/libc.so.6
+#1  0x00007fe304260479 in do_system () from /lib64/libc.so.6
+#2  0x00007fe3052e5711 in TUnixSystem::Exec (shellcmd=<optimized out>, this=0x144b4f0) at /sw/packages/root/src/root-6.10.08/core/unix/src/TUnixSystem.cxx:2118
+#3  TUnixSystem::StackTrace (this=0x144b4f0) at /sw/packages/root/src/root-6.10.08/core/unix/src/TUnixSystem.cxx:2412
+#4  0x00007fe3006b9265 in cling::MultiplexInterpreterCallbacks::PrintStackTrace() () from /sw/packages/root/6.10.08/lib/libCling.so
+#5  0x00007fe3006b8d28 in cling_runtime_internal_throwIfInvalidPointer () from /sw/packages/root/6.10.08/lib/libCling.so
+#6  0x00007fe305a8d238 in ?? ()
+#7  0x0000000000000000 in ?? ()
+Error in <HandleInterpreterException>: Trying to dereference null pointer or trying to call routine taking non-null arguments.
+Execution of your code was aborted.
+In file included from input_line_8:1:
+/gpfs/home/had/suharu/work/e40/ana/macro/hodprm/HodoParamMaker1_jun.C:99:4: warning: null passed to a callee that requires a non-null argument [-Wnonnull]
+   tree->SetBranchAddress("evnum",&evnum);
+   ^~~~
+2.87user 0.91system 0:04.29elapsed 88%CPU (0avgtext+0avgdata 305680maxresident)k
+272inputs+24outputs (0major+125836minor)pagefaults 0swaps
