@@ -403,6 +403,7 @@ void CountEff_BH2( int month, int runnum){
            }
          }
          if(bh1dt[i][j]>0){
+           BH1DT0[i]->Fill(bh1dt[i][j]-bh1dtprm[i]);
            Time = (bh1dt[i][j]-bh1dtprm[i])*FPGA_hr_TDC;
            BH1DTns[i]->Fill(Time);
            if(Time > -5. && Time < 5.){
@@ -429,6 +430,7 @@ void CountEff_BH2( int month, int runnum){
            }
          }
          if(bh2dt[i][j]>0){
+           BH2DT0[i]->Fill(bh2dt[i][j]-bh2dtprm[i]);
            Time = (bh2dt[i][j]-bh2dtprm[i])*FPGA_hr_TDC;
            BH2DTns[i]->Fill(Time);
            if(Time > -5. && Time < 5.){
