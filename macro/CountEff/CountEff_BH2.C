@@ -444,62 +444,105 @@ void CountEff_BH2( int month, int runnum){
      }
    }
 
-//T0 
+////T0 
+//   for(int i=0; i<NumOfSegBH1; i++){
+//     BH1UT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
+//     BH1UT0[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//   for(int i=0; i<NumOfSegBH1; i++){
+//     BH1DT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
+//     BH1DT0[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//   for(int i=0; i<NumOfSegBH2; i++){
+//     BH2UT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
+//     BH2UT0[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//   for(int i=0; i<NumOfSegBH2; i++){
+//     BH2DT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
+//     BH2DT0[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//   
+////Tns
+//   for(int i=0; i<NumOfSegBH1; i++){
+//     BH1UTns[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//   for(int i=0; i<NumOfSegBH1; i++){
+//     BH1DTns[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//   for(int i=0; i<NumOfSegBH2; i++){
+//     BH2UTns[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//   for(int i=0; i<NumOfSegBH2; i++){
+//     BH2DTns[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//   
+////Tns First
+//   for(int i=0; i<NumOfSegBH1; i++){
+//     BH1UTnsFirst[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//   for(int i=0; i<NumOfSegBH1; i++){
+//     BH1DTnsFirst[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//   for(int i=0; i<NumOfSegBH2; i++){
+//     BH2UTnsFirst[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//   for(int i=0; i<NumOfSegBH2; i++){
+//     BH2DTnsFirst[i]->Draw(); 
+//     c1 ->Print(pdf); 
+//   }
+//
+   TCanvas *c2 = new TCanvas("c2","c2",800,700); 
+   c2->divide(2,2);
    for(int i=0; i<NumOfSegBH1; i++){
      BH1UT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
+     c2->cd(1);
      BH1UT0[i]->Draw(); 
-     c1 ->Print(pdf); 
+     c2->cd(2);
+     BH1UTns[i]->Draw(); 
+     c2->cd(3);
+     BH1UTnsFirst[i]->Draw(); 
+     c2 ->Print(pdf); 
    }
    for(int i=0; i<NumOfSegBH1; i++){
      BH1DT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
+     c2->cd(1);
      BH1DT0[i]->Draw(); 
-     c1 ->Print(pdf); 
+     c2->cd(2);
+     BH1DTns[i]->Draw(); 
+     c2->cd(3);
+     BH1DTnsFirst[i]->Draw(); 
+     c2 ->Print(pdf); 
    }
    for(int i=0; i<NumOfSegBH2; i++){
      BH2UT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
+     c2->cd(1);
      BH2UT0[i]->Draw(); 
-     c1 ->Print(pdf); 
+     c2->cd(2);
+     BH2UTns[i]->Draw(); 
+     c2->cd(3);
+     BH2UTnsFirst[i]->Draw(); 
+     c2 ->Print(pdf); 
    }
    for(int i=0; i<NumOfSegBH2; i++){
      BH2DT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
+     c2->cd(1);
      BH2DT0[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-   
-//Tns
-   for(int i=0; i<NumOfSegBH1; i++){
-     BH1UTns[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-   for(int i=0; i<NumOfSegBH1; i++){
-     BH1DTns[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-   for(int i=0; i<NumOfSegBH2; i++){
-     BH2UTns[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-   for(int i=0; i<NumOfSegBH2; i++){
+     c2->cd(2);
      BH2DTns[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-   
-//Tns First
-   for(int i=0; i<NumOfSegBH1; i++){
-     BH1UTnsFirst[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-   for(int i=0; i<NumOfSegBH1; i++){
-     BH1DTnsFirst[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-   for(int i=0; i<NumOfSegBH2; i++){
-     BH2UTnsFirst[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-   for(int i=0; i<NumOfSegBH2; i++){
+     c2->cd(3);
      BH2DTnsFirst[i]->Draw(); 
-     c1 ->Print(pdf); 
+     c2 ->Print(pdf); 
    }
                              
   c1->Print(pdf+"]");        
