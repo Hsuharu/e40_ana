@@ -503,7 +503,7 @@ void CountEff_BH2( int month, int runnum){
 //   }
 //
    TCanvas *c2 = new TCanvas("c2","c2",800,700); 
-   c2->divide(2,2);
+   c2->Divide(2,2);
    for(int i=0; i<NumOfSegBH1; i++){
      BH1UT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
      c2->cd(1);
