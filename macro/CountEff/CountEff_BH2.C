@@ -444,7 +444,7 @@ void CountEff_BH2( int month, int runnum){
      }
    }
 
-
+//T0 
    for(int i=0; i<NumOfSegBH1; i++){
      BH1UT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
      BH1UT0[i]->Draw(); 
@@ -466,44 +466,38 @@ void CountEff_BH2( int month, int runnum){
      c1 ->Print(pdf); 
    }
    
+//Tns
    for(int i=0; i<NumOfSegBH1; i++){
-     BH1UTns[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
      BH1UTns[i]->Draw(); 
      c1 ->Print(pdf); 
    }
    for(int i=0; i<NumOfSegBH1; i++){
-     BH1DTns[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
      BH1DTns[i]->Draw(); 
      c1 ->Print(pdf); 
    }
    for(int i=0; i<NumOfSegBH2; i++){
-     BH2UTns[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
      BH2UTns[i]->Draw(); 
      c1 ->Print(pdf); 
    }
    for(int i=0; i<NumOfSegBH2; i++){
-     BH2DTns[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
      BH2DTns[i]->Draw(); 
      c1 ->Print(pdf); 
    }
    
+//Tns First
    for(int i=0; i<NumOfSegBH1; i++){
-     BH1UTnsFirst[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
      BH1UTnsFirst[i]->Draw(); 
      c1 ->Print(pdf); 
    }
    for(int i=0; i<NumOfSegBH1; i++){
-     BH1DTnsFirst[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
      BH1DTnsFirst[i]->Draw(); 
      c1 ->Print(pdf); 
    }
    for(int i=0; i<NumOfSegBH2; i++){
-     BH2UTnsFirst[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
      BH2UTnsFirst[i]->Draw(); 
      c1 ->Print(pdf); 
    }
    for(int i=0; i<NumOfSegBH2; i++){
-     BH2DTnsFirst[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
      BH2DTnsFirst[i]->Draw(); 
      c1 ->Print(pdf); 
    }
