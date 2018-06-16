@@ -154,47 +154,6 @@ void CountEff_BH2( int month, int runnum){
 //       To read only selected branches, Insert statements like:
 // tree->SetBranchStatus("*",0);  // disable all branches
 // TTreePlayer->SetBranchStatus("branchname",1);  // activate branchname
-
-   TH1D *BH1UT[NumOfSegBH1]; 
-   TH1D *BH1DT[NumOfSegBH1]; 
-   TH1D *BH1UT0[NumOfSegBH1]; 
-   TH1D *BH1DT0[NumOfSegBH1]; 
-   TH1D *BH1UTns[NumOfSegBH1]; 
-   TH1D *BH1DTns[NumOfSegBH1]; 
-   TH1D *BH1UTnsFirst[NumOfSegBH1]; 
-   TH1D *BH1DTnsFirst[NumOfSegBH1]; 
-      for (int i=0; i<NumOfSegBH1;i++) {
-        BH1UT[i] = new TH1D(Form("BH1_%dUT",i+1),Form("BH1_%dUT",i+1),2000,200000,400000);
-        BH1DT[i] = new TH1D(Form("BH1_%dDT",i+1),Form("BH1_%dDT",i+1),2000,200000,400000);
-        BH1UT0[i] = new TH1D(Form("BH1_%dUT0",i+1),Form("BH1_%dUT0",i+1),2000,-100000,100000);
-        BH1DT0[i] = new TH1D(Form("BH1_%dDT0",i+1),Form("BH1_%dDT0",i+1),2000,-100000,100000);
-        BH1UTns[i] = new TH1D(Form("BH1UTns%d",i+1),Form("BH1UTns%d",i+1),160,-8,8);
-        BH1DTns[i] = new TH1D(Form("BH1DTns%d",i+1),Form("BH1DTns%d",i+1),160,-8,8);
-        BH1UTnsFirst[i] = new TH1D(Form("BH1UTnsFirst%d",i+1),Form("BH1UTnsFirst%d",i+1),160,-8,8);
-        BH1DTnsFirst[i] = new TH1D(Form("BH1DTnsFirst%d",i+1),Form("BH1DTnsFirst%d",i+1),160,-8,8);
-      }
-//   TH1D *BH1HitPat = new TH1D("BH1HitPat","BH1HitPat",12,0,12);
-
-   TH1D *BH2UT[NumOfSegBH2]; 
-   TH1D *BH2DT[NumOfSegBH2]; 
-   TH1D *BH2UT0[NumOfSegBH2]; 
-   TH1D *BH2DT0[NumOfSegBH2]; 
-   TH1D *BH2UTns[NumOfSegBH2]; 
-   TH1D *BH2DTns[NumOfSegBH2]; 
-   TH1D *BH2UTnsFirst[NumOfSegBH2]; 
-   TH1D *BH2DTnsFirst[NumOfSegBH2]; 
-      for (int i=0; i<NumOfSegBH2;i++) {
-        BH2UT[i] = new TH1D(Form("BH2_%dUT",i+1),Form("BH2_%dUT",i+1),2000,200000,400000);
-        BH2DT[i] = new TH1D(Form("BH2_%dDT",i+1),Form("BH2_%dDT",i+1),5000,200000,400000);
-        BH2UT0[i] = new TH1D(Form("BH2_%dUT0",i+1),Form("BH2_%dUT0",i+1),2000,-100000,100000);
-        BH2DT0[i] = new TH1D(Form("BH2_%dDT0",i+1),Form("BH2_%dDT0",i+1),1000,-10000,10000);
-        BH2UTns[i] = new TH1D(Form("BH2UTns%d",i+1),Form("BH2UTns%d",i+1),160,-8,8);
-        BH2DTns[i] = new TH1D(Form("BH2DTns%d",i+1),Form("BH2DTns%d",i+1),160,-8,8);
-        BH2UTnsFirst[i] = new TH1D(Form("BH2UTnsFirst%d",i+1),Form("BH2UTnsFirst%d",i+1),160,-8,8);
-        BH2DTnsFirst[i] = new TH1D(Form("BH2DTnsFirst%d",i+1),Form("BH2DTnsFirst%d",i+1),160,-8,8);
-      }
-//   TH1D *BH2HitPat = new TH1D("BH2HitPat","BH2HitPat",9,0,9);
-
    Long64_t nentries = tree->GetEntries();
    double fitprm[3];
    double bh1utprm[NumOfSegBH1]; 
@@ -230,6 +189,47 @@ void CountEff_BH2( int month, int runnum){
 
 //time
    double Time = 0.; //unit [ns]
+
+   TH1D *BH1UT[NumOfSegBH1]; 
+   TH1D *BH1DT[NumOfSegBH1]; 
+   TH1D *BH1UT0[NumOfSegBH1]; 
+   TH1D *BH1DT0[NumOfSegBH1]; 
+   TH1D *BH1UTns[NumOfSegBH1]; 
+   TH1D *BH1DTns[NumOfSegBH1]; 
+   TH1D *BH1UTnsFirst[NumOfSegBH1]; 
+   TH1D *BH1DTnsFirst[NumOfSegBH1]; 
+      for (int i=0; i<NumOfSegBH1;i++) {
+        BH1UT[i] = new TH1D(Form("BH1_%dUT",i+1),Form("BH1_%dUT",i+1),2000,200000,400000);
+        BH1DT[i] = new TH1D(Form("BH1_%dDT",i+1),Form("BH1_%dDT",i+1),2000,200000,400000);
+        BH1UT0[i] = new TH1D(Form("BH1_%dUT0",i+1),Form("BH1_%dUT0",i+1),2000,-100000,100000);
+        BH1DT0[i] = new TH1D(Form("BH1_%dDT0",i+1),Form("BH1_%dDT0",i+1),2000,-100000,100000);
+        BH1UTns[i] = new TH1D(Form("BH1-%dU [ns]",i+1),Form("BH1-%dU [ns]",i+1),160,-Range,Range);
+        BH1DTns[i] = new TH1D(Form("BH1-%dD [ns]",i+1),Form("BH1-%dD [ns]",i+1),160,-Range,Range);
+        BH1UTnsFirst[i] = new TH1D(Form("BH1-%dU First [ns]",i+1),Form("BH1-%dU First [ns]",i+1),160,-Range,Range);
+        BH1DTnsFirst[i] = new TH1D(Form("BH1-%dD First [ns]",i+1),Form("BH1-%dD First [ns]",i+1),160,-Range,Range);
+      }
+//   TH1D *BH1HitPat = new TH1D("BH1HitPat","BH1HitPat",12,0,12);
+
+   TH1D *BH2UT[NumOfSegBH2]; 
+   TH1D *BH2DT[NumOfSegBH2]; 
+   TH1D *BH2UT0[NumOfSegBH2]; 
+   TH1D *BH2DT0[NumOfSegBH2]; 
+   TH1D *BH2UTns[NumOfSegBH2]; 
+   TH1D *BH2DTns[NumOfSegBH2]; 
+   TH1D *BH2UTnsFirst[NumOfSegBH2]; 
+   TH1D *BH2DTnsFirst[NumOfSegBH2]; 
+      for (int i=0; i<NumOfSegBH2;i++) {
+        BH2UT[i] = new TH1D(Form("BH2_%dUT",i+1),Form("BH2_%dUT",i+1),2000,200000,400000);
+        BH2DT[i] = new TH1D(Form("BH2_%dDT",i+1),Form("BH2_%dDT",i+1),5000,200000,400000);
+        BH2UT0[i] = new TH1D(Form("BH2_%dUT0",i+1),Form("BH2_%dUT0",i+1),2000,-100000,100000);
+        BH2DT0[i] = new TH1D(Form("BH2_%dDT0",i+1),Form("BH2_%dDT0",i+1),1000,-10000,10000);
+        BH2UTns[i] = new TH1D(Form("BH2-%dU [ns]",i+1),Form("BH2-%dU [ns]",i+1),160,-Range,Range);
+        BH2DTns[i] = new TH1D(Form("BH2-%dD [ns]",i+1),Form("BH2-%dD [ns]",i+1),160,-Range,Range);
+        BH2UTnsFirst[i] = new TH1D(Form("BH2-%dU First [ns]",i+1),Form("BH2-%dU First [ns]",i+1),160,-Range,Range);
+        BH2DTnsFirst[i] = new TH1D(Form("BH2-%dD First [ns]",i+1),Form("BH2-%dD First [ns]",i+1),160,-Range,Range);
+      }
+//   TH1D *BH2HitPat = new TH1D("BH2HitPat","BH2HitPat",9,0,9);
+
 
    TF1 *fit = new TF1("fit","gaus"); 
    
