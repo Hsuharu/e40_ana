@@ -604,7 +604,7 @@ void CountEff_BH2( int month, int runnum){
      fout_3 << bh2utprm[i]  <<  "\t"  << bh2dtprm[i] << endl;
   }     
   for(int i=0; i<NumOfSegBH2+1; i++){
-     fout_2 << bh2usegcount[i] <<  "\t" 
+     fout_4 << bh2usegcount[i] <<  "\t" 
             << bh2usegevent[i] <<  "\t"
             << (double)bh2usegcount[i]/bh2usegevent[i] <<  "\t" 
             << bh2dsegcount[i] <<  "\t" 
