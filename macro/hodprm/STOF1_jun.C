@@ -165,7 +165,7 @@ void STOF1_jun( int month, int runnum){
    int seg2 = 4; //1 origine
    int range1 = 0; //  
    int range2 = 3; //  range1 < nhit < range2 
-   int xbin = 60;
+   int xbin = 2000;
 
    int MaxDepth = 16;
 
@@ -264,7 +264,7 @@ void STOF1_jun( int month, int runnum){
         TOFDBG[i] = new TH1D(Form("TOFDBG%d",i+1),Form("TOFDBG%d",i+1),600,0,600);
         TOFUdE[i] = new TH1D(Form("TOFUdE%d",i+1),Form("TOFUdE%d",i+1),xbin,0,3);
         TOFDdE[i] = new TH1D(Form("TOFDdE%d",i+1),Form("TOFDdE%d",i+1),xbin,0,3);
-        SHist[i] = new TH2D(Form("SHist%d",i+1),Form("SHist%d",i+1),1000,0,2000,100,30,40);
+        SHist[i] = new TH2D(Form("SHist%d",i+1),Form("SHist%d",i+1),2000,0,2000,100,30,40);
       }
    TH1D *TOFHitPat = new TH1D("TOFHitPat","TOFHitPat",NumOfSegTOF+1,0,NumOfSegTOF+1);
    TH1D *STOF1 = new TH1D("STOF1","STOF1",100,30,40);
