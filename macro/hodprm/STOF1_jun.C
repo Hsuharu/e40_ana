@@ -268,6 +268,7 @@ void STOF1_jun( int month, int runnum){
       }
    TH1D *TOFHitPat = new TH1D("TOFHitPat","TOFHitPat",NumOfSegTOF+1,0,NumOfSegTOF+1);
    TH1D *STOF1 = new TH1D("STOF1","STOF1",100,30,40);
+   TH1D *STOFCORR1 = new TH1D("STOFCORR1","STOFCORR1",100,30,40);
 
    Long64_t nentries = tree->GetEntries();
    double fitprm[3];
@@ -525,6 +526,50 @@ void STOF1_jun( int month, int runnum){
     }
                                
   }
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                         //
+//    TOF corr                                                                             //
+//                                                                                         //
+/////////////////////////////////////////////////////////////////////////////////////////////
+   nbytes = 0;
+   for (Long64_t i=0; i<nentries;i++) {
+      nbytes += tree->GetEntry(i);
+
+      if(tofut[10]>0 && tofdt[10]>0 && bh2ut[3]>0 && bh2dt[3]>0 && bh2nhits  == 1){
+      double ctofmtime = ch2ns*(tofut[10][0] + tofdt[10][0])*0.5 - (a[0][0]/sqrt(a[0][1] + tofua[10]) + a[0][2]) - (a[1][0]/sqrt(a[1][1] + tofda[10]) + a[1][2]);
+      double bh2mtime  = ch2ns*(bh2ut[3][0] + bh2dt[3][0])*0.5;
+      double stof = ctofmtime - bh2mtime ;
+        SHist[2]->Fill(tofua[10],ctofmtime - bh2mtime);   
+        SHist[2]->Fill(tofua[10],ctofmtime - bh2mtime);   
+        SHist[3]->Fill(tofda[10],ctofmtime - bh2mtime);   
+        STOFCORR1->Fill(ctofmtime - bh2mtime);   
+      }
+   }
+
+   c1->cd(); 
+   c1->SetGridx();
+   c1->SetGridy();
+   SHist[2]->SetXTitle("TOF_10_UpADC[ch]"); 
+   SHist[2]->SetYTitle("STOF(TOFMT_corr - BH2MT) [ns]"); 
+   SHist[2]->Draw("colz"); 
+   c1 ->Print(pdf); 
+
+   c1->cd(); 
+   c1->SetGridx();
+   c1->SetGridy();
+   SHist[3]->SetXTitle("TOF_10_DownADC[ch]"); 
+   SHist[3]->SetYTitle("STOF(TOFMT_corr - BH2MT) [ns]"); 
+   SHist[3]->Draw("colz"); 
+   c1 ->Print(pdf); 
+   
+
+   c1->cd(); 
+   c1->SetGridx();
+   c1->SetGridy();
+   STOFCORR1->Fit("fit","","", 30, 40);
+   STOFCORR1->Draw(); 
+   c1 ->Print(pdf); 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ////                                                                                         //
