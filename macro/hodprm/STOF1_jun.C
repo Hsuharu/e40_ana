@@ -369,8 +369,8 @@ void STOF1_jun( int month, int runnum){
         double bh2mtime  = ch2ns*(bh2ut[3][0] + bh2dt[3][0])*0.5;
         double stof = tofmtime - bh2mtime ;
         STOF1->Fill(stof); 
-        SHist[0]->Fill(stof,tofua[10]);
-        SHist[1]->Fill(stof,tofda[10]);
+        SHist[0]->Fill(tofua[10],stof);
+        SHist[1]->Fill(tofda[10],stof);
       }
    }
 
