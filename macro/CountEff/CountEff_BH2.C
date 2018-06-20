@@ -18,7 +18,7 @@
  };
 
 
-void CountEff_BH2( int month, int runnum){
+void CountEff_BH2( int month, int runnum, double Range){
 ////////////////////////////////////////////////////////////
 //   This file has been automatically generated           //
 //     (Sun Feb 25 23:10:42 2018 by ROOT version6.10/08)  //
@@ -185,7 +185,7 @@ void CountEff_BH2( int month, int runnum){
    int T0_range_max = 3000;
 
 //time range
-   int Range = 5; //unit [ns]
+//   double Range = 5.; //unit [ns]
 
 //time
    double Time = 0.; //unit [ns]
@@ -199,6 +199,10 @@ void CountEff_BH2( int month, int runnum){
    int bh1dsegevent[NumOfSegBH1+1] = {0,0,0,0,0,0,0,0,0,0,0,0};
    int bh2usegevent[NumOfSegBH2+1] = {0,0,0,0,0,0,0,0,0};
    int bh2dsegevent[NumOfSegBH2+1] = {0,0,0,0,0,0,0,0,0};
+
+   int FirstSegEventflg1[NumOfSegBH1];
+   int FirstSegEventflg2[NumOfSegBH1];
+       
 
    TH1D *BH1UT[NumOfSegBH1]; 
    TH1D *BH1DT[NumOfSegBH1]; 
@@ -306,11 +310,11 @@ void CountEff_BH2( int month, int runnum){
        bh1utprm[i] = BH1UT[i]->GetXaxis()->GetBinCenter(bh1utprm[i]);  
        bh1dtprm[i] = BH1DT[i]->GetXaxis()->GetBinCenter(bh1dtprm[i]);  
 
-       BH1UT[i]->Fit("fit","i","", bh1utprm[i]-f_l, bh1utprm[i]+f_l); 
+       BH1UT[i]->Fit("fit","iQ","", bh1utprm[i]-f_l, bh1utprm[i]+f_l); 
        bh1utprm[i] = fit->GetParameter(1);  
        BH1UT[i]->GetXaxis()->SetRangeUser(bh1utprm[i]-1*(l), bh1utprm[i]+2*(l)); 
 
-       BH1DT[i]->Fit("fit","i","", bh1dtprm[i]-f_l, bh1dtprm[i]+f_l); 
+       BH1DT[i]->Fit("fit","iQ","", bh1dtprm[i]-f_l, bh1dtprm[i]+f_l); 
        bh1dtprm[i] = fit->GetParameter(1);  
        BH1DT[i]->GetXaxis()->SetRangeUser(bh1dtprm[i]-1*(l), bh1dtprm[i]+2*(l));  
 
@@ -324,11 +328,11 @@ void CountEff_BH2( int month, int runnum){
        bh2utprm[i] = BH2UT[i]->GetXaxis()->GetBinCenter(bh2utprm[i]);  
        bh2dtprm[i] = BH2DT[i]->GetXaxis()->GetBinCenter(bh2dtprm[i]);  
 
-       BH2UT[i]->Fit("fit","i","", bh2utprm[i]-f_l2, bh2utprm[i]+f_l2); 
+       BH2UT[i]->Fit("fit","iQ","", bh2utprm[i]-f_l2, bh2utprm[i]+f_l2); 
        bh2utprm[i] = fit->GetParameter(1);  
        BH2UT[i]->GetXaxis()->SetRangeUser(bh2utprm[i]-1*l2, bh2utprm[i]+2*(l2));
 
-       BH2DT[i]->Fit("fit","i","", bh2dtprm[i]-f_l2_D, bh2dtprm[i]+f_l2_D);
+       BH2DT[i]->Fit("fit","iQ","", bh2dtprm[i]-f_l2_D, bh2dtprm[i]+f_l2_D);
        bh2dtprm[i] = fit->GetParameter(1);  
        BH2DT[i]->GetXaxis()->SetRangeUser(bh2dtprm[i]-1*(l2), bh2dtprm[i]+2*(l2));  
 
@@ -412,6 +416,8 @@ void CountEff_BH2( int month, int runnum){
    for (Long64_t s=0; s<nentries;s++) {
      nbytes += tree->GetEntry(s);
      for (int i=0, Firstflg1=1, Firstflg2=1, FirstEventflg1 = 1, FirstEventflg2 = 1, bh1usegcounts=1, bh1dsegcounts=1; i<NumOfSegBH1;i++) {
+       FirstSegEventflg1[i] = 1;
+       FirstSegEventflg2[i] = 1;
        for(int j=0; j<MaxDepth; j++){
          if(bh1ut[i][j]>0){
            //Up
@@ -420,7 +426,7 @@ void CountEff_BH2( int month, int runnum){
            Time = (bh1ut[i][j]-bh1utprm[i])*FPGA_hr_TDC;
            BH1UTns[i]->Fill(Time);
            BH1UTnsSUM->Fill(Time);
-           if(Time > -5. && Time < 5.){
+           if(Time > -Range && Time < Range){
              if(Firstflg1 == 1){
                BH1UTnsFirst[i]->Fill(Time);
                BH1UTnsFirstSUM->Fill(Time);
@@ -429,8 +435,11 @@ void CountEff_BH2( int month, int runnum){
                bh1usegcount[NumOfSegBH1] += bh1usegcounts;
              }
            }
-           if(FirstEventflg1 == 1){
+           if(FirstSegEventflg1[i] == 1){
              bh1usegevent[i] += 1;
+             FirstSegEventflg1[i] = 0;
+           }
+           if(FirstEventflg1 == 1){
              bh1usegevent[NumOfSegBH1] += 1;
              FirstEventflg1 = 0;
            }
@@ -442,7 +451,7 @@ void CountEff_BH2( int month, int runnum){
            Time = (bh1dt[i][j]-bh1dtprm[i])*FPGA_hr_TDC;
            BH1DTns[i]->Fill(Time);
            BH1DTnsSUM->Fill(Time);
-           if(Time > -5. && Time < 5.){
+           if(Time > -Range && Time < Range){
              if(Firstflg2 == 1){
                BH1DTnsFirst[i]->Fill(Time);
                BH1DTnsFirstSUM->Fill(Time);
@@ -451,8 +460,11 @@ void CountEff_BH2( int month, int runnum){
                bh1dsegcount[NumOfSegBH1] += bh1dsegcounts;
              }
            }
-           if(FirstEventflg2 == 1){
+           if(FirstSegEventflg2[i] == 1){
              bh1dsegevent[i] += 1;
+             FirstSegEventflg2[i] = 0;
+           }
+           if(FirstEventflg2 == 1){
              bh1dsegevent[NumOfSegBH1] += 1;
              FirstEventflg2 = 0;
            }
@@ -461,6 +473,8 @@ void CountEff_BH2( int month, int runnum){
      }
 
      for (int i=0, Firstflg1=1, Firstflg2=1, FirstEventflg1 = 1, FirstEventflg2 = 1, bh2usegcounts=1, bh2dsegcounts=1; i<NumOfSegBH2;i++) {
+       FirstSegEventflg1[i] = 1;
+       FirstSegEventflg2[i] = 1;
        for(int j=0; j<MaxDepth; j++){
          if(bh2ut[i][j]>0){
            BH2UT0[i]->Fill(bh2ut[i][j]-bh2utprm[i]);
@@ -468,7 +482,7 @@ void CountEff_BH2( int month, int runnum){
            Time = (bh2ut[i][j]-bh2utprm[i])*FPGA_hr_TDC;
            BH2UTns[i]->Fill(Time);
            BH2UTnsSUM->Fill(Time);
-           if(Time > -5. && Time < 5.){
+           if(Time > -Range && Time < Range){
              if(Firstflg1 == 1){
                BH2UTnsFirst[i]->Fill(Time);
                BH2UTnsFirstSUM->Fill(Time);
@@ -476,6 +490,10 @@ void CountEff_BH2( int month, int runnum){
                bh2usegcount[i] += bh2usegcounts;
                bh2usegcount[NumOfSegBH2] += bh2usegcounts;
              }
+           }
+           if(FirstSegEventflg1[i] == 1){
+             bh2usegevent[i] += 1;
+             FirstSegEventflg1[i] = 0;
            }
            if(FirstEventflg1 == 1){
              bh2usegevent[i] += 1;
@@ -489,7 +507,7 @@ void CountEff_BH2( int month, int runnum){
            Time = (bh2dt[i][j]-bh2dtprm[i])*FPGA_hr_TDC;
            BH2DTns[i]->Fill(Time);
            BH2DTnsSUM->Fill(Time);
-           if(Time > -5. && Time < 5.){
+           if(Time > -Range && Time < Range){
              if(Firstflg2 == 1){
                BH2DTnsFirst[i]->Fill(Time);
                BH2DTnsFirstSUM->Fill(Time);
@@ -498,8 +516,11 @@ void CountEff_BH2( int month, int runnum){
                bh2dsegcount[NumOfSegBH2] += bh2dsegcounts;
              }
            }
-           if(FirstEventflg2 == 1){
+           if(FirstSegEventflg2[i] == 1){
              bh2dsegevent[i] += 1;
+             FirstSegEventflg2[i] = 0;
+           }
+           if(FirstEventflg2 == 1){
              bh2dsegevent[NumOfSegBH2] += 1;
              FirstEventflg2 = 0;
            }
@@ -562,14 +583,14 @@ void CountEff_BH2( int month, int runnum){
                              
   c1->Print(pdf+"]");        
   
-   for(int i=0; i<NumOfSegBH1+1; i++){
-     std::cout << " BH1 " <<  i+1 << "U " <<  " \t "  << bh1usegcount[i] <<  " \t "  << bh1usegevent[i] <<  " \t "  << (double)bh1usegcount[i]/bh1usegevent[i] <<  " \t "  << std::endl;
-     std::cout << " BH1 " <<  i+1 << "D " <<  " \t "  << bh1dsegcount[i] <<  " \t "  << bh1dsegevent[i] <<  " \t "  << (double)bh1dsegcount[i]/bh1dsegevent[i] <<  " \t "  << std::endl;
+   for(int i=11; i<NumOfSegBH1+1; i++){
+     std::cout << " BH1 SUM" <<  i+1 << "U " <<  " \t "  << bh1usegcount[i] <<  " \t "  << bh1usegevent[i] <<  " \t "  << (double)bh1usegcount[i]/bh1usegevent[i] <<  " \t "  << std::endl;
+     std::cout << " BH1 SUM" <<  i+1 << "D " <<  " \t "  << bh1dsegcount[i] <<  " \t "  << bh1dsegevent[i] <<  " \t "  << (double)bh1dsegcount[i]/bh1dsegevent[i] <<  " \t "  << std::endl;
    }                                                                                                                                
                                                                                                                                     
-   for(int i=0; i<NumOfSegBH2+1; i++){                                                                                              
-     std::cout << " BH2 " <<  i+1 << "U " <<  " \t "  << bh2usegcount[i] <<  " \t "  << bh2usegevent[i] <<  " \t "  << (double)bh2usegcount[i]/bh2usegevent[i] <<  " \t "  << std::endl;
-     std::cout << " BH2 " <<  i+1 << "D " <<  " \t "  << bh2dsegcount[i] <<  " \t "  << bh2dsegevent[i] <<  " \t "  << (double)bh2dsegcount[i]/bh2dsegevent[i] <<  " \t "  << std::endl;
+   for(int i=8; i<NumOfSegBH2+1; i++){                                                                                              
+     std::cout << " BH2 SUM" <<  i+1 << "U " <<  " \t "  << bh2usegcount[i] <<  " \t "  << bh2usegevent[i] <<  " \t "  << (double)bh2usegcount[i]/bh2usegevent[i] <<  " \t "  << std::endl;
+     std::cout << " BH2 SUM" <<  i+1 << "D " <<  " \t "  << bh2dsegcount[i] <<  " \t "  << bh2dsegevent[i] <<  " \t "  << (double)bh2dsegcount[i]/bh2dsegevent[i] <<  " \t "  << std::endl;
    }
 
    
