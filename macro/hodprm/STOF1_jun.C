@@ -268,11 +268,11 @@ void STOF1_jun( int month, int runnum){
       }
         SHist[0] = new TH2D(Form("SHist%d",0+1),Form("SHist%d",0+1),2000,0,2000,100,30,40);
         SHist[1] = new TH2D(Form("SHist%d",1+1),Form("SHist%d",1+1),2000,0,2000,100,30,40);
-        SHist[2] = new TH2D(Form("SHist%d",2+1),Form("SHist%d",2+1),2000,0,2000,100,25,35);
-        SHist[3] = new TH2D(Form("SHist%d",3+1),Form("SHist%d",3+1),2000,0,2000,100,25,35);
+        SHist[2] = new TH2D(Form("SHist%d",2+1),Form("SHist%d",2+1),2000,0,2000,100,28,38);
+        SHist[3] = new TH2D(Form("SHist%d",3+1),Form("SHist%d",3+1),2000,0,2000,100,28,38);
    TH1D *TOFHitPat = new TH1D("TOFHitPat","TOFHitPat",NumOfSegTOF+1,0,NumOfSegTOF+1);
    TH1D *STOF1 = new TH1D("STOF1","STOF1",100,30,40);
-   TH1D *STOFCORR1 = new TH1D("STOFCORR1","STOFCORR1",100,25,35);
+   TH1D *STOFCORR1 = new TH1D("STOFCORR1","STOFCORR1",100,28,38);
 
    Long64_t nentries = tree->GetEntries();
    double fitprm[3];
