@@ -457,11 +457,11 @@ void STOF1_jun( int month, int runnum){
 ///    Throwimg correction                                                                  //
 ///                                                                                         //
 //////////////////////////////////////////////////////////////////////////////////////////////
-  int x = 5, y =2, z = 10;
+  int x = 5, y =3, z = 15;
   int NofProject = z;
   int stepProject = xbin/NofProject;
-  double ff1min = 0.5;
-  double ff1max = 2.0;
+  double ff1min = 200;
+  double ff1max = 1700;
   double a[4][3];
   TCanvas *c5 = new TCanvas("c5","c5");
   c5->Divide(x,y);
