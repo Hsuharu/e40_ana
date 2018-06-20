@@ -448,6 +448,7 @@ void STOF1_jun( int month, int runnum){
 //     BH2DT[i]->Draw(); 
 //     c1 ->Print(pdf); 
 //   }
+     STOF1->Fit("fit","","", 30, 40);
      STOF1->Draw(); 
      c1 ->Print(pdf); 
    
@@ -542,7 +543,7 @@ void STOF1_jun( int month, int runnum){
 
       if(tofut[10]>0 && tofdt[10]>0 && bh2ut[3]>0 && bh2dt[3]>0 && bh2nhits  == 1){
 //      double ctofmtime = ch2ns*(tofut[10][0] + tofdt[10][0])*0.5 - (a[0][0]/sqrt(a[0][1] + tofua[10]) + a[0][2]) - (a[1][0]/sqrt(a[1][1] + tofda[10]) + a[1][2]);
-      double ctofmtime = ch2ns*(tofut[10][0] + tofdt[10][0])*0.5 - (a[0][0]/sqrt(a[0][1] + tofua[10]) ) - (a[1][0]/sqrt(a[1][1] + tofda[10]) );
+      double ctofmtime = ch2ns*(tofut[10][0] + tofdt[10][0])*0.5 - (0.5*a[0][0]/sqrt(a[0][1] + tofua[10]) ) - (0.5*a[1][0]/sqrt(a[1][1] + tofda[10]) );
       double bh2mtime  = ch2ns*(bh2ut[3][0] + bh2dt[3][0])*0.5;
       double stof = ctofmtime - bh2mtime ;
         SHist[2]->Fill(tofua[10],ctofmtime - bh2mtime);   
@@ -571,7 +572,7 @@ void STOF1_jun( int month, int runnum){
    c1->cd(); 
    c1->SetGridx();
    c1->SetGridy();
-   STOFCORR1->Fit("fit","","", 30, 40);
+   STOFCORR1->Fit("fit","","", 25, 35);
    STOFCORR1->Draw(); 
    c1 ->Print(pdf); 
 
