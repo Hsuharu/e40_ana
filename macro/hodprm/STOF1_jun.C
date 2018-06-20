@@ -537,7 +537,8 @@ void STOF1_jun( int month, int runnum){
       nbytes += tree->GetEntry(i);
 
       if(tofut[10]>0 && tofdt[10]>0 && bh2ut[3]>0 && bh2dt[3]>0 && bh2nhits  == 1){
-      double ctofmtime = ch2ns*(tofut[10][0] + tofdt[10][0])*0.5 - (a[0][0]/sqrt(a[0][1] + tofua[10]) + a[0][2]) - (a[1][0]/sqrt(a[1][1] + tofda[10]) + a[1][2]);
+//      double ctofmtime = ch2ns*(tofut[10][0] + tofdt[10][0])*0.5 - (a[0][0]/sqrt(a[0][1] + tofua[10]) + a[0][2]) - (a[1][0]/sqrt(a[1][1] + tofda[10]) + a[1][2]);
+      double ctofmtime = ch2ns*(tofut[10][0] + tofdt[10][0])*0.5 - (a[0][0]/sqrt(a[0][1] + tofua[10]) ) - (a[1][0]/sqrt(a[1][1] + tofda[10]) );
       double bh2mtime  = ch2ns*(bh2ut[3][0] + bh2dt[3][0])*0.5;
       double stof = ctofmtime - bh2mtime ;
         SHist[2]->Fill(tofua[10],ctofmtime - bh2mtime);   
