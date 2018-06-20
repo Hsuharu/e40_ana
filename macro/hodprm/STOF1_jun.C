@@ -266,7 +266,7 @@ void STOF1_jun( int month, int runnum){
         TOFDdE[i] = new TH1D(Form("TOFDdE%d",i+1),Form("TOFDdE%d",i+1),xbin,0,3);
         SHist[i] = new TH2D(Form("SHist%d",i+1),Form("SHist%d",i+1),1000,0,2000,100,30,40);
       }
-   TH1D *TOFHitPat = new TH1D("TOFHitPat","TOFHitPat",9,0,9);
+   TH1D *TOFHitPat = new TH1D("TOFHitPat","TOFHitPat",NumOfSegTOF+1,0,NumOfSegTOF+1);
    TH1D *STOF1 = new TH1D("STOF1","STOF1",100,30,40);
 
    Long64_t nentries = tree->GetEntries();
@@ -367,7 +367,7 @@ void STOF1_jun( int month, int runnum){
       if(bh2ut[3]>0 && bh2dt[3]>0 && tofut[10]>0 && tofdt[10]>0 && bh2nhits == 1){
         double tofmtime = ch2ns*(tofut[10][0] + tofdt[10][0])*0.5;
         double bh2mtime  = ch2ns*(bh2ut[3][0] + bh2dt[3][0])*0.5;
-        double stof = bh2mtime - tofmtime;
+        double stof = tofmtime - bh2mtime ;
         STOF1->Fill(stof); 
         SHist[0]->Fill(stof,tofua[10]);
         SHist[1]->Fill(stof,tofda[10]);
