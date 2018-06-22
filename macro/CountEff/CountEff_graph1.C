@@ -145,8 +145,8 @@ void CountEff_graph1( int month,int det,int gatenum,int runnum1,int runnum2,int 
   c1->Print(pdf+"["); 
 
 // Frame ---------------------------------------------------------------------
-  TH1 *frame1=gPad->DrawFrame(0,0.95,22,1.01,Form("BH%d_%s Efficiency",det,ud[0]));      
-  TH1 *frame2=gPad->DrawFrame(0,0.95,22,1.01,Form("BH%d_%s Efficiency",det,ud[1]));      
+  TH1 *frame1=gPad->DrawFrame(0,0.65,22,1.01,Form("BH%d_%s Efficiency",det,ud[0]));      
+  TH1 *frame2=gPad->DrawFrame(0,0.65,22,1.01,Form("BH%d_%s Efficiency",det,ud[1]));      
   gPad->SetGrid();
   frame1->GetXaxis()->SetTitle("[ M/Spill ]");
   frame1->GetYaxis()->SetTitleOffset(1.2);
@@ -184,8 +184,8 @@ void CountEff_graph1( int month,int det,int gatenum,int runnum1,int runnum2,int 
     graph[10+i]->SetLineStyle(i);
     graph[10+i]->SetMarkerColor(i+4);
     graph[10+i]->SetLineColor(i+4);
-    legend->AddEntry(graph[i],Form("BH%d_%s",det,ud[1]),"p");
-    legend->Draw();
+    legend2->AddEntry(graph[10+i],Form("BH%d_%s",det,ud[1]),"p");
+    legend2->Draw();
     graph[10+i]->Draw("p");
   }
 
