@@ -33,9 +33,10 @@ void HodoParamMaker1_jun( int month, int runnum){
    gROOT->Reset();
 //   TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("../rootfile/run04571_hodo.root");
    TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_hodo.root", anadir.Data(),Month[month], runnum),"READ");
+//j   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_hodo.root", anadir.Data(),Month[month], runnum),"READ");
+   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_Hodoscope.root", anadir.Data(),Month[month], runnum),"READ");
    if (!f) {
-      f = new TFile(Form("%s/rootfile/run%05d_hodo.root", anadir.Data() , runnum));
+      f = new TFile(Form("%s/rootfile/run%05d_Hodoscope.root", anadir.Data() , runnum));
    }
     TTree *tree;
     f->GetObject("tree",tree);
