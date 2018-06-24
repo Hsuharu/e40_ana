@@ -270,11 +270,14 @@ void STOF1_jun( int month, int runnum){
         SHist[1] = new TH2D(Form("SHist%d",1+1),Form("SHist%d",1+1),2000,0,2000,100,30,40);
         SHist[2] = new TH2D(Form("SHist%d",2+1),Form("SHist%d",2+1),2000,0,2000,100,28,38);
         SHist[3] = new TH2D(Form("SHist%d",3+1),Form("SHist%d",3+1),2000,0,2000,100,28,38);
-        SHist[10+0] = new TH2D(Form("SHist%d",0+10),Form("SHist%d",0+10),2000,0,2000,100,30,40);
-        SHist[10+1] = new TH2D(Form("SHist%d",1+10),Form("SHist%d",1+10),2000,0,2000,100,30,40);
+        SHist[10+0] = new TH2D(Form("SHist%d",0+10),Form("SHist%d",0+10),1000,0,1000,100,30,40);
+        SHist[10+1] = new TH2D(Form("SHist%d",1+10),Form("SHist%d",1+10),1000,0,1000,100,30,40);
+        SHist[10+2] = new TH2D(Form("SHist%d",2+10),Form("SHist%d",2+10),2000,0,2000,100,28,38);
+        SHist[10+3] = new TH2D(Form("SHist%d",3+10),Form("SHist%d",3+10),2000,0,2000,100,28,38);
    TH1D *TOFHitPat = new TH1D("TOFHitPat","TOFHitPat",NumOfSegTOF+1,0,NumOfSegTOF+1);
    TH1D *STOF1 = new TH1D("STOF1","STOF1",100,30,40);
    TH1D *STOFCORR1 = new TH1D("STOFCORR1","STOFCORR1",100,28,38);
+   TH1D *STOFCORR2 = new TH1D("STOFCORR2","STOFCORR2",100,28,38);
 
    Long64_t nentries = tree->GetEntries();
    double fitprm[3];
@@ -470,7 +473,7 @@ void STOF1_jun( int month, int runnum){
    
 //////////////////////////////////////////////////////////////////////////////////////////////
 ///                                                                                         //
-///    Throwimg correction                                                                  //
+///    Throwimg correction ver TOF                                                          //
 ///                                                                                         //
 //////////////////////////////////////////////////////////////////////////////////////////////
   int x = 5, y =3, z = 15;
@@ -528,8 +531,8 @@ void STOF1_jun( int month, int runnum){
     c1->cd(); 
     c1->SetGridx();
     c1->SetGridy();
-    SHist[j]->SetXTitle(Form("TOF_10%s",ud[j])); 
-    SHist[j]->SetYTitle("STOF(TOFMT_10-BH2MT_4) [ns]"); 
+    SHist[j]->SetXTitle(Form("TOF_11%s",ud[j])); 
+    SHist[j]->SetYTitle("STOF(TOFMT_11-BH2MT_4) [ns]"); 
     SHist[j]->Draw("colz"); 
     graph->Draw("psame"); 
     graph->Fit("ff1","","",ff1min,ff1max);
@@ -537,6 +540,73 @@ void STOF1_jun( int month, int runnum){
     
     for(int k=0;k<3;k++){
       a[j][k] = ff1->GetParameter(k);
+//      std::cout << a[j][k] << std::endl;
+    }
+                               
+  }
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+///                                                                                         //
+///    Throwimg correction ver BH2                                                          //
+///                                                                                         //
+//////////////////////////////////////////////////////////////////////////////////////////////
+  x = 4, y =4, z = 16;
+  NofProject = z;
+  stepProject = xbin/NofProject;
+  ff1min = 200;
+  ff1max = 600;
+  c5->Divide(x,y);
+
+  xval.resize(NofProject);
+  exval.resize(NofProject);
+  yval.resize(NofProject);
+  eyval.resize(NofProject);
+
+  for(int j =  0; j<2; j++){
+    for(int i =0; i<NofProject; i++){
+      c5->cd(i+1);
+      int bin_min = i*stepProject+1;
+      int bin_max = (i+1)*stepProject;
+      TH1D *tmp1 = (TH1D*)SHist[10+j]->ProjectionY(Form("Projectoin%d",i+1),bin_min, bin_max);
+      double center = tmp1->GetBinCenter(tmp1->GetMaximumBin());
+      tmp1->Fit("fit","Q","",center - 0.4 ,center + 0.4  );
+      tmp1->Draw();
+  
+      double x_min = SHist[10+j]->GetXaxis()->GetBinCenter(bin_min);
+      double x_max = SHist[10+j]->GetXaxis()->GetBinCenter(bin_max);
+      double x_center = (x_min + x_max)*0.5;
+  
+      xval[i] = x_center;
+      exval[i] = 0.;
+      yval[i] = fit->GetParameter(1);
+      eyval[i] = fit->GetParError(1);
+    }
+    c5 ->Print(pdf); 
+  
+    TGraphErrors *graph = new TGraphErrors(NofProject, &(xval[0]), &(yval[0]), &(exval[0]), &(eyval[0]));
+    graph->SetMarkerStyle(8);
+    graph->SetMarkerColor(2);
+    graph->SetMarkerSize(0.5);
+  
+//    TF1 *ff1 = new TF1("ff1","[0]/sqrt([1]+x)+[2]");
+    TF1 *ff1 = new TF1("ff1","[0]/sqrt([1]+x)+[2]");
+    ff1->SetLineWidth(1);
+//     ff1->SetParLimits(100,100.,100.);
+    ff1->SetParameters(1,1.,0.);
+    ff1->SetParNames("a0","a1","a3");
+  
+    c1->cd(); 
+    c1->SetGridx();
+    c1->SetGridy();
+    SHist[10+j]->SetXTitle(Form("BH2_4%s",ud[j])); 
+    SHist[10+j]->SetYTitle("STOF(TOFMT_11-BH2MT_4) [ns]"); 
+    SHist[10+j]->Draw("colz"); 
+    graph->Draw("psame"); 
+    graph->Fit("ff1","","",ff1min,ff1max);
+    c1 ->Print(pdf); 
+    
+    for(int k=0;k<3;k++){
+      a[j+2][k] = ff1->GetParameter(k);
 //      std::cout << a[j][k] << std::endl;
     }
                                
@@ -555,10 +625,14 @@ void STOF1_jun( int month, int runnum){
 //      double ctofmtime = ch2ns*(tofut[10][0] + tofdt[10][0])*0.5 - (a[0][0]/sqrt(a[0][1] + tofua[10]) + a[0][2]) - (a[1][0]/sqrt(a[1][1] + tofda[10]) + a[1][2]);
       double ctofmtime = ch2ns*(tofut[10][0] + tofdt[10][0])*0.5 - (0.5*a[0][0]/sqrt(a[0][1] + tofua[10]) ) - (0.5*a[1][0]/sqrt(a[1][1] + tofda[10]) );
       double bh2mtime  = ch2ns*(bh2ut[3][0] + bh2dt[3][0])*0.5;
+      double cbh2mtime  = ch2ns*(bh2ut[3][0] + bh2dt[3][0])*0.5 - (0.5*a[0+2][0]/sqrt(a[0+2][1] + bh2ua[10]) ) - (0.5*a[1+2][0]/sqrt(a[1+2][1] + bh2da[10]);
       double stof = ctofmtime - bh2mtime ;
         SHist[2]->Fill(tofua[10],ctofmtime - bh2mtime);   
         SHist[3]->Fill(tofda[10],ctofmtime - bh2mtime);   
+        SHist[10+2]->Fill(tofua[10],tofmtime - cbh2mtime);   
+        SHist[10+3]->Fill(tofda[10],tofmtime - cbh2mtime);   
         STOFCORR1->Fill(ctofmtime - bh2mtime);   
+        STOFCORR2->Fill(ctofmtime - cbh2mtime);   
       }
    }
 
@@ -578,14 +652,31 @@ void STOF1_jun( int month, int runnum){
    SHist[3]->Draw("colz"); 
    c1 ->Print(pdf); 
    
+   c1->cd(); 
+   c1->SetGridx();
+   c1->SetGridy();
+   SHist[10+2]->SetXTitle("BH2_4_UpADC[ch]"); 
+   SHist[10+2]->SetYTitle("STOF(TOFMT_corr - BH2MT) [ns]"); 
+   SHist[10+2]->Draw("colz"); 
+   c1 ->Print(pdf); 
 
    c1->cd(); 
    c1->SetGridx();
    c1->SetGridy();
+   SHist[10+3]->SetXTitle("BH2_4_DownADC[ch]"); 
+   SHist[10+3]->SetYTitle("STOF(TOFMT_corr - BH2MT) [ns]"); 
+   SHist[10+3]->Draw("colz"); 
+   c1 ->Print(pdf); 
+   
+
+   c1->cd(); 
    STOFCORR1->Fit("fit","","", 25, 35);
    STOFCORR1->Draw(); 
    c1 ->Print(pdf); 
 
+   STOFCORR2->Fit("fit","","", 25, 35);
+   STOFCORR2->Draw(); 
+   c1 ->Print(pdf); 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ////                                                                                         //
 ////    BH1 & BH2 TDC's peak change to 0 code                                                //
