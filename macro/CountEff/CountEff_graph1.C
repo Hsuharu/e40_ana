@@ -43,10 +43,10 @@ void CountEff_graph1( int month,int det,int gatenum,int runnum1,int runnum2,int 
   std::ifstream fin3(filein3);
   std::ifstream fin4(filein4);
 
-  std::vector< std::vector<double> > BH2_Eff_5M; 
-  std::vector< std::vector<double> > BH2_Eff_10M; 
-  std::vector< std::vector<double> > BH2_Eff_15M; 
-  std::vector< std::vector<double> > BH2_Eff_20M; 
+  std::vector< std::vector<double> > Det_Eff_5M; 
+  std::vector< std::vector<double> > Det_Eff_10M; 
+  std::vector< std::vector<double> > Det_Eff_15M; 
+  std::vector< std::vector<double> > Det_Eff_20M; 
 
   std::string line;
   
@@ -67,7 +67,7 @@ void CountEff_graph1( int month,int det,int gatenum,int runnum1,int runnum2,int 
       inner.push_back(dcount);
       inner.push_back(devent);
       inner.push_back(deff  );
-      BH2_Eff_5M.push_back(inner);
+      Det_Eff_5M.push_back(inner);
     }
   }
 
@@ -83,7 +83,7 @@ void CountEff_graph1( int month,int det,int gatenum,int runnum1,int runnum2,int 
       inner.push_back(dcount);
       inner.push_back(devent);
       inner.push_back(deff  );
-      BH2_Eff_10M.push_back(inner);
+      Det_Eff_10M.push_back(inner);
     }
   }
 
@@ -99,7 +99,7 @@ void CountEff_graph1( int month,int det,int gatenum,int runnum1,int runnum2,int 
       inner.push_back(dcount);
       inner.push_back(devent);
       inner.push_back(deff  );
-      BH2_Eff_15M.push_back(inner);
+      Det_Eff_15M.push_back(inner);
     }
   }
 
@@ -115,20 +115,21 @@ void CountEff_graph1( int month,int det,int gatenum,int runnum1,int runnum2,int 
       inner.push_back(dcount);
       inner.push_back(devent);
       inner.push_back(deff  );
-      BH2_Eff_20M.push_back(inner);
+      Det_Eff_20M.push_back(inner);
     }
   }
   
   int number = 4;//Number of M/spill data
 //  int gatenum = 10;
   double M_par_Spill[] = {5,10,15,20};
-  double efficiency[2][4];
+  double efficiency[20][4];
+  int style[] = {3,2,27,4,5,20,21,22,23,25};
   for(int i=0; i<gatenum; i++){
     for(int j=0; j<2; j++){
-       efficiency[10*j+i][0] = BH2_Eff_5M[ i][j*3+2];
-       efficiency[10*j+i][1] = BH2_Eff_10M[i][j*3+2];
-       efficiency[10*j+i][2] = BH2_Eff_15M[i][j*3+2];
-       efficiency[10*j+i][3] = BH2_Eff_20M[i][j*3+2];
+       efficiency[10*j+i][0] = Det_Eff_5M[ i][j*3+2];
+       efficiency[10*j+i][1] = Det_Eff_10M[i][j*3+2];
+       efficiency[10*j+i][2] = Det_Eff_15M[i][j*3+2];
+       efficiency[10*j+i][3] = Det_Eff_20M[i][j*3+2];
     }
   }
   
@@ -145,8 +146,8 @@ void CountEff_graph1( int month,int det,int gatenum,int runnum1,int runnum2,int 
   c1->Print(pdf+"["); 
 
 // Frame ---------------------------------------------------------------------
-  TH1 *frame1=gPad->DrawFrame(0,0.65,22,1.01,Form("BH%d_%s Efficiency",det,ud[0]));      
-  TH1 *frame2=gPad->DrawFrame(0,0.65,22,1.01,Form("BH%d_%s Efficiency",det,ud[1]));      
+  TH1 *frame1=gPad->DrawFrame(0,0.7,22,1.06,Form("BH%d_%s Efficiency",det,ud[0]));      
+  TH1 *frame2=gPad->DrawFrame(0,0.7,22,1.06,Form("BH%d_%s Efficiency",det,ud[1]));      
   gPad->SetGrid();
   frame1->GetXaxis()->SetTitle("[ M/Spill ]");
   frame1->GetYaxis()->SetTitleOffset(1.2);
@@ -160,11 +161,15 @@ void CountEff_graph1( int month,int det,int gatenum,int runnum1,int runnum2,int 
 
   frame1->Draw();
   for(int i=0 ; i<gatenum; i++){
-    graph[i]->SetMarkerStyle(i);
+    graph[i]->SetMarkerStyle(i+20);
     graph[i]->SetLineStyle(i);
-    graph[i]->SetMarkerColor(i+4);
-    graph[i]->SetLineColor(i+4);
-    legend->AddEntry(graph[i],Form("BH%d_%s",det,ud[0]),"p");
+    graph[i]->SetMarkerColor(i+1);
+    graph[i]->SetLineColor(i+1);
+      if(i==9){
+              graph[i]->SetMarkerColor(12);
+              graph[i]->SetLineColor(12);
+      }
+    legend->AddEntry(graph[i],Form("BH%d_%s Gate:%dns",det,ud[0], i+1),"p");
     legend->Draw();
     graph[i]->Draw("p");
   }
@@ -180,11 +185,15 @@ void CountEff_graph1( int month,int det,int gatenum,int runnum1,int runnum2,int 
   for(int i=0 ; i<gatenum; i++){
 //    graph[10+i]->SetMarkerStyle(21);
 //    graph[10+i]->SetLineStyle(2);
-    graph[10+i]->SetMarkerStyle(i);
-    graph[10+i]->SetLineStyle(i);
-    graph[10+i]->SetMarkerColor(i+4);
-    graph[10+i]->SetLineColor(i+4);
-    legend2->AddEntry(graph[10+i],Form("BH%d_%s",det,ud[1]),"p");
+    graph[10+i]->SetMarkerStyle(i+20);
+    graph[10+i]->SetLineStyle(i+1);
+    graph[10+i]->SetMarkerColor(i+1);
+    graph[10+i]->SetLineColor(i+1);
+      if(i==9){
+              graph[10+i]->SetMarkerColor(12);
+              graph[10+i]->SetLineColor(12);
+      }
+    legend2->AddEntry(graph[10+i],Form("BH%d_%s Gate:%dns",det,ud[1],i+1),"p");
     legend2->Draw();
     graph[10+i]->Draw("p");
   }
