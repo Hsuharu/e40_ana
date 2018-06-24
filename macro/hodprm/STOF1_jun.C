@@ -603,8 +603,9 @@ void STOF1_jun( int month, int runnum){
     SHist[10+j]->SetXTitle(Form("BH2_4%s",ud[j])); 
     SHist[10+j]->SetYTitle("STOF(TOFMT_11-BH2MT_4) [ns]"); 
     SHist[10+j]->Draw("colz"); 
-    graph->Fit("ff1","","",ff1min,ff1max);
     graph->Draw("psame"); 
+    graph->Fit("ff1","","",ff1min,ff1max);
+    ff1->Draw("same");
     c1 ->Print(pdf); 
     
     for(int k=0;k<3;k++){
