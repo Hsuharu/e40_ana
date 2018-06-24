@@ -272,12 +272,12 @@ void STOF1_jun( int month, int runnum){
         SHist[3] = new TH2D(Form("SHist%d",3+1),Form("SHist%d",3+1),2000,0,2000,100,28,38);
         SHist[10+0] = new TH2D(Form("SHist%d",0+10),Form("SHist%d",0+10),1000,0,1000,100,30,40);
         SHist[10+1] = new TH2D(Form("SHist%d",1+10),Form("SHist%d",1+10),1000,0,1000,100,30,40);
-        SHist[10+2] = new TH2D(Form("SHist%d",2+10),Form("SHist%d",2+10),2000,0,2000,100,28,38);
-        SHist[10+3] = new TH2D(Form("SHist%d",3+10),Form("SHist%d",3+10),2000,0,2000,100,28,38);
+        SHist[10+2] = new TH2D(Form("SHist%d",2+10),Form("SHist%d",2+10),1000,0,1000,100,28,38);
+        SHist[10+3] = new TH2D(Form("SHist%d",3+10),Form("SHist%d",3+10),1000,0,1000,100,28,38);
    TH1D *TOFHitPat = new TH1D("TOFHitPat","TOFHitPat",NumOfSegTOF+1,0,NumOfSegTOF+1);
    TH1D *STOF1 = new TH1D("STOF1","STOF1",100,30,40);
    TH1D *STOFCORR1 = new TH1D("STOFCORR1","STOFCORR1",100,28,38);
-   TH1D *STOFCORR2 = new TH1D("STOFCORR2","STOFCORR2",100,28,38);
+   TH1D *STOFCORR2 = new TH1D("STOFCORR2","STOFCORR2",100,30,40);
 
    Long64_t nentries = tree->GetEntries();
    double fitprm[3];
@@ -603,8 +603,8 @@ void STOF1_jun( int month, int runnum){
     SHist[10+j]->SetXTitle(Form("BH2_4%s",ud[j])); 
     SHist[10+j]->SetYTitle("STOF(TOFMT_11-BH2MT_4) [ns]"); 
     SHist[10+j]->Draw("colz"); 
-    graph->Draw("psame"); 
     graph->Fit("ff1","","",ff1min,ff1max);
+    graph->Draw("psame"); 
     c1 ->Print(pdf); 
     
     for(int k=0;k<3;k++){
