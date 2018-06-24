@@ -605,7 +605,6 @@ void STOF1_jun( int month, int runnum){
     SHist[10+j]->Draw("colz"); 
     graph->Draw("psame"); 
     graph->Fit("ff1","","",ff1min,ff1max);
-    ff1->Draw("same");
     c1 ->Print(pdf); 
     
     for(int k=0;k<3;k++){
@@ -629,7 +628,7 @@ void STOF1_jun( int month, int runnum){
       double tofmtime = ch2ns*(tofut[10][0] + tofdt[10][0])*0.5;
       double ctofmtime = ch2ns*(tofut[10][0] + tofdt[10][0])*0.5 - (0.5*a[0][0]/sqrt(a[0][1] + tofua[10]) ) - (0.5*a[1][0]/sqrt(a[1][1] + tofda[10]) );
       double bh2mtime  = ch2ns*(bh2ut[3][0] + bh2dt[3][0])*0.5;
-      double cbh2mtime  = ch2ns*(bh2ut[3][0] + bh2dt[3][0])*0.5 + (0.5*a[0+2][0]/sqrt(a[0+2][1] + bh2ua[3]) ) + (0.5*a[1+2][0]/sqrt(a[1+2][1] + bh2da[3]) );
+      double cbh2mtime  = ch2ns*(bh2ut[3][0] + bh2dt[3][0])*0.5 + (0.5*a[2][0]/sqrt(a[2][1] + bh2ua[3]) ) + (0.5*a[3][0]/sqrt(a[3][1] + bh2da[3]) );
       double stof = ctofmtime - bh2mtime ;
         SHist[2]->Fill(tofua[10],ctofmtime - bh2mtime);   
         SHist[3]->Fill(tofda[10],ctofmtime - bh2mtime);   
