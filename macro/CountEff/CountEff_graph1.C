@@ -146,8 +146,8 @@ void CountEff_graph1( int month,int det,int gatenum,int runnum1,int runnum2,int 
   c1->Print(pdf+"["); 
 
 // Frame ---------------------------------------------------------------------
-  TH1 *frame1=gPad->DrawFrame(0,0.7,22,1.06,Form("BH%d_%s Efficiency",det,ud[0]));      
-  TH1 *frame2=gPad->DrawFrame(0,0.7,22,1.06,Form("BH%d_%s Efficiency",det,ud[1]));      
+  TH1 *frame1=gPad->DrawFrame(0,0.7,24,1.06,Form("BH%d_%s Efficiency",det,ud[0]));      
+  TH1 *frame2=gPad->DrawFrame(0,0.7,24,1.06,Form("BH%d_%s Efficiency",det,ud[1]));      
   gPad->SetGrid();
   frame1->GetXaxis()->SetTitle("[ M/Spill ]");
   frame1->GetYaxis()->SetTitleOffset(1.2);
@@ -157,7 +157,8 @@ void CountEff_graph1( int month,int det,int gatenum,int runnum1,int runnum2,int 
   frame2->GetYaxis()->SetTitle("Efficiency");
 
 // Legend --------------------------------------------------------------------
-  TLegend *legend = new TLegend(0.7,0.7,0.9,0.9);
+  TLegend *legend  = new TLegend(0.8,0.6,0.9,0.9);
+  TLegend *legend2 = new TLegend(0.8,0.6,0.9,0.9);
 
   frame1->Draw();
   for(int i=0 ; i<gatenum; i++){
@@ -169,7 +170,7 @@ void CountEff_graph1( int month,int det,int gatenum,int runnum1,int runnum2,int 
               graph[i]->SetMarkerColor(12);
               graph[i]->SetLineColor(12);
       }
-    legend->AddEntry(graph[i],Form("BH%d_%s Gate:%dns",det,ud[0], i+1),"p");
+    legend->AddEntry(graph[i],Form("Gate:%dns", i+1),"p");
     legend->Draw();
     graph[i]->Draw("p");
   }
@@ -178,8 +179,6 @@ void CountEff_graph1( int month,int det,int gatenum,int runnum1,int runnum2,int 
   c1 ->Print(pdf); 
   
 
-// Legend --------------------------------------------------------------------
-  TLegend *legend2 = new TLegend(0.7,0.7,0.9,0.9);
 
   frame2->Draw();
   for(int i=0 ; i<gatenum; i++){
@@ -193,7 +192,7 @@ void CountEff_graph1( int month,int det,int gatenum,int runnum1,int runnum2,int 
               graph[10+i]->SetMarkerColor(12);
               graph[10+i]->SetLineColor(12);
       }
-    legend2->AddEntry(graph[10+i],Form("BH%d_%s Gate:%dns",det,ud[1],i+1),"p");
+    legend2->AddEntry(graph[10+i],Form("Gate:%dns",i+1),"p");
     legend2->Draw();
     graph[10+i]->Draw("p");
   }
