@@ -552,10 +552,12 @@ void STOF1_jun( int month, int runnum){
 //////////////////////////////////////////////////////////////////////////////////////////////
   x = 4, y =4, z = 16;
   NofProject = z;
+  xbin = 1000;
   stepProject = xbin/NofProject;
   ff1min = 200;
   ff1max = 600;
-  c5->Divide(x,y);
+  TCanvas *c6 = new TCanvas("c6","c6");
+  c6->Divide(x,y);
 
   xval.resize(NofProject);
   exval.resize(NofProject);
@@ -564,7 +566,7 @@ void STOF1_jun( int month, int runnum){
 
   for(int j =  0; j<2; j++){
     for(int i =0; i<NofProject; i++){
-      c5->cd(i+1);
+      c6->cd(i+1);
       int bin_min = i*stepProject+1;
       int bin_max = (i+1)*stepProject;
       TH1D *tmp1 = (TH1D*)SHist[10+j]->ProjectionY(Form("Projectoin%d",i+1),bin_min, bin_max);
@@ -581,7 +583,7 @@ void STOF1_jun( int month, int runnum){
       yval[i] = fit->GetParameter(1);
       eyval[i] = fit->GetParError(1);
     }
-    c5 ->Print(pdf); 
+    c6 ->Print(pdf); 
   
     TGraphErrors *graph = new TGraphErrors(NofProject, &(xval[0]), &(yval[0]), &(exval[0]), &(eyval[0]));
     graph->SetMarkerStyle(8);
@@ -623,14 +625,15 @@ void STOF1_jun( int month, int runnum){
 
       if(tofut[10]>0 && tofdt[10]>0 && bh2ut[3]>0 && bh2dt[3]>0 && bh2nhits  == 1){
 //      double ctofmtime = ch2ns*(tofut[10][0] + tofdt[10][0])*0.5 - (a[0][0]/sqrt(a[0][1] + tofua[10]) + a[0][2]) - (a[1][0]/sqrt(a[1][1] + tofda[10]) + a[1][2]);
+      double tofmtime = ch2ns*(tofut[10][0] + tofdt[10][0])*0.5;
       double ctofmtime = ch2ns*(tofut[10][0] + tofdt[10][0])*0.5 - (0.5*a[0][0]/sqrt(a[0][1] + tofua[10]) ) - (0.5*a[1][0]/sqrt(a[1][1] + tofda[10]) );
       double bh2mtime  = ch2ns*(bh2ut[3][0] + bh2dt[3][0])*0.5;
-      double cbh2mtime  = ch2ns*(bh2ut[3][0] + bh2dt[3][0])*0.5 - (0.5*a[0+2][0]/sqrt(a[0+2][1] + bh2ua[10]) ) - (0.5*a[1+2][0]/sqrt(a[1+2][1] + bh2da[10]);
+      double cbh2mtime  = ch2ns*(bh2ut[3][0] + bh2dt[3][0])*0.5 - (0.5*a[0+2][0]/sqrt(a[0+2][1] + bh2ua[3]) ) - (0.5*a[1+2][0]/sqrt(a[1+2][1] + bh2da[3]) );
       double stof = ctofmtime - bh2mtime ;
         SHist[2]->Fill(tofua[10],ctofmtime - bh2mtime);   
         SHist[3]->Fill(tofda[10],ctofmtime - bh2mtime);   
-        SHist[10+2]->Fill(tofua[10],tofmtime - cbh2mtime);   
-        SHist[10+3]->Fill(tofda[10],tofmtime - cbh2mtime);   
+        SHist[10+2]->Fill(bh2ua[3],tofmtime - cbh2mtime);   
+        SHist[10+3]->Fill(bh2da[3],tofmtime - cbh2mtime);   
         STOFCORR1->Fill(ctofmtime - bh2mtime);   
         STOFCORR2->Fill(ctofmtime - cbh2mtime);   
       }
