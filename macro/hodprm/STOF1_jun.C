@@ -594,7 +594,7 @@ void STOF1_jun( int month, int runnum){
     TF1 *ff1 = new TF1("ff1","[0]/sqrt([1]+x)+[2]");
     ff1->SetLineWidth(1);
 //     ff1->SetParLimits(100,100.,100.);
-    ff1->SetParameters(1,1.,0.);
+    ff1->SetParameters(100,1.,0.);
     ff1->SetParNames("a0","a1","a3");
   
     c1->cd(); 
