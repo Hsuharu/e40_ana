@@ -270,10 +270,10 @@ void STOF1_jun( int month, int runnum){
         SHist[1] = new TH2D(Form("SHist%d",1+1),Form("SHist%d",1+1),2000,0,2000,100,30,40);
         SHist[2] = new TH2D(Form("SHist%d",2+1),Form("SHist%d",2+1),2000,0,2000,100,28,38);
         SHist[3] = new TH2D(Form("SHist%d",3+1),Form("SHist%d",3+1),2000,0,2000,100,28,38);
-        SHist[10+0] = new TH2D(Form("SHist%d",0+10),Form("SHist%d",0+10),1000,0,1000,100,30,40);
-        SHist[10+1] = new TH2D(Form("SHist%d",1+10),Form("SHist%d",1+10),1000,0,1000,100,30,40);
-        SHist[10+2] = new TH2D(Form("SHist%d",2+10),Form("SHist%d",2+10),1000,0,1000,100,28,38);
-        SHist[10+3] = new TH2D(Form("SHist%d",3+10),Form("SHist%d",3+10),1000,0,1000,100,28,38);
+        SHist[10+0] = new TH2D(Form("SHist%d",0+10),Form("SHist%d",0+10),800,0,800,100,30,40);
+        SHist[10+1] = new TH2D(Form("SHist%d",1+10),Form("SHist%d",1+10),800,0,800,100,30,40);
+        SHist[10+2] = new TH2D(Form("SHist%d",2+10),Form("SHist%d",2+10),800,0,800,100,30,40);
+        SHist[10+3] = new TH2D(Form("SHist%d",3+10),Form("SHist%d",3+10),800,0,800,100,30,40);
    TH1D *TOFHitPat = new TH1D("TOFHitPat","TOFHitPat",NumOfSegTOF+1,0,NumOfSegTOF+1);
    TH1D *STOF1 = new TH1D("STOF1","STOF1",100,30,40);
    TH1D *STOFCORR1 = new TH1D("STOFCORR1","STOFCORR1",100,28,38);
@@ -552,7 +552,7 @@ void STOF1_jun( int month, int runnum){
 //////////////////////////////////////////////////////////////////////////////////////////////
   x = 4, y =4, z = 16;
   NofProject = z;
-  xbin = 1000;
+  xbin = 800;
   stepProject = xbin/NofProject;
   ff1min = 200;
   ff1max = 600;
@@ -677,7 +677,7 @@ void STOF1_jun( int month, int runnum){
    STOFCORR1->Draw(); 
    c1 ->Print(pdf); 
 
-   STOFCORR2->Fit("fit","","", 25, 35);
+   STOFCORR2->Fit("fit","","", 32, 35);
    STOFCORR2->Draw(); 
    c1 ->Print(pdf); 
 ///////////////////////////////////////////////////////////////////////////////////////////////
