@@ -204,8 +204,7 @@ void HodoParamMaker3_jun( int month, int runnum){
    double f_l2_D = 20;
 
 //Draw range
-   double l = 200;
-   double l2 = 150;
+   double l = 50;
 
 //gate range
    double gr1 = 1000; 
@@ -213,12 +212,12 @@ void HodoParamMaker3_jun( int month, int runnum){
    double gr3 = 500; 
 
 //Draw range
-   int T0_range_min = -300;
-   int T0_range_max = 300;
+   int T0_range_min = -100;
+   int T0_range_max =  100;
 
 //Draw range ns
-   int T0ns_range_min = -250;
-   int T0ns_range_max =  250;
+   int T0ns_range_min = -83;
+   int T0ns_range_max =  83;
 
    double l_mip = 17; 
    double l_mip0 = 50;
@@ -318,7 +317,7 @@ void HodoParamMaker3_jun( int month, int runnum){
         if(sact[i]>0 && trigflag[kBh2KPs]>0){
           for(int j=0; j<MaxDepth; j++){
             SACT0[i]->Fill(sact[i][j]-sactprm[i]);
-            double sactns = (sact[i][j]-sactprm[i])*mhtdcns;
+            double sactns = (sact[i][j]-sactprm[i])*-mhtdcns;
             SACT0ns[i]->Fill(sactns);
           }
         }
@@ -327,7 +326,7 @@ void HodoParamMaker3_jun( int month, int runnum){
         if(tofhtt[i]>0 && trigflag[kBh2KPs]>0){
           for(int j=0; j<MaxDepth; j++){
             HtTOFT0[i]->Fill(tofhtt[i][j]-httoftprm[i]);
-            double httoftns = (tofhtt[i][j]-httoftprm[i])*mhtdcns;
+            double httoftns = (tofhtt[i][j]-httoftprm[i])*-mhtdcns;
             HtTOFT0ns[i]->Fill(httoftns);
           }
         }
