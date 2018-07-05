@@ -190,7 +190,7 @@ void HodoParamMaker3_jun( int month, int runnum){
       for (int i=0; i<NumOfSegHtTOF;i++) {
         HtTOFT[i] = new TH1D(Form("HtTOF_%dT",i+1),Form("HtTOF_%dT",i+1),4000,0,4000);
         HtTOFT0[i] = new TH1D(Form("HtTOFT0_%dT",i+1),Form("HtTOFT0_%dT",i+1),4000,-2000,2000);
-        HtTOFT0ns[i] = new TH1D(Form("TOF-HT Time [ns] %s ",STOF_HT[i]),Form("TOF-HT Time [ns] %s ",STOF_HT[i]),4000,-1666,1666);
+        HtTOFT0ns[i] = new TH1D(Form("TOF-HT %s Time [ns]",STOF_HT[i]),Form("TOF-HT %s Time [ns]",STOF_HT[i]),4000,-1666,1666);
       }
    TH1D *HtTOFHitPat = new TH1D("HtTOFHitPat","HtTOFHitPat",NumOfSegHtTOF+1,0,NumOfSegHtTOF+1);
 
