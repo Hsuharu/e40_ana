@@ -1,4 +1,7 @@
 #include "DetectorID.hh"
+#include <iostream>
+#include "TString.h"
+
 
  const char* Month[] =
  {
@@ -177,7 +180,7 @@ void HodoParamMaker3_jun( int month, int runnum){
       for (int i=0; i<NumOfSegSAC;i++) {
         SACT[i] = new TH1D(Form("SAC_%dT",i+1),Form("SAC_%dT",i+1),4000,0,4000);
         SACT0[i] = new TH1D(Form("SACT0_%dT",i+1),Form("SACT0_%dT",i+1),4000,-2000,2000);
-        SACT0ns[i] = new TH1D(Form("SACT0ns_%dT",i+1),Form("SACT0ns_%dT",i+1),4000,-1800,1800);
+        SACT0ns[i] = new TH1D(Form("SAC Time [ns]_ROOM%d",i+1),Form("SAC Time [ns]_ROOM%d",i+1),4000,-1666,1666);
       }
    TH1D *SACHitPat = new TH1D("SACHitPat","SACHitPat",NumOfSegSAC+1,0,NumOfSegSAC+1);
 
@@ -187,7 +190,7 @@ void HodoParamMaker3_jun( int month, int runnum){
       for (int i=0; i<NumOfSegHtTOF;i++) {
         HtTOFT[i] = new TH1D(Form("HtTOF_%dT",i+1),Form("HtTOF_%dT",i+1),4000,0,4000);
         HtTOFT0[i] = new TH1D(Form("HtTOFT0_%dT",i+1),Form("HtTOFT0_%dT",i+1),4000,-2000,2000);
-        HtTOFT0ns[i] = new TH1D(Form("HtTOFT0ns_%dT",i+1),Form("HtTOFT0ns_%dT",i+1),4000,-1800,1800);
+        HtTOFT0ns[i] = new TH1D(Form("TOF-HT Time [ns] %s ",STOF_HT[i]),Form("TOF-HT Time [ns] %s ",STOF_HT[i]),4000,-1666,1666);
       }
    TH1D *HtTOFHitPat = new TH1D("HtTOFHitPat","HtTOFHitPat",NumOfSegHtTOF+1,0,NumOfSegHtTOF+1);
 
