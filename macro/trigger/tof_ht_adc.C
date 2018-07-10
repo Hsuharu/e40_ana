@@ -229,10 +229,10 @@ void tof_ht_adc( int month, int runnum){
    double f_l  = 20000;
 
 //Draw range
-   double l = 20000;
+   double l = 5000;
 
 //gate range
-   double gr1 = 100; 
+   double gr1 = 5000; 
 
 //Draw range
    int T0_range_min = -100;
