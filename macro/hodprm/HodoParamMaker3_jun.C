@@ -180,7 +180,7 @@ void HodoParamMaker3_jun( int month, int runnum){
       for (int i=0; i<NumOfSegSAC;i++) {
         SACT[i] = new TH1D(Form("SAC_%dT",i+1),Form("SAC_%dT",i+1),4000,0,4000);
         SACT0[i] = new TH1D(Form("SACT0_%dT",i+1),Form("SACT0_%dT",i+1),4000,-2000,2000);
-        SACT0ns[i] = new TH1D(Form("SAC Time [ns]_ROOM%d",i+1),Form("SAC Time [ns]_ROOM%d",i+1),4000,-1666,1666);
+        SACT0ns[i] = new TH1D(Form("SAC ROOM%d Time [ns]",i+1),Form("SAC ROOM%d Time [ns]",i+1),4000,-1666,1666);
       }
    TH1D *SACHitPat = new TH1D("SACHitPat","SACHitPat",NumOfSegSAC+1,0,NumOfSegSAC+1);
 
