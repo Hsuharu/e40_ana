@@ -1,4 +1,4 @@
-#D [::main()] recreate root file : ./rootfile/run05120_Hodoscope.root
+#D [::main()] recreate root file : ./rootfile/run05118_Hodoscope.root
 #D [ConfMan::Initialize()]
  key = UNPACK     value = ./param/UNPACK/unpacker.xml   
  key = DIGIT      value = ./param/DIGIT/digit_data_20180602.xml
@@ -403,11 +403,11 @@
 #D check mode = 01101001
 
 #D ___________ GUnpacker::set_istream() __________
-   input stream = /ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05120.dat
+   input stream = /ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05118.dat
 
 #D GUnpacker::initialize()
 [0m
-#D EventReader::open()  data stream /ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05120.dat
+#D EventReader::open()  data stream /ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05118.dat
 #D GUnpacker skipped 0 events
 #D GUnpacker::initialize() ----> finished
 #D UnpackerManager::show_event_number()
@@ -474,15 +474,15 @@
 #E EventReader::read() no data
 #D EventReader::read()
  close stream
-#D IStream /ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05120.dat closed
+#D IStream /ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05118.dat closed
 
 #E null stream
-    n unpacked =  209769 (0x33369)
+    n unpacked =  201974 (0x314f6)
 #D GUnpacker::operator++()   exit loop
-    n unpacked =  209769 (0x33369)
+    n unpacked =  201974 (0x314f6)
 #DTimer [::main()] End of Analyzer 
    Process Start   : Wed Jul 11 15:21:00 2018
-   Process Stop    : Wed Jul 11 15:32:56 2018
-   Processing Time : 0:11:56
-697.21user 4.83system 11:57.62elapsed 97%CPU (0avgtext+0avgdata 1003604maxresident)k
-0inputs+8outputs (0major+140873minor)pagefaults 0swaps
+   Process Stop    : Wed Jul 11 15:31:37 2018
+   Processing Time : 0:10:37
+620.87user 4.46system 10:38.27elapsed 97%CPU (0avgtext+0avgdata 1008596maxresident)k
+0inputs+0outputs (0major+142714minor)pagefaults 0swaps
