@@ -226,7 +226,7 @@ void tof_ht_adc( int month, int runnum){
    double mhtdcns = 0.8333;
 
 //Fit range
-   double f_l  = 20000;
+   double f_l  = 2000;
 
 //Draw range
    double l = 5000;
@@ -242,7 +242,7 @@ void tof_ht_adc( int month, int runnum){
    int T0ns_range_min = -83;
    int T0ns_range_max =  83;
 
-   double l_mip = 17; 
+   double l_mip = 50; 
    double l_mip0 = 50;
    double l_bg = 4; 
    double l_bg1 = 3; 
