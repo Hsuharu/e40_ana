@@ -123,7 +123,7 @@ void SCHBySegScaler( int month, int runnum){
 
    TH1D *SCHCT[NumOfSegSCH]; 
       for (int i=0; i<NumOfSegSCH;i++) {
-        SCHCT[i] = new TH1D(Form("SCH_%dCT",i+1),Form("SCH_%dCT",i+1),2000,-5000,5000);
+        SCHCT[i] = new TH1D(Form("SCH_%dCT",i+1),Form("SCH_%dCT",i+1),2000,-500,500);
       }
    TH1D *SCHHitPat = new TH1D("SCHHitPat","SCHHitPat",NumOfSegSCH+1,0,NumOfSegSCH+1);
 
@@ -134,10 +134,10 @@ void SCHBySegScaler( int month, int runnum){
    double schscr[NumOfSegSCH]; 
 
 //Fit range
-   double f_l  = 200; 
+   double f_l  = 50; 
 
 //Draw range
-   double l = 1000; 
+   double l = 100; 
 
 //Draw range
    int T0_range_min = -3000;
