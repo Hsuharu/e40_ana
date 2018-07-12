@@ -389,8 +389,8 @@ void tof_ht_adc( int month, int runnum){
          if(tofdt[i][j] > (tofdtprm[i] - gr1) && tofdt[i][j] < (tofdtprm[i] + gr1) ) d_mipflg = 1;
        }
        if(u_mipflg && d_mipflg){
-         if(tofua[i] > tofubgprm[i] + 15*sigma_tofubgprm[i]) TOFUMIP[i]->Fill(tofua[i]);
-         if(tofda[i] > tofdbgprm[i] + 15*sigma_tofdbgprm[i]) TOFDMIP[i]->Fill(tofda[i]);
+         if(tofua[i] > tofubgprm[i] + 30*sigma_tofubgprm[i]) TOFUMIP[i]->Fill(tofua[i]);
+         if(tofda[i] > tofdbgprm[i] + 30*sigma_tofdbgprm[i]) TOFDMIP[i]->Fill(tofda[i]);
        }
        u_mipflg = 0;
        d_mipflg = 0;
@@ -426,7 +426,7 @@ void tof_ht_adc( int month, int runnum){
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                         //
-//    TOF ADC MIP                                                                           //
+//    TOF ADC MIP                                                                          //
 //                                                                                         //
 /////////////////////////////////////////////////////////////////////////////////////////////
    nbytes = 0;
@@ -460,7 +460,7 @@ void tof_ht_adc( int month, int runnum){
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                         //
-//    TOF-HT ADC                                                                              //
+//    TOF-HT ADC                                                                           //
 //                                                                                         //
 /////////////////////////////////////////////////////////////////////////////////////////////
    nbytes = 0;
