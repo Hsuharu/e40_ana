@@ -35,15 +35,24 @@ void scaler( int month, int runnum){
    if(!fin){
      std::cout << "File Open error\n" << std::endl;
      exit(1);
-   }else{
-     std::cout << "succusess\n" << std::endl;
    }
      
 //file read 
    std::string line;
+   std::vector<double> spillnum; 
+   std::vector<double> bh2sumnum; 
 
-   while(fin&&getline(fin,line)){
-     std::cout << line << std::endl;
+   while(getline(fin,line)){
+     string name;
+     int num=-1;
+     std::istringstream input_line( line );
+     std::vector<double> inner;
+     if( input_line >> name >> num ){
+       inner.push_back(namu);
+       inner.push_back(num);
+       std::cout << name << "\t" << num << std::endl;
+       spill.push_back(inner);
+     }
    }
 
 }

@@ -388,8 +388,8 @@ void tof_ht_adc( int month, int runnum){
          if(tofdt[i][j] > (tofdtprm[i] - gr1) && tofdt[i][j] < (tofdtprm[i] + gr1) ) d_mipflg = 1;
        }
        if(u_mipflg && d_mipflg){
-         if(tofua[i] > tofubgprm[i] + 2*sigma_tofubgprm[i]) TOFUMIP[i]->Fill(tofua[i]);
-         if(tofda[i] > tofdbgprm[i] + 2*sigma_tofdbgprm[i]) TOFDMIP[i]->Fill(tofda[i]);
+         if(tofua[i] > tofubgprm[i] + 5*sigma_tofubgprm[i]) TOFUMIP[i]->Fill(tofua[i]);
+         if(tofda[i] > tofdbgprm[i] + 5*sigma_tofdbgprm[i]) TOFDMIP[i]->Fill(tofda[i]);
        }
        u_mipflg = 0;
        d_mipflg = 0;
@@ -515,7 +515,7 @@ void tof_ht_adc( int month, int runnum){
         httofmip[TOF17  ] = ((tofua[16]-tofubgprm[16])/(tofumipprm[16]-tofubgprm[16])
                             +(tofda[16]-tofdbgprm[16])/(tofdmipprm[16]-tofdbgprm[16]))*0.5;
         for(int i=0; i<NumOfSegHtTOF; i++){
-          if(tofhtt[i]>0){
+          if(tofhtt[i][0]>0){
             HtTOFMIP[i]->Fill(httofmip[i]);
           }
         }
