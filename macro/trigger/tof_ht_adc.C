@@ -205,7 +205,7 @@ void tof_ht_adc( int month, int runnum){
    TH1D *HtTOFMIP[NumOfSegHtTOF]; 
       for (int i=0; i<NumOfSegHtTOF;i++) {
         HtTOFT[i] = new TH1D(Form("HtTOF_%dT",i+1),Form("HtTOF_%dT",i+1),4000,0,4000);
-        HtTOFA[i] = new TH1D(Form("HtTOF_%dA",i+1),Form("HtTOF_%dA",i+1),4000,0,4000);
+        HtTOFA[i] = new TH1D(Form("TOF-HT %s [ADC-Pede]",STOF_HT[i]),Form("TOF-HT %s [ADC-Pede]",STOF_HT[i]),4000,0,4000);
         HtTOFT0[i] = new TH1D(Form("HtTOFT0_%dT",i+1),Form("HtTOFT0_%dT",i+1),4000,-2000,2000);
         HtTOFT0ns[i] = new TH1D(Form("TOF-HT %s Time [ns]",STOF_HT[i]),Form("TOF-HT %s Time [ns]",STOF_HT[i]),4000,-1666,1666);
         HtTOFMIP[i] = new TH1D(Form("TOF-HT %s [mip]",STOF_HT[i]),Form("TOF-HT %s [mip]",STOF_HT[i]),4000,0,4);
@@ -389,8 +389,8 @@ void tof_ht_adc( int month, int runnum){
          if(tofdt[i][j] > (tofdtprm[i] - gr1) && tofdt[i][j] < (tofdtprm[i] + gr1) ) d_mipflg = 1;
        }
        if(u_mipflg && d_mipflg){
-         if(tofua[i] > tofubgprm[i] + 6*sigma_tofubgprm[i]) TOFUMIP[i]->Fill(tofua[i]);
-         if(tofda[i] > tofdbgprm[i] + 6*sigma_tofdbgprm[i]) TOFDMIP[i]->Fill(tofda[i]);
+         if(tofua[i] > tofubgprm[i] + 15*sigma_tofubgprm[i]) TOFUMIP[i]->Fill(tofua[i]);
+         if(tofda[i] > tofdbgprm[i] + 15*sigma_tofdbgprm[i]) TOFDMIP[i]->Fill(tofda[i]);
        }
        u_mipflg = 0;
        d_mipflg = 0;
