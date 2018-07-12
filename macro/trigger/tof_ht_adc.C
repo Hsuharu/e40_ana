@@ -247,7 +247,7 @@ void tof_ht_adc( int month, int runnum){
    int T0ns_range_min = -83;
    int T0ns_range_max =  83;
 
-   double l_mip = 50; 
+   double l_mip = 100; 
    double l_mip0 = 50;
    double l_bg = 4; 
    double l_bg1 = 3; 
@@ -383,17 +383,19 @@ void tof_ht_adc( int month, int runnum){
      nbytes += tree->GetEntry(s);
      int u_mipflg = 0;
      int d_mipflg = 0;
-     for (int i=0; i<NumOfSegTOF;i++) {
-       for (int j=0; j<MaxDepth;j++) {
-         if(tofut[i][j] > (tofutprm[i] - gr1) && tofut[i][j] < (tofutprm[i] + gr1) ) u_mipflg = 1;
-         if(tofdt[i][j] > (tofdtprm[i] - gr1) && tofdt[i][j] < (tofdtprm[i] + gr1) ) d_mipflg = 1;
+     if(trigflag[kBeamPiPs]>0){
+       for (int i=0; i<NumOfSegTOF;i++) {
+         for (int j=0; j<MaxDepth;j++) {
+           if(tofut[i][j] > (tofutprm[i] - gr1) && tofut[i][j] < (tofutprm[i] + gr1) ) u_mipflg = 1;
+           if(tofdt[i][j] > (tofdtprm[i] - gr1) && tofdt[i][j] < (tofdtprm[i] + gr1) ) d_mipflg = 1;
+         }
+         if(u_mipflg && d_mipflg){
+           if(tofua[i] > tofubgprm[i] + 100*sigma_tofubgprm[i]) TOFUMIP[i]->Fill(tofua[i]);
+           if(tofda[i] > tofdbgprm[i] + 100*sigma_tofdbgprm[i]) TOFDMIP[i]->Fill(tofda[i]);
+         }
+         u_mipflg = 0;
+         d_mipflg = 0;
        }
-       if(u_mipflg && d_mipflg){
-         if(tofua[i] > tofubgprm[i] + 50*sigma_tofubgprm[i]) TOFUMIP[i]->Fill(tofua[i]);
-         if(tofda[i] > tofdbgprm[i] + 50*sigma_tofdbgprm[i]) TOFDMIP[i]->Fill(tofda[i]);
-       }
-       u_mipflg = 0;
-       d_mipflg = 0;
      }
    }
 

@@ -134,10 +134,10 @@ void SCHBySegScaler( int month, int runnum){
    double schscr[NumOfSegSCH]; 
 
 //Fit range
-   double f_l  = 50; 
+   double f_l  = 5; 
 
 //Draw range
-   double l = 100; 
+   double l = 50; 
 
 //Draw range
    int T0_range_min = -3000;
