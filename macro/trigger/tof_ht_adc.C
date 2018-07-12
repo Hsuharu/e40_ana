@@ -216,6 +216,7 @@ void tof_ht_adc( int month, int runnum){
    double fitprm[3];
    double sactprm[NumOfSegSAC]; 
    double httoftprm[NumOfSegHtTOF]; 
+   double httofadc[NumOfSegHtTOF]; 
    double httofmip[NumOfSegHtTOF]; 
    double tofutprm[NumOfSegTOF]; 
    double tofdtprm[NumOfSegTOF]; 
@@ -388,8 +389,8 @@ void tof_ht_adc( int month, int runnum){
          if(tofdt[i][j] > (tofdtprm[i] - gr1) && tofdt[i][j] < (tofdtprm[i] + gr1) ) d_mipflg = 1;
        }
        if(u_mipflg && d_mipflg){
-         if(tofua[i] > tofubgprm[i] + 5*sigma_tofubgprm[i]) TOFUMIP[i]->Fill(tofua[i]);
-         if(tofda[i] > tofdbgprm[i] + 5*sigma_tofdbgprm[i]) TOFDMIP[i]->Fill(tofda[i]);
+         if(tofua[i] > tofubgprm[i] + 6*sigma_tofubgprm[i]) TOFUMIP[i]->Fill(tofua[i]);
+         if(tofda[i] > tofdbgprm[i] + 6*sigma_tofdbgprm[i]) TOFDMIP[i]->Fill(tofda[i]);
        }
        u_mipflg = 0;
        d_mipflg = 0;
@@ -466,6 +467,7 @@ void tof_ht_adc( int month, int runnum){
    for (Long64_t s=0; s<nentries;s++) {
       nbytes += tree->GetEntry(s);
       if(trigflag[kBeamTofPs]>0){
+//  MIP calib
         httofmip[TOF1_20] = ((tofua[0]-tofubgprm[0])/(tofumipprm[0]-tofubgprm[0])
                             +(tofda[0]-tofdbgprm[0])/(tofdmipprm[0]-tofdbgprm[0]))*0.5
                             +((tofua[19]-tofubgprm[19])/(tofumipprm[19]-tofubgprm[19])
@@ -514,13 +516,46 @@ void tof_ht_adc( int month, int runnum){
                             + (tofda[20]-tofdbgprm[20])/(tofdmipprm[20]-tofdbgprm[20]))*0.5;
         httofmip[TOF17  ] = ((tofua[16]-tofubgprm[16])/(tofumipprm[16]-tofubgprm[16])
                             +(tofda[16]-tofdbgprm[16])/(tofdmipprm[16]-tofdbgprm[16]))*0.5;
+
+// ADC                              
+        httofadc[TOF1_20] = ((tofua[0]-tofubgprm[0]) + (tofda[0]-tofdbgprm[0]))*0.5
+                          + ((tofua[19]-tofubgprm[19]) + (tofda[19]-tofdbgprm[19]))*0.5;
+        httofadc[TOF5_22] = ((tofua[4]-tofubgprm[4]) + (tofda[4]-tofdbgprm[4]))*0.5
+                          + ((tofua[21]-tofubgprm[21]) + (tofda[21]-tofdbgprm[21]))*0.5;
+        httofadc[TOF18  ] = ((tofua[17]-tofubgprm[17]) + (tofda[17]-tofdbgprm[17]))*0.5;
+        httofadc[TOF4_10] = ((tofua[3]-tofubgprm[3]) + (tofda[3]-tofdbgprm[3]))*0.5
+                          + ((tofua[9]-tofubgprm[9]) + (tofda[9]-tofdbgprm[9]))*0.5;
+        httofadc[TOF2_11] = ((tofua[1]-tofubgprm[1]) + (tofda[1]-tofdbgprm[1]))*0.5
+                          + ((tofua[10]-tofubgprm[10]) + (tofda[10]-tofdbgprm[10]))*0.5;
+        httofadc[TOF8_24] = ((tofua[7]-tofubgprm[7]) + (tofda[7]-tofdbgprm[7]))*0.5
+                          + ((tofua[23]-tofubgprm[23]) + (tofda[23]-tofdbgprm[23]))*0.5;
+        httofadc[TOF6_9 ] = ((tofua[5]-tofubgprm[5]) + (tofda[5]-tofdbgprm[5]))*0.5
+                          + ((tofua[8]-tofubgprm[8]) + (tofda[8]-tofdbgprm[8]))*0.5;
+        httofadc[TOF7_23] = ((tofua[6]-tofubgprm[6]) + (tofda[6]-tofdbgprm[6]))*0.5
+                          + ((tofua[22]-tofubgprm[22]) + (tofda[22]-tofdbgprm[22]))*0.5;
+        httofadc[TOF12  ] = ((tofua[11]-tofubgprm[11]) + (tofda[11]-tofdbgprm[11]))*0.5;
+        httofadc[TOF19  ] = ((tofua[18]-tofubgprm[18]) + (tofda[18]-tofdbgprm[18]))*0.5;
+        httofadc[TOF13  ] = ((tofua[12]-tofubgprm[12]) + (tofda[12]-tofdbgprm[12]))*0.5;
+        httofadc[TOF14  ] = ((tofua[13]-tofubgprm[13]) + (tofda[13]-tofdbgprm[13]))*0.5;
+        httofadc[TOF15  ] = ((tofua[14]-tofubgprm[14]) + (tofda[14]-tofdbgprm[14]))*0.5;
+        httofadc[TOF16  ] = ((tofua[15]-tofubgprm[15]) + (tofda[15]-tofdbgprm[15]))*0.5;
+        httofadc[TOF3_21] = ((tofua[2]-tofubgprm[2]) + (tofda[2]-tofdbgprm[2]))*0.5
+                          + ((tofua[20]-tofubgprm[20]) + (tofda[20]-tofdbgprm[20]))*0.5;
+        httofadc[TOF17  ] = ((tofua[16]-tofubgprm[16]) + (tofda[16]-tofdbgprm[16]))*0.5;
+
         for(int i=0; i<NumOfSegHtTOF; i++){
           if(tofhtt[i][0]>0){
+            HtTOFA[i]->Fill(httofadc[i]);
             HtTOFMIP[i]->Fill(httofmip[i]);
           }
         }
       }
     }
+
+   for(int i=0; i<NumOfSegHtTOF; i++){
+     HtTOFA[i]->Draw(); 
+     c1 ->Print(pdf); 
+   }
 
    
    for(int i=0; i<NumOfSegHtTOF; i++){

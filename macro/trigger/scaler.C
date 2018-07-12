@@ -74,6 +74,7 @@ void scaler(){
   std::vector<double> SpillCounts;
   std::vector<double> BH2SUMCounts;
   std::vector<double> BH2SUMMparSpillCounts;
+  std::vector<double> SCHCounts;
 
   std::vector<int> runnumber{5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
 
@@ -86,6 +87,7 @@ void scaler(){
     SpillCounts.push_back(SCounts);
     BH2SUMCounts.push_back(BCounts);
     BH2SUMMparSpillCounts.push_back(BMpSCounts);
+    SCHCounts.push_back(param("SCH"));
   }
 
   std::ofstream fout1;
@@ -104,6 +106,12 @@ void scaler(){
   fout3.open(Form("%s/dat/trigger/BH2_SUM_MparSpillByRate.txt", anadir.Data()));
   for(int i=0; i<BH2SUMMparSpillCounts.size(); i++){
     fout3 << Form("run%05d",runnumber[i]) << "\t" << BH2SUMMparSpillCounts[i] << std::endl;
+  }
+  
+  std::ofstream fout4;
+  fout4.open(Form("%s/dat/trigger/SCHByRate.txt", anadir.Data()));
+  for(int i=0; i<SCHCounts.size(); i++){
+    fout4 << Form("run%05d",runnumber[i]) << "\t" << SCHCounts[i] << std::endl;
   }
   
 }
