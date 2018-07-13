@@ -984,3 +984,6 @@
 #D UnpackerManager::show_event_number()
    (daq root data) 650000 (0x9eb10)
    (counter)       650000 (0x9eb10)
+#D UnpackerManager::show_event_number()
+   (daq root data) 660000 (0xa1220)
+   (counter)       660000 (0xa1220)

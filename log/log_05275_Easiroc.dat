@@ -942,3 +942,6 @@
 #D UnpackerManager::show_event_number()
    (daq root data) 510000 (0x7c830)
    (counter)       510000 (0x7c830)
+#D UnpackerManager::show_event_number()
+   (daq root data) 520000 (0x7ef40)
+   (counter)       520000 (0x7ef40)
