@@ -792,3 +792,77 @@
 #D UnpackerManager::show_event_number()
    (daq root data) 10000 (0x2710)
    (counter)       10000 (0x2710)
+#D UnpackerManager::show_event_number()
+   (daq root data) 20000 (0x4e20)
+   (counter)       20000 (0x4e20)
+#D UnpackerManager::show_event_number()
+   (daq root data) 30000 (0x7530)
+   (counter)       30000 (0x7530)
+#D UnpackerManager::show_event_number()
+   (daq root data) 40000 (0x9c40)
+   (counter)       40000 (0x9c40)
+#D UnpackerManager::show_event_number()
+   (daq root data) 50000 (0xc350)
+   (counter)       50000 (0xc350)
+#D UnpackerManager::show_event_number()
+   (daq root data) 60000 (0xea60)
+   (counter)       60000 (0xea60)
+#D UnpackerManager::show_event_number()
+   (daq root data) 70000 (0x11170)
+   (counter)       70000 (0x11170)
+#D UnpackerManager::show_event_number()
+   (daq root data) 80000 (0x13880)
+   (counter)       80000 (0x13880)
+#D UnpackerManager::show_event_number()
+   (daq root data) 90000 (0x15f90)
+   (counter)       90000 (0x15f90)
+#D UnpackerManager::show_event_number()
+   (daq root data) 100000 (0x186a0)
+   (counter)       100000 (0x186a0)
+#D UnpackerManager::show_event_number()
+   (daq root data) 110000 (0x1adb0)
+   (counter)       110000 (0x1adb0)
+#D UnpackerManager::show_event_number()
+   (daq root data) 120000 (0x1d4c0)
+   (counter)       120000 (0x1d4c0)
+#D UnpackerManager::show_event_number()
+   (daq root data) 130000 (0x1fbd0)
+   (counter)       130000 (0x1fbd0)
+#D UnpackerManager::show_event_number()
+   (daq root data) 140000 (0x222e0)
+   (counter)       140000 (0x222e0)
+#D UnpackerManager::show_event_number()
+   (daq root data) 150000 (0x249f0)
+   (counter)       150000 (0x249f0)
+#D UnpackerManager::show_event_number()
+   (daq root data) 160000 (0x27100)
+   (counter)       160000 (0x27100)
+#D UnpackerManager::show_event_number()
+   (daq root data) 170000 (0x29810)
+   (counter)       170000 (0x29810)
+#D UnpackerManager::show_event_number()
+   (daq root data) 180000 (0x2bf20)
+   (counter)       180000 (0x2bf20)
+#D UnpackerManager::show_event_number()
+   (daq root data) 190000 (0x2e630)
+   (counter)       190000 (0x2e630)
+#D UnpackerManager::show_event_number()
+   (daq root data) 200000 (0x30d40)
+   (counter)       200000 (0x30d40)
+
+#E EventReader::read() no data
+#D EventReader::read()
+ close stream
+#D IStream /ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05118.dat closed
+
+#E null stream
+    n unpacked =  201974 (0x314f6)
+#D GUnpacker::operator++()   exit loop
+    n unpacked =  201974 (0x314f6)
+#DTimer [::main()] End of Analyzer 
+   Process Start   : Fri Jul 13 08:26:29 2018
+   Process Stop    : Fri Jul 13 08:45:18 2018
+   Processing Time : 0:18:49
+1101.16user 6.70system 18:50.98elapsed 97%CPU (0avgtext+0avgdata 3110476maxresident)k
+0inputs+8outputs (0major+655876minor)pagefaults 0swaps
+

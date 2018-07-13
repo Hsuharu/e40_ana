@@ -191,8 +191,8 @@ void tof_ht_adc( int month, int runnum){
         TOFDADC[i] = new TH1D(Form("TOFDADC_%d",i+1),Form("TOFDADC_%d",i+1),4000,0,4000);
         TOFUMIP[i] = new TH1D(Form("TOFUMIP_%d",i+1),Form("TOFUMIP_%d",i+1),4000,0,4000);
         TOFDMIP[i] = new TH1D(Form("TOFDMIP_%d",i+1),Form("TOFDMIP_%d",i+1),4000,0,4000);
-        TOFUMIPSC[i] = new TH1D(Form("TOFUMIPSC_%d",i+1),Form("TOFUMIPSC_%d",i+1),4000,0,4);
-        TOFDMIPSC[i] = new TH1D(Form("TOFDMIPSC_%d",i+1),Form("TOFDMIPSC_%d",i+1),4000,0,4);
+        TOFUMIPSC[i] = new TH1D(Form("TOFUMIPSC_%d",i+1),Form("TOFUMIPSC_%d",i+1),3600,0,4);
+        TOFDMIPSC[i] = new TH1D(Form("TOFDMIPSC_%d",i+1),Form("TOFDMIPSC_%d",i+1),3600,0,4);
         TOFUPEDE[i] = new TH1D(Form("TOFUPEDE_%d",i+1),Form("TOFUPEDE_%d",i+1),4000,0,4000);
         TOFDPEDE[i] = new TH1D(Form("TOFDPEDE_%d",i+1),Form("TOFDPEDE_%d",i+1),4000,0,4000);
       }
@@ -383,19 +383,17 @@ void tof_ht_adc( int month, int runnum){
      nbytes += tree->GetEntry(s);
      int u_mipflg = 0;
      int d_mipflg = 0;
-     if(trigflag[kBeamPiPs]>0){
-       for (int i=0; i<NumOfSegTOF;i++) {
-         for (int j=0; j<MaxDepth;j++) {
-           if(tofut[i][j] > (tofutprm[i] - gr1) && tofut[i][j] < (tofutprm[i] + gr1) ) u_mipflg = 1;
-           if(tofdt[i][j] > (tofdtprm[i] - gr1) && tofdt[i][j] < (tofdtprm[i] + gr1) ) d_mipflg = 1;
-         }
-         if(u_mipflg && d_mipflg){
-           if(tofua[i] > tofubgprm[i] + 100*sigma_tofubgprm[i]) TOFUMIP[i]->Fill(tofua[i]);
-           if(tofda[i] > tofdbgprm[i] + 100*sigma_tofdbgprm[i]) TOFDMIP[i]->Fill(tofda[i]);
-         }
-         u_mipflg = 0;
-         d_mipflg = 0;
+     for (int i=0; i<NumOfSegTOF;i++) {
+       for (int j=0; j<MaxDepth;j++) {
+         if(tofut[i][j] > (tofutprm[i] - gr1) && tofut[i][j] < (tofutprm[i] + gr1) ) u_mipflg = 1;
+         if(tofdt[i][j] > (tofdtprm[i] - gr1) && tofdt[i][j] < (tofdtprm[i] + gr1) ) d_mipflg = 1;
        }
+       if(u_mipflg && d_mipflg){
+         if(tofua[i] > tofubgprm[i] + 100*sigma_tofubgprm[i]) TOFUMIP[i]->Fill(tofua[i]);
+         if(tofda[i] > tofdbgprm[i] + 100*sigma_tofdbgprm[i]) TOFDMIP[i]->Fill(tofda[i]);
+       }
+       u_mipflg = 0;
+       d_mipflg = 0;
      }
    }
 
