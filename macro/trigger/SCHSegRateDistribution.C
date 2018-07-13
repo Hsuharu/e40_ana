@@ -153,7 +153,8 @@ void SCHSegRateDistribution(){
     graph[i]->SetLineStyle(2);
     graph[i]->SetMarkerColor(2);
     graph[i]->SetLineColor(2);
-    graph[i]->Draw("alp");
+    graph[i]->GetXaxis()->SetRangeUser(0,24);
+    graph[i]->Draw("ap");
     c1->Print(pdf); 
   }
 
