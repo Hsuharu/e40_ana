@@ -221,7 +221,9 @@ void SCHBySegScaler_get( int month, int runnum){
 
 //Integral range
    int range1 = 600; 
-   int range2 = 900; 
+   int range2 = 1000; 
+   int range3 = 0; 
+   int range4 = 300; 
 
 //Draw range
    int T0_range_min = -3000;
@@ -259,7 +261,7 @@ void SCHBySegScaler_get( int month, int runnum){
 
 // SCH Integral Counts range1 ~ range2 
    for (int i=0; i<NumOfSegSCH;i++){
-     schscr[i] = SCHTDC[i]->Integral(range1,range2);
+     schscr[i] = SCHTDC[i]->Integral(range3,range4) + SCHTDC[i]->Integral(range1,range2);
    }
 
    c1->cd(); 
@@ -297,7 +299,7 @@ void SCHBySegScaler_get( int month, int runnum){
 
 void SCHBySegScaler( int month){
   for(int i=0; i<12; i++){
-    std::cout << runnumber[i] << std::endl;
+//    std::cout << runnumber[i] << std::endl;
     SCHBySegScaler_get(6, runnumber[i]);
   }
 }
