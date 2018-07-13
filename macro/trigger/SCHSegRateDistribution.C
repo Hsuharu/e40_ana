@@ -148,7 +148,7 @@ void SCHSegRateDistribution(){
 //  c1->GetYaxis()->SetTitle(Form("Segment%d [Counts/Spill]",i));
 
   for(int i=0 ; i<NumOfSegSCH; i++){
-    graph[i]->SetTitle(Form("SCH Segment%d Counts/spill by Rate;[ M/Spill ];Segment%d [Counts/Spill]",i+1,i+1));
+    graph[i]->SetTitle(Form("SCH Segment%d Counts/spill ;BH2-SUM [ M/Spill ];SCH Segment%d [Counts/Spill]",i+1,i+1));
     graph[i]->SetMarkerStyle(20);
     graph[i]->SetLineStyle(2);
     graph[i]->SetMarkerColor(2);

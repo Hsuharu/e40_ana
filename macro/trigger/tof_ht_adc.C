@@ -547,10 +547,15 @@ void tof_ht_adc( int month, int runnum){
           if(tofhtt[i][0]>0){
             HtTOFA[i]->Fill(httofadc[i]);
             HtTOFMIP[i]->Fill(httofmip[i]);
+            HtTOFHitPat->Fill(tofhthitpat[i]);
           }
         }
       }
     }
+
+   c1->cd(); 
+   HtTOFHitPat->Draw(); 
+   c1 ->Print(pdf); 
 
    for(int i=0; i<NumOfSegHtTOF; i++){
      HtTOFA[i]->Draw(); 

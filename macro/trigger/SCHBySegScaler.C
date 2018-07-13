@@ -252,7 +252,7 @@ void SCHBySegScaler_get( int month, int runnum){
   for(int i=0; i<NumOfSegSCH; i++){
     SCHTDC[i] = (TH1F*)f->Get(Form("h210%02d",i+1)) ; 
   }  
-  SCHHitPat = (TH1F*)f->Get("h20001") ;
+  SCHHitPat = (TH1F*)f->Get("h20002") ;
 
    
    TString pdf = Form("%s/pdf/trigger/SCHBySegScaler_%05d.pdf", anadir.Data(),runnum);
