@@ -106,15 +106,7 @@ void SCHBySegScaler( int month, int runnum){
 // tree->SetBranchStatus("*",0);  // disable all branches
 // TTreePlayer->SetBranchStatus("branchname",1);  // activate branchname
 
-   int seg1 = 4; //1 origine
-   int seg2 = 4; //1 origine
-   int range1 = 0; //  
-   int range2 = 3; //  range1 < nhit < range2 
-   int xbin = 60;
-
    int MaxDepth = 16;
-
-   int NumOfAllHist = 100;
 
 //   TH1D *hist[NumOfAllHist]; 
 //   for(int i = 0; i<NumOfAllHist; i++){
@@ -122,7 +114,9 @@ void SCHBySegScaler( int month, int runnum){
 //   }
 
    TH1D *SCHCT[NumOfSegSCH]; 
+   TH1D *SCHTDC[NumOfSegSCH]; 
       for (int i=0; i<NumOfSegSCH;i++) {
+        SCHTDC[i] = new TH1D(Form("SCH_%dTDC",i+1),Form("SCH_%dTDC",i+1),1000,0,1000);
         SCHCT[i] = new TH1D(Form("SCH_%dCT",i+1),Form("SCH_%dCT",i+1),2000,-500,500);
       }
    TH1D *SCHHitPat = new TH1D("SCHHitPat","SCHHitPat",NumOfSegSCH+1,0,NumOfSegSCH+1);
@@ -138,6 +132,10 @@ void SCHBySegScaler( int month, int runnum){
 
 //Draw range
    double l = 50; 
+
+//Integral range
+   int range1 = 600; 
+   int range2 = 700; 
 
 //Draw range
    int T0_range_min = -3000;
@@ -155,7 +153,10 @@ void SCHBySegScaler( int month, int runnum){
    for (Long64_t s=0; s<nentries;s++) {
       nbytes += ea0c->GetEntry(s);
       for (int i=0; i<NumOfSegSCH;i++) {
-            SCHCT[i]->Fill(sch_ctime[i]);
+        for(int j=0; j<MaxDepth; j++){
+          SCHTDC[i]->Fill(sch_tdc[i][j]);
+        }
+//        SCHCT[i]->Fill(sch_ctime[i]);
       }
    }
 
@@ -164,28 +165,33 @@ void SCHBySegScaler( int month, int runnum){
    TCanvas *c1 = new TCanvas("c1","c1",800,700); 
    c1->Print(pdf+"["); 
 
-// SCH TDC MEAN 
-   for (int i=0; i<NumOfSegSCH;i++) {
-       schctprm[i] = SCHCT[i]->GetMaximumBin();   
-
-       schctprm[i] = SCHCT[i]->GetXaxis()->GetBinCenter(schctprm[i]);  
-
-       SCHCT[i]->Fit("fit","i","", schctprm[i]-f_l, schctprm[i]+f_l); 
-       schctprm[i] = fit->GetParameter(1);  
-       SCHCT[i]->GetXaxis()->SetRangeUser(schctprm[i]-1*(l), schctprm[i]+2*(l)); 
-
+// SCH Integral Counts range1 ~ range2 
+   for (int i=0; i<NumOfSegSCH;i++){
+     schscr[i] = SCHTDC[i]->Integral(range1,range2);
    }
 
-   c1->cd(); 
-   SCHHitPat->Draw(); 
-   c1 ->Print(pdf); 
+//// SCH CTime MEAN 
+//   for (int i=0; i<NumOfSegSCH;i++) {
+//       schctprm[i] = SCHCT[i]->GetMaximumBin();   
+//
+//       schctprm[i] = SCHCT[i]->GetXaxis()->GetBinCenter(schctprm[i]);  
+//
+//       SCHCT[i]->Fit("fit","i","", schctprm[i]-f_l, schctprm[i]+f_l); 
+//       schctprm[i] = fit->GetParameter(1);  
+//       SCHCT[i]->GetXaxis()->SetRangeUser(schctprm[i]-1*(l), schctprm[i]+2*(l)); 
+//
+//   }
+
+//   c1->cd(); 
+//   SCHHitPat->Draw(); 
+//   c1 ->Print(pdf); 
 
    c1->cd(); 
    c1->SetGridx();
    c1->SetGridy();
 
    for(int i=0; i<NumOfSegSCH; i++){
-     SCHCT[i]->Draw(); 
+     SCHTDC[i]->Draw(); 
      c1 ->Print(pdf); 
    }
 
@@ -222,20 +228,17 @@ void SCHBySegScaler( int month, int runnum){
 //                             
   c1->Print(pdf+"]");        
    
-///////////////////////////////////////////////////////////////////////////////////////////////
-////                                                                                         //
-////    BH1 & BH2 dat file maker                                                             //
-////                                                                                         //
-///////////////////////////////////////////////////////////////////////////////////////////////
-//  TString fout1 = (Form( "%s/hp_dat/HodoParamMaker1_BH1_TDC_%05d.dat", anadir.Data() ,runnum));  
-//  TString fout2 = (Form( "%s/hp_dat/HodoParamMaker1_BH1_ADC_%05d.dat", anadir.Data() ,runnum));  
-//   
-//  std::ofstream fout_1(fout1.Data()); 
-//  std::ofstream fout_2(fout2.Data()); 
-//  for(int i=0; i<NumOfSegBH1; i++){
-//     fout_1 << bh1utprm[i]  <<  "\t"  << bh1dtprm[i] << endl;
-//     fout_2 << bh1ubgprm[i]  <<  "\t" << bh1umipprm[i]  <<  "\t" << bh1dbgprm[i]  <<  "\t" << bh1dmipprm[i] << endl;
-//  }     
+/////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                         //
+//    SCH Counts dat file maker                                                             //
+//                                                                                         //
+/////////////////////////////////////////////////////////////////////////////////////////////
+  TString fout1 = (Form( "%s/dat/SCHBySegScaler_%05d.dat", anadir.Data() ,runnum));  
+   
+  std::ofstream fout_1(fout1.Data()); 
+  for(int i=0; i<NumOfSegSCH; i++){
+     fout_1 << "Seg1" <<  "\t"  << schscr[i] << endl;
+  }     
                              
 }                            
                              

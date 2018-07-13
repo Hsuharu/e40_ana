@@ -987,3 +987,23 @@
 #D UnpackerManager::show_event_number()
    (daq root data) 660000 (0xa1220)
    (counter)       660000 (0xa1220)
+#D UnpackerManager::show_event_number()
+   (daq root data) 670000 (0xa3930)
+   (counter)       670000 (0xa3930)
+
+#E EventReader::read() no data
+#D EventReader::read()
+ close stream
+#D IStream /ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05080.dat closed
+
+#E null stream
+    n unpacked =  676676 (0xa5344)
+#D GUnpacker::operator++()   exit loop
+    n unpacked =  676676 (0xa5344)
+#DTimer [::main()] End of Analyzer 
+   Process Start   : Fri Jul 13 08:26:29 2018
+   Process Stop    : Fri Jul 13 09:21:51 2018
+   Processing Time : 0:55:22
+3274.12user 15.30system 55:23.08elapsed 98%CPU (0avgtext+0avgdata 3118456maxresident)k
+0inputs+0outputs (0major+669616minor)pagefaults 0swaps
+s
