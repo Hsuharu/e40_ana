@@ -114,15 +114,49 @@ void SCHSegRateDistribution(){
    fin1.close();
 
    for(int i=0; i<runnumber.size(); i++){
-     SCHSegRate_get(runnumber[i]);
-     for(int j=0; j<NumOfSegSCH; j++){
-       SCHSegCounts[j].push_back(param(Form("Seg%d",j+1)));
-     }
+    BH2SUMCounts[i] = BH2SUMCounts[i]/SpillCounts[i];
    }
 
    for(int i=0; i<runnumber.size(); i++){
-     std::cout << SCHSegCounts[0][i] << std::endl;
+     SCHSegRate_get(runnumber[i]);
+     for(int j=0; j<NumOfSegSCH; j++){
+       SCHSegCounts[j].push_back(param(Form("Seg%d",j+1))/SpillCounts[i]);
+     }
    }
 
+//   for(int i=0; i<runnumber.size(); i++){
+//     std::cout << SCHSegCounts[0][i] << std::endl;
+//   }
+
+// TGraph---------------------------------------------------------------------
+  TGraph *graph[NumOfSegSCH];
+  for(int i=0; i<NumOfSegSCH; i++){ 
+    graph[i] = new TGraph(runnumber.size(),&BH2SUMCounts[0],&SCHSegCounts[i][0]);
+  }
+
+// TCanvas--------------------------------------------------------------------
+  TString pdf = Form("%s/pdf/trigger/SCHSegRateDistribution.pdf", anadir.Data());
+  TCanvas *c1 = new TCanvas("c1","c1",800,700);
+  c1->Print(pdf+"["); 
+
+// Frame ---------------------------------------------------------------------
+//  TH1 *frame1=gPad->DrawFrame(0,0.95,22,1.01,"SCH Counts/spill by Rate");      
+//  gPad->SetGrid();
+//  c1->SetGrid();
+//  c1->GetXaxis()->SetTitle("[ M/Spill ]");
+//  c1->GetYaxis()->SetTitleOffset(1.2);
+//  c1->GetYaxis()->SetTitle(Form("Segment%d [Counts/Spill]",i));
+
+  for(int i=0 ; i<NumOfSegSCH; i++){
+    graph[i]->SetTitle(Form("SCH Segment%d Counts/spill by Rate;[ M/Spill ];[Counts/Spill]",i+1));
+    graph[i]->SetMarkerStyle(21);
+    graph[i]->SetLineStyle(2);
+    graph[i]->SetMarkerColor(4);
+    graph[i]->SetLineColor(4);
+    graph[i]->Draw("ap");
+    c1->Print(pdf); 
+  }
+
+  c1->Print(pdf+"]");        
   
 }
