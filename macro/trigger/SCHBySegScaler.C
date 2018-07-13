@@ -18,7 +18,8 @@
  };
 
  double schscr[NumOfSegSCH]; 
- std::vector<int> runnumber{5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
+// std::vector<int> runnumber{5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
+ int runnumber[] = {5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
 
 void SCHBySegScaler_get( int month, int runnum){
 ////////////////////////////////////////////////////////////
@@ -199,11 +200,6 @@ void SCHBySegScaler_get( int month, int runnum){
 
    int MaxDepth = 16;
 
-//   TH1D *hist[NumOfAllHist]; 
-//   for(int i = 0; i<NumOfAllHist; i++){
-//     hist[i] = new TH1D(Form("hist%d",i+1),Form("hist%d",i+1), , ,,  );
-//   }
-
    TH1F *SCHCT[NumOfSegSCH]; 
    TH1F *SCHTDC[NumOfSegSCH]; 
       for (int i=0; i<NumOfSegSCH;i++) {
@@ -280,36 +276,6 @@ void SCHBySegScaler_get( int month, int runnum){
    }
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////
-////                                                                                         //
-////    BH1 & BH2 TDC's peak change to 0 code                                                //
-////                                                                                         //
-///////////////////////////////////////////////////////////////////////////////////////////////
-//   nbytes = 0;
-//   for (Long64_t s=0; s<nentries;s++) {
-//      nbytes += ea0c->GetEntry(s);
-//      for (int i=0; i<NumOfSegBH1;i++) {
-//        if(bh1ut[i]>0 && bh1dt[i]>0 && bh1nhits < range2 && bh1nhits > range1 && bh2nhits == 1){
-//          for(int j=0; j<MaxDepth; j++){
-//            BH1UT0[i]->Fill(bh1ut[i][j]-bh1utprm[i]);
-//            BH1DT0[i]->Fill(bh1dt[i][j]-bh1dtprm[i]);
-//          }
-//        }
-//      }
-//   }
-//
-//
-//   for(int i=0; i<NumOfSegBH1; i++){
-//     BH1UT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
-//     BH1UT0[i]->Draw(); 
-//     c1 ->Print(pdf); 
-//   }
-//   for(int i=0; i<NumOfSegBH1; i++){
-//     BH1DT0[i]->GetXaxis()->SetRangeUser(T0_range_min,T0_range_max);  
-//     BH1DT0[i]->Draw(); 
-//     c1 ->Print(pdf); 
-//   }
-//                             
   c1->Print(pdf+"]");        
    
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -323,11 +289,15 @@ void SCHBySegScaler_get( int month, int runnum){
   for(int i=0; i<NumOfSegSCH; i++){
      fout_1 << Form("Seg%d",i+1) <<  "\t"  << schscr[i] << endl;
   }     
+  c1->Clear();
+  f->Clear();
+  ea0c->Clear();
                              
 }                            
 
 void SCHBySegScaler( int month){
-  for(int i=0; i<runnumber.size(); i++){
+  for(int i=0; i<12; i++){
+    std::cout << runnumber[i] << std::endl;
     SCHBySegScaler_get(6, runnumber[i]);
   }
 }

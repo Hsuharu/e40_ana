@@ -205,12 +205,12 @@ void tof_ht_adc( int month, int runnum){
    TH1D *HtTOFMIP[NumOfSegHtTOF]; 
       for (int i=0; i<NumOfSegHtTOF;i++) {
         HtTOFT[i] = new TH1D(Form("HtTOF_%dT",i+1),Form("HtTOF_%dT",i+1),4000,0,4000);
-        HtTOFA[i] = new TH1D(Form("TOF-HT %s [ADC-Pede]",STOF_HT[i]),Form("TOF-HT %s [ADC-Pede]",STOF_HT[i]),4000,0,4000);
+        HtTOFA[i] = new TH1D(Form("TOF-HTADC-Pede %s [ch]",STOF_HT[i]),Form("TOF-HTADC-Pede %s [ch];[ch];[counts]",STOF_HT[i]),4000,0,4000);
         HtTOFT0[i] = new TH1D(Form("HtTOFT0_%dT",i+1),Form("HtTOFT0_%dT",i+1),4000,-2000,2000);
         HtTOFT0ns[i] = new TH1D(Form("TOF-HT %s Time [ns]",STOF_HT[i]),Form("TOF-HT %s Time [ns]",STOF_HT[i]),4000,-1666,1666);
-        HtTOFMIP[i] = new TH1D(Form("TOF-HT %s [mip]",STOF_HT[i]),Form("TOF-HT %s [mip]",STOF_HT[i]),4000,0,4);
+        HtTOFMIP[i] = new TH1D(Form("TOF-HT %s [mip]",STOF_HT[i]),Form("TOF-HT %s [mip];[mip];[counts]",STOF_HT[i]),4000,0,4);
       }
-   TH1D *HtTOFHitPat = new TH1D("HtTOFHitPat","HtTOFHitPat",NumOfSegHtTOF+1,0,NumOfSegHtTOF+1);
+   TH1D *HtTOFHitPat = new TH1D("HtTOFHitPat","HtTOFHitPat;[Segment];[counts]",NumOfSegHtTOF+1,0,NumOfSegHtTOF+1);
 
    Long64_t nentries = tree->GetEntries();
    double fitprm[3];
@@ -568,7 +568,7 @@ void tof_ht_adc( int month, int runnum){
    
 /////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                         //
-//    BH1 & BH2 dat file maker                                                             //
+//     TOF dat file maker                                                                  //
 //                                                                                         //
 /////////////////////////////////////////////////////////////////////////////////////////////
   TString fout2 = (Form( "%s/hp_dat/HodoParamMaker_TOF_ADC_%05d.dat", anadir.Data() ,runnum));  
