@@ -202,11 +202,11 @@ void SCHBySegScaler( int month, int runnum){
 //     hist[i] = new TH1D(Form("hist%d",i+1),Form("hist%d",i+1), , ,,  );
 //   }
 
-   TH1D *SCHCT[NumOfSegSCH]; 
-   TH1D *SCHTDC[NumOfSegSCH]; 
+   TH1F *SCHCT[NumOfSegSCH]; 
+   TH1F *SCHTDC[NumOfSegSCH]; 
       for (int i=0; i<NumOfSegSCH;i++) {
-        SCHTDC[i] = new TH1D(Form("SCH_%dTDC",i+1),Form("SCH_%dTDC",i+1),1200,0,1200);
-        SCHCT[i] = new TH1D(Form("SCH_%dCT",i+1),Form("SCH_%dCT",i+1),2000,-500,500);
+        SCHTDC[i] = new TH1F(Form("SCH_%dTDC",i+1),Form("SCH_%dTDC",i+1),1200,0,1200);
+        SCHCT[i]  = new TH1F(Form("SCH_%dCT",i+1),Form("SCH_%dCT",i+1),2000,-500,500);
       }
    TH1D *SCHHitPat = new TH1D("SCHHitPat","SCHHitPat",NumOfSegSCH+1,0,NumOfSegSCH+1);
 
