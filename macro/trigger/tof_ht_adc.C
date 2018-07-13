@@ -187,10 +187,10 @@ void tof_ht_adc( int month, int runnum){
       for (int i=0; i<NumOfSegTOF;i++) {
         TOFUT[i] = new TH1D(Form("TOFUT_%d",i+1),Form("TOFUT_%d",i+1),2000,200000,400000);
         TOFDT[i] = new TH1D(Form("TOFDT_%d",i+1),Form("TOFDT_%d",i+1),2000,200000,400000);
-        TOFUADC[i] = new TH1D(Form("TOFUADC_%d",i+1),Form("TOFUADC_%d",i+1),2000,0,4000);
-        TOFDADC[i] = new TH1D(Form("TOFDADC_%d",i+1),Form("TOFDADC_%d",i+1),2000,0,4000);
-        TOFUMIP[i] = new TH1D(Form("TOFUMIP_%d",i+1),Form("TOFUMIP_%d",i+1),2000,0,4000);
-        TOFDMIP[i] = new TH1D(Form("TOFDMIP_%d",i+1),Form("TOFDMIP_%d",i+1),2000,0,4000);
+        TOFUADC[i] = new TH1D(Form("TOFUADC_%d",i+1),Form("TOFUADC_%d",i+1),1000,0,4000);
+        TOFDADC[i] = new TH1D(Form("TOFDADC_%d",i+1),Form("TOFDADC_%d",i+1),1000,0,4000);
+        TOFUMIP[i] = new TH1D(Form("TOFUMIP_%d",i+1),Form("TOFUMIP_%d",i+1),1000,0,4000);
+        TOFDMIP[i] = new TH1D(Form("TOFDMIP_%d",i+1),Form("TOFDMIP_%d",i+1),1000,0,4000);
         TOFUMIPSC[i] = new TH1D(Form("TOFUMIPSC_%d",i+1),Form("TOFUMIPSC_%d",i+1),1000,0,4);
         TOFDMIPSC[i] = new TH1D(Form("TOFDMIPSC_%d",i+1),Form("TOFDMIPSC_%d",i+1),1000,0,4);
         TOFUPEDE[i] = new TH1D(Form("TOFUPEDE_%d",i+1),Form("TOFUPEDE_%d",i+1),4000,0,4000);
@@ -375,7 +375,7 @@ void tof_ht_adc( int month, int runnum){
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                         //
-//    TOF ADC MIP get                                                                       //
+//    TOF ADC MIP get                                                                      //
 //                                                                                         //
 /////////////////////////////////////////////////////////////////////////////////////////////
    nbytes = 0;
@@ -389,8 +389,8 @@ void tof_ht_adc( int month, int runnum){
          if(tofdt[i][j] > (tofdtprm[i] - gr1) && tofdt[i][j] < (tofdtprm[i] + gr1) ) d_mipflg = 1;
        }
        if(u_mipflg && d_mipflg){
-         if(tofua[i] > tofubgprm[i] + 150*sigma_tofubgprm[i]) TOFUMIP[i]->Fill(tofua[i]);
-         if(tofda[i] > tofdbgprm[i] + 150*sigma_tofdbgprm[i]) TOFDMIP[i]->Fill(tofda[i]);
+         if(tofua[i] > tofubgprm[i] + 200*sigma_tofubgprm[i]) TOFUMIP[i]->Fill(tofua[i]);
+         if(tofda[i] > tofdbgprm[i] + 200*sigma_tofdbgprm[i]) TOFDMIP[i]->Fill(tofda[i]);
        }
        u_mipflg = 0;
        d_mipflg = 0;
