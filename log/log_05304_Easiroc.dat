@@ -1247,8 +1247,9 @@
 #D GUnpacker::operator++()   exit loop
     n unpacked =  1490612 (0x16beb4)
 #DTimer [::main()] End of Analyzer 
-   Process Start   : Fri Jul 13 08:19:27 2018
-   Process Stop    : Fri Jul 13 10:23:13 2018
-   Processing Time : 2:03:46
-7346.76user 29.74system 2:03:46elapsed 99%CPU (0avgtext+0avgdata 3126220maxresident)k
-288inputs+0outputs (7major+762617minor)pagefaults 0swaps
+   Process Start   : Fri Jul 13 08:26:29 2018
+   Process Stop    : Fri Jul 13 10:29:26 2018
+   Processing Time : 2:02:57
+7293.77user 30.22system 2:02:58elapsed 99%CPU (0avgtext+0avgdata 3125924maxresident)k
+0inputs+0outputs (0major+778669minor)pagefaults 0swaps
+s

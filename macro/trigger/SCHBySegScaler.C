@@ -17,8 +17,10 @@
    "dec",
  };
 
+ double schscr[NumOfSegSCH]; 
+ std::vector<int> runnumber{5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
 
-void SCHBySegScaler( int month, int runnum){
+void SCHBySegScaler_get( int month, int runnum){
 ////////////////////////////////////////////////////////////
 //   This file has been automatically generated           //
 //     (Sun Feb 25 23:10:42 2018 by ROOT version6.10/08)  //
@@ -208,13 +210,12 @@ void SCHBySegScaler( int month, int runnum){
         SCHTDC[i] = new TH1F(Form("SCH_%dTDC",i+1),Form("SCH_%dTDC",i+1),1200,0,1200);
         SCHCT[i]  = new TH1F(Form("SCH_%dCT",i+1),Form("SCH_%dCT",i+1),2000,-500,500);
       }
-   TH1D *SCHHitPat = new TH1D("SCHHitPat","SCHHitPat",NumOfSegSCH+1,0,NumOfSegSCH+1);
+   TH1F *SCHHitPat = new TH1F("SCHHitPat","SCHHitPat",NumOfSegSCH+1,0,NumOfSegSCH+1);
 
 
    Long64_t nentries = ea0c->GetEntries();
    double fitprm[3];
    double schctprm[NumOfSegSCH]; 
-   double schscr[NumOfSegSCH]; 
 
 //Fit range
    double f_l  = 5; 
@@ -253,6 +254,7 @@ void SCHBySegScaler( int month, int runnum){
   for(int i=0; i<NumOfSegSCH; i++){
     SCHTDC[i] = (TH1F*)f->Get(Form("h210%02d",i+1)) ; 
   }  
+  SCHHitPat = (TH1F*)f->Get("h20001") ;
 
    
    TString pdf = Form("%s/pdf/trigger/SCHBySegScaler_%05d.pdf", anadir.Data(),runnum);
@@ -264,21 +266,9 @@ void SCHBySegScaler( int month, int runnum){
      schscr[i] = SCHTDC[i]->Integral(range1,range2);
    }
 
-//// SCH CTime MEAN 
-//   for (int i=0; i<NumOfSegSCH;i++) {
-//       schctprm[i] = SCHCT[i]->GetMaximumBin();   
-//
-//       schctprm[i] = SCHCT[i]->GetXaxis()->GetBinCenter(schctprm[i]);  
-//
-//       SCHCT[i]->Fit("fit","i","", schctprm[i]-f_l, schctprm[i]+f_l); 
-//       schctprm[i] = fit->GetParameter(1);  
-//       SCHCT[i]->GetXaxis()->SetRangeUser(schctprm[i]-1*(l), schctprm[i]+2*(l)); 
-//
-//   }
-
-//   c1->cd(); 
-//   SCHHitPat->Draw(); 
-//   c1 ->Print(pdf); 
+   c1->cd(); 
+   SCHHitPat->Draw(); 
+   c1 ->Print(pdf); 
 
    c1->cd(); 
    c1->SetGridx();
@@ -327,12 +317,18 @@ void SCHBySegScaler( int month, int runnum){
 //    SCH Counts dat file maker                                                             //
 //                                                                                         //
 /////////////////////////////////////////////////////////////////////////////////////////////
-  TString fout1 = (Form( "%s/dat/SCHBySegScaler_%05d.dat", anadir.Data() ,runnum));  
+  TString fout1 = (Form( "%s/dat/trigger/SCHBySegScaler_%05d.dat", anadir.Data() ,runnum));  
    
   std::ofstream fout_1(fout1.Data()); 
   for(int i=0; i<NumOfSegSCH; i++){
-     fout_1 << "Seg1" <<  "\t"  << schscr[i] << endl;
+     fout_1 << Form("Seg%d",i+1) <<  "\t"  << schscr[i] << endl;
   }     
                              
 }                            
+
+void SCHBySegScaler( int month){
+  for(int i=0; i<runnumber.size(); i++){
+    SCHBySegScaler_get(6, runnumber[i]);
+  }
+}
                              
