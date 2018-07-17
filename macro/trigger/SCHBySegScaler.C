@@ -17,7 +17,16 @@
    "dec",
  };
 
+ const char* Plane[] =
+ {
+   "V",
+   "U",
+   "XU",
+   "XD",
+ };
+
  double schscr[NumOfSegSCH]; 
+ double sftscr[4]; 
 // std::vector<int> runnumber{5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
  int runnumber[] = {5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
 
@@ -208,6 +217,10 @@ void SCHBySegScaler_get( int month, int runnum){
       }
    TH1F *SCHHitPat = new TH1F("SCHHitPat","SCHHitPat",NumOfSegSCH+1,0,NumOfSegSCH+1);
 
+   TH1F *SFTVTDC  = new TH1F("SFTVTDC" ,"SFTVTDC" ,1000,0,1000);
+   TH1F *SFTUTDC  = new TH1F("SFTUTDC" ,"SFTUTDC" ,1000,0,1000);
+   TH1F *SFTXUTDC = new TH1F("SFTXUTDC","SFTXUTDC",1000,0,1000);
+   TH1F *SFTXDTDC = new TH1F("SFTXDTDC","SFTXDTDC",1000,0,1000);
 
    Long64_t nentries = ea0c->GetEntries();
    double fitprm[3];
@@ -254,32 +267,50 @@ void SCHBySegScaler_get( int month, int runnum){
   }  
   SCHHitPat = (TH1F*)f->Get("h20002") ;
 
-   
-   TString pdf = Form("%s/pdf/trigger/SCHBySegScaler_%05d.pdf", anadir.Data(),runnum);
-   TCanvas *c1 = new TCanvas("c1","c1",800,700); 
-   c1->Print(pdf+"["); 
+  SFTVTDC  = (TH1F*)f->Get("h30006");
+  SFTUTDC  = (TH1F*)f->Get("h40006");
+  SFTXUTDC = (TH1F*)f->Get("h50006");
+  SFTXDTDC = (TH1F*)f->Get("h50007");
+  
+  TString pdf = Form("%s/pdf/trigger/SCHBySegScaler_%05d.pdf", anadir.Data(),runnum);
+  TString pdf1 = Form("%s/pdf/trigger/SFTByPlaneScaler_%05d.pdf", anadir.Data(),runnum);
+  TCanvas *c1 = new TCanvas("c1","c1",800,700); 
+  c1->Print(pdf+"["); 
+  c1->Print(pdf1+"["); 
 
 // SCH Integral Counts range1 ~ range2 
-   for (int i=0; i<NumOfSegSCH;i++){
-     schscr[i] = SCHTDC[i]->Integral(range3,range4) + SCHTDC[i]->Integral(range1,range2);
-   }
+  for (int i=0; i<NumOfSegSCH;i++){
+    schscr[i] = SCHTDC[i]->Integral(range3,range4) + SCHTDC[i]->Integral(range1,range2);
+  }
+    sftscr[0] = SFTVTDC->Integral(range3,range4)  + SFTVTDC->Integral(range1,range2);
+    sftscr[1] = SFTUTDC->Integral(range3,range4)  + SFTUTDC->Integral(range1,range2);
+    sftscr[2] = SFTXUTDC->Integral(range3,range4) + SFTXUTDC->Integral(range1,range2);
+    sftscr[3] = SFTXDTDC->Integral(range3,range4) + SFTXDTDC->Integral(range1,range2);
 
-   c1->cd(); 
-   SCHHitPat->Draw(); 
-   c1 ->Print(pdf); 
+  c1->cd(); 
+  SCHHitPat->Draw(); 
+  c1 ->Print(pdf); 
 
-   c1->cd(); 
-   c1->SetGridx();
-   c1->SetGridy();
+  c1->cd(); 
+  c1->SetGridx();
+  c1->SetGridy();
 
-   for(int i=0; i<NumOfSegSCH; i++){
-     SCHTDC[i]->Draw(); 
-     c1 ->Print(pdf); 
-   }
-
-
+  for(int i=0; i<NumOfSegSCH; i++){
+    SCHTDC[i]->Draw(); 
+    c1 ->Print(pdf); 
+  }
   c1->Print(pdf+"]");        
-   
+
+  SFTVTDC ->Draw();
+  c1 ->Print(pdf1); 
+  SFTUTDC ->Draw();
+  c1 ->Print(pdf1); 
+  SFTXUTDC->Draw();
+  c1 ->Print(pdf1); 
+  SFTXDTDC->Draw();
+  c1 ->Print(pdf1); 
+
+  c1->Print(pdf1+"]");        
 /////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                         //
 //    SCH Counts dat file maker                                                             //
@@ -290,6 +321,18 @@ void SCHBySegScaler_get( int month, int runnum){
   std::ofstream fout_1(fout1.Data()); 
   for(int i=0; i<NumOfSegSCH; i++){
      fout_1 << Form("Seg%d",i+1) <<  "\t"  << schscr[i] << endl;
+  }     
+   
+/////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                         //
+//    SFT Counts dat file maker                                                             //
+//                                                                                         //
+/////////////////////////////////////////////////////////////////////////////////////////////
+  fout1 = (Form( "%s/dat/trigger/SFTByPlaneScaler_%05d.dat", anadir.Data() ,runnum));  
+   
+  std::ofstream fout_2(fout1.Data()); 
+  for(int i=0; i<4; i++){
+     fout_2 << Form("Plane%s",Plane[i]) <<  "\t"  << sftscr[i] << endl;
   }     
   c1->Clear();
   f->Clear();
