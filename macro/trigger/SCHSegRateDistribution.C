@@ -194,7 +194,7 @@ void SCHSegRateDistribution(){
     graph[i]->SetLineColor(2);
 //    graph[i]->GetHistogram()->SetMinimum(0);
     graph[i]->SetMinimum(0);
-    graph[i]->GetXaxis()->SetRangeUser(-1000000,20000000);
+    graph[i]->GetXaxis()->SetRangeUser(-1000000,22000000);
     graph[i]->Draw("ap");
     c1->Print(pdf); 
   }
