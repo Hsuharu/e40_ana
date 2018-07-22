@@ -193,6 +193,8 @@ void SCHSegRateDistribution(){
 //  c1->GetYaxis()->SetTitle(Form("Segment%d [Counts/Spill]",i));
 
   for(int i=0 ; i<NumOfSegSCH; i++){
+    double max = *std::max_element(SCHSegCounts[i].begin(),SCHSegCounts[i].end());;
+    c1->DrawFrame(0,0,22000000,1.2*max);
     graph[i]->SetTitle(Form("SCH Segment%d Counts/spill ;BH2-SUM [ M/Spill ];SCH Segment%d [Counts/Spill]",i+1,i+1));
     graph[i]->SetMarkerStyle(20);
     graph[i]->SetLineStyle(2);
@@ -208,6 +210,8 @@ void SCHSegRateDistribution(){
   c1->Print(pdf+"]");        
   
   for(int i=0 ; i<4; i++){
+    double max = *std::max_element(SFTPlaneCounts[i].begin(),SFTPlaneCounts[i].end());;
+    c1->DrawFrame(0,0,22000000,1.2*max);
     graph1[i]->SetTitle(Form("SFT Plane%s Counts/spill ;BH2-SUM [ M/Spill ];SFT Plane%s [Counts/Spill]",Plane[i],Plane[i]));
     graph1[i]->SetMarkerStyle(20);
     graph1[i]->SetLineStyle(2);
