@@ -185,16 +185,11 @@ void SCHSegRateDistribution(){
   c1->Print(pdf1+"["); 
 
 // Frame ---------------------------------------------------------------------
-//  TH1 *frame1=gPad->DrawFrame(0,0.95,22,1.01,"SCH Counts/spill by Rate");      
-//  gPad->SetGrid();
-//  c1->SetGrid();
-//  c1->GetXaxis()->SetTitle("[ M/Spill ]");
-//  c1->GetYaxis()->SetTitleOffset(1.2);
-//  c1->GetYaxis()->SetTitle(Form("Segment%d [Counts/Spill]",i));
+  gPad->SetGrid();
 
   for(int i=0 ; i<NumOfSegSCH; i++){
     double max = *std::max_element(SCHSegCounts[i].begin(),SCHSegCounts[i].end());;
-    c1->DrawFrame(0,0,22000000,1.2*max);
+    TH1 *frame1=gPad->DrawFrame(0,0,22000000,1.2*max);      
     graph[i]->SetTitle(Form("SCH Segment%d Counts/spill ;BH2-SUM [ M/Spill ];SCH Segment%d [Counts/Spill]",i+1,i+1));
     graph[i]->SetMarkerStyle(20);
     graph[i]->SetLineStyle(2);
