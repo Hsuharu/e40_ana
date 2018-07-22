@@ -184,7 +184,6 @@ void SCHSegRateDistribution(){
   TCanvas *c2 = new TCanvas("c2","c2",1600,900);
   c2->Divide(4,2);
   c1->Print(pdf+"["); 
-  c1->Print(pdf1+"["); 
 
 // Frame ---------------------------------------------------------------------
 
@@ -211,6 +210,7 @@ void SCHSegRateDistribution(){
   }
 
   c1->Print(pdf+"]");        
+  c1->Print(pdf1+"["); 
   
   for(int i=0 ; i<4; i++){
     graph1[i]->SetTitle(Form("SFT Plane%s Counts/spill ;BH2-SUM [ M/Spill ];SFT Plane%s [Counts/Spill]",Plane[i],Plane[i]));
