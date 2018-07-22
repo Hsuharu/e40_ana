@@ -181,6 +181,8 @@ void SCHSegRateDistribution(){
   TString pdf = Form("%s/pdf/trigger/SCHSegRateDistribution.pdf", anadir.Data());
   TString pdf1 = Form("%s/pdf/trigger/SFTPlaneRateDistribution.pdf", anadir.Data());
   TCanvas *c1 = new TCanvas("c1","c1",800,700);
+  TCanvas *c2 = new TCanvas("c2","c2",1600,900);
+  c2->Divide(4,2);
   c1->Print(pdf+"["); 
   c1->Print(pdf1+"["); 
 
@@ -195,8 +197,17 @@ void SCHSegRateDistribution(){
 //    graph[i]->GetHistogram()->SetMinimum(0);
     graph[i]->SetMinimum(0);
     graph[i]->GetXaxis()->SetRangeUser(-1000000,22000000);
+    c1->cd();
     graph[i]->Draw("ap");
     c1->Print(pdf); 
+    if((i+1)%8 != 0){
+      c2->cd((i+1)%8);
+      graph[i]->Draw("ap");
+    }else{
+      c2->cd(8);
+      graph[i]->Draw("ap");
+      c2->Print(pdf); 
+    }
   }
 
   c1->Print(pdf+"]");        
