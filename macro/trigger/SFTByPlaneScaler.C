@@ -228,10 +228,15 @@ void SFTByPlane_get( int month, int runnum){
    double l = 50; 
 
 //Integral range
-   int range1 = 600; 
+   int range1 = 700; 
    int range2 = 1000; 
    int range3 = 0; 
-   int range4 = 300; 
+   int range4 = 400; 
+   int v_seg_range1 = 0; 
+   int v_seg_range2 = 0; 
+
+   int u_seg_range1 = 0; 
+   int u_seg_range2 = 0; 
 
 //Draw range
    int T0_range_min = -3000;
@@ -242,29 +247,17 @@ void SFTByPlane_get( int month, int runnum){
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                         //
-//    SCH CTime Mean get code                                                              //
+//    SFTX UD Plane rate  get code                                                         //
 //                                                                                         //
 /////////////////////////////////////////////////////////////////////////////////////////////
-//   Long64_t nbytes = 0;
-//   for (Long64_t s=0; s<nentries;s++) {
-//      nbytes += ea0c->GetEntry(s);
-//      for (int i=0; i<NumOfSegSCH;i++) {
-//        if(sch_tdc[i]>0){
-//          for(int j=0; j<MaxDepth; j++){
-//            SCHTDC[i]->Fill(sch_tdc[i][j]);
-//          }
-//        }
-////        SCHCT[i]->Fill(sch_ctime[i]);
-//      }
-//   }
 
   SFTVHitPat  = (TH1F*)f->Get("h30004");
   SFTUHitPat  = (TH1F*)f->Get("h40004");
   SFTXUHitPat = (TH1F*)f->Get("h50004");
   SFTXDHitPat = (TH1F*)f->Get("h50005");
   
-  SFTVTDC  = (TH1F*)f->Get("h30006");
-  SFTUTDC  = (TH1F*)f->Get("h40006");
+//  SFTVTDC  = (TH1F*)f->Get("h30006");
+//  SFTUTDC  = (TH1F*)f->Get("h40006");
   SFTXUTDC = (TH1F*)f->Get("h50006");
   SFTXDTDC = (TH1F*)f->Get("h50007");
   
@@ -272,10 +265,27 @@ void SFTByPlane_get( int month, int runnum){
   TCanvas *c1 = new TCanvas("c1","c1",800,700); 
   c1->Print(pdf1+"["); 
 
-  sftscr[0] = SFTVTDC->Integral(range3,range4)  + SFTVTDC->Integral(range1,range2);
-  sftscr[1] = SFTUTDC->Integral(range3,range4)  + SFTUTDC->Integral(range1,range2);
   sftscr[2] = SFTXUTDC->Integral(range3,range4) + SFTXUTDC->Integral(range1,range2);
   sftscr[3] = SFTXDTDC->Integral(range3,range4) + SFTXDTDC->Integral(range1,range2);
+
+  double max;
+  double sigma;
+  max = SFTVHitPat->GetMaximumBin();
+  SFTVHitPat->Fit("fit","i","",max-20,max+20);
+  max = fit->GetParameter(1);
+  sigma = fit->GetParameter(2);
+  
+  v_seg_range1 = max - 2*sigma;
+  v_seg_range2 = max + 2*sigma;
+
+  max = SFTUHitPat->GetMaximumBin();
+  SFTUHitPat->Fit("fit","i","",max-20,max+20);
+  max = fit->GetParameter(1);
+  sigma = fit->GetParameter(2);
+  
+  u_seg_range1 = max - 2*sigma;
+  u_seg_range2 = max + 2*sigma;
+  
 
   c1->cd(); 
   SFTVHitPat ->Draw(); 
@@ -291,6 +301,35 @@ void SFTByPlane_get( int month, int runnum){
   c1->SetGridx();
   c1->SetGridy();
 
+/////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                         //
+//    SFT Beam  Mean get code                                                              //
+//                                                                                         //
+/////////////////////////////////////////////////////////////////////////////////////////////
+   Long64_t nbytes = 0;
+   for (Long64_t s=0; s<nentries;s++) {
+      nbytes += ea0c->GetEntry(s);
+      for (int i=0; i<NumOfSegSFT_UV;i++) {
+        if(i<v_seg_range1 && i<v_seg_range2) continue;
+        if(sftv_tdc[i]>0){
+          for(int j=0; j<MaxDepth; j++){
+            SFTVTDC->Fill(sftv_tdc[i][j]);
+          }
+        }
+      }
+      for (int i=0; i<NumOfSegSFT_UV;i++) {
+        if(i<u_seg_range1 && i<u_seg_range2) continue;
+        if(sftu_tdc[i]>0){
+          for(int j=0; j<MaxDepth; j++){
+            SFTUTDC->Fill(sftu_tdc[i][j]);
+          }
+        }
+      }
+   }
+
+  sftscr[0] = SFTVTDC->Integral(range3,range4)  + SFTVTDC->Integral(range1,range2);
+  sftscr[1] = SFTUTDC->Integral(range3,range4)  + SFTUTDC->Integral(range1,range2);
+
   SFTVTDC ->Draw();
   c1 ->Print(pdf1); 
   SFTUTDC ->Draw();
@@ -301,6 +340,7 @@ void SFTByPlane_get( int month, int runnum){
   c1 ->Print(pdf1); 
 
   c1->Print(pdf1+"]");        
+
   
 /////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                         //
