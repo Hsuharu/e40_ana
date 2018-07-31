@@ -27,7 +27,10 @@
 
  double sftscr[4]; 
 // std::vector<int> runnumber{5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
- int runnumber[] = {5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
+// int runnumber[] = {5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
+ int runnumber[] = {5080,5139,5118,5120,5123,5304,5303,5126,5129,5275,5283};
+// int runnumber1[] = {5080,5139,5118,5120,5123,5304};
+// int runnumber2[] = {5303,5126,5129,5272,5275,5283};
 
 void SFTByPlane_get( int month, int runnum){
 ////////////////////////////////////////////////////////////
@@ -275,16 +278,16 @@ void SFTByPlane_get( int month, int runnum){
   max = fit->GetParameter(1);
   sigma = fit->GetParameter(2);
   
-  v_seg_range1 = max - 2*sigma;
-  v_seg_range2 = max + 2*sigma;
+  v_seg_range1 = max - 1*sigma;
+  v_seg_range2 = max + 1*sigma;
 
   max = SFTUHitPat->GetMaximumBin();
   SFTUHitPat->Fit("fit","i","",max-20,max+20);
   max = fit->GetParameter(1);
   sigma = fit->GetParameter(2);
   
-  u_seg_range1 = max - 2*sigma;
-  u_seg_range2 = max + 2*sigma;
+  u_seg_range1 = max - 1*sigma;
+  u_seg_range2 = max + 1*sigma;
   
 
   c1->cd(); 
@@ -310,20 +313,20 @@ void SFTByPlane_get( int month, int runnum){
    for (Long64_t s=0; s<nentries;s++) {
       nbytes += ea0c->GetEntry(s);
       for (int i=0; i<NumOfSegSFT_UV;i++) {
-        if(i<v_seg_range1 && i<v_seg_range2) continue;
-        if(sftv_tdc[i]>0){
-          for(int j=0; j<MaxDepth; j++){
-            SFTVTDC->Fill(sftv_tdc[i][j]);
+        if(i>v_seg_range1 && i<v_seg_range2) continue;
+          if(sftv_tdc[i]>0){
+            for(int j=0; j<MaxDepth; j++){
+              SFTVTDC->Fill(sftv_tdc[i][j]);
+            }
           }
-        }
       }
       for (int i=0; i<NumOfSegSFT_UV;i++) {
-        if(i<u_seg_range1 && i<u_seg_range2) continue;
-        if(sftu_tdc[i]>0){
-          for(int j=0; j<MaxDepth; j++){
-            SFTUTDC->Fill(sftu_tdc[i][j]);
+        if(i>u_seg_range1 && i<u_seg_range2) continue;
+          if(sftu_tdc[i]>0){
+            for(int j=0; j<MaxDepth; j++){
+              SFTUTDC->Fill(sftu_tdc[i][j]);
+            }
           }
-        }
       }
    }
 
@@ -360,9 +363,22 @@ void SFTByPlane_get( int month, int runnum){
 }                            
 
 void SFTByPlaneScaler( int month){
-  for(int i=0; i<12; i++){
-//    std::cout << runnumber[i] << std::endl;
-    SFTByPlane_get(6, runnumber[i]);
-  }
+//  for(int i=0; i<12; i++){
+//    SFTByPlane_get(6, runnumber[i]);
+//  }
+//  for(int i=0; i<11; i++){
+//    SFTByPlane_get(6, runnumber[i]);
+//  }
+
+    SFTByPlane_get(6, 5272);
+
+//  for(int i=0; i<6; i++){
+//    SFTByPlane_get(6, runnumber1[i]);
+//  }
+//
+//  for(int i=0; i<6; i++){
+//    SFTByPlane_get(6, runnumber2[i]);
+//  }
+
 }
                              
