@@ -26,9 +26,9 @@
  };
 
  double sftscr[4]; 
-// std::vector<int> runnumber{5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
+ std::vector<int> runnumber{5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
 // int runnumber[] = {5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
- int runnumber[] = {5080,5139,5118,5120,5123,5304,5303,5126,5129,5275,5283};
+// int runnumber[] = {5080,5139,5118,5120,5123,5304,5303,5126,5129,5275,5283};
 // int runnumber1[] = {5080,5139,5118,5120,5123,5304};
 // int runnumber2[] = {5303,5126,5129,5272,5275,5283};
 
@@ -129,6 +129,7 @@ void SFTByPlane_get( int month, int runnum){
    Double_t        sftx_clpos[55];
 
    // Set branch addresses.
+   ea0c->SetBranchStatus("*",0);
    ea0c->SetBranchAddress("evnum",&evnum);
    ea0c->SetBranchAddress("trignhits",&trignhits);
    ea0c->SetBranchAddress("trigpat",trigpat);
@@ -289,7 +290,6 @@ void SFTByPlane_get( int month, int runnum){
   u_seg_range1 = max - 1*sigma;
   u_seg_range2 = max + 1*sigma;
   
-
   c1->cd(); 
   SFTVHitPat ->Draw(); 
   c1 ->Print(pdf1); 
@@ -304,6 +304,7 @@ void SFTByPlane_get( int month, int runnum){
   c1->SetGridx();
   c1->SetGridy();
 
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                         //
 //    SFT Beam  Mean get code                                                              //
@@ -312,6 +313,7 @@ void SFTByPlane_get( int month, int runnum){
    Long64_t nbytes = 0;
    for (Long64_t s=0; s<nentries;s++) {
       nbytes += ea0c->GetEntry(s);
+//      if(s%10000 == 0) std::cout << s << std::endl;
       for (int i=0; i<NumOfSegSFT_UV;i++) {
         if(i>v_seg_range1 && i<v_seg_range2) continue;
           if(sftv_tdc[i]>0){
@@ -356,21 +358,18 @@ void SFTByPlane_get( int month, int runnum){
   for(int i=0; i<4; i++){
      fout_2 << Form("Plane%s",Plane[i]) <<  "\t"  << sftscr[i] << endl;
   }     
-  c1->Clear();
-  f->Clear();
-  ea0c->Clear();
                              
 }                            
 
 void SFTByPlaneScaler( int month){
-//  for(int i=0; i<12; i++){
-//    SFTByPlane_get(6, runnumber[i]);
-//  }
+  for(int i=0; i<12; i++){
+    SFTByPlane_get(6, runnumber[i]);
+  }
 //  for(int i=0; i<11; i++){
 //    SFTByPlane_get(6, runnumber[i]);
 //  }
 
-    SFTByPlane_get(6, 5272);
+//    SFTByPlane_get(6, 5272);
 
 //  for(int i=0; i<6; i++){
 //    SFTByPlane_get(6, runnumber1[i]);
