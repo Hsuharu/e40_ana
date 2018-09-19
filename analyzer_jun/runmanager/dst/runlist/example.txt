@@ -1,0 +1,25 @@
+#
+# RUN LIST (text format)
+#
+# The allowed keys are
+#   work      <- path to work directory
+#   bin       <- path to DST binary
+#   conf      <- path to conf directory/file
+#   rootin    <- path to input ROOT directory
+#   rootout   <- path to output ROOT directory
+#
+#   note that those paths should be relative from work directory
+#
+
+work:    ~/work/miwalove/analyzer
+bin:     bin/DstPiKAna
+conf:    param/conf/analyzer_miwa.conf
+rootin:  rootfile
+rootout: ../dst_rootfile
+
+# run number list
+
+3800
+3838
+
+1189

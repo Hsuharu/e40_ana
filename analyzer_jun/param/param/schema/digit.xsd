@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    attributeFormDefault="unqualified"
+    elementFormDefault="unqualified"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="digit_data" type="digit_dataType"/>
+
+
+
+
+  <!-- ______________________________________________________________________-->
+  <!-- ______________________________________________________________________-->
+  <!-- _________________________________________________________________________
+       attributeGroup definition
+  -->
+
+  <!-- _________________________________________________________________________
+       <digitAttrs>
+  -->
+  <xs:attributeGroup name="digitAttrs">
+    <xs:attribute name="id"   type="xs:string" default="0"/>
+    <xs:attribute name="name" type="xs:string" use="optional"/>
+  </xs:attributeGroup>
+
+
+
+  <!-- ______________________________________________________________________-->
+  <!-- ______________________________________________________________________-->
+  <!-- _________________________________________________________________________
+       group definition
+  -->
+
+  <!-- _________________________________________________________________________
+       <dataGroup>
+  -->
+  <xs:group name="dataGroup">
+    <xs:choice>
+      <xs:element name="data" type="dataType"/>
+      <xs:element name="for"  type="forType"/>
+    </xs:choice>
+  </xs:group>
+
+  <!-- _________________________________________________________________________
+       <chGroup>
+  -->
+  <xs:group name="chGroup">
+    <xs:choice>
+      <xs:element name="ch" type="chType"/>
+      <xs:group	  ref="dataGroup"/>
+    </xs:choice>
+  </xs:group>
+
+  <!-- _________________________________________________________________________
+       <segmentGroup>
+  -->
+  <xs:group name="segmentGroup">
+    <xs:choice>
+      <xs:element name="segment" type="segmentType"/>
+      <xs:group	  ref="chGroup"/>
+    </xs:choice>
+  </xs:group>
+
+  <!-- _________________________________________________________________________
+       <planeGroup>
+  -->
+  <xs:group name="planeGroup">
+    <xs:choice>
+      <xs:element name="plane"  type="planeType"/>
+      <xs:group	  ref="segmentGroup"/>
+    </xs:choice>
+  </xs:group>
+
+  <!-- _________________________________________________________________________
+       <deviceGroup>
+  -->
+  <xs:group name="deviceGroup">
+    <xs:choice>
+      <xs:element  name="device"  type="deviceType"/>
+      <xs:group    ref="planeGroup"/>
+    </xs:choice>
+  </xs:group>
+
+  <!-- ________________________________________________________________________
+       <digitGroup>
+  -->
+  <xs:group name="digitGroup">
+    <xs:choice>
+      <xs:element  name="device"  type="deviceType"/>
+      <xs:element  name="plane"   type="planeType"/>
+      <xs:element  name="segment" type="segmentType"/>
+      <xs:element  name="ch"      type="chType"/>
+      <xs:element  name="data"	  type="dataType"/>
+      <xs:element  name="for"	  type="forType"/>
+    </xs:choice>
+  </xs:group>
+	    
+
+  <!-- ______________________________________________________________________-->
+  <!-- ______________________________________________________________________-->
+  <!-- _________________________________________________________________________
+       compexType definition
+  -->
+
+
+  <!-- _________________________________________________________________________
+       <digit_dataType>
+  -->
+  <xs:complexType name="digit_dataType">
+    <xs:group ref="deviceGroup"	minOccurs="0" maxOccurs="unbounded"/>
+  </xs:complexType>
+
+  <!-- _________________________________________________________________________
+       <dataType>
+  -->
+  <xs:complexType name="dataType">
+    <xs:attributeGroup ref="digitAttrs"/>
+  </xs:complexType>
+
+  <!-- _________________________________________________________________________
+       <chType>
+  -->
+  <xs:complexType name="chType">
+    <xs:group ref="dataGroup" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:attributeGroup ref="digitAttrs"/>
+  </xs:complexType>
+
+  <!-- _________________________________________________________________________
+       <segmentType>
+  -->
+  <xs:complexType name="segmentType">
+    <xs:group     ref="chGroup"	minOccurs="0" maxOccurs="unbounded"/>
+    <xs:attributeGroup ref="digitAttrs"/>
+  </xs:complexType>
+
+
+  <!-- _________________________________________________________________________
+       <planeType>
+  -->
+  <xs:complexType name="planeType">
+    <xs:group	  ref="segmentGroup" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:attributeGroup ref="digitAttrs"/>
+  </xs:complexType>
+
+
+  <!-- _________________________________________________________________________
+       <deviceType>
+  -->
+  <xs:complexType name="deviceType">
+    <xs:group ref="planeGroup" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:attributeGroup ref="digitAttrs"/>
+  </xs:complexType>
+
+  <!-- _________________________________________________________________________
+       <forType>
+  -->
+  <xs:complexType name="forType">
+    <xs:group	  ref="digitGroup" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:attribute name="var"  type="xs:string" use="required"/>
+    <xs:attribute name="from" type="xs:string" use="required"/>
+    <xs:attribute name="to"   type="xs:string" use="required"/>
+    <xs:attribute name="step" type="xs:int"    default="1"/>
+  </xs:complexType>
+
+</xs:schema>

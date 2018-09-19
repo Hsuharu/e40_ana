@@ -1,0 +1,32 @@
+0 *** K1.8 B.S. VI->VO 1.8GeV/c (Design) FF+ Focus with Eff. Len. 091124 *** 
+DPRM 
+BEAM 
+1 3 
+XSET 
+YSET 
+DRFT L1 
+0.2895 
+MPLM Q10 
+0.921 1.60024 0. 0. 0.1 0 
+DRFT L2 
+0.2595 
+MPLM Q11 
+0.66 -1.23682 0. 0. 0.1 0 
+DRFT L3 
+0.47 
+DEFM D4 
+4.000 64.0 0. 0. 0. 23.5 0.0 0. 0. 0. 0. 0.095 7 
+DRFT L4 
+0.47 
+MPLM Q12 
+0.66 1.31129 0. 0. 0.1 0 
+DRFT L5 
+0.24 
+MPLM Q13 
+0.66 -1.10003 0. 0. 0.1 0 
+DRFT L6 
+0.27 
+ENDS 
+DEND 
+
+

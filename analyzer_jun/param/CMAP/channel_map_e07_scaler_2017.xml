@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<channel_map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="schema/channel_map.xsd">
+
+  <DAQNode node_id="1" name="k18eb">
+    <VmeMaster node_id="0x201" name="vme01">
+      <VmeCaenV775 address="0xbd050000">
+    	<for var="ch" from="0" to="31">
+    	  <FE ch="ch"><D Device="TFlag" segment="ch" data="1"/></FE>
+    	</for>
+      </VmeCaenV775>
+    </VmeMaster>
+    <!--________________________________________________________________-->
+    <VmeMaster node_id="0x301" name="emc01">
+      <VmeRm address="0xff0e0000">
+    	<for var="ch" from="0" to="1"><for var="data" from="0" to="3">
+    	    <FE ch="ch" data="data">
+    	      <D Device="VME-RM" Plane="emc01" ch="ch" data="data"/></FE>
+    	</for></for>
+      </VmeRm>
+      <VmeEmc address="0xe3c00000">
+    	<for var="data" from="0" to="5">
+    	  <FE data="data"><D Device="EMC" data="data"/></FE>
+    	</for>
+      </VmeEmc>
+    </VmeMaster>
+    <!-- ________________________________________________________________ -->
+    <HulScaler node_id="0x601" name="hul01">
+      <for var="ch" from="0" to="95"><for var="data" from="0" to="4">
+    	  <FE ch="ch" data="data"><D Device="Scaler" plane="0" ch="ch" data="data"/></FE>
+      </for></for>
+    </HulScaler>
+  </DAQNode>    
+</channel_map>

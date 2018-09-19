@@ -1,0 +1,16 @@
+start:          Wed Jul 11 15:16:22 2018
+________________________________________________________________
+key:            5129
+________________________________________________________________
+bin:            ./bin/Hodoscope
+conf:           ./param/conf/analyzer_05126.conf
+data:           /ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05129.dat
+unit:           100000
+nevent:         228941
+prefetch:       /gpfs/home/had/suharu/work/e40/ana/analyzer_jun/runmanager/prefetch/runlist_run05129_Hodoscope.pf
+out:            /ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05129_Hodoscope.root
+________________________________________________________________
+elem(0):        runlist_run05129_Hodoscope_0
+elem(1):        runlist_run05129_Hodoscope_1
+elem(2):        runlist_run05129_Hodoscope_2
+________________________________________________________________

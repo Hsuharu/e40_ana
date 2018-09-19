@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:element name="analyzer" type="analyzerType"/>
+
+  <!-- _________________________________________________________________________
+       <analyzerType>
+  -->  
+  <xs:complexType name="analyzerType">
+    <xs:all>
+      <xs:element name="unpacker"    type="fileIncludeType"/>
+      <xs:element name="digit_data"  type="fileIncludeType"/>
+      <xs:element name="channel_map" type="fileIncludeType"/>
+      <xs:element name="mwpc"        type="fileIncludeType" minOccurs="0"/>
+    </xs:all>
+    <xs:attribute name="param_dir" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <!-- _________________________________________________________________________
+       <fileIncludeType>
+  -->  
+  <xs:complexType name="fileIncludeType">
+    <xs:attribute name="file" type="xs:string" use="required"/>
+  </xs:complexType>
+  
+
+</xs:schema>

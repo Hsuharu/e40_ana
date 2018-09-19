@@ -1,0 +1,16 @@
+{
+    "5126": {
+        "nseg": 3,
+        "bin": "./bin/KuramaTracking",
+        "nproc": 1,
+        "conf": "./param_nakadashi/analyzer_jun.conf",
+        "stat": true,
+        "queue": "s",
+        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05126_KuramaTracking.root",
+        "time": 3607.1782891750336,
+        "prog": 3,
+        "nev": 264862,
+        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05126.dat",
+        "unit": 100000
+    }
+}

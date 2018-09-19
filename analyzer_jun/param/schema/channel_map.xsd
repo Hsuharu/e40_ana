@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    attributeFormDefault="unqualified"
+    elementFormDefault="unqualified"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="channel_map" type="channel_mapType"/>
+
+
+  <!-- ______________________________________________________________________-->
+  <!-- ______________________________________________________________________-->
+  <!-- _________________________________________________________________________
+       attributeGroup definition
+  -->
+  <!-- _________________________________________________________________________
+       <unpackerAttrs>
+  -->
+  <xs:attributeGroup name="unpackerAttrs">
+    <xs:attribute name="decode" type="xs:string" default="y"/>
+    <xs:attribute name="dump"   type="xs:string" default="n"/>
+    <xs:attribute name="unpack" type="xs:string" default="y"/>
+  </xs:attributeGroup>
+
+  <!-- _________________________________________________________________________
+       <finesseAttrs>
+  -->
+  <xs:attributeGroup name="finesseAttrs">
+    <xs:attribute name="slot" type="xs:string" use="required"/>
+    <xs:attributeGroup ref="unpackerAttrs"/>
+  </xs:attributeGroup>
+
+  <!-- _________________________________________________________________________
+       <tkoAttrs>
+  -->
+  <xs:attributeGroup name="tkoAttrs">
+    <xs:attribute name="ma" type="xs:string" use="required"/>
+    <xs:attributeGroup ref="unpackerAttrs"/>
+  </xs:attributeGroup>
+
+  <!-- _________________________________________________________________________
+       <feraAttrs>
+  -->
+  <xs:attributeGroup name="feraAttrs">
+    <xs:attribute name="ma" type="xs:string" use="required"/>
+    <xs:attributeGroup ref="unpackerAttrs"/>
+  </xs:attributeGroup>
+
+  <!-- _________________________________________________________________________
+       <vmeAttrs>
+  -->
+  <xs:attributeGroup name="vmeAttrs">
+    <xs:attribute name="address" type="xs:string" use="required"/>
+    <xs:attributeGroup ref="unpackerAttrs"/>
+  </xs:attributeGroup>
+
+  <!-- _________________________________________________________________________
+       <nodeAttrs>
+  -->
+  <xs:attributeGroup name="nodeAttrs">
+    <xs:attribute name="node_id" type="xs:string" use="required"/>
+    <xs:attribute name="name"    type="xs:string" use="required"/>
+    <xs:attributeGroup ref="unpackerAttrs"/>
+  </xs:attributeGroup>
+
+
+
+  <!-- ______________________________________________________________________-->
+  <!-- ______________________________________________________________________-->
+  <!-- _________________________________________________________________________
+       group definition
+  -->
+  <!-- _________________________________________________________________________
+       <feGroup>
+  -->
+  <xs:group name="feGroup">
+    <xs:choice>
+      <xs:element name="FE"  type="FEType"/>
+      <xs:element name="for" type="fe_forType"/>
+    </xs:choice>
+  </xs:group>
+
+  <!-- _________________________________________________________________________
+       <finesseGroup>
+  -->
+  <xs:group name="finesseGroup">
+    <xs:choice>
+      <xs:element name="FinesseEncoderPPG" type="FinesseType"/>
+      <xs:element name="FinesseEncoder"    type="FinesseType"/>
+      <xs:element name="FinessePtdc"       type="FinesseType"/>
+      <xs:group   ref="feGroup"/>
+    </xs:choice>
+  </xs:group>
+
+  <!-- _________________________________________________________________________
+       <tkoGroup>
+  -->
+  <xs:group name="tkoGroup">
+    <xs:choice>
+      <xs:element name="Tko"      type="TkoType"/>
+      <xs:element name="TkoDrT"   type="TkoType"/>
+      <xs:element name="TkoDrTII" type="TkoType"/>
+      <xs:element name="TkoRm"    type="TkoRmType"/>
+      <xs:element name="TkoMHTdc" type="TkoMHTdcType"/>
+      <xs:element name="TkoMHTdcCSds" type="TkoMHTdcCSdsType"/>
+      <xs:group   ref="feGroup"/>
+    </xs:choice>
+  </xs:group>
+
+  <!-- _________________________________________________________________________
+       <feraGroup>
+  -->
+  <xs:group name="feraGroup">
+    <xs:choice>
+      <xs:element name="FeraAD413A"   type="FeraType"/>
+      <xs:element name="Fera3377"     type="FeraType"/>
+      <xs:group   ref="feGroup"/>
+    </xs:choice>
+  </xs:group>
+
+  <!-- _________________________________________________________________________
+       <vmeModuleGroup>
+  -->
+  <xs:group name="vmeModuleGroup">
+    <xs:choice>
+      <xs:element name="VmeAPVDaq"     type="VmeModuleType"/>
+      <xs:element name="VmeSmp"        type="VmeSmpType"/>
+      <xs:element name="VmeRpv130"     type="VmeModuleType"/>
+      <xs:element name="VmeRpv100"     type="VmeModuleType"/>
+      <xs:element name="VmeCaenV775"   type="VmeModuleType"/>
+      <xs:element name="VmeCaenV792"   type="VmeModuleType"/>
+      <xs:element name="VmeCaenV820"   type="VmeModuleType"/>
+      <xs:element name="VmeCaenV830"   type="VmeModuleType"/>
+      <xs:element name="VmeCaenV1724"  type="VmeModuleType"/>
+      <xs:element name="VmeEmc"        type="VmeModuleType"/>
+      <xs:element name="VmeInputReg"   type="VmeModuleType"/>
+      <xs:element name="VmeTdc64M"     type="VmeModuleType"/>
+      <xs:element name="VmeRm"         type="VmeModuleType"/>
+      <xs:element name="VmeAmt"        type="VmeModuleType"/>
+      <xs:element name="VmeUmem"       type="VmeUmemType"/>
+      <xs:element name="HBJTimeStamp"  type="VmeModuleType"/>
+      <xs:element name="VVmeCamacRm"   type="VmeModuleType"/>
+      <xs:element name="VVmeFERA4300B" type="VmeModuleType"/>
+      <xs:element name="VVmeCoinReg"   type="VmeModuleType"/>
+      <xs:element name="VmeV1290A"     type="VmeModuleType"/>
+      <xs:group   ref="feGroup"/>
+    </xs:choice>
+  </xs:group>
+
+  <!-- _________________________________________________________________________
+       <nodeGroup>
+  -->
+  <xs:group name="nodeGroup">
+    <xs:choice>
+      <xs:element name="SoyTimeStamp"    type="DAQNodeType"/>
+      <xs:element name="Hul3DMtx"        type="DAQNodeType"/>
+      <xs:element name="HulScaler"       type="DAQNodeType"/>
+      <xs:element name="HulMHTdc"        type="DAQNodeType"/>
+      <xs:element name="HulHRTdc"        type="DAQNodeType"/>
+      <xs:element name="HulMsT"          type="DAQNodeType"/>
+      <xs:element name="HulMassTrigFera" type="DAQNodeType"/>
+      <xs:element name="VmeMaster"       type="VmeMasterType"/>
+      <xs:element name="Copper"          type="CopperType"/>
+      <xs:element name="CopperLite"      type="CopperType"/>
+      <xs:element name="Easiroc"         type="DAQNodeType"/>
+      <xs:element name="VmeEasiroc"      type="DAQNodeType"/>
+      <xs:element name="DAQNode"         type="DAQNodeType"/>
+      <xs:group   ref="feGroup"/>
+    </xs:choice>
+  </xs:group>
+
+  <!-- _________________________________________________________________________
+       <unpackerGroup>
+  -->
+  <xs:group name="unpackerLoopGroup">
+    <xs:choice>
+      <xs:element name="DAQNode"            type="DAQNodeType"/>
+      <xs:element name="Copper"             type="CopperType"/>
+      <xs:element name="CopperLite"         type="CopperType"/>
+      <xs:element name="Easiroc"            type="DAQNodeType"/>
+      <xs:element name="VmeEasiroc"         type="DAQNodeType"/>
+      <xs:element name="VmeMaster"          type="VmeMasterType"/>
+      <xs:element name="SoyTimeStamp"       type="DAQNodeType"/>
+      <xs:element name="Hul3DMtx"           type="DAQNodeType"/>
+      <xs:element name="HulScaler"          type="DAQNodeType"/>
+      <xs:element name="HulMHTdc"           type="DAQNodeType"/>
+      <xs:element name="HulHRTdc"           type="DAQNodeType"/>
+      <xs:element name="HulMsT"             type="DAQNodeType"/>
+      <xs:element name="HulMassTrigFera"    type="DAQNodeType"/>
+
+      <xs:element name="VmeRpv100"          type="VmeModuleType"/>
+      <xs:element name="VmeRpv130"          type="VmeModuleType"/>
+      <xs:element name="VmeCaenV775"        type="VmeModuleType"/>
+      <xs:element name="VmeCaenV792"        type="VmeModuleType"/>
+      <xs:element name="VmeCaenV820"        type="VmeModuleType"/>
+      <xs:element name="VmeCaenV830"        type="VmeModuleType"/>
+      <xs:element name="VmeCaenV1724"       type="VmeModuleType"/>
+      <xs:element name="VmeEmc"             type="VmeModuleType"/>
+      <xs:element name="VmeInputReg"        type="VmeModuleType"/>
+      <xs:element name="VmeTdc64M"          type="VmeModuleType"/>
+      <xs:element name="VmeSmp"             type="VmeSmpType"/>
+      <xs:element name="VmeRm"              type="VmeModuleType"/>
+      <xs:element name="VmeAmt"             type="VmeModuleType"/>
+      <xs:element name="VmeUmem"            type="VmeModuleType"/>
+      <xs:element name="HBJTimeStamp"       type="VmeModuleType"/>
+      <xs:element name="VVmeCamacRm"        type="VmeModuleType"/>
+      <xs:element name="VVmeFERA4300B"      type="VmeModuleType"/>
+      <xs:element name="VVmeCoinReg"        type="VmeModuleType"/>
+      <xs:element name="APVDaq"             type="VmeModuleType"/>
+      <xs:element name="VmeV1290A"          type="VmeModuleType"/>
+
+      <xs:element name="Tko"                type="TkoType"/>
+      <xs:element name="TkoDrT"             type="TkoType"/>
+      <xs:element name="TkoDrTII"           type="TkoType"/>
+      <xs:element name="TkoMHTdc"           type="TkoMHTdcType"/>
+      <xs:element name="TkoMHTdcCSds"       type="TkoMHTdcCSdsType"/>
+      <xs:element name="TkoRm"              type="TkoRmType"/>
+
+      <xs:element name="FeraAD413A"         type="FeraType"/>
+      <xs:element name="Fera3377"           type="FeraType"/>
+
+      <xs:element name="FinessePtdc"        type="FinesseType"/>
+      <xs:element name="FinesseEncoder"     type="FinesseType"/>
+      <xs:element name="FinesseEncoderPPG"  type="FinesseType"/>
+      <xs:element name="FinesseEncoderPtdc" type="FinesseType"/>
+
+      <xs:element name="FE"  type="FEType"/>
+      <xs:element name="for" type="fe_forType"/>
+    </xs:choice>
+  </xs:group>
+
+
+  <!-- ______________________________________________________________________-->
+  <!-- ______________________________________________________________________-->
+  <!-- _________________________________________________________________________
+       complexType definition
+  -->
+  <!-- _________________________________________________________________________
+       <channel_mapType>
+  -->
+  <xs:complexType name="channel_mapType">
+    <xs:group ref="nodeGroup"/>
+  </xs:complexType>
+
+  <!-- _________________________________________________________________________
+       <DType>
+  -->
+  <xs:complexType name="DType">
+    <xs:attribute name="Device"	 type="xs:string" use="optional"/>
+    <xs:attribute name="device"	 type="xs:string" default="0"/>
+    <xs:attribute name="Plane"   type="xs:string" use="optional"/>
+    <xs:attribute name="plane"   type="xs:string" default="0"/>
+    <xs:attribute name="Segment" type="xs:string" use="optional"/>
+    <xs:attribute name="segment" type="xs:string" default="0"/>
+    <xs:attribute name="Ch"      type="xs:string" use="optional"/>
+    <xs:attribute name="ch"      type="xs:string" default="0"/>
+    <xs:attribute name="Data"    type="xs:string" use="optional"/>
+    <xs:attribute name="data"    type="xs:string" default="0"/>
+  </xs:complexType>
+
+  <!-- _________________________________________________________________________
+       <FEType>
+  -->
+  <xs:complexType name="FEType">
+    <xs:all>
+      <xs:element name="D" type="DType"/>
+    </xs:all>
+    <xs:attribute name="ch"   type="xs:string" default="0"/>
+    <xs:attribute name="data" type="xs:string" default="0"/>
+  </xs:complexType>
+
+  <!-- _________________________________________________________________________
+       <FinesseType>
+  -->
+  <xs:complexType name="FinesseType">
+    <xs:group     ref="feGroup" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:attributeGroup ref="finesseAttrs"/>
+  </xs:complexType>
+
+  <!-- _________________________________________________________________________
+       <TkoType>
+  -->
+  <xs:complexType name="TkoType">
+    <xs:group ref="feGroup" minOccurs="0" maxOccurs="32"/>
+    <xs:attributeGroup ref="tkoAttrs"/>
+  </xs:complexType>
+
+  <!-- _________________________________________________________________________
+       <TkoRmType>
+  -->
+  <xs:complexType name="TkoRmType">
+    <xs:group ref="feGroup" minOccurs="0" maxOccurs="4"/>
+    <xs:attributeGroup ref="tkoAttrs"/>
+  </xs:complexType>
+  <!-- _________________________________________________________________________
+       <TkoMHTdcType>
+  -->
+  <xs:complexType name="TkoMHTdcType">
+    <xs:group ref="feGroup" minOccurs="0" maxOccurs="130"/>
+    <xs:attributeGroup ref="tkoAttrs"/>
+  </xs:complexType>
+
+  <!-- _________________________________________________________________________
+       <TkoMHTdcCSdsType>
+  -->
+  <xs:complexType name="TkoMHTdcCSdsType">
+    <xs:group ref="feGroup" minOccurs="0" maxOccurs="130"/>
+    <xs:attributeGroup ref="tkoAttrs"/>
+  </xs:complexType>
+
+  <!-- _________________________________________________________________________
+       <FeraType>
+  -->
+  <xs:complexType name="FeraType">
+    <xs:group ref="feGroup" minOccurs="0" maxOccurs="32"/>
+    <xs:attributeGroup ref="feraAttrs"/>
+  </xs:complexType>
+
+
+  <!-- _________________________________________________________________________
+       <VmeSmpType>
+  -->
+  <xs:complexType name="VmeSmpType">
+    <xs:group ref="tkoGroup" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:attributeGroup ref="vmeAttrs"/>
+  </xs:complexType>
+
+  <!-- _________________________________________________________________________
+       <VmeUmemType>
+  -->
+  <xs:complexType name="VmeUmemType">
+    <xs:group ref="feraGroup" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:attributeGroup ref="vmeAttrs"/>
+  </xs:complexType>
+
+  <!-- _________________________________________________________________________
+       <VmeModuleType>
+  -->
+  <xs:complexType name="VmeModuleType">
+    <xs:group ref="feGroup" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:attributeGroup ref="vmeAttrs"/>
+  </xs:complexType>
+
+  <!-- _________________________________________________________________________
+       <VmeMasterType>
+  -->
+  <xs:complexType name="VmeMasterType">
+    <xs:group ref="vmeModuleGroup" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:attributeGroup ref="nodeAttrs"/>
+  </xs:complexType>
+  <!-- _________________________________________________________________________
+       <CopperType>
+  -->
+  <xs:complexType name="CopperType">
+    <xs:group ref="finesseGroup" minOccurs="0" maxOccurs="4"/>
+    <xs:attributeGroup ref="nodeAttrs"/>
+  </xs:complexType>
+
+  <!-- _________________________________________________________________________
+       <DAQNodeType>
+  -->
+  <xs:complexType name="DAQNodeType">
+    <xs:group ref="nodeGroup" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:attributeGroup ref="nodeAttrs"/>
+  </xs:complexType>
+
+  <!-- _________________________________________________________________________
+       <fe_forType>
+  -->
+  <xs:complexType name="fe_forType">
+    <xs:group     ref="unpackerLoopGroup" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:attribute name="var"  type="xs:string" use="required"/>
+    <xs:attribute name="from" type="xs:string" use="required"/>
+    <xs:attribute name="to"   type="xs:string" use="required"/>
+    <xs:attribute name="step" type="xs:int"    default="1"/>
+  </xs:complexType>
+
+</xs:schema>

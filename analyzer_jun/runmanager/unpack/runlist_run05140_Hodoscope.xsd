@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="unpacker" type="unpackerType"/>
+
+  <!-- _________________________________________________________________________
+       <unpackerType>
+  -->  
+  <xs:complexType name="unpackerType">
+    <xs:all>
+      <xs:element name="control" type="controlType"/>
+    </xs:all>
+  </xs:complexType>
+
+  <!-- _________________________________________________________________________
+       <controlType>
+  -->
+  <xs:complexType name="controlType">
+    <xs:all>
+      <xs:element name="skip"        type="xs:int"/>
+      <xs:element name="max_loop"    type="xs:int"/>
+<!--      <xs:element name="fifo_length" type="xs:int"/> -->
+      <xs:element name="cout"        type="xs:string"/>
+      <xs:element name="cerr"        type="xs:string"/>
+      <xs:element name="tout"        type="xs:string"/>
+      <xs:element name="esc"         type="xs:string"/>
+      <xs:element name="print_cycle" type="xs:int"/>
+      <xs:element name="error_check" type="error_checkType"/>
+    </xs:all>
+  </xs:complexType>
+
+  <!-- _________________________________________________________________________
+       <error_checkType>
+  -->
+
+  <xs:complexType name="error_checkType">
+    <xs:all>
+      <xs:element name="format"       type="formatType"/>
+      <xs:element name="slip"         type="slipType"/>
+      <xs:element name="disagreement" type="disagreementType"/>
+      <xs:element name="show"         type="showType"/>
+    </xs:all>
+  </xs:complexType>
+
+  <!--__________________________________________________________________________
+      <formatType>
+  -->
+  <xs:complexType name="formatType">
+    <xs:attribute name="check" type="xs:boolean" use="required"/>
+  </xs:complexType>
+  
+  <!--__________________________________________________________________________
+      <slipType>
+  -->
+  <xs:complexType name="slipType">
+    <xs:attribute name="check" type="xs:boolean" use="required"/>
+  </xs:complexType>
+
+  <!--__________________________________________________________________________
+      <disagreementType>
+  -->
+  <xs:complexType name="disagreementType">
+    <xs:attribute name="local" type="xs:boolean" use="required"/>
+    <xs:attribute name="event" type="xs:boolean" use="required"/>
+    <xs:attribute name="spill" type="xs:boolean" use="required"/>
+  </xs:complexType>
+
+  <!--__________________________________________________________________________
+      <showType>
+  -->
+  <xs:complexType name="showType">
+    <xs:attribute name="all"        type="xs:boolean" use="required"/>
+    <xs:attribute name="always"     type="xs:boolean" use="required"/>
+    <xs:attribute name="char_true"  type="charType"   default="."/>
+    <xs:attribute name="char_false" type="charType"   default="!"/>
+  </xs:complexType>
+
+  <!--__________________________________________________________________________
+      <charType>
+  -->
+  <xs:simpleType name="charType">
+    <xs:restriction base="xs:string">
+      <xs:length value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

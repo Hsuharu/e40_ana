@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<channel_map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="schema/channel_map.xsd">
+
+  <!--________________________________________________________________-->
+  <DAQNode node_id="1" name="k18eb">
+    <!--________________________________________________________________-->
+    <VmeMaster node_id="0x201" name="vme01">
+      <VmeRm address="0xff010000">
+    	<for var="ch" from="0" to="1"><for var="data" from="0" to="3">
+    	  <FE ch="ch" data="data">
+    	  <D Device="VME-RM" Plane="vme01" ch="ch" data="data"/></FE>
+    	</for></for>
+      </VmeRm>
+      <VmeCaenV792 address="0xad010000">
+    	<FE ch="0"><D Device="BH1" segment="0" ch="0" data="0"/></FE>
+    	<FE ch="1"><D Device="BH1" segment="1" ch="0" data="0"/></FE>
+    	<FE ch="2"><D Device="BH1" segment="2" ch="0" data="0"/></FE>
+    	<FE ch="3"><D Device="BH1" segment="3" ch="0" data="0"/></FE>
+    	<FE ch="4"><D Device="BH1" segment="4" ch="0" data="0"/></FE>
+    	<FE ch="5"><D Device="BH1" segment="5" ch="0" data="0"/></FE>
+    	<FE ch="6"><D Device="BH1" segment="6" ch="0" data="0"/></FE>
+    	<FE ch="7"><D Device="BH1" segment="7" ch="0" data="0"/></FE>
+    	<FE ch="8"><D Device="BH1" segment="8" ch="0" data="0"/></FE>
+    	<FE ch="9"><D Device="BH1" segment="9" ch="0" data="0"/></FE>
+    	<FE ch="10"><D Device="BH1" segment="10" ch="0" data="0"/></FE>
+    	<FE ch="11"><D Device="BH2" segment="0" ch="0" data="0"/></FE>
+    	<FE ch="16"><D Device="BH1" segment="0" ch="1" data="0"/></FE>
+    	<FE ch="17"><D Device="BH1" segment="1" ch="1" data="0"/></FE>
+    	<FE ch="18"><D Device="BH1" segment="2" ch="1" data="0"/></FE>
+    	<FE ch="19"><D Device="BH1" segment="3" ch="1" data="0"/></FE>
+    	<FE ch="20"><D Device="BH1" segment="4" ch="1" data="0"/></FE>
+    	<FE ch="21"><D Device="BH1" segment="5" ch="1" data="0"/></FE>
+    	<FE ch="22"><D Device="BH1" segment="6" ch="1" data="0"/></FE>
+    	<FE ch="23"><D Device="BH1" segment="7" ch="1" data="0"/></FE>
+    	<FE ch="24"><D Device="BH1" segment="8" ch="1" data="0"/></FE>
+    	<FE ch="25"><D Device="BH1" segment="9" ch="1" data="0"/></FE>
+    	<FE ch="26"><D Device="BH1" segment="10" ch="1" data="0"/></FE>
+    	<FE ch="27"><D Device="BH2" segment="0" ch="1" data="0"/></FE>
+    	<for var="ch" from="12" to="15">
+    	  <FE ch="ch"><D Device="VMEdummy" plane="1" ch="ch" data="0"/></FE>
+    	</for>
+    	<for var="ch" from="28" to="31">
+    	  <FE ch="ch"><D Device="VMEdummy" plane="1" ch="ch" data="0"/></FE>
+    	</for>
+      </VmeCaenV792>
+      <VmeCaenV792 address="0xad020000">
+    	<FE ch="2"><D Device="BAC" segment="0" ch="0" data="0"/></FE>
+    	<FE ch="3"><D Device="BAC" segment="1" ch="0" data="0"/></FE>
+    	<FE ch="4"><D Device="PVAC" segment="0" ch="0" data="0"/></FE>
+    	<FE ch="5"><D Device="FAC" segment="0" ch="0" data="0"/></FE>
+    	<for var="ch" from="0" to="1">
+    	  <FE ch="ch"><D Device="VMEdummy" plane="2" ch="ch" data="0"/></FE>
+    	</for>
+    	<for var="ch" from="6" to="31">
+    	  <FE ch="ch"><D Device="VMEdummy" plane="2" ch="ch" data="0"/></FE>
+    	</for>
+      </VmeCaenV792>
+      <VmeCaenV792 address="0xad030000">
+   	<for var="ch" from="0" to="23">
+    	  <FE ch="ch"><D Device="TOF" segment="ch" ch="0" data="0"/></FE>
+    	</for>
+    	<for var="ch" from="24" to="31">
+    	  <FE ch="ch"><D Device="VMEdummy" plane="3" ch="ch" data="0"/></FE>
+    	</for>
+      </VmeCaenV792>
+      <VmeCaenV792 address="0xad040000">
+ 	<for var="ch" from="0" to="16">
+    	  <FE ch="ch"><D Device="TOF" segment="ch" ch="1" data="0"/></FE>
+    	</for>
+	<FE ch="24"><D Device="TOF" segment="17" ch="1" data="0"/></FE>
+    	<for var="ch" from="18" to="23">
+    	  <FE ch="ch"><D Device="TOF" segment="ch" ch="1" data="0"/></FE>
+    	</for>
+    	<FE ch="17"><D Device="VMEdummy" plane="4" ch="17" data="0"/></FE>
+    	<for var="ch" from="25" to="31">
+    	  <FE ch="ch"><D Device="VMEdummy" plane="4" ch="ch" data="0"/></FE>
+    	</for> 
+      </VmeCaenV792>
+      <VmeCaenV775 address="0xbd010000">
+    	<FE ch="0"><D Device="BH1" segment="0" ch="0" data="1"/></FE>
+    	<FE ch="1"><D Device="BH1" segment="1" ch="0" data="1"/></FE>
+    	<FE ch="2"><D Device="BH1" segment="2" ch="0" data="1"/></FE>
+    	<FE ch="3"><D Device="BH1" segment="3" ch="0" data="1"/></FE>
+    	<FE ch="4"><D Device="BH1" segment="4" ch="0" data="1"/></FE>
+    	<FE ch="5"><D Device="BH1" segment="5" ch="0" data="1"/></FE>
+    	<FE ch="6"><D Device="BH1" segment="6" ch="0" data="1"/></FE>
+    	<FE ch="7"><D Device="BH1" segment="7" ch="0" data="1"/></FE>
+    	<FE ch="8"><D Device="BH1" segment="8" ch="0" data="1"/></FE>
+    	<FE ch="9"><D Device="BH1" segment="9" ch="0" data="1"/></FE>
+    	<FE ch="10"><D Device="BH1" segment="10" ch="0" data="1"/></FE>
+    	<FE ch="16"><D Device="BH1" segment="0" ch="1" data="1"/></FE>
+    	<FE ch="17"><D Device="BH1" segment="1" ch="1" data="1"/></FE>
+    	<FE ch="18"><D Device="BH1" segment="2" ch="1" data="1"/></FE>
+    	<FE ch="19"><D Device="BH1" segment="3" ch="1" data="1"/></FE>
+    	<FE ch="20"><D Device="BH1" segment="4" ch="1" data="1"/></FE>
+    	<FE ch="21"><D Device="BH1" segment="5" ch="1" data="1"/></FE>
+    	<FE ch="22"><D Device="BH1" segment="6" ch="1" data="1"/></FE>
+    	<FE ch="23"><D Device="BH1" segment="7" ch="1" data="1"/></FE>
+    	<FE ch="24"><D Device="BH1" segment="8" ch="1" data="1"/></FE>
+    	<FE ch="25"><D Device="BH1" segment="9" ch="1" data="1"/></FE>
+    	<FE ch="26"><D Device="BH1" segment="10" ch="1" data="1"/></FE>
+    	<for var="ch" from="11" to="15">
+    	  <FE ch="ch"><D Device="VMEdummy" plane="1" ch="ch" data="1"/></FE>
+    	</for>
+    	<for var="ch" from="27" to="31">
+    	  <FE ch="ch"><D Device="VMEdummy" plane="1" ch="ch" data="1"/></FE>
+    	</for>
+      </VmeCaenV775>
+      <VmeCaenV775 address="0xbd020000">
+    	<FE ch="0"><D Device="BH2" segment="0" ch="0" data="1"/></FE>
+    	<FE ch="1"><D Device="BH2" segment="0" ch="1" data="1"/></FE>
+    	<for var="ch" from="2" to="31">
+    	  <FE ch="ch"><D Device="VMEdummy" plane="2" ch="ch" data="1"/></FE>
+    	</for>
+      </VmeCaenV775>
+      <VmeCaenV775 address="0xbd030000">
+    	<for var="ch" from="0" to="23">
+    	  <FE ch="ch"><D Device="TOF" segment="ch" ch="0" data="1"/></FE>
+    	</for>
+    	<FE ch="24"><D Device="BAC" segment="0" ch="0" data="1"/></FE>
+    	<FE ch="25"><D Device="BAC" segment="1" ch="0" data="1"/></FE>
+    	<FE ch="26"><D Device="PVAC" segment="0" ch="0" data="1"/></FE>
+    	<FE ch="27"><D Device="FAC" segment="0" ch="0" data="1"/></FE>
+    	<for var="ch" from="28" to="31">
+    	  <FE ch="ch"><D Device="VMEdummy" plane="3" ch="ch" data="1"/></FE>
+    	</for>
+      </VmeCaenV775>
+      <VmeCaenV775 address="0xbd040000">
+    	<for var="ch" from="0" to="23">
+    	  <FE ch="ch"><D Device="TOF" segment="ch" ch="1" data="1"/></FE>
+    	</for>
+    	<for var="ch" from="24" to="31">
+    	  <FE ch="ch"><D Device="VMEdummy" plane="4" ch="ch" data="1"/></FE>
+    	</for>
+      </VmeCaenV775>
+      <VmeCaenV775 address="0xbd050000">
+    	<for var="ch" from="0" to="31">
+    	  <FE ch="ch"><D Device="TFlag" segment="ch" data="1"/></FE>
+    	</for>
+      </VmeCaenV775>
+    </VmeMaster>
+    <!--________________________________________________________________-->
+    <VmeMaster node_id="0x203" name="vme03">
+      <!-- <VmeRm address="0xff030000"> -->
+      <!-- 	<for var="ch" from="0" to="1"><for var="data" from="0" to="3"> -->
+      <!-- 	    <FE ch="ch" data="data"> -->
+      <!-- 	      <D Device="VME-RM" Plane="vme03" ch="ch" data="data"/></FE> -->
+      <!-- 	</for></for> -->
+      <!-- </VmeRm> -->
+      <VmeCaenV820 address="0x20010000">
+    	<for var="ch" from="0" to="31">
+    	  <FE ch="ch"><D Device="Scaler" plane="0" ch="ch"/></FE>
+    	</for>
+      </VmeCaenV820>
+      <VmeCaenV820 address="0x20020000">
+    	<for var="ch" from="0" to="31">
+    	  <FE ch="ch"><D Device="Scaler" plane="1" ch="ch"/></FE>
+    	</for>
+      </VmeCaenV820>
+      <VmeCaenV820 address="0x20030000">
+    	<for var="ch" from="0" to="31">
+    	  <FE ch="ch"><D Device="Scaler" plane="2" ch="ch"/></FE>
+    	</for>
+      </VmeCaenV820>
+    </VmeMaster>
+    <!--________________________________________________________________-->
+  </DAQNode>    
+
+</channel_map>

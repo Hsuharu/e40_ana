@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<unpacker xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	  xsi:noNamespaceSchemaLocation="schema/unpacker.xsd">
+
+  <control>
+    <skip>        0        </skip>
+    <max_loop>    -1        </max_loop>
+    <cout>       /dev/null </cout>
+    <cerr>       /dev/null </cerr>
+    <tout>       /dev/null </tout>
+    <esc>         on       </esc>
+    <print_cycle> 500       </print_cycle>
+    
+    <error_check>
+      <format check="true"/>
+      <slip check="false"/>
+      <disagreement
+       	 local="false"
+	 event="false"
+	 spill="false"/>
+      <show 
+	 all="true" 
+	 always="false"
+	 char_true="!" char_false="."/>
+    </error_check>
+
+  </control>
+
+</unpacker>
+
+<!-- attributes of <error_check> child elements
+     <format> _______________________________________________________________________
+       data format (header, trailer, magic word, data size...) 
+
+       <slip> _________________________________________________________________________
+	 check="true" or "1": check
+	 check="false" or "0": no check
+
+	 tag slip 
+	 check="true" or "1": check
+	 check="false" or "0": no check
+
+	 <disagreement> _________________________________________________________________
+	   check tag disagreement 
+	   local="true" or "1": check local tag
+	   local="false" or "0": loccal tag not checked
+	   
+	   event="true" or "1": check event tag
+	   event="false" or "0": event tag not checked
+	   
+	   spill="true" or "1": check spill tag
+	   spill="false" or "0": spill tag not checked
+
+	   <show> _________________________________________________________________________
+	     call Unpacker::show_summary()
+
+             all="true" or "1": all unpackers 
+	     all="false" or "0": only unpackers which has Node ID (IP-address)
+
+	     always="true" or "1": every event
+	     always="false" or "0": only something bad happened
+	     
+	     char_true="<ASCII char>": true state bits are shown with this char
+	       char_false="<ASCII char>": false state bits are shown with this char
+		 -->

@@ -1,0 +1,28 @@
+start:          Wed Jul 11 15:16:22 2018
+________________________________________________________________
+key:            5304
+________________________________________________________________
+bin:            ./bin/Hodoscope
+conf:           ./param/conf/analyzer_05126.conf
+data:           /ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05304.dat
+unit:           100000
+nevent:         1490613
+prefetch:       /gpfs/home/had/suharu/work/e40/ana/analyzer_jun/runmanager/prefetch/runlist_run05304_Hodoscope.pf
+out:            /ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05304_Hodoscope.root
+________________________________________________________________
+elem(0):        runlist_run05304_Hodoscope_0
+elem(1):        runlist_run05304_Hodoscope_1
+elem(2):        runlist_run05304_Hodoscope_2
+elem(3):        runlist_run05304_Hodoscope_3
+elem(4):        runlist_run05304_Hodoscope_4
+elem(5):        runlist_run05304_Hodoscope_5
+elem(6):        runlist_run05304_Hodoscope_6
+elem(7):        runlist_run05304_Hodoscope_7
+elem(8):        runlist_run05304_Hodoscope_8
+elem(9):        runlist_run05304_Hodoscope_9
+elem(10):       runlist_run05304_Hodoscope_10
+elem(11):       runlist_run05304_Hodoscope_11
+elem(12):       runlist_run05304_Hodoscope_12
+elem(13):       runlist_run05304_Hodoscope_13
+elem(14):       runlist_run05304_Hodoscope_14
+________________________________________________________________

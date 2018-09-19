@@ -1,0 +1,72 @@
+##
+#  file: UserParam_0
+#  date: 2017.04.10
+#
+#
+#######################################################################
+# name		p0	p1	...
+
+### HodoCut ############################
+# K18		min	max
+DeBH1		0.5	4.0
+DeBH2		0.5	4.0
+BTOF		-1.0	1.0
+
+# KURAMA	min	max
+DeTOF		0.3	4.0
+TimeTOF		15.0	35.0
+
+### TimeCut ############################
+# BFT		min	max
+TdcBFT		710	750
+TimeBFT		-4	4
+
+# SCH		min	max
+TdcSCH		400	800
+TimeSCH		-10	10
+
+# FBH		min	max
+TdcFBH		400	800
+TimeFBH		-10	10
+
+### SSD Filter #########################
+# SSD		min	max
+AmpSSD		0	1000
+DeSSDKaon	2500	100000
+DeSSDXi		5000	200000
+RmsSSD		10	1000
+DevSSD		10	1000
+TimeSSD		60	120
+MaxChisqrSSD		300
+
+### Drift Chamber ######################
+# Tdc		min	max
+TdcBC3		630	700
+TdcBC4		630	700
+TdcSDC1		500	690
+TdcSDC2		640	870
+TdcSDC3		450	870
+
+# MaxMultiHit		max
+MaxMultiHitBcOut	10
+MaxMultiHitSsdIn	20
+MaxMultiHitSsdOut	20
+MaxMultiHitSdcIn	5
+MaxMultiHitSdcOut	3
+
+### Tracking ###########################
+# MinLayerTrackSearch
+MinLayerBcOut		9
+MinLayerSdcIn		10
+MinLayerSdcOut		8
+MinLayerSsdIn		4
+MinLayerSsdOut		4
+
+MinLayerBcOutSdcIn	18
+MinLayerBcOutSsdIn	12
+MinLayerSsdOutSdcIn	10
+MinLayerSdcInSdcOut	14
+
+### Misc ###############################
+# Time Offset between BH2 and Target
+OffsetToF		-3.4757
