@@ -810,7 +810,7 @@ dst::DstRead( int ievent )
     HF1( 3211, pCorr );
     HF1( 3212, path );
 
-    //HF1( 3213, m2 );
+    HF1( 3213, m2 );
 
     //     double xTof=(clTof->MeanSeg()-7.5)*70.;
     //     double yTof=(clTof->TimeDif())*800./12.;

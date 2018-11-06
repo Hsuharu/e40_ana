@@ -358,6 +358,8 @@ dst::DstRead( int ievent )
     event.trigflag[i] = tdc;
   }
 
+//  if( event.trigflag[19]<=0 ) return false;
+
   if( event.nhBh1<=0 ) return true;
   HF1( 1, event.status++ );
 

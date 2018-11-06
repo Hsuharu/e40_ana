@@ -61,7 +61,7 @@ enum eTriggerFlag
     kBh2KPs     = 17,
     kBeamPs     = 18,
     kBeamTofPs  = 19,
-    kBeamPiPs   = 10,
+    kBeamPiPs   = 20,
     kBeamPPs    = 21,
     kCoin1Ps    = 22,
     kCoin2Ps    = 23,
