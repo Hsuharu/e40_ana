@@ -269,7 +269,6 @@ EventHodoscope::ProcessingNormal( void )
   gRM.Decode();
 
   event.evnum = gRM.EventNumber();
-  event.evnum = gRM.EventNumber();
   event.spill = gRM.SpillNumber();
   dst.evnum   = gRM.EventNumber();
   dst.spill   = gRM.SpillNumber();

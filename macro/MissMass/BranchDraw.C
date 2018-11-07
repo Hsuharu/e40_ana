@@ -21,7 +21,7 @@
  };
 
 
-void pik( int month, int runnumber){
+void BranchDraw( int month, int runnumber){
 //////////////////////////////////////////////////////////
 //   This file has been automatically generated 
 //     (Tue Nov  6 16:04:20 2018 by ROOT version6.12/06)
@@ -280,124 +280,145 @@ void pik( int month, int runnumber){
 // TTreePlayer->SetBranchStatus("branchname",1);  // activate branchname
    pik->SetBranchStatus("runnum",1);
    pik->SetBranchStatus("evnum",1);
-//   TTreePlayer->SetBranchStatus("spill",&spill);
-//   TTreePlayer->SetBranchStatus("trigpat",trigpat);
-//   TTreePlayer->SetBranchStatus("trigflag",trigflag);
-//   TTreePlayer->SetBranchStatus("nhBh1",&nhBh1);
-//   TTreePlayer->SetBranchStatus("csBh1",csBh1);
-//   TTreePlayer->SetBranchStatus("Bh1Seg",Bh1Seg);
-//   TTreePlayer->SetBranchStatus("tBh1",tBh1);
-//   TTreePlayer->SetBranchStatus("dtBh1",dtBh1);
-//   TTreePlayer->SetBranchStatus("deBh1",deBh1);
-//   TTreePlayer->SetBranchStatus("btof",btof);
-//   TTreePlayer->SetBranchStatus("nhBh2",&nhBh2);
-//   TTreePlayer->SetBranchStatus("csBh2",csBh2);
-//   TTreePlayer->SetBranchStatus("Bh2Seg",Bh2Seg);
-//   TTreePlayer->SetBranchStatus("tBh2",tBh2);
-//   TTreePlayer->SetBranchStatus("t0Bh2",t0Bh2);
-//   TTreePlayer->SetBranchStatus("dtBh2",dtBh2);
-//   TTreePlayer->SetBranchStatus("deBh2",deBh2);
-//   TTreePlayer->SetBranchStatus("nhTof",&nhTof);
-//   TTreePlayer->SetBranchStatus("csTof",csTof);
-//   TTreePlayer->SetBranchStatus("TofSeg",TofSeg);
-//   TTreePlayer->SetBranchStatus("tTof",tTof);
-//   TTreePlayer->SetBranchStatus("dtTof",dtTof);
-//   TTreePlayer->SetBranchStatus("deTof",deTof);
-//   TTreePlayer->SetBranchStatus("nhBft",&nhBft);
-//   TTreePlayer->SetBranchStatus("csBft",csBft);
-//   TTreePlayer->SetBranchStatus("tBft",tBft);
-//   TTreePlayer->SetBranchStatus("wBft",wBft);
-//   TTreePlayer->SetBranchStatus("BftPos",BftPos);
-//   TTreePlayer->SetBranchStatus("nhSch",&nhSch);
-//   TTreePlayer->SetBranchStatus("csSch",csSch);
-//   TTreePlayer->SetBranchStatus("tSch",tSch);
-//   TTreePlayer->SetBranchStatus("wSch",wSch);
-//   TTreePlayer->SetBranchStatus("SchPos",SchPos);
-//   TTreePlayer->SetBranchStatus("nlBcOut",&nlBcOut);
-//   TTreePlayer->SetBranchStatus("ntBcOut",&ntBcOut);
-//   TTreePlayer->SetBranchStatus("nhBcOut",nhBcOut);
-//   TTreePlayer->SetBranchStatus("chisqrBcOut",chisqrBcOut);
-//   TTreePlayer->SetBranchStatus("x0BcOut",x0BcOut);
-//   TTreePlayer->SetBranchStatus("y0BcOut",y0BcOut);
-//   TTreePlayer->SetBranchStatus("u0BcOut",u0BcOut);
-//   TTreePlayer->SetBranchStatus("v0BcOut",v0BcOut);
-//   TTreePlayer->SetBranchStatus("xtgtBcOut",xtgtBcOut);
-//   TTreePlayer->SetBranchStatus("ytgtBcOut",ytgtBcOut);
-//   TTreePlayer->SetBranchStatus("xbh2BcOut",xbh2BcOut);
-//   TTreePlayer->SetBranchStatus("ybh2BcOut",ybh2BcOut);
-//   TTreePlayer->SetBranchStatus("ntK18",&ntK18);
-//   TTreePlayer->SetBranchStatus("nhK18",nhK18);
-//   TTreePlayer->SetBranchStatus("chisqrK18",chisqrK18);
-//   TTreePlayer->SetBranchStatus("pK18",pK18);
-//   TTreePlayer->SetBranchStatus("xtgtK18",xtgtK18);
-//   TTreePlayer->SetBranchStatus("ytgtK18",ytgtK18);
-//   TTreePlayer->SetBranchStatus("utgtK18",utgtK18);
-//   TTreePlayer->SetBranchStatus("vtgtK18",vtgtK18);
-//   TTreePlayer->SetBranchStatus("thetaK18",thetaK18);
-//   TTreePlayer->SetBranchStatus("nlSdcIn",&nlSdcIn);
-//   TTreePlayer->SetBranchStatus("ntSdcIn",&ntSdcIn);
-//   TTreePlayer->SetBranchStatus("nhSdcIn",nhSdcIn);
-//   TTreePlayer->SetBranchStatus("chisqrSdcIn",chisqrSdcIn);
-//   TTreePlayer->SetBranchStatus("x0SdcIn",x0SdcIn);
-//   TTreePlayer->SetBranchStatus("y0SdcIn",y0SdcIn);
-//   TTreePlayer->SetBranchStatus("u0SdcIn",u0SdcIn);
-//   TTreePlayer->SetBranchStatus("v0SdcIn",v0SdcIn);
-//   TTreePlayer->SetBranchStatus("nlSdcOut",&nlSdcOut);
-//   TTreePlayer->SetBranchStatus("ntSdcOut",&ntSdcOut);
-//   TTreePlayer->SetBranchStatus("nhSdcOut",nhSdcOut);
-//   TTreePlayer->SetBranchStatus("chisqrSdcOut",chisqrSdcOut);
-//   TTreePlayer->SetBranchStatus("x0SdcOut",x0SdcOut);
-//   TTreePlayer->SetBranchStatus("y0SdcOut",y0SdcOut);
-//   TTreePlayer->SetBranchStatus("u0SdcOut",u0SdcOut);
-//   TTreePlayer->SetBranchStatus("v0SdcOut",v0SdcOut);
-//   TTreePlayer->SetBranchStatus("ntKurama",&ntKurama);
-//   TTreePlayer->SetBranchStatus("nhKurama",nhKurama);
-//   TTreePlayer->SetBranchStatus("chisqrKurama",chisqrKurama);
-//   TTreePlayer->SetBranchStatus("stof",stof);
-//   TTreePlayer->SetBranchStatus("path",path);
-//   TTreePlayer->SetBranchStatus("pKurama",pKurama);
-//   TTreePlayer->SetBranchStatus("qKurama",qKurama);
-//   TTreePlayer->SetBranchStatus("m2",m2);
-//   TTreePlayer->SetBranchStatus("xtgtKurama",xtgtKurama);
-//   TTreePlayer->SetBranchStatus("ytgtKurama",ytgtKurama);
-//   TTreePlayer->SetBranchStatus("utgtKurama",utgtKurama);
-//   TTreePlayer->SetBranchStatus("vtgtKurama",vtgtKurama);
-//   TTreePlayer->SetBranchStatus("thetaKurama",thetaKurama);
-//   TTreePlayer->SetBranchStatus("xtofKurama",xtofKurama);
-//   TTreePlayer->SetBranchStatus("ytofKurama",ytofKurama);
-//   TTreePlayer->SetBranchStatus("utofKurama",utofKurama);
-//   TTreePlayer->SetBranchStatus("vtofKurama",vtofKurama);
-//   TTreePlayer->SetBranchStatus("tofsegKurama",tofsegKurama);
-//   TTreePlayer->SetBranchStatus("nPi",&nPi);
-//   TTreePlayer->SetBranchStatus("nK",&nK);
-//   TTreePlayer->SetBranchStatus("nPiK",&nPiK);
-//   TTreePlayer->SetBranchStatus("vtx",vtx);
-//   TTreePlayer->SetBranchStatus("vty",vty);
-//   TTreePlayer->SetBranchStatus("vtz",vtz);
-//   TTreePlayer->SetBranchStatus("closeDist",closeDist);
-//   TTreePlayer->SetBranchStatus("theta",theta);
-//   TTreePlayer->SetBranchStatus("MissMass",MissMass);
-//   TTreePlayer->SetBranchStatus("MissMassCorr",MissMassCorr);
-//   TTreePlayer->SetBranchStatus("MissMassCorrDE",MissMassCorrDE);
-//   TTreePlayer->SetBranchStatus("thetaCM",thetaCM);
-//   TTreePlayer->SetBranchStatus("costCM",costCM);
-//   TTreePlayer->SetBranchStatus("xpi",xpi);
-//   TTreePlayer->SetBranchStatus("ypi",ypi);
-//   TTreePlayer->SetBranchStatus("upi",upi);
-//   TTreePlayer->SetBranchStatus("vpi",vpi);
-//   TTreePlayer->SetBranchStatus("xk",xk);
-//   TTreePlayer->SetBranchStatus("yk",yk);
-//   TTreePlayer->SetBranchStatus("uk",uk);
-//   TTreePlayer->SetBranchStatus("vk",vk);
-//   TTreePlayer->SetBranchStatus("pOrg",pOrg);
-//   TTreePlayer->SetBranchStatus("pCalc",pCalc);
-//   TTreePlayer->SetBranchStatus("pCorr",pCorr);
-//   TTreePlayer->SetBranchStatus("pCorrDE",pCorrDE);
+//   pik->SetBranchStatus("spill",1);
+//   pik->SetBranchStatus("trigpat",trigpat);
+//   pik->SetBranchStatus("trigflag",trigflag);
+//   pik->SetBranchStatus("nhBh1",&nhBh1);
+//   pik->SetBranchStatus("csBh1",csBh1);
+//   pik->SetBranchStatus("Bh1Seg",Bh1Seg);
+//   pik->SetBranchStatus("tBh1",tBh1);
+//   pik->SetBranchStatus("dtBh1",dtBh1);
+//   pik->SetBranchStatus("deBh1",deBh1);
+//   pik->SetBranchStatus("btof",btof);
+//   pik->SetBranchStatus("nhBh2",&nhBh2);
+//   pik->SetBranchStatus("csBh2",csBh2);
+//   pik->SetBranchStatus("Bh2Seg",Bh2Seg);
+//   pik->SetBranchStatus("tBh2",tBh2);
+//   pik->SetBranchStatus("t0Bh2",t0Bh2);
+//   pik->SetBranchStatus("dtBh2",dtBh2);
+//   pik->SetBranchStatus("deBh2",deBh2);
+//   pik->SetBranchStatus("nhTof",&nhTof);
+//   pik->SetBranchStatus("csTof",csTof);
+//   pik->SetBranchStatus("TofSeg",TofSeg);
+//   pik->SetBranchStatus("tTof",tTof);
+//   pik->SetBranchStatus("dtTof",dtTof);
+//   pik->SetBranchStatus("deTof",deTof);
+//   pik->SetBranchStatus("nhBft",&nhBft);
+//   pik->SetBranchStatus("csBft",csBft);
+//   pik->SetBranchStatus("tBft",tBft);
+//   pik->SetBranchStatus("wBft",wBft);
+//   pik->SetBranchStatus("BftPos",BftPos);
+//   pik->SetBranchStatus("nhSch",&nhSch);
+//   pik->SetBranchStatus("csSch",csSch);
+//   pik->SetBranchStatus("tSch",tSch);
+//   pik->SetBranchStatus("wSch",wSch);
+//   pik->SetBranchStatus("SchPos",SchPos);
+//   pik->SetBranchStatus("nlBcOut",&nlBcOut);
+//   pik->SetBranchStatus("ntBcOut",&ntBcOut);
+//   pik->SetBranchStatus("nhBcOut",nhBcOut);
+//   pik->SetBranchStatus("chisqrBcOut",chisqrBcOut);
+//   pik->SetBranchStatus("x0BcOut",x0BcOut);
+//   pik->SetBranchStatus("y0BcOut",y0BcOut);
+//   pik->SetBranchStatus("u0BcOut",u0BcOut);
+//   pik->SetBranchStatus("v0BcOut",v0BcOut);
+//   pik->SetBranchStatus("xtgtBcOut",xtgtBcOut);
+//   pik->SetBranchStatus("ytgtBcOut",ytgtBcOut);
+//   pik->SetBranchStatus("xbh2BcOut",xbh2BcOut);
+//   pik->SetBranchStatus("ybh2BcOut",ybh2BcOut);
+//   pik->SetBranchStatus("ntK18",&ntK18);
+//   pik->SetBranchStatus("nhK18",nhK18);
+//   pik->SetBranchStatus("chisqrK18",chisqrK18);
+//   pik->SetBranchStatus("pK18",pK18);
+//   pik->SetBranchStatus("xtgtK18",xtgtK18);
+//   pik->SetBranchStatus("ytgtK18",ytgtK18);
+//   pik->SetBranchStatus("utgtK18",utgtK18);
+//   pik->SetBranchStatus("vtgtK18",vtgtK18);
+//   pik->SetBranchStatus("thetaK18",thetaK18);
+//   pik->SetBranchStatus("nlSdcIn",&nlSdcIn);
+//   pik->SetBranchStatus("ntSdcIn",&ntSdcIn);
+//   pik->SetBranchStatus("nhSdcIn",nhSdcIn);
+//   pik->SetBranchStatus("chisqrSdcIn",chisqrSdcIn);
+//   pik->SetBranchStatus("x0SdcIn",x0SdcIn);
+//   pik->SetBranchStatus("y0SdcIn",y0SdcIn);
+//   pik->SetBranchStatus("u0SdcIn",u0SdcIn);
+//   pik->SetBranchStatus("v0SdcIn",v0SdcIn);
+//   pik->SetBranchStatus("nlSdcOut",&nlSdcOut);
+//   pik->SetBranchStatus("ntSdcOut",&ntSdcOut);
+//   pik->SetBranchStatus("nhSdcOut",nhSdcOut);
+//   pik->SetBranchStatus("chisqrSdcOut",chisqrSdcOut);
+//   pik->SetBranchStatus("x0SdcOut",x0SdcOut);
+//   pik->SetBranchStatus("y0SdcOut",y0SdcOut);
+//   pik->SetBranchStatus("u0SdcOut",u0SdcOut);
+//   pik->SetBranchStatus("v0SdcOut",v0SdcOut);
+//   pik->SetBranchStatus("ntKurama",&ntKurama);
+//   pik->SetBranchStatus("nhKurama",nhKurama);
+//   pik->SetBranchStatus("chisqrKurama",chisqrKurama);
+//   pik->SetBranchStatus("stof",stof);
+//   pik->SetBranchStatus("path",path);
+//   pik->SetBranchStatus("pKurama",pKurama);
+//   pik->SetBranchStatus("qKurama",qKurama);
+//   pik->SetBranchStatus("m2",m2);
+//   pik->SetBranchStatus("xtgtKurama",xtgtKurama);
+//   pik->SetBranchStatus("ytgtKurama",ytgtKurama);
+//   pik->SetBranchStatus("utgtKurama",utgtKurama);
+//   pik->SetBranchStatus("vtgtKurama",vtgtKurama);
+//   pik->SetBranchStatus("thetaKurama",thetaKurama);
+//   pik->SetBranchStatus("xtofKurama",xtofKurama);
+//   pik->SetBranchStatus("ytofKurama",ytofKurama);
+//   pik->SetBranchStatus("utofKurama",utofKurama);
+//   pik->SetBranchStatus("vtofKurama",vtofKurama);
+//   pik->SetBranchStatus("tofsegKurama",tofsegKurama);
+//   pik->SetBranchStatus("nPi",&nPi);
+//   pik->SetBranchStatus("nK",&nK);
+//   pik->SetBranchStatus("nPiK",&nPiK);
+//   pik->SetBranchStatus("vtx",vtx);
+//   pik->SetBranchStatus("vty",vty);
+//   pik->SetBranchStatus("vtz",vtz);
+//   pik->SetBranchStatus("closeDist",closeDist);
+//   pik->SetBranchStatus("theta",theta);
+//   pik->SetBranchStatus("MissMass",MissMass);
+//   pik->SetBranchStatus("MissMassCorr",MissMassCorr);
+//   pik->SetBranchStatus("MissMassCorrDE",MissMassCorrDE);
+//   pik->SetBranchStatus("thetaCM",thetaCM);
+//   pik->SetBranchStatus("costCM",costCM);
+//   pik->SetBranchStatus("xpi",xpi);
+//   pik->SetBranchStatus("ypi",ypi);
+//   pik->SetBranchStatus("upi",upi);
+//   pik->SetBranchStatus("vpi",vpi);
+//   pik->SetBranchStatus("xk",xk);
+//   pik->SetBranchStatus("yk",yk);
+//   pik->SetBranchStatus("uk",uk);
+//   pik->SetBranchStatus("vk",vk);
+//   pik->SetBranchStatus("pOrg",pOrg);
+//   pik->SetBranchStatus("pCalc",pCalc);
+//   pik->SetBranchStatus("pCorr",pCorr);
+//   pik->SetBranchStatus("pCorrDE",pCorrDE);
+
+
+// Hist Identification
+  TH1D *Hist[100];
+  Hist[0] = new TH1D(Form("Hist%d",0),Form("Hist%d",0),300000,0,300000);
+
+// Para Identification
+   int pre_evnum=0;
+
 
    Long64_t nentries = pik->GetEntries();
 
    Long64_t nbytes = 0;
    for (Long64_t i=0; i<nentries;i++) {
       nbytes += pik->GetEntry(i);
+      if(evnum!=0){
+      if(pre_evnum!=evnum-1){
+        cout << pre_evnum <<endl;
+      }
+      }
+
+      Hist[0]->Fill(evnum);
+      pre_evnum = evnum;
+      
    }
+   Hist[0]->Draw();
 }
+
+
