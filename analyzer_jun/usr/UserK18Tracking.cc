@@ -61,27 +61,27 @@ VEvent::~VEvent( void )
 //______________________________________________________________________________
 class EventK18Tracking : public VEvent
 {
-private:
-  RawData      *rawData;
-  DCAnalyzer   *DCAna;
-  HodoAnalyzer *hodoAna;
+  private:
+    RawData      *rawData;
+    DCAnalyzer   *DCAna;
+    HodoAnalyzer *hodoAna;
 
-public:
-        EventK18Tracking( void );
-       ~EventK18Tracking( void );
-  bool  ProcessingBegin();
-  bool  ProcessingEnd();
-  bool  ProcessingNormal();
-  bool  InitializeHistograms();
-  void  InitializeEvent();
+  public:
+    EventK18Tracking( void );
+    ~EventK18Tracking( void );
+    bool  ProcessingBegin();
+    bool  ProcessingEnd();
+    bool  ProcessingNormal();
+    bool  InitializeHistograms();
+    void  InitializeEvent();
 };
 
 //______________________________________________________________________________
-EventK18Tracking::EventK18Tracking( void )
-  : VEvent(),
-    rawData(0),
-    DCAna( new DCAnalyzer ),
-    hodoAna( new HodoAnalyzer )
+  EventK18Tracking::EventK18Tracking( void )
+: VEvent(),
+  rawData(0),
+  DCAna( new DCAnalyzer ),
+  hodoAna( new HodoAnalyzer )
 {
 }
 
@@ -157,13 +157,13 @@ namespace root
   TTree *tree;
   const int BFTHid = 10000;
   enum eParticle
-    {
-      kKaon, kPion, nParticle
-    };
+  {
+    kKaon, kPion, nParticle
+  };
 }
 
 //______________________________________________________________________________
-bool
+  bool
 EventK18Tracking::ProcessingBegin( void )
 {
   InitializeEvent();
@@ -171,7 +171,7 @@ EventK18Tracking::ProcessingBegin( void )
 }
 
 //______________________________________________________________________________
-bool
+  bool
 EventK18Tracking::ProcessingNormal( void )
 {
   const std::string funcname("["+class_name+"::"+__func__+"]");
@@ -209,10 +209,10 @@ EventK18Tracking::ProcessingNormal( void )
       int seg = hit->SegmentId()+1;
       int tdc = hit->GetTdc1();
       if( tdc ){
-	event.trigpat[trignhits++] = seg;
-	event.trigflag[seg-1]      = tdc;
-	HF1( 100, seg-1 );
-	HF1( 100+seg, tdc );
+        event.trigpat[trignhits++] = seg;
+        event.trigflag[seg-1]      = tdc;
+        HF1( 100, seg-1 );
+        HF1( 100+seg, tdc );
       }
     }
     event.trignhits = trignhits;
@@ -224,8 +224,8 @@ EventK18Tracking::ProcessingNormal( void )
 
   ////////// BH2 time 0
   hodoAna->DecodeBH2Hits(rawData);
-  int nhBh2 = hodoAna->GetNHitsBH2();
 #if HodoCut
+  int nhBh2 = hodoAna->GetNHitsBH2();
   if(nhBh2==0) return true;
 #endif
   HF1(1, 2);
@@ -245,8 +245,8 @@ EventK18Tracking::ProcessingNormal( void )
 
   ////////// BH1 Analysis
   hodoAna->DecodeBH1Hits(rawData);
-  int nhBh1 = hodoAna->GetNHitsBH1();
 #if HodoCut
+  int nhBh1 = hodoAna->GetNHitsBH1();
   if(nhBh1==0) return true;
 #endif
   HF1(1, 4);
@@ -285,14 +285,14 @@ EventK18Tracking::ProcessingNormal( void )
       event.bft_clsize[i] = clsize;
       event.bft_ctime[i]  = ctime;
       event.bft_clpos[i]  = pos;
-      
+
       if(btof0_seg > 0 && ncl != 1){
-	if(gBH1Mth.Judge(pos, btof0_seg)){
-	  event.bft_bh1mth[i] = 1;
-	  xCand.push_back( pos );
-	}
+        if(gBH1Mth.Judge(pos, btof0_seg)){
+          event.bft_bh1mth[i] = 1;
+          xCand.push_back( pos );
+        }
       }else{
-	xCand.push_back( pos );
+        xCand.push_back( pos );
       }
 
       HF1( BFTHid +102, clsize );
@@ -336,8 +336,8 @@ EventK18Tracking::ProcessingNormal( void )
   event.ntBcOut = ntBcOut;
   if(ntBcOut > MaxHits){
     std::cout << "#W " << funcname
-	      << " Too many BcOut tracks : ntBcOut = "
-	      << ntBcOut << std::endl;
+      << " Too many BcOut tracks : ntBcOut = "
+      << ntBcOut << std::endl;
     ntBcOut = MaxHits;
   }
   HF1( 30, double(ntBcOut) );
@@ -378,7 +378,7 @@ EventK18Tracking::ProcessingNormal( void )
   int ntK18 = DCAna->GetNTracksK18D2U();
   if(ntK18 > MaxHits){
     std::cout << "#W " << funcname << " too many ntK18 "
-	      << ntK18 << "/" << MaxHits << std::endl;
+      << ntK18 << "/" << MaxHits << std::endl;
     ntK18 = MaxHits;
   }
   event.ntK18 = ntK18;
@@ -433,7 +433,7 @@ EventK18Tracking::ProcessingNormal( void )
 }
 
 //______________________________________________________________________________
-bool
+  bool
 EventK18Tracking::ProcessingEnd( void )
 {
   tree->Fill();
@@ -441,7 +441,7 @@ EventK18Tracking::ProcessingEnd( void )
 }
 
 //______________________________________________________________________________
-void
+  void
 EventK18Tracking::InitializeEvent( void )
 {
   event.evnum     =  0;
@@ -500,7 +500,7 @@ EventK18Tracking::InitializeEvent( void )
 }
 
 //______________________________________________________________________________
-VEvent*
+  VEvent*
 ConfMan::EventAllocator( void )
 {
   return new EventK18Tracking;
@@ -526,7 +526,7 @@ namespace
   const double MaxTime  =  500.;
 }
 //______________________________________________________________________________
-bool
+  bool
 ConfMan:: InitializeHistograms( void )
 {
   HB1(  1, "Status",  30,   0., 30. );
@@ -546,7 +546,7 @@ ConfMan:: InitializeHistograms( void )
   HB1( BFTHid +102, "BFT Cluster Size", 5, 0, 5 );
   HB1( BFTHid +103, "BFT CTime (Cluster)", NbinTime, MinTime, MaxTime );
   HB1( BFTHid +104, "BFT Cluster Position",
-       NumOfSegBFT, -0.5*(double)NumOfSegBFT, 0.5*(double)NumOfSegBFT );
+      NumOfSegBFT, -0.5*(double)NumOfSegBFT, 0.5*(double)NumOfSegBFT );
   HB1( BFTHid +105, "BFT NCluster [TimeCut && BH1Matching]", 10, 0, 10 );
 
   // BcOut
@@ -635,7 +635,7 @@ ConfMan:: InitializeHistograms( void )
 }
 
 //______________________________________________________________________________
-bool
+  bool
 ConfMan::InitializeParameterFiles( void )
 {
   return
@@ -651,7 +651,7 @@ ConfMan::InitializeParameterFiles( void )
 }
 
 //______________________________________________________________________________
-bool
+  bool
 ConfMan::FinalizeProcess( void )
 {
   return true;

@@ -35,8 +35,8 @@ namespace
   using namespace root;
   const std::string& class_name("MassTrigger");
   RMAnalyzer&         gRM          = RMAnalyzer::GetInstance();
-  const MsTParamMan&  gMsT         = MsTParamMan::GetInstance();
-  const UserParamMan& gUser        = UserParamMan::GetInstance();
+//  const MsTParamMan&  gMsT         = MsTParamMan::GetInstance();
+//  const UserParamMan& gUser        = UserParamMan::GetInstance();
   const hddaq::unpacker::UnpackerManager& gUnpacker
   = hddaq::unpacker::GUnpacker::get_instance();
 }

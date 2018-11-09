@@ -205,9 +205,9 @@ EventBcOutTracking::ProcessingNormal( void )
     BH2Hit *hit = hodoAna->GetHitBH2(i);
     if(!hit) continue;
     double seg = hit->SegmentId()+1;
-    double  mt = hit->MeanTime();
+//    double  mt = hit->MeanTime();
     double cmt = hit->CMeanTime();
-    double ct0 = hit->CTime0();
+//    double ct0 = hit->CTime0();
     double dE  = hit->DeltaE();
 
 #if HodoCut

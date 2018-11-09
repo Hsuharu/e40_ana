@@ -27,8 +27,8 @@ namespace
   using namespace dst;
   const std::string& class_name("DstSkeleton");
   ConfMan&            gConf = ConfMan::GetInstance();
-  const DCGeomMan&    gGeom = DCGeomMan::GetInstance();
-  const UserParamMan& gUser = UserParamMan::GetInstance();
+//  const DCGeomMan&    gGeom = DCGeomMan::GetInstance();
+//  const UserParamMan& gUser = UserParamMan::GetInstance();
 }
 
 namespace dst

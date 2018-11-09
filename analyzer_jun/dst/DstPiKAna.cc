@@ -35,7 +35,7 @@ namespace
   using namespace dst;
   const std::string& class_name("DstPiKAna");
   ConfMan&            gConf = ConfMan::GetInstance();
-  const DCGeomMan&    gGeom = DCGeomMan::GetInstance();
+//  const DCGeomMan&    gGeom = DCGeomMan::GetInstance();
   // const MsTParamMan&  gMsT  = MsTParamMan::GetInstance();
   const UserParamMan& gUser = UserParamMan::GetInstance();
 }

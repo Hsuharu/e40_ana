@@ -347,7 +347,9 @@ EventKuramaTracking::ProcessingNormal( void )
   int nhTof = hodoAna->GetNClustersTOF();
   event.nhTof = nhTof;
   {
+#if HodoCut
     int nhOk = 0;
+#endif
     for( int i=0; i<nhTof; ++i ){
       HodoCluster *hit = hodoAna->GetClusterTOF(i);
       double seg = hit->MeanSeg()+1;

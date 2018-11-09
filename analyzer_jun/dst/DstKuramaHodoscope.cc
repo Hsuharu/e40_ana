@@ -29,7 +29,7 @@ namespace
   using namespace dst;
   const std::string& class_name("DstKuramaHodoscope");
   ConfMan&            gConf = ConfMan::GetInstance();
-  const DCGeomMan&    gGeom = DCGeomMan::GetInstance();
+//  const DCGeomMan&    gGeom = DCGeomMan::GetInstance();
   const UserParamMan& gUser = UserParamMan::GetInstance();
 }
 

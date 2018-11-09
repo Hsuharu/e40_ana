@@ -30,7 +30,9 @@ namespace
   using namespace root;
   const std::string& classname("EventSdcInTracking");
   RMAnalyzer&         gRM   = RMAnalyzer::GetInstance();
+#if HodoCut
   const UserParamMan& gUser = UserParamMan::GetInstance();
+#endif
 }
 
 //______________________________________________________________________________

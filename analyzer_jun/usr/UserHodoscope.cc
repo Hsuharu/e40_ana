@@ -813,27 +813,27 @@ EventHodoscope::ProcessingNormal( void )
       double ms = cluster->MeanSeg()+1;
       double cmt= cluster->CMeanTime();
       double de = cluster->DeltaE();
-      double mt = cluster->MeanTime();
+//      double mt = cluster->MeanTime();
       HF1( BH2Hid+31, double(cs) );
       HF1( BH2Hid+32, ms-0.5 );
       HF1( BH2Hid+33, cmt ); HF1( BH2Hid+34, de );
       if( de>0.5 ){
-	++nc2; HF1( BH2Hid+36, cmt );
+        ++nc2; HF1( BH2Hid+36, cmt );
       }
 
       for( int i2=0; i2<nc; ++i2 ){
-	if( i2==i ) continue;
-	BH2Cluster *cl2=hodoAna->GetClusterBH2(i2);
-	if(!cl2) continue;
-	double ms2=cl2->MeanSeg()+1, cmt2=cl2->CMeanTime(),
-	  de2=cl2->DeltaE();
-	if( de<=0.5 || de2<=0.5 ) continue;
-	HF2( BH2Hid+41, ms-0.5, ms2-0.5 );
-	HF2( BH2Hid+42, cmt, cmt2 );
-	HF1( BH2Hid+43, cmt2-cmt );
-	if( std::abs(cmt2-cmt)<2.0 ){
-	  HF2( BH2Hid+44, ms-0.5, ms2-0.5 );
-	}
+        if( i2==i ) continue;
+        BH2Cluster *cl2=hodoAna->GetClusterBH2(i2);
+        if(!cl2) continue;
+        double ms2=cl2->MeanSeg()+1, cmt2=cl2->CMeanTime(),
+               de2=cl2->DeltaE();
+        if( de<=0.5 || de2<=0.5 ) continue;
+        HF2( BH2Hid+41, ms-0.5, ms2-0.5 );
+        HF2( BH2Hid+42, cmt, cmt2 );
+        HF1( BH2Hid+43, cmt2-cmt );
+        if( std::abs(cmt2-cmt)<2.0 ){
+          HF2( BH2Hid+44, ms-0.5, ms2-0.5 );
+        }
       }//for(i2)
     }//for(i)
     HF1( BH2Hid+35, double(nc2) );

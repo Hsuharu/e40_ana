@@ -96,7 +96,7 @@ UserEventDisplay::ProcessingNormal( void )
 {
   static const std::string func_name("["+class_name+"::"+__func__+"]");
 
-  static const double MaxMultiHitBcOut  = gUser.GetParameter("MaxMultiHitBcOut");
+//  static const double MaxMultiHitBcOut  = gUser.GetParameter("MaxMultiHitBcOut");
   static const double MaxMultiHitSdcIn  = gUser.GetParameter("MaxMultiHitSdcIn");
   static const double MaxMultiHitSdcOut = gUser.GetParameter("MaxMultiHitSdcOut");
 
@@ -135,10 +135,10 @@ UserEventDisplay::ProcessingNormal( void )
   static const int IdSDC1 = gGeom.DetectorId("SDC1-X1");
   static const int IdSDC2 = gGeom.DetectorId("SDC2-X1");
   static const int IdSDC3 = gGeom.DetectorId("SDC3-X1");
-  static const int PlOffsBcOut =  gGeom.DetectorId("BC3-X1");
-  static const int IdBC3 = gGeom.DetectorId("BC3-X1") - PlOffsBcOut + 1;
-  static const int IdBC4 = gGeom.DetectorId("BC4-X1") - PlOffsBcOut + 1;
-  static const int kSkip = 1;
+//  static const int PlOffsBcOut =  gGeom.DetectorId("BC3-X1");
+//  static const int IdBC3 = gGeom.DetectorId("BC3-X1") - PlOffsBcOut + 1;
+//  static const int IdBC4 = gGeom.DetectorId("BC4-X1") - PlOffsBcOut + 1;
+//  static const int kSkip = 1;
 
   rawData = new RawData;
   rawData->DecodeHits();
@@ -226,15 +226,15 @@ UserEventDisplay::ProcessingNormal( void )
     BH2Hit *hit = hodoAna->GetHitBH2(i);
     if(!hit) continue;
     double seg = hit->SegmentId()+1;
-    double de  = hit->DeltaE();
 #if HodoCut
+    double de  = hit->DeltaE();
     if( de<MinDeBH2 || MaxDeBH2<de ) continue;
 #endif
 
     int multi = hit->GetNumOfHit();
     for (int m=0; m<multi; m++) {
       double mt  = hit->MeanTime(m);
-      double cmt = hit->CMeanTime(m);
+//      double cmt = hit->CMeanTime(m);
       double ct0 = hit->CTime0(m);
       if( std::abs(mt)<std::abs(min_time) ){
 	min_time = mt;
@@ -749,7 +749,7 @@ UserEventDisplay::ProcessingNormal( void )
     }
   }
   
-  bool flagFBT=false;
+//  bool flagFBT=false;
   {
     ////////// FBT1
     hodoAna->DecodeFBT1Hits( rawData );
@@ -771,10 +771,10 @@ UserEventDisplay::ProcessingNormal( void )
 	    double leading  = hit->GetLeading(m);
 	    if( 505<leading && leading<MaxTdcFBT1 ){
 	      hit_flag = true;
-	      flagFBT = true;
+//	      flagFBT = true;
 	      //std::cout << "FBT1 : " << seg << ", " << leading<< std::endl;
 	    } else if( MinTdcFBT1 <leading && leading<MaxTdcFBT1 ){
-	      flagFBT = true;
+//	      flagFBT = true;
 	      hit_flag2 = true;
 	      //std::cout << "FBT1 : " << seg << ", " << leading<< std::endl;
 	    } 
@@ -817,11 +817,11 @@ UserEventDisplay::ProcessingNormal( void )
 	  for( int m=0; m<mh; ++m ){
 	    double leading  = hit->GetLeading(m);
 	    if( 505<leading && leading<MaxTdcFBT2 ){
-	      flagFBT = true;
+//	      flagFBT = true;
 	      hit_flag = true;
 	      std::cout << "FBT2 : " << seg << ", " << leading<< std::endl;
 	    } else if( MinTdcFBT2 <leading && leading<MaxTdcFBT2 ){
-	      flagFBT = true;
+//	      flagFBT = true;
 	      hit_flag2 = true;
 	      std::cout << "FBT2 : " << seg << ", " << leading<< std::endl;
 	    }
@@ -860,9 +860,9 @@ UserEventDisplay::ProcessingNormal( void )
       int nhIn=contIn.size();
       //std::cout << "layer : " << layer << std::endl;
       for( int i=0; i<nhIn; ++i ){
-	 DCHit  *hit  = contIn[i];
-	 double  wire = hit->GetWire();
-	 int     mhit = hit->GetTdcSize();
+//	 DCHit  *hit  = contIn[i];
+//	 double  wire = hit->GetWire();
+//	 int     mhit = hit->GetTdcSize();
 	 //std::cout << "wire " << wire << " : ";
 
 	 //for (int j=0; j<mhit; j++) {
@@ -1000,9 +1000,9 @@ UserEventDisplay::ProcessingNormal( void )
       for( int ih=0; ih<nh; ++ih ){
 	DCLTrackHit *hit=tp->GetHit(ih);
 	if( !hit ) continue;
-	int layerId = hit->GetLayer();
-	double wire=hit->GetWire();
-	double res=hit->GetResidual();
+//	int layerId = hit->GetLayer();
+//	double wire=hit->GetWire();
+//	double res=hit->GetResidual();
 	//std::cout << "layer = " << layerId << ", wire = " << wire << ", res = " << res << std::endl;
       }
       if( tp ) gEvDisp.DrawSdcInLocalTrack( tp );
@@ -1023,14 +1023,14 @@ UserEventDisplay::ProcessingNormal( void )
       DCLocalTrack *tp = DCAna->GetTrackSdcOut( it );
 
       int nh=tp->GetNHit();
-      double chisqr=tp->GetChiSquare();
+//      double chisqr=tp->GetChiSquare();
       //std::cout << "SdcOut " << it << "-th track, chi2 = " << chisqr << std::endl; 
       for( int ih=0; ih<nh; ++ih ){
 	DCLTrackHit *hit=tp->GetHit(ih);
 	if( !hit ) continue;
-	int layerId = hit->GetLayer();
-	double wire=hit->GetWire();
-	double res=hit->GetResidual();
+//	int layerId = hit->GetLayer();
+//	double wire=hit->GetWire();
+//	double res=hit->GetResidual();
 	//std::cout << "layer = " << layerId << ", wire = " << wire << ", res = " << res << std::endl;
       }
     }

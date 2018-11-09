@@ -157,10 +157,10 @@ EventSdcOutTracking::ProcessingNormal( void )
   static const double MaxDeTOF   = gUser.GetParameter("DeTOF",   1);
   static const double MinTimeTOF = gUser.GetParameter("TimeTOF", 0);
   static const double MaxTimeTOF = gUser.GetParameter("TimeTOF", 1);
-  static const double MinTimeFBT1 = gUser.GetParameter("TimeFBT1", 0);
-  static const double MaxTimeFBT1 = gUser.GetParameter("TimeFBT1", 1);
-  static const double MinTimeFBT2 = gUser.GetParameter("TimeFBT2", 0);
-  static const double MaxTimeFBT2 = gUser.GetParameter("TimeFBT2", 1);
+//  static const double MinTimeFBT1 = gUser.GetParameter("TimeFBT1", 0);
+//  static const double MaxTimeFBT1 = gUser.GetParameter("TimeFBT1", 1);
+//  static const double MinTimeFBT2 = gUser.GetParameter("TimeFBT2", 0);
+//  static const double MaxTimeFBT2 = gUser.GetParameter("TimeFBT2", 1);
   static const double dTOfs      = gUser.GetParameter("dTOfs",   0);
   static const double MinTimeL1  = gUser.GetParameter("TimeL1",  0);
   static const double MaxTimeL1  = gUser.GetParameter("TimeL1",  1);

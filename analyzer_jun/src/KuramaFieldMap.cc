@@ -20,7 +20,7 @@
 namespace
 {
   const std::string& class_name("KuramaFieldMap");
-  const ConfMan& gConf = ConfMan::GetInstance();
+//  const ConfMan& gConf = ConfMan::GetInstance();
   const double& valueNMR  = ConfMan::Get<double>("FLDNMR");
   const double& valueCalc = ConfMan::Get<double>("FLDCALC");
 }

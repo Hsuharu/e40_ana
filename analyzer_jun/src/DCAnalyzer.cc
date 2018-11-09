@@ -57,7 +57,7 @@ namespace
 {
   using namespace K18Parameter;
   const std::string& class_name("DCAnalyzer");
-  const ConfMan&      gConf = ConfMan::GetInstance();
+//  const ConfMan&      gConf = ConfMan::GetInstance();
   const DCGeomMan&    gGeom = DCGeomMan::GetInstance();
   const UserParamMan& gUser = UserParamMan::GetInstance();
 

@@ -184,6 +184,7 @@ namespace
   }
 
   //_____________________________________________________________________
+#if 0
   void
   DebugPrint( const IndexList& nCombi,
 	      const std::string& func_name="",
@@ -206,8 +207,10 @@ namespace
     hddaq::cout << ": total = " << n << ", " << nn << ", " << std::endl;
     return;
   }
+#endif
 
   //_____________________________________________________________________
+#if 0
   void
   DebugPrint( const std::vector<DCLocalTrack*>& trackCont,
 	      const std::string& arg="" )
@@ -225,8 +228,10 @@ namespace
     }
     hddaq::cout << std::endl;
   }
+#endif
 
   //_____________________________________________________________________
+#if 0
   void
   DebugPrint( const IndexList& nCombi,
 	      const std::vector<ClusterList>& CandCont,
@@ -250,6 +255,7 @@ namespace
       hddaq::cout << std::endl;
     }
   }
+#endif
 
   //______________________________________________________________________________
   template <class Functor>
@@ -872,19 +878,19 @@ namespace track
 	( track->GetWire(IdTOF_UX)==track->GetWire(IdTOF_UY) ) ||
 	( track->GetWire(IdTOF_DX)==track->GetWire(IdTOF_DY) );
       
-      int Track[20]={0};
-      int layer;
-      for( int i=0; i<(track->GetNHit()); ++i){
-	layer=track->GetHit(i)->GetLayer();
-	Track[layer]=1;
-      }
+//      int Track[20]={0};
+//      int layer;
+//      for( int i=0; i<(track->GetNHit()); ++i){
+//	layer=track->GetHit(i)->GetLayer();
+//	Track[layer]=1;
+//      }
 
-      bool FBT = 
-	( Track[80]==1 && Track[82]==1 ) || ( Track[81]==1 && Track[83]==1 ) ||
-	( Track[84]==1 && Track[86]==1 ) || ( Track[85]==1 && Track[87]==1 ) ;
-      
-      bool DC23x_off =
-	( Track[31]==0 && Track[32]==0 && Track[37]==0 && Track[38]==0 );
+//      bool FBT = 
+//	( Track[80]==1 && Track[82]==1 ) || ( Track[81]==1 && Track[83]==1 ) ||
+//	( Track[84]==1 && Track[86]==1 ) || ( Track[85]==1 && Track[87]==1 ) ;
+//      
+//      bool DC23x_off =
+//	( Track[31]==0 && Track[32]==0 && Track[37]==0 && Track[38]==0 );
       
 
       if( TOFSegXYMatching &&
