@@ -285,13 +285,13 @@ void mtxflg_tof(int month, int runnum){
   
   TH1D *TofNhits = new TH1D("TofNhits","TofNhits",20,0,20);
 
-  TH1D *TofMt[NumOfSegTof];
-  TH1D *TofSegMultiplicity[NumOfSegTof];
-  TH1D *TofHitPat[NumOfSegTof];
-  for(int i=0;i<NumOfSegTof;i++){
+  TH1D *TofMt[NumOfSegTOF];
+  TH1D *TofSegMultiplicity[NumOfSegTOF];
+  TH1D *TofHitPat[NumOfSegTOF];
+  for(int i=0;i<NumOfSegTOF;i++){
     TofMt[i]= new TH1D(Form("TofMt%d",i+1),Form("TofMt%d",i+1),100,-10,10);
     TofSegMultiplicity[i]= new TH1D(Form("TofSegMultiplicity%d",i+1),Form("TofSegMultiplicity%d",i+1),10,0,10);
-    TofHitPat[i]= new TH1D(Form("TofHitPat%d",i+1),Form("TofHitPat%d",i+1),NumOfSegTof,0,NumOfSegTof);
+    TofHitPat[i]= new TH1D(Form("TofHitPat%d",i+1),Form("TofHitPat%d",i+1),NumOfSegTOF,0,NumOfSegTOF);
   }
 
   TH1D *TofMtOr = new TH1D("TofMtOr","TofMtOr",20,0,20);
@@ -312,16 +312,16 @@ void mtxflg_tof(int month, int runnum){
 
       TofNhits->Fill(tofnhits);
 
-      for(int i=0; i<NumOfSegTof; i++){
+      for(int i=0; i<NumOfSegTOF; i++){
         TofHitPat[i]->Fill(tofhitpat[i]);
         bool flag=false;
-        for(int i=0; i<16; i++){
+        for(int j=0; j<16; j++){
           TofMt[i]->Fill(tofmt[i][j]);
           TofMtOr->Fill(tofmt[i][j]);
-          if(tofmt[i][j]=-999){
+          if(tofmt[i][j]==-999){
             if(!flag){
               TofSegMultiplicity[i]->Fill(j-1);
-              TofSegMultiplicityOr->Fill(j-1);
+              TofMultiplicityOr->Fill(j-1);
               flag=true;
             }
           }
@@ -333,10 +333,12 @@ void mtxflg_tof(int month, int runnum){
   TCanvas *c1 = new TCanvas("c1","c1",1200,900);
   TCanvas *c2 = new TCanvas("c2","c2",1200,900);
   TCanvas *c3 = new TCanvas("c3","c3",1200,900);
+  TCanvas *c4 = new TCanvas("c4","c4",1200,900);
 
 //  c1->Divide();
   c2->Divide(6,3);
   c3->Divide(4,4);
+  c4->Divide(4,3);
 
    c1->Print(pdf+"["); 
 
@@ -358,6 +360,31 @@ void mtxflg_tof(int month, int runnum){
     }
     c2->Print(pdf);
   }
+
+  c1->cd();
+  TofNhits->Draw();
+
+  for(int j=0; j<2; j++){
+    for(int i=0; i<12; i++){
+      c4->cd(i+1);
+      TofMt[j*12+i]->Draw();
+    }
+    c4->Print(pdf);
+  }
+
+  for(int j=0; j<2; j++){
+    for(int i=0; i<12; i++){
+      c4->cd(i+1);
+      TofSegMultiplicity[j*12+i]->Draw();
+    }
+    c4->Print(pdf);
+  }
+
+  c1->cd();
+  TofMtOr->Draw();
+  c1->Print(pdf);
+  TofMultiplicityOr->Draw();
+    
   c1->Print(pdf+"]"); 
 
 }
