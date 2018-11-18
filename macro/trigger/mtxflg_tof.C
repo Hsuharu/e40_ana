@@ -316,7 +316,7 @@ void mtxflg_tof(int month, int runnum){
 
   TH1D *TrigFlag[32];
   for(int i=0;i<32;i++){
-    TrigFlag[i]= new TH1D(Form("TrigFlag %s",TriggerFlag[i]),Form("TrigFlag %s",TriggerFlag[i]),1000,0,4000);
+    TrigFlag[i]= new TH1D(Form("TrigFlag %s",TriggerFlag[i]),Form("TrigFlag %s",TriggerFlag[i]),1000,0,2100);
   }
   
   TH1D *TofNhits = new TH1D("TofNhits","TofNhits",20,0,20);
@@ -339,10 +339,10 @@ void mtxflg_tof(int month, int runnum){
    for (Long64_t s=0; s<nentries;s++) {
       nbytes += tree->GetEntry(s);
       TrigNhits->Fill(trignhits);
-      for(int i=0; i<18; i++){
+      for(int i=0; i<32; i++){
         TrigPat[i]->Fill(trigpat[i]);
       }
-      for(int i=0; i<18; i++){
+      for(int i=0; i<32; i++){
         TrigFlag[i]->Fill(trigflag[i]);
       }
 
