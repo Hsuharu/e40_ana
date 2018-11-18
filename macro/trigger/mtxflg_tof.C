@@ -399,9 +399,10 @@ void mtxflg_tof(int month, int runnum){
 
   c1->cd();
   TrigFlag[28]->Draw();
+  c1->Print(pdf);
 
-  c1->cd();
   TofNhits->Draw();
+  c1->Print(pdf);
 
   for(int j=0; j<2; j++){
     for(int i=0; i<12; i++){
