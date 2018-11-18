@@ -289,12 +289,12 @@ void mtxflg_tof(int month, int runnum){
   TH1D *TofSegMultiplicity[NumOfSegTOF];
   TH1D *TofHitPat[NumOfSegTOF];
   for(int i=0;i<NumOfSegTOF;i++){
-    TofMt[i]= new TH1D(Form("TofMt%d",i+1),Form("TofMt%d",i+1),100,-10,10);
+    TofMt[i]= new TH1D(Form("TofMt%d",i+1),Form("TofMt%d",i+1),100,-10,20);
     TofSegMultiplicity[i]= new TH1D(Form("TofSegMultiplicity%d",i+1),Form("TofSegMultiplicity%d",i+1),10,0,10);
     TofHitPat[i]= new TH1D(Form("TofHitPat%d",i+1),Form("TofHitPat%d",i+1),NumOfSegTOF,0,NumOfSegTOF);
   }
 
-  TH1D *TofMtOr = new TH1D("TofMtOr","TofMtOr",20,0,20);
+  TH1D *TofMtOr = new TH1D("TofMtOr","TofMtOr",1000,-10,20);
   TH1D *TofMultiplicityOr = new TH1D("TofMultiplicityOr","TofMultiplicityOr",20,0,20);
 
 //-Event loop---------------------------------------------------------------------------------------
@@ -384,6 +384,7 @@ void mtxflg_tof(int month, int runnum){
   TofMtOr->Draw();
   c1->Print(pdf);
   TofMultiplicityOr->Draw();
+  c1->Print(pdf);
     
   c1->Print(pdf+"]"); 
 
