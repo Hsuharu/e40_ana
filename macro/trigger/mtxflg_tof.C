@@ -17,6 +17,42 @@
    "dec",
  };
 
+const char* TriggerFlag[]=
+  {
+    "Bh21K     ",
+    "Bh22K     ",
+    "Bh23K     ",
+    "Bh24K     ",
+    "Bh25K     ",
+    "Bh26K     ",
+    "Bh27K     ",
+    "Bh28K     ",
+    "Bh2K      ",
+    "ElseOr    ",
+    "Beam      ",
+    "BeamTof   ",
+    "BeamPi    ",
+    "BeamP     ",
+    "Coin1     ",
+    "Coin2     ",
+    "E03       ",
+    "Bh2KPs    ",
+    "BeamPs    ",
+    "BeamTofPs ",
+    "BeamPiPs  ",
+    "BeamPPs   ",
+    "Coin1Ps   ",
+    "Coin2Ps   ",
+    "E03Ps     ",
+    "Clock     ",
+    "Reserve2  ",
+    "SpillEnd  ",
+    "Matrix    ",
+    "MstAccept ",
+    "MstClear  ",
+    "TofTiming "
+  };
+
 
 void mtxflg_tof(int month, int runnum){
 //////////////////////////////////////////////////////////
@@ -280,7 +316,7 @@ void mtxflg_tof(int month, int runnum){
 
   TH1D *TrigFlag[32];
   for(int i=0;i<32;i++){
-    TrigFlag[i]= new TH1D(Form("TrigFlag%d",i+1),Form("TrigFlag%d",i+1),1000,0,2000);
+    TrigFlag[i]= new TH1D(Form("TrigFlag %s",TriggerFlag[i]),Form("TrigFlag %s",TriggerFlag[i]),1000,0,4000);
   }
   
   TH1D *TofNhits = new TH1D("TofNhits","TofNhits",20,0,20);
@@ -289,13 +325,13 @@ void mtxflg_tof(int month, int runnum){
   TH1D *TofSegMultiplicity[NumOfSegTOF];
   TH1D *TofHitPat[NumOfSegTOF];
   for(int i=0;i<NumOfSegTOF;i++){
-    TofMt[i]= new TH1D(Form("TofMt%d",i+1),Form("TofMt%d",i+1),100,-10,30);
+    TofMt[i]= new TH1D(Form("TofMt%d",i+1),Form("TofMt%d",i+1),100,-10,40);
     TofSegMultiplicity[i]= new TH1D(Form("TofSegMultiplicity%d",i+1),Form("TofSegMultiplicity%d",i+1),10,0,10);
     TofHitPat[i]= new TH1D(Form("TofHitPat%d",i+1),Form("TofHitPat%d",i+1),NumOfSegTOF,0,NumOfSegTOF);
   }
 
-  TH1D *TofMtOr = new TH1D("TofMtOr","TofMtOr",1000,-10,30);
-  TH1D *TofMultiplicityOr = new TH1D("TofMultiplicityOr","TofMultiplicityOr",20,0,20);
+  TH1D *TofMtOr = new TH1D("TofMtOr","TofMtOr",1000,-10,40);
+  TH1D *TofMultiplicityOr = new TH1D("TofMultiplicityOr","TofMultiplicityOr",10,0,10);
 
 //-Event loop---------------------------------------------------------------------------------------
    Long64_t nentries = tree->GetEntries();
