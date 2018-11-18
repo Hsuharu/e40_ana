@@ -271,7 +271,7 @@ void mtxflg_tof(int month, int runnum){
 //-para def-----------------------------------------------------------------------------------------
 
 //-hist def-----------------------------------------------------------------------------------------
-  TH1D *TrigNhits = new TH1D("trignhits","trignhits",10,0,10);
+  TH1D *TrigNhits = new TH1D("TrigNhits","TrigNhits",20,0,20);
 
   TH1D *TrigPat[18];
   for(int i=0;i<18;i++){
@@ -282,7 +282,20 @@ void mtxflg_tof(int month, int runnum){
   for(int i=0;i<32;i++){
     TrigFlag[i]= new TH1D(Form("TrigFlag%d",i+1),Form("TrigFlag%d",i+1),1000,0,1000);
   }
+  
+  TH1D *TofNhits = new TH1D("TofNhits","TofNhits",20,0,20);
 
+  TH1D *TofMt[NumOfSegTof];
+  TH1D *TofSegMultiplicity[NumOfSegTof];
+  TH1D *TofHitPat[NumOfSegTof];
+  for(int i=0;i<NumOfSegTof;i++){
+    TofMt[i]= new TH1D(Form("TofMt%d",i+1),Form("TofMt%d",i+1),100,-10,10);
+    TofSegMultiplicity[i]= new TH1D(Form("TofSegMultiplicity%d",i+1),Form("TofSegMultiplicity%d",i+1),10,0,10);
+    TofHitPat[i]= new TH1D(Form("TofHitPat%d",i+1),Form("TofHitPat%d",i+1),NumOfSegTof,0,NumOfSegTof);
+  }
+
+  TH1D *TofMtOr = new TH1D("TofMtOr","TofMtOr",20,0,20);
+  TH1D *TofMultiplicityOr = new TH1D("TofMultiplicityOr","TofMultiplicityOr",20,0,20);
 
 //-Event loop---------------------------------------------------------------------------------------
    Long64_t nentries = tree->GetEntries();
@@ -296,12 +309,30 @@ void mtxflg_tof(int month, int runnum){
       for(int i=0; i<18; i++){
         TrigFlag[i]->Fill(trigflag[i]);
       }
+
+      TofNhits->Fill(tofnhits);
+
+      for(int i=0; i<NumOfSegTof; i++){
+        TofHitPat[i]->Fill(tofhitpat[i]);
+        bool flag=false;
+        for(int i=0; i<16; i++){
+          TofMt[i]->Fill(tofmt[i][j]);
+          TofMtOr->Fill(tofmt[i][j]);
+          if(tofmt[i][j]=-999){
+            if(!flag){
+              TofSegMultiplicity[i]->Fill(j-1);
+              TofSegMultiplicityOr->Fill(j-1);
+              flag=true;
+            }
+          }
+        }
+      }
   }
 
 //-Canvas def---------------------------------------------------------------------------------------
-  TCanvas *c1 = new TCanvas("c1","c1",800,700);
-  TCanvas *c2 = new TCanvas("c2","c2",800,700);
-  TCanvas *c3 = new TCanvas("c3","c3",800,700);
+  TCanvas *c1 = new TCanvas("c1","c1",1200,900);
+  TCanvas *c2 = new TCanvas("c2","c2",1200,900);
+  TCanvas *c3 = new TCanvas("c3","c3",1200,900);
 
 //  c1->Divide();
   c2->Divide(6,3);
