@@ -358,7 +358,7 @@ void mtxflg_tof(int month, int runnum){
       c3->cd(j+1);
       TrigFlag[i*16+j]->Draw();
     }
-    c2->Print(pdf);
+    c3->Print(pdf);
   }
 
   c1->cd();
