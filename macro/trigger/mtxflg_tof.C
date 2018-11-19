@@ -451,12 +451,23 @@ void mtxflg_tof(int month, int runnum){
   for(int j=0; j<6; j++){
     for(int i=0; i<4; i++){
       c5->cd(i+1);
+      TofHitPat[j*4+i]->Draw();
+    }
+    c5->Print(pdf);
+  }
+
+  for(int j=0; j<6; j++){
+    for(int i=0; i<4; i++){
+      c5->cd(i+1);
       TofMtCut[j*4+i]->Draw();
     }
     c5->Print(pdf);
   }
 
   c1->cd();
+//  TofHitPat->Draw();
+//  c1->Print(pdf);
+
   TofMtOrCut->Draw();
   c1->Print(pdf);
 
