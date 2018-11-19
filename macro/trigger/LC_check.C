@@ -70,7 +70,7 @@ void LC_check(int month, int runnum){
    gROOT->Reset();
 //   TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("rootfile/run05126_Trigger.root");
    TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-   TString pdf = Form("%s/pdf/trigger/mtx_tof_%05d.pdf", anadir.Data(),runnum);
+   TString pdf = Form("%s/pdf/trigger/LC_check_%05d.pdf", anadir.Data(),runnum);
    TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_Trigger.root", anadir.Data(),Month[month], runnum),"READ");
    TTree *tree;
    f->GetObject("tree",tree);

@@ -360,7 +360,7 @@ void mtxflg_tof(int month, int runnum){
         for(int j=0; j<16; j++){
           TofMt[i]->Fill(tofmt[i][j]);
           TofMtOr->Fill(tofmt[i][j]);
-          MtxFlag_Tof->Fill(trigflag[28]-tofmt[i][j]);
+          MtxFlag_Tof->Fill(abs(-trigflag[28]-tofmt[i][j]));
           if(tofmt[i][j]==-999){
             if(!flag){
               TofSegMultiplicity[i]->Fill(j);
@@ -368,7 +368,7 @@ void mtxflg_tof(int month, int runnum){
               flag=true;
             }
           }else{
-            MtxFlag_TofCut->Fill(trigflag[28]-tofmt[i][j]);
+            MtxFlag_TofCut->Fill(abs(-trigflag[28]-tofmt[i][j]));
           }
         }
       }
