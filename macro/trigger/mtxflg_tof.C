@@ -328,14 +328,14 @@ void mtxflg_tof(int month, int runnum){
   TH1D *TofSegMultiplicity[NumOfSegTOF];
   TH1D *TofHitPat[NumOfSegTOF];
   for(int i=0;i<NumOfSegTOF;i++){
-    TofMt[i]= new TH1D(Form("TofMt%d",i+1),Form("TofMt%d",i+1),100,-10,50);
-    TofMtCut[i]= new TH1D(Form("TofMtCut%d",i+1),Form("TofMtCut%d",i+1),100,-10,50);
+    TofMt[i]= new TH1D(Form("TofMt%d",i+1),Form("TofMt%d",i+1),100,-10,90);
+    TofMtCut[i]= new TH1D(Form("TofMtCut%d",i+1),Form("TofMtCut%d",i+1),100,-10,90);
     TofSegMultiplicity[i]= new TH1D(Form("TofSegMultiplicity%d",i+1),Form("TofSegMultiplicity%d",i+1),10,0,10);
     TofHitPat[i]= new TH1D(Form("TofHitPat%d",i+1),Form("TofHitPat%d",i+1),NumOfSegTOF,0,NumOfSegTOF);
   }
 
-  TH1D *TofMtOr = new TH1D("TofMtOr","TofMtOr",1000,-10,50);
-  TH1D *TofMtOrCut = new TH1D("TofMtOrCut","TofMtOrCut",1000,-10,50);
+  TH1D *TofMtOr = new TH1D("TofMtOr","TofMtOr",1000,-10,90);
+  TH1D *TofMtOrCut = new TH1D("TofMtOrCut","TofMtOrCut",1000,-10,90);
   TH1D *TofMultiplicityOr = new TH1D("TofMultiplicityOr","TofMultiplicityOr",10,0,10);
 
 //-Mtx Flag - Tof -----

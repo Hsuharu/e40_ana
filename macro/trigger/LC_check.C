@@ -343,7 +343,7 @@ void LC_check(int month, int runnum){
   TH1D *LcTdcOrCut = new TH1D("LcTdcOrCut","LcTdcOrCut",1000,0,2100);
   TH1D *LcMtOrCut = new TH1D("LcMtOrCut","LcMtOrCut",1000,0,2100);
   TH1D *LcMultiplicityOr = new TH1D("LcMultiplicityOr","LcMultiplicityOr",10,0,10);
-  TH1D *LcHitPatOr = new TH1D("LcHitPatOr","LcHitPatOr",28,0,28);
+  TH1D *LcHitPatOr = new TH1D("LcHitPatOr","LcHitPatOr",29,0,29);
 
 
 //-Event loop---------------------------------------------------------------------------------------
