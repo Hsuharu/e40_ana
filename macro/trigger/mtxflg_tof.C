@@ -324,15 +324,18 @@ void mtxflg_tof(int month, int runnum){
   TH1D *TofNhits = new TH1D("TofNhits","TofNhits",20,0,20);
 
   TH1D *TofMt[NumOfSegTOF];
+  TH1D *TofMtCut[NumOfSegTOF];
   TH1D *TofSegMultiplicity[NumOfSegTOF];
   TH1D *TofHitPat[NumOfSegTOF];
   for(int i=0;i<NumOfSegTOF;i++){
-    TofMt[i]= new TH1D(Form("TofMt%d",i+1),Form("TofMt%d",i+1),100,-10,40);
+    TofMt[i]= new TH1D(Form("TofMt%d",i+1),Form("TofMt%d",i+1),100,-10,50);
+    TofMtCut[i]= new TH1D(Form("TofMtCut%d",i+1),Form("TofMtCut%d",i+1),100,-10,50);
     TofSegMultiplicity[i]= new TH1D(Form("TofSegMultiplicity%d",i+1),Form("TofSegMultiplicity%d",i+1),10,0,10);
     TofHitPat[i]= new TH1D(Form("TofHitPat%d",i+1),Form("TofHitPat%d",i+1),NumOfSegTOF,0,NumOfSegTOF);
   }
 
-  TH1D *TofMtOr = new TH1D("TofMtOr","TofMtOr",1000,-10,40);
+  TH1D *TofMtOr = new TH1D("TofMtOr","TofMtOr",1000,-10,50);
+  TH1D *TofMtOrCut = new TH1D("TofMtOrCut","TofMtOrCut",1000,-10,50);
   TH1D *TofMultiplicityOr = new TH1D("TofMultiplicityOr","TofMultiplicityOr",10,0,10);
 
 //-Mtx Flag - Tof -----
@@ -368,6 +371,8 @@ void mtxflg_tof(int month, int runnum){
               flag=true;
             }
           }else{
+            TofMtCut[i]->Fill(tofmt[i][j]);
+            TofMtOrCut->Fill(tofmt[i][j]);
             MtxFlag_TofCut->Fill(abs(-trigflag[28]-tofmt[i][j]));
           }
         }
@@ -379,11 +384,13 @@ void mtxflg_tof(int month, int runnum){
   TCanvas *c2 = new TCanvas("c2","c2",1200,900);
   TCanvas *c3 = new TCanvas("c3","c3",1200,900);
   TCanvas *c4 = new TCanvas("c4","c4",1200,900);
+  TCanvas *c5 = new TCanvas("c5","c5",1200,900);
 
 //  c1->Divide();
   c2->Divide(6,3);
   c3->Divide(4,4);
   c4->Divide(4,3);
+  c5->Divide(2,2);
 
    c1->Print(pdf+"["); 
 
@@ -425,6 +432,10 @@ void mtxflg_tof(int month, int runnum){
     c4->Print(pdf);
   }
 
+  c1->cd();
+  TofMtOr->Draw();
+  c1->Print(pdf);
+
   for(int j=0; j<2; j++){
     for(int i=0; i<12; i++){
       c4->cd(i+1);
@@ -434,14 +445,28 @@ void mtxflg_tof(int month, int runnum){
   }
 
   c1->cd();
-  TofMtOr->Draw();
-  c1->Print(pdf);
   TofMultiplicityOr->Draw();
   c1->Print(pdf);
-    
+
+  for(int j=0; j<6; j++){
+    for(int i=0; i<4; i++){
+      c5->cd(i+1);
+      TofMtCut[j*4+i]->Draw();
+    }
+    c5->Print(pdf);
+  }
+
+  c1->cd();
+  TofMtOrCut->Draw();
+  c1->Print(pdf);
+
   MtxFlag_Tof->Draw();
   c1->Print(pdf);
     
+  MtxFlag_TofCut->Draw();
+  c1->Print(pdf);
+
+  MtxFlag_TofCut->SetAxisRange(700,1100,"X");
   MtxFlag_TofCut->Draw();
   c1->Print(pdf);
 

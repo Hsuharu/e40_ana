@@ -325,16 +325,23 @@ void LC_check(int month, int runnum){
 
   TH1D *LcTdc[NumOfSegLC];
   TH1D *LcMt[NumOfSegLC];
+  TH1D *LcTdcCut[NumOfSegLC];
+  TH1D *LcMtCut[NumOfSegLC];
   TH1D *LcSegMultiplicity[NumOfSegLC];
   TH1D *LcHitPat[NumOfSegLC];
   for(int i=0;i<NumOfSegLC;i++){
     LcTdc[i]= new TH1D(Form("LcTdc%d",i+1),Form("LcTdc%d",i+1),1000,0,2100);
-    LcMt[i]= new TH1D(Form("LcMt%d",i+1),Form("LcMt%d",i+1),1000,0,2100);
+    LcMt[i]= new TH1D(Form("LcMt%d",i+1),Form("LcMt%d",i+1),100,-100,100);
+    LcTdcCut[i]= new TH1D(Form("LcTdcCut%d",i+1),Form("LcTdcCut%d",i+1),1000,0,2100);
+    LcMtCut[i]= new TH1D(Form("LcMtCut%d",i+1),Form("LcMtCut%d",i+1),100,-100,100);
     LcSegMultiplicity[i]= new TH1D(Form("LcSegMultiplicity%d",i+1),Form("LcSegMultiplicity%d",i+1),10,0,10);
     LcHitPat[i]= new TH1D(Form("LcHitPat%d",i+1),Form("LcHitPat%d",i+1),NumOfSegLC,0,NumOfSegLC);
   }
 
+  TH1D *LcTdcOr = new TH1D("LcTdcOr","LcTdcOr",1000,0,2100);
   TH1D *LcMtOr = new TH1D("LcMtOr","LcMtOr",1000,0,2100);
+  TH1D *LcTdcOrCut = new TH1D("LcTdcOrCut","LcTdcOrCut",1000,0,2100);
+  TH1D *LcMtOrCut = new TH1D("LcMtOrCut","LcMtOrCut",1000,0,2100);
   TH1D *LcMultiplicityOr = new TH1D("LcMultiplicityOr","LcMultiplicityOr",10,0,10);
   TH1D *LcHitPatOr = new TH1D("LcHitPatOr","LcHitPatOr",28,0,28);
 
@@ -360,6 +367,7 @@ void LC_check(int month, int runnum){
         bool flag=false;
         for(int j=0; j<16; j++){
           LcTdc[i]->Fill(lct[i][j]);
+          LcTdcOr->Fill(lct[i][j]);
           LcMt[i]->Fill(lcmt[i][j]);
           LcMtOr->Fill(lcmt[i][j]);
           if(lcmt[i][j]==-999){
@@ -368,6 +376,11 @@ void LC_check(int month, int runnum){
               LcMultiplicityOr->Fill(j);
               flag=true;
             }
+          }else{
+            LcTdcCut[i]->Fill(lct[i][j]);
+            LcTdcOrCut->Fill(lct[i][j]);
+            LcMtCut[i]->Fill(lcmt[i][j]);
+            LcMtOrCut->Fill(lcmt[i][j]);
           }
         }
       }
@@ -435,7 +448,23 @@ void LC_check(int month, int runnum){
   for(int j=0; j<7; j++){
     for(int i=0; i<4; i++){
       c2->cd(i+1);
+      LcTdcCut[j*4+i]->Draw();
+    }
+    c2->Print(pdf);
+  }
+
+  for(int j=0; j<7; j++){
+    for(int i=0; i<4; i++){
+      c2->cd(i+1);
       LcMt[j*4+i]->Draw();
+    }
+    c2->Print(pdf);
+  }
+
+  for(int j=0; j<7; j++){
+    for(int i=0; i<4; i++){
+      c2->cd(i+1);
+      LcMtCut[j*4+i]->Draw();
     }
     c2->Print(pdf);
   }
@@ -449,7 +478,13 @@ void LC_check(int month, int runnum){
   }
 
   c1->cd();
+  LcTdcOr->Draw();
+  c1->Print(pdf);
   LcMtOr->Draw();
+  c1->Print(pdf);
+  LcTdcOrCut->Draw();
+  c1->Print(pdf);
+  LcMtOrCut->Draw();
   c1->Print(pdf);
   LcMultiplicityOr->Draw();
   c1->Print(pdf);
