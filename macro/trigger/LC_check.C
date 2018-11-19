@@ -54,7 +54,7 @@ const char* TriggerFlag[]=
   };
 
 
-void LC_check(int month, int runnum){
+void mtxflg_tof(int month, int runnum){
 //////////////////////////////////////////////////////////
 //   This file has been automatically generated 
 //     (Fri Nov 16 14:55:11 2018 by ROOT version6.10/08)
