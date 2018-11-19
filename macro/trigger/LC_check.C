@@ -54,7 +54,7 @@ const char* TriggerFlag[]=
   };
 
 
-void mtxflg_tof(int month, int runnum){
+void LC_check(int month, int runnum){
 //////////////////////////////////////////////////////////
 //   This file has been automatically generated 
 //     (Fri Nov 16 14:55:11 2018 by ROOT version6.10/08)
@@ -307,63 +307,63 @@ void mtxflg_tof(int month, int runnum){
 //-para def-----------------------------------------------------------------------------------------
 
 //-hist def-----------------------------------------------------------------------------------------
-//-Trigger Flag -------
-  TH1D *TrigNhits = new TH1D("TrigNhits","TrigNhits",20,0,20);
-
-  TH1D *TrigPat[18];
-  for(int i=0;i<18;i++){
-    TrigPat[i]= new TH1D(Form("TrigPat%d",i+1),Form("TrigPat%d",i+1),32,0,32);
-  }
-
-  TH1D *TrigFlag[32];
-  for(int i=0;i<32;i++){
-    TrigFlag[i]= new TH1D(Form("TrigFlag %s",TriggerFlag[i]),Form("TrigFlag %s",TriggerFlag[i]),1000,0,2100);
-  }
+////-Trigger Flag -------
+//  TH1D *TrigNhits = new TH1D("TrigNhits","TrigNhits",20,0,20);
+//
+//  TH1D *TrigPat[18];
+//  for(int i=0;i<18;i++){
+//    TrigPat[i]= new TH1D(Form("TrigPat%d",i+1),Form("TrigPat%d",i+1),32,0,32);
+//  }
+//
+//  TH1D *TrigFlag[32];
+//  for(int i=0;i<32;i++){
+//    TrigFlag[i]= new TH1D(Form("TrigFlag %s",TriggerFlag[i]),Form("TrigFlag %s",TriggerFlag[i]),1000,0,2100);
+//  }
   
 //-Tof ----------------
-  TH1D *TofNhits = new TH1D("TofNhits","TofNhits",20,0,20);
+  TH1D *LcNhits = new TH1D("LcNhits","LcNhits",20,0,20);
 
-  TH1D *TofMt[NumOfSegTOF];
-  TH1D *TofSegMultiplicity[NumOfSegTOF];
-  TH1D *TofHitPat[NumOfSegTOF];
-  for(int i=0;i<NumOfSegTOF;i++){
-    TofMt[i]= new TH1D(Form("TofMt%d",i+1),Form("TofMt%d",i+1),100,-10,40);
-    TofSegMultiplicity[i]= new TH1D(Form("TofSegMultiplicity%d",i+1),Form("TofSegMultiplicity%d",i+1),10,0,10);
-    TofHitPat[i]= new TH1D(Form("TofHitPat%d",i+1),Form("TofHitPat%d",i+1),NumOfSegTOF,0,NumOfSegTOF);
+  TH1D *LcTdc[NumOfSegLC];
+  TH1D *LcMt[NumOfSegLC];
+  TH1D *LcSegMultiplicity[NumOfSegLC];
+  TH1D *LcHitPat[NumOfSegLC];
+  for(int i=0;i<NumOfSegLC;i++){
+    LcTdc[i]= new TH1D(Form("LcTdc%d",i+1),Form("LcTdc%d",i+1),1000,0,2100);
+    LcMt[i]= new TH1D(Form("LcMt%d",i+1),Form("LcMt%d",i+1),100,-10,40);
+    LcSegMultiplicity[i]= new TH1D(Form("LcSegMultiplicity%d",i+1),Form("LcSegMultiplicity%d",i+1),10,0,10);
+    LcHitPat[i]= new TH1D(Form("LcHitPat%d",i+1),Form("LcHitPat%d",i+1),NumOfSegLC,0,NumOfSegLC);
   }
 
-  TH1D *TofMtOr = new TH1D("TofMtOr","TofMtOr",1000,-10,40);
-  TH1D *TofMultiplicityOr = new TH1D("TofMultiplicityOr","TofMultiplicityOr",10,0,10);
+  TH1D *LcMtOr = new TH1D("LcMtOr","LcMtOr",1000,-10,40);
+  TH1D *LcMultiplicityOr = new TH1D("LcMultiplicityOr","LcMultiplicityOr",10,0,10);
 
-//-Mtx Flag - Tof -----
-  TH1D *MtxFlag_Tof = new TH1D("MtxFlag_Tof","MtxFlag_Tof",1000,0,2100);
 
 //-Event loop---------------------------------------------------------------------------------------
    Long64_t nentries = tree->GetEntries();
    Long64_t nbytes = 0;
    for (Long64_t s=0; s<nentries;s++) {
       nbytes += tree->GetEntry(s);
-      TrigNhits->Fill(trignhits);
-      for(int i=0; i<32; i++){
-        TrigPat[i]->Fill(trigpat[i]);
-      }
-      for(int i=0; i<32; i++){
-        TrigFlag[i]->Fill(trigflag[i]);
-      }
+//      TrigNhits->Fill(trignhits);
+//      for(int i=0; i<32; i++){
+//        TrigPat[i]->Fill(trigpat[i]);
+//      }
+//      for(int i=0; i<32; i++){
+//        TrigFlag[i]->Fill(trigflag[i]);
+//      }
 
-      TofNhits->Fill(tofnhits);
+      LcNhits->Fill(lcnhits);
 
-      for(int i=0; i<NumOfSegTOF; i++){
-        TofHitPat[i]->Fill(tofhitpat[i]);
+      for(int i=0; i<NumOfSegLC; i++){
+        LcHitPat[i]->Fill(lchitpat[i]);
         bool flag=false;
         for(int j=0; j<16; j++){
-          TofMt[i]->Fill(tofmt[i][j]);
-          TofMtOr->Fill(tofmt[i][j]);
-          MtxFlag_Tof->Fill(trigflag[28]-tofmt[i][j]);
-          if(tofmt[i][j]==-999){
+          LcTdc[i]->Fill(lct[i][j]);
+          LcMt[i]->Fill(lcmt[i][j]);
+          LcMtOr->Fill(lcmt[i][j]);
+          if(lcmt[i][j]==-999){
             if(!flag){
-              TofSegMultiplicity[i]->Fill(j);
-              TofMultiplicityOr->Fill(j);
+              LcSegMultiplicity[i]->Fill(j);
+              LcMultiplicityOr->Fill(j);
               flag=true;
             }
           }
@@ -378,7 +378,7 @@ void mtxflg_tof(int month, int runnum){
   TCanvas *c4 = new TCanvas("c4","c4",1200,900);
 
 //  c1->Divide();
-  c2->Divide(6,3);
+  c2->Divide(2,2);
   c3->Divide(4,4);
   c4->Divide(4,3);
 
@@ -386,57 +386,62 @@ void mtxflg_tof(int month, int runnum){
 
 //-Hist Draw----------------------------------------------------------------------------------------
   c1->cd();
-  TrigNhits->Draw();
+//  TrigNhits->Draw();
+//  c1->Print(pdf);
+//
+//  for(int i=0; i<18; i++){
+//    c2->cd(i+1);
+//    TrigPat[i]->Draw();
+//  }
+//  c2->Print(pdf);
+//
+//  for(int i=0; i<2; i++){
+//    for(int j=0; j<16; j++){
+//      c3->cd(j+1);
+//      TrigFlag[i*16+j]->Draw();
+//    }
+//    c3->Print(pdf);
+//  }
+//
+//  c1->cd();
+//  TrigFlag[28]->Draw();
+//  c1->Print(pdf);
+//
+//  TrigFlag[28]->SetAxisRange(950,1050,"X");
+//  TrigFlag[28]->Draw();
+//  c1->Print(pdf);
+
+  LcNhits->Draw();
   c1->Print(pdf);
 
-  for(int i=0; i<18; i++){
-    c2->cd(i+1);
-    TrigPat[i]->Draw();
-  }
-  c2->Print(pdf);
-
-  for(int i=0; i<2; i++){
-    for(int j=0; j<16; j++){
-      c3->cd(j+1);
-      TrigFlag[i*16+j]->Draw();
+  for(int j=0; j<7; j++){
+    for(int i=0; i<4; i++){
+      c2->cd(i+1);
+      LcTdc[j*4+i]->Draw();
     }
-    c3->Print(pdf);
+    c2->Print(pdf);
+  }
+
+  for(int j=0; j<7; j++){
+    for(int i=0; i<4; i++){
+      c2->cd(i+1);
+      LcMt[j*4+i]->Draw();
+    }
+    c2->Print(pdf);
+  }
+
+  for(int j=0; j<7; j++){
+    for(int i=0; i<4; i++){
+      c2->cd(i+1);
+      LcSegMultiplicity[j*4+i]->Draw();
+    }
+    c2->Print(pdf);
   }
 
   c1->cd();
-  TrigFlag[28]->Draw();
+  LcMtOr->Draw();
   c1->Print(pdf);
-
-  TrigFlag[28]->SetAxisRange(950,1050,"X");
-  TrigFlag[28]->Draw();
-  c1->Print(pdf);
-
-  TofNhits->Draw();
-  c1->Print(pdf);
-
-  for(int j=0; j<2; j++){
-    for(int i=0; i<12; i++){
-      c4->cd(i+1);
-      TofMt[j*12+i]->Draw();
-    }
-    c4->Print(pdf);
-  }
-
-  for(int j=0; j<2; j++){
-    for(int i=0; i<12; i++){
-      c4->cd(i+1);
-      TofSegMultiplicity[j*12+i]->Draw();
-    }
-    c4->Print(pdf);
-  }
-
-  c1->cd();
-  TofMtOr->Draw();
-  c1->Print(pdf);
-  TofMultiplicityOr->Draw();
-  c1->Print(pdf);
-    
-  MtxFlag_Tof->Draw();
+  LcMultiplicityOr->Draw();
   c1->Print(pdf);
 
   c1->Print(pdf+"]"); 
