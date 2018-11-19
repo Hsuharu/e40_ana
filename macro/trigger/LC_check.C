@@ -329,13 +329,14 @@ void LC_check(int month, int runnum){
   TH1D *LcHitPat[NumOfSegLC];
   for(int i=0;i<NumOfSegLC;i++){
     LcTdc[i]= new TH1D(Form("LcTdc%d",i+1),Form("LcTdc%d",i+1),1000,0,2100);
-    LcMt[i]= new TH1D(Form("LcMt%d",i+1),Form("LcMt%d",i+1),100,-10,40);
+    LcMt[i]= new TH1D(Form("LcMt%d",i+1),Form("LcMt%d",i+1),1000,0,2100);
     LcSegMultiplicity[i]= new TH1D(Form("LcSegMultiplicity%d",i+1),Form("LcSegMultiplicity%d",i+1),10,0,10);
     LcHitPat[i]= new TH1D(Form("LcHitPat%d",i+1),Form("LcHitPat%d",i+1),NumOfSegLC,0,NumOfSegLC);
   }
 
-  TH1D *LcMtOr = new TH1D("LcMtOr","LcMtOr",1000,-10,40);
+  TH1D *LcMtOr = new TH1D("LcMtOr","LcMtOr",1000,0,2100);
   TH1D *LcMultiplicityOr = new TH1D("LcMultiplicityOr","LcMultiplicityOr",10,0,10);
+  TH1D *LcHitPatOr = new TH1D("LcHitPatOr","LcHitPatOr",28,0,28);
 
 
 //-Event loop---------------------------------------------------------------------------------------
@@ -355,6 +356,7 @@ void LC_check(int month, int runnum){
 
       for(int i=0; i<NumOfSegLC; i++){
         LcHitPat[i]->Fill(lchitpat[i]);
+        LcHitPatOr->Fill(lchitpat[i]);
         bool flag=false;
         for(int j=0; j<16; j++){
           LcTdc[i]->Fill(lct[i][j]);
@@ -417,6 +419,14 @@ void LC_check(int month, int runnum){
   for(int j=0; j<7; j++){
     for(int i=0; i<4; i++){
       c2->cd(i+1);
+      LcHitPat[j*4+i]->Draw();
+    }
+    c2->Print(pdf);
+  }
+
+  for(int j=0; j<7; j++){
+    for(int i=0; i<4; i++){
+      c2->cd(i+1);
       LcTdc[j*4+i]->Draw();
     }
     c2->Print(pdf);
@@ -442,6 +452,8 @@ void LC_check(int month, int runnum){
   LcMtOr->Draw();
   c1->Print(pdf);
   LcMultiplicityOr->Draw();
+  c1->Print(pdf);
+  LcHitPatOr->Draw();
   c1->Print(pdf);
 
   c1->Print(pdf+"]"); 
