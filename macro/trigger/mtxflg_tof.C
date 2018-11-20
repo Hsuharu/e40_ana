@@ -316,8 +316,10 @@ void mtxflg_tof(int month, int runnum){
   }
 
   TH1D *TrigFlag[32];
+  TH1D *TrigFlagCut[32];
   for(int i=0;i<32;i++){
     TrigFlag[i]= new TH1D(Form("TrigFlag %s",TriggerFlag[i]),Form("TrigFlag %s",TriggerFlag[i]),1000,0,2100);
+    TrigFlagCut[i]= new TH1D(Form("TrigFlagCut %s",TriggerFlag[i]),Form("TrigFlagCut %s",TriggerFlag[i]),1000,0,2100);
   }
   
 //-Tof ----------------
@@ -336,48 +338,56 @@ void mtxflg_tof(int month, int runnum){
 
   TH1D *TofMtOr = new TH1D("TofMtOr","TofMtOr",1000,-10,90);
   TH1D *TofMtOrCut = new TH1D("TofMtOrCut","TofMtOrCut",1000,-10,90);
+  TH1D *TofMtOrMtxFlgCut = new TH1D("TofMtOrMtxFlgCut","TofMtOrMtxFlgCut",1000,-10,90);
+  TH1D *TofMtOrVarMtxFlgCut = new TH1D("TofMtOrVarMtxFlgCut","TofMtOrVarMtxFlgCut",1000,-10,90);
   TH1D *TofMultiplicityOr = new TH1D("TofMultiplicityOr","TofMultiplicityOr",10,0,10);
 
 //-Mtx Flag - Tof -----
-  TH1D *MtxFlag_Tof = new TH1D("MtxFlag_Tof","MtxFlag_Tof",1000,0,2100);
-  TH1D *MtxFlag_TofCut = new TH1D("MtxFlag_TofCut","MtxFlag_TofCut",1000,0,2100);
+  TH1D *MtxFlag_Tof = new TH1D("MtxFlag_Tof","MtxFlag_Tof",2100,0,2100);
+  TH1D *MtxFlag_TofCut = new TH1D("MtxFlag_TofCut","MtxFlag_TofCut",2100,0,2100);
 
 //-Event loop---------------------------------------------------------------------------------------
    Long64_t nentries = tree->GetEntries();
    Long64_t nbytes = 0;
    for (Long64_t s=0; s<nentries;s++) {
-      nbytes += tree->GetEntry(s);
-      TrigNhits->Fill(trignhits);
-      for(int i=0; i<32; i++){
-        TrigPat[i]->Fill(trigpat[i]);
-      }
-      for(int i=0; i<32; i++){
-        TrigFlag[i]->Fill(trigflag[i]);
-      }
+     nbytes += tree->GetEntry(s);
+     TrigNhits->Fill(trignhits);
+     for(int i=0; i<32; i++){
+       TrigPat[i]->Fill(trigpat[i]);
+     }
+     for(int i=0; i<32; i++){
+       TrigFlag[i]->Fill(trigflag[i]);
+     }
 
-      TofNhits->Fill(tofnhits);
+     TofNhits->Fill(tofnhits);
 
-      for(int i=0; i<NumOfSegTOF; i++){
-        TofHitPat[i]->Fill(tofhitpat[i]);
-        bool flag=false;
-        for(int j=0; j<16; j++){
-          TofMt[i]->Fill(tofmt[i][j]);
-          TofMtOr->Fill(tofmt[i][j]);
-          MtxFlag_Tof->Fill(abs(-trigflag[28]-tofmt[i][j]));
-          if(tofmt[i][j]==-999){
-            if(!flag){
-              TofSegMultiplicity[i]->Fill(j);
-              TofMultiplicityOr->Fill(j);
-              flag=true;
-            }
-          }else{
-            TofMtCut[i]->Fill(tofmt[i][j]);
-            TofMtOrCut->Fill(tofmt[i][j]);
-            MtxFlag_TofCut->Fill(abs(-trigflag[28]-tofmt[i][j]));
-          }
-        }
-      }
-  }
+     for(int i=0; i<NumOfSegTOF; i++){
+       TofHitPat[i]->Fill(tofhitpat[i]);
+       bool flag=false;
+       for(int j=0; j<16; j++){
+         TofMt[i]->Fill(tofmt[i][j]);
+         TofMtOr->Fill(tofmt[i][j]);
+         MtxFlag_Tof->Fill(abs(-trigflag[28]-tofmt[i][j]));
+         if(tofmt[i][j]==-999){
+           if(!flag){
+             TofSegMultiplicity[i]->Fill(j);
+             TofMultiplicityOr->Fill(j);
+             flag=true;
+           }
+         }else{
+           TofMtCut[i]->Fill(tofmt[i][j]);
+           TofMtOrCut->Fill(tofmt[i][j]);
+           MtxFlag_TofCut->Fill(abs(-trigflag[28]-tofmt[i][j]));
+           TrigFlagCut[28]->Fill(abs(-trigflag[28]));
+           if(trigflag[28]>0){
+             TofMtOrMtxFlgCut->Fill(tofmt[i][j]);
+           }else{
+             TofMtOrVarMtxFlgCut->Fill(tofmt[i][j]);
+           }
+         }
+       }
+     }
+   }
 
 //-Canvas def---------------------------------------------------------------------------------------
   TCanvas *c1 = new TCanvas("c1","c1",1200,900);
@@ -468,6 +478,9 @@ void mtxflg_tof(int month, int runnum){
 //  TofHitPat->Draw();
 //  c1->Print(pdf);
 
+  TrigFlagCut[28]->Draw();
+  c1->Print(pdf);
+
   TofMtOrCut->Draw();
   c1->Print(pdf);
 
@@ -479,6 +492,12 @@ void mtxflg_tof(int month, int runnum){
 
   MtxFlag_TofCut->SetAxisRange(700,1100,"X");
   MtxFlag_TofCut->Draw();
+  c1->Print(pdf);
+
+  TofMtOrMtxFlgCut->Draw();
+  c1->Print(pdf);
+
+  TofMtOrVarMtxFlgCut->Draw();
   c1->Print(pdf);
 
   c1->Print(pdf+"]"); 
