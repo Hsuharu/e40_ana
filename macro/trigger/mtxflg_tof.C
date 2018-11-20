@@ -329,11 +329,17 @@ void mtxflg_tof(int month, int runnum){
   TH1D *TofMtCut[NumOfSegTOF];
   TH1D *TofSegMultiplicity[NumOfSegTOF];
   TH1D *TofHitPat[NumOfSegTOF];
+  TH1D *TofMtOrMtxFlgNhitsCut[NumOfSegTOF];
+  TH1D *MtxFlag_TofNhitsCut[NumOfSegTOF];
+  TH1D *TrigFlag28NhitsCut[NumOfSegTOF];
   for(int i=0;i<NumOfSegTOF;i++){
     TofMt[i]= new TH1D(Form("TofMt%d",i+1),Form("TofMt%d",i+1),100,-10,90);
     TofMtCut[i]= new TH1D(Form("TofMtCut%d",i+1),Form("TofMtCut%d",i+1),100,-10,90);
     TofSegMultiplicity[i]= new TH1D(Form("TofSegMultiplicity%d",i+1),Form("TofSegMultiplicity%d",i+1),10,0,10);
     TofHitPat[i]= new TH1D(Form("TofHitPat%d",i+1),Form("TofHitPat%d",i+1),NumOfSegTOF,0,NumOfSegTOF);
+    TofMtOrMtxFlgNhitsCut[i] = new TH1D(Form("TofMtOr TdcCut & MtxFlg & Nhits%d Cut",i),Form("TofMtOr TdcCut & MtxFlg & Nhits%d Cut",i),100,-10,90);
+    MtxFlag_TofNhitsCut[i] = new TH1D(Form("MtxFlag_Tof TdcCut & MtxFlg & Nhits%d Cut",i),Form("MtxFlag_Tof TdcCut & MtxFlg & Nhits%d Cut",i),2100,-2100,0);
+    TrigFlag28NhitsCut[i]= new TH1D(Form("MtxFlag TdcCut & MtxFlg & Nhits%d Cut",i),Form("MtxFlag_Tof TdcCut & MtxFlg & Nhits%d Cut",i),2100,-2100,0);
   }
 
   TH1D *TofMtOr = new TH1D("TofMtOr","TofMtOr",100,-10,90);
@@ -383,6 +389,17 @@ void mtxflg_tof(int month, int runnum){
              TofMtOrMtxFlgCut->Fill(tofmt[i][j]);
            }else{
              TofMtOrVarMtxFlgCut->Fill(tofmt[i][j]);
+           }
+         }
+       }
+       if(trigflag[28]>0&&tofnhits==i+1){
+         for(int j=0; j<NumOfSegTOF; j++){
+           for(int k=0; k<16; k++){
+             if(tofmt[j][k]!=-999){
+               TofMtOrMtxFlgNhitsCut[i]->Fill(tofmt[j][k]);
+               MtxFlag_TofNhitsCut[i]->Fill(-trigflag[28]-tofmt[j][k]);
+               TrigFlag28NhitsCut[i]->Fill(-trigflag[28]);
+             }
            }
          }
        }
@@ -503,6 +520,22 @@ void mtxflg_tof(int month, int runnum){
 
   TofMtOrVarMtxFlgCut->Draw();
   c1->Print(pdf);
+
+  for(int j=0; j<6; j++){
+    for(int i=0; i<4; i++){
+      c5->cd(1);
+      TrigFlag28NhitsCut[j*4+i]->SetAxisRange(-1050,-900,"X");
+      TrigFlag28NhitsCut[j*4+i]->Draw();
+      c5->cd(2);
+      TofMtOrMtxFlgNhitsCut[j*4+i]->Draw();
+      c5->cd(3);
+      MtxFlag_TofNhitsCut[j*4+i]->SetAxisRange(-1100,-700,"X");
+      MtxFlag_TofNhitsCut[j*4+i]->Draw();
+      //    c5->cd(4);
+      //    TofMtCut[j*4+i]->Draw();
+      c5->Print(pdf);
+    }
+  }
 
   c1->Print(pdf+"]"); 
 
