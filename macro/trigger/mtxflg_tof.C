@@ -344,7 +344,7 @@ void mtxflg_tof(int month, int runnum){
 
 //-Mtx Flag - Tof -----
   TH1D *MtxFlag_Tof = new TH1D("MtxFlag_Tof","MtxFlag_Tof",2100,0,2100);
-  TH1D *MtxFlag_TofCut = new TH1D("MtxFlag_TofCut","MtxFlag_TofCut",2100,0,2100);
+  TH1D *MtxFlag_TofCut = new TH1D("MtxFlag_TofCut","MtxFlag_TofCut",2100,-2100,0);
 
 //-Event loop---------------------------------------------------------------------------------------
    Long64_t nentries = tree->GetEntries();
@@ -377,7 +377,7 @@ void mtxflg_tof(int month, int runnum){
          }else{
            TofMtCut[i]->Fill(tofmt[i][j]);
            TofMtOrCut->Fill(tofmt[i][j]);
-           MtxFlag_TofCut->Fill(abs(-trigflag[28]-tofmt[i][j]));
+           MtxFlag_TofCut->Fill(-trigflag[28]-tofmt[i][j]);
            TrigFlagCut[28]->Fill(-trigflag[28]);
            if(trigflag[28]>0){
              TofMtOrMtxFlgCut->Fill(tofmt[i][j]);
@@ -494,7 +494,7 @@ void mtxflg_tof(int month, int runnum){
   MtxFlag_TofCut->Draw();
   c1->Print(pdf);
 
-  MtxFlag_TofCut->SetAxisRange(700,1100,"X");
+  MtxFlag_TofCut->SetAxisRange(-1100,-700,"X");
   MtxFlag_TofCut->Draw();
   c1->Print(pdf);
 
