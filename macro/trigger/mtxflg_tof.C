@@ -319,7 +319,7 @@ void mtxflg_tof(int month, int runnum){
   TH1D *TrigFlagCut[32];
   for(int i=0;i<32;i++){
     TrigFlag[i]= new TH1D(Form("TrigFlag %s",TriggerFlag[i]),Form("TrigFlag %s",TriggerFlag[i]),1000,0,2100);
-    TrigFlagCut[i]= new TH1D(Form("TrigFlagCut %s",TriggerFlag[i]),Form("TrigFlagCut %s",TriggerFlag[i]),1000,0,2100);
+    TrigFlagCut[i]= new TH1D(Form("TrigFlagCut %s",TriggerFlag[i]),Form("TrigFlagCut %s",TriggerFlag[i]),1000,-2100,0);
   }
   
 //-Tof ----------------
@@ -378,7 +378,7 @@ void mtxflg_tof(int month, int runnum){
            TofMtCut[i]->Fill(tofmt[i][j]);
            TofMtOrCut->Fill(tofmt[i][j]);
            MtxFlag_TofCut->Fill(abs(-trigflag[28]-tofmt[i][j]));
-           TrigFlagCut[28]->Fill(abs(-trigflag[28]));
+           TrigFlagCut[28]->Fill(-trigflag[28]);
            if(trigflag[28]>0){
              TofMtOrMtxFlgCut->Fill(tofmt[i][j]);
            }else{
@@ -481,6 +481,10 @@ void mtxflg_tof(int month, int runnum){
   TrigFlagCut[28]->Draw();
   c1->Print(pdf);
 
+  TrigFlagCut[28]->SetAxisRange(-1050,-900,"X");
+  TrigFlagCut[28]->Draw();
+  c1->Print(pdf);
+
   TofMtOrCut->Draw();
   c1->Print(pdf);
 
@@ -494,6 +498,10 @@ void mtxflg_tof(int month, int runnum){
   MtxFlag_TofCut->Draw();
   c1->Print(pdf);
 
+  TofMtOrMtxFlgCut->Draw();
+  c1->Print(pdf);
+
+  TofMtOrMtxFlgCut->SetAxisRange(700,1100,"X");
   TofMtOrMtxFlgCut->Draw();
   c1->Print(pdf);
 
