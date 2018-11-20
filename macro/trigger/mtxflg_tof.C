@@ -336,9 +336,9 @@ void mtxflg_tof(int month, int runnum){
     TofHitPat[i]= new TH1D(Form("TofHitPat%d",i+1),Form("TofHitPat%d",i+1),NumOfSegTOF,0,NumOfSegTOF);
   }
 
-  TH1D *TofMtOr = new TH1D("TofMtOr","TofMtOr",1000,-10,90);
-  TH1D *TofMtOrCut = new TH1D("TofMtOrCut","TofMtOrCut",1000,-10,90);
-  TH1D *TofMtOrMtxFlgCut = new TH1D("TofMtOrMtxFlgCut","TofMtOrMtxFlgCut",1000,-10,90);
+  TH1D *TofMtOr = new TH1D("TofMtOr","TofMtOr",100,-10,90);
+  TH1D *TofMtOrCut = new TH1D("TofMtOrCut","TofMtOrCut",100,-10,90);
+  TH1D *TofMtOrMtxFlgCut = new TH1D("TofMtOr TdcCut & MtxFlgCut","TofMtOr TdcCut & MtxFlgCut",100,-10,90);
   TH1D *TofMtOrVarMtxFlgCut = new TH1D("TofMtOrVarMtxFlgCut","TofMtOrVarMtxFlgCut",1000,-10,90);
   TH1D *TofMultiplicityOr = new TH1D("TofMultiplicityOr","TofMultiplicityOr",10,0,10);
 
@@ -498,10 +498,6 @@ void mtxflg_tof(int month, int runnum){
   MtxFlag_TofCut->Draw();
   c1->Print(pdf);
 
-  TofMtOrMtxFlgCut->Draw();
-  c1->Print(pdf);
-
-  TofMtOrMtxFlgCut->SetAxisRange(700,1100,"X");
   TofMtOrMtxFlgCut->Draw();
   c1->Print(pdf);
 
