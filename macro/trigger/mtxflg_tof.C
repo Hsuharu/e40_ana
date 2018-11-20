@@ -412,12 +412,14 @@ void mtxflg_tof(int month, int runnum){
   TCanvas *c3 = new TCanvas("c3","c3",1200,900);
   TCanvas *c4 = new TCanvas("c4","c4",1200,900);
   TCanvas *c5 = new TCanvas("c5","c5",1200,900);
+  TCanvas *c6 = new TCanvas("c6","c6",1200,900);
 
 //  c1->Divide();
   c2->Divide(6,3);
   c3->Divide(4,4);
   c4->Divide(4,3);
   c5->Divide(2,2);
+  c6->Divide(2,2);
 
    c1->Print(pdf+"["); 
 
@@ -523,17 +525,15 @@ void mtxflg_tof(int month, int runnum){
 
   for(int j=0; j<6; j++){
     for(int i=0; i<4; i++){
-      c5->cd(1);
+      c6->cd(1);
       TrigFlag28NhitsCut[j*4+i]->SetAxisRange(-1050,-900,"X");
       TrigFlag28NhitsCut[j*4+i]->Draw();
-      c5->cd(2);
+      c6->cd(2);
       TofMtOrMtxFlgNhitsCut[j*4+i]->Draw();
-      c5->cd(3);
+      c6->cd(3);
       MtxFlag_TofNhitsCut[j*4+i]->SetAxisRange(-1100,-700,"X");
       MtxFlag_TofNhitsCut[j*4+i]->Draw();
-      //    c5->cd(4);
-      //    TofMtCut[j*4+i]->Draw();
-      c5->Print(pdf);
+      c6->Print(pdf);
     }
   }
 
