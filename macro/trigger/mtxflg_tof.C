@@ -273,6 +273,8 @@ void mtxflg_tof(int month, int runnum){
 
 //- Correlation -------
   TH2D *MtxFlag_vs_TofMtOrNhitsDepthCut = new TH2D("MtxFlag vs TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut","MtxFlag vs TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut",100,-10,90,1800,-1800,0);
+  TH2D *MtxFlag_vs_MtxFlagTofMtOrNhitsDepthCut = new TH2D("MtxFlag vs MtxFlag-TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut","MtxFlag vs MtxFlag-TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut",100,-10,90,1800,-1800,0);
+  TH2D *TofMtOr_vs_MtxFlagTofMtOrNhitsDepthCut = new TH2D("TofMtOr vs MtxFlag-TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut","TofMtOr vs MtxFlag-TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut",100,-10,90,1800,-1800,0);
 
 //-Event loop---------------------------------------------------------------------------------------
    Long64_t nentries = tree->GetEntries();
