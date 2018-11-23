@@ -377,6 +377,7 @@ void mtxflg_tof(int month, int runnum){
          if(tofmt[i][j]==-999){
            if(!flag){
              if(j!=0){
+               if(tofnhits!=1) continue;
                TofMtDepthPat[i]->Fill(j);
                TofMtOrDepthPat->Fill(j);
              }
