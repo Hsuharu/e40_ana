@@ -395,7 +395,7 @@ void mtxflg_tof(int month, int runnum){
                    TofMtOrMtxFlgNhitsDepthCut->Fill(tofmt[i][0]);
                    TrigFlag28NhitsDepthCut->Fill(-trigflag[28]);
                    MtxFlag_TofNhitsDepthCut->Fill(-trigflag[28]-tofmt[i][0]);
-                   TH2D *MtxFlag_vs_TofMtOrNhitsDepthCut->Fill(-trigflag[28]-tofmt[i][0],-trigflag[28]);
+                   MtxFlag_vs_TofMtOrNhitsDepthCut->Fill(-trigflag[28]-tofmt[i][0],-trigflag[28]);
                  }
                }
              }
@@ -409,7 +409,7 @@ void mtxflg_tof(int month, int runnum){
            if(trigflag[28]>0){
              TofMtOrMtxFlgCut->Fill(tofmt[i][j]);
                if(tofnhits!=1) continue;
-               TofMtOrAllDepthPat->Fill(j);
+               TofMtOrAllDepthPat->Fill(j+1);
            }else{
              TofMtOrVarMtxFlgCut->Fill(tofmt[i][j]);
            }
@@ -526,7 +526,7 @@ void mtxflg_tof(int month, int runnum){
   TrigFlagCut[28]->Draw();
   c1->Print(pdf);
 
-  TrigFlagCut[28]->SetAxisRange(-1050,-900,"X");
+  TrigFlagCut[28]->SetAxisRange(-1010,-910,"X");
   TrigFlagCut[28]->Draw();
   c1->Print(pdf);
 
@@ -552,24 +552,24 @@ void mtxflg_tof(int month, int runnum){
   for(int j=0; j<6; j++){
     for(int i=0; i<4; i++){
       c6->cd(1);
-      TrigFlag28NhitsCut[j*4+i]->SetAxisRange(-1050,-900,"X");
+      TrigFlag28NhitsCut[j*4+i]->SetAxisRange(-1010,-910,"X");
       TrigFlag28NhitsCut[j*4+i]->Draw();
       c6->cd(2);
       TofMtOrMtxFlgNhitsCut[j*4+i]->Draw();
       c6->cd(3);
-      MtxFlag_TofNhitsCut[j*4+i]->SetAxisRange(-1100,-700,"X");
+      MtxFlag_TofNhitsCut[j*4+i]->SetAxisRange(-1010,-910,"X");
       MtxFlag_TofNhitsCut[j*4+i]->Draw();
       c6->Print(pdf);
     }
   }
 
   c6->cd(1);
-  TrigFlag28NhitsDepthCut->SetAxisRange(-1050,-900,"X");
+  TrigFlag28NhitsDepthCut->SetAxisRange(-1010,-910,"X");
   TrigFlag28NhitsDepthCut->Draw();
   c6->cd(2);
   TofMtOrMtxFlgNhitsDepthCut->Draw();
   c6->cd(3);
-  MtxFlag_TofNhitsDepthCut->SetAxisRange(-1100,-700,"X");
+  MtxFlag_TofNhitsDepthCut->SetAxisRange(-1010,-910,"X");
   MtxFlag_TofNhitsDepthCut->Draw();
   c6->cd(4);
   MtxFlag_vs_TofMtOrNhitsDepthCut->Draw();
