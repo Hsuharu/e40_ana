@@ -492,6 +492,12 @@ void mtxflg_tof(int month, int runnum){
   MtxFlag_vs_TofMtOrNhitsDepthCut->Draw("colz");
   c6->Print(pdf);
 
+  c1->cd();
+  MtxFlag_vs_MtxFlagTofMtOrNhitsDepthCut->Draw("colz");
+  c1->Print(pdf);
+  TofMtOr_vs_MtxFlagTofMtOrNhitsDepthCut->Draw("colz");
+  c1->Print(pdf);
+
   c1->Print(pdf+"]"); 
 
 }
