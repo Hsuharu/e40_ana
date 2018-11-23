@@ -489,12 +489,20 @@ void mtxflg_tof(int month, int runnum){
   MtxFlag_TofNhitsDepthCut->SetAxisRange(-840,-740,"X");
   MtxFlag_TofNhitsDepthCut->Draw();
   c6->cd(4);
+  MtxFlag_vs_TofMtOrNhitsDepthCut->SetAxisRange(-840,-740,"Y");
   MtxFlag_vs_TofMtOrNhitsDepthCut->Draw("colz");
   c6->Print(pdf);
 
   c1->cd();
   MtxFlag_vs_MtxFlagTofMtOrNhitsDepthCut->Draw("colz");
   c1->Print(pdf);
+  MtxFlag_vs_MtxFlagTofMtOrNhitsDepthCut->SetAxisRange(-840,-740,"X");
+  MtxFlag_vs_MtxFlagTofMtOrNhitsDepthCut->SetAxisRange(-840,-740,"Y");
+  MtxFlag_vs_MtxFlagTofMtOrNhitsDepthCut->Draw("colz");
+  c1->Print(pdf);
+  TofMtOr_vs_MtxFlagTofMtOrNhitsDepthCut->Draw("colz");
+  c1->Print(pdf);
+  TofMtOr_vs_MtxFlagTofMtOrNhitsDepthCut->SetAxisRange(-840,-740,"X");
   TofMtOr_vs_MtxFlagTofMtOrNhitsDepthCut->Draw("colz");
   c1->Print(pdf);
 
