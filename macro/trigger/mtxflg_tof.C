@@ -273,8 +273,8 @@ void mtxflg_tof(int month, int runnum){
 
 //- Correlation -------
   TH2D *MtxFlag_vs_TofMtOrNhitsDepthCut = new TH2D("MtxFlag vs TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut","MtxFlag vs TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut",100,-10,90,1800,-1800,0);
-  TH2D *MtxFlag_vs_MtxFlagTofMtOrNhitsDepthCut = new TH2D("MtxFlag vs MtxFlag-TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut","MtxFlag vs MtxFlag-TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut",100,-10,90,1800,-1800,0);
-  TH2D *TofMtOr_vs_MtxFlagTofMtOrNhitsDepthCut = new TH2D("TofMtOr vs MtxFlag-TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut","TofMtOr vs MtxFlag-TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut",100,-10,90,1800,-1800,0);
+  TH2D *MtxFlag_vs_MtxFlagTofMtOrNhitsDepthCut = new TH2D("MtxFlag vs MtxFlag-TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut","MtxFlag vs MtxFlag-TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut",1800,-1800,0,1800,-1800,0);
+  TH2D *TofMtOr_vs_MtxFlagTofMtOrNhitsDepthCut = new TH2D("TofMtOr vs MtxFlag-TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut","TofMtOr vs MtxFlag-TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut",1800,-1800,0,100,-10,90);
 
 //-Event loop---------------------------------------------------------------------------------------
    Long64_t nentries = tree->GetEntries();
@@ -297,7 +297,7 @@ void mtxflg_tof(int month, int runnum){
        for(int j=0; j<16; j++){
          TofMt[i]->Fill(tofmt[i][j]);
          TofMtOr->Fill(tofmt[i][j]);
-         MtxFlag_Tof->Fill(abs(-trigflag[28]-tofmt[i][j]));
+         MtxFlag_Tof->Fill(abs(HULMHTDCCalib*trigflag[28]-tofmt[i][j]));
          if(tofmt[i][j]==-999){
            if(!flag){
              if(j!=0){
@@ -311,6 +311,8 @@ void mtxflg_tof(int month, int runnum){
                    TrigFlag28NhitsDepthCut->Fill(HULMHTDCCalib*trigflag[28]);
                    MtxFlag_TofNhitsDepthCut->Fill(HULMHTDCCalib*trigflag[28]-tofmt[i][0]);
                    MtxFlag_vs_TofMtOrNhitsDepthCut->Fill(tofmt[i][0],HULMHTDCCalib*trigflag[28]);
+                   MtxFlag_vs_MtxFlagTofMtOrNhitsDepthCut->Fill(HULMHTDCCalib*trigflag[28]-tofmt[i][0],HULMHTDCCalib*trigflag[28]);
+                   TofMtOr_vs_MtxFlagTofMtOrNhitsDepthCut->Fill(HULMHTDCCalib*trigflag[28]-tofmt[i][0],tofmt[i][0]);
                  }
                }
              }
@@ -441,7 +443,7 @@ void mtxflg_tof(int month, int runnum){
   TrigFlagCut[28]->Draw();
   c1->Print(pdf);
 
-  TrigFlagCut[28]->SetAxisRange(-1010,-910,"X");
+  TrigFlagCut[28]->SetAxisRange(-1010,-810,"X");
   TrigFlagCut[28]->Draw();
   c1->Print(pdf);
 
@@ -467,27 +469,27 @@ void mtxflg_tof(int month, int runnum){
   for(int j=0; j<6; j++){
     for(int i=0; i<4; i++){
       c6->cd(1);
-      TrigFlag28NhitsCut[j*4+i]->SetAxisRange(-1010,-910,"X");
+      TrigFlag28NhitsCut[j*4+i]->SetAxisRange(-1010,-810,"X");
       TrigFlag28NhitsCut[j*4+i]->Draw();
       c6->cd(2);
       TofMtOrMtxFlgNhitsCut[j*4+i]->Draw();
       c6->cd(3);
-      MtxFlag_TofNhitsCut[j*4+i]->SetAxisRange(-1010,-910,"X");
+      MtxFlag_TofNhitsCut[j*4+i]->SetAxisRange(-1010,-810,"X");
       MtxFlag_TofNhitsCut[j*4+i]->Draw();
       c6->Print(pdf);
     }
   }
 
   c6->cd(1);
-  TrigFlag28NhitsDepthCut->SetAxisRange(-1010,-910,"X");
+  TrigFlag28NhitsDepthCut->SetAxisRange(-1010,-810,"X");
   TrigFlag28NhitsDepthCut->Draw();
   c6->cd(2);
   TofMtOrMtxFlgNhitsDepthCut->Draw();
   c6->cd(3);
-  MtxFlag_TofNhitsDepthCut->SetAxisRange(-1010,-910,"X");
+  MtxFlag_TofNhitsDepthCut->SetAxisRange(-1010,-810,"X");
   MtxFlag_TofNhitsDepthCut->Draw();
   c6->cd(4);
-  MtxFlag_vs_TofMtOrNhitsDepthCut->Draw();
+  MtxFlag_vs_TofMtOrNhitsDepthCut->Draw("colz");
   c6->Print(pdf);
 
   c1->Print(pdf+"]"); 
