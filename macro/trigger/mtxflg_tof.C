@@ -330,6 +330,7 @@ void mtxflg_tof(int month, int runnum){
   TH1D *TofHitPat[NumOfSegTOF];
   TH1D *TofMtDepthPat[NumOfSegTOF];
   TH1D *TofMtOrMtxFlgNhitsCut[NumOfSegTOF];
+  TH1D *TofMtMtxFlgNhitsDepthCut[NumOfSegTOF];
   TH1D *MtxFlag_TofNhitsCut[NumOfSegTOF];
   TH1D *TrigFlag28NhitsCut[NumOfSegTOF];
   for(int i=0;i<NumOfSegTOF;i++){
@@ -338,6 +339,7 @@ void mtxflg_tof(int month, int runnum){
     TofHitPat[i]= new TH1D(Form("TofHitPat%d",i+1),Form("TofHitPat%d",i+1),NumOfSegTOF,0,NumOfSegTOF);
     TofMtDepthPat[i]= new TH1D(Form("TofMtDepthPat%d",i+1),Form("TofMtDepthPat%d",i+1),5,0,5);
     TofMtOrMtxFlgNhitsCut[i] = new TH1D(Form("TofMtOr TdcCut & MtxFlg & Nhits%d Cut",i),Form("TofMtOr TdcCut & MtxFlg & Nhits%d Cut",i),100,-10,90);
+    TofMtMtxFlgNhitsDepthCut[i] = new TH1D(Form("TofMt%d TdcCut & MtxFlg & Nhits=1 & MaxDepth#1 Cut",i+1),Form("TofMt%d TdcCut & MtxFlg & Nhits=1 & MaxDepth#1 Cut",i+1),100,-10,90);
     MtxFlag_TofNhitsCut[i] = new TH1D(Form("MtxFlag_Tof TdcCut & MtxFlg & Nhits%d Cut",i),Form("MtxFlag_Tof TdcCut & MtxFlg & Nhits%d Cut",i),2100,-2100,0);
     TrigFlag28NhitsCut[i]= new TH1D(Form("MtxFlag TdcCut & MtxFlg & Nhits%d Cut",i),Form("MtxFlag_Tof TdcCut & MtxFlg & Nhits%d Cut",i),2100,-2100,0);
   }
@@ -347,10 +349,12 @@ void mtxflg_tof(int month, int runnum){
   TH1D *TofMtOrDepthPat = new TH1D("TofMtOrDepthPat","TofMtOrDepthPat",10,0,10);
   TH1D *TofMtOrMtxFlgCut = new TH1D("TofMtOr TdcCut & MtxFlgCut","TofMtOr TdcCut & MtxFlgCut",100,-10,90);
   TH1D *TofMtOrVarMtxFlgCut = new TH1D("TofMtOrVarMtxFlgCut","TofMtOrVarMtxFlgCut",1000,-10,90);
+  TH1D *TofMtOrMtxFlgNhitsDepthCut = new TH1D("TofMtOr TdcCut & MtxFlg & Nhits=1 & MaxDepth#1 Cut","TofMtOr TdcCut & MtxFlg & Nhits=1 & MaxDepth#1 Cut",100,-10,90);
 
 //-Mtx Flag - Tof -----
   TH1D *MtxFlag_Tof = new TH1D("MtxFlag_Tof","MtxFlag_Tof",2100,0,2100);
   TH1D *MtxFlag_TofCut = new TH1D("MtxFlag_TofCut","MtxFlag_TofCut",2100,-2100,0);
+  TH1D *MtxFlag_TofNhitsDepthCut = new TH1D("MtxFlag-TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut","MtxFlag-TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut",2100,-2100,0);
 
 //-Event loop---------------------------------------------------------------------------------------
    Long64_t nentries = tree->GetEntries();
@@ -380,6 +384,13 @@ void mtxflg_tof(int month, int runnum){
                if(tofnhits!=1) continue;
                TofMtDepthPat[i]->Fill(j);
                TofMtOrDepthPat->Fill(j);
+               if(j==1){
+                 if(trigflag[28]>0){
+                   TofMtMtxFlgNhitsDepthCut[i]->Fill(tofmt[i][0]);
+                   TofMtOrMtxFlgNhitsDepthCut->Fill(tofmt[i][0]);
+                   MtxFlag_TofNhitsDepthCut->Fill(-trigflag[28]-tofmt[i][0]);
+                 }
+               }
              }
              flag=true;
            }
@@ -539,6 +550,18 @@ void mtxflg_tof(int month, int runnum){
       c6->Print(pdf);
     }
   }
+
+    for(int i=0; i<4; i++){
+      c6->cd(1);
+      TrigFlag28NhitsCut[0]->SetAxisRange(-1050,-900,"X");
+      TrigFlag28NhitsCut[0]->Draw();
+      c6->cd(2);
+      TofMtOrMtxFlgNhitsDepthCut->Draw();
+      c6->cd(3);
+      MtxFlag_TofNhitsDepthCut->SetAxisRange(-1100,-700,"X");
+      MtxFlag_TofNhitsDepthCut->Draw();
+      c6->Print(pdf);
+    }
 
   c1->Print(pdf+"]"); 
 
