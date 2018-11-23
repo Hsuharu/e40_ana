@@ -327,16 +327,16 @@ void mtxflg_tof(int month, int runnum){
 
   TH1D *TofMt[NumOfSegTOF];
   TH1D *TofMtCut[NumOfSegTOF];
-  TH1D *TofSegMultiplicity[NumOfSegTOF];
   TH1D *TofHitPat[NumOfSegTOF];
+  TH1D *TofMtDepthPat[NumOfSegTOF];
   TH1D *TofMtOrMtxFlgNhitsCut[NumOfSegTOF];
   TH1D *MtxFlag_TofNhitsCut[NumOfSegTOF];
   TH1D *TrigFlag28NhitsCut[NumOfSegTOF];
   for(int i=0;i<NumOfSegTOF;i++){
     TofMt[i]= new TH1D(Form("TofMt%d",i+1),Form("TofMt%d",i+1),100,-10,90);
     TofMtCut[i]= new TH1D(Form("TofMtCut%d",i+1),Form("TofMtCut%d",i+1),100,-10,90);
-    TofSegMultiplicity[i]= new TH1D(Form("TofSegMultiplicity%d",i+1),Form("TofSegMultiplicity%d",i+1),10,0,10);
     TofHitPat[i]= new TH1D(Form("TofHitPat%d",i+1),Form("TofHitPat%d",i+1),NumOfSegTOF,0,NumOfSegTOF);
+    TofMtDepthPat[i]= new TH1D(Form("TofMtDepthPat%d",i+1),Form("TofMtDepthPat%d",i+1),5,0,5);
     TofMtOrMtxFlgNhitsCut[i] = new TH1D(Form("TofMtOr TdcCut & MtxFlg & Nhits%d Cut",i),Form("TofMtOr TdcCut & MtxFlg & Nhits%d Cut",i),100,-10,90);
     MtxFlag_TofNhitsCut[i] = new TH1D(Form("MtxFlag_Tof TdcCut & MtxFlg & Nhits%d Cut",i),Form("MtxFlag_Tof TdcCut & MtxFlg & Nhits%d Cut",i),2100,-2100,0);
     TrigFlag28NhitsCut[i]= new TH1D(Form("MtxFlag TdcCut & MtxFlg & Nhits%d Cut",i),Form("MtxFlag_Tof TdcCut & MtxFlg & Nhits%d Cut",i),2100,-2100,0);
@@ -344,9 +344,9 @@ void mtxflg_tof(int month, int runnum){
 
   TH1D *TofMtOr = new TH1D("TofMtOr","TofMtOr",100,-10,90);
   TH1D *TofMtOrCut = new TH1D("TofMtOrCut","TofMtOrCut",100,-10,90);
+  TH1D *TofMtOrDepthPat = new TH1D("TofMtOrDepthPat","TofMtOrDepthPat",10,0,10);
   TH1D *TofMtOrMtxFlgCut = new TH1D("TofMtOr TdcCut & MtxFlgCut","TofMtOr TdcCut & MtxFlgCut",100,-10,90);
   TH1D *TofMtOrVarMtxFlgCut = new TH1D("TofMtOrVarMtxFlgCut","TofMtOrVarMtxFlgCut",1000,-10,90);
-  TH1D *TofMultiplicityOr = new TH1D("TofMultiplicityOr","TofMultiplicityOr",10,0,10);
 
 //-Mtx Flag - Tof -----
   TH1D *MtxFlag_Tof = new TH1D("MtxFlag_Tof","MtxFlag_Tof",2100,0,2100);
@@ -376,8 +376,10 @@ void mtxflg_tof(int month, int runnum){
          MtxFlag_Tof->Fill(abs(-trigflag[28]-tofmt[i][j]));
          if(tofmt[i][j]==-999){
            if(!flag){
-             TofSegMultiplicity[i]->Fill(j);
-             TofMultiplicityOr->Fill(j);
+             if(j!=0){
+               TofMtDepthPat[i]->Fill(j);
+               TofMtOrDepthPat->Fill(j);
+             }
              flag=true;
            }
          }else{
@@ -468,13 +470,13 @@ void mtxflg_tof(int month, int runnum){
   for(int j=0; j<2; j++){
     for(int i=0; i<12; i++){
       c4->cd(i+1);
-      TofSegMultiplicity[j*12+i]->Draw();
+      TofMtDepthPat[j*12+i]->Draw();
     }
     c4->Print(pdf);
   }
 
   c1->cd();
-  TofMultiplicityOr->Draw();
+  TofMtOrDepthPat->Draw();
   c1->Print(pdf);
 
   for(int j=0; j<6; j++){

@@ -31,7 +31,7 @@
 
 #define HodoCut    0 // with BH1/BH2
 #define TimeCut    1 // in cluster analysis
-#define FHitBranch 0 // make FiberHit branches (becomes heavy)
+#define FHitBranch 1 // make FiberHit branches (becomes heavy)
 
 namespace
 {

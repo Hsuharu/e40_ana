@@ -1,16 +1,16 @@
 {
     "5126": {
         "bin": "./bin/Easiroc",
-        "unit": 100000,
-        "queue": "s",
-        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05126_Ea0cforDstk0hodo.root",
         "prog": 3,
+        "unit": 100000,
         "conf": "./param_nakadashi/analyzer_jun.conf",
-        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05126.dat",
         "stat": true,
-        "nseg": 3,
-        "time": 409.75796604156494,
         "nev": 264862,
-        "nproc": 1
+        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05126_Ea0cforDstk0hodo.root",
+        "nproc": 1,
+        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05126.dat",
+        "time": 811.9061114788055,
+        "nseg": 3,
+        "queue": "s"
     }
 }
