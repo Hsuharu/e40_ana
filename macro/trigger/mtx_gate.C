@@ -269,7 +269,6 @@ void mtx_gate(int month, int runnum){
 
   TH1D *TofMt[NumOfSegTOF];
   TH1D *TofMtCut[NumOfSegTOF];
-  TH1D *TofHitPat[NumOfSegTOF];
   TH1D *TofMtDepthPat[NumOfSegTOF];
   TH1D *TofMtOrMtxFlgNhitsCut[NumOfSegTOF];
   TH1D *TofMtMtxFlgNhitsDepthCut[NumOfSegTOF];
@@ -277,13 +276,13 @@ void mtx_gate(int month, int runnum){
   for(int i=0;i<NumOfSegTOF;i++){
     TofMt[i]= new TH1D(Form("TofMt%d",i+1),Form("TofMt%d",i+1),100,-10,90);
     TofMtCut[i]= new TH1D(Form("TofMtCut%d",i+1),Form("TofMtCut%d",i+1),100,-10,90);
-    TofHitPat[i]= new TH1D(Form("TofHitPat%d",i+1),Form("TofHitPat%d",i+1),NumOfSegTOF,0,NumOfSegTOF);
     TofMtDepthPat[i]= new TH1D(Form("TofMtDepthPat%d",i+1),Form("TofMtDepthPat%d",i+1),5,0,5);
     TofMtOrMtxFlgNhitsCut[i] = new TH1D(Form("TofMtOr TdcCut & MtxFlg & Nhits%d Cut",i+1),Form("TofMtOr TdcCut & MtxFlg & Nhits%d Cut",i+1),100,-10,90);
     TofMtMtxFlgNhitsDepthCut[i] = new TH1D(Form("TofMt%d TdcCut & MtxFlg & Nhits=1 & MaxDepth#1 Cut",i+1),Form("TofMt%d TdcCut & MtxFlg & Nhits=1 & MaxDepth#1 Cut",i+1),100,-10,90);
     TrigFlag28NhitsCut[i]= new TH1D(Form("MtxFlag TdcCut & MtxFlg & Nhits%d Cut",i+1),Form("MtxFlag TdcCut & MtxFlg & Nhits%d Cut",i+1),1800,-1800,0);
   }
 
+  TH1D *TofHitPatNhitsCut = new TH1D("TofHitPat Cut:Nhits","TofHitPat Cut:Nhits",NumOfSegTOF,0,NumOfSegTOF);
   TH1D *TofMtOr = new TH1D("TofMtOr","TofMtOr",100,-10,90);
   TH1D *TofMtOrCut = new TH1D("TofMtOrCut","TofMtOrCut",100,-10,90);
   TH1D *TofMtOrDepthPat = new TH1D("TofMtOrDepthPat","TofMtOrDepthPat",10,0,10);
@@ -309,7 +308,6 @@ void mtx_gate(int month, int runnum){
      TofNhits->Fill(tofnhits);
 
      for(int i=0; i<NumOfSegTOF; i++){
-       TofHitPat[i]->Fill(tofhitpat[i]);
        bool flag=false;
        for(int j=0; j<16; j++){
          TofMt[i]->Fill(tofmt[i][j]);
@@ -322,6 +320,7 @@ void mtx_gate(int month, int runnum){
                TofMtOrDepthPat->Fill(j);
                if(j==1){
                  if(trigflag[28]>0){
+                   TofHitPatNhitsCut->Fill(i);
                    TofMtMtxFlgNhitsDepthCut[i]->Fill(tofmt[i][0]);
                    TofMtOrMtxFlgNhitsDepthCut->Fill(tofmt[i][0]);
                    TrigFlag28NhitsDepthCut->Fill(HULMHTDCCalib*trigflag[28]);
@@ -381,7 +380,7 @@ void mtx_gate(int month, int runnum){
        c5->cd(j+1);
        TrigFlag[i*4+j]->Draw();
      }
-     c3->Print(pdf);
+     c5->Print(pdf);
    }
 
    c1->cd();
@@ -428,21 +427,8 @@ void mtx_gate(int month, int runnum){
   TofMtOrAllDepthPat->Draw();
   c1->Print(pdf);
 
-  for(int j=0; j<6; j++){
-    for(int i=0; i<4; i++){
-      c5->cd(i+1);
-      TofHitPat[j*4+i]->Draw();
-    }
-    c5->Print(pdf);
-  }
-
-//  for(int j=0; j<6; j++){
-//    for(int i=0; i<4; i++){
-//      c5->cd(i+1);
-//      TofMtCut[j*4+i]->Draw();
-//    }
-//    c5->Print(pdf);
-//  }
+  TofHitPatNhitsCut->Draw();
+  c1->Print(pdf);
 
   c1->cd();
   TrigFlagCut[28]->Draw();
