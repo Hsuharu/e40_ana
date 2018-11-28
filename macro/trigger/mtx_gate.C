@@ -78,170 +78,170 @@ void mtx_gate(int month, int runnum){
 //Declaration of leaves types
    Int_t           trigflag[32];
    Int_t           trigpat[32];
-   Int_t           status;
-   Int_t           ntKurama;
-   Double_t        path[4];
-   Double_t        pKurama[4];
-   Double_t        qKurama[4];
-   Double_t        chisqrKurama[4];
-   Double_t        xtgtKurama[4];
-   Double_t        ytgtKurama[4];
-   Double_t        utgtKurama[4];
-   Double_t        vtgtKurama[4];
-   Double_t        thetaKurama[4];
-   Double_t        vpx[5];
-   Double_t        vpy[5];
-   Double_t        tTofCalc[3];
-   Int_t           nhBh1;
-   Double_t        csBh1[5];
-   Double_t        Bh1Seg[5];
-   Double_t        tBh1[5];
-   Double_t        dtBh1[5];
-   Double_t        deBh1[5];
-   Double_t        btof[5];
-   Int_t           nhBh2;
-   Double_t        csBh2[4];
-   Double_t        Bh2Seg[4];
-   Double_t        tBh2[4];
-   Double_t        dtBh2[4];
-   Double_t        t0Bh2[4];
-   Double_t        deBh2[4];
-   Int_t           nhSac;
-   Double_t        csSac[41];
-   Double_t        SacSeg[41];
-   Double_t        tSac[41];
-   Double_t        deSac[41];
-   Int_t           nhTof;
-   Double_t        csTof[17];
-   Double_t        TofSeg[17];
-   Double_t        tTof[17];
-   Double_t        dtTof[17];
-   Double_t        deTof[17];
+//   Int_t           status;
+//   Int_t           ntKurama;
+//   Double_t        path[4];
+//   Double_t        pKurama[4];
+//   Double_t        qKurama[4];
+//   Double_t        chisqrKurama[4];
+//   Double_t        xtgtKurama[4];
+//   Double_t        ytgtKurama[4];
+//   Double_t        utgtKurama[4];
+//   Double_t        vtgtKurama[4];
+//   Double_t        thetaKurama[4];
+//   Double_t        vpx[5];
+//   Double_t        vpy[5];
+//   Double_t        tTofCalc[3];
+//   Int_t           nhBh1;
+//   Double_t        csBh1[5];
+//   Double_t        Bh1Seg[5];
+//   Double_t        tBh1[5];
+//   Double_t        dtBh1[5];
+//   Double_t        deBh1[5];
+//   Double_t        btof[5];
+//   Int_t           nhBh2;
+//   Double_t        csBh2[4];
+//   Double_t        Bh2Seg[4];
+//   Double_t        tBh2[4];
+//   Double_t        dtBh2[4];
+//   Double_t        t0Bh2[4];
+//   Double_t        deBh2[4];
+//   Int_t           nhSac;
+//   Double_t        csSac[41];
+//   Double_t        SacSeg[41];
+//   Double_t        tSac[41];
+//   Double_t        deSac[41];
+//   Int_t           nhTof;
+//   Double_t        csTof[17];
+//   Double_t        TofSeg[17];
+//   Double_t        tTof[17];
+//   Double_t        dtTof[17];
+//   Double_t        deTof[17];
    Int_t           tofnhits;
    Int_t           tofhitpat[24];
    Double_t        tofmt[24][16];
-   Int_t           nhBft;
-   Int_t           csBft[15];
-   Double_t        tBft[15];
-   Double_t        wBft[15];
-   Double_t        BftPos[15];
-   Int_t           sch_nhits;
-   Int_t           sch_hitpat[26];
-   Double_t        sch_tdc[64][16];
-   Double_t        sch_trailing[64][16];
-   Double_t        sch_tot[64][16];
-   Int_t           sch_depth[64];
-   Int_t           nhSch;
-   Int_t           csSch[25];
-   Double_t        tSch[25];
-   Double_t        wSch[25];
-   Double_t        SchPos[25];
-   Int_t           sftx_nhits;
-   Int_t           sftx_unhits;
-   Int_t           sftx_dnhits;
-   Int_t           sftx_uhitpat[94];
-   Int_t           sftx_dhitpat[49];
-   Double_t        sftx_utdc[256][16];
-   Double_t        sftx_dtdc[256][16];
-   Double_t        sftx_utrailing[256][16];
-   Double_t        sftx_dtrailing[256][16];
-   Double_t        sftx_utot[256][16];
-   Double_t        sftx_dtot[256][16];
-   Int_t           sftx_udepth[256];
-   Int_t           sftx_ddepth[256];
-   Int_t           sftx_ncl;
-   Int_t           sftx_clsize[29];
-   Double_t        sftx_ctime[29];
-   Double_t        sftx_ctot[29];
-   Double_t        sftx_clpos[29];
-   Int_t           m2Combi;
-   Double_t        beta[36];
-   Double_t        stof[36];
-   Double_t        m2[36];
+//   Int_t           nhBft;
+//   Int_t           csBft[15];
+//   Double_t        tBft[15];
+//   Double_t        wBft[15];
+//   Double_t        BftPos[15];
+//   Int_t           sch_nhits;
+//   Int_t           sch_hitpat[26];
+//   Double_t        sch_tdc[64][16];
+//   Double_t        sch_trailing[64][16];
+//   Double_t        sch_tot[64][16];
+//   Int_t           sch_depth[64];
+//   Int_t           nhSch;
+//   Int_t           csSch[25];
+//   Double_t        tSch[25];
+//   Double_t        wSch[25];
+//   Double_t        SchPos[25];
+//   Int_t           sftx_nhits;
+//   Int_t           sftx_unhits;
+//   Int_t           sftx_dnhits;
+//   Int_t           sftx_uhitpat[94];
+//   Int_t           sftx_dhitpat[49];
+//   Double_t        sftx_utdc[256][16];
+//   Double_t        sftx_dtdc[256][16];
+//   Double_t        sftx_utrailing[256][16];
+//   Double_t        sftx_dtrailing[256][16];
+//   Double_t        sftx_utot[256][16];
+//   Double_t        sftx_dtot[256][16];
+//   Int_t           sftx_udepth[256];
+//   Int_t           sftx_ddepth[256];
+//   Int_t           sftx_ncl;
+//   Int_t           sftx_clsize[29];
+//   Double_t        sftx_ctime[29];
+//   Double_t        sftx_ctot[29];
+//   Double_t        sftx_clpos[29];
+//   Int_t           m2Combi;
+//   Double_t        beta[36];
+//   Double_t        stof[36];
+//   Double_t        m2[36];
 
    // Set branch addresses.
    k0hodo->SetBranchAddress("trigflag",trigflag);
    k0hodo->SetBranchAddress("trigpat",trigpat);
-   k0hodo->SetBranchAddress("status",&status);
-   k0hodo->SetBranchAddress("ntKurama",&ntKurama);
-   k0hodo->SetBranchAddress("path",path);
-   k0hodo->SetBranchAddress("pKurama",pKurama);
-   k0hodo->SetBranchAddress("qKurama",qKurama);
-   k0hodo->SetBranchAddress("chisqrKurama",chisqrKurama);
-   k0hodo->SetBranchAddress("xtgtKurama",xtgtKurama);
-   k0hodo->SetBranchAddress("ytgtKurama",ytgtKurama);
-   k0hodo->SetBranchAddress("utgtKurama",utgtKurama);
-   k0hodo->SetBranchAddress("vtgtKurama",vtgtKurama);
-   k0hodo->SetBranchAddress("thetaKurama",thetaKurama);
-   k0hodo->SetBranchAddress("vpx",vpx);
-   k0hodo->SetBranchAddress("vpy",vpy);
-   k0hodo->SetBranchAddress("tTofCalc",tTofCalc);
-   k0hodo->SetBranchAddress("nhBh1",&nhBh1);
-   k0hodo->SetBranchAddress("csBh1",csBh1);
-   k0hodo->SetBranchAddress("Bh1Seg",Bh1Seg);
-   k0hodo->SetBranchAddress("tBh1",tBh1);
-   k0hodo->SetBranchAddress("dtBh1",dtBh1);
-   k0hodo->SetBranchAddress("deBh1",deBh1);
-   k0hodo->SetBranchAddress("btof",btof);
-   k0hodo->SetBranchAddress("nhBh2",&nhBh2);
-   k0hodo->SetBranchAddress("csBh2",csBh2);
-   k0hodo->SetBranchAddress("Bh2Seg",Bh2Seg);
-   k0hodo->SetBranchAddress("tBh2",tBh2);
-   k0hodo->SetBranchAddress("dtBh2",dtBh2);
-   k0hodo->SetBranchAddress("t0Bh2",t0Bh2);
-   k0hodo->SetBranchAddress("deBh2",deBh2);
-   k0hodo->SetBranchAddress("nhSac",&nhSac);
-   k0hodo->SetBranchAddress("csSac",csSac);
-   k0hodo->SetBranchAddress("SacSeg",SacSeg);
-   k0hodo->SetBranchAddress("tSac",tSac);
-   k0hodo->SetBranchAddress("deSac",deSac);
-   k0hodo->SetBranchAddress("nhTof",&nhTof);
-   k0hodo->SetBranchAddress("csTof",csTof);
-   k0hodo->SetBranchAddress("TofSeg",TofSeg);
-   k0hodo->SetBranchAddress("tTof",tTof);
-   k0hodo->SetBranchAddress("dtTof",dtTof);
-   k0hodo->SetBranchAddress("deTof",deTof);
+//   k0hodo->SetBranchAddress("status",&status);
+//   k0hodo->SetBranchAddress("ntKurama",&ntKurama);
+//   k0hodo->SetBranchAddress("path",path);
+//   k0hodo->SetBranchAddress("pKurama",pKurama);
+//   k0hodo->SetBranchAddress("qKurama",qKurama);
+//   k0hodo->SetBranchAddress("chisqrKurama",chisqrKurama);
+//   k0hodo->SetBranchAddress("xtgtKurama",xtgtKurama);
+//   k0hodo->SetBranchAddress("ytgtKurama",ytgtKurama);
+//   k0hodo->SetBranchAddress("utgtKurama",utgtKurama);
+//   k0hodo->SetBranchAddress("vtgtKurama",vtgtKurama);
+//   k0hodo->SetBranchAddress("thetaKurama",thetaKurama);
+//   k0hodo->SetBranchAddress("vpx",vpx);
+//   k0hodo->SetBranchAddress("vpy",vpy);
+//   k0hodo->SetBranchAddress("tTofCalc",tTofCalc);
+//   k0hodo->SetBranchAddress("nhBh1",&nhBh1);
+//   k0hodo->SetBranchAddress("csBh1",csBh1);
+//   k0hodo->SetBranchAddress("Bh1Seg",Bh1Seg);
+//   k0hodo->SetBranchAddress("tBh1",tBh1);
+//   k0hodo->SetBranchAddress("dtBh1",dtBh1);
+//   k0hodo->SetBranchAddress("deBh1",deBh1);
+//   k0hodo->SetBranchAddress("btof",btof);
+//   k0hodo->SetBranchAddress("nhBh2",&nhBh2);
+//   k0hodo->SetBranchAddress("csBh2",csBh2);
+//   k0hodo->SetBranchAddress("Bh2Seg",Bh2Seg);
+//   k0hodo->SetBranchAddress("tBh2",tBh2);
+//   k0hodo->SetBranchAddress("dtBh2",dtBh2);
+//   k0hodo->SetBranchAddress("t0Bh2",t0Bh2);
+//   k0hodo->SetBranchAddress("deBh2",deBh2);
+//   k0hodo->SetBranchAddress("nhSac",&nhSac);
+//   k0hodo->SetBranchAddress("csSac",csSac);
+//   k0hodo->SetBranchAddress("SacSeg",SacSeg);
+//   k0hodo->SetBranchAddress("tSac",tSac);
+//   k0hodo->SetBranchAddress("deSac",deSac);
+//   k0hodo->SetBranchAddress("nhTof",&nhTof);
+//   k0hodo->SetBranchAddress("csTof",csTof);
+//   k0hodo->SetBranchAddress("TofSeg",TofSeg);
+//   k0hodo->SetBranchAddress("tTof",tTof);
+//   k0hodo->SetBranchAddress("dtTof",dtTof);
+//   k0hodo->SetBranchAddress("deTof",deTof);
    k0hodo->SetBranchAddress("tofnhits",&tofnhits);
    k0hodo->SetBranchAddress("tofhitpat",tofhitpat);
    k0hodo->SetBranchAddress("tofmt",tofmt);
-   k0hodo->SetBranchAddress("nhBft",&nhBft);
-   k0hodo->SetBranchAddress("csBft",csBft);
-   k0hodo->SetBranchAddress("tBft",tBft);
-   k0hodo->SetBranchAddress("wBft",wBft);
-   k0hodo->SetBranchAddress("BftPos",BftPos);
-   k0hodo->SetBranchAddress("sch_nhits",&sch_nhits);
-   k0hodo->SetBranchAddress("sch_hitpat",sch_hitpat);
-   k0hodo->SetBranchAddress("sch_tdc",sch_tdc);
-   k0hodo->SetBranchAddress("sch_trailing",sch_trailing);
-   k0hodo->SetBranchAddress("sch_tot",sch_tot);
-   k0hodo->SetBranchAddress("sch_depth",sch_depth);
-   k0hodo->SetBranchAddress("nhSch",&nhSch);
-   k0hodo->SetBranchAddress("csSch",csSch);
-   k0hodo->SetBranchAddress("tSch",tSch);
-   k0hodo->SetBranchAddress("wSch",wSch);
-   k0hodo->SetBranchAddress("SchPos",SchPos);
-   k0hodo->SetBranchAddress("sftx_nhits",&sftx_nhits);
-   k0hodo->SetBranchAddress("sftx_unhits",&sftx_unhits);
-   k0hodo->SetBranchAddress("sftx_dnhits",&sftx_dnhits);
-   k0hodo->SetBranchAddress("sftx_uhitpat",sftx_uhitpat);
-   k0hodo->SetBranchAddress("sftx_dhitpat",sftx_dhitpat);
-   k0hodo->SetBranchAddress("sftx_utdc",sftx_utdc);
-   k0hodo->SetBranchAddress("sftx_dtdc",sftx_dtdc);
-   k0hodo->SetBranchAddress("sftx_utrailing",sftx_utrailing);
-   k0hodo->SetBranchAddress("sftx_dtrailing",sftx_dtrailing);
-   k0hodo->SetBranchAddress("sftx_utot",sftx_utot);
-   k0hodo->SetBranchAddress("sftx_dtot",sftx_dtot);
-   k0hodo->SetBranchAddress("sftx_udepth",sftx_udepth);
-   k0hodo->SetBranchAddress("sftx_ddepth",sftx_ddepth);
-   k0hodo->SetBranchAddress("sftx_ncl",&sftx_ncl);
-   k0hodo->SetBranchAddress("sftx_clsize",sftx_clsize);
-   k0hodo->SetBranchAddress("sftx_ctime",sftx_ctime);
-   k0hodo->SetBranchAddress("sftx_ctot",sftx_ctot);
-   k0hodo->SetBranchAddress("sftx_clpos",sftx_clpos);
-   k0hodo->SetBranchAddress("m2Combi",&m2Combi);
-   k0hodo->SetBranchAddress("beta",beta);
-   k0hodo->SetBranchAddress("stof",stof);
-   k0hodo->SetBranchAddress("m2",m2);
+//   k0hodo->SetBranchAddress("nhBft",&nhBft);
+//   k0hodo->SetBranchAddress("csBft",csBft);
+//   k0hodo->SetBranchAddress("tBft",tBft);
+//   k0hodo->SetBranchAddress("wBft",wBft);
+//   k0hodo->SetBranchAddress("BftPos",BftPos);
+//   k0hodo->SetBranchAddress("sch_nhits",&sch_nhits);
+//   k0hodo->SetBranchAddress("sch_hitpat",sch_hitpat);
+//   k0hodo->SetBranchAddress("sch_tdc",sch_tdc);
+//   k0hodo->SetBranchAddress("sch_trailing",sch_trailing);
+//   k0hodo->SetBranchAddress("sch_tot",sch_tot);
+//   k0hodo->SetBranchAddress("sch_depth",sch_depth);
+//   k0hodo->SetBranchAddress("nhSch",&nhSch);
+//   k0hodo->SetBranchAddress("csSch",csSch);
+//   k0hodo->SetBranchAddress("tSch",tSch);
+//   k0hodo->SetBranchAddress("wSch",wSch);
+//   k0hodo->SetBranchAddress("SchPos",SchPos);
+//   k0hodo->SetBranchAddress("sftx_nhits",&sftx_nhits);
+//   k0hodo->SetBranchAddress("sftx_unhits",&sftx_unhits);
+//   k0hodo->SetBranchAddress("sftx_dnhits",&sftx_dnhits);
+//   k0hodo->SetBranchAddress("sftx_uhitpat",sftx_uhitpat);
+//   k0hodo->SetBranchAddress("sftx_dhitpat",sftx_dhitpat);
+//   k0hodo->SetBranchAddress("sftx_utdc",sftx_utdc);
+//   k0hodo->SetBranchAddress("sftx_dtdc",sftx_dtdc);
+//   k0hodo->SetBranchAddress("sftx_utrailing",sftx_utrailing);
+//   k0hodo->SetBranchAddress("sftx_dtrailing",sftx_dtrailing);
+//   k0hodo->SetBranchAddress("sftx_utot",sftx_utot);
+//   k0hodo->SetBranchAddress("sftx_dtot",sftx_dtot);
+//   k0hodo->SetBranchAddress("sftx_udepth",sftx_udepth);
+//   k0hodo->SetBranchAddress("sftx_ddepth",sftx_ddepth);
+//   k0hodo->SetBranchAddress("sftx_ncl",&sftx_ncl);
+//   k0hodo->SetBranchAddress("sftx_clsize",sftx_clsize);
+//   k0hodo->SetBranchAddress("sftx_ctime",sftx_ctime);
+//   k0hodo->SetBranchAddress("sftx_ctot",sftx_ctot);
+//   k0hodo->SetBranchAddress("sftx_clpos",sftx_clpos);
+//   k0hodo->SetBranchAddress("m2Combi",&m2Combi);
+//   k0hodo->SetBranchAddress("beta",beta);
+//   k0hodo->SetBranchAddress("stof",stof);
+//   k0hodo->SetBranchAddress("m2",m2);
 
 //     This is the loop skeleton
 //       To read only selected branches, Insert statements like:
@@ -254,10 +254,7 @@ void mtx_gate(int month, int runnum){
 //-hist def-----------------------------------------------------------------------------------------
 //-Trigger Flag -------
 
-  TH1D *TrigPat[18];
-  for(int i=0;i<18;i++){
-    TrigPat[i]= new TH1D(Form("TrigPat%d",i+1),Form("TrigPat%d",i+1),32,0,32);
-  }
+  TH1D *TrigPatAll= new TH1D("TrigPatAll","TrigPatAll",32,0,32);
 
   TH1D *TrigFlag[32];
   TH1D *TrigFlagCut[32];
@@ -276,7 +273,6 @@ void mtx_gate(int month, int runnum){
   TH1D *TofMtDepthPat[NumOfSegTOF];
   TH1D *TofMtOrMtxFlgNhitsCut[NumOfSegTOF];
   TH1D *TofMtMtxFlgNhitsDepthCut[NumOfSegTOF];
-  TH1D *MtxFlag_TofNhitsCut[NumOfSegTOF];
   TH1D *TrigFlag28NhitsCut[NumOfSegTOF];
   for(int i=0;i<NumOfSegTOF;i++){
     TofMt[i]= new TH1D(Form("TofMt%d",i+1),Form("TofMt%d",i+1),100,-10,90);
@@ -285,8 +281,7 @@ void mtx_gate(int month, int runnum){
     TofMtDepthPat[i]= new TH1D(Form("TofMtDepthPat%d",i+1),Form("TofMtDepthPat%d",i+1),5,0,5);
     TofMtOrMtxFlgNhitsCut[i] = new TH1D(Form("TofMtOr TdcCut & MtxFlg & Nhits%d Cut",i+1),Form("TofMtOr TdcCut & MtxFlg & Nhits%d Cut",i+1),100,-10,90);
     TofMtMtxFlgNhitsDepthCut[i] = new TH1D(Form("TofMt%d TdcCut & MtxFlg & Nhits=1 & MaxDepth#1 Cut",i+1),Form("TofMt%d TdcCut & MtxFlg & Nhits=1 & MaxDepth#1 Cut",i+1),100,-10,90);
-    MtxFlag_TofNhitsCut[i] = new TH1D(Form("MtxFlag_Tof TdcCut & MtxFlg & Nhits%d Cut",i+1),Form("MtxFlag_Tof TdcCut & MtxFlg & Nhits%d Cut",i+1),1800,-1800,0);
-    TrigFlag28NhitsCut[i]= new TH1D(Form("MtxFlag TdcCut & MtxFlg & Nhits%d Cut",i+1),Form("MtxFlag_Tof TdcCut & MtxFlg & Nhits%d Cut",i+1),1800,-1800,0);
+    TrigFlag28NhitsCut[i]= new TH1D(Form("MtxFlag TdcCut & MtxFlg & Nhits%d Cut",i+1),Form("MtxFlag TdcCut & MtxFlg & Nhits%d Cut",i+1),1800,-1800,0);
   }
 
   TH1D *TofMtOr = new TH1D("TofMtOr","TofMtOr",100,-10,90);
@@ -294,18 +289,8 @@ void mtx_gate(int month, int runnum){
   TH1D *TofMtOrDepthPat = new TH1D("TofMtOrDepthPat","TofMtOrDepthPat",10,0,10);
   TH1D *TofMtOrAllDepthPat = new TH1D("TofMtOrAllDepthPat","TofMtOrAllDepthPat",10,0,10);
   TH1D *TofMtOrMtxFlgCut = new TH1D("TofMtOr TdcCut & MtxFlgCut","TofMtOr TdcCut & MtxFlgCut",100,-10,90);
-  TH1D *TofMtOrVarMtxFlgCut = new TH1D("TofMtOrVarMtxFlgCut","TofMtOrVarMtxFlgCut",1000,-10,90);
   TH1D *TofMtOrMtxFlgNhitsDepthCut = new TH1D("TofMtOr TdcCut & MtxFlg & Nhits=1 & MaxDepth#1 Cut","TofMtOr TdcCut & MtxFlg & Nhits=1 & MaxDepth#1 Cut",100,-10,90);
 
-//-Mtx Flag - Tof -----
-  TH1D *MtxFlag_Tof = new TH1D("MtxFlag_Tof","MtxFlag_Tof",2100,0,2100);
-  TH1D *MtxFlag_TofCut = new TH1D("MtxFlag_TofCut","MtxFlag_TofCut",1800,-1800,0);
-  TH1D *MtxFlag_TofNhitsDepthCut = new TH1D("MtxFlag-TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut","MtxFlag-TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut",2100,-2100,0);
-
-//- Correlation -------
-  TH2D *MtxFlag_vs_TofMtOrNhitsDepthCut = new TH2D("MtxFlag vs TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut","MtxFlag vs TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut",100,-10,90,1800,-1800,0);
-  TH2D *MtxFlag_vs_MtxFlagTofMtOrNhitsDepthCut = new TH2D("MtxFlag vs MtxFlag-TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut","MtxFlag vs MtxFlag-TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut",1800,-1800,0,1800,-1800,0);
-  TH2D *TofMtOr_vs_MtxFlagTofMtOrNhitsDepthCut = new TH2D("TofMtOr vs MtxFlag-TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut","TofMtOr vs MtxFlag-TofMtOr TdcCut & MtxFlg & Nhits=1 & Depth#1Cut",1800,-1800,0,100,-10,90);
 
 
    Long64_t nentries = k0hodo->GetEntries();
@@ -315,8 +300,9 @@ void mtx_gate(int month, int runnum){
    for (Long64_t s=0; s<10000;s++) {
      nbytes += k0hodo->GetEntry(s);
      for(int i=0; i<32; i++){
-       TrigPat[i]->Fill(trigpat[i]);
+       TrigPatAll->Fill(trigpat[i]);
      }
+
      for(int i=0; i<32; i++){
        TrigFlag[i]->Fill(trigflag[i]);
      }
@@ -329,7 +315,6 @@ void mtx_gate(int month, int runnum){
        for(int j=0; j<16; j++){
          TofMt[i]->Fill(tofmt[i][j]);
          TofMtOr->Fill(tofmt[i][j]);
-         MtxFlag_Tof->Fill(abs(HULMHTDCCalib*trigflag[28]-tofmt[i][j]));
          if(tofmt[i][j]==-999){
            if(!flag){
              if(j!=0){
@@ -341,10 +326,6 @@ void mtx_gate(int month, int runnum){
                    TofMtMtxFlgNhitsDepthCut[i]->Fill(tofmt[i][0]);
                    TofMtOrMtxFlgNhitsDepthCut->Fill(tofmt[i][0]);
                    TrigFlag28NhitsDepthCut->Fill(HULMHTDCCalib*trigflag[28]);
-                   MtxFlag_TofNhitsDepthCut->Fill(HULMHTDCCalib*trigflag[28]-tofmt[i][0]);
-                   MtxFlag_vs_TofMtOrNhitsDepthCut->Fill(tofmt[i][0],HULMHTDCCalib*trigflag[28]);
-                   MtxFlag_vs_MtxFlagTofMtOrNhitsDepthCut->Fill(HULMHTDCCalib*trigflag[28]-tofmt[i][0],HULMHTDCCalib*trigflag[28]);
-                   TofMtOr_vs_MtxFlagTofMtOrNhitsDepthCut->Fill(HULMHTDCCalib*trigflag[28]-tofmt[i][0],tofmt[i][0]);
                  }
                }
              }
@@ -353,14 +334,12 @@ void mtx_gate(int month, int runnum){
          }else{
            TofMtCut[i]->Fill(tofmt[i][j]);
            TofMtOrCut->Fill(tofmt[i][j]);
-           MtxFlag_TofCut->Fill(-trigflag[28]-tofmt[i][j]);
            TrigFlagCut[28]->Fill(-trigflag[28]);
            if(trigflag[28]>0){
              TofMtOrMtxFlgCut->Fill(tofmt[i][j]);
                if(tofnhits!=1) continue;
                TofMtOrAllDepthPat->Fill(j+1);
            }else{
-             TofMtOrVarMtxFlgCut->Fill(tofmt[i][j]);
            }
          }
        }
@@ -369,7 +348,6 @@ void mtx_gate(int month, int runnum){
            for(int k=0; k<16; k++){
              if(tofmt[j][k]!=-999){
                TofMtOrMtxFlgNhitsCut[i]->Fill(tofmt[j][k]);
-               MtxFlag_TofNhitsCut[i]->Fill(HULMHTDCCalib*trigflag[28]-tofmt[j][k]);
                TrigFlag28NhitsCut[i]->Fill(HULMHTDCCalib*trigflag[28]);
              }
            }
@@ -395,36 +373,41 @@ void mtx_gate(int month, int runnum){
 
    c1->Print(pdf+"["); 
 //-Hist Draw----------------------------------------------------------------------------------------
-  for(int i=0; i<18; i++){
-    c2->cd(i+1);
-    TrigPat[i]->Draw();
-  }
-  c2->Print(pdf);
+   c1->Print(pdf);
+   TrigPatAll->Draw();
 
-  for(int i=0; i<2; i++){
-    for(int j=0; j<16; j++){
-      c3->cd(j+1);
-      TrigFlag[i*16+j]->Draw();
-    }
-    c3->Print(pdf);
-  }
+   c2->Print(pdf);
 
-  c1->cd();
-  TrigFlag[28]->Draw();
-  c1->Print(pdf);
+   for(int i=0; i<4; i++){
+     for(int j=0; j<4; j++){
+       c5->cd(j+1);
+       TrigFlag[i*4+j]->Draw();
+     }
+     c3->Print(pdf);
+   }
 
-  TrigFlag[28]->SetAxisRange(900,1050,"X");
-  TrigFlag[28]->Draw();
-  c1->Print(pdf);
+   c1->cd();
+   TrigFlag[8]->Draw();
+   c1->Print(pdf);
 
-  TofNhits->Draw();
-  c1->Print(pdf);
+   TrigFlag[9]->Draw();
+   c1->Print(pdf);
 
-  for(int j=0; j<2; j++){
-    for(int i=0; i<12; i++){
-      c4->cd(i+1);
-      TofMt[j*12+i]->Draw();
-    }
+   TrigFlag[28]->Draw();
+   c1->Print(pdf);
+
+   TrigFlag[28]->SetAxisRange(900,1050,"X");
+   TrigFlag[28]->Draw();
+   c1->Print(pdf);
+
+   TofNhits->Draw();
+   c1->Print(pdf);
+
+   for(int j=0; j<2; j++){
+     for(int i=0; i<12; i++){
+       c4->cd(i+1);
+       TofMt[j*12+i]->Draw();
+     }
     c4->Print(pdf);
   }
 
@@ -464,9 +447,6 @@ void mtx_gate(int month, int runnum){
 //  }
 
   c1->cd();
-//  TofHitPat->Draw();
-//  c1->Print(pdf);
-
   TrigFlagCut[28]->Draw();
   c1->Print(pdf);
 
@@ -477,21 +457,8 @@ void mtx_gate(int month, int runnum){
   TofMtOrCut->Draw();
   c1->Print(pdf);
 
-  MtxFlag_Tof->Draw();
-  c1->Print(pdf);
-    
-  MtxFlag_TofCut->Draw();
-  c1->Print(pdf);
-
-  MtxFlag_TofCut->SetAxisRange(-1100,-700,"X");
-  MtxFlag_TofCut->Draw();
-  c1->Print(pdf);
-
   TofMtOrMtxFlgCut->Draw();
   c1->Print(pdf);
-
-//  TofMtOrVarMtxFlgCut->Draw();
-//  c1->Print(pdf);
 
   for(int j=0; j<6; j++){
     for(int i=0; i<4; i++){
@@ -500,9 +467,6 @@ void mtx_gate(int month, int runnum){
       TrigFlag28NhitsCut[j*4+i]->Draw();
       c6->cd(2);
       TofMtOrMtxFlgNhitsCut[j*4+i]->Draw();
-      c6->cd(3);
-      MtxFlag_TofNhitsCut[j*4+i]->SetAxisRange(-840,-740,"X");
-      MtxFlag_TofNhitsCut[j*4+i]->Draw();
       c6->Print(pdf);
     }
   }
@@ -513,25 +477,7 @@ void mtx_gate(int month, int runnum){
   c6->cd(2);
   TofMtOrMtxFlgNhitsDepthCut->Draw();
   c6->cd(3);
-  MtxFlag_TofNhitsDepthCut->SetAxisRange(-840,-740,"X");
-  MtxFlag_TofNhitsDepthCut->Draw();
-  c6->cd(4);
-  MtxFlag_vs_TofMtOrNhitsDepthCut->SetAxisRange(-840,-740,"Y");
-  MtxFlag_vs_TofMtOrNhitsDepthCut->Draw("colz");
   c6->Print(pdf);
-
-  c1->cd();
-  MtxFlag_vs_MtxFlagTofMtOrNhitsDepthCut->Draw("colz");
-  c1->Print(pdf);
-  MtxFlag_vs_MtxFlagTofMtOrNhitsDepthCut->SetAxisRange(-840,-740,"X");
-  MtxFlag_vs_MtxFlagTofMtOrNhitsDepthCut->SetAxisRange(-840,-740,"Y");
-  MtxFlag_vs_MtxFlagTofMtOrNhitsDepthCut->Draw("colz");
-  c1->Print(pdf);
-  TofMtOr_vs_MtxFlagTofMtOrNhitsDepthCut->Draw("colz");
-  c1->Print(pdf);
-  TofMtOr_vs_MtxFlagTofMtOrNhitsDepthCut->SetAxisRange(-840,-740,"X");
-  TofMtOr_vs_MtxFlagTofMtOrNhitsDepthCut->Draw("colz");
-  c1->Print(pdf);
 
   c1->Print(pdf+"]"); 
 
