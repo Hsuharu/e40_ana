@@ -296,8 +296,7 @@ void mtx_gate(int month, int runnum){
    Long64_t nentries = k0hodo->GetEntries();
 
    Long64_t nbytes = 0;
-//   for (Long64_t s=0; s<nentries;s++) {
-   for (Long64_t s=0; s<10000;s++) {
+   for (Long64_t s=0; s<nentries;s++) {
      nbytes += k0hodo->GetEntry(s);
      for(int i=0; i<32; i++){
        TrigPatAll->Fill(trigpat[i]);
@@ -373,10 +372,9 @@ void mtx_gate(int month, int runnum){
 
    c1->Print(pdf+"["); 
 //-Hist Draw----------------------------------------------------------------------------------------
-   c1->Print(pdf);
+   c1->cd();
    TrigPatAll->Draw();
-
-   c2->Print(pdf);
+   c1->Print(pdf);
 
    for(int i=0; i<4; i++){
      for(int j=0; j<4; j++){
