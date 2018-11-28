@@ -205,6 +205,9 @@ struct Dst
   double tTof[NumOfSegTOF*MaxDepth];
   double dtTof[NumOfSegTOF*MaxDepth];
   double deTof[NumOfSegTOF*MaxDepth];
+  int tofnhits;
+  int tofhitpat[MaxHits];
+  double tofmt[NumOfSegTOF][MaxDepth];
 
   int    nhHtTof;
   int    csHtTof[NumOfSegTOF*MaxDepth];
@@ -567,6 +570,7 @@ EventHodoscope::ProcessingNormal( void )
 
       if( Tu >0 && Td>0 ){
 	event.tofhitpat[tof_nhits] = seg;
+	dst.tofhitpat[tof_nhits] = seg;
 	tof_nhits++;
       }
 
@@ -580,6 +584,7 @@ EventHodoscope::ProcessingNormal( void )
     }
     HF1( TOFHid+2, double(nh1) ); HF1( TOFHid+4, double(nh2) );
     event.tofnhits = tof_nhits;
+    dst.tofnhits = tof_nhits;
   }
 
   // HtTOF
@@ -1070,6 +1075,7 @@ EventHodoscope::ProcessingNormal( void )
 
 	dst.utTofSeg[seg-1][m]  = tu; dst.dtTofSeg[seg-1][m]  = td;
 	dst.udeTofSeg[seg-1]    = au; dst.ddeTofSeg[seg-1]    = ad;
+	dst.tofmt[seg-1][m] = mt;
 
 	if( m == 0){
 	  HF1( TOFHid+100*seg+14, au );    HF1( TOFHid+100*seg+15, ad );
@@ -1408,6 +1414,7 @@ EventHodoscope::InitializeEvent( void )
   dst.nhTof  = 0;
   dst.nhHtTof  = 0;
   dst.nhLc  = 0;
+  dst.tofnhits  = 0;
 
   event.Time0Seg = -999;
   event.deTime0  = -999;
@@ -1448,6 +1455,7 @@ EventHodoscope::InitializeEvent( void )
     event.tofhitpat[it]  = -1;
     event.tofhthitpat[it]  = -1;
     event.lchitpat[it]  = -1;
+    dst.tofhitpat[it]  = -1;
   }
 
   for( int it=0; it<NumOfSegBH1; ++it ){
@@ -1532,6 +1540,7 @@ EventHodoscope::InitializeEvent( void )
       dst.tTof[MaxDepth*it + m]   = -9999.;
       dst.dtTof[MaxDepth*it + m]  = -9999.;
       dst.deTof[MaxDepth*it + m]  = -9999.;      
+      dst.tofmt[it][m] = -999.0;
     }
   }
 
@@ -2235,6 +2244,9 @@ ConfMan::InitializeHistograms( void )
   hodo->Branch("tTof",       dst.tTof,      "tTof[nhTof]/D");
   hodo->Branch("dtTof",      dst.dtTof,     "dtTof[nhTof]/D");
   hodo->Branch("deTof",      dst.deTof,     "deTof[nhTof]/D");
+  hodo->Branch("tofnhits",   &dst.tofnhits,   "tofnhits/I");
+  hodo->Branch("tofhitpat",  dst.tofhitpat,  Form("tofhitpat[%d]/I", NumOfSegTOF));
+  hodo->Branch("tofmt",      dst.tofmt,     Form("tofmt[%d][%d]/D", NumOfSegTOF, MaxDepth));
 
   hodo->Branch("nhHtTof",     &dst.nhHtTof,     "nhHtTof/I");
   hodo->Branch("csHtTof",      dst.csHtTof,     "csHtTof[nhHtTof]/I");

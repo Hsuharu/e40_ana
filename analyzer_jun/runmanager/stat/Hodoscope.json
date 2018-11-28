@@ -1,16 +1,30 @@
 {
     "5126": {
-        "time": 374.197872877121,
-        "stat": true,
-        "conf": "./param_nakadashi/analyzer_jun.conf",
-        "nseg": 3,
-        "unit": 100000,
-        "bin": "./bin/Hodoscope",
-        "nproc": 1,
         "nev": 264862,
-        "queue": "s",
-        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05126.dat",
         "prog": 3,
-        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05126_HodoforDstk0hodo.root"
+        "time": 307.20054960250854,
+        "unit": 100000,
+        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05126.dat",
+        "bin": "./bin/Hodoscope",
+        "conf": "./param_nakadashi/analyzer_jun.conf",
+        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05126_Hodoscope.root",
+        "stat": true,
+        "nproc": 1,
+        "queue": "s",
+        "nseg": 3
+    },
+    "5115": {
+        "nev": 955578,
+        "prog": 10,
+        "time": 307.4624321460724,
+        "unit": 100000,
+        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05115.dat",
+        "bin": "./bin/Hodoscope",
+        "conf": "./param_nakadashi/analyzer_jun.conf",
+        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05115_Hodoscope.root",
+        "stat": true,
+        "nproc": 1,
+        "queue": "s",
+        "nseg": 10
     }
 }

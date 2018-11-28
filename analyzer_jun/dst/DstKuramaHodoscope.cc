@@ -570,7 +570,6 @@ ConfMan::InitializeHistograms( void )
   tree->Branch("TofSeg",  event.TofSeg,"TofSeg[nhTof]/D");
   tree->Branch("tTof",    event.tTof,  "tTof[nhTof]/D");
   tree->Branch("dtTof",   event.dtTof, "dtTof[nhTof]/D");
-  tree->Branch("deTof",   event.deTof, "deTof[nhTof]/D");
 
   tree->Branch("m2Combi", &event.m2Combi, "m2Combi/I");
   tree->Branch("beta",     event.beta,    "beta[m2Combi]/D");
