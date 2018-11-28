@@ -266,18 +266,15 @@ void mtx_gate(int month, int runnum){
 //-Tof ----------------
   TH1D *TofNhits = new TH1D("TofNhits","TofNhits",20,0,20);
   TH1D *TrigFlag28NhitsDepthCut= new TH1D("MtxFlag TdcCut & MtxFlg & Nhits=1 & MaxDepth#1 Cut","MtxFlag TdcCut & MtxFlg & Nhits=1 & MaxDepth#1 Cut",1800,-1800,0);
+  TH1D *TofMtOrMtxFlgNhitsCut = new TH1D("TofMtOr TdcCut & MtxFlg & Nhits=1 Cut","TofMtOr TdcCut & MtxFlg & Nhits=1 Cut",100,-10,90);
 
   TH1D *TofMt[NumOfSegTOF];
   TH1D *TofMtCut[NumOfSegTOF];
-  TH1D *TofMtDepthPat[NumOfSegTOF];
-  TH1D *TofMtOrMtxFlgNhitsCut[NumOfSegTOF];
   TH1D *TofMtMtxFlgNhitsDepthCut[NumOfSegTOF];
   TH1D *TrigFlag28NhitsCut[NumOfSegTOF];
   for(int i=0;i<NumOfSegTOF;i++){
     TofMt[i]= new TH1D(Form("TofMt%d",i+1),Form("TofMt%d",i+1),100,-10,90);
     TofMtCut[i]= new TH1D(Form("TofMtCut%d",i+1),Form("TofMtCut%d",i+1),100,-10,90);
-    TofMtDepthPat[i]= new TH1D(Form("TofMtDepthPat%d",i+1),Form("TofMtDepthPat%d",i+1),5,0,5);
-    TofMtOrMtxFlgNhitsCut[i] = new TH1D(Form("TofMtOr TdcCut & MtxFlg & Nhits%d Cut",i+1),Form("TofMtOr TdcCut & MtxFlg & Nhits%d Cut",i+1),100,-10,90);
     TofMtMtxFlgNhitsDepthCut[i] = new TH1D(Form("TofMt%d TdcCut & MtxFlg & Nhits=1 & MaxDepth#1 Cut",i+1),Form("TofMt%d TdcCut & MtxFlg & Nhits=1 & MaxDepth#1 Cut",i+1),100,-10,90);
     TrigFlag28NhitsCut[i]= new TH1D(Form("MtxFlag TdcCut & MtxFlg & Nhits%d Cut",i+1),Form("MtxFlag TdcCut & MtxFlg & Nhits%d Cut",i+1),1800,-1800,0);
   }
@@ -316,7 +313,6 @@ void mtx_gate(int month, int runnum){
            if(!flag){
              if(j!=0){
                if(tofnhits!=1) continue;
-               TofMtDepthPat[i]->Fill(j);
                TofMtOrDepthPat->Fill(j);
                if(j==1){
                  if(trigflag[28]>0){
@@ -337,17 +333,8 @@ void mtx_gate(int month, int runnum){
              TofMtOrMtxFlgCut->Fill(tofmt[i][j]);
                if(tofnhits!=1) continue;
                TofMtOrAllDepthPat->Fill(j+1);
-           }else{
-           }
-         }
-       }
-       if(trigflag[28]>0&&tofnhits==i+1){
-         for(int j=0; j<NumOfSegTOF; j++){
-           for(int k=0; k<16; k++){
-             if(tofmt[j][k]!=-999){
-               TofMtOrMtxFlgNhitsCut[i]->Fill(tofmt[j][k]);
-               TrigFlag28NhitsCut[i]->Fill(HULMHTDCCalib*trigflag[28]);
-             }
+               TofMtOrMtxFlgNhitsCut->Fill(tofmt[i][j]);
+               TrigFlag28NhitsCut->Fill(HULMHTDCCalib*trigflag[28]);
            }
          }
        }
@@ -406,63 +393,55 @@ void mtx_gate(int month, int runnum){
        TofMt[j*12+i]->Draw();
      }
     c4->Print(pdf);
-  }
+   }
 
-  c1->cd();
-  TofMtOr->Draw();
-  c1->Print(pdf);
+   c1->cd();
+   TofMtOr->Draw();
+   c1->Print(pdf);
 
-  for(int j=0; j<2; j++){
-    for(int i=0; i<12; i++){
-      c4->cd(i+1);
-      TofMtDepthPat[j*12+i]->Draw();
-    }
-    c4->Print(pdf);
-  }
+   c1->cd();
+   TofMtOrDepthPat->Draw();
+   c1->Print(pdf);
 
-  c1->cd();
-  TofMtOrDepthPat->Draw();
-  c1->Print(pdf);
+   TofMtOrAllDepthPat->Draw();
+   c1->Print(pdf);
 
-  TofMtOrAllDepthPat->Draw();
-  c1->Print(pdf);
+   TofHitPatNhitsCut->Draw();
+   c1->Print(pdf);
 
-  TofHitPatNhitsCut->Draw();
-  c1->Print(pdf);
+   c1->cd();
+   TrigFlagCut[28]->Draw();
+   c1->Print(pdf);
 
-  c1->cd();
-  TrigFlagCut[28]->Draw();
-  c1->Print(pdf);
+   TrigFlagCut[28]->SetAxisRange(-840,-740,"X");
+   TrigFlagCut[28]->Draw();
+   c1->Print(pdf);
 
-  TrigFlagCut[28]->SetAxisRange(-840,-740,"X");
-  TrigFlagCut[28]->Draw();
-  c1->Print(pdf);
+   TofMtOrCut->Draw();
+   c1->Print(pdf);
 
-  TofMtOrCut->Draw();
-  c1->Print(pdf);
+   TofMtOrMtxFlgCut->Draw();
+   c1->Print(pdf);
 
-  TofMtOrMtxFlgCut->Draw();
-  c1->Print(pdf);
+   for(int j=0; j<6; j++){
+     for(int i=0; i<4; i++){
+       c6->cd(1);
+       TrigFlag28NhitsCut[j*4+i]->SetAxisRange(-840,-740,"X");
+       TrigFlag28NhitsCut[j*4+i]->Draw();
+       c6->cd(2);
+       TofMtOrMtxFlgNhitsCut->Draw();
+       c6->Print(pdf);
+     }
+   }
 
-  for(int j=0; j<6; j++){
-    for(int i=0; i<4; i++){
-      c6->cd(1);
-      TrigFlag28NhitsCut[j*4+i]->SetAxisRange(-840,-740,"X");
-      TrigFlag28NhitsCut[j*4+i]->Draw();
-      c6->cd(2);
-      TofMtOrMtxFlgNhitsCut[j*4+i]->Draw();
-      c6->Print(pdf);
-    }
-  }
+   c6->cd(1);
+   TrigFlag28NhitsDepthCut->SetAxisRange(-840,-740,"X");
+   TrigFlag28NhitsDepthCut->Draw();
+   c6->cd(2);
+   TofMtOrMtxFlgNhitsDepthCut->Draw();
+   c6->cd(3);
+   c6->Print(pdf);
 
-  c6->cd(1);
-  TrigFlag28NhitsDepthCut->SetAxisRange(-840,-740,"X");
-  TrigFlag28NhitsDepthCut->Draw();
-  c6->cd(2);
-  TofMtOrMtxFlgNhitsDepthCut->Draw();
-  c6->cd(3);
-  c6->Print(pdf);
-
-  c1->Print(pdf+"]"); 
+   c1->Print(pdf+"]"); 
 
 }
