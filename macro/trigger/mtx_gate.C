@@ -308,6 +308,7 @@ TH1D *SchTofPCut_KTime0  = new TH1D("Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  
    Long64_t nbytes = 0;
    for (Long64_t s=0; s<nentries;s++) {
      nbytes += k0hodo->GetEntry(s);
+     if(trigpat[17]<=0) continue;
      for(int i=0; i<32; i++){
        TrigPatAll->Fill(trigpat[i]);
      }
@@ -536,11 +537,10 @@ TH1D *SchTofPCut_KTime0  = new TH1D("Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  
    c1->Print(pdf);
 
 
-   c1->Print(pdf+"]"); 
-
 // KTime0 Calib
    for (Long64_t s=0; s<nentries;s++) {
      nbytes += k0hodo->GetEntry(s);
+     if(trigpat[17]<=0) continue;
      for(int i=0; i<NumOfSegTOF; i++){
        bool flag=false;
        for(int j=0; j<16; j++){
@@ -555,15 +555,14 @@ TH1D *SchTofPCut_KTime0  = new TH1D("Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  
                      if(sch_depth[k]!=1) continue;
                      if(sch_hitpat[0]!=k) continue;
                      if(ntKurama==1){
-                       SchTofCut3->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]);
                        if(0<m2[ntKurama]&&m2[ntKurama]<0.1){
-                         SchTofPiCut->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]);
+                         SchTofPiCut_KTime0->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0);
                        }
                        if(0.1<m2[ntKurama]&&m2[ntKurama]<0.4){
-                         SchTofKCut->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]);
+                         SchTofKCut_KTime0->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0);
                        }
                        if(0.4<m2[ntKurama]&&m2[ntKurama]<1){
-                         SchTofPCut->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]);
+                         SchTofPCut_KTime0->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0);
                        }
                      }
                    }
@@ -577,6 +576,22 @@ TH1D *SchTofPCut_KTime0  = new TH1D("Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  
      }
    }
 
+
+   SchTofPiCut_KTime0->Draw();
+   c1->Print(pdf);
+   SchTofKCut_KTime0->Draw();
+   c1->Print(pdf);
+   SchTofPCut_KTime0->Draw();
+   c1->Print(pdf);
+
+   SchTofKCut_KTime0->Draw();
+   SchTofPiCut_KTime0->SetLineColor(2);
+   SchTofPiCut_KTime0->Draw("same");
+   SchTofPCut_KTime0->SetLineColor(3);
+   SchTofPCut_KTime0->Draw("same");
+   c1->Print(pdf);
+
+   c1->Print(pdf+"]"); 
 
 
 }
