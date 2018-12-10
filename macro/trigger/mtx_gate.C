@@ -406,15 +406,6 @@ TH1D *SchTofPCut_KTime0  = new TH1D("Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  
 //     }
    }
 
-// Time Calib by KaonTime to 0----------------------------------------------------------------------
-   TF1 *FitFunc1 = new TF1("FitFunc1","gaus");
-   double MaximumBin=0.;
-   double SchTofKTime0=0.;
-   MaximumBin=SchTofKCut->GetMaximumBin();
-   SchTofKCut->Fit("FitFinc1","","",MaximumBin-5,MaximumBin+5);
-   SchTofKTime0=FitFunc1->GetParameter(1);
-   std::cout << SchTofKTime0 << std::endl;
-
 //-Canvas def---------------------------------------------------------------------------------------
   TCanvas *c1 = new TCanvas("c1","c1",1200,900);
   TCanvas *c2 = new TCanvas("c2","c2",1200,900);
@@ -531,7 +522,16 @@ TH1D *SchTofPCut_KTime0  = new TH1D("Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  
 
    SchTofPiCut->Draw();
    c1->Print(pdf);
+
+// Time Calib by KaonTime to 0----------------------------------------------------------------------
+   TF1 *FitFunc1 = new TF1("FitFunc1","gaus");
+   double MaximumBin=0.;
+   double SchTofKTime0=0.;
+   MaximumBin=SchTofKCut->GetMaximumBin();
    SchTofKCut->Draw();
+   SchTofKCut->Fit("FitFunc1","","",MaximumBin-5,MaximumBin+5);
+   SchTofKTime0=FitFunc1->GetParameter(1);
+
    c1->Print(pdf);
    SchTofPCut->Draw();
    c1->Print(pdf);
