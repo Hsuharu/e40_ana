@@ -295,6 +295,8 @@ void mtx_gate(int month, int runnum){
 
 // Sch - Tof ----------
 TH1D *SchTof = new TH1D("Sch-Tof Cut2: Sch&TOF-> nhits=1 & Maxdepth =1","Sch-Tof Cut2: Sch&TOF-> nhits=1 & Maxdepth =1",100,-500,-300);
+TH1D *SchTofCut3 = new TH1D("Sch-Tof Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1","Sch-Tof Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1",100,-500,-300);
+TH1D *SchTofKCut = new TH1D("Sch-Tof KCut: Cut3 & 0.1<m2&m2<0.4","Sch-Tof KCut: Cut3 & 0.1<m2&m2<0.4",100,-500,-300);
 
    Long64_t nentries = k0hodo->GetEntries();
 
@@ -334,6 +336,12 @@ TH1D *SchTof = new TH1D("Sch-Tof Cut2: Sch&TOF-> nhits=1 & Maxdepth =1","Sch-Tof
                      SchTdcCut2->Fill(sch_tdc[k][0]);
                      SchTimeCut2->Fill(HULMHTDCCalib*sch_tdc[k][0]);
                      SchTof->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]);
+                     if(ntKurama==1){
+                       SchTofCut3->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]);
+                       if(0.1<m2[ntKurama]&&m2[ntKurama]<0.4){
+                         SchTofKCut->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]);
+                       }
+                     }
                    }
                  }
                }
@@ -495,6 +503,12 @@ TH1D *SchTof = new TH1D("Sch-Tof Cut2: Sch&TOF-> nhits=1 & Maxdepth =1","Sch-Tof
    
 //Sch-Tof Draw ----
    SchTof->Draw();
+   c1->Print(pdf);
+
+   SchTofCut3->Draw();
+   c1->Print(pdf);
+
+   SchTofKCut->Draw();
    c1->Print(pdf);
 
 
