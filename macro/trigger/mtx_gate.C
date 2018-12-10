@@ -291,10 +291,10 @@ void mtx_gate(int month, int runnum){
   TH1D *SchTdc = new TH1D("SchTdc","SchTdc",100,0,1000);
   TH1D *SchTdcCut = new TH1D("SchTdcCut:nhits=1 & Maxdepth =1","SchTdcCut:nhits=1 & Maxdepth =1",100,0,1000);
   TH1D *SchTdcCut2 = new TH1D("SchTdcCut2: Sch&TOF-> nhits=1 & Maxdepth =1","SchTdcCut2: Sch&TOF-> nhits=1 & Maxdepth =1",100,0,1000);
-  TH1D *SchTimeCut2 = new TH1D("SchTimeCut2: Sch&TOF-> nhits=1 & Maxdepth =1","SchTimeCut2: Sch&TOF-> nhits=1 & Maxdepth =1",100,-1000,0);
+  TH1D *SchTimeCut2 = new TH1D("SchTimeCut2: Sch&TOF-> nhits=1 & Maxdepth =1","SchTimeCut2: Sch&TOF-> nhits=1 & Maxdepth =1",100,-500,-300);
 
 // Sch - Tof ----------
-TH1D *SchTof = new TH1D("Sch-Tof Cut2: Sch&TOF-> nhits=1 & Maxdepth =1","Sch-Tof Cut2: Sch&TOF-> nhits=1 & Maxdepth =1",100,-500,500);
+TH1D *SchTof = new TH1D("Sch-Tof Cut2: Sch&TOF-> nhits=1 & Maxdepth =1","Sch-Tof Cut2: Sch&TOF-> nhits=1 & Maxdepth =1",100,-500,-300);
 
    Long64_t nentries = k0hodo->GetEntries();
 
