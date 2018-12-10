@@ -79,7 +79,7 @@ void mtx_gate(int month, int runnum){
    Int_t           trigflag[32];
    Int_t           trigpat[32];
 //   Int_t           status;
-//   Int_t           ntKurama;
+   Int_t           ntKurama;
 //   Double_t        path[4];
 //   Double_t        pKurama[4];
 //   Double_t        qKurama[4];
@@ -125,13 +125,13 @@ void mtx_gate(int month, int runnum){
 //   Double_t        tBft[15];
 //   Double_t        wBft[15];
 //   Double_t        BftPos[15];
-//   Int_t           sch_nhits;
-//   Int_t           sch_hitpat[26];
-//   Double_t        sch_tdc[64][16];
+   Int_t           sch_nhits;
+   Int_t           sch_hitpat[26];
+   Double_t        sch_tdc[64][16];
 //   Double_t        sch_trailing[64][16];
 //   Double_t        sch_tot[64][16];
-//   Int_t           sch_depth[64];
-//   Int_t           nhSch;
+   Int_t           sch_depth[64];
+   Int_t           nhSch;
 //   Int_t           csSch[25];
 //   Double_t        tSch[25];
 //   Double_t        wSch[25];
@@ -154,16 +154,16 @@ void mtx_gate(int month, int runnum){
 //   Double_t        sftx_ctime[29];
 //   Double_t        sftx_ctot[29];
 //   Double_t        sftx_clpos[29];
-//   Int_t           m2Combi;
+   Int_t           m2Combi;
 //   Double_t        beta[36];
 //   Double_t        stof[36];
-//   Double_t        m2[36];
+   Double_t        m2[36];
 
    // Set branch addresses.
    k0hodo->SetBranchAddress("trigflag",trigflag);
    k0hodo->SetBranchAddress("trigpat",trigpat);
 //   k0hodo->SetBranchAddress("status",&status);
-//   k0hodo->SetBranchAddress("ntKurama",&ntKurama);
+   k0hodo->SetBranchAddress("ntKurama",&ntKurama);
 //   k0hodo->SetBranchAddress("path",path);
 //   k0hodo->SetBranchAddress("pKurama",pKurama);
 //   k0hodo->SetBranchAddress("qKurama",qKurama);
@@ -209,12 +209,12 @@ void mtx_gate(int month, int runnum){
 //   k0hodo->SetBranchAddress("tBft",tBft);
 //   k0hodo->SetBranchAddress("wBft",wBft);
 //   k0hodo->SetBranchAddress("BftPos",BftPos);
-//   k0hodo->SetBranchAddress("sch_nhits",&sch_nhits);
-//   k0hodo->SetBranchAddress("sch_hitpat",sch_hitpat);
-//   k0hodo->SetBranchAddress("sch_tdc",sch_tdc);
+   k0hodo->SetBranchAddress("sch_nhits",&sch_nhits);
+   k0hodo->SetBranchAddress("sch_hitpat",sch_hitpat);
+   k0hodo->SetBranchAddress("sch_tdc",sch_tdc);
 //   k0hodo->SetBranchAddress("sch_trailing",sch_trailing);
 //   k0hodo->SetBranchAddress("sch_tot",sch_tot);
-//   k0hodo->SetBranchAddress("sch_depth",sch_depth);
+   k0hodo->SetBranchAddress("sch_depth",sch_depth);
 //   k0hodo->SetBranchAddress("nhSch",&nhSch);
 //   k0hodo->SetBranchAddress("csSch",csSch);
 //   k0hodo->SetBranchAddress("tSch",tSch);
@@ -238,10 +238,10 @@ void mtx_gate(int month, int runnum){
 //   k0hodo->SetBranchAddress("sftx_ctime",sftx_ctime);
 //   k0hodo->SetBranchAddress("sftx_ctot",sftx_ctot);
 //   k0hodo->SetBranchAddress("sftx_clpos",sftx_clpos);
-//   k0hodo->SetBranchAddress("m2Combi",&m2Combi);
+   k0hodo->SetBranchAddress("m2Combi",&m2Combi);
 //   k0hodo->SetBranchAddress("beta",beta);
 //   k0hodo->SetBranchAddress("stof",stof);
-//   k0hodo->SetBranchAddress("m2",m2);
+   k0hodo->SetBranchAddress("m2",m2);
 
 //     This is the loop skeleton
 //       To read only selected branches, Insert statements like:
@@ -284,6 +284,12 @@ void mtx_gate(int month, int runnum){
   TH1D *TofMtOrMtxFlgCut = new TH1D("TofMtOr TdcCut & MtxFlgCut","TofMtOr TdcCut & MtxFlgCut",100,-10,90);
   TH1D *TofMtOrMtxFlgNhitsDepthCut = new TH1D("TofMtOr TdcCut & MtxFlg & Nhits=1 & MaxDepth#1 Cut","TofMtOr TdcCut & MtxFlg & Nhits=1 & MaxDepth#1 Cut",100,-10,90);
 
+//-Sch ----------------
+  TH1D *SchNhits = new TH1D("SchNhits","SchNhits",20,0,20);
+  TH1D *SchHitpat = new TH1D("SchHitpat","SchHitpat",20,0,20);
+  TH1D *SchNhitsCut = new TH1D("SchNhitsCut:nhits=1 & Maxdepth =1","SchNhitsCut:nhits=1 & Maxdepth =1",20,0,20);
+  TH1D *SchTdc = new TH1D("SchTdc","SchTdc",100,0,1000);
+  TH1D *SchTdcCut = new TH1D("SchTdcCut:nhits=1 & Maxdepth =1","SchTdcCut:nhits=1 & Maxdepth =1",100,0,1000);
 
 
    Long64_t nentries = k0hodo->GetEntries();
@@ -334,6 +340,21 @@ void mtx_gate(int month, int runnum){
            }
          }
        }
+     }
+     for(int i=0; i<26; i++){
+       SchHitpat->Fill(sch_hitpat[i]);
+     }
+     SchNhits->Fill(sch_nhits);
+     for(int i=0; i<NumOfSegSCH; i++){
+       for(int j=0; j<16; j++){
+         SchTdc->Fill(sch_tdc[i][j]);
+       }
+       if(sch_nhits!=1) continue;
+       if(sch_depth[i]!=1) continue;
+       if(sch_nhits[0]!=i) continue;
+       SchNhitsCut->Fill(sch_nhits);
+       SchTdcCut->Fill(sch_tdc[i][0]);
+
      }
    }
 
@@ -426,6 +447,20 @@ void mtx_gate(int month, int runnum){
    TofMtOrMtxFlgNhitsDepthCut->Draw();
    c6->cd(3);
    c6->Print(pdf);
+
+   c1->cd();
+   SchNhits->Draw();
+   c1->Print(pdf);
+   SchHitpat->Draw();
+   c1->Print(pdf);
+   SchNhitsCut->Draw();
+   c1->Print(pdf);
+   SchTdc->Draw();
+   c1->Print(pdf);
+   SchTdcCut->Draw();
+   c1->Print(pdf);
+   
+
 
    c1->Print(pdf+"]"); 
 
