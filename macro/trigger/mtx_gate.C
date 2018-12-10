@@ -290,6 +290,7 @@ void mtx_gate(int month, int runnum){
   TH1D *SchNhitsCut = new TH1D("SchNhitsCut:nhits=1 & Maxdepth =1","SchNhitsCut:nhits=1 & Maxdepth =1",20,0,20);
   TH1D *SchTdc = new TH1D("SchTdc","SchTdc",100,0,1000);
   TH1D *SchTdcCut = new TH1D("SchTdcCut:nhits=1 & Maxdepth =1","SchTdcCut:nhits=1 & Maxdepth =1",100,0,1000);
+  TH1D *SchTdcCut2 = new TH1D("SchTdcCut2: Sch&TOF-> nhits=1 & Maxdepth =1","SchTdcCut2: Sch&TOF-> nhits=1 & Maxdepth =1",100,0,1000);
 
 
    Long64_t nentries = k0hodo->GetEntries();
@@ -323,6 +324,12 @@ void mtx_gate(int month, int runnum){
                    TofMtMtxFlgNhitsDepthCut[i]->Fill(tofmt[i][0]);
                    TofMtOrMtxFlgNhitsDepthCut->Fill(tofmt[i][0]);
                    TrigFlag28NhitsDepthCut->Fill(HULMHTDCCalib*trigflag[28]);
+                   for(int k=0; k<NumOfSegSCH; k++){
+                     if(sch_nhits!=1) continue;
+                     if(sch_depth[k]!=1) continue;
+                     if(sch_hitpat[0]!=k) continue;
+                     SchTdcCut2->Fill(sch_tdc[k][0]);
+                   }
                  }
                }
              }
@@ -357,21 +364,21 @@ void mtx_gate(int month, int runnum){
        SchTdcCut->Fill(sch_tdc[i][0]);
      }
 
-     //Sft ----
-     for(int i=0; i<26; i++){
-       SchHitpat->Fill(sch_hitpat[i]);
-     }
-     SchNhits->Fill(sch_nhits);
-     for(int i=0; i<NumOfSegSCH; i++){
-       for(int j=0; j<16; j++){
-         SchTdc->Fill(sch_tdc[i][j]);
-       }
-       if(sch_nhits!=1) continue;
-       if(sch_depth[i]!=1) continue;
-       if(sch_hitpat[0]!=i) continue;
-       SchNhitsCut->Fill(sch_nhits);
-       SchTdcCut->Fill(sch_tdc[i][0]);
-     }
+//     //Sft ----
+//     for(int i=0; i<26; i++){
+//       SchHitpat->Fill(sch_hitpat[i]);
+//     }
+//     SchNhits->Fill(sch_nhits);
+//     for(int i=0; i<NumOfSegSCH; i++){
+//       for(int j=0; j<16; j++){
+//         SchTdc->Fill(sch_tdc[i][j]);
+//       }
+//       if(sch_nhits!=1) continue;
+//       if(sch_depth[i]!=1) continue;
+//       if(sch_hitpat[0]!=i) continue;
+//       SchNhitsCut->Fill(sch_nhits);
+//       SchTdcCut->Fill(sch_tdc[i][0]);
+//     }
    }
 
 //-Canvas def---------------------------------------------------------------------------------------
@@ -464,6 +471,7 @@ void mtx_gate(int month, int runnum){
    c6->cd(3);
    c6->Print(pdf);
 
+//Sch Draw ----
    c1->cd();
    SchNhits->Draw();
    c1->Print(pdf);
@@ -474,6 +482,8 @@ void mtx_gate(int month, int runnum){
    SchTdc->Draw();
    c1->Print(pdf);
    SchTdcCut->Draw();
+   c1->Print(pdf);
+   SchTdcCut2->Draw();
    c1->Print(pdf);
    
 
