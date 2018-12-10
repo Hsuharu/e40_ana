@@ -291,7 +291,10 @@ void mtx_gate(int month, int runnum){
   TH1D *SchTdc = new TH1D("SchTdc","SchTdc",100,0,1000);
   TH1D *SchTdcCut = new TH1D("SchTdcCut:nhits=1 & Maxdepth =1","SchTdcCut:nhits=1 & Maxdepth =1",100,0,1000);
   TH1D *SchTdcCut2 = new TH1D("SchTdcCut2: Sch&TOF-> nhits=1 & Maxdepth =1","SchTdcCut2: Sch&TOF-> nhits=1 & Maxdepth =1",100,0,1000);
+  TH1D *SchTimeCut2 = new TH1D("SchTimeCut2: Sch&TOF-> nhits=1 & Maxdepth =1","SchTimeCut2: Sch&TOF-> nhits=1 & Maxdepth =1",100,-1000,0);
 
+// Sch - Tof ----------
+TH1D *SchTof = new TH1D("Sch-Tof Cut2: Sch&TOF-> nhits=1 & Maxdepth =1","Sch-Tof Cut2: Sch&TOF-> nhits=1 & Maxdepth =1",100,-500,500);
 
    Long64_t nentries = k0hodo->GetEntries();
 
@@ -329,6 +332,8 @@ void mtx_gate(int month, int runnum){
                      if(sch_depth[k]!=1) continue;
                      if(sch_hitpat[0]!=k) continue;
                      SchTdcCut2->Fill(sch_tdc[k][0]);
+                     SchTimeCut2->Fill(HULMHTDCCalib*sch_tdc[k][0]);
+                     SchTof->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]);
                    }
                  }
                }
@@ -485,7 +490,12 @@ void mtx_gate(int month, int runnum){
    c1->Print(pdf);
    SchTdcCut2->Draw();
    c1->Print(pdf);
+   SchTimeCut2->Draw();
+   c1->Print(pdf);
    
+//Sch-Tof Draw ----
+   SchTof->Draw();
+   c1->Print(pdf);
 
 
    c1->Print(pdf+"]"); 
