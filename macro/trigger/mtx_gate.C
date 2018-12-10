@@ -528,8 +528,8 @@ TH1D *SchTofPCut_KTime0  = new TH1D("Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  
    double MaximumBin=0.;
    double SchTofKTime0=0.;
    MaximumBin=SchTofKCut->GetMaximumBin();
-   SchTofKCut->Draw();
    SchTofKCut->Fit("FitFunc1","","",MaximumBin-5,MaximumBin+5);
+   SchTofKCut->Draw();
    SchTofKTime0=FitFunc1->GetParameter(1);
 
    c1->Print(pdf);
