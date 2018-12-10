@@ -136,19 +136,19 @@ void mtx_gate(int month, int runnum){
 //   Double_t        tSch[25];
 //   Double_t        wSch[25];
 //   Double_t        SchPos[25];
-//   Int_t           sftx_nhits;
-//   Int_t           sftx_unhits;
-//   Int_t           sftx_dnhits;
-//   Int_t           sftx_uhitpat[94];
-//   Int_t           sftx_dhitpat[49];
-//   Double_t        sftx_utdc[256][16];
-//   Double_t        sftx_dtdc[256][16];
+   Int_t           sftx_nhits;
+   Int_t           sftx_unhits;
+   Int_t           sftx_dnhits;
+   Int_t           sftx_uhitpat[94];
+   Int_t           sftx_dhitpat[49];
+   Double_t        sftx_utdc[256][16];
+   Double_t        sftx_dtdc[256][16];
 //   Double_t        sftx_utrailing[256][16];
 //   Double_t        sftx_dtrailing[256][16];
 //   Double_t        sftx_utot[256][16];
 //   Double_t        sftx_dtot[256][16];
-//   Int_t           sftx_udepth[256];
-//   Int_t           sftx_ddepth[256];
+   Int_t           sftx_udepth[256];
+   Int_t           sftx_ddepth[256];
 //   Int_t           sftx_ncl;
 //   Int_t           sftx_clsize[29];
 //   Double_t        sftx_ctime[29];
@@ -220,19 +220,19 @@ void mtx_gate(int month, int runnum){
 //   k0hodo->SetBranchAddress("tSch",tSch);
 //   k0hodo->SetBranchAddress("wSch",wSch);
 //   k0hodo->SetBranchAddress("SchPos",SchPos);
-//   k0hodo->SetBranchAddress("sftx_nhits",&sftx_nhits);
-//   k0hodo->SetBranchAddress("sftx_unhits",&sftx_unhits);
-//   k0hodo->SetBranchAddress("sftx_dnhits",&sftx_dnhits);
-//   k0hodo->SetBranchAddress("sftx_uhitpat",sftx_uhitpat);
-//   k0hodo->SetBranchAddress("sftx_dhitpat",sftx_dhitpat);
-//   k0hodo->SetBranchAddress("sftx_utdc",sftx_utdc);
-//   k0hodo->SetBranchAddress("sftx_dtdc",sftx_dtdc);
+   k0hodo->SetBranchAddress("sftx_nhits",&sftx_nhits);
+   k0hodo->SetBranchAddress("sftx_unhits",&sftx_unhits);
+   k0hodo->SetBranchAddress("sftx_dnhits",&sftx_dnhits);
+   k0hodo->SetBranchAddress("sftx_uhitpat",sftx_uhitpat);
+   k0hodo->SetBranchAddress("sftx_dhitpat",sftx_dhitpat);
+   k0hodo->SetBranchAddress("sftx_utdc",sftx_utdc);
+   k0hodo->SetBranchAddress("sftx_dtdc",sftx_dtdc);
 //   k0hodo->SetBranchAddress("sftx_utrailing",sftx_utrailing);
 //   k0hodo->SetBranchAddress("sftx_dtrailing",sftx_dtrailing);
 //   k0hodo->SetBranchAddress("sftx_utot",sftx_utot);
 //   k0hodo->SetBranchAddress("sftx_dtot",sftx_dtot);
-//   k0hodo->SetBranchAddress("sftx_udepth",sftx_udepth);
-//   k0hodo->SetBranchAddress("sftx_ddepth",sftx_ddepth);
+   k0hodo->SetBranchAddress("sftx_udepth",sftx_udepth);
+   k0hodo->SetBranchAddress("sftx_ddepth",sftx_ddepth);
 //   k0hodo->SetBranchAddress("sftx_ncl",&sftx_ncl);
 //   k0hodo->SetBranchAddress("sftx_clsize",sftx_clsize);
 //   k0hodo->SetBranchAddress("sftx_ctime",sftx_ctime);
@@ -286,7 +286,7 @@ void mtx_gate(int month, int runnum){
 
 //-Sch ----------------
   TH1D *SchNhits = new TH1D("SchNhits","SchNhits",20,0,20);
-  TH1D *SchHitpat = new TH1D("SchHitpat","SchHitpat",20,0,20);
+  TH1D *SchHitpat = new TH1D("SchHitpat","SchHitpat",65,0,65);
   TH1D *SchNhitsCut = new TH1D("SchNhitsCut:nhits=1 & Maxdepth =1","SchNhitsCut:nhits=1 & Maxdepth =1",20,0,20);
   TH1D *SchTdc = new TH1D("SchTdc","SchTdc",100,0,1000);
   TH1D *SchTdcCut = new TH1D("SchTdcCut:nhits=1 & Maxdepth =1","SchTdcCut:nhits=1 & Maxdepth =1",100,0,1000);
@@ -341,6 +341,7 @@ void mtx_gate(int month, int runnum){
          }
        }
      }
+     //Sch ----
      for(int i=0; i<26; i++){
        SchHitpat->Fill(sch_hitpat[i]);
      }
@@ -351,10 +352,25 @@ void mtx_gate(int month, int runnum){
        }
        if(sch_nhits!=1) continue;
        if(sch_depth[i]!=1) continue;
-       if(sch_nhits[0]!=i) continue;
+       if(sch_hitpat[0]!=i) continue;
        SchNhitsCut->Fill(sch_nhits);
        SchTdcCut->Fill(sch_tdc[i][0]);
+     }
 
+     //Sft ----
+     for(int i=0; i<26; i++){
+       SchHitpat->Fill(sch_hitpat[i]);
+     }
+     SchNhits->Fill(sch_nhits);
+     for(int i=0; i<NumOfSegSCH; i++){
+       for(int j=0; j<16; j++){
+         SchTdc->Fill(sch_tdc[i][j]);
+       }
+       if(sch_nhits!=1) continue;
+       if(sch_depth[i]!=1) continue;
+       if(sch_hitpat[0]!=i) continue;
+       SchNhitsCut->Fill(sch_nhits);
+       SchTdcCut->Fill(sch_tdc[i][0]);
      }
    }
 
