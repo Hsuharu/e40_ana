@@ -299,6 +299,9 @@ TH1D *SchTofCut3 = new TH1D("Sch-Tof Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntK
 TH1D *SchTofKCut = new TH1D("Sch-Tof KCut: Cut3 & 0.1<m2&m2<0.4","Sch-Tof KCut: Cut3 & 0.1<m2&m2<0.4",50,-420,-370);
 TH1D *SchTofPiCut = new TH1D("Sch-Tof PiCut: Cut3 & 0<m2&m2<0.1","Sch-Tof PiCut: Cut3 & 0<m2&m2<0.1",50,-420,-370);
 TH1D *SchTofPCut = new TH1D("Sch-Tof PCut: Cut3 & 0.6<m2&m2<1","Sch-Tof PCut: Cut3 & 0.6<m2&m2<1",50,-420,-370);
+TH1D *SchTofKCut_KTime0  = new TH1D("Sch-Tof KTime0 KCut: Cut3 & 0.1<m2&m2<0.4","Sch-Tof KTime0 KCut: Cut3 & 0.1<m2&m2<0.4",50,-25,25);
+TH1D *SchTofPiCut_KTime0 = new TH1D("Sch-Tof KTime0 PiCut: Cut3 & 0<m2&m2<0.1", "Sch-Tof KTime0 PiCut: Cut3 & 0<m2&m2<0.1", 50,-25,25);
+TH1D *SchTofPCut_KTime0  = new TH1D("Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  "Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  50,-25,25);
 
    Long64_t nentries = k0hodo->GetEntries();
 
@@ -534,5 +537,46 @@ TH1D *SchTofPCut = new TH1D("Sch-Tof PCut: Cut3 & 0.6<m2&m2<1","Sch-Tof PCut: Cu
 
 
    c1->Print(pdf+"]"); 
+
+// KTime0 Calib
+   for (Long64_t s=0; s<nentries;s++) {
+     nbytes += k0hodo->GetEntry(s);
+     for(int i=0; i<NumOfSegTOF; i++){
+       bool flag=false;
+       for(int j=0; j<16; j++){
+         if(tofmt[i][j]==-999){
+           if(!flag){
+             if(j!=0){
+               if(tofnhits!=1) continue;
+               if(j==1){
+                 if(trigflag[28]>0){
+                   for(int k=0; k<NumOfSegSCH; k++){
+                     if(sch_nhits!=1) continue;
+                     if(sch_depth[k]!=1) continue;
+                     if(sch_hitpat[0]!=k) continue;
+                     if(ntKurama==1){
+                       SchTofCut3->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]);
+                       if(0<m2[ntKurama]&&m2[ntKurama]<0.1){
+                         SchTofPiCut->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]);
+                       }
+                       if(0.1<m2[ntKurama]&&m2[ntKurama]<0.4){
+                         SchTofKCut->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]);
+                       }
+                       if(0.4<m2[ntKurama]&&m2[ntKurama]<1){
+                         SchTofPCut->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]);
+                       }
+                     }
+                   }
+                 }
+               }
+             }
+             flag=true;
+           }
+         }
+       }
+     }
+   }
+
+
 
 }
