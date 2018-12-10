@@ -346,7 +346,7 @@ TH1D *SchTofPCut = new TH1D("Sch-Tof PCut: Cut3 & 0.6<m2&m2<1","Sch-Tof PCut: Cu
                        if(0.1<m2[ntKurama]&&m2[ntKurama]<0.4){
                          SchTofKCut->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]);
                        }
-                       if(0.6<m2[ntKurama]&&m2[ntKurama]<1){
+                       if(0.4<m2[ntKurama]&&m2[ntKurama]<1){
                          SchTofPCut->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]);
                        }
                      }
@@ -405,7 +405,11 @@ TH1D *SchTofPCut = new TH1D("Sch-Tof PCut: Cut3 & 0.6<m2&m2<1","Sch-Tof PCut: Cu
 // Time Calib by KaonTime to 0----------------------------------------------------------------------
    TF1 *FitFunc1 = new TF1("FitFunc1","gaus");
    double MaximumBin=0.;
-
+   double SchTofKTime0=0.;
+   MaximumBin=SchTofKCut->GetMaximumBin();
+   SchTofKCut->Fit("FitFinc1","","",MaximumBin-5,MaximumBin+5);
+   SchTofKTime0=FitFunc1->GetParameter(1);
+   std::cout << SchTofKTime0 << std::endl;
 
 //-Canvas def---------------------------------------------------------------------------------------
   TCanvas *c1 = new TCanvas("c1","c1",1200,900);
