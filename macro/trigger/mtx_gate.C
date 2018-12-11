@@ -304,7 +304,8 @@ void mtx_gate(int month, int runnum){
   TH1D *SchTofPCut_KTime0  = new TH1D("Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  "Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  50,-25,25);
 
 //-Legend def --------------------------------------------------------------------------------------
-  TLegend *Leg1 = new TLegend(0.1,0.7,0.48,0.9);
+//  TLegend *Leg1 = new TLegend(0.1,0.7,0.48,0.9);
+  TLegend *Leg1 = new TLegend(0.78,0.98,0.775,0.935);
 
    Long64_t nentries = k0hodo->GetEntries();
 
