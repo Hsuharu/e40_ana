@@ -294,14 +294,17 @@ void mtx_gate(int month, int runnum){
   TH1D *SchTimeCut2 = new TH1D("SchTimeCut2: Sch&TOF-> nhits=1 & Maxdepth =1","SchTimeCut2: Sch&TOF-> nhits=1 & Maxdepth =1",100,-500,-300);
 
 // Sch - Tof ----------
-TH1D *SchTof = new TH1D("Sch-Tof Cut2: Sch&TOF-> nhits=1 & Maxdepth =1","Sch-Tof Cut2: Sch&TOF-> nhits=1 & Maxdepth =1",100,-500,-300);
-TH1D *SchTofCut3 = new TH1D("Sch-Tof Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1","Sch-Tof Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1",100,-500,-300);
-TH1D *SchTofKCut = new TH1D("Sch-Tof KCut: Cut3 & 0.1<m2&m2<0.4","Sch-Tof KCut: Cut3 & 0.1<m2&m2<0.4",50,-420,-370);
-TH1D *SchTofPiCut = new TH1D("Sch-Tof PiCut: Cut3 & 0<m2&m2<0.1","Sch-Tof PiCut: Cut3 & 0<m2&m2<0.1",50,-420,-370);
-TH1D *SchTofPCut = new TH1D("Sch-Tof PCut: Cut3 & 0.6<m2&m2<1","Sch-Tof PCut: Cut3 & 0.6<m2&m2<1",50,-420,-370);
-TH1D *SchTofKCut_KTime0  = new TH1D("Sch-Tof KTime0 KCut: Cut3 & 0.1<m2&m2<0.4","Sch-Tof KTime0 KCut: Cut3 & 0.1<m2&m2<0.4",50,-25,25);
-TH1D *SchTofPiCut_KTime0 = new TH1D("Sch-Tof KTime0 PiCut: Cut3 & 0<m2&m2<0.1", "Sch-Tof KTime0 PiCut: Cut3 & 0<m2&m2<0.1", 50,-25,25);
-TH1D *SchTofPCut_KTime0  = new TH1D("Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  "Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  50,-25,25);
+  TH1D *SchTof = new TH1D("Sch-Tof Cut2: Sch&TOF-> nhits=1 & Maxdepth =1","Sch-Tof Cut2: Sch&TOF-> nhits=1 & Maxdepth =1",100,-500,-300);
+  TH1D *SchTofCut3 = new TH1D("Sch-Tof Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1","Sch-Tof Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1",100,-500,-300);
+  TH1D *SchTofKCut = new TH1D("Sch-Tof KCut: Cut3 & 0.1<m2&m2<0.4","Sch-Tof KCut: Cut3 & 0.1<m2&m2<0.4",50,-420,-370);
+  TH1D *SchTofPiCut = new TH1D("Sch-Tof PiCut: Cut3 & 0<m2&m2<0.1","Sch-Tof PiCut: Cut3 & 0<m2&m2<0.1",50,-420,-370);
+  TH1D *SchTofPCut = new TH1D("Sch-Tof PCut: Cut3 & 0.6<m2&m2<1","Sch-Tof PCut: Cut3 & 0.6<m2&m2<1",50,-420,-370);
+  TH1D *SchTofKCut_KTime0  = new TH1D("Sch-Tof KTime0 KCut: Cut3 & 0.1<m2&m2<0.4","Sch-Tof KTime0 KCut: Cut3 & 0.1<m2&m2<0.4",50,-25,25);
+  TH1D *SchTofPiCut_KTime0 = new TH1D("Sch-Tof KTime0 PiCut: Cut3 & 0<m2&m2<0.1", "Sch-Tof KTime0 PiCut: Cut3 & 0<m2&m2<0.1", 50,-25,25);
+  TH1D *SchTofPCut_KTime0  = new TH1D("Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  "Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  50,-25,25);
+
+//-Legend def --------------------------------------------------------------------------------------
+  TLegend *Leg1 = new TLegend(0.1,0.7,0.48,0.9);
 
    Long64_t nentries = k0hodo->GetEntries();
 
@@ -591,6 +594,11 @@ TH1D *SchTofPCut_KTime0  = new TH1D("Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  
    SchTofKCut_KTime0->Draw("same");
    SchTofPiCut_KTime0->SetLineColor(2);
    SchTofPiCut_KTime0->Draw("same");
+
+   Leg1->AddEntry(SchTofPiCut_KTime0, "Pion"  ,"f");
+   Leg1->AddEntry(SchTofKCut_KTime0,  "Kaon"  ,"f");
+   Leg1->AddEntry(SchTofPCut_KTime0,  "Proton","f");
+   Leg1->Draw();
    c1->Print(pdf);
 
    c1->Print(pdf+"]"); 
