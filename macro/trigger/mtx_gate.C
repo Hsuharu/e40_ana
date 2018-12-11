@@ -525,9 +525,11 @@ TH1D *SchTofPCut_KTime0  = new TH1D("Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  
 
 // Time Calib by KaonTime to 0----------------------------------------------------------------------
    TF1 *FitFunc1 = new TF1("FitFunc1","gaus");
+   FitFunc1->SetParameters(1000,-400,5);
    double MaximumBin=0.;
    double SchTofKTime0=0.;
-   MaximumBin=SchTofKCut->GetMaximumBin();
+   MaximumBin=SchTofKCut->GetXaxis()->GetBinCenter(SchTofKCut->GetMaximumBin());
+   std::cout << MaximumBin << std::endl;
    SchTofKCut->Fit("FitFunc1","","",MaximumBin-5,MaximumBin+5);
    SchTofKCut->Draw();
    SchTofKTime0=FitFunc1->GetParameter(1);
