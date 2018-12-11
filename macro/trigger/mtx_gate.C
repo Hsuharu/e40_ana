@@ -586,11 +586,11 @@ TH1D *SchTofPCut_KTime0  = new TH1D("Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  
    SchTofPCut_KTime0->Draw();
    c1->Print(pdf);
 
-   SchTofKCut_KTime0->Draw();
+   SchTofPCut_KTime0->SetLineColor(3);
+   SchTofPCut_KTime0->Draw();
+   SchTofKCut_KTime0->Draw("same");
    SchTofPiCut_KTime0->SetLineColor(2);
    SchTofPiCut_KTime0->Draw("same");
-   SchTofPCut_KTime0->SetLineColor(3);
-   SchTofPCut_KTime0->Draw("same");
    c1->Print(pdf);
 
    c1->Print(pdf+"]"); 
