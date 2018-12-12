@@ -268,12 +268,12 @@ void mtx_gate(int month, int runnum){
   TH1D *TrigFlag28NhitsCut= new TH1D("MtxFlag TdcCut & MtxFlg & Nhits=1 Cut","MtxFlag TdcCut & MtxFlg & Nhits=1 Cut",1800,-1800,0);
 
   TH1D *TofMt[NumOfSegTOF];
-  TH1D *TofMtCut[NumOfSegTOF];
-  TH1D *TofMtMtxFlgNhitsDepthCut[NumOfSegTOF];
+//  TH1D *TofMtCut[NumOfSegTOF];
+//  TH1D *TofMtMtxFlgNhitsDepthCut[NumOfSegTOF];
   for(int i=0;i<NumOfSegTOF;i++){
     TofMt[i]= new TH1D(Form("TofMt%d",i+1),Form("TofMt%d",i+1),100,-10,90);
-    TofMtCut[i]= new TH1D(Form("TofMtCut%d",i+1),Form("TofMtCut%d",i+1),100,-10,90);
-    TofMtMtxFlgNhitsDepthCut[i] = new TH1D(Form("TofMt%d TdcCut & MtxFlg & Nhits=1 & MaxDepth#1 Cut",i+1),Form("TofMt%d TdcCut & MtxFlg & Nhits=1 & MaxDepth#1 Cut",i+1),100,-10,90);
+//    TofMtCut[i]= new TH1D(Form("TofMtCut%d",i+1),Form("TofMtCut%d",i+1),100,-10,90);
+//    TofMtMtxFlgNhitsDepthCut[i] = new TH1D(Form("TofMt%d TdcCut & MtxFlg & Nhits=1 & MaxDepth#1 Cut",i+1),Form("TofMt%d TdcCut & MtxFlg & Nhits=1 & MaxDepth#1 Cut",i+1),100,-10,90);
   }
 
   TH1D *TofHitPatNhitsCut = new TH1D("TofHitPat Cut:Nhits","TofHitPat Cut:Nhits",NumOfSegTOF,0,NumOfSegTOF);
@@ -305,7 +305,7 @@ void mtx_gate(int month, int runnum){
 
 //-Legend def --------------------------------------------------------------------------------------
 //  TLegend *Leg1 = new TLegend(0.1,0.7,0.48,0.9);
-  TLegend *Leg1 = new TLegend(0.78,0.98,0.775,0.935);
+  TLegend *Leg1 = new TLegend(0.78,0.775,0.98,0.935);
 
    Long64_t nentries = k0hodo->GetEntries();
 
@@ -336,7 +336,7 @@ void mtx_gate(int month, int runnum){
                if(j==1){
                  if(trigflag[28]>0){
                    TofHitPatNhitsCut->Fill(i);
-                   TofMtMtxFlgNhitsDepthCut[i]->Fill(tofmt[i][0]);
+//                   TofMtMtxFlgNhitsDepthCut[i]->Fill(tofmt[i][0]);
                    TofMtOrMtxFlgNhitsDepthCut->Fill(tofmt[i][0]);
                    TrigFlag28NhitsDepthCut->Fill(HULMHTDCCalib*trigflag[28]);
                    for(int k=0; k<NumOfSegSCH; k++){
@@ -365,7 +365,7 @@ void mtx_gate(int month, int runnum){
              flag=true;
            }
          }else{
-           TofMtCut[i]->Fill(tofmt[i][j]);
+//           TofMtCut[i]->Fill(tofmt[i][j]);
            TofMtOrCut->Fill(tofmt[i][j]);
            if(trigflag[28]>0){
              TofMtOrMtxFlgCut->Fill(tofmt[i][j]);
@@ -590,6 +590,9 @@ void mtx_gate(int month, int runnum){
    SchTofPCut_KTime0->Draw();
    c1->Print(pdf);
 
+   SchTofPCut_KTime0->SetStats(0);
+   SchTofPiCut_KTime0->SetStats(0);
+   SchTofKCut_KTime0->SetStats(0);
    SchTofPCut_KTime0->SetLineColor(3);
    SchTofPCut_KTime0->Draw();
    SchTofKCut_KTime0->Draw("same");
