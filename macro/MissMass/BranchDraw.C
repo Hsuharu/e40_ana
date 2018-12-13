@@ -294,7 +294,7 @@ void BranchDraw( int month, int runnumber){
 
       TH1D *MM[5];
       for(int i=0;i<5;i++){
-        MM[i]= new TH1D(Form("Missing Mass Cut%d",i+1),Form("Missing Mass Cut%d",i+1),50,0,1.6);
+        MM[i]= new TH1D(Form("Missing Mass Cut%d",i+1),Form("Missing Mass Cut%d",i+1),100,0,1.6);
       }
 // Para Identification
    int pre_evnum=0;
