@@ -1,3 +1,18 @@
+#include <iostream>
+#include <fstream>
+#include <TApplication.h>
+#include <TROOT.h>
+#include <TStyle.h>
+#include <TCanvas.h>
+#include <TString.h>
+#include <TTree.h>
+#include <TFile.h>
+#include <TSystem.h>
+#include <TH1.h>
+#include <TH2.h>
+
+using namespace std;
+
 #include "DetectorID.hh"
 
  const char* Month[] =
@@ -613,3 +628,4 @@ void mtx_gate(int month, int runnum){
 
 
 }
+
