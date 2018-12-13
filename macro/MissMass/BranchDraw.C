@@ -35,7 +35,8 @@ void BranchDraw( int month, int runnumber){
 //   TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("../../analyzer_jun/rootfile/run05126_DstPiKAna3.root");
 //
    TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstPiKAna3.root", anadir.Data(),Month[month], runnumber),"READ");
+   TString pdf = Form("%s/pdf/MissMass/BranchDraw_run%05d.pdf", anadir.Data(),runnumber);
+   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstPiKAna4.root", anadir.Data(),Month[month], runnumber),"READ");
 
     TTree *pik;
     f->GetObject("pik",pik);
@@ -291,6 +292,10 @@ void BranchDraw( int month, int runnumber){
         Hist[i+10]= new TH1D(Form("Hist%d",i+10),Form("Hist%d",i+6),48,0,24);
       }
 
+      TH1D *MM[5];
+      for(int i=0;i<5;i++){
+        MM[i]= new TH1D(Form("Missing Mass Cut%d",i+1),Form("Missing Mass Cut%d",i+1),50,0,1.6);
+      }
 // Para Identification
    int pre_evnum=0;
 
@@ -318,6 +323,13 @@ void BranchDraw( int month, int runnumber){
       for(int i=0;i<nhTof;i++){
         Hist[i+10]->Fill(TofSeg[i]);
       }
+      MM[0]->Fill(MissMass[0]);
+      if(m2[0]<0.4&&m2[0]>0.1){
+        MM[1]->Fill(MissMass[0]);
+        if(chisqrKurama[0]<50){
+          MM[2]->Fill(MissMass[0]);
+        }
+      }
       
    }
 
@@ -331,8 +343,11 @@ void BranchDraw( int month, int runnumber){
    c4->Divide(5,4);
    c5->Divide(3,2);
 
+   c1->Print(pdf+"["); 
+
    c1->cd();
    Hist[0]->Draw();
+   c1->Print(pdf);
 
    for(int i=0;i<5;i++){
      c2->cd(i+1);
@@ -340,15 +355,28 @@ void BranchDraw( int month, int runnumber){
      c5->cd(i+1);
      Hist[i+27]->Draw();
    }
+   c2->Print(pdf);
 
    for(int i=0;i<4;i++){
      c3->cd(i+1);
      Hist[i+6]->Draw();
    }
+   c3->Print(pdf);
    for(int i=0;i<17;i++){
      c4->cd(i+1);
      Hist[i+10]->Draw();
    }
+   c4->Print(pdf);
+
+   c1->cd();
+   MM[0]->Draw();
+   c1->Print(pdf);
+   MM[1]->Draw();
+   c1->Print(pdf);
+   MM[2]->Draw();
+   c1->Print(pdf);
+
+   c1->Print(pdf+"]"); 
 }
 
 
