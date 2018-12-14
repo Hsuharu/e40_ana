@@ -310,7 +310,7 @@ void mtx_gate(int month, int runnum){
 
 // TrigFlag - Matrix Detector----------
   TH1D *MatrixFlag_Tof = new TH1D("Matrix Flag - TofMtOr","Matrix Flag - TofMtOr",2000,-1000,1000);
-  TH1D *MatrixFlag_Sch = new TH1D("Matrix Flag - SchOr",  "Matrix Flag - SchOr",  2000,-1000,1000);
+  TH1D *MatrixFlag_Sch = new TH1D("Matrix Flag - SchOr",  "Matrix Flag - SchOr",  2000,-2000,0);
   TH1D *MatrixFlag_Sft = new TH1D("Matrix Flag - SftOr",  "Matrix Flag - SftOr",  2000,-1000,1000);
 
 
