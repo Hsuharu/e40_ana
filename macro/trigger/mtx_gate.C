@@ -573,9 +573,17 @@ void mtx_gate(int month, int runnum){
    MaxBinValue=MatrixFlag_Sch->GetXaxis()->GetBinCenter(MatrixFlag_Sch->GetMaximumBin());
    MatrixFlag_Sch->Draw();
    c1->Print(pdf);
+   gPad->SetLogy(1);
+   MatrixFlag_Sch->Draw();
+   c1->Print(pdf);
+   gPad->SetLogy(0);
    MatrixFlag_Sch->SetAxisRange(MaxBinValue-50,MaxBinValue+50,"X");
    MatrixFlag_Sch->Draw();
    c1->Print(pdf);
+   gPad->SetLogy(1);
+   MatrixFlag_Sch->Draw();
+   c1->Print(pdf);
+   gPad->SetLogy(0);
 
 // Time Calib by KaonTime to 0----------------------------------------------------------------------
    TF1 *FitFunc1 = new TF1("FitFunc1","gaus");
