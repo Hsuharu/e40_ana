@@ -363,7 +363,7 @@ void mtx_gate(int month, int runnum){
                      SchTimeCut2->Fill(HULMHTDCCalib*sch_tdc[k][0]);
                      SchTof->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]);
                      if(ntKurama==1){
-                       SchTofCut3_m2->Fill(m2[ntKurama],HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]);
+                       SchTofCut3_m2->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0],m2[ntKurama]);
                        SchTofCut3->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]);
                        if(0<m2[ntKurama]&&m2[ntKurama]<0.1){
                          SchTofPiCut->Fill(HULMHTDCCalib*sch_tdc[k][0]-tofmt[i][0]);
