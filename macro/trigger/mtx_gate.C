@@ -324,7 +324,7 @@ void mtx_gate(int month, int runnum){
   TH1D *SftX_D_NhitsCut = new TH1D("SftX D Nhits Cut","Sft D Nhits",50,0,50);
   TH1D *SftXNhitsCut = new TH1D("SftNhits Cut","SftNhits Cut",50,0,50);
   TH1D *SftX_U_HitpatCut = new TH1D("Sft U Hitpat Cut","Sft U Hitpat Cut",256*2,0,256);
-  TH1D *SftX_D_HitpatCut = new TH1D("Sft D Hitpat Cut","Sft D Hitpat",256*2,0,256);
+  TH1D *SftX_D_HitpatCut = new TH1D("Sft D Hitpat Cut","Sft D Hitpat Cut",256*2,0,256);
   TH1D *SftXHitpatCut = new TH1D("SftHitpat Cut","SftHitpat Cut",256*2,0,256);
   TH1D *SftX_U_TdcCut = new TH1D("Sft U Tdc Cut","Sft U Tdc Cut",1000,0,1000);
   TH1D *SftX_D_TdcCut = new TH1D("Sft D Tdc Cut","Sft D Tdc",1000,0,1000);
@@ -334,10 +334,10 @@ void mtx_gate(int month, int runnum){
   TH1D *SftX_D_NhitsCut2 = new TH1D("SftX D Nhits Cut2","Sft D Nhits",50,0,50);
   TH1D *SftXNhitsCut2 = new TH1D("SftNhits Cut2","SftNhits Cut2",50,0,50);
   TH1D *SftX_U_HitpatCut2 = new TH1D("Sft U Hitpat Cut2","Sft U Hitpat Cut2",256*2,0,256);
-  TH1D *SftX_D_HitpatCut2 = new TH1D("Sft D Hitpat Cut2","Sft D Hitpat",256*2,0,256);
+  TH1D *SftX_D_HitpatCut2 = new TH1D("Sft D Hitpat Cut2","Sft D Hitpat Cut2",256*2,0,256);
   TH1D *SftXHitpatCut2 = new TH1D("SftHitpat Cut2","SftHitpat Cut2",256*2,0,256);
   TH1D *SftX_U_TdcCut2 = new TH1D("Sft U Tdc Cut2","Sft U Tdc Cut2",1000,0,1000);
-  TH1D *SftX_D_TdcCut2 = new TH1D("Sft D Tdc Cut2","Sft D Tdc",1000,0,1000);
+  TH1D *SftX_D_TdcCut2 = new TH1D("Sft D Tdc Cut2","Sft D Tdc Cut2",1000,0,1000);
   TH1D *SftXTdcCut2 = new TH1D("SftTdc Cut2","SftTdc Cut2",1000,0,1000);
 
 
@@ -345,7 +345,7 @@ void mtx_gate(int month, int runnum){
 // TrigFlag - Matrix Detector----------
   TH1D *MatrixFlag_Tof = new TH1D("Matrix Flag - TofMtOr","Matrix Flag - TofMtOr",2000,-1000,1000);
   TH1D *MatrixFlag_Sch = new TH1D("Matrix Flag - SchOr",  "Matrix Flag - SchOr",  2000,-2000,0);
-  TH1D *MatrixFlag_Sft = new TH1D("Matrix Flag - SftOr",  "Matrix Flag - SftOr",  2000,-1000,1000);
+  TH1D *MatrixFlag_SftX = new TH1D("Matrix Flag - SftXOr",  "Matrix Flag - SftXOr",  2000,-2000,0);
 
 
 // Sch - Tof ----------
@@ -366,7 +366,7 @@ void mtx_gate(int month, int runnum){
   TH2D *SchTofPCut_KTime0_pKurama  = new TH2D("Sch-Tof KTime0 vs pKurama PCut: Cut3 & 0.6<m2&m2<1",  "Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  50,-25,25,50,0,2);
 
 // Sft - Tof ----------
-  TH1D *SftTof = new TH1D("Sft-Tof Cut2: Sft&TOF-> nhits=1 & Maxdepth =1","Sft-Tof Cut2: Sft&TOF-> nhits=1 & Maxdepth =1",1000,1000,0);
+  TH1D *SftTof = new TH1D("Sft-Tof Cut2: Sft&TOF-> nhits=1 & Maxdepth =1","Sft-Tof Cut2: Sft&TOF-> nhits=1 & Maxdepth =1",1000,-1000,0);
 
 //-Legend def --------------------------------------------------------------------------------------
 //  TLegend *Leg1 = new TLegend(0.1,0.7,0.48,0.9);
@@ -433,6 +433,7 @@ void mtx_gate(int month, int runnum){
                        if(sftx_udepth[k]!=1) continue;
                        if(sftx_uhitpat[0]!=k) continue;
                        SftX_U_NhitsCut2->Fill(sftx_unhits);
+                       SftXNhitsCut2->Fill(sftx_unhits);
                        SftX_U_HitpatCut2->Fill(sftx_uhitpat[0]);
                        SftXHitpatCut2->Fill(sftx_uhitpat[0]);
                        SftX_U_TdcCut2->Fill(sftx_utdc[k][0]);
@@ -442,6 +443,7 @@ void mtx_gate(int month, int runnum){
                        if(sftx_ddepth[k]!=1) continue;
                        if(sftx_dhitpat[0]!=k) continue;
                        SftX_D_NhitsCut2->Fill(sftx_dnhits);
+                       SftXNhitsCut2->Fill(sftx_dnhits);
                        SftX_D_HitpatCut2->Fill(sftx_dhitpat[0]+0.5);
                        SftXHitpatCut2->Fill(sftx_dhitpat[0]+0.5);
                        SftX_D_TdcCut2->Fill(sftx_dtdc[k][0]);
@@ -508,18 +510,22 @@ void mtx_gate(int month, int runnum){
          if(sftx_udepth[i]!=1) continue;
          if(sftx_uhitpat[0]!=i) continue;
          SftX_U_NhitsCut->Fill(sftx_unhits);
+         SftXNhitsCut->Fill(sftx_unhits);
          SftX_U_HitpatCut->Fill(sftx_uhitpat[0]);
          SftXHitpatCut->Fill(sftx_uhitpat[0]);
          SftX_U_TdcCut->Fill(sftx_utdc[i][0]);
          SftXTdcCut->Fill(sftx_utdc[i][0]);
+         MatrixFlag_SftX->Fill(HULMHTDCCalib*trigflag[28]-HULMHTDCCalib*sftx_utdc[i][0]);
        }else if(sftx_unhits==0&&sftx_dnhits==1){
          if(sftx_ddepth[i]!=1) continue;
          if(sftx_dhitpat[0]!=i) continue;
          SftX_D_NhitsCut->Fill(sftx_dnhits);
+         SftXNhitsCut->Fill(sftx_dnhits);
          SftX_D_HitpatCut->Fill(sftx_dhitpat[0]+0.5);
          SftXHitpatCut->Fill(sftx_dhitpat[0]+0.5);
          SftX_D_TdcCut->Fill(sftx_dtdc[i][0]);
          SftXTdcCut->Fill(sftx_dtdc[i][0]);
+         MatrixFlag_SftX->Fill(HULMHTDCCalib*trigflag[28]-HULMHTDCCalib*sftx_dtdc[i][0]);
        }
      }
    }
@@ -716,7 +722,7 @@ void mtx_gate(int month, int runnum){
    SftTof->Draw();
    c1->Print(pdf);
 
-//Matrix-Detevtor Draw ----
+//Matrix-Detector Draw ----
 
    MaxBinValue=MatrixFlag_Tof->GetXaxis()->GetBinCenter(MatrixFlag_Tof->GetMaximumBin());
    MatrixFlag_Tof->Draw();
@@ -745,6 +751,21 @@ void mtx_gate(int month, int runnum){
    c1->Print(pdf);
    gPad->SetLogy(1);
    MatrixFlag_Sch->Draw();
+   c1->Print(pdf);
+   gPad->SetLogy(0);
+
+   MaxBinValue=MatrixFlag_SftX->GetXaxis()->GetBinCenter(MatrixFlag_SftX->GetMaximumBin());
+   MatrixFlag_SftX->Draw();
+   c1->Print(pdf);
+   gPad->SetLogy(1);
+   MatrixFlag_SftX->Draw();
+   c1->Print(pdf);
+   gPad->SetLogy(0);
+   MatrixFlag_SftX->SetAxisRange(MaxBinValue-50,MaxBinValue+70,"X");
+   MatrixFlag_SftX->Draw();
+   c1->Print(pdf);
+   gPad->SetLogy(1);
+   MatrixFlag_SftX->Draw();
    c1->Print(pdf);
    gPad->SetLogy(0);
 
