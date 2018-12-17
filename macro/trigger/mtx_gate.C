@@ -478,12 +478,14 @@ void mtx_gate(int month, int runnum){
        for(int j=0; j<16; j++){
          SchTdc->Fill(sch_tdc[i][j]);
        }
-       if(sch_nhits!=1) continue;
-       if(sch_depth[i]!=1) continue;
-       if(sch_hitpat[0]!=i) continue;
-       MatrixFlag_Sch->Fill(HULMHTDCCalib*trigflag[28]+sch_tdc[i][0]);
-       SchNhitsCut->Fill(sch_nhits);
-       SchTdcCut->Fill(sch_tdc[i][0]);
+       if(trigflag[28]>0){
+         if(sch_nhits!=1) continue;
+         if(sch_depth[i]!=1) continue;
+         if(sch_hitpat[0]!=i) continue;
+         MatrixFlag_Sch->Fill(HULMHTDCCalib*trigflag[28]+sch_tdc[i][0]);
+         SchNhitsCut->Fill(sch_nhits);
+         SchTdcCut->Fill(sch_tdc[i][0]);
+       }
      }
 
      //SftX ----
@@ -506,26 +508,28 @@ void mtx_gate(int month, int runnum){
          SftXTdc->Fill(sftx_utdc[i][j]);
          SftXTdc->Fill(sftx_dtdc[i][j]);
        }
-       if(sftx_unhits==1&&sftx_dnhits==0){
-         if(sftx_udepth[i]!=1) continue;
-         if(sftx_uhitpat[0]!=i) continue;
-         SftX_U_NhitsCut->Fill(sftx_unhits);
-         SftXNhitsCut->Fill(sftx_unhits);
-         SftX_U_HitpatCut->Fill(sftx_uhitpat[0]);
-         SftXHitpatCut->Fill(sftx_uhitpat[0]);
-         SftX_U_TdcCut->Fill(sftx_utdc[i][0]);
-         SftXTdcCut->Fill(sftx_utdc[i][0]);
-         MatrixFlag_SftX->Fill(HULMHTDCCalib*trigflag[28]-HULMHTDCCalib*sftx_utdc[i][0]);
-       }else if(sftx_unhits==0&&sftx_dnhits==1){
-         if(sftx_ddepth[i]!=1) continue;
-         if(sftx_dhitpat[0]!=i) continue;
-         SftX_D_NhitsCut->Fill(sftx_dnhits);
-         SftXNhitsCut->Fill(sftx_dnhits);
-         SftX_D_HitpatCut->Fill(sftx_dhitpat[0]+0.5);
-         SftXHitpatCut->Fill(sftx_dhitpat[0]+0.5);
-         SftX_D_TdcCut->Fill(sftx_dtdc[i][0]);
-         SftXTdcCut->Fill(sftx_dtdc[i][0]);
-         MatrixFlag_SftX->Fill(HULMHTDCCalib*trigflag[28]-HULMHTDCCalib*sftx_dtdc[i][0]);
+       if(trigflag[28]>0){
+         if(sftx_unhits==1&&sftx_dnhits==0){
+           if(sftx_udepth[i]!=1) continue;
+           if(sftx_uhitpat[0]!=i) continue;
+           SftX_U_NhitsCut->Fill(sftx_unhits);
+           SftXNhitsCut->Fill(sftx_unhits);
+           SftX_U_HitpatCut->Fill(sftx_uhitpat[0]);
+           SftXHitpatCut->Fill(sftx_uhitpat[0]);
+           SftX_U_TdcCut->Fill(sftx_utdc[i][0]);
+           SftXTdcCut->Fill(sftx_utdc[i][0]);
+           MatrixFlag_SftX->Fill(HULMHTDCCalib*trigflag[28]-HULMHTDCCalib*sftx_utdc[i][0]);
+         }else if(sftx_unhits==0&&sftx_dnhits==1){
+           if(sftx_ddepth[i]!=1) continue;
+           if(sftx_dhitpat[0]!=i) continue;
+           SftX_D_NhitsCut->Fill(sftx_dnhits);
+           SftXNhitsCut->Fill(sftx_dnhits);
+           SftX_D_HitpatCut->Fill(sftx_dhitpat[0]+0.5);
+           SftXHitpatCut->Fill(sftx_dhitpat[0]+0.5);
+           SftX_D_TdcCut->Fill(sftx_dtdc[i][0]);
+           SftXTdcCut->Fill(sftx_dtdc[i][0]);
+           MatrixFlag_SftX->Fill(HULMHTDCCalib*trigflag[28]-HULMHTDCCalib*sftx_dtdc[i][0]);
+         }
        }
      }
    }
