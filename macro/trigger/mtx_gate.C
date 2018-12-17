@@ -265,6 +265,7 @@ void mtx_gate(int month, int runnum){
 
 //-para def-----------------------------------------------------------------------------------------
    double HULMHTDCCalib = -0.8333;
+   double MaxBinValue=0.;
 
 //-hist def-----------------------------------------------------------------------------------------
 //-Trigger Flag -------
@@ -306,7 +307,7 @@ void mtx_gate(int month, int runnum){
   TH1D *SchTdc = new TH1D("SchTdc","SchTdc",100,0,1000);
   TH1D *SchTdcCut = new TH1D("SchTdcCut:nhits=1 & Maxdepth =1","SchTdcCut:nhits=1 & Maxdepth =1",100,0,1000);
   TH1D *SchTdcCut2 = new TH1D("SchTdcCut2: Sch&TOF-> nhits=1 & Maxdepth =1","SchTdcCut2: Sch&TOF-> nhits=1 & Maxdepth =1",100,0,1000);
-  TH1D *SchTimeCut2 = new TH1D("SchTimeCut2: Sch&TOF-> nhits=1 & Maxdepth =1","SchTimeCut2: Sch&TOF-> nhits=1 & Maxdepth =1",100,-500,-300);
+  TH1D *SchTimeCut2 = new TH1D("SchTimeCut2: Sch&TOF-> nhits=1 & Maxdepth =1","SchTimeCut2: Sch&TOF-> nhits=1 & Maxdepth =1",1000,-1000,0);
 
 // TrigFlag - Matrix Detector----------
   TH1D *MatrixFlag_Tof = new TH1D("Matrix Flag - TofMtOr","Matrix Flag - TofMtOr",2000,-1000,1000);
@@ -315,7 +316,7 @@ void mtx_gate(int month, int runnum){
 
 
 // Sch - Tof ----------
-  TH1D *SchTof = new TH1D("Sch-Tof Cut2: Sch&TOF-> nhits=1 & Maxdepth =1","Sch-Tof Cut2: Sch&TOF-> nhits=1 & Maxdepth =1",100,-500,-300);
+  TH1D *SchTof = new TH1D("Sch-Tof Cut2: Sch&TOF-> nhits=1 & Maxdepth =1","Sch-Tof Cut2: Sch&TOF-> nhits=1 & Maxdepth =1",500,-800,-300);
   TH1D *SchTofCut3 = new TH1D("Sch-Tof Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1","Sch-Tof Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1",100,-500,-300);
   TH1D *SchTofCut3_KTime0 = new TH1D("TSch-TTof Cut3 & 0<m2&m2<1","Sch-Tof Cut3 & 0<m2&m2<1",50,-25,25);
   TH1D *SchTofCut3_KTime0_GOMI = new TH1D("TSch-TTof Cut3 & 1<m2&m2<0","Sch-Tof Cut3 & 1<m2&m2<0",200,-100,100);
@@ -549,11 +550,23 @@ void mtx_gate(int month, int runnum){
    c1->Print(pdf);
    SchTimeCut2->Draw();
    c1->Print(pdf);
+   MaxBinValue=SchTimeCut2->GetXaxis()->GetBinCenter(SchTimeCut2->GetMaximumBin());
+   SchTimeCut2->SetAxisRange(MaxBinValue-50,MaxBinValue+70,"X");
+   SchTimeCut2->Draw();
+   c1->Print(pdf);
    
 //Sch-Tof Draw ----
    SchTof->Draw();
    c1->Print(pdf);
+   MaxBinValue=SchTof->GetXaxis()->GetBinCenter(SchTof->GetMaximumBin());
+   SchTof->SetAxisRange(MaxBinValue-50,MaxBinValue+70,"X");
+   SchTof->Draw();
+   c1->Print(pdf);
 
+   SchTofCut3->Draw();
+   c1->Print(pdf);
+   MaxBinValue=SchTofCut3->GetXaxis()->GetBinCenter(SchTofCut3->GetMaximumBin());
+   SchTofCut3->SetAxisRange(MaxBinValue-50,MaxBinValue+70,"X");
    SchTofCut3->Draw();
    c1->Print(pdf);
 
@@ -563,7 +576,6 @@ void mtx_gate(int month, int runnum){
 
 //Matrix-Detevtor Draw ----
 
-   double MaxBinValue=0.;
    MaxBinValue=MatrixFlag_Tof->GetXaxis()->GetBinCenter(MatrixFlag_Tof->GetMaximumBin());
    MatrixFlag_Tof->Draw();
    c1->Print(pdf);
