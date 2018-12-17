@@ -359,8 +359,8 @@ void mtx_gate(int month, int runnum){
   TH1D *SchTofKCut_KTime0  = new TH1D("Sch-Tof KTime0 KCut: Cut3 & 0.1<m2&m2<0.4","Sch-Tof KTime0 KCut: Cut3 & 0.1<m2&m2<0.4",50,-25,25);
   TH1D *SchTofPiCut_KTime0 = new TH1D("Sch-Tof KTime0 PiCut: Cut3 & 0<m2&m2<0.1", "Sch-Tof KTime0 PiCut: Cut3 & 0<m2&m2<0.1", 50,-25,25);
   TH1D *SchTofPCut_KTime0  = new TH1D("Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  "Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  50,-25,25);
-  TH2D *SchTofCut3_m2 = new TH2D("Sch-Tof vs m2 Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1","Sch-Tof vs m2 Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1",50,-500,-400,50,-0.2,1.2);
-  TH2D *SchTofCut3_pKurama = new TH2D("Sch-Tof vs pKurama Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1","Sch-Tof vs pKurama Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1",50,-500,-400,50,0,2);
+  TH2D *SchTofCut3_m2 = new TH2D("Sch-Tof vs m2 Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1","Sch-Tof vs m2 Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1",400,-800,-400,50,-0.2,1.2);
+  TH2D *SchTofCut3_pKurama = new TH2D("Sch-Tof vs pKurama Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1","Sch-Tof vs pKurama Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1",400,-800,-400,50,0,2);
   TH2D *SchTofKCut_KTime0_pKurama  = new TH2D("Sch-Tof KTime0 vs pKurama KCut: Cut3 & 0.1<m2&m2<0.4","Sch-Tof KTime0 KCut: Cut3 & 0.1<m2&m2<0.4",50,-25,25,50,0,2);
   TH2D *SchTofPiCut_KTime0_pKurama = new TH2D("Sch-Tof KTime0 vs pKurama PiCut: Cut3 & 0<m2&m2<0.1", "Sch-Tof KTime0 PiCut: Cut3 & 0<m2&m2<0.1", 50,-25,25,50,0,2);
   TH2D *SchTofPCut_KTime0_pKurama  = new TH2D("Sch-Tof KTime0 vs pKurama PCut: Cut3 & 0.6<m2&m2<1",  "Sch-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  50,-25,25,50,0,2);
@@ -518,7 +518,7 @@ void mtx_gate(int month, int runnum){
            SftXHitpatCut->Fill(sftx_uhitpat[0]);
            SftX_U_TdcCut->Fill(sftx_utdc[i][0]);
            SftXTdcCut->Fill(sftx_utdc[i][0]);
-           MatrixFlag_SftX->Fill(HULMHTDCCalib*trigflag[28]-HULMHTDCCalib*sftx_utdc[i][0]);
+           MatrixFlag_SftX->Fill(HULMHTDCCalib*trigflag[28]+HULMHTDCCalib*sftx_utdc[i][0]);
          }else if(sftx_unhits==0&&sftx_dnhits==1){
            if(sftx_ddepth[i]!=1) continue;
            if(sftx_dhitpat[0]!=i) continue;
@@ -528,7 +528,7 @@ void mtx_gate(int month, int runnum){
            SftXHitpatCut->Fill(sftx_dhitpat[0]+0.5);
            SftX_D_TdcCut->Fill(sftx_dtdc[i][0]);
            SftXTdcCut->Fill(sftx_dtdc[i][0]);
-           MatrixFlag_SftX->Fill(HULMHTDCCalib*trigflag[28]-HULMHTDCCalib*sftx_dtdc[i][0]);
+           MatrixFlag_SftX->Fill(HULMHTDCCalib*trigflag[28]+HULMHTDCCalib*sftx_dtdc[i][0]);
          }
        }
      }
@@ -850,6 +850,7 @@ void mtx_gate(int month, int runnum){
    SchTofCut3_m2->SetAxisRange(MaximumBin-50,MaximumBin+70,"X");
    SchTofCut3_m2->Draw("colz");
    c1->Print(pdf);
+   SchTofCut3_pKurama->SetAxisRange(MaximumBin-50,MaximumBin+70,"X");
    SchTofCut3_pKurama->Draw("colz");
    c1->Print(pdf);
    SchTofPiCut_KTime0_pKurama->Draw("colz");
