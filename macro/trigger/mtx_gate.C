@@ -320,7 +320,7 @@ void mtx_gate(int month, int runnum){
   TH1D *SchTofCut3 = new TH1D("Sch-Tof Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1","Sch-Tof Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1",100,-800,-300);
   TH1D *SchTofCut3_KTime0 = new TH1D("TSch-TTof Cut3 & 0<m2&m2<1","Sch-Tof Cut3 & 0<m2&m2<1",50,-25,25);
   TH1D *SchTofCut3_KTime0_GOMI = new TH1D("TSch-TTof Cut3 & 1<m2&m2<0","Sch-Tof Cut3 & 1<m2&m2<0",200,-100,100);
-  TH1D *SchTofKCut = new TH1D("Sch-Tof KCut: Cut3 & 0.1<m2&m2<0.4","Sch-Tof KCut: Cut3 & 0.1<m2&m2<0.4",50,-420,-370);
+  TH1D *SchTofKCut = new TH1D("Sch-Tof KCut: Cut3 & 0.1<m2&m2<0.4","Sch-Tof KCut: Cut3 & 0.1<m2&m2<0.4",800,-800,-0);
   TH1D *SchTofPiCut = new TH1D("Sch-Tof PiCut: Cut3 & 0<m2&m2<0.1","Sch-Tof PiCut: Cut3 & 0<m2&m2<0.1",50,-420,-370);
   TH1D *SchTofPCut = new TH1D("Sch-Tof PCut: Cut3 & 0.6<m2&m2<1","Sch-Tof PCut: Cut3 & 0.6<m2&m2<1",50,-420,-370);
   TH1D *SchTofKCut_KTime0  = new TH1D("Sch-Tof KTime0 KCut: Cut3 & 0.1<m2&m2<0.4","Sch-Tof KTime0 KCut: Cut3 & 0.1<m2&m2<0.4",50,-25,25);
@@ -611,6 +611,7 @@ void mtx_gate(int month, int runnum){
    MaximumBin=SchTofKCut->GetXaxis()->GetBinCenter(SchTofKCut->GetMaximumBin());
    std::cout << MaximumBin << std::endl;
    SchTofKCut->Fit("FitFunc1","","",MaximumBin-5,MaximumBin+5);
+   SchTofKCut->SetAxisRange(MaximumBin-50,MaximumBin+70,"X");
    SchTofKCut->Draw();
    SchTofKTime0=FitFunc1->GetParameter(1);
    c1->Print(pdf);
