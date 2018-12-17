@@ -317,7 +317,7 @@ void mtx_gate(int month, int runnum){
 
 // Sch - Tof ----------
   TH1D *SchTof = new TH1D("Sch-Tof Cut2: Sch&TOF-> nhits=1 & Maxdepth =1","Sch-Tof Cut2: Sch&TOF-> nhits=1 & Maxdepth =1",500,-800,-300);
-  TH1D *SchTofCut3 = new TH1D("Sch-Tof Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1","Sch-Tof Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1",100,-500,-300);
+  TH1D *SchTofCut3 = new TH1D("Sch-Tof Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1","Sch-Tof Cut3: Sch&TOF-> nhits=1 & Maxdepth =1 & ntKurama=1",100,-800,-300);
   TH1D *SchTofCut3_KTime0 = new TH1D("TSch-TTof Cut3 & 0<m2&m2<1","Sch-Tof Cut3 & 0<m2&m2<1",50,-25,25);
   TH1D *SchTofCut3_KTime0_GOMI = new TH1D("TSch-TTof Cut3 & 1<m2&m2<0","Sch-Tof Cut3 & 1<m2&m2<0",200,-100,100);
   TH1D *SchTofKCut = new TH1D("Sch-Tof KCut: Cut3 & 0.1<m2&m2<0.4","Sch-Tof KCut: Cut3 & 0.1<m2&m2<0.4",50,-420,-370);
@@ -336,8 +336,8 @@ void mtx_gate(int month, int runnum){
 //  TLegend *Leg1 = new TLegend(0.1,0.7,0.48,0.9);
   TLegend *Leg1 = new TLegend(0.78,0.775,0.98,0.935);
 
-//   Long64_t nentries = k0hodo->GetEntries();
-   Long64_t nentries =10000;
+   Long64_t nentries = k0hodo->GetEntries();
+//   Long64_t nentries =10000;
 
    Long64_t nbytes = 0;
    for (Long64_t s=0; s<nentries;s++) {
@@ -570,9 +570,6 @@ void mtx_gate(int month, int runnum){
    SchTofCut3->Draw();
    c1->Print(pdf);
 
-   SchTofPiCut->Draw();
-   c1->Print(pdf);
-
 
 //Matrix-Detevtor Draw ----
 
@@ -616,7 +613,9 @@ void mtx_gate(int month, int runnum){
    SchTofKCut->Fit("FitFunc1","","",MaximumBin-5,MaximumBin+5);
    SchTofKCut->Draw();
    SchTofKTime0=FitFunc1->GetParameter(1);
+   c1->Print(pdf);
 
+   SchTofPiCut->Draw();
    c1->Print(pdf);
    SchTofPCut->Draw();
    c1->Print(pdf);
