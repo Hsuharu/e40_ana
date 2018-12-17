@@ -616,8 +616,10 @@ void mtx_gate(int month, int runnum){
    SchTofKTime0=FitFunc1->GetParameter(1);
    c1->Print(pdf);
 
+   SchTofPiCut->SetAxisRange(MaximumBin-50,MaximumBin+70,"X");
    SchTofPiCut->Draw();
    c1->Print(pdf);
+   SchTofPCut->SetAxisRange(MaximumBin-50,MaximumBin+70,"X");
    SchTofPCut->Draw();
    c1->Print(pdf);
 
