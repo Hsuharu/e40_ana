@@ -467,6 +467,10 @@ void SAC_Efficiency(int month,int runnum){
    int chisqr = 0;
    chisqr = 100;
 
+   int hit=0;
+   int total=0;
+   double eff=0.;
+
 //-hist def-----------------------------------------------------------------------------------------
    Hist1Max = 22;
    Hist2Max = 7;
@@ -647,12 +651,16 @@ void SAC_Efficiency(int month,int runnum){
 //         trigflag[19]>trigflag19GateMin&&
 //         trigflag[19]<trigflag19GateMax
        ){
-       if( tSac[nhSac]>tSacGateMin
-           && tSac[nhSac]<tSacGateMax){
-         for(int i=0; i<nhSac; i++){
-           Hist1[21]->Fill(tSac[nhSac]);
+       int n_hit=0;
+       for(int i=0; i<nhSac; i++){
+         if( tSac[i]>tSacGateMin && tSac[i]<tSacGateMax){
+           Hist1[21]->Fill(tSac[i]);
+           n_hit +=1;
          }
        }
+       if(n_hit!=0) hit += 1;
+       total += 1;
+
        Hist1[17]->Fill(xsacKurama[ntKurama]);
        Hist1[18]->Fill(ysacKurama[ntKurama]);
        Hist1[19]->Fill(pKurama[ntKurama]);
@@ -662,6 +670,15 @@ void SAC_Efficiency(int month,int runnum){
      } // Cut3
 //    } // tSac by Room
    } 
+
+   eff = (double)hit/total;
+
+// Peak & Gate Make -----
+   MaximumBintSac=0.;
+   MaximumBintSac=Hist1[21]->GetXaxis()->GetBinCenter(Hist1[21]->GetMaximumBin());
+   Hist1[21]->Fit("FitFunc1","","",MaximumBintSac-4,MaximumBintSac+4);
+   Hist1[21]->SetAxisRange(MaximumBintSac-50,MaximumBintSac+80,"X");
+
 
 //-Canvas def---------------------------------------------------------------------------------------
 
@@ -681,6 +698,11 @@ void SAC_Efficiency(int month,int runnum){
    c1->Print(pdf);
    c1->Print(Form("%s/SAC_Efficiency_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
    }
+
+std::cout << "hit \t" << hit << std::endl; 
+std::cout << "total \t" << total << std::endl; 
+std::cout << "eff \t" << eff << std::endl; 
+
 
    c1->Print(pdf+"]"); 
 
