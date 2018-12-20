@@ -69,8 +69,8 @@ void SAC_Efficiency(int month){
 //Reset ROOT and connect tree file
    gROOT->Reset();
    TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-   TString pdf = Form("%s/pdf/trigger/SAC_Efficiency_trig19.pdf", anadir.Data());
-   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/trig19.root", anadir.Data(),Month[month],"READ");
+   TString pdf = Form("%s/pdf/trigger/SAC_Efficiency_BH2TOFTOFHT.pdf", anadir.Data());
+   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/trigf19_tofht.root", anadir.Data(),Month[month]),"READ");
    TTree *khodo;
     f->GetObject("khodo",khodo);
 
@@ -173,6 +173,8 @@ void SAC_Efficiency(int month){
    double HULMHTDCCalib = -0.8333;
 
 //-hist def-----------------------------------------------------------------------------------------
+  TH1D *Hist1= new TH1D("Hist1","Hist1",25,0,25);
+  TH2D *Hist2= new TH2D("Hist2","Hist2",25,0,25,50,0,2);
 
 //-Legend def --------------------------------------------------------------------------------------
 
@@ -181,15 +183,25 @@ void SAC_Efficiency(int month){
 
    Long64_t nbytes = 0;
    for (Long64_t s=0; s<nentries;s++) {
-      nbytes += khodo->GetEntry(i);
-   }
-
+     nbytes += khodo->GetEntry(s);
+     for(int i=0; i<4; i++){
+       Hist1->Fill(thetaKurama[i]);
+       Hist2->Fill(thetaKurama[i],pKurama[i]);
+     } 
+   } 
 
 //-Canvas def---------------------------------------------------------------------------------------
 
   TCanvas *c1 = new TCanvas("c1","c1",1200,900);
+   c1->Print(pdf+"["); 
 //-Hist Draw----------------------------------------------------------------------------------------
+   c1->cd();
+   Hist1->Draw();
+   c1->Print(pdf);
+   Hist2->Draw();
+   c1->Print(pdf);
 
+   c1->Print(pdf+"]"); 
 
 
 
