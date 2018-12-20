@@ -468,7 +468,7 @@ void SAC_Efficiency(int month,int runnum){
    chisqr = 100;
 
 //-hist def-----------------------------------------------------------------------------------------
-   Hist1Max = 16;
+   Hist1Max = 17;
    Hist2Max = 5;
    TH1D *Hist1[Hist1Max];
    TH2D *Hist2[Hist2Max];
@@ -493,7 +493,8 @@ void SAC_Efficiency(int month,int runnum){
 //    } // tSac by Room
     Hist1[13]= new TH1D("tSac Or  ","tSac Or  ",2000,-1500,500);
     Hist1[14]= new TH1D("tSac Or Cut2","tSac Or Cut2",2000,-1500,500);
-    Hist1[15]= new TH1D(Form("Trigger Flag %s Or Cut2",TriggerFlag[19]),Form("Trigger Flag %s Or Cut2",TriggerFlag[19]),2000,0,2000);
+    Hist1[15]= new TH1D(Form("Trigger Flag %s  ",TriggerFlag[19]),Form("Trigger Flag %s  ",TriggerFlag[19]),2000,0,2000);
+    Hist1[16]= new TH1D(Form("Trigger Flag %s Cut2",TriggerFlag[19]),Form("Trigger Flag %s Cut2",TriggerFlag[19]),2000,0,2000);
 
 
     Hist2[0]= new TH2D("pKurama % ThetaKurama","pKurama % ThetaKurama",1000,0,40,1000,0,2);
@@ -529,6 +530,7 @@ void SAC_Efficiency(int month,int runnum){
          Hist2[4]->Fill(xsacKurama[i],ysacKurama[i]);
          Hist1[8]->Fill(xsacKurama[i]);
          Hist1[10]->Fill(ysacKurama[i]);
+         Hist1[16]->Fill(trigflag[19]);
        } // Cut1
        if(chisqrKurama[i]<chisqr&&qKurama[i]>0){
          Hist1[11]->Fill(xsacKurama[i]);
@@ -561,16 +563,16 @@ void SAC_Efficiency(int month,int runnum){
    MaximumBintSac=Hist1[13]->GetXaxis()->GetBinCenter(Hist1[13]->GetMaximumBin());
    Hist1[13]->Fit("FitFunc1","","",MaximumBintSac-4,MaximumBintSac+4);
    Hist1[13]->SetAxisRange(MaximumBintSac-50,MaximumBintSac+80,"X");
-   tSacGateMin=FitFunc1->GetParameter(1) - 2*FitFunc1->GetParameter(2);
-   tSacGateMax=FitFunc1->GetParameter(1) + 2*FitFunc1->GetParameter(2);
+   tSacGateMin=FitFunc1->GetParameter(1) - 20 ;//FitFunc1->GetParameter(2);
+   tSacGateMax=FitFunc1->GetParameter(1) + 20 ;//FitFunc1->GetParameter(2);
 
    double tSacGateMin_Cut2   =0.;
    double tSacGateMax_Cut2   =0.;
    MaximumBintSac=Hist1[14]->GetXaxis()->GetBinCenter(Hist1[14]->GetMaximumBin());
    Hist1[14]->Fit("FitFunc1","","",MaximumBintSac-4,MaximumBintSac+4);
    Hist1[14]->SetAxisRange(MaximumBintSac-50,MaximumBintSac+80,"X");
-   tSacGateMin_Cut2=FitFunc1->GetParameter(1) - 2*FitFunc1->GetParameter(2);
-   tSacGateMax_Cut2=FitFunc1->GetParameter(1) + 2*FitFunc1->GetParameter(2);
+   tSacGateMin_Cut2=FitFunc1->GetParameter(1) - 20; //FitFunc1->GetParameter(2);
+   tSacGateMax_Cut2=FitFunc1->GetParameter(1) + 20; //FitFunc1->GetParameter(2);
 
    double MaximumBin=0.;
    double trigflag19GateMin   =0.;
@@ -578,8 +580,8 @@ void SAC_Efficiency(int month,int runnum){
    MaximumBin=Hist1[15]->GetXaxis()->GetBinCenter(Hist1[15]->GetMaximumBin());
    Hist1[15]->Fit("FitFunc1","","",MaximumBin-4,MaximumBin+4);
    Hist1[15]->SetAxisRange(MaximumBin-50,MaximumBin+80,"X");
-   trigflag19GateMin=FitFunc1->GetParameter(1) - 2*FitFunc1->GetParameter(2);
-   trigflag19GateMax=FitFunc1->GetParameter(1) + 2*FitFunc1->GetParameter(2);
+   trigflag19GateMin=FitFunc1->GetParameter(1) - 15; //FitFunc1->GetParameter(2);
+   trigflag19GateMax=FitFunc1->GetParameter(1) + 15; //FitFunc1->GetParameter(2);
 
 
    c1->cd();
