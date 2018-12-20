@@ -491,8 +491,8 @@ void SAC_Efficiency(int month,int runnum){
 //      Hist1[13+i]= new TH1D(Form("tSac Room%d",i),Form("tSac Room%d",i),1000,-2000,2000);
 //      Hist1[18+i]= new TH1D(Form("tSac Cut2 Room%d",i),Form("tSac Cut2 Room%d",i),1000,-2000,2000);
 //    } // tSac by Room
-    Hist1[13]= new TH1D("tSac Or  ","tSac Or  ",1000,-2000,2000);
-    Hist1[14]= new TH1D("tSac Or Cut2","tSac Or Cut2",1000,-2000,2000);
+    Hist1[13]= new TH1D("tSac Or  ","tSac Or  ",1000,-1500,500);
+    Hist1[14]= new TH1D("tSac Or Cut2","tSac Or Cut2",1000,-1500,500);
 
 
     Hist2[0]= new TH2D("pKurama % ThetaKurama","pKurama % ThetaKurama",1000,0,40,1000,0,2);
@@ -519,7 +519,7 @@ void SAC_Efficiency(int month,int runnum){
        Hist1[7]->Fill(xsacKurama[i]);
        Hist1[9]->Fill(ysacKurama[i]);
        Hist2[3]->Fill(xsacKurama[i],ysacKurama[i]);
-       if(chisqrKurama[i]<chisqr&&qKurama[i]>0){
+       if(chisqrKurama[i]<chisqr&&qKurama[i]>0&&ntKurama==1){
          Hist1[2]->Fill(pKurama[i]);
          Hist1[4]->Fill(m2[i]);
          Hist2[2]->Fill(m2[i],pKurama[i]);
@@ -550,6 +550,25 @@ void SAC_Efficiency(int month,int runnum){
   TCanvas *c1 = new TCanvas("c1","c1",1200,900);
    c1->Print(pdf+"["); 
 //-Hist Draw----------------------------------------------------------------------------------------
+   TF1 *FitFunc1 = new TF1("FitFunc1","gaus");
+   FitFunc1->SetParameters(1000,-400,5);
+   double MaximumBintSac=0.;
+   double tSacGateMin   =0.;
+   double tSacGateMax   =0.;
+   MaximumBintSac=Hist1[13]->GetXaxis()->GetBinCenter(Hist1[13]->GetMaximumBin());
+   Hist1[13]->Fit("FitFunc1","","",MaximumBintSac-10,MaximumBintSac+10);
+   Hist1[13]->SetAxisRange(MaximumBintSac-80,MaximumBintSac+100,"X");
+   tSacGateMin=FitFunc1->GetParameter(1) - 2*FitFunc1->GetParameter(2);
+   tSacGateMax=FitFunc1->GetParameter(1) + 2*FitFunc1->GetParameter(2);
+
+   double tSacGateMin_Cut2   =0.;
+   double tSacGateMax_Cut2   =0.;
+   MaximumBintSac=Hist1[14]->GetXaxis()->GetBinCenter(Hist1[14]->GetMaximumBin());
+   Hist1[14]->Fit("FitFunc1","","",MaximumBintSac-10,MaximumBintSac+10);
+   Hist1[14]->SetAxisRange(MaximumBintSac-80,MaximumBintSac+100,"X");
+   tSacGateMin_Cut2=FitFunc1->GetParameter(1) - 2*FitFunc1->GetParameter(2);
+   tSacGateMax_Cut2=FitFunc1->GetParameter(1) + 2*FitFunc1->GetParameter(2);
+
 
    c1->cd();
    for(int i=0; i<Hist1Max; i++){
