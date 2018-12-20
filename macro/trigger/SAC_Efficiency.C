@@ -198,7 +198,7 @@ void SAC_Efficiency(int month){
    c1->cd();
    Hist1->Draw();
    c1->Print(pdf);
-   Hist2->Draw();
+   Hist2->Draw("colz");
    c1->Print(pdf);
 
    c1->Print(pdf+"]"); 
