@@ -627,7 +627,7 @@ void SAC_Efficiency(int month,int runnum){
 //       Hist1[13]->Fill(tSac[nhSac]);
      if(chisqrKurama[ntKurama]<chisqr &&
          qKurama[ntKurama]>0&&
-         ntKurama==1// &&
+         ntKurama==1 &&
 //         nhSac==1//&&
 //         xsacKurama[ntKurama]>xsacKuramaGateMin&&
 //         xsacKurama[ntKurama]>xsacKuramaGateMin&&
@@ -635,10 +635,15 @@ void SAC_Efficiency(int month,int runnum){
 //         ysacKurama[ntKurama]>ysacKuramaGateMax&&
 //         tSac[nhSac]>tSacGateMin&&
 //         tSac[nhSac]<tSacGateMax&&
-//         trigflag[19]>trigflag19GateMin&&
-//         trigflag[19]<trigflag19GateMax
+         trigflag[19]>trigflag19GateMin&&
+         trigflag[19]<trigflag19GateMax
        ){
-//       Hist1[14]->Fill(tSac[nhSac]);
+       if( tSac[nhSac]>tSacGateMin
+           && tSac[nhSac]<tSacGateMax){
+         for(int i=0; i<nhSac; i++){
+           Hist1[14]->Fill(tSac[nhSac]);
+         }
+       }
        Hist1[17]->Fill(xsacKurama[ntKurama]);
        Hist1[18]->Fill(ysacKurama[ntKurama]);
        Hist1[19]->Fill(pKurama[ntKurama]);
