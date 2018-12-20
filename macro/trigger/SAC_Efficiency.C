@@ -74,7 +74,7 @@ void SAC_Efficiency(int month,int runnum){
    TTree *kurama;
     f->GetObject("kurama",kurama);
 
-//Declaration of leaves types
+// Declaration of leaves types-----------------------------------------------------------------------
    Int_t           evnum;
    Int_t           trigpat[32];
    Int_t           trigflag[32];
@@ -199,71 +199,198 @@ void SAC_Efficiency(int month,int runnum){
    Double_t        tofua[24];
    Double_t        tofda[24];
 
-   // Set branch addresses.
+// Select Branch ------------------------------------------------------------------------------------
+   kurama->SetBranchStatus("*", 0);
+   kurama->SetBranchStatus("evnum");
+   kurama->SetBranchStatus("trigpat");
+   kurama->SetBranchStatus("trigflag");
+//   kurama->SetBranchStatus("nhBh2",&nhBh2);
+//   kurama->SetBranchStatus("Bh2Seg",Bh2Seg);
+//   kurama->SetBranchStatus("tBh2",tBh2);
+//   kurama->SetBranchStatus("deBh2",deBh2);
+//   kurama->SetBranchStatus("time0",&time0);
+//   kurama->SetBranchStatus("nhBh1",&nhBh1);
+//   kurama->SetBranchStatus("Bh1Seg",Bh1Seg);
+//   kurama->SetBranchStatus("tBh1",tBh1);
+//   kurama->SetBranchStatus("deBh1",deBh1);
+//   kurama->SetBranchStatus("btof",&btof);
+   kurama->SetBranchStatus("nhSac");
+   kurama->SetBranchStatus("SacSeg");
+   kurama->SetBranchStatus("tSac");
+   kurama->SetBranchStatus("deSac");
+//   kurama->SetBranchStatus("nhTof",&nhTof);
+//   kurama->SetBranchStatus("TofSeg",TofSeg);
+//   kurama->SetBranchStatus("tTof",tTof);
+//   kurama->SetBranchStatus("dtTof",dtTof);
+//   kurama->SetBranchStatus("deTof",deTof);
+//   kurama->SetBranchStatus("wposSdcIn",wposSdcIn);
+//   kurama->SetBranchStatus("wposSdcOut",wposSdcOut);
+//   kurama->SetBranchStatus("ntSdcIn",&ntSdcIn);
+//   kurama->SetBranchStatus("much",&much);
+//   kurama->SetBranchStatus("nlSdcIn",&nlSdcIn);
+//   kurama->SetBranchStatus("nhSdcIn",nhSdcIn);
+//   kurama->SetBranchStatus("chisqrSdcIn",chisqrSdcIn);
+//   kurama->SetBranchStatus("x0SdcIn",x0SdcIn);
+//   kurama->SetBranchStatus("y0SdcIn",y0SdcIn);
+//   kurama->SetBranchStatus("u0SdcIn",u0SdcIn);
+//   kurama->SetBranchStatus("v0SdcIn",v0SdcIn);
+//   kurama->SetBranchStatus("ntSdcOut",&ntSdcOut);
+//   kurama->SetBranchStatus("nlSdcOut",&nlSdcOut);
+//   kurama->SetBranchStatus("nhSdcOut",nhSdcOut);
+//   kurama->SetBranchStatus("chisqrSdcOut",chisqrSdcOut);
+//   kurama->SetBranchStatus("x0SdcOut",x0SdcOut);
+//   kurama->SetBranchStatus("y0SdcOut",y0SdcOut);
+//   kurama->SetBranchStatus("u0SdcOut",u0SdcOut);
+//   kurama->SetBranchStatus("v0SdcOut",v0SdcOut);
+   kurama->SetBranchStatus("ntKurama");
+//   kurama->SetBranchStatus("nlKurama",&nlKurama);
+//   kurama->SetBranchStatus("nhKurama",nhKurama);
+   kurama->SetBranchStatus("chisqrKurama");
+//   kurama->SetBranchStatus("path",path);
+   kurama->SetBranchStatus("pKurama");
+   kurama->SetBranchStatus("stof");
+   kurama->SetBranchStatus("qKurama");
+   kurama->SetBranchStatus("m2");
+//   kurama->SetBranchStatus("xtgtKurama",xtgtKurama);
+//   kurama->SetBranchStatus("ytgtKurama",ytgtKurama);
+//   kurama->SetBranchStatus("utgtKurama",utgtKurama);
+//   kurama->SetBranchStatus("vtgtKurama",vtgtKurama);
+   kurama->SetBranchStatus("thetaKurama");
+//   kurama->SetBranchStatus("phiKurama",phiKurama);
+//   kurama->SetBranchStatus("resP",resP);
+   kurama->SetBranchStatus("xsacKurama");
+   kurama->SetBranchStatus("ysacKurama");
+//   kurama->SetBranchStatus("xtofKurama",xtofKurama);
+//   kurama->SetBranchStatus("ytofKurama",ytofKurama);
+//   kurama->SetBranchStatus("utofKurama",utofKurama);
+//   kurama->SetBranchStatus("vtofKurama",vtofKurama);
+//   kurama->SetBranchStatus("tofsegKurama",tofsegKurama);
+   kurama->SetBranchStatus("vpx");
+   kurama->SetBranchStatus("vpy");
+//   kurama->SetBranchStatus("ResL1",&ResL1);
+//   kurama->SetBranchStatus("ResL2",&ResL2);
+//   kurama->SetBranchStatus("ResL3",&ResL3);
+//   kurama->SetBranchStatus("ResL4",&ResL4);
+//   kurama->SetBranchStatus("ResL5",&ResL5);
+//   kurama->SetBranchStatus("ResL6",&ResL6);
+//   kurama->SetBranchStatus("ResL7",&ResL7);
+//   kurama->SetBranchStatus("ResL8",&ResL8);
+//   kurama->SetBranchStatus("ResL9",&ResL9);
+//   kurama->SetBranchStatus("ResL31",&ResL31);
+//   kurama->SetBranchStatus("ResL32",&ResL32);
+//   kurama->SetBranchStatus("ResL33",&ResL33);
+//   kurama->SetBranchStatus("ResL34",&ResL34);
+//   kurama->SetBranchStatus("ResL35",&ResL35);
+//   kurama->SetBranchStatus("ResL36",&ResL36);
+//   kurama->SetBranchStatus("ResL37",&ResL37);
+//   kurama->SetBranchStatus("ResL38",&ResL38);
+//   kurama->SetBranchStatus("ResL39",&ResL39);
+//   kurama->SetBranchStatus("ResL40",&ResL40);
+//   kurama->SetBranchStatus("ResL41",&ResL41);
+//   kurama->SetBranchStatus("ResL43",&ResL43);
+//   kurama->SetBranchStatus("ResL44",&ResL44);
+//   kurama->SetBranchStatus("ResL45",&ResL45);
+//   kurama->SetBranchStatus("ResL46",&ResL46);
+//   kurama->SetBranchStatus("ResL42",&ResL42);
+//   kurama->SetBranchStatus("ResG1",&ResG1);
+//   kurama->SetBranchStatus("ResG2",&ResG2);
+//   kurama->SetBranchStatus("ResG3",&ResG3);
+//   kurama->SetBranchStatus("ResG4",&ResG4);
+//   kurama->SetBranchStatus("ResG5",&ResG5);
+//   kurama->SetBranchStatus("ResG6",&ResG6);
+//   kurama->SetBranchStatus("ResG7",&ResG7);
+//   kurama->SetBranchStatus("ResG8",&ResG8);
+//   kurama->SetBranchStatus("ResG9",&ResG9);
+//   kurama->SetBranchStatus("ResG31",&ResG31);
+//   kurama->SetBranchStatus("ResG32",&ResG32);
+//   kurama->SetBranchStatus("ResG33",&ResG33);
+//   kurama->SetBranchStatus("ResG34",&ResG34);
+//   kurama->SetBranchStatus("ResG35",&ResG35);
+//   kurama->SetBranchStatus("ResG36",&ResG36);
+//   kurama->SetBranchStatus("ResG37",&ResG37);
+//   kurama->SetBranchStatus("ResG38",&ResG38);
+//   kurama->SetBranchStatus("ResG39",&ResG39);
+//   kurama->SetBranchStatus("ResG40",&ResG40);
+//   kurama->SetBranchStatus("ResG43",&ResG43);
+//   kurama->SetBranchStatus("ResG44",&ResG44);
+//   kurama->SetBranchStatus("ResG45",&ResG45);
+//   kurama->SetBranchStatus("ResG46",&ResG46);
+//   kurama->SetBranchStatus("ResG41",&ResG41);
+//   kurama->SetBranchStatus("ResG42",&ResG42);
+//   kurama->SetBranchStatus("tTofCalc",tTofCalc);
+//   kurama->SetBranchStatus("utTofSeg",utTofSeg);
+//   kurama->SetBranchStatus("dtTofSeg",dtTofSeg);
+//   kurama->SetBranchStatus("udeTofSeg",udeTofSeg);
+//   kurama->SetBranchStatus("ddeTofSeg",ddeTofSeg);
+//   kurama->SetBranchStatus("tofua",tofua);
+//   kurama->SetBranchStatus("tofda",tofda);
+
+
+// Set branch addresses -----------------------------------------------------------------------------
    kurama->SetBranchAddress("evnum",&evnum);
    kurama->SetBranchAddress("trigpat",trigpat);
    kurama->SetBranchAddress("trigflag",trigflag);
-   kurama->SetBranchAddress("nhBh2",&nhBh2);
-   kurama->SetBranchAddress("Bh2Seg",Bh2Seg);
-   kurama->SetBranchAddress("tBh2",tBh2);
-   kurama->SetBranchAddress("deBh2",deBh2);
-   kurama->SetBranchAddress("time0",&time0);
-   kurama->SetBranchAddress("nhBh1",&nhBh1);
-   kurama->SetBranchAddress("Bh1Seg",Bh1Seg);
-   kurama->SetBranchAddress("tBh1",tBh1);
-   kurama->SetBranchAddress("deBh1",deBh1);
-   kurama->SetBranchAddress("btof",&btof);
+//   kurama->SetBranchAddress("nhBh2",&nhBh2);
+//   kurama->SetBranchAddress("Bh2Seg",Bh2Seg);
+//   kurama->SetBranchAddress("tBh2",tBh2);
+//   kurama->SetBranchAddress("deBh2",deBh2);
+//   kurama->SetBranchAddress("time0",&time0);
+//   kurama->SetBranchAddress("nhBh1",&nhBh1);
+//   kurama->SetBranchAddress("Bh1Seg",Bh1Seg);
+//   kurama->SetBranchAddress("tBh1",tBh1);
+//   kurama->SetBranchAddress("deBh1",deBh1);
+//   kurama->SetBranchAddress("btof",&btof);
    kurama->SetBranchAddress("nhSac",&nhSac);
    kurama->SetBranchAddress("SacSeg",SacSeg);
    kurama->SetBranchAddress("tSac",tSac);
    kurama->SetBranchAddress("deSac",deSac);
-   kurama->SetBranchAddress("nhTof",&nhTof);
-   kurama->SetBranchAddress("TofSeg",TofSeg);
-   kurama->SetBranchAddress("tTof",tTof);
-   kurama->SetBranchAddress("dtTof",dtTof);
-   kurama->SetBranchAddress("deTof",deTof);
-   kurama->SetBranchAddress("wposSdcIn",wposSdcIn);
-   kurama->SetBranchAddress("wposSdcOut",wposSdcOut);
-   kurama->SetBranchAddress("ntSdcIn",&ntSdcIn);
-   kurama->SetBranchAddress("much",&much);
-   kurama->SetBranchAddress("nlSdcIn",&nlSdcIn);
-   kurama->SetBranchAddress("nhSdcIn",nhSdcIn);
-   kurama->SetBranchAddress("chisqrSdcIn",chisqrSdcIn);
-   kurama->SetBranchAddress("x0SdcIn",x0SdcIn);
-   kurama->SetBranchAddress("y0SdcIn",y0SdcIn);
-   kurama->SetBranchAddress("u0SdcIn",u0SdcIn);
-   kurama->SetBranchAddress("v0SdcIn",v0SdcIn);
-   kurama->SetBranchAddress("ntSdcOut",&ntSdcOut);
-   kurama->SetBranchAddress("nlSdcOut",&nlSdcOut);
-   kurama->SetBranchAddress("nhSdcOut",nhSdcOut);
-   kurama->SetBranchAddress("chisqrSdcOut",chisqrSdcOut);
-   kurama->SetBranchAddress("x0SdcOut",x0SdcOut);
-   kurama->SetBranchAddress("y0SdcOut",y0SdcOut);
-   kurama->SetBranchAddress("u0SdcOut",u0SdcOut);
-   kurama->SetBranchAddress("v0SdcOut",v0SdcOut);
+//   kurama->SetBranchAddress("nhTof",&nhTof);
+//   kurama->SetBranchAddress("TofSeg",TofSeg);
+//   kurama->SetBranchAddress("tTof",tTof);
+//   kurama->SetBranchAddress("dtTof",dtTof);
+//   kurama->SetBranchAddress("deTof",deTof);
+//   kurama->SetBranchAddress("wposSdcIn",wposSdcIn);
+//   kurama->SetBranchAddress("wposSdcOut",wposSdcOut);
+//   kurama->SetBranchAddress("ntSdcIn",&ntSdcIn);
+//   kurama->SetBranchAddress("much",&much);
+//   kurama->SetBranchAddress("nlSdcIn",&nlSdcIn);
+//   kurama->SetBranchAddress("nhSdcIn",nhSdcIn);
+//   kurama->SetBranchAddress("chisqrSdcIn",chisqrSdcIn);
+//   kurama->SetBranchAddress("x0SdcIn",x0SdcIn);
+//   kurama->SetBranchAddress("y0SdcIn",y0SdcIn);
+//   kurama->SetBranchAddress("u0SdcIn",u0SdcIn);
+//   kurama->SetBranchAddress("v0SdcIn",v0SdcIn);
+//   kurama->SetBranchAddress("ntSdcOut",&ntSdcOut);
+//   kurama->SetBranchAddress("nlSdcOut",&nlSdcOut);
+//   kurama->SetBranchAddress("nhSdcOut",nhSdcOut);
+//   kurama->SetBranchAddress("chisqrSdcOut",chisqrSdcOut);
+//   kurama->SetBranchAddress("x0SdcOut",x0SdcOut);
+//   kurama->SetBranchAddress("y0SdcOut",y0SdcOut);
+//   kurama->SetBranchAddress("u0SdcOut",u0SdcOut);
+//   kurama->SetBranchAddress("v0SdcOut",v0SdcOut);
    kurama->SetBranchAddress("ntKurama",&ntKurama);
-   kurama->SetBranchAddress("nlKurama",&nlKurama);
-   kurama->SetBranchAddress("nhKurama",nhKurama);
+//   kurama->SetBranchAddress("nlKurama",&nlKurama);
+//   kurama->SetBranchAddress("nhKurama",nhKurama);
    kurama->SetBranchAddress("chisqrKurama",chisqrKurama);
    kurama->SetBranchAddress("stof",stof);
-   kurama->SetBranchAddress("path",path);
+//   kurama->SetBranchAddress("path",path);
    kurama->SetBranchAddress("pKurama",pKurama);
    kurama->SetBranchAddress("qKurama",qKurama);
    kurama->SetBranchAddress("m2",m2);
-   kurama->SetBranchAddress("xtgtKurama",xtgtKurama);
-   kurama->SetBranchAddress("ytgtKurama",ytgtKurama);
-   kurama->SetBranchAddress("utgtKurama",utgtKurama);
-   kurama->SetBranchAddress("vtgtKurama",vtgtKurama);
+//   kurama->SetBranchAddress("xtgtKurama",xtgtKurama);
+//   kurama->SetBranchAddress("ytgtKurama",ytgtKurama);
+//   kurama->SetBranchAddress("utgtKurama",utgtKurama);
+//   kurama->SetBranchAddress("vtgtKurama",vtgtKurama);
    kurama->SetBranchAddress("thetaKurama",thetaKurama);
-   kurama->SetBranchAddress("phiKurama",phiKurama);
-   kurama->SetBranchAddress("resP",resP);
+//   kurama->SetBranchAddress("phiKurama",phiKurama);
+//   kurama->SetBranchAddress("resP",resP);
    kurama->SetBranchAddress("xsacKurama",xsacKurama);
    kurama->SetBranchAddress("ysacKurama",ysacKurama);
-   kurama->SetBranchAddress("xtofKurama",xtofKurama);
-   kurama->SetBranchAddress("ytofKurama",ytofKurama);
-   kurama->SetBranchAddress("utofKurama",utofKurama);
-   kurama->SetBranchAddress("vtofKurama",vtofKurama);
-   kurama->SetBranchAddress("tofsegKurama",tofsegKurama);
+//   kurama->SetBranchAddress("xtofKurama",xtofKurama);
+//   kurama->SetBranchAddress("ytofKurama",ytofKurama);
+//   kurama->SetBranchAddress("utofKurama",utofKurama);
+//   kurama->SetBranchAddress("vtofKurama",vtofKurama);
+//   kurama->SetBranchAddress("tofsegKurama",tofsegKurama);
    kurama->SetBranchAddress("vpx",vpx);
    kurama->SetBranchAddress("vpy",vpy);
 //   kurama->SetBranchAddress("ResL1",&ResL1);
@@ -316,13 +443,13 @@ void SAC_Efficiency(int month,int runnum){
 //   kurama->SetBranchAddress("ResG46",&ResG46);
 //   kurama->SetBranchAddress("ResG41",&ResG41);
 //   kurama->SetBranchAddress("ResG42",&ResG42);
-   kurama->SetBranchAddress("tTofCalc",tTofCalc);
-   kurama->SetBranchAddress("utTofSeg",utTofSeg);
-   kurama->SetBranchAddress("dtTofSeg",dtTofSeg);
-   kurama->SetBranchAddress("udeTofSeg",udeTofSeg);
-   kurama->SetBranchAddress("ddeTofSeg",ddeTofSeg);
-   kurama->SetBranchAddress("tofua",tofua);
-   kurama->SetBranchAddress("tofda",tofda);
+//   kurama->SetBranchAddress("tTofCalc",tTofCalc);
+//   kurama->SetBranchAddress("utTofSeg",utTofSeg);
+//   kurama->SetBranchAddress("dtTofSeg",dtTofSeg);
+//   kurama->SetBranchAddress("udeTofSeg",udeTofSeg);
+//   kurama->SetBranchAddress("ddeTofSeg",ddeTofSeg);
+//   kurama->SetBranchAddress("tofua",tofua);
+//   kurama->SetBranchAddress("tofda",tofda);
 
 //     This is the loop skeleton
 //       To read only selected branches, Insert statements like:
@@ -333,9 +460,19 @@ void SAC_Efficiency(int month,int runnum){
 //-para def-----------------------------------------------------------------------------------------
    double HULMHTDCCalib = -0.8333;
 
+   int Hist1Max = 0;
+   int Hist2Max = 0;
+
 //-hist def-----------------------------------------------------------------------------------------
-  TH1D *Hist1= new TH1D("Hist1","Hist1",50,0,25);
-  TH2D *Hist2= new TH2D("Hist2","Hist2",50,0,25,50,0,2);
+   Hist1Max = 1;
+   Hist2Max = 1;
+   TH1D *Hist1[Hist1Max];
+   TH2D *Hist2[Hist2Max];
+
+//    Hist1[0]= new TH1D(Form("Hist1 %s",TriggerFlag[i]),Form("Hist1 %s",TriggerFlag[i]),1000,0,2100);
+    Hist1[0]= new TH1D("ThetaKurama","ThetaKurama",100,0,40);
+
+    Hist2[0]= new TH2D("pKurama % ThetaKurama","pKurama % ThetaKurama",100,0,40,100,0,2);
 
 //-Legend def --------------------------------------------------------------------------------------
 
@@ -349,8 +486,8 @@ void SAC_Efficiency(int month,int runnum){
      for(int i=0; i<4; i++){
        if(m2[i]<0)continue;
        if(m2[i]>0.1)continue;
-       Hist1->Fill(thetaKurama[i]);
-       Hist2->Fill(thetaKurama[i],pKurama[i]);
+       Hist1[0]->Fill(thetaKurama[i]);
+       Hist2[0]->Fill(thetaKurama[i],pKurama[i]);
      } 
    } 
 
@@ -359,11 +496,16 @@ void SAC_Efficiency(int month,int runnum){
   TCanvas *c1 = new TCanvas("c1","c1",1200,900);
    c1->Print(pdf+"["); 
 //-Hist Draw----------------------------------------------------------------------------------------
+
    c1->cd();
-   Hist1->Draw();
+   for(int i=0; i<Hist1Max; i++){
+   Hist1[i]->Draw();
    c1->Print(pdf);
-   Hist2->Draw("colz");
+   }
+   for(int i=0; i<Hist2Max; i++){
+   Hist2[i]->Draw("colz");
    c1->Print(pdf);
+   }
 
    c1->Print(pdf+"]"); 
 
