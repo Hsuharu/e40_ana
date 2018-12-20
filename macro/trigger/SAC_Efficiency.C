@@ -468,7 +468,7 @@ void SAC_Efficiency(int month,int runnum){
    chisqr = 100;
 
 //-hist def-----------------------------------------------------------------------------------------
-   Hist1Max = 21;
+   Hist1Max = 22;
    Hist2Max = 7;
    TH1D *Hist1[Hist1Max];
    TH2D *Hist2[Hist2Max];
@@ -499,6 +499,7 @@ void SAC_Efficiency(int month,int runnum){
     Hist1[18]= new TH1D("ysacKurama Cut3","ysacKurama Cut3",500,-400,400);
     Hist1[19]= new TH1D("pKurama Cut3","pKurama Cut3",1000,0,2);
     Hist1[20]= new TH1D("m2 Cut3","m2 Cut3",1000,-0.4,1.4);
+    Hist1[21]= new TH1D("tSac Or Cut3","tSac Or Cut3",1000,-1500,500);
 
 
     Hist2[0]= new TH2D("pKurama % ThetaKurama","pKurama % ThetaKurama",1000,0,40,1000,0,2);
@@ -649,7 +650,7 @@ void SAC_Efficiency(int month,int runnum){
        if( tSac[nhSac]>tSacGateMin
            && tSac[nhSac]<tSacGateMax){
          for(int i=0; i<nhSac; i++){
-           Hist1[14]->Fill(tSac[nhSac]);
+           Hist1[21]->Fill(tSac[nhSac]);
          }
        }
        Hist1[17]->Fill(xsacKurama[ntKurama]);
