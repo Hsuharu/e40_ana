@@ -1,59 +1,4 @@
-#include "DetectorID.hh"
-
- const char* Month[] =
- {
-   "zero",
-   "jan",
-   "feb",
-   "mar",
-   "apr",
-   "may",
-   "jun",
-   "jly",
-   "agt",
-   "sep",
-   "oct",
-   "nov",
-   "dec",
- };
-
-const char* TriggerFlag[]=
-  {
-    "Bh21K     ",
-    "Bh22K     ",
-    "Bh23K     ",
-    "Bh24K     ",
-    "Bh25K     ",
-    "Bh26K     ",
-    "Bh27K     ",
-    "Bh28K     ",
-    "Bh2K      ",
-    "ElseOr    ",
-    "Beam      ",
-    "BeamTof   ",
-    "BeamPi    ",
-    "BeamP     ",
-    "Coin1     ",
-    "Coin2     ",
-    "E03       ",
-    "Bh2KPs    ",
-    "BeamPs    ",
-    "BeamTofPs ",
-    "BeamPiPs  ",
-    "BeamPPs   ",
-    "Coin1Ps   ",
-    "Coin2Ps   ",
-    "E03Ps     ",
-    "Clock     ",
-    "Reserve2  ",
-    "SpillEnd  ",
-    "Matrix    ",
-    "MstAccept ",
-    "MstClear  ",
-    "TofTiming "
-  };
-
-void SAC_Efficiency(int month,int runnum){
+{
 //////////////////////////////////////////////////////////
 //   This file has been automatically generated 
 //     (Fri Dec 21 01:38:49 2018 by ROOT version6.10/08)
@@ -61,18 +6,14 @@ void SAC_Efficiency(int month,int runnum){
 //   found on file: rootfile/run05078_KuramaTracking.root
 //////////////////////////////////////////////////////////
 
-  gStyle->SetOptStat(1111110); 
-  gStyle->SetOptFit(1); 
 
 //Reset ROOT and connect tree file
    gROOT->Reset();
-   gROOT->Reset();
-   TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-   TString pdf = Form("%s/pdf/trigger/SAC_Efficiency_run%05d.pdf", anadir.Data(),runnum);
-//   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/trigf19_tofht.root", anadir.Data(),Month[month]),"READ");
-   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_KuramaTracking.root", anadir.Data(),Month[month],runnum),"READ");
-   TTree *kurama;
-    f->GetObject("kurama",kurama);
+   TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("rootfile/run05078_KuramaTracking.root");
+   if (!f) {
+      f = new TFile("rootfile/run05078_KuramaTracking.root");
+   }
+    f->GetObject("kurama",tree);
 
 //Declaration of leaves types
    Int_t           evnum;
@@ -141,56 +82,60 @@ void SAC_Efficiency(int month,int runnum){
    Double_t        tofsegKurama[4];
    Double_t        vpx[5];
    Double_t        vpy[5];
-//   vector<double>  ResL1;
-//   vector<double>  ResL2;
-//   vector<double>  ResL3;
-//   vector<double>  ResL4;
-//   vector<double>  ResL5;
-//   vector<double>  ResL6;
-//   vector<double>  ResL7;
-//   vector<double>  ResL8;
-//   vector<double>  ResL9;
-//   vector<double>  ResL31;
-//   vector<double>  ResL32;
-//   vector<double>  ResL33;
-//   vector<double>  ResL34;
-//   vector<double>  ResL35;
-//   vector<double>  ResL36;
-//   vector<double>  ResL37;
-//   vector<double>  ResL38;
-//   vector<double>  ResL39;
-//   vector<double>  ResL40;
-//   vector<double>  ResL41;
-//   vector<double>  ResL42;
-//   vector<double>  ResL43;
-//   vector<double>  ResL44;
-//   vector<double>  ResL45;
-//   vector<double>  ResL46;
-//   vector<double>  ResG1;
-//   vector<double>  ResG2;
-//   vector<double>  ResG3;
-//   vector<double>  ResG4;
-//   vector<double>  ResG5;
-//   vector<double>  ResG6;
-//   vector<double>  ResG7;
-//   vector<double>  ResG8;
-//   vector<double>  ResG9;
-//   vector<double>  ResG31;
-//   vector<double>  ResG32;
-//   vector<double>  ResG33;
-//   vector<double>  ResG34;
-//   vector<double>  ResG35;
-//   vector<double>  ResG36;
-//   vector<double>  ResG37;
-//   vector<double>  ResG38;
-//   vector<double>  ResG39;
-//   vector<double>  ResG40;
-//   vector<double>  ResG41;
-//   vector<double>  ResG43;
-//   vector<double>  ResG44;
-//   vector<double>  ResG45;
-//   vector<double>  ResG46;
-//   vector<double>  ResG42;
+   vector<double>  ResL1;
+   vector<double>  ResL2;
+   vector<double>  ResL3;
+   vector<double>  ResL4;
+   vector<double>  ResL5;
+   vector<double>  ResL6;
+   vector<double>  ResL7;
+   vector<double>  ResL8;
+   vector<double>  ResL9;
+   vector<double>  ResL31;
+   vector<double>  ResL32;
+   vector<double>  ResL33;
+   vector<double>  ResL34;
+   vector<double>  ResL35;
+   vector<double>  ResL36;
+   vector<double>  ResL37;
+   vector<double>  ResL38;
+   vector<double>  ResL39;
+   vector<double>  ResL40;
+   vector<double>  ResL41;
+   vector<double>  ResL42;
+   vector<double>  ResL43;
+   vector<double>  ResL44;
+   vector<double>  ResL45;
+   vector<double>  ResL46;
+   vector<double>  ResL41;
+   vector<double>  ResL42;
+   vector<double>  ResG1;
+   vector<double>  ResG2;
+   vector<double>  ResG3;
+   vector<double>  ResG4;
+   vector<double>  ResG5;
+   vector<double>  ResG6;
+   vector<double>  ResG7;
+   vector<double>  ResG8;
+   vector<double>  ResG9;
+   vector<double>  ResG31;
+   vector<double>  ResG32;
+   vector<double>  ResG33;
+   vector<double>  ResG34;
+   vector<double>  ResG35;
+   vector<double>  ResG36;
+   vector<double>  ResG37;
+   vector<double>  ResG38;
+   vector<double>  ResG39;
+   vector<double>  ResG40;
+   vector<double>  ResG41;
+   vector<double>  ResG42;
+   vector<double>  ResG43;
+   vector<double>  ResG44;
+   vector<double>  ResG45;
+   vector<double>  ResG46;
+   vector<double>  ResG41;
+   vector<double>  ResG42;
    Double_t        tTofCalc[3];
    Double_t        utTofSeg[24];
    Double_t        dtTofSeg[24];
@@ -266,56 +211,60 @@ void SAC_Efficiency(int month,int runnum){
    kurama->SetBranchAddress("tofsegKurama",tofsegKurama);
    kurama->SetBranchAddress("vpx",vpx);
    kurama->SetBranchAddress("vpy",vpy);
-//   kurama->SetBranchAddress("ResL1",&ResL1);
-//   kurama->SetBranchAddress("ResL2",&ResL2);
-//   kurama->SetBranchAddress("ResL3",&ResL3);
-//   kurama->SetBranchAddress("ResL4",&ResL4);
-//   kurama->SetBranchAddress("ResL5",&ResL5);
-//   kurama->SetBranchAddress("ResL6",&ResL6);
-//   kurama->SetBranchAddress("ResL7",&ResL7);
-//   kurama->SetBranchAddress("ResL8",&ResL8);
-//   kurama->SetBranchAddress("ResL9",&ResL9);
-//   kurama->SetBranchAddress("ResL31",&ResL31);
-//   kurama->SetBranchAddress("ResL32",&ResL32);
-//   kurama->SetBranchAddress("ResL33",&ResL33);
-//   kurama->SetBranchAddress("ResL34",&ResL34);
-//   kurama->SetBranchAddress("ResL35",&ResL35);
-//   kurama->SetBranchAddress("ResL36",&ResL36);
-//   kurama->SetBranchAddress("ResL37",&ResL37);
-//   kurama->SetBranchAddress("ResL38",&ResL38);
-//   kurama->SetBranchAddress("ResL39",&ResL39);
-//   kurama->SetBranchAddress("ResL40",&ResL40);
-//   kurama->SetBranchAddress("ResL41",&ResL41);
-//   kurama->SetBranchAddress("ResL43",&ResL43);
-//   kurama->SetBranchAddress("ResL44",&ResL44);
-//   kurama->SetBranchAddress("ResL45",&ResL45);
-//   kurama->SetBranchAddress("ResL46",&ResL46);
-//   kurama->SetBranchAddress("ResL42",&ResL42);
-//   kurama->SetBranchAddress("ResG1",&ResG1);
-//   kurama->SetBranchAddress("ResG2",&ResG2);
-//   kurama->SetBranchAddress("ResG3",&ResG3);
-//   kurama->SetBranchAddress("ResG4",&ResG4);
-//   kurama->SetBranchAddress("ResG5",&ResG5);
-//   kurama->SetBranchAddress("ResG6",&ResG6);
-//   kurama->SetBranchAddress("ResG7",&ResG7);
-//   kurama->SetBranchAddress("ResG8",&ResG8);
-//   kurama->SetBranchAddress("ResG9",&ResG9);
-//   kurama->SetBranchAddress("ResG31",&ResG31);
-//   kurama->SetBranchAddress("ResG32",&ResG32);
-//   kurama->SetBranchAddress("ResG33",&ResG33);
-//   kurama->SetBranchAddress("ResG34",&ResG34);
-//   kurama->SetBranchAddress("ResG35",&ResG35);
-//   kurama->SetBranchAddress("ResG36",&ResG36);
-//   kurama->SetBranchAddress("ResG37",&ResG37);
-//   kurama->SetBranchAddress("ResG38",&ResG38);
-//   kurama->SetBranchAddress("ResG39",&ResG39);
-//   kurama->SetBranchAddress("ResG40",&ResG40);
-//   kurama->SetBranchAddress("ResG43",&ResG43);
-//   kurama->SetBranchAddress("ResG44",&ResG44);
-//   kurama->SetBranchAddress("ResG45",&ResG45);
-//   kurama->SetBranchAddress("ResG46",&ResG46);
-//   kurama->SetBranchAddress("ResG41",&ResG41);
-//   kurama->SetBranchAddress("ResG42",&ResG42);
+   kurama->SetBranchAddress("ResL1",&ResL1);
+   kurama->SetBranchAddress("ResL2",&ResL2);
+   kurama->SetBranchAddress("ResL3",&ResL3);
+   kurama->SetBranchAddress("ResL4",&ResL4);
+   kurama->SetBranchAddress("ResL5",&ResL5);
+   kurama->SetBranchAddress("ResL6",&ResL6);
+   kurama->SetBranchAddress("ResL7",&ResL7);
+   kurama->SetBranchAddress("ResL8",&ResL8);
+   kurama->SetBranchAddress("ResL9",&ResL9);
+   kurama->SetBranchAddress("ResL31",&ResL31);
+   kurama->SetBranchAddress("ResL32",&ResL32);
+   kurama->SetBranchAddress("ResL33",&ResL33);
+   kurama->SetBranchAddress("ResL34",&ResL34);
+   kurama->SetBranchAddress("ResL35",&ResL35);
+   kurama->SetBranchAddress("ResL36",&ResL36);
+   kurama->SetBranchAddress("ResL37",&ResL37);
+   kurama->SetBranchAddress("ResL38",&ResL38);
+   kurama->SetBranchAddress("ResL39",&ResL39);
+   kurama->SetBranchAddress("ResL40",&ResL40);
+   kurama->SetBranchAddress("ResL41",&ResL41);
+   kurama->SetBranchAddress("ResL42",&ResL42);
+   kurama->SetBranchAddress("ResL43",&ResL43);
+   kurama->SetBranchAddress("ResL44",&ResL44);
+   kurama->SetBranchAddress("ResL45",&ResL45);
+   kurama->SetBranchAddress("ResL46",&ResL46);
+   kurama->SetBranchAddress("ResL41",&ResL41);
+   kurama->SetBranchAddress("ResL42",&ResL42);
+   kurama->SetBranchAddress("ResG1",&ResG1);
+   kurama->SetBranchAddress("ResG2",&ResG2);
+   kurama->SetBranchAddress("ResG3",&ResG3);
+   kurama->SetBranchAddress("ResG4",&ResG4);
+   kurama->SetBranchAddress("ResG5",&ResG5);
+   kurama->SetBranchAddress("ResG6",&ResG6);
+   kurama->SetBranchAddress("ResG7",&ResG7);
+   kurama->SetBranchAddress("ResG8",&ResG8);
+   kurama->SetBranchAddress("ResG9",&ResG9);
+   kurama->SetBranchAddress("ResG31",&ResG31);
+   kurama->SetBranchAddress("ResG32",&ResG32);
+   kurama->SetBranchAddress("ResG33",&ResG33);
+   kurama->SetBranchAddress("ResG34",&ResG34);
+   kurama->SetBranchAddress("ResG35",&ResG35);
+   kurama->SetBranchAddress("ResG36",&ResG36);
+   kurama->SetBranchAddress("ResG37",&ResG37);
+   kurama->SetBranchAddress("ResG38",&ResG38);
+   kurama->SetBranchAddress("ResG39",&ResG39);
+   kurama->SetBranchAddress("ResG40",&ResG40);
+   kurama->SetBranchAddress("ResG41",&ResG41);
+   kurama->SetBranchAddress("ResG42",&ResG42);
+   kurama->SetBranchAddress("ResG43",&ResG43);
+   kurama->SetBranchAddress("ResG44",&ResG44);
+   kurama->SetBranchAddress("ResG45",&ResG45);
+   kurama->SetBranchAddress("ResG46",&ResG46);
+   kurama->SetBranchAddress("ResG41",&ResG41);
+   kurama->SetBranchAddress("ResG42",&ResG42);
    kurama->SetBranchAddress("tTofCalc",tTofCalc);
    kurama->SetBranchAddress("utTofSeg",utTofSeg);
    kurama->SetBranchAddress("dtTofSeg",dtTofSeg);
@@ -329,43 +278,10 @@ void SAC_Efficiency(int month,int runnum){
 // kurama->SetBranchStatus("*",0);  // disable all branches
 // TTreePlayer->SetBranchStatus("branchname",1);  // activate branchname
 
-//
-//-para def-----------------------------------------------------------------------------------------
-   double HULMHTDCCalib = -0.8333;
-
-//-hist def-----------------------------------------------------------------------------------------
-  TH1D *Hist1= new TH1D("Hist1","Hist1",50,0,25);
-  TH2D *Hist2= new TH2D("Hist2","Hist2",50,0,25,50,0,2);
-
-//-Legend def --------------------------------------------------------------------------------------
-
-//-Event Loop --------------------------------------------------------------------------------------
    Long64_t nentries = kurama->GetEntries();
-//   Long64_t nentries = 10000;
 
    Long64_t nbytes = 0;
-   for (Long64_t s=0; s<nentries;s++) {
-     nbytes += kurama->GetEntry(s);
-     for(int i=0; i<4; i++){
-       if(m2[i]<0)continue;
-       if(m2[i]>0.1)continue;
-       Hist1->Fill(thetaKurama[i]);
-       Hist2->Fill(thetaKurama[i],pKurama[i]);
-     } 
-   } 
-
-//-Canvas def---------------------------------------------------------------------------------------
-
-  TCanvas *c1 = new TCanvas("c1","c1",1200,900);
-   c1->Print(pdf+"["); 
-//-Hist Draw----------------------------------------------------------------------------------------
-   c1->cd();
-   Hist1->Draw();
-   c1->Print(pdf);
-   Hist2->Draw("colz");
-   c1->Print(pdf);
-
-   c1->Print(pdf+"]"); 
-
-
+//   for (Long64_t i=0; i<nentries;i++) {
+//      nbytes += kurama->GetEntry(i);
+//   }
 }

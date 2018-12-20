@@ -134,7 +134,8 @@
 #nohup time ./bin/DstPiKAna ./param_nakadashi/analyzer_jun.conf  ./rootfile/run05126_KuramaforDstk0hodo.root ./rootfile/run05126_K18forDstk0hodo.root ./rootfile/run05126_HodoforDstk0hodo.root ./rootfile/run05126_Ea0cforDstk0hodo.root ./rootfile/run05126_DstPiKAna4.root >../log/log_05126_DstPiKAna4.dat 2>&1 &
 
 #./bin/DstKuramaEasirocHodoscope ./param_nakadashi/analyzer_jun.conf  ./rootfile/run05126_KuramaTracking.root ./rootfile/run05126_Easiroc.root ./rootfile/run05126_Hodoscope.root ./rootfile/run05126_DstKuramaEasirocHodoscope.root
-./bin/DstKuramaEasirocHodoscope ./param_nakadashi/analyzer_jun.conf  ./rootfile/run05115_KuramaTracking.root ./rootfile/run05115_Easiroc.root ./rootfile/run05115_Hodoscope.root ./rootfile/run05115_DstKuramaEasirocHodoscope.root
+#./bin/DstKuramaEasirocHodoscope ./param_nakadashi/analyzer_jun.conf  ./rootfile/run05115_KuramaTracking.root ./rootfile/run05115_Easiroc.root ./rootfile/run05115_Hodoscope.root ./rootfile/run05115_DstKuramaEasirocHodoscope.root
 
+nohup time ./bin/DstKuramaHodoscope ./param_nakadashi/analyzer_jun.conf  ./rootfile/run05078_KuramaTracking.root ./rootfile/run05078_Hodoscope.root ./rootfile/run05078_DstKuramaHodoscope.root >../log/log_05078_DstKuramaHodoscope.dat 2>&1 &
 
 #END
