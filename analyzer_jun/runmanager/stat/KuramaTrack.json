@@ -3,13 +3,13 @@
         "unit": 100000,
         "conf": "./param_nakadashi/analyzer_jun.conf",
         "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05395.dat.gz",
-        "time": 4457.163128852844,
+        "time": 4540.6887550354,
         "nseg": 8,
-        "prog": 4,
+        "prog": 8,
         "bin": "./bin/KuramaTracking",
         "nproc": 1,
         "queue": "s",
-        "stat": 0,
+        "stat": true,
         "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05395_KuramaTracking.root",
         "nev": 723777
     }

@@ -69,6 +69,7 @@ void SAC_Efficiency(int month,int runnum){
    gROOT->Reset();
    TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
    TString pdf = Form("%s/pdf/trigger/SAC_Efficiency_run%05d.pdf", anadir.Data(),runnum);
+   TString pdfDhire = Form("%s/pdf/trigger", anadir.Data());
 //   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/trigf19_tofht.root", anadir.Data(),Month[month]),"READ");
    TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_KuramaTracking.root", anadir.Data(),Month[month],runnum),"READ");
    TTree *kurama;
@@ -463,23 +464,27 @@ void SAC_Efficiency(int month,int runnum){
    int Hist1Max = 0;
    int Hist2Max = 0;
 
+   int chisqr = 0;
+   chisqr = 100;
+
 //-hist def-----------------------------------------------------------------------------------------
-   Hist1Max = 5;
+   Hist1Max = 6;
    Hist2Max = 3;
    TH1D *Hist1[Hist1Max];
    TH2D *Hist2[Hist2Max];
 
 //    Hist1[0]= new TH1D(Form("Hist1 %s",TriggerFlag[i]),Form("Hist1 %s",TriggerFlag[i]),1000,0,2100);
     Hist1[0]= new TH1D("ThetaKurama","ThetaKurama",50,0,40);
-    Hist1[1]= new TH1D("pKurama","pKurama",200,0,2);
-    Hist1[2]= new TH1D("pKurama Cut1","pKurama Cut1",200,0,2);
-    Hist1[3]= new TH1D("m2","m2",200,-0.4,1.4);
-    Hist1[4]= new TH1D("m2 Cut1","m2 Cut1",200,-0.4,1.4);
-    Hist1[5]= new TH1D("chisqrKurama","chisqrKurama",200,-0.4,1.4);
+    Hist1[1]= new TH1D("pKurama","pKurama",100,0,2);
+    Hist1[2]= new TH1D("pKurama Cut1","pKurama Cut1",100,0,2);
+    Hist1[3]= new TH1D("m2","m2",100,-0.4,1.4);
+    Hist1[4]= new TH1D("m2 Cut1","m2 Cut1",100,-0.4,1.4);
+    Hist1[5]= new TH1D("chisqrKurama","chisqrKurama",100,-0.4,1.4);
+    Hist1[6]= new TH1D("qKurama","qKurama",6,-3,3);
 
-    Hist2[0]= new TH2D("pKurama % ThetaKurama","pKurama % ThetaKurama",50,0,40,200,0,2);
-    Hist2[1]= new TH2D("m2 % pKurama","m2 % pKurama",200,-0.4,1.4,200,0,2);
-    Hist2[2]= new TH2D("m2 % pKurama Cut1","m2 % pKurama Cut1",200,-0.4,1.4,200,0,2);
+    Hist2[0]= new TH2D("pKurama % ThetaKurama","pKurama % ThetaKurama",50,0,40,100,0,2);
+    Hist2[1]= new TH2D("m2 % pKurama","m2 % pKurama",100,-0.4,1.4,100,0,2);
+    Hist2[2]= new TH2D("m2 % pKurama Cut1","m2 % pKurama Cut1",100,-0.4,1.4,100,0,2);
 
 //-Legend def --------------------------------------------------------------------------------------
 
@@ -495,7 +500,8 @@ void SAC_Efficiency(int month,int runnum){
        Hist1[3]->Fill(m2[i]);
        Hist2[1]->Fill(m2[i],pKurama[i]);
        Hist1[5]->Fill(chisqrKurama[i]);
-       if(chisqrKurama[i]<50){
+       Hist1[6]->Fill(qKurama[i]);
+       if(chisqrKurama[i]<chisqr&&qKurama[i]>0){
          Hist1[2]->Fill(pKurama[i]);
          Hist1[4]->Fill(m2[i]);
          Hist2[2]->Fill(m2[i],pKurama[i]);
@@ -517,10 +523,12 @@ void SAC_Efficiency(int month,int runnum){
    for(int i=0; i<Hist1Max; i++){
    Hist1[i]->Draw();
    c1->Print(pdf);
+   c1->Print(Form("%s/SAC_Efficiency_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
    }
    for(int i=0; i<Hist2Max; i++){
    Hist2[i]->Draw("colz");
    c1->Print(pdf);
+   c1->Print(Form("%s/SAC_Efficiency_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
    }
 
    c1->Print(pdf+"]"); 
