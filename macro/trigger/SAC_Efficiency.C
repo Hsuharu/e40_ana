@@ -468,8 +468,8 @@ void SAC_Efficiency(int month,int runnum){
    chisqr = 100;
 
 //-hist def-----------------------------------------------------------------------------------------
-   Hist1Max = 17;
-   Hist2Max = 5;
+   Hist1Max = 21;
+   Hist2Max = 7;
    TH1D *Hist1[Hist1Max];
    TH2D *Hist2[Hist2Max];
 
@@ -491,10 +491,14 @@ void SAC_Efficiency(int month,int runnum){
 //      Hist1[13+i]= new TH1D(Form("tSac Room%d",i),Form("tSac Room%d",i),1000,-2000,2000);
 //      Hist1[18+i]= new TH1D(Form("tSac Cut2 Room%d",i),Form("tSac Cut2 Room%d",i),1000,-2000,2000);
 //    } // tSac by Room
-    Hist1[13]= new TH1D("tSac Or  ","tSac Or  ",2000,-1500,500);
-    Hist1[14]= new TH1D("tSac Or Cut2","tSac Or Cut2",2000,-1500,500);
+    Hist1[13]= new TH1D("tSac Or  ","tSac Or  ",1500,-1500,500);
+    Hist1[14]= new TH1D("tSac Or Cut2","tSac Or Cut2",1500,-1500,500);
     Hist1[15]= new TH1D(Form("Trigger Flag %s  ",TriggerFlag[19]),Form("Trigger Flag %s  ",TriggerFlag[19]),2000,0,2000);
     Hist1[16]= new TH1D(Form("Trigger Flag %s Cut2",TriggerFlag[19]),Form("Trigger Flag %s Cut2",TriggerFlag[19]),2000,0,2000);
+    Hist1[17]= new TH1D("xsacKurama Cut3","xsacKurama Cut3",500,-400,400);
+    Hist1[18]= new TH1D("ysacKurama Cut3","ysacKurama Cut3",500,-400,400);
+    Hist1[19]= new TH1D("pKurama Cut3","pKurama Cut3",1000,0,2);
+    Hist1[20]= new TH1D("m2 Cut3","m2 Cut3",1000,-0.4,1.4);
 
 
     Hist2[0]= new TH2D("pKurama % ThetaKurama","pKurama % ThetaKurama",1000,0,40,1000,0,2);
@@ -502,6 +506,8 @@ void SAC_Efficiency(int month,int runnum){
     Hist2[2]= new TH2D("pKurama % m2 Cut1","pKurama % m2 Cut1",1000,-0.4,1.4,1000,0,2);
     Hist2[3]= new TH2D("ysacKurama % xsacKurama     ","ysacKurama % xsacKurama     ",1000,-400,400,1000,-400,400);
     Hist2[4]= new TH2D("ysacKurama % xsacKurama Cut1","ysacKurama % xsacKurama Cut1",1000,-400,400,1000,-400,400);
+    Hist2[5]= new TH2D("pKurama % m2 Cut3","pKurama % m2 Cut3",1000,-0.4,1.4,1000,0,2);
+    Hist2[6]= new TH2D("ysacKurama % xsacKurama Cut3","ysacKurama % xsacKurama Cut3",1000,-400,400,1000,-400,400);
 
 //-Legend def --------------------------------------------------------------------------------------
 
@@ -509,6 +515,7 @@ void SAC_Efficiency(int month,int runnum){
    Long64_t nentries = kurama->GetEntries();
 //   Long64_t nentries = 10000;
 
+//-Event Loop First --------
    Long64_t nbytes = 0;
    for (Long64_t s=0; s<nentries;s++) {
      nbytes += kurama->GetEntry(s);
@@ -544,17 +551,13 @@ void SAC_Efficiency(int month,int runnum){
     for(int i=0; i<nhSac; i++){
       int SacSegNum= SacSeg[nhSac];
        Hist1[13]->Fill(tSac[nhSac]);
-       if(chisqrKurama[i]<chisqr&&qKurama[i]>0&&ntKurama==1&&nhSac==1){
+       if(chisqrKurama[i]<chisqr&&qKurama[i]>0&&ntKurama==1){
        Hist1[14]->Fill(tSac[nhSac]);
-       }
+       }//Cut2
     } // tSac by Room
    } 
 
-//-Canvas def---------------------------------------------------------------------------------------
-
-  TCanvas *c1 = new TCanvas("c1","c1",1200,900);
-   c1->Print(pdf+"["); 
-//-Hist Draw----------------------------------------------------------------------------------------
+// Peak & Gate Make -----
    TF1 *FitFunc1 = new TF1("FitFunc1","gaus");
    FitFunc1->SetParameters(1000,-400,5);
    double MaximumBintSac=0.;
@@ -583,12 +586,80 @@ void SAC_Efficiency(int month,int runnum){
    trigflag19GateMin=FitFunc1->GetParameter(1) - 15; //FitFunc1->GetParameter(2);
    trigflag19GateMax=FitFunc1->GetParameter(1) + 15; //FitFunc1->GetParameter(2);
 
+   MaximumBin=Hist1[16]->GetXaxis()->GetBinCenter(Hist1[16]->GetMaximumBin());
+   Hist1[16]->Fit("FitFunc1","","",MaximumBin-4,MaximumBin+4);
+   Hist1[16]->SetAxisRange(MaximumBin-50,MaximumBin+80,"X");
 
+
+//-Event Loop Second --------
+   for (Long64_t s=0; s<nentries;s++) {
+     nbytes += kurama->GetEntry(s);
+//     for(int i=0; i<ntKurama; i++){
+//       Hist1[1]->Fill(pKurama[i]);
+//       Hist1[3]->Fill(m2[i]);
+//       Hist2[1]->Fill(m2[i],pKurama[i]);
+//       Hist1[5]->Fill(chisqrKurama[i]);
+//       Hist1[6]->Fill(qKurama[i]);
+//       Hist1[7]->Fill(xsacKurama[i]);
+//       Hist1[9]->Fill(ysacKurama[i]);
+//       Hist2[3]->Fill(xsacKurama[i],ysacKurama[i]);
+//
+//       if(chisqrKurama[i]<chisqr&&qKurama[i]>0&&ntKurama==1){
+//         Hist1[2]->Fill(pKurama[i]);
+//         Hist1[4]->Fill(m2[i]);
+//         Hist2[2]->Fill(m2[i],pKurama[i]);
+//         Hist2[4]->Fill(xsacKurama[i],ysacKurama[i]);
+//         Hist1[8]->Fill(xsacKurama[i]);
+//         Hist1[10]->Fill(ysacKurama[i]);
+//         Hist1[16]->Fill(trigflag[19]);
+//       } // Cut1
+//       if(chisqrKurama[i]<chisqr&&qKurama[i]>0){
+//         Hist1[11]->Fill(xsacKurama[i]);
+//         Hist1[12]->Fill(ysacKurama[i]);
+//       } // Cut2
+//       if(m2[i]<0)continue;
+//       if(m2[i]>0.1)continue;
+//       Hist1[0]->Fill(thetaKurama[i]);
+//       Hist2[0]->Fill(thetaKurama[i],pKurama[i]);
+//     } 
+//    for(int i=0; i<nhSac; i++){
+//      int SacSegNum= SacSeg[nhSac];
+//       Hist1[13]->Fill(tSac[nhSac]);
+     if(chisqrKurama[ntKurama]<chisqr &&
+         qKurama[ntKurama]>0&&ntKurama==1 &&
+         nhSac==1&&
+         tSac[nhSac]>tSacGateMin&&
+         tSac[nhSac]>tSacGateMax&&
+//         xsacKurama[ntKurama]>xsacKuramaGateMin&&
+//         xsacKurama[ntKurama]>xsacKuramaGateMin&&
+//         ysacKurama[ntKurama]>ysacKuramaGateMax&&
+//         ysacKurama[ntKurama]>ysacKuramaGateMax&&
+         trigflag[19]>trigflag19GateMin&&
+         trigflag[19]>trigflag19GateMax
+       ){
+       Hist1[14]->Fill(tSac[nhSac]);
+       Hist1[17]->Fill(xsacKurama[ntKurama]);
+       Hist1[18]->Fill(ysacKurama[ntKurama]);
+       Hist1[19]->Fill(pKurama[ntKurama]);
+       Hist1[20]->Fill(m2[ntKurama]);
+       Hist2[5]->Fill(m2[ntKurama],pKurama[ntKurama]);
+       Hist2[6]->Fill(xsacKurama[ntKurama],ysacKurama[ntKurama]);
+     } // Cut3
+//    } // tSac by Room
+   } 
+
+//-Canvas def---------------------------------------------------------------------------------------
+
+  TCanvas *c1 = new TCanvas("c1","c1",1200,900);
+   c1->Print(pdf+"["); 
+//-Hist Draw----------------------------------------------------------------------------------------
    c1->cd();
    for(int i=0; i<Hist1Max; i++){
+   if(i==15 || i==16) gPad->SetLogy(1);
    Hist1[i]->Draw();
    c1->Print(pdf);
    c1->Print(Form("%s/SAC_Efficiency_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
+   if(i==15 || i==16) gPad->SetLogy(0);
    }
    for(int i=0; i<Hist2Max; i++){
    Hist2[i]->Draw("colz");
