@@ -468,7 +468,7 @@ void SAC_Efficiency(int month,int runnum){
    chisqr = 100;
 
 //-hist def-----------------------------------------------------------------------------------------
-   Hist1Max = 11;
+   Hist1Max = 15;
    Hist2Max = 5;
    TH1D *Hist1[Hist1Max];
    TH2D *Hist2[Hist2Max];
@@ -481,10 +481,19 @@ void SAC_Efficiency(int month,int runnum){
     Hist1[4 ]= new TH1D("m2 Cut1","m2 Cut1",1000,-0.4,1.4);
     Hist1[5 ]= new TH1D("chisqrKurama","chisqrKurama",100,0,200);
     Hist1[6 ]= new TH1D("qKurama","qKurama",6,-3,3);
-    Hist1[7 ]= new TH1D("xsacKurama     ","xsacKurama     ",1000,-400,400);
-    Hist1[8 ]= new TH1D("xsacKurama Cut1","xsacKurama Cut1",1000,-400,400);
-    Hist1[9 ]= new TH1D("ysacKurama     ","ysacKurama     ",1000,-400,400);
-    Hist1[10]= new TH1D("ysacKurama Cut1","ysacKurama Cut1",1000,-400,400);
+    Hist1[7 ]= new TH1D("xsacKurama     ","xsacKurama     ",500,-400,400);
+    Hist1[8 ]= new TH1D("xsacKurama Cut1","xsacKurama Cut1",500,-400,400);
+    Hist1[9 ]= new TH1D("ysacKurama     ","ysacKurama     ",500,-400,400);
+    Hist1[10]= new TH1D("ysacKurama Cut1","ysacKurama Cut1",500,-400,400);
+    Hist1[11]= new TH1D("xsacKurama Cut2","xsacKurama Cut2",500,-400,400);
+    Hist1[12]= new TH1D("ysacKurama Cut2","ysacKurama Cut2",500,-400,400);
+//    for(int i=0; i<4; i++){
+//      Hist1[13+i]= new TH1D(Form("tSac Room%d",i),Form("tSac Room%d",i),1000,-2000,2000);
+//      Hist1[18+i]= new TH1D(Form("tSac Cut2 Room%d",i),Form("tSac Cut2 Room%d",i),1000,-2000,2000);
+//    } // tSac by Room
+    Hist1[13]= new TH1D("tSac Or  ","tSac Or  ",1000,-2000,2000);
+    Hist1[14]= new TH1D("tSac Or Cut2","tSac Or Cut2",1000,-2000,2000);
+
 
     Hist2[0]= new TH2D("pKurama % ThetaKurama","pKurama % ThetaKurama",1000,0,40,1000,0,2);
     Hist2[1]= new TH2D("pKurama % m2",     "pKurama % m2 "    ,1000,-0.4,1.4,1000,0,2);
@@ -501,7 +510,7 @@ void SAC_Efficiency(int month,int runnum){
    Long64_t nbytes = 0;
    for (Long64_t s=0; s<nentries;s++) {
      nbytes += kurama->GetEntry(s);
-     for(int i=0; i<4; i++){
+     for(int i=0; i<ntKurama; i++){
        Hist1[1]->Fill(pKurama[i]);
        Hist1[3]->Fill(m2[i]);
        Hist2[1]->Fill(m2[i],pKurama[i]);
@@ -518,11 +527,22 @@ void SAC_Efficiency(int month,int runnum){
          Hist1[8]->Fill(xsacKurama[i]);
          Hist1[10]->Fill(ysacKurama[i]);
        } // Cut1
+       if(chisqrKurama[i]<chisqr&&qKurama[i]>0){
+         Hist1[11]->Fill(xsacKurama[i]);
+         Hist1[12]->Fill(ysacKurama[i]);
+       } // Cut2
        if(m2[i]<0)continue;
        if(m2[i]>0.1)continue;
        Hist1[0]->Fill(thetaKurama[i]);
        Hist2[0]->Fill(thetaKurama[i],pKurama[i]);
      } 
+    for(int i=0; i<nhSac; i++){
+      int SacSegNum= SacSeg[nhSac];
+       Hist1[13]->Fill(tSac[nhSac]);
+       if(chisqrKurama[i]<chisqr&&qKurama[i]>0&&ntKurama==1&&nhSac==1){
+       Hist1[14]->Fill(tSac[nhSac]);
+       }
+    } // tSac by Room
    } 
 
 //-Canvas def---------------------------------------------------------------------------------------
