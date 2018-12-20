@@ -491,8 +491,8 @@ void SAC_Efficiency(int month,int runnum){
 //      Hist1[13+i]= new TH1D(Form("tSac Room%d",i),Form("tSac Room%d",i),1000,-2000,2000);
 //      Hist1[18+i]= new TH1D(Form("tSac Cut2 Room%d",i),Form("tSac Cut2 Room%d",i),1000,-2000,2000);
 //    } // tSac by Room
-    Hist1[13]= new TH1D("tSac Or  ","tSac Or  ",1500,-1500,500);
-    Hist1[14]= new TH1D("tSac Or Cut2","tSac Or Cut2",1500,-1500,500);
+    Hist1[13]= new TH1D("tSac Or  ","tSac Or  ",1000,-1500,500);
+    Hist1[14]= new TH1D("tSac Or Cut2","tSac Or Cut2",1000,-1500,500);
     Hist1[15]= new TH1D(Form("Trigger Flag %s  ",TriggerFlag[19]),Form("Trigger Flag %s  ",TriggerFlag[19]),2000,0,2000);
     Hist1[16]= new TH1D(Form("Trigger Flag %s Cut2",TriggerFlag[19]),Form("Trigger Flag %s Cut2",TriggerFlag[19]),2000,0,2000);
     Hist1[17]= new TH1D("xsacKurama Cut3","xsacKurama Cut3",500,-400,400);
@@ -566,16 +566,16 @@ void SAC_Efficiency(int month,int runnum){
    MaximumBintSac=Hist1[13]->GetXaxis()->GetBinCenter(Hist1[13]->GetMaximumBin());
    Hist1[13]->Fit("FitFunc1","","",MaximumBintSac-4,MaximumBintSac+4);
    Hist1[13]->SetAxisRange(MaximumBintSac-50,MaximumBintSac+80,"X");
-   tSacGateMin=FitFunc1->GetParameter(1) - 20 ;//FitFunc1->GetParameter(2);
-   tSacGateMax=FitFunc1->GetParameter(1) + 20 ;//FitFunc1->GetParameter(2);
+   tSacGateMin=FitFunc1->GetParameter(1) - 15 ;//FitFunc1->GetParameter(2);
+   tSacGateMax=FitFunc1->GetParameter(1) + 15 ;//FitFunc1->GetParameter(2);
 
    double tSacGateMin_Cut2   =0.;
    double tSacGateMax_Cut2   =0.;
    MaximumBintSac=Hist1[14]->GetXaxis()->GetBinCenter(Hist1[14]->GetMaximumBin());
    Hist1[14]->Fit("FitFunc1","","",MaximumBintSac-4,MaximumBintSac+4);
    Hist1[14]->SetAxisRange(MaximumBintSac-50,MaximumBintSac+80,"X");
-   tSacGateMin_Cut2=FitFunc1->GetParameter(1) - 20; //FitFunc1->GetParameter(2);
-   tSacGateMax_Cut2=FitFunc1->GetParameter(1) + 20; //FitFunc1->GetParameter(2);
+   tSacGateMin_Cut2=FitFunc1->GetParameter(1) - 15; //FitFunc1->GetParameter(2);
+   tSacGateMax_Cut2=FitFunc1->GetParameter(1) + 15; //FitFunc1->GetParameter(2);
 
    double MaximumBin=0.;
    double trigflag19GateMin   =0.;
