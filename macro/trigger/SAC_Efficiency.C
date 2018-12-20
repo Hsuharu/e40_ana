@@ -470,9 +470,9 @@ void SAC_Efficiency(int month,int runnum){
    TH2D *Hist2[Hist2Max];
 
 //    Hist1[0]= new TH1D(Form("Hist1 %s",TriggerFlag[i]),Form("Hist1 %s",TriggerFlag[i]),1000,0,2100);
-    Hist1[0]= new TH1D("ThetaKurama","ThetaKurama",100,0,40);
+    Hist1[0]= new TH1D("ThetaKurama","ThetaKurama",50,0,40);
 
-    Hist2[0]= new TH2D("pKurama % ThetaKurama","pKurama % ThetaKurama",100,0,40,100,0,2);
+    Hist2[0]= new TH2D("pKurama % ThetaKurama","pKurama % ThetaKurama",50,0,40,50,0,2);
 
 //-Legend def --------------------------------------------------------------------------------------
 
