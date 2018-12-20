@@ -497,10 +497,10 @@ void SAC_Efficiency(int month,int runnum){
 //    } // tSac by Room
     Hist1[13]= new TH1D("tSac Or  ","tSac Or  ",1000,-1500,500);
     Hist1[14]= new TH1D("tSac Or Cut2","tSac Or Cut2",1000,-1500,500);
-    Hist1[15]= new TH1D(Form("Trigger Flag %s  ",TriggerFlag[17]),Form("Trigger Flag %s  ",TriggerFlag[17]),2000,0,2000);
-//    Hist1[15]= new TH1D(Form("Trigger Flag %s  ",TriggerFlag[19]),Form("Trigger Flag %s  ",TriggerFlag[19]),2000,0,2000);
-//    Hist1[16]= new TH1D(Form("Trigger Flag %s Cut2",TriggerFlag[19]),Form("Trigger Flag %s Cut2",TriggerFlag[19]),2000,0,2000);
-    Hist1[16]= new TH1D(Form("Trigger Flag %s Cut2",TriggerFlag[17]),Form("Trigger Flag %s Cut2",TriggerFlag[17]),2000,0,2000);
+    Hist1[15]= new TH1D(Form("Trigger Flag %s  ",TriggerFlag[19]),Form("Trigger Flag %s  ",TriggerFlag[19]),2000,0,2000);
+    Hist1[16]= new TH1D(Form("Trigger Flag %s Cut2",TriggerFlag[19]),Form("Trigger Flag %s Cut2",TriggerFlag[19]),2000,0,2000);
+//    Hist1[15]= new TH1D(Form("Trigger Flag %s  ",TriggerFlag[17]),Form("Trigger Flag %s  ",TriggerFlag[17]),2000,0,2000);
+//    Hist1[16]= new TH1D(Form("Trigger Flag %s Cut2",TriggerFlag[17]),Form("Trigger Flag %s Cut2",TriggerFlag[17]),2000,0,2000);
     Hist1[17]= new TH1D("xsacKurama Cut3","xsacKurama Cut3",500,-400,400);
     Hist1[18]= new TH1D("ysacKurama Cut3","ysacKurama Cut3",500,-400,400);
     Hist1[19]= new TH1D("pKurama Cut3","pKurama Cut3",1000,0,2);
@@ -526,8 +526,8 @@ void SAC_Efficiency(int month,int runnum){
    Long64_t nbytes = 0;
    for (Long64_t s=0; s<nentries;s++) {
      nbytes += kurama->GetEntry(s);
-//     Hist1[15]->Fill(trigflag[19]);
-     Hist1[15]->Fill(trigflag[17]);
+     Hist1[15]->Fill(trigflag[19]);
+//     Hist1[15]->Fill(trigflag[17]);
      for(int i=0; i<ntKurama; i++){
        Hist1[1]->Fill(pKurama[i]);
        Hist1[3]->Fill(m2[i]);
@@ -545,8 +545,8 @@ void SAC_Efficiency(int month,int runnum){
          Hist2[4]->Fill(xsacKurama[i],ysacKurama[i]);
          Hist1[8]->Fill(xsacKurama[i]);
          Hist1[10]->Fill(ysacKurama[i]);
-//         Hist1[16]->Fill(trigflag[19]);
-         Hist1[16]->Fill(trigflag[17]);
+         Hist1[16]->Fill(trigflag[19]);
+//         Hist1[16]->Fill(trigflag[17]);
        } // Cut1
        if(chisqrKurama[i]<chisqr&&qKurama[i]>0){
          Hist1[11]->Fill(xsacKurama[i]);
@@ -577,6 +577,8 @@ void SAC_Efficiency(int month,int runnum){
    Hist1[13]->SetAxisRange(MaximumBintSac-50,MaximumBintSac+80,"X");
    tSacGateMin=FitFunc1->GetParameter(1) - 15 ;//FitFunc1->GetParameter(2);
    tSacGateMax=FitFunc1->GetParameter(1) + 15 ;//FitFunc1->GetParameter(2);
+   std::cout << "SAC Time Gate Min \t" << tSacGateMin << std::endl;
+   std::cout << "SAC Time Gate Max \t" << tSacGateMax << std::endl;
 
    double tSacGateMin_Cut2   =0.;
    double tSacGateMax_Cut2   =0.;
@@ -587,20 +589,20 @@ void SAC_Efficiency(int month,int runnum){
    tSacGateMax_Cut2=FitFunc1->GetParameter(1) + 15; //FitFunc1->GetParameter(2);
 
    double MaximumBin=0.;
-//   double trigflag19GateMin   =0.;
-//   double trigflag19GateMax   =0.;
-//   MaximumBin=Hist1[15]->GetXaxis()->GetBinCenter(Hist1[15]->GetMaximumBin());
-//   Hist1[15]->Fit("FitFunc1","","",MaximumBin-4,MaximumBin+4);
-//   Hist1[15]->SetAxisRange(MaximumBin-50,MaximumBin+80,"X");
-//   trigflag19GateMin=FitFunc1->GetParameter(1) - 15; //FitFunc1->GetParameter(2);
-//   trigflag19GateMax=FitFunc1->GetParameter(1) + 15; //FitFunc1->GetParameter(2);
-   double trigflag17GateMin   =0.;
-   double trigflag17GateMax   =0.;
+   double trigflag19GateMin   =0.;
+   double trigflag19GateMax   =0.;
    MaximumBin=Hist1[15]->GetXaxis()->GetBinCenter(Hist1[15]->GetMaximumBin());
    Hist1[15]->Fit("FitFunc1","","",MaximumBin-4,MaximumBin+4);
    Hist1[15]->SetAxisRange(MaximumBin-50,MaximumBin+80,"X");
-   trigflag17GateMin=FitFunc1->GetParameter(1) - 15; //FitFunc1->GetParameter(2);
-   trigflag17GateMax=FitFunc1->GetParameter(1) + 15; //FitFunc1->GetParameter(2);
+   trigflag19GateMin=FitFunc1->GetParameter(1) - 15; //FitFunc1->GetParameter(2);
+   trigflag19GateMax=FitFunc1->GetParameter(1) + 15; //FitFunc1->GetParameter(2);
+//   double trigflag17GateMin   =0.;
+//   double trigflag17GateMax   =0.;
+//   MaximumBin=Hist1[15]->GetXaxis()->GetBinCenter(Hist1[15]->GetMaximumBin());
+//   Hist1[15]->Fit("FitFunc1","","",MaximumBin-4,MaximumBin+4);
+//   Hist1[15]->SetAxisRange(MaximumBin-50,MaximumBin+80,"X");
+//   trigflag17GateMin=FitFunc1->GetParameter(1) - 15; //FitFunc1->GetParameter(2);
+//   trigflag17GateMax=FitFunc1->GetParameter(1) + 15; //FitFunc1->GetParameter(2);
 
    MaximumBin=Hist1[16]->GetXaxis()->GetBinCenter(Hist1[16]->GetMaximumBin());
    Hist1[16]->Fit("FitFunc1","","",MaximumBin-4,MaximumBin+4);
