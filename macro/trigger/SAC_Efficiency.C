@@ -464,15 +464,22 @@ void SAC_Efficiency(int month,int runnum){
    int Hist2Max = 0;
 
 //-hist def-----------------------------------------------------------------------------------------
-   Hist1Max = 1;
-   Hist2Max = 1;
+   Hist1Max = 5;
+   Hist2Max = 3;
    TH1D *Hist1[Hist1Max];
    TH2D *Hist2[Hist2Max];
 
 //    Hist1[0]= new TH1D(Form("Hist1 %s",TriggerFlag[i]),Form("Hist1 %s",TriggerFlag[i]),1000,0,2100);
     Hist1[0]= new TH1D("ThetaKurama","ThetaKurama",50,0,40);
+    Hist1[1]= new TH1D("pKurama","pKurama",50,0,2);
+    Hist1[2]= new TH1D("pKurama Cut1","pKurama Cut1",50,0,2);
+    Hist1[3]= new TH1D("m2","m2",50,-0.4,1.4);
+    Hist1[4]= new TH1D("m2 Cut1","m2 Cut1",50,-0.4,1.4);
+    Hist1[5]= new TH1D("chisqrKurama","chisqrKurama",50,-0.4,1.4);
 
     Hist2[0]= new TH2D("pKurama % ThetaKurama","pKurama % ThetaKurama",50,0,40,50,0,2);
+    Hist2[1]= new TH2D("m2 % pKurama","m2 % pKurama",50,0,2,-0.4,1.4);
+    Hist2[2]= new TH2D("m2 % pKurama Cut1","m2 % pKurama Cut1",50,0,2,-0.4,1.4);
 
 //-Legend def --------------------------------------------------------------------------------------
 
@@ -484,6 +491,15 @@ void SAC_Efficiency(int month,int runnum){
    for (Long64_t s=0; s<nentries;s++) {
      nbytes += kurama->GetEntry(s);
      for(int i=0; i<4; i++){
+       Hist1[1]->Fill(pKurama[i]);
+       Hist1[3]->Fill(m2[i]);
+       Hist2[1]->Fill(m2[i],pKurama[i]);
+       Hist1[5]->Fill(chisqrKurama[i]);
+       if(chisqrKurama[i]<50){
+         Hist1[2]->Fill(pKurama[i]);
+         Hist1[4]->Fill(m2[i]);
+         Hist2[2]->Fill(m2[i],pKurama[i]);
+       }
        if(m2[i]<0)continue;
        if(m2[i]>0.1)continue;
        Hist1[0]->Fill(thetaKurama[i]);
