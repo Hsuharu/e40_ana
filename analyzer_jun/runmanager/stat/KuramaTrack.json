@@ -3,7 +3,7 @@
         "unit": 100000,
         "conf": "./param_nakadashi/analyzer_jun.conf",
         "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05395.dat.gz",
-        "time": 4191.281790018082,
+        "time": 4326.644130945206,
         "nseg": 8,
         "prog": 1,
         "bin": "./bin/KuramaTracking",

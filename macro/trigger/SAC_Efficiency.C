@@ -478,8 +478,8 @@ void SAC_Efficiency(int month,int runnum){
     Hist1[5]= new TH1D("chisqrKurama","chisqrKurama",50,-0.4,1.4);
 
     Hist2[0]= new TH2D("pKurama % ThetaKurama","pKurama % ThetaKurama",50,0,40,50,0,2);
-    Hist2[1]= new TH2D("m2 % pKurama","m2 % pKurama",50,0,2,-0.4,1.4);
-    Hist2[2]= new TH2D("m2 % pKurama Cut1","m2 % pKurama Cut1",50,0,2,-0.4,1.4);
+    Hist2[1]= new TH2D("m2 % pKurama","m2 % pKurama",50,-0.4,1.4,50,0,2);
+    Hist2[2]= new TH2D("m2 % pKurama Cut1","m2 % pKurama Cut1",50,-0.4,1.4,50,0,2);
 
 //-Legend def --------------------------------------------------------------------------------------
 
