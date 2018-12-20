@@ -173,8 +173,8 @@ void SAC_Efficiency(int month){
    double HULMHTDCCalib = -0.8333;
 
 //-hist def-----------------------------------------------------------------------------------------
-  TH1D *Hist1= new TH1D("Hist1","Hist1",25,0,25);
-  TH2D *Hist2= new TH2D("Hist2","Hist2",250,0,25,50,0,2);
+  TH1D *Hist1= new TH1D("Hist1","Hist1",50,0,25);
+  TH2D *Hist2= new TH2D("Hist2","Hist2",50,0,25,50,0,2);
 
 //-Legend def --------------------------------------------------------------------------------------
 
@@ -185,6 +185,8 @@ void SAC_Efficiency(int month){
    for (Long64_t s=0; s<nentries;s++) {
      nbytes += khodo->GetEntry(s);
      for(int i=0; i<4; i++){
+       if(m2[i]<0)continue;
+       if(m2[i]>0.1)continue;
        Hist1->Fill(thetaKurama[i]);
        Hist2->Fill(thetaKurama[i],pKurama[i]);
      } 
