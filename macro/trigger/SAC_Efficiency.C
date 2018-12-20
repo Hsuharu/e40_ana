@@ -468,19 +468,23 @@ void SAC_Efficiency(int month,int runnum){
    chisqr = 100;
 
 //-hist def-----------------------------------------------------------------------------------------
-   Hist1Max = 7;
+   Hist1Max = 11;
    Hist2Max = 5;
    TH1D *Hist1[Hist1Max];
    TH2D *Hist2[Hist2Max];
 
 //    Hist1[0]= new TH1D(Form("Hist1 %s",TriggerFlag[i]),Form("Hist1 %s",TriggerFlag[i]),1000,0,2100);
-    Hist1[0]= new TH1D("ThetaKurama","ThetaKurama",1000,0,40);
-    Hist1[1]= new TH1D("pKurama","pKurama",1000,0,2);
-    Hist1[2]= new TH1D("pKurama Cut1","pKurama Cut1",1000,0,2);
-    Hist1[3]= new TH1D("m2","m2",1000,-0.4,1.4);
-    Hist1[4]= new TH1D("m2 Cut1","m2 Cut1",1000,-0.4,1.4);
-    Hist1[5]= new TH1D("chisqrKurama","chisqrKurama",100,0,200);
-    Hist1[6]= new TH1D("qKurama","qKurama",6,-3,3);
+    Hist1[0 ]= new TH1D("ThetaKurama","ThetaKurama",1000,0,40);
+    Hist1[1 ]= new TH1D("pKurama","pKurama",1000,0,2);
+    Hist1[2 ]= new TH1D("pKurama Cut1","pKurama Cut1",1000,0,2);
+    Hist1[3 ]= new TH1D("m2","m2",1000,-0.4,1.4);
+    Hist1[4 ]= new TH1D("m2 Cut1","m2 Cut1",1000,-0.4,1.4);
+    Hist1[5 ]= new TH1D("chisqrKurama","chisqrKurama",100,0,200);
+    Hist1[6 ]= new TH1D("qKurama","qKurama",6,-3,3);
+    Hist1[7 ]= new TH1D("xsacKurama     ","xsacKurama     ",1000,-400,400);
+    Hist1[8 ]= new TH1D("xsacKurama Cut1","xsacKurama Cut1",1000,-400,400);
+    Hist1[9 ]= new TH1D("ysacKurama     ","ysacKurama     ",1000,-400,400);
+    Hist1[10]= new TH1D("ysacKurama Cut1","ysacKurama Cut1",1000,-400,400);
 
     Hist2[0]= new TH2D("pKurama % ThetaKurama","pKurama % ThetaKurama",1000,0,40,1000,0,2);
     Hist2[1]= new TH2D("pKurama % m2",     "pKurama % m2 "    ,1000,-0.4,1.4,1000,0,2);
@@ -503,12 +507,16 @@ void SAC_Efficiency(int month,int runnum){
        Hist2[1]->Fill(m2[i],pKurama[i]);
        Hist1[5]->Fill(chisqrKurama[i]);
        Hist1[6]->Fill(qKurama[i]);
+       Hist1[7]->Fill(xsacKurama[i]);
+       Hist1[9]->Fill(ysacKurama[i]);
        Hist2[3]->Fill(xsacKurama[i],ysacKurama[i]);
        if(chisqrKurama[i]<chisqr&&qKurama[i]>0){
          Hist1[2]->Fill(pKurama[i]);
          Hist1[4]->Fill(m2[i]);
          Hist2[2]->Fill(m2[i],pKurama[i]);
          Hist2[4]->Fill(xsacKurama[i],ysacKurama[i]);
+         Hist1[8]->Fill(xsacKurama[i]);
+         Hist1[10]->Fill(ysacKurama[i]);
        } // Cut1
        if(m2[i]<0)continue;
        if(m2[i]>0.1)continue;
