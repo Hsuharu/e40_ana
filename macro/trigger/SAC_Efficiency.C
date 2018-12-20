@@ -592,6 +592,7 @@ void SAC_Efficiency(int month,int runnum){
 
 
 //-Event Loop Second --------
+   nbytes = 0;
    for (Long64_t s=0; s<nentries;s++) {
      nbytes += kurama->GetEntry(s);
 //     for(int i=0; i<ntKurama; i++){
@@ -625,9 +626,12 @@ void SAC_Efficiency(int month,int runnum){
 //    for(int i=0; i<nhSac; i++){
 //      int SacSegNum= SacSeg[nhSac];
 //       Hist1[13]->Fill(tSac[nhSac]);
-     if(chisqrKurama[ntKurama]<chisqr &&
+     if(chisqrKurama[ntKurama]>chisqr) continue;
+     if(ntKurama!=1) continue;
+     if(
+//       chisqrKurama[ntKurama]<chisqr &&
          qKurama[ntKurama]>0&&
-         ntKurama==1 &&
+//         ntKurama==1 &&
 //         nhSac==1//&&
 //         xsacKurama[ntKurama]>xsacKuramaGateMin&&
 //         xsacKurama[ntKurama]>xsacKuramaGateMin&&
@@ -638,9 +642,9 @@ void SAC_Efficiency(int month,int runnum){
          m2[ntKurama]>0&&
          m2[ntKurama]<0.25&&
          pKurama[ntKurama]>0.2&&
-         pKurama[ntKurama]<1.2&&
-         trigflag[19]>trigflag19GateMin&&
-         trigflag[19]<trigflag19GateMax
+         pKurama[ntKurama]<1.2//&&
+//         trigflag[19]>trigflag19GateMin&&
+//         trigflag[19]<trigflag19GateMax
        ){
        if( tSac[nhSac]>tSacGateMin
            && tSac[nhSac]<tSacGateMax){
