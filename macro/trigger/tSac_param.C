@@ -274,7 +274,7 @@ void tSac_param(int month,int runnum){
 //   TH2D *Hist2[Hist2Max];
 
    for(int i=0; i<NumOfSegSAC; i++){
-     Hist1[i ]= new TH1D(Form("sact ROOM%d",i+1),Form("sact ROOM%d",i+1),1000,0,1000);
+     Hist1[i ]= new TH1D(Form("sact ROOM%d",i+1),Form("sact ROOM%d",i+1),1000,-2000,2000);
    }
 
 
