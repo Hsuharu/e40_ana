@@ -290,7 +290,7 @@ void tSac_param(int month,int runnum){
    for (Long64_t s=0; s<nentries;s++) {
       nbytes += tree->GetEntry(s);
       for(int i=0; i<sacnhits; i++){
-        for(int nd; nd<16; nd++){
+        for(int nd=0; nd<16; nd++){
           if(sact[sachitpat[i]-1][nd]==-9999) continue;
             Hist1[sachitpat[i]-1]->Fill(sact[sachitpat[i]-1][nd]);
         }
