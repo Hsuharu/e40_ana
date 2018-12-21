@@ -268,7 +268,7 @@ void tSac_param(int month,int runnum){
 
 
 //-hist def-----------------------------------------------------------------------------------------
-   Hist1Max = 8;
+   Hist1Max = 12;
 //   Hist2Max = 7;
    TH1D *Hist1[Hist1Max];
 //   TH2D *Hist2[Hist2Max];
@@ -276,6 +276,7 @@ void tSac_param(int month,int runnum){
    for(int i=0; i<NumOfSegSAC; i++){
      Hist1[i ]= new TH1D(Form("sact ROOM%d",i+1),Form("sact ROOM%d",i+1),1000,0,2000);
      Hist1[i+4 ]= new TH1D(Form("sact ROOM%d zoom",i+1),Form("sact ROOM%d zoom",i+1),1000,0,2000);
+     Hist1[i+4*2]= new TH1D(Form("sacmt ROOM%d",i+1),Form("sacmt ROOM%d",i+1),2000,-2000,2000);
    }
 
 
@@ -295,6 +296,8 @@ void tSac_param(int month,int runnum){
           if(sact[sachitpat[i]-1][nd]==-9999) continue;
             Hist1[sachitpat[i]-1]->Fill(sact[sachitpat[i]-1][nd]);
             Hist1[sachitpat[i]-1+NumOfSegSAC]->Fill(sact[sachitpat[i]-1][nd]);
+          if(sacmt[sachitpat[i]-1][nd]==-9999) continue;
+            Hist1[sachitpat[i]-1+NumOfSegSAC*2]->Fill(sacmt[sachitpat[i]-1][nd]);
         }
       }
    }
@@ -308,7 +311,11 @@ void tSac_param(int month,int runnum){
      Hist1[i+NumOfSegSAC]->Fit("FitFunc1","","",MaximumBintSac-4,MaximumBintSac+4);
      Hist1[i+NumOfSegSAC]->SetAxisRange(MaximumBintSac-50,MaximumBintSac+80,"X");
      tSacPeak[i]=FitFunc1->GetParameter(1);
+
+     MaximumBintSac=Hist1[i+NumOfSegSAC*2]->GetXaxis()->GetBinCenter(Hist1[i+NumOfSegSAC*2]->GetMaximumBin());
+     Hist1[i+NumOfSegSAC*2]->SetAxisRange(MaximumBintSac-50,MaximumBintSac+80,"X");
    }
+
 
 
 //-Canvas def---------------------------------------------------------------------------------------
