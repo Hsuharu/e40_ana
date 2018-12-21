@@ -608,6 +608,10 @@ void SAC_Efficiency(int month,int runnum){
    Hist1[16]->Fit("FitFunc1","","",MaximumBin-4,MaximumBin+4);
    Hist1[16]->SetAxisRange(MaximumBin-50,MaximumBin+80,"X");
 
+   double xsacKuramaGateMin = -200;
+   double xsacKuramaGateMax =  240;
+   double ysacKuramaGateMin = -180;
+   double ysacKuramaGateMax =  180;
 
 //-Event Loop Second --------
    nbytes = 0;
@@ -651,10 +655,10 @@ void SAC_Efficiency(int month,int runnum){
          qKurama[ntKurama]>0&&
 //         ntKurama==1 &&
 //         nhSac==1//&&
-//         xsacKurama[ntKurama]>xsacKuramaGateMin&&
-//         xsacKurama[ntKurama]>xsacKuramaGateMin&&
-//         ysacKurama[ntKurama]>ysacKuramaGateMax&&
-//         ysacKurama[ntKurama]>ysacKuramaGateMax&&
+         xsacKurama[ntKurama]>xsacKuramaGateMin&&
+         xsacKurama[ntKurama]<xsacKuramaGateMax&&
+         ysacKurama[ntKurama]>ysacKuramaGateMin&&
+         ysacKurama[ntKurama]<ysacKuramaGateMax&&
 //         tSac[nhSac]>tSacGateMin&&
 //         tSac[nhSac]<tSacGateMax&&
          m2[ntKurama]>0&&
