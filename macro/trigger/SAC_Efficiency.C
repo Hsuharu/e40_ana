@@ -673,10 +673,10 @@ void SAC_Efficiency(int month,int runnum){
          ysacKurama[0]<ysacKuramaGateMax&&
 //         tSac[nhSac]>tSacGateMin&&
 //         tSac[nhSac]<tSacGateMax&&
-         m2[0]>0&&
-         m2[0]<0.25&&
+         m2[0]>-0.1&&
+         m2[0]<0.1&&
          pKurama[0]>0.2&&
-         pKurama[0]<1.2//&&
+         pKurama[0]<0.9//&&
 //         trigflag[19]>trigflag19GateMin&&
 //         trigflag[19]<trigflag19GateMax
        ){
