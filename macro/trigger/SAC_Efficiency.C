@@ -572,7 +572,7 @@ void SAC_Efficiency(int month,int runnum){
        Hist1[9]->Fill(ysacKurama[i]);
        Hist2[3]->Fill(xsacKurama[i],ysacKurama[i]);
 
-       if(chisqrKurama[i]<chisqr&&qKurama[i]<0&&ntKurama==1){
+       if(chisqrKurama[i]<chisqr&&qKurama[i]>0&&ntKurama==1){
          Hist1[2]->Fill(pKurama[i]);
          Hist1[4]->Fill(m2[i]);
          Hist2[2]->Fill(m2[i],pKurama[i]);
@@ -582,7 +582,7 @@ void SAC_Efficiency(int month,int runnum){
          Hist1[16]->Fill(trigflag[19]);
 //         Hist1[16]->Fill(trigflag[17]);
        } // Cut1
-       if(chisqrKurama[i]<chisqr&&qKurama[i]<0){
+       if(chisqrKurama[i]<chisqr&&qKurama[i]>0){
          Hist1[11]->Fill(xsacKurama[i]);
          Hist1[12]->Fill(ysacKurama[i]);
        } // Cut2
@@ -594,7 +594,7 @@ void SAC_Efficiency(int month,int runnum){
     for(int i=0; i<nhSac; i++){
       int SacSegNum= SacSeg[nhSac];
        Hist1[13]->Fill(tSac[nhSac]);
-       if(chisqrKurama[i]<chisqr&&qKurama[i]<0&&ntKurama==1){
+       if(chisqrKurama[i]<chisqr&&qKurama[i]>0&&ntKurama==1){
        Hist1[14]->Fill(tSac[nhSac]);
        }//Cut2
     } // tSac by Room
@@ -686,7 +686,7 @@ void SAC_Efficiency(int month,int runnum){
      if(chisqrKurama[0]>chisqr) continue;
      if(
 //       chisqrKurama[ntKurama]<chisqr &&
-         qKurama[0]<0&&
+         qKurama[0]>0&&
 //         ntKurama==1 &&
 //         nhSac==1//&&
          xsacKurama[0]>xsacKuramaGateMin&&
