@@ -336,6 +336,9 @@ void tSac_param(int month,int runnum){
 //   c1->Print(pdf);
 //   c1->Print(Form("%s/tSac_param_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
 //   }
-
    c1->Print(pdf+"]"); 
+
+   for(int i=0; i<NumOfSegSAC; i++){
+     std::cout << tSacPeak[i ]<< std::endl;
+   }
 }
