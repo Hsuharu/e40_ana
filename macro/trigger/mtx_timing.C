@@ -367,8 +367,8 @@ void mtx_timing(int month, int runnum){
   }
 //-Tof ----------------
   Hist1[32] = new TH1D("TofMtOr Nhits","TofMtOr Nhits",20,0,20);
-  Hist1[33] = new TH1D("TofMtOr Hitpat","TofMtOr Hitpat",20,0,20);
-  Hist1[34] = new TH1D("TofMtOr DepthPat","TofMtOrDepthPat",10,0,10);
+  Hist1[33] = new TH1D("TofMtOr Hitpat","TofMtOr Hitpat",25,0,24);
+  Hist1[34] = new TH1D("TofMtOr DepthPat","TofMtOrDepthPat",20,0,20);
   Hist1[35] = new TH1D("TofMtOr","TofMtOr",100,-10,90);
   Hist1[36] = new TH1D("TofMtOr Cut1","TofMtOrCut1",100,-10,90);
 
@@ -578,22 +578,15 @@ void mtx_timing(int month, int runnum){
 
      Hist1[32]->Fill(tofnhits);
 
-     bool TofMtOrCut1_flag=false;
      for(int i=0; i<NumOfSegTOF; i++){
        for(int j=0; j<16; j++){
+         if(tofmt[i][j]==-999)   continue;
+         Hist1[33]->Fill(i);
+         Hist1[34]->Fill(j);
          Hist1[35]->Fill(tofmt[i][j]);
-         if(tofmt[i][j]==-999){
-           Hist1[33]->Fill(i);
-           Hist1[34]->Fill(j);
-           if(tofnhits!=1)       continue;
-           if(!TofMtOrCut1_flag){
-             if(j!=0){
-               if(tofmt[i][1]!=-999) continue;
-               Hist1[36]->Fill(tofmt[i][0]);
-             }
-             TofMtOrCut1_flag=true;
-           }
-         }
+         if(tofnhits!=1)         continue;    
+         if(tofmt[i][1]!=-999)   continue;
+         Hist1[36]->Fill(tofmt[i][0]);
        }
      }
    }
