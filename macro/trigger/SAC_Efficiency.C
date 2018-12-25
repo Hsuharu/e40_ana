@@ -680,14 +680,14 @@ void SAC_Efficiency(int month,int runnum){
 //         trigflag[19]>trigflag19GateMin&&
 //         trigflag[19]<trigflag19GateMax
        ){
-       int n_hit=0;
+       bool hit_flg=false;
        for(int i=0; i<nhSac; i++){
          if( tSac[i]>tSacGateMin && tSac[i]<tSacGateMax){
            Hist1[21]->Fill(tSac[i]);
-           n_hit +=1;
+           hit_flg=true;
          }
        }
-       if(n_hit!=0){
+       if(hit_flg){
          hit += 1;
          Hist1[22]->Fill(xsacKurama[0]);
          Hist1[23]->Fill(ysacKurama[0]);
