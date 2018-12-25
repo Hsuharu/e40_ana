@@ -1,16 +1,16 @@
 {
     "5078": {
+        "queue": "s",
+        "conf": "./param_nakadashi/analyzer_jun.conf",
+        "nev": 1004633,
         "nseg": 11,
+        "stat": true,
+        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05078_KuramaTracking.root",
+        "prog": 11,
         "unit": 100000,
         "nproc": 1,
-        "conf": "./param_nakadashi/analyzer_jun.conf",
-        "time": 1079.95672249794,
-        "nev": 1004633,
-        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05078_KuramaTracking.root",
-        "stat": true,
         "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05078.dat",
-        "prog": 11,
-        "queue": "s",
-        "bin": "./bin/KuramaTracking"
+        "bin": "./bin/KuramaTracking",
+        "time": 1006.5697333812714
     }
 }

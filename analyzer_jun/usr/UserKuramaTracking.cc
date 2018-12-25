@@ -107,8 +107,10 @@ struct Event
   double deBh1[MaxHits];
 
   int nhSac;
+  int nhSac_khodo;
   double SacSeg[MaxHits];
   double tSac[MaxHits];
+  double tSac_khodo[NumOfSegSAC*MaxDepth];
   double deSac[MaxHits];
 
   int nhTof;
@@ -337,6 +339,16 @@ EventKuramaTracking::ProcessingNormal( void )
     event.tSac[i]   = cmt;
     event.deSac[i]  = dE;
   }
+  {
+    int nc = hodoAna->GetNClustersSAC();
+    event.nhSac_khodo = nc;
+    for( int i=0; i<nc; ++i ){
+      HodoCluster *cl = hodoAna->GetClusterSAC(i);
+      if( !cl ) continue;
+      event.tSac_khodo[i]   = cl->CMeanTime();
+    }
+  }
+
 
   HF1( 1, 3. );
 
@@ -963,6 +975,11 @@ EventKuramaTracking::InitializeEvent( void )
     event.tTof[it] = -9999.;
     event.deTof[it] = -9999.;
   }
+  for( int it=0; it<NumOfSegSAC; it++){
+    for(int m = 0; m<MaxDepth; ++m){
+      event.tSac_khodo[MaxDepth*it+m]   = -9999.;
+    }
+  }
 
   for( int it=0; it<NumOfLayersSdcIn; ++it ){
     event.wposSdcIn[it]  = -9999.;
@@ -1354,8 +1371,10 @@ ConfMan:: InitializeHistograms( void )
   tree->Branch("btof",    &event.btof,    "btof/D");
 
   tree->Branch("nhSac",   &event.nhSac,   "nhSac/I");
+  tree->Branch("nhSac_khodo",   &event.nhSac_khodo,   "nhSac_khodo/I");
   tree->Branch("SacSeg",   event.SacSeg,  "SacSeg[nhSac]/D");
   tree->Branch("tSac",     event.tSac,    "tSac[nhSac]/D");
+  tree->Branch("tSac_khodo",     event.tSac_khodo,    "tSac[nhSac_khodo]/D");
   tree->Branch("deSac",    event.deSac,   "deSac[nhSac]/D");
 
   tree->Branch("nhTof",   &event.nhTof,   "nhTof/I");

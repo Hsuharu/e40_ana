@@ -90,8 +90,10 @@ void SAC_Efficiency(int month,int runnum){
    Double_t        deBh1[11];
    Double_t        btof;
    Int_t           nhSac;
+   Int_t           nhSac_khodo;
    Double_t        SacSeg[4];
    Double_t        tSac[4];
+   Double_t        tSac_khodo[64];
    Double_t        deSac[4];
    Int_t           nhTof;
    Double_t        TofSeg[12];
@@ -216,8 +218,10 @@ void SAC_Efficiency(int month,int runnum){
 //   kurama->SetBranchStatus("deBh1",deBh1);
 //   kurama->SetBranchStatus("btof",&btof);
    kurama->SetBranchStatus("nhSac");
+   kurama->SetBranchStatus("nhSac_khodo");
    kurama->SetBranchStatus("SacSeg");
    kurama->SetBranchStatus("tSac");
+   kurama->SetBranchStatus("tSac_khodo");
    kurama->SetBranchStatus("deSac");
 //   kurama->SetBranchStatus("nhTof",&nhTof);
 //   kurama->SetBranchStatus("TofSeg",TofSeg);
@@ -342,8 +346,10 @@ void SAC_Efficiency(int month,int runnum){
 //   kurama->SetBranchAddress("deBh1",deBh1);
 //   kurama->SetBranchAddress("btof",&btof);
    kurama->SetBranchAddress("nhSac",&nhSac);
+   kurama->SetBranchAddress("nhSac_khodo",&nhSac_khodo);
    kurama->SetBranchAddress("SacSeg",SacSeg);
    kurama->SetBranchAddress("tSac",tSac);
+   kurama->SetBranchAddress("tSac_khodo",tSac_khodo);
    kurama->SetBranchAddress("deSac",deSac);
 //   kurama->SetBranchAddress("nhTof",&nhTof);
 //   kurama->SetBranchAddress("TofSeg",TofSeg);
@@ -468,12 +474,14 @@ void SAC_Efficiency(int month,int runnum){
    chisqr = 100;
 
    int hit=0;
+   int hit_khodo=0;
    int total=0;
    double eff=0.;
+   double eff_khodo=0.;
 
 //-hist def-----------------------------------------------------------------------------------------
-   Hist1Max = 30;
-   Hist2Max = 11;
+   Hist1Max = 38;
+   Hist2Max = 15;
    TH1D *Hist1[Hist1Max];
    TH2D *Hist2[Hist2Max];
 
@@ -514,6 +522,14 @@ void SAC_Efficiency(int month,int runnum){
     Hist1[27]= new TH1D("ysacKurama Cut Ver 4","ysacKurama Cut Ver 4",100,-400,400);
     Hist1[28]= new TH1D("pKurama Cut Ver 4","pKurama Cut Ver 4",100,0,2);
     Hist1[29]= new TH1D("m2 Cut Ver 4","m2 Cut Ver 4",100,-0.4,1.4);
+    Hist1[30]= new TH1D("xsacKurama Cut5","xsacKurama Cut5",100,-400,400);
+    Hist1[31]= new TH1D("ysacKurama Cut5","ysacKurama Cut5",100,-400,400);
+    Hist1[32]= new TH1D("pKurama Cut5","pKurama Cut5",100,0,2);
+    Hist1[33]= new TH1D("m2 Cut5","m2 Cut5",100,-0.4,1.4);
+    Hist1[34]= new TH1D("xsacKurama Cut Ver 5","xsacKurama Cut Ver 5",100,-400,400);
+    Hist1[35]= new TH1D("ysacKurama Cut Ver 5","ysacKurama Cut Ver 5",100,-400,400);
+    Hist1[36]= new TH1D("pKurama Cut Ver 5","pKurama Cut Ver 5",100,0,2);
+    Hist1[37]= new TH1D("m2 Cut Ver 5","m2 Cut Ver 5",100,-0.4,1.4);
 
 
     Hist2[0]= new TH2D("pKurama % ThetaKurama","pKurama % ThetaKurama",100,0,40,100,0,2);
@@ -527,6 +543,10 @@ void SAC_Efficiency(int month,int runnum){
     Hist2[8]= new TH2D("ysacKurama % xsacKurama Cut4","ysacKurama % xsacKurama Cut4",100,-400,400,100,-400,400);
     Hist2[9]= new TH2D("pKurama % m2 Cut Ver 4","pKurama % m2 Cut Ver 4",100,-0.4,1.4,100,0,2);
     Hist2[10]= new TH2D("ysacKurama % xsacKurama Cut Ver 4","ysacKurama % xsacKurama Cut Ver 4",100,-400,400,100,-400,400);
+    Hist2[11]= new TH2D("pKurama % m2 Cut5","pKurama % m2 Cut5",100,-0.4,1.4,100,0,2);
+    Hist2[12]= new TH2D("ysacKurama % xsacKurama Cut5","ysacKurama % xsacKurama Cut5",100,-400,400,100,-400,400);
+    Hist2[13]= new TH2D("pKurama % m2 Cut Ver 5","pKurama % m2 Cut Ver 5",100,-0.4,1.4,100,0,2);
+    Hist2[14]= new TH2D("ysacKurama % xsacKurama Cut Ver 5","ysacKurama % xsacKurama Cut Ver 5",100,-400,400,100,-400,400);
 
 //-Legend def --------------------------------------------------------------------------------------
 
@@ -681,6 +701,8 @@ void SAC_Efficiency(int month,int runnum){
 //         trigflag[19]<trigflag19GateMax
        ){
        bool hit_flg=false;
+       bool hit_flg_khodo=false;
+
        for(int i=0; i<nhSac; i++){
          if( tSac[i]>tSacGateMin && tSac[i]<tSacGateMax){
            Hist1[21]->Fill(tSac[i]);
@@ -703,6 +725,30 @@ void SAC_Efficiency(int month,int runnum){
          Hist2[9]->Fill(m2[0],pKurama[0]);
          Hist2[10]->Fill(xsacKurama[0],ysacKurama[0]);
        } // Cut_Ver_4
+
+       //tSac Dif is khodo clustering and all tdc using
+       for(int i=0; i<nhSac_khodo; i++){
+         if( tSac[i]>tSacGateMin && tSac[i]<tSacGateMax){
+           Hist1[21]->Fill(tSac[i]);
+           hit_flg_khodo=true;
+         }
+       }
+       if(hit_flg_khodo){
+         hit_khodo += 1;
+         Hist1[30]->Fill(xsacKurama[0]);
+         Hist1[31]->Fill(ysacKurama[0]);
+         Hist1[32]->Fill(pKurama[0]);
+         Hist1[33]->Fill(m2[0]);
+         Hist2[11]->Fill(m2[0],pKurama[0]);
+         Hist2[12]->Fill(xsacKurama[0],ysacKurama[0]);
+       }else{  // Cut5
+         Hist1[34]->Fill(xsacKurama[0]);
+         Hist1[35]->Fill(ysacKurama[0]);
+         Hist1[36]->Fill(pKurama[0]);
+         Hist1[37]->Fill(m2[0]);
+         Hist2[13]->Fill(m2[0],pKurama[0]);
+         Hist2[14]->Fill(xsacKurama[0],ysacKurama[0]);
+       } // Cut_Ver_5
        total += 1;
 
        Hist1[17]->Fill(xsacKurama[0]);
@@ -716,6 +762,7 @@ void SAC_Efficiency(int month,int runnum){
    } 
 
    eff = (double)hit/total;
+   eff_khodo = (double)hit_khodo/total;
 
 // Peak & Gate Make -----
    MaximumBintSac=0.;
@@ -743,10 +790,13 @@ void SAC_Efficiency(int month,int runnum){
    c1->Print(Form("%s/SAC_Efficiency_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
    }
 
-std::cout << "hit \t" << hit << std::endl; 
-std::cout << "total \t" << total << std::endl; 
-std::cout << "eff \t" << eff << std::endl; 
+std::cout << "hit \t\t" << hit << std::endl; 
+std::cout << "total \t\t" << total << std::endl; 
+std::cout << "eff \t\t" << eff << std::endl; 
 
+std::cout << "hit_khodo \t" << hit_khodo << std::endl; 
+std::cout << "total \t\t" << total << std::endl; 
+std::cout << "eff_khodo \t" << eff_khodo << std::endl; 
 
    c1->Print(pdf+"]"); 
 
