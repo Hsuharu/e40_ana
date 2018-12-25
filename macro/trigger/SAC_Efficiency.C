@@ -654,8 +654,8 @@ void SAC_Efficiency(int month,int runnum){
 //    for(int i=0; i<nhSac; i++){
 //      int SacSegNum= SacSeg[nhSac];
 //       Hist1[13]->Fill(tSac[nhSac]);
-     if(chisqrKurama[ntKurama]>chisqr) continue;
      if(ntKurama!=1) continue;
+     if(chisqrKurama[0]>chisqr) continue;
      if(
 //       chisqrKurama[ntKurama]<chisqr &&
          qKurama[0]>0&&
