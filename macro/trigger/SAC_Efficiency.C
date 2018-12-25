@@ -771,6 +771,12 @@ void SAC_Efficiency(int month,int runnum){
    Hist1[21]->Fit("FitFunc1","","",MaximumBintSac-4,MaximumBintSac+4);
    Hist1[21]->SetAxisRange(MaximumBintSac-50,MaximumBintSac+80,"X");
 
+// Peak & Gate Make -----
+   MaximumBintSac=0.;
+   MaximumBintSac=Hist1[38]->GetXaxis()->GetBinCenter(Hist1[38]->GetMaximumBin());
+   Hist1[38]->Fit("FitFunc1","","",MaximumBintSac-4,MaximumBintSac+4);
+   Hist1[38]->SetAxisRange(MaximumBintSac-50,MaximumBintSac+80,"X");
+
 
 //-Canvas def---------------------------------------------------------------------------------------
 
