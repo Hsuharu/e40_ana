@@ -480,7 +480,7 @@ void SAC_Efficiency(int month,int runnum){
    double eff_khodo=0.;
 
 //-hist def-----------------------------------------------------------------------------------------
-   Hist1Max = 39;
+   Hist1Max = 40;
    Hist2Max = 15;
    TH1D *Hist1[Hist1Max];
    TH2D *Hist2[Hist2Max];
@@ -531,6 +531,7 @@ void SAC_Efficiency(int month,int runnum){
     Hist1[36]= new TH1D("pKurama Cut Ver 5","pKurama Cut Ver 5",100,0,2);
     Hist1[37]= new TH1D("m2 Cut Ver 5","m2 Cut Ver 5",100,-0.4,1.4);
     Hist1[38]= new TH1D("tSac Or Cut5","tSac Or Cut5",200,-100,100);
+    Hist1[39]= new TH1D("tSac Or Cut Ver 5","tSac Or Cut Ver 5",40,-20,20);
 
 
     Hist2[0]= new TH2D("pKurama % ThetaKurama","pKurama % ThetaKurama",100,0,40,100,0,2);
@@ -608,8 +609,8 @@ void SAC_Efficiency(int month,int runnum){
    MaximumBintSac=Hist1[13]->GetXaxis()->GetBinCenter(Hist1[13]->GetMaximumBin());
    Hist1[13]->Fit("FitFunc1","","",MaximumBintSac-4,MaximumBintSac+4);
    Hist1[13]->SetAxisRange(MaximumBintSac-50,MaximumBintSac+80,"X");
-   tSacGateMin=FitFunc1->GetParameter(1) - 15 ;//FitFunc1->GetParameter(2);
-   tSacGateMax=FitFunc1->GetParameter(1) + 15 ;//FitFunc1->GetParameter(2);
+   tSacGateMin=FitFunc1->GetParameter(1) - 20 ;//FitFunc1->GetParameter(2);
+   tSacGateMax=FitFunc1->GetParameter(1) + 20 ;//FitFunc1->GetParameter(2);
    std::cout << "SAC Time Gate Min \t" << tSacGateMin << std::endl;
    std::cout << "SAC Time Gate Max \t" << tSacGateMax << std::endl;
 
@@ -618,8 +619,8 @@ void SAC_Efficiency(int month,int runnum){
    MaximumBintSac=Hist1[14]->GetXaxis()->GetBinCenter(Hist1[14]->GetMaximumBin());
    Hist1[14]->Fit("FitFunc1","","",MaximumBintSac-4,MaximumBintSac+4);
    Hist1[14]->SetAxisRange(MaximumBintSac-50,MaximumBintSac+80,"X");
-   tSacGateMin_Cut2=FitFunc1->GetParameter(1) - 15; //FitFunc1->GetParameter(2);
-   tSacGateMax_Cut2=FitFunc1->GetParameter(1) + 15; //FitFunc1->GetParameter(2);
+   tSacGateMin_Cut2=FitFunc1->GetParameter(1) - 20; //FitFunc1->GetParameter(2);
+   tSacGateMax_Cut2=FitFunc1->GetParameter(1) + 20; //FitFunc1->GetParameter(2);
 
    double MaximumBin=0.;
    double trigflag19GateMin   =0.;
@@ -749,6 +750,9 @@ void SAC_Efficiency(int month,int runnum){
          Hist1[37]->Fill(m2[0]);
          Hist2[13]->Fill(m2[0],pKurama[0]);
          Hist2[14]->Fill(xsacKurama[0],ysacKurama[0]);
+         for(int i=0; i<nhSac_khodo; i++){
+           Hist1[39]->Fill(tSac[i]);
+         }
        } // Cut_Ver_5
        total += 1;
 
