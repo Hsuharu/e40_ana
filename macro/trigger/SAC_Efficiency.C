@@ -478,11 +478,11 @@ void SAC_Efficiency(int month,int runnum){
    TH2D *Hist2[Hist2Max];
 
 //    Hist1[0]= new TH1D(Form("Hist1 %s",TriggerFlag[i]),Form("Hist1 %s",TriggerFlag[i]),1000,0,2100);
-    Hist1[0 ]= new TH1D("ThetaKurama","ThetaKurama",1000,0,40);
-    Hist1[1 ]= new TH1D("pKurama","pKurama",1000,0,2);
-    Hist1[2 ]= new TH1D("pKurama Cut1","pKurama Cut1",1000,0,2);
-    Hist1[3 ]= new TH1D("m2","m2",1000,-0.4,1.4);
-    Hist1[4 ]= new TH1D("m2 Cut1","m2 Cut1",1000,-0.4,1.4);
+    Hist1[0 ]= new TH1D("ThetaKurama","ThetaKurama",100,0,40);
+    Hist1[1 ]= new TH1D("pKurama","pKurama",100,0,2);
+    Hist1[2 ]= new TH1D("pKurama Cut1","pKurama Cut1",100,0,2);
+    Hist1[3 ]= new TH1D("m2","m2",100,-0.4,1.4);
+    Hist1[4 ]= new TH1D("m2 Cut1","m2 Cut1",100,-0.4,1.4);
     Hist1[5 ]= new TH1D("chisqrKurama","chisqrKurama",100,0,200);
     Hist1[6 ]= new TH1D("qKurama","qKurama",6,-3,3);
     Hist1[7 ]= new TH1D("xsacKurama     ","xsacKurama     ",500,-400,400);
@@ -503,18 +503,18 @@ void SAC_Efficiency(int month,int runnum){
 //    Hist1[16]= new TH1D(Form("Trigger Flag %s Cut2",TriggerFlag[17]),Form("Trigger Flag %s Cut2",TriggerFlag[17]),2000,0,2000);
     Hist1[17]= new TH1D("xsacKurama Cut3","xsacKurama Cut3",500,-400,400);
     Hist1[18]= new TH1D("ysacKurama Cut3","ysacKurama Cut3",500,-400,400);
-    Hist1[19]= new TH1D("pKurama Cut3","pKurama Cut3",1000,0,2);
-    Hist1[20]= new TH1D("m2 Cut3","m2 Cut3",1000,-0.4,1.4);
+    Hist1[19]= new TH1D("pKurama Cut3","pKurama Cut3",100,0,2);
+    Hist1[20]= new TH1D("m2 Cut3","m2 Cut3",100,-0.4,1.4);
     Hist1[21]= new TH1D("tSac Or Cut3","tSac Or Cut3",1000,-1500,500);
 
 
-    Hist2[0]= new TH2D("pKurama % ThetaKurama","pKurama % ThetaKurama",1000,0,40,1000,0,2);
-    Hist2[1]= new TH2D("pKurama % m2",     "pKurama % m2 "    ,1000,-0.4,1.4,1000,0,2);
-    Hist2[2]= new TH2D("pKurama % m2 Cut1","pKurama % m2 Cut1",1000,-0.4,1.4,1000,0,2);
-    Hist2[3]= new TH2D("ysacKurama % xsacKurama     ","ysacKurama % xsacKurama     ",1000,-400,400,1000,-400,400);
-    Hist2[4]= new TH2D("ysacKurama % xsacKurama Cut1","ysacKurama % xsacKurama Cut1",1000,-400,400,1000,-400,400);
-    Hist2[5]= new TH2D("pKurama % m2 Cut3","pKurama % m2 Cut3",1000,-0.4,1.4,1000,0,2);
-    Hist2[6]= new TH2D("ysacKurama % xsacKurama Cut3","ysacKurama % xsacKurama Cut3",1000,-400,400,1000,-400,400);
+    Hist2[0]= new TH2D("pKurama % ThetaKurama","pKurama % ThetaKurama",100,0,40,100,0,2);
+    Hist2[1]= new TH2D("pKurama % m2",     "pKurama % m2 "    ,100,-0.4,1.4,100,0,2);
+    Hist2[2]= new TH2D("pKurama % m2 Cut1","pKurama % m2 Cut1",100,-0.4,1.4,100,0,2);
+    Hist2[3]= new TH2D("ysacKurama % xsacKurama     ","ysacKurama % xsacKurama     ",100,-400,400,100,-400,400);
+    Hist2[4]= new TH2D("ysacKurama % xsacKurama Cut1","ysacKurama % xsacKurama Cut1",100,-400,400,100,-400,400);
+    Hist2[5]= new TH2D("pKurama % m2 Cut3","pKurama % m2 Cut3",100,-0.4,1.4,100,0,2);
+    Hist2[6]= new TH2D("ysacKurama % xsacKurama Cut3","ysacKurama % xsacKurama Cut3",100,-400,400,100,-400,400);
 
 //-Legend def --------------------------------------------------------------------------------------
 
@@ -661,10 +661,10 @@ void SAC_Efficiency(int month,int runnum){
          ysacKurama[ntKurama]<ysacKuramaGateMax&&
 //         tSac[nhSac]>tSacGateMin&&
 //         tSac[nhSac]<tSacGateMax&&
-         m2[ntKurama]>0&&
-         m2[ntKurama]<0.25&&
+         m2[ntKurama]>-0,2&&
+         m2[ntKurama]<0.2&&
          pKurama[ntKurama]>0.2&&
-         pKurama[ntKurama]<1.2//&&
+         pKurama[ntKurama]<0.9//&&
 //         trigflag[19]>trigflag19GateMin&&
 //         trigflag[19]<trigflag19GateMax
        ){
