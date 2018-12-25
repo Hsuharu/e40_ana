@@ -472,8 +472,8 @@ void SAC_Efficiency(int month,int runnum){
    double eff=0.;
 
 //-hist def-----------------------------------------------------------------------------------------
-   Hist1Max = 22;
-   Hist2Max = 7;
+   Hist1Max = 26;
+   Hist2Max = 9;
    TH1D *Hist1[Hist1Max];
    TH2D *Hist2[Hist2Max];
 
@@ -506,6 +506,10 @@ void SAC_Efficiency(int month,int runnum){
     Hist1[19]= new TH1D("pKurama Cut3","pKurama Cut3",100,0,2);
     Hist1[20]= new TH1D("m2 Cut3","m2 Cut3",100,-0.4,1.4);
     Hist1[21]= new TH1D("tSac Or Cut3","tSac Or Cut3",1000,-1500,500);
+    Hist1[22]= new TH1D("xsacKurama Cut4","xsacKurama Cut4",500,-400,400);
+    Hist1[23]= new TH1D("ysacKurama Cut4","ysacKurama Cut4",500,-400,400);
+    Hist1[24]= new TH1D("pKurama Cut4","pKurama Cut4",100,0,2);
+    Hist1[25]= new TH1D("m2 Cut4","m2 Cut4",100,-0.4,1.4);
 
 
     Hist2[0]= new TH2D("pKurama % ThetaKurama","pKurama % ThetaKurama",100,0,40,100,0,2);
@@ -515,6 +519,8 @@ void SAC_Efficiency(int month,int runnum){
     Hist2[4]= new TH2D("ysacKurama % xsacKurama Cut1","ysacKurama % xsacKurama Cut1",100,-400,400,100,-400,400);
     Hist2[5]= new TH2D("pKurama % m2 Cut3","pKurama % m2 Cut3",100,-0.4,1.4,100,0,2);
     Hist2[6]= new TH2D("ysacKurama % xsacKurama Cut3","ysacKurama % xsacKurama Cut3",100,-400,400,100,-400,400);
+    Hist2[7]= new TH2D("pKurama % m2 Cut4","pKurama % m2 Cut4",100,-0.4,1.4,100,0,2);
+    Hist2[8]= new TH2D("ysacKurama % xsacKurama Cut4","ysacKurama % xsacKurama Cut4",100,-400,400,100,-400,400);
 
 //-Legend def --------------------------------------------------------------------------------------
 
@@ -675,7 +681,15 @@ void SAC_Efficiency(int month,int runnum){
            n_hit +=1;
          }
        }
-       if(n_hit!=0) hit += 1;
+       if(n_hit!=0){
+         hit += 1;
+         Hist1[22]->Fill(xsacKurama[0]);
+         Hist1[23]->Fill(ysacKurama[0]);
+         Hist1[24]->Fill(pKurama[0]);
+         Hist1[25]->Fill(m2[0]);
+         Hist2[7]->Fill(m2[0],pKurama[0]);
+         Hist2[8]->Fill(xsacKurama[0],ysacKurama[0]);
+       }// Cut4
        total += 1;
 
        Hist1[17]->Fill(xsacKurama[0]);
