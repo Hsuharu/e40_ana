@@ -463,8 +463,8 @@ void mtx_timing(int month, int runnum){
   TLegend *Leg1 = new TLegend(0.78,0.775,0.98,0.935);
   TLegend *Leg2 = new TLegend(0.78,0.775,0.98,0.935);
 
-//   Long64_t nentries = k0hodo->GetEntries();
-   Long64_t nentries =10000;
+   Long64_t nentries = k0hodo->GetEntries();
+//   Long64_t nentries =10000;
 //   Long64_t nbytes = 0;
 //   for (Long64_t s=0; s<nentries;s++) {
 //     nbytes += k0hodo->GetEntry(s);
