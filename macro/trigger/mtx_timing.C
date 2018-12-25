@@ -356,7 +356,7 @@ void mtx_timing(int month, int runnum){
    int Hist2Max = 0;
 
 //-hist def-----------------------------------------------------------------------------------------
-   Hist1Max = 42;
+   Hist1Max = 50;
 //   Hist2Max = 15;
    TH1D *Hist1[Hist1Max];
 //   TH2D *Hist2[Hist2Max];
@@ -373,28 +373,21 @@ void mtx_timing(int month, int runnum){
   Hist1[36] = new TH1D("TofMtOr Cut1","TofMtOrCut1",100,-10,90);
 
 //-Sch ----------------
-  Hist1[38]= new TH1D("Sch Nhits" ,"Sch Nhits" ,20,0,20);
-  Hist1[39]= new TH1D("Sch Hitpat","Sch Hitpat",65,0,65);
-  Hist1[40]= new TH1D("Sch Depthpat","Sch Depthpat",65,0,65);
-  Hist1[41]= new TH1D("Sch Tdc"   ,"Sch Tdc"   ,100,0,1000);
- // TH1D *SchNhits    = new TH1D("SchNhits","SchNhits",20,0,20);
- // TH1D *SchHitpat   = new TH1D("SchHitpat","SchHitpat",65,0,65);
- // TH1D *SchNhitsCut = new TH1D("SchNhitsCut:nhits=1 & Maxdepth =1","SchNhitsCut:nhits=1 & Maxdepth =1",20,0,20);
- // TH1D *SchTdc      = new TH1D("SchTdc","SchTdc",100,0,1000);
- // TH1D *SchTdcCut   = new TH1D("SchTdcCut:nhits=1 & Maxdepth =1","SchTdcCut:nhits=1 & Maxdepth =1",100,0,1000);
- // TH1D *SchTdcCut2  = new TH1D("SchTdcCut2: Sch&TOF-> nhits=1 & Maxdepth =1","SchTdcCut2: Sch&TOF-> nhits=1 & Maxdepth =1",100,0,1000);
- // TH1D *SchTimeCut2 = new TH1D("SchTimeCut2: Sch&TOF-> nhits=1 & Maxdepth =1","SchTimeCut2: Sch&TOF-> nhits=1 & Maxdepth =1",1000,-1000,0);
+  Hist1[37]= new TH1D("Sch Nhits" ,"Sch Nhits" ,20,0,20);
+  Hist1[38]= new TH1D("Sch Hitpat","Sch Hitpat",65,0,65);
+  Hist1[39]= new TH1D("Sch Depthpat","Sch Depthpat",65,0,65);
+  Hist1[40]= new TH1D("Sch Tdc"   ,"Sch Tdc"   ,100,0,1000);
 
 //-Sft ----------------
-  TH1D *SftX_U_Nhits     = new TH1D("SftX U Nhits","Sft U Nhits",50,0,50);
-  TH1D *SftX_D_Nhits     = new TH1D("SftX D Nhits","Sft D Nhits",50,0,50);
-  TH1D *SftXNhits        = new TH1D("SftNhits","SftNhits",50,0,50);
-  TH1D *SftX_U_Hitpat    = new TH1D("Sft U    Hitpat","Sft U Hitpat",256*2,0,256);
-  TH1D *SftX_D_Hitpat    = new TH1D("Sft D Hitpat","Sft D Hitpat",256*2,0,256);
-  TH1D *SftXHitpat       = new TH1D("SftHitpat","SftHitpat",256*2,0,256);
-  TH1D *SftX_U_Tdc       = new TH1D("Sft U Tdc","Sft U Tdc",1000,0,1000);
-  TH1D *SftX_D_Tdc       = new TH1D("Sft D Tdc","Sft D Tdc",1000,0,1000);
-  TH1D *SftXTdc          = new TH1D("SftTdc","SftTdc",1000,0,1000);
+  Hist1[41] = new TH1D("SftX U Nhits","Sft U Nhits",50,0,50);
+  Hist1[42] = new TH1D("SftX D Nhits","Sft D Nhits",50,0,50);
+  Hist1[43] = new TH1D("SftNhits","SftNhits",50,0,50);
+  Hist1[44] = new TH1D("Sft U Hitpat","Sft U Hitpat",256*2,0,256);
+  Hist1[45] = new TH1D("Sft D Hitpat","Sft D Hitpat",256*2,0,256);
+  Hist1[46] = new TH1D("SftHitpat","SftHitpat",256*2,0,256);
+  Hist1[47] = new TH1D("Sft U Tdc","Sft U Tdc",1000,0,1000);
+  Hist1[48] = new TH1D("Sft D Tdc","Sft D Tdc",1000,0,1000);
+  Hist1[49] = new TH1D("SftTdc","SftTdc",1000,0,1000);
 
   TH1D *SftX_U_NhitsCut  = new TH1D("SftX U Nhits Cut","Sft U Nhits Cut",50,0,50);
   TH1D *SftX_D_NhitsCut  = new TH1D("SftX D Nhits Cut","Sft D Nhits",50,0,50);
@@ -470,8 +463,8 @@ void mtx_timing(int month, int runnum){
   TLegend *Leg1 = new TLegend(0.78,0.775,0.98,0.935);
   TLegend *Leg2 = new TLegend(0.78,0.775,0.98,0.935);
 
-   Long64_t nentries = k0hodo->GetEntries();
-//   Long64_t nentries =10000;
+//   Long64_t nentries = k0hodo->GetEntries();
+   Long64_t nentries =10000;
 //   Long64_t nbytes = 0;
 //   for (Long64_t s=0; s<nentries;s++) {
 //     nbytes += k0hodo->GetEntry(s);
@@ -569,12 +562,14 @@ void mtx_timing(int month, int runnum){
      if(trigflag[17]<=0) continue;
      if(trigflag[28]<=0) continue;
 
+     // Trigger Flag -----------------------
      for(int i=0; i<32; i++){
        Hist1[i]->Fill(trigflag[i]);
      }
 
      Hist1[32]->Fill(tofnhits);
 
+     // TofMtOr ----------------------------
      for(int i=0; i<NumOfSegTOF; i++){
        for(int j=0; j<16; j++){
          if(tofmt[i][j]==-999)   continue;
@@ -586,57 +581,80 @@ void mtx_timing(int month, int runnum){
          Hist1[36]->Fill(tofmt[i][0]);
        }
      }
-   }
 
-   Hist1[38]->Fill(sch_nhits);
-   for(int i=0; i<sch_nhits; i++){
-     Hist1[39]->Fill(sch_hitpat[i]);
-   }
-   for(int i=0; i<NumOfSegSCH; i++){
-     Hist1[40]->Fill(sch_depth[i]);
-     for(int k=0; k<16; k++){
-       if(sch_tdc[i][k]==-999) continue;
-       Hist1[41]->Fill(sch_tdc[i][k]);
-       if(sch_nhits!=1) continue;
-       if(sch_depth[i]!=1) continue;
-       if(sch_hitpat[0]!=i) continue;
+     // Sch --------------------------------
+     Hist1[37]->Fill(sch_nhits);
+     for(int i=0; i<sch_nhits; i++){
+       Hist1[38]->Fill(sch_hitpat[i]);
+     }
+     for(int i=0; i<NumOfSegSCH; i++){
+       Hist1[39]->Fill(sch_depth[i]);
+       for(int k=0; k<16; k++){
+         if(sch_tdc[i][k]==-999) continue;
+         Hist1[40]->Fill(sch_tdc[i][k]);
+         if(sch_nhits!=1) continue;
+         if(sch_depth[i]!=1) continue;
+         if(sch_hitpat[0]!=i) continue;
+       }
+     }
+
+     // Sft X ------------------------------
+     Hist1[41]->Fill(sftx_unhits);
+     Hist1[42]->Fill(sftx_dnhits);
+     Hist1[43]->Fill(sftx_unhits);
+     Hist1[43]->Fill(sftx_dnhits);
+     for(int i=0; i<94; i++){
+       Hist1[44]->Fill(sftx_uhitpat[i]);
+       Hist1[46]->Fill(sftx_uhitpat[i]);
+     }
+     for(int i=0; i<49; i++){
+       Hist1[45]->Fill(sftx_dhitpat[i]+0.5);
+       Hist1[46]->Fill(sftx_dhitpat[i]+0.5);
+     }
+     for(int i=0; i<NumOfSegSFT_X; i++){
+       for(int j=0; j<16; j++){
+         if(sftx_utdc[i][j]!=-999){
+           Hist1[47]->Fill(sftx_utdc[i][j]);
+           Hist1[49]->Fill(sftx_utdc[i][j]);
+         }
+         if(sftx_dtdc[i][j]!=-999){
+           Hist1[48]->Fill(sftx_dtdc[i][j]);
+           Hist1[49]->Fill(sftx_dtdc[i][j]);
+         }
+         if(sftx_unhits==1&&sftx_dnhits==0){
+           if(sftx_udepth[i]!=1) continue;
+           if(sftx_uhitpat[0]!=i) continue;
+         }else if(sftx_unhits==0&&sftx_dnhits==1){
+           if(sftx_ddepth[i]!=1) continue;
+           if(sftx_dhitpat[0]!=i) continue;
+         }
+       }
      }
    }
-                 //                 MatrixFlag_Tof->Fill(HULMHTDCCalib*trigflag[28]-tofmt[i][0]);
-                 //                 for(int k=0; k<NumOfSegSFT_X; k++){
-                 //                   if(sftx_unhits==1&&sftx_dnhits==0){
-                 //                     if(sftx_udepth[k]!=1) continue;
-                 //                     if(sftx_uhitpat[0]!=k) continue;
-                 //                     SftX_U_NhitsCut2->Fill(sftx_unhits);
-                 //                     SftXNhitsCut2->Fill(sftx_unhits);
-                 //                     SftX_U_HitpatCut2->Fill(sftx_uhitpat[0]);
-                 //                     SftXHitpatCut2->Fill(sftx_uhitpat[0]);
-                 //                     SftX_U_TdcCut2->Fill(sftx_utdc[k][0]);
-                 //                     SftXTdcCut2->Fill(sftx_utdc[k][0]);
-                 //                     SftXTof->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[k][0]);
-                 //                     if(ntKurama==1){
-                 //                       if(0<m2[0]&&m2[0]<0.1)    SftXTofPiCut->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[i][0]);
-                 //                       if(0.1<m2[0]&&m2[0]<0.4)  SftXTofKCut->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[i][0]);
-                 //                       if(0.6<m2[0]&&m2[0]<1)    SftXTofPCut->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[i][0]);
-                 //                     }
-                 //                   }else if(sftx_unhits==0&&sftx_dnhits==1){
-                 //                     if(sftx_ddepth[k]!=1) continue;
-                 //                     if(sftx_dhitpat[0]!=k) continue;
-                 //                     SftX_D_NhitsCut2->Fill(sftx_dnhits);
-                 //                     SftXNhitsCut2->Fill(sftx_dnhits);
-                 //                     SftX_D_HitpatCut2->Fill(sftx_dhitpat[0]+0.5);
-                 //                     SftXHitpatCut2->Fill(sftx_dhitpat[0]+0.5);
-                 //                     SftX_D_TdcCut2->Fill(sftx_dtdc[k][0]);
-                 //                     SftXTdcCut2->Fill(sftx_dtdc[k][0]);
-                 //                     SftXTof->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[k][0]);
-                 //                     if(ntKurama==1){
-                 //                       if(0<m2[0]&&m2[0]<0.1)    SftXTofPiCut->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[i][0]);
-                 //                       if(0.1<m2[0]&&m2[0]<0.4)  SftXTofKCut->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[i][0]);
-                 //                       if(0.6<m2[0]&&m2[0]<1)    SftXTofPCut->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[i][0]);
-                 //                     }
-                 //                   }
-                 //                 }
 
+//     for(int k=0; k<NumOfSegSFT_X; k++){
+//       if(sftx_unhits==1&&sftx_dnhits==0){
+//         if(sftx_udepth[k]!=1) continue;
+//         if(sftx_uhitpat[0]!=k) continue;
+//         SftX_U_NhitsCut2->Fill(sftx_unhits);
+//         SftXNhitsCut2->Fill(sftx_unhits);
+//         SftX_U_HitpatCut2->Fill(sftx_uhitpat[0]);
+//         SftXHitpatCut2->Fill(sftx_uhitpat[0]);
+//         SftX_U_TdcCut2->Fill(sftx_utdc[k][0]);
+//         SftXTdcCut2->Fill(sftx_utdc[k][0]);
+//         SftXTof->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[k][0]);
+//       }else if(sftx_unhits==0&&sftx_dnhits==1){
+//         if(sftx_ddepth[k]!=1) continue;
+//         if(sftx_dhitpat[0]!=k) continue;
+//         SftX_D_NhitsCut2->Fill(sftx_dnhits);
+//         SftXNhitsCut2->Fill(sftx_dnhits);
+//         SftX_D_HitpatCut2->Fill(sftx_dhitpat[0]+0.5);
+//         SftXHitpatCut2->Fill(sftx_dhitpat[0]+0.5);
+//         SftX_D_TdcCut2->Fill(sftx_dtdc[k][0]);
+//         SftXTdcCut2->Fill(sftx_dtdc[k][0]);
+//         SftXTof->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[k][0]);
+//       }
+//     }
 //-Canvas def---------------------------------------------------------------------------------------
   TCanvas *c1 = new TCanvas("c1","c1",1200,900);
 
