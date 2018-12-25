@@ -471,7 +471,7 @@ void SAC_Efficiency(int month,int runnum){
    int Hist2Max = 0;
 
    int chisqr = 0;
-   chisqr = 100;
+   chisqr = 10;
 
    int hit=0;
    int hit_khodo=0;
