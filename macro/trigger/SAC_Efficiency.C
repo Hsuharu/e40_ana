@@ -530,7 +530,7 @@ void SAC_Efficiency(int month,int runnum){
     Hist1[35]= new TH1D("ysacKurama Cut Ver 5","ysacKurama Cut Ver 5",100,-400,400);
     Hist1[36]= new TH1D("pKurama Cut Ver 5","pKurama Cut Ver 5",100,0,2);
     Hist1[37]= new TH1D("m2 Cut Ver 5","m2 Cut Ver 5",100,-0.4,1.4);
-    Hist1[38]= new TH1D("tSac Or Cut5","tSac Or Cut5",250,-500,500);
+    Hist1[38]= new TH1D("tSac Or Cut5","tSac Or Cut5",200,-100,100);
 
 
     Hist2[0]= new TH2D("pKurama % ThetaKurama","pKurama % ThetaKurama",100,0,40,100,0,2);
