@@ -573,7 +573,7 @@ void SAC_Efficiency(int month,int runnum){
        Hist2[3]->Fill(xsacKurama[i],ysacKurama[i]);
 
        if(chisqrKurama[i]<chisqr&&qKurama[i]>0&&ntKurama==1){
-         Hist1[2]->Fill(pKurama[i]);
+         Hist1[2]->Fkll(pKurama[i]);
          Hist1[4]->Fill(m2[i]);
          Hist2[2]->Fill(m2[i],pKurama[i]);
          Hist2[4]->Fill(xsacKurama[i],ysacKurama[i]);

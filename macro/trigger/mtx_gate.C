@@ -174,6 +174,90 @@ void mtx_gate(int month, int runnum){
 //   Double_t        stof[36];
    Double_t        m2[36];
 
+   // Set branch status    
+   k0hodo->SetBranchStatus("trigflag");
+   k0hodo->SetBranchStatus("trigpat");
+//   k0hodo->SetBranchStatus("status");
+   k0hodo->SetBranchStatus("ntKurama");
+//   k0hodo->SetBranchStatus("path");
+   k0hodo->SetBranchStatus("pKurama");
+   k0hodo->SetBranchStatus("qKurama");
+//   k0hodo->SetBranchStatus("chisqrKurama");
+//   k0hodo->SetBranchStatus("xtgtKurama");
+//   k0hodo->SetBranchStatus("ytgtKurama");
+//   k0hodo->SetBranchStatus("utgtKurama");
+//   k0hodo->SetBranchStatus("vtgtKurama");
+//   k0hodo->SetBranchStatus("thetaKurama");
+//   k0hodo->SetBranchStatus("vpx");
+//   k0hodo->SetBranchStatus("vpy");
+//   k0hodo->SetBranchStatus("tTofCalc");
+//   k0hodo->SetBranchStatus("nhBh1");
+//   k0hodo->SetBranchStatus("csBh1");
+//   k0hodo->SetBranchStatus("Bh1Seg");
+//   k0hodo->SetBranchStatus("tBh1");
+//   k0hodo->SetBranchStatus("dtBh1");
+//   k0hodo->SetBranchStatus("deBh1");
+//   k0hodo->SetBranchStatus("btof");
+//   k0hodo->SetBranchStatus("nhBh2");
+//   k0hodo->SetBranchStatus("csBh2");
+//   k0hodo->SetBranchStatus("Bh2Seg");
+//   k0hodo->SetBranchStatus("tBh2");
+//   k0hodo->SetBranchStatus("dtBh2");
+//   k0hodo->SetBranchStatus("t0Bh2");
+//   k0hodo->SetBranchStatus("deBh2");
+//   k0hodo->SetBranchStatus("nhSac");
+//   k0hodo->SetBranchStatus("csSac");
+//   k0hodo->SetBranchStatus("SacSeg");
+//   k0hodo->SetBranchStatus("tSac");
+//   k0hodo->SetBranchStatus("deSac");
+//   k0hodo->SetBranchStatus("nhTof");
+//   k0hodo->SetBranchStatus("csTof");
+//   k0hodo->SetBranchStatus("TofSeg");
+//   k0hodo->SetBranchStatus("tTof");
+//   k0hodo->SetBranchStatus("dtTof");
+//   k0hodo->SetBranchStatus("deTof");
+   k0hodo->SetBranchStatus("tofnhits");
+   k0hodo->SetBranchStatus("tofhitpat");
+   k0hodo->SetBranchStatus("tofmt");
+//   k0hodo->SetBranchStatus("nhBft");
+//   k0hodo->SetBranchStatus("csBft");
+//   k0hodo->SetBranchStatus("tBft");
+//   k0hodo->SetBranchStatus("wBft");
+//   k0hodo->SetBranchStatus("BftPos");
+   k0hodo->SetBranchStatus("sch_nhits");
+   k0hodo->SetBranchStatus("sch_hitpat");
+   k0hodo->SetBranchStatus("sch_tdc");
+//   k0hodo->SetBranchStatus("sch_trailing");
+//   k0hodo->SetBranchStatus("sch_tot");
+   k0hodo->SetBranchStatus("sch_depth");
+//   k0hodo->SetBranchStatus("nhSch");
+//   k0hodo->SetBranchStatus("csSch");
+//   k0hodo->SetBranchStatus("tSch");
+//   k0hodo->SetBranchStatus("wSch");
+//   k0hodo->SetBranchStatus("SchPos");
+   k0hodo->SetBranchStatus("sftx_nhits");
+   k0hodo->SetBranchStatus("sftx_unhits");
+   k0hodo->SetBranchStatus("sftx_dnhits");
+   k0hodo->SetBranchStatus("sftx_uhitpat");
+   k0hodo->SetBranchStatus("sftx_dhitpat");
+   k0hodo->SetBranchStatus("sftx_utdc");
+   k0hodo->SetBranchStatus("sftx_dtdc");
+//   k0hodo->SetBranchStatus("sftx_utrailing");
+//   k0hodo->SetBranchStatus("sftx_dtrailing");
+//   k0hodo->SetBranchStatus("sftx_utot");
+//   k0hodo->SetBranchStatus("sftx_dtot");
+   k0hodo->SetBranchStatus("sftx_udepth");
+   k0hodo->SetBranchStatus("sftx_ddepth");
+//   k0hodo->SetBranchStatus("sftx_ncl");
+//   k0hodo->SetBranchStatus("sftx_clsize");
+//   k0hodo->SetBranchStatus("sftx_ctime");
+//   k0hodo->SetBranchStatus("sftx_ctot");
+//   k0hodo->SetBranchStatus("sftx_clpos");
+   k0hodo->SetBranchStatus("m2Combi");
+//   k0hodo->SetBranchStatus("beta");
+//   k0hodo->SetBranchStatus("stof");
+   k0hodo->SetBranchStatus("m2");
+
    // Set branch addresses.
    k0hodo->SetBranchAddress("trigflag",trigflag);
    k0hodo->SetBranchAddress("trigpat",trigpat);
@@ -266,6 +350,9 @@ void mtx_gate(int month, int runnum){
 //-para def-----------------------------------------------------------------------------------------
    double HULMHTDCCalib = -0.8333;
    double MaxBinValue=0.;
+
+   int Hist1Max = 0;
+   int Hist2Max = 0;
 
 //-hist def-----------------------------------------------------------------------------------------
 //-Trigger Flag -------
@@ -382,6 +469,16 @@ void mtx_gate(int month, int runnum){
   TH2D *SftXTofPiCut_KTime0_pKurama = new TH2D("SftX-Tof KTime0 vs pKurama PiCut: Cut3 & 0<m2&m2<0.1", "SftX-Tof KTime0 PiCut: Cut3 & 0<m2&m2<0.1", 50,-25,25,50,0,2);
   TH2D *SftXTofPCut_KTime0_pKurama  = new TH2D("SftX-Tof KTime0 vs pKurama PCut: Cut3 & 0.6<m2&m2<1",  "SftX-Tof KTime0 PCut: Cut3 & 0.6<m2&m2<1",  50,-25,25,50,0,2);
 
+// m2 - momentum ...------
+//   Hist1Max = 40;
+//   Hist2Max = 15;
+//   TH1D *Hist1[Hist1Max];
+//   TH2D *Hist2[Hist2Max];
+//
+//    Hist1[0 ]= new TH1D("m2","m2",100,0,40);
+//    Hist1[1 ]= new TH1D("pKurama","pKurama",100,0,2);
+//
+//    Hist2[0]= new TH2D("pKurama % m2",     "pKurama % m2 "    ,100,-0.4,1.4,100,0,2);
 
 //-Legend def --------------------------------------------------------------------------------------
 //  TLegend *Leg1 = new TLegend(0.1,0.7,0.48,0.9);
@@ -430,16 +527,16 @@ void mtx_gate(int month, int runnum){
                      SchTimeCut2->Fill(-sch_tdc[k][0]);
                      SchTof->Fill(-sch_tdc[k][0]-tofmt[i][0]);
                      if(ntKurama==1){
-                       SchTofCut3_m2->Fill(-sch_tdc[k][0]-tofmt[i][0],m2[ntKurama]);
-                       SchTofCut3_pKurama->Fill(-sch_tdc[k][0]-tofmt[i][0],pKurama[ntKurama]);
+                       SchTofCut3_m2->Fill(-sch_tdc[k][0]-tofmt[i][0],m2[0]);
+                       SchTofCut3_pKurama->Fill(-sch_tdc[k][0]-tofmt[i][0],pKurama[0]);
                        SchTofCut3->Fill(-sch_tdc[k][0]-tofmt[i][0]);
-                       if(0<m2[ntKurama]&&m2[ntKurama]<0.1){
+                       if(0<m2[0]&&m2[0]<0.1){
                          SchTofPiCut->Fill(-sch_tdc[k][0]-tofmt[i][0]);
                        }
-                       if(0.1<m2[ntKurama]&&m2[ntKurama]<0.4){
+                       if(0.1<m2[0]&&m2[0]<0.4){
                          SchTofKCut->Fill(-sch_tdc[k][0]-tofmt[i][0]);
                        }
-                       if(0.6<m2[ntKurama]&&m2[ntKurama]<1){
+                       if(0.6<m2[0]&&m2[0]<1){
                          SchTofPCut->Fill(-sch_tdc[k][0]-tofmt[i][0]);
                        }
                      }
@@ -456,9 +553,9 @@ void mtx_gate(int month, int runnum){
                        SftXTdcCut2->Fill(sftx_utdc[k][0]);
                        SftXTof->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[k][0]);
                        if(ntKurama==1){
-                         if(0<m2[ntKurama]&&m2[ntKurama]<0.1)    SftXTofPiCut->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[i][0]);
-                         if(0.1<m2[ntKurama]&&m2[ntKurama]<0.4)  SftXTofKCut->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[i][0]);
-                         if(0.6<m2[ntKurama]&&m2[ntKurama]<1)    SftXTofPCut->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[i][0]);
+                         if(0<m2[0]&&m2[0]<0.1)    SftXTofPiCut->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[i][0]);
+                         if(0.1<m2[0]&&m2[0]<0.4)  SftXTofKCut->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[i][0]);
+                         if(0.6<m2[0]&&m2[0]<1)    SftXTofPCut->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[i][0]);
                        }
                      }else if(sftx_unhits==0&&sftx_dnhits==1){
                        if(sftx_ddepth[k]!=1) continue;
@@ -471,9 +568,9 @@ void mtx_gate(int month, int runnum){
                        SftXTdcCut2->Fill(sftx_dtdc[k][0]);
                        SftXTof->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[k][0]);
                        if(ntKurama==1){
-                         if(0<m2[ntKurama]&&m2[ntKurama]<0.1)    SftXTofPiCut->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[i][0]);
-                         if(0.1<m2[ntKurama]&&m2[ntKurama]<0.4)  SftXTofKCut->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[i][0]);
-                         if(0.6<m2[ntKurama]&&m2[ntKurama]<1)    SftXTofPCut->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[i][0]);
+                         if(0<m2[0]&&m2[0]<0.1)    SftXTofPiCut->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[i][0]);
+                         if(0.1<m2[0]&&m2[0]<0.4)  SftXTofKCut->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[i][0]);
+                         if(0.6<m2[0]&&m2[0]<1)    SftXTofPCut->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[i][0]);
                        }
                      }
                    }
@@ -854,19 +951,19 @@ void mtx_gate(int month, int runnum){
                      if(sch_depth[k]!=1) continue;
                      if(sch_hitpat[0]!=k) continue;
                      if(ntKurama==1){
-                       if(0<m2[ntKurama]&&m2[ntKurama]<0.1){
+                       if(0<m2[0]&&m2[0]<0.1){
                          SchTofPiCut_KTime0->Fill(-sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0);
-                         SchTofPiCut_KTime0_pKurama->Fill(-sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0,pKurama[ntKurama]);
+                         SchTofPiCut_KTime0_pKurama->Fill(-sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0,pKurama[0]);
                        }
-                       if(0.1<m2[ntKurama]&&m2[ntKurama]<0.4){
+                       if(0.1<m2[0]&&m2[0]<0.4){
                          SchTofKCut_KTime0->Fill(-sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0);
-                         SchTofKCut_KTime0_pKurama->Fill(-sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0,pKurama[ntKurama]);
+                         SchTofKCut_KTime0_pKurama->Fill(-sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0,pKurama[0]);
                        }
-                       if(0.6<m2[ntKurama]&&m2[ntKurama]<1){
+                       if(0.6<m2[0]&&m2[0]<1){
                          SchTofPCut_KTime0->Fill(-sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0);
-                         SchTofPCut_KTime0_pKurama->Fill(-sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0,pKurama[ntKurama]);
+                         SchTofPCut_KTime0_pKurama->Fill(-sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0,pKurama[0]);
                        }
-                       if(0<m2[ntKurama]&&m2[ntKurama]<1){
+                       if(0<m2[0]&&m2[0]<1){
                          SchTofCut3_KTime0->Fill(-sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0);
                        }else{
                          SchTofCut3_KTime0_GOMI->Fill(-sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0);
@@ -878,17 +975,17 @@ void mtx_gate(int month, int runnum){
                        if(sftx_udepth[k]!=1) continue;
                        if(sftx_uhitpat[0]!=k) continue;
                        if(ntKurama==1){
-                         if(0<m2[ntKurama]&&m2[ntKurama]<0.1)    SftXTofPiCut_KTime0->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[i][0]-SftXTofKTime0);
-                         if(0.1<m2[ntKurama]&&m2[ntKurama]<0.4)  SftXTofKCut_KTime0->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[i][0]-SftXTofKTime0);
-                         if(0.6<m2[ntKurama]&&m2[ntKurama]<1)    SftXTofPCut_KTime0->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[i][0]-SftXTofKTime0);
+                         if(0<m2[0]&&m2[0]<0.1)    SftXTofPiCut_KTime0->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[i][0]-SftXTofKTime0);
+                         if(0.1<m2[0]&&m2[0]<0.4)  SftXTofKCut_KTime0->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[i][0]-SftXTofKTime0);
+                         if(0.6<m2[0]&&m2[0]<1)    SftXTofPCut_KTime0->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[i][0]-SftXTofKTime0);
                        }
                      }else if(sftx_unhits==0&&sftx_dnhits==1){
                        if(sftx_ddepth[k]!=1) continue;
                        if(sftx_dhitpat[0]!=k) continue;
                        if(ntKurama==1){
-                         if(0<m2[ntKurama]&&m2[ntKurama]<0.1)    SftXTofPiCut_KTime0->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[i][0]-SftXTofKTime0);
-                         if(0.1<m2[ntKurama]&&m2[ntKurama]<0.4)  SftXTofKCut_KTime0->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[i][0]-SftXTofKTime0);
-                         if(0.6<m2[ntKurama]&&m2[ntKurama]<1)    SftXTofPCut_KTime0->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[i][0]-SftXTofKTime0);
+                         if(0<m2[0]&&m2[0]<0.1)    SftXTofPiCut_KTime0->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[i][0]-SftXTofKTime0);
+                         if(0.1<m2[0]&&m2[0]<0.4)  SftXTofKCut_KTime0->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[i][0]-SftXTofKTime0);
+                         if(0.6<m2[0]&&m2[0]<1)    SftXTofPCut_KTime0->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[i][0]-SftXTofKTime0);
                        }
                      }
                    }
@@ -986,8 +1083,75 @@ void mtx_gate(int month, int runnum){
    Leg2->AddEntry(SftXTofPCut_KTime0,  "Proton","f");
    Leg2->Draw();
    c1->Print(pdf);
-   c1->Print(pdf+"]"); 
 
+//// m2 vs momwntum ... -------------------------------------------------------------------------------
+//   for (Long64_t s=0; s<nentries;s++) {
+//     nbytes += k0hodo->GetEntry(s);
+//     if(trigpat[17]<=0) continue;
+//     for(int i=0; i<NumOfSegTOF; i++){
+//       bool flag=false;
+//       for(int j=0; j<16; j++){
+//         if(tofmt[i][j]==-999){
+//           if(!flag){
+//             if(j!=0){
+//               if(tofnhits!=1) continue;
+//               if(j==1){
+//                 if(trigflag[28]>0){
+//                   for(int k=0; k<NumOfSegSCH; k++){
+//                     if(sch_nhits!=1) continue;
+//                     if(sch_depth[k]!=1) continue;
+//                     if(sch_hitpat[0]!=k) continue;
+//                     if(ntKurama==1){
+//                       if(0<m2[0]&&m2[0]<0.1){
+//                         SchTofPiCut_KTime0->Fill(-sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0);
+//                         SchTofPiCut_KTime0_pKurama->Fill(-sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0,pKurama[0]);
+//                       }
+//                       if(0.1<m2[0]&&m2[0]<0.4){
+//                         SchTofKCut_KTime0->Fill(-sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0);
+//                         SchTofKCut_KTime0_pKurama->Fill(-sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0,pKurama[0]);
+//                       }
+//                       if(0.6<m2[0]&&m2[0]<1){
+//                         SchTofPCut_KTime0->Fill(-sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0);
+//                         SchTofPCut_KTime0_pKurama->Fill(-sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0,pKurama[0]);
+//                       }
+//                       if(0<m2[0]&&m2[0]<1){
+//                         SchTofCut3_KTime0->Fill(-sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0);
+//                       }else{
+//                         SchTofCut3_KTime0_GOMI->Fill(-sch_tdc[k][0]-tofmt[i][0]-SchTofKTime0);
+//                       }
+//                     }
+//                   }
+//                   for(int k=0; k<NumOfSegSFT_X; k++){
+//                     if(sftx_unhits==1&&sftx_dnhits==0){
+//                       if(sftx_udepth[k]!=1) continue;
+//                       if(sftx_uhitpat[0]!=k) continue;
+//                       if(ntKurama==1){
+//                         if(0<m2[0]&&m2[0]<0.1)    SftXTofPiCut_KTime0->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[i][0]-SftXTofKTime0);
+//                         if(0.1<m2[0]&&m2[0]<0.4)  SftXTofKCut_KTime0->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[i][0]-SftXTofKTime0);
+//                         if(0.6<m2[0]&&m2[0]<1)    SftXTofPCut_KTime0->Fill(HULMHTDCCalib*sftx_utdc[k][0]-tofmt[i][0]-SftXTofKTime0);
+//                       }
+//                     }else if(sftx_unhits==0&&sftx_dnhits==1){
+//                       if(sftx_ddepth[k]!=1) continue;
+//                       if(sftx_dhitpat[0]!=k) continue;
+//                       if(ntKurama==1){
+//                         if(0<m2[0]&&m2[0]<0.1)    SftXTofPiCut_KTime0->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[i][0]-SftXTofKTime0);
+//                         if(0.1<m2[0]&&m2[0]<0.4)  SftXTofKCut_KTime0->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[i][0]-SftXTofKTime0);
+//                         if(0.6<m2[0]&&m2[0]<1)    SftXTofPCut_KTime0->Fill(HULMHTDCCalib*sftx_dtdc[k][0]-tofmt[i][0]-SftXTofKTime0);
+//                       }
+//                     }
+//                   }
+//                 }
+//               }
+//             }
+//             flag=true;
+//           }
+//         }
+//       }
+//     }
+//   }
+
+
+   c1->Print(pdf+"]"); 
 
 }
 
