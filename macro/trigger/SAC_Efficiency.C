@@ -652,19 +652,19 @@ void SAC_Efficiency(int month,int runnum){
      if(ntKurama!=1) continue;
      if(
 //       chisqrKurama[ntKurama]<chisqr &&
-         qKurama[ntKurama]>0&&
+         qKurama[0]>0&&
 //         ntKurama==1 &&
 //         nhSac==1//&&
-         xsacKurama[ntKurama]>xsacKuramaGateMin&&
-         xsacKurama[ntKurama]<xsacKuramaGateMax&&
-         ysacKurama[ntKurama]>ysacKuramaGateMin&&
-         ysacKurama[ntKurama]<ysacKuramaGateMax&&
+         xsacKurama[0]>xsacKuramaGateMin&&
+         xsacKurama[0]<xsacKuramaGateMax&&
+         ysacKurama[0]>ysacKuramaGateMin&&
+         ysacKurama[0]<ysacKuramaGateMax&&
 //         tSac[nhSac]>tSacGateMin&&
 //         tSac[nhSac]<tSacGateMax&&
-         m2[ntKurama]>-0,2&&
-         m2[ntKurama]<0.2&&
-         pKurama[ntKurama]>0.2&&
-         pKurama[ntKurama]<0.9//&&
+         m2[0]>-0,2&&
+         m2[0]<0.2&&
+         pKurama[0]>0.2&&
+         pKurama[0]<0.9//&&
 //         trigflag[19]>trigflag19GateMin&&
 //         trigflag[19]<trigflag19GateMax
        ){
@@ -678,12 +678,12 @@ void SAC_Efficiency(int month,int runnum){
        if(n_hit!=0) hit += 1;
        total += 1;
 
-       Hist1[17]->Fill(xsacKurama[ntKurama]);
-       Hist1[18]->Fill(ysacKurama[ntKurama]);
-       Hist1[19]->Fill(pKurama[ntKurama]);
-       Hist1[20]->Fill(m2[ntKurama]);
-       Hist2[5]->Fill(m2[ntKurama],pKurama[ntKurama]);
-       Hist2[6]->Fill(xsacKurama[ntKurama],ysacKurama[ntKurama]);
+       Hist1[17]->Fill(xsacKurama[0]);
+       Hist1[18]->Fill(ysacKurama[0]);
+       Hist1[19]->Fill(pKurama[0]);
+       Hist1[20]->Fill(m2[0]);
+       Hist2[5]->Fill(m2[0],pKurama[0]);
+       Hist2[6]->Fill(xsacKurama[0],ysacKurama[0]);
      } // Cut3
 //    } // tSac by Room
    } 
