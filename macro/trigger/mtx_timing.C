@@ -588,17 +588,19 @@ void mtx_timing(int month, int runnum){
      }
    }
 
-   for(int k=0; k<NumOfSegSCH; k++){
-     Hist1[38]->Fill(sch_nhits);
-     Hist1[39]->Fill(sch_hitpat[k]);
-     Hist1[40]->Fill(sch_depth[k]);
-     Hist1[41]->Fill(sch_tdc[k]);
-     if(sch_nhits!=1) continue;
-     if(sch_depth[k]!=1) continue;
-     if(sch_hitpat[0]!=k) continue;
-     SchTdcCut2->Fill(sch_tdc[k][0]);
-     SchTimeCut2->Fill(-sch_tdc[k][0]);
-     SchTof->Fill(-sch_tdc[k][0]-tofmt[i][0]);
+   Hist1[38]->Fill(sch_nhits);
+   for(int i=0; i<sch_nhits; i++){
+     Hist1[39]->Fill(sch_hitpat[i]);
+   }
+   for(int i=0; i<NumOfSegSCH; i++){
+     Hist1[40]->Fill(sch_depth[i]);
+     for(int k=0; k<16; k++){
+       if(sch_tdc[i][k]==-999) continue;
+       Hist1[41]->Fill(sch_tdc[i][k]);
+       if(sch_nhits!=1) continue;
+       if(sch_depth[i]!=1) continue;
+       if(sch_hitpat[0]!=i) continue;
+     }
    }
                  //                 MatrixFlag_Tof->Fill(HULMHTDCCalib*trigflag[28]-tofmt[i][0]);
                  //                 for(int k=0; k<NumOfSegSFT_X; k++){
