@@ -503,7 +503,7 @@ void mtx_banch(int month, int runnum){
                   Hist1[76]->Fill(sftx_utime[m][0]);
                   Hist1[80]->Fill(sftx_utime[m][0]);
                   Hist2[0]->Fill(sch_time[k][0],tofmt[i][0]);
-                  Hist2[1]->Fill(sch_time[k][0],sftx_utime[m][0]);
+                  Hist2[2]->Fill(sch_time[k][0],sftx_utime[m][0]);
                   if(    -Gate1+10<tofmt[i][0]  &&tofmt[i][0] <Gate1+10 
                       && -Gate1<sch_time[k][0]  &&sch_time[k][0]  <Gate1
                       && -Gate1<sftx_utime[m][0]&&sftx_utime[m][0]<Gate1
@@ -545,7 +545,7 @@ void mtx_banch(int month, int runnum){
                   Hist1[79]->Fill(m);
                   Hist1[78]->Fill(sftx_dtime[m][0]);
                   Hist1[80]->Fill(sftx_dtime[m][0]);
-                  Hist2[2]->Fill(sch_time[k][0],tofmt[i][0]);
+                  Hist2[1]->Fill(sch_time[k][0],tofmt[i][0]);
                   Hist2[3]->Fill(sch_time[k][0],sftx_dtime[m][0]);
                 }
               }
