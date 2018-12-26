@@ -504,30 +504,34 @@ void mtx_banch(int month, int runnum){
                   Hist1[80]->Fill(sftx_utime[m][0]);
                   Hist2[0]->Fill(sch_time[k][0],tofmt[i][0]);
                   Hist2[1]->Fill(sch_time[k][0],sftx_utime[m][0]);
-                  if(   -Gate1<tofmt[i][0]     &&tofmt[i][0]     <Gate1
+                  if(    -Gate1<tofmt[i][0]     &&tofmt[i][0]     <Gate1
                       && -Gate1<sch_time[k][0]  &&sch_time[k][0]  <Gate1
                       && -Gate1<sftx_utime[m][0]&&sftx_utime[m][0]<Gate1
-                    ) continue; //Cut7
+                    ){ //Cut7
                   Hist2[4]->Fill(sch_time[k][0],tofmt[i][0]);
                   Hist2[5]->Fill(sch_time[k][0],sftx_utime[m][0]);
-                  if(   -Gate2<tofmt[i][0]     &&tofmt[i][0]     <Gate2
+                  }
+                  if(    -Gate2<tofmt[i][0]     &&tofmt[i][0]     <Gate2
                       && -Gate2<sch_time[k][0]  &&sch_time[k][0]  <Gate2
                       && -Gate2<sftx_utime[m][0]&&sftx_utime[m][0]<Gate2
-                    ) continue; //Cut8
+                    ){ //Cut8
                   Hist2[6]->Fill(sch_time[k][0],tofmt[i][0]);
                   Hist2[7]->Fill(sch_time[k][0],sftx_utime[m][0]);
-                  if(   -Gate3<tofmt[i][0]     &&tofmt[i][0]     <Gate3
+                  }
+                  if(    -Gate3<tofmt[i][0]     &&tofmt[i][0]     <Gate3
                       && -Gate3<sch_time[k][0]  &&sch_time[k][0]  <Gate3
                       && -Gate3<sftx_utime[m][0]&&sftx_utime[m][0]<Gate3
-                    ) continue; //Cut9
+                    ){ //Cut9
                   Hist2[8]->Fill(sch_time[k][0],tofmt[i][0]);
                   Hist2[9]->Fill(sch_time[k][0],sftx_utime[m][0]);
-                  if(   -Gate4<tofmt[i][0]     &&tofmt[i][0]     <Gate4
+                  }
+                  if(    -Gate4<tofmt[i][0]     &&tofmt[i][0]     <Gate4
                       && -Gate4<sch_time[k][0]  &&sch_time[k][0]  <Gate4
                       && -Gate4<sftx_utime[m][0]&&sftx_utime[m][0]<Gate4
-                    ) continue; //Cut10
+                    ){ //Cut9
                   Hist2[10]->Fill(sch_time[k][0],tofmt[i][0]);
                   Hist2[11]->Fill(sch_time[k][0],sftx_utime[m][0]);
+                  }
                 }
               }
               if(sftx_dnhits==1){
