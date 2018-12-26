@@ -298,6 +298,8 @@ void mtx_banch(int month, int runnum){
   Hist1[35] = new TH1D("TofMtOr","TofMtOr",100,-10,90);
   Hist1[36] = new TH1D("TofMtOr Cut1","TofMtOrCut1",100,-10,90);
   Hist1[50] = new TH1D("TofMtOr Hitpat Cut1","TofMtOr Hitpat Cut1",25,0,24);
+  Hist1[67] = new TH1D("TofMtOr Hitpat Cut4","TofMtOr Hitpat Cut4",25,0,24);
+  Hist1[68] = new TH1D("TofMtOr Cut4","TofMtOr Cut4",200,-100,100);
 
   //-Sch ----------------
   Hist1[37]= new TH1D("Sch Nhits" ,"Sch Nhits" ,20,0,20);
@@ -325,12 +327,12 @@ void mtx_banch(int month, int runnum){
   Hist1[56] = new TH1D("Sft U Tdc Cut3","Sft U Tdc Cut3",1000,0,1000);
   Hist1[57] = new TH1D("Sft D Tdc Cut3","Sft D Tdc Cut3",1000,0,1000);
   Hist1[58] = new TH1D("SftTdc Cut3","SftTdc Cut3",1000,0,1000);
-  Hist1[61] = new TH1D("Sft U Time","Sft U Time",1000,0,1000);
-  Hist1[62] = new TH1D("Sft D Time","Sft D Time",1000,0,1000);
-  Hist1[63] = new TH1D("SftTime","SftTime",1000,0,1000);
-  Hist1[64] = new TH1D("Sft U Time Cut3","Sft U Time Cut3",1000,0,1000);
-  Hist1[65] = new TH1D("Sft D Time Cut3","Sft D Time Cut3",1000,0,1000);
-  Hist1[66] = new TH1D("SftTime Cut3","SftTime Cut3",1000,0,1000);
+  Hist1[61] = new TH1D("Sft U Time","Sft U Time",200,-100,100);
+  Hist1[62] = new TH1D("Sft D Time","Sft D Time",200,-100,100);
+  Hist1[63] = new TH1D("SftTime","SftTime",200,-100,100);
+  Hist1[64] = new TH1D("Sft U Time Cut3","Sft U Time Cut3",200,-100,100);
+  Hist1[65] = new TH1D("Sft D Time Cut3","Sft D Time Cut3",200,-100,100);
+  Hist1[66] = new TH1D("SftTime Cut3","SftTime Cut3",200,-100,100);
 
 
   //    Hist1[0 ]= new TH1D("m2","m2",100,0,40);
@@ -453,22 +455,19 @@ void mtx_banch(int month, int runnum){
         if(tofnhits!=1)         continue;    
         if(tofmt[i][1]!=-999)   continue;
         // Sch ------------------------
-        for(int i=0; i<NumOfSegSCH; i++){
-          for(int k=0; k<16; k++){
-            if(sch_tdc[i][k]==-999) continue;
+        for(int k=0; k<NumOfSegSCH; k++){
+          for(int l=0; l<16; l++){
+            if(sch_tdc[k][l]==-999) continue;
             if(sch_nhits!=1) continue;
-            if(sch_depth[i]!=1) continue;
-            if(sch_hitpat[0]!=i) continue;
+            if(sch_depth[k]!=1) continue;
+            if(sch_hitpat[0]!=k) continue;
             // Sft X ----------------------
-            for(int i=0; i<NumOfSegSFT_X; i++){
-              for(int j=0; j<16; j++){
-                if(sftx_unhits==1&&sftx_dnhits==0){
-                  if(sftx_udepth[i]!=1) continue;
-                  if(sftx_uhitpat[0]!=i) continue;
-                }else if(sftx_unhits==0&&sftx_dnhits==1){
-                  if(sftx_ddepth[i]!=1) continue;
-                  if(sftx_dhitpat[0]!=i) continue;
-                }
+            for(int mi=0; m<NumOfSegSFT_X; m++){
+              if(sftx_unhits==1&&sftx_dnhits==1){
+                if(sftx_udepth[m]!=1) continue;
+                if(sftx_uhitpat[0]!=m) continue;
+                if(sftx_ddepth[m]!=1) continue;
+                if(sftx_dhitpat[0]!=m) continue; //Cut4
               }
             }
           }
