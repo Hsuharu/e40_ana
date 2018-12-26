@@ -644,10 +644,10 @@ void SAC_Efficiency(int month,int runnum){
 
 //   double xsacKuramaGateMin = -200;
 //   double xsacKuramaGateMax =  240;
-   double xsacKuramaGateMin =    0;
-   double xsacKuramaGateMax =  440;
-   double ysacKuramaGateMin = -180;
-   double ysacKuramaGateMax =  180;
+   double xsacKuramaGateMin =   40;
+   double xsacKuramaGateMax =  400;
+   double ysacKuramaGateMin = -160;
+   double ysacKuramaGateMax =  160;
 
 //-Event Loop Second --------
    nbytes = 0;
