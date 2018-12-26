@@ -283,9 +283,9 @@ void mtx_banch(int month, int runnum){
 
   //-hist def-----------------------------------------------------------------------------------------
   Hist1Max = 81;
-  //   Hist2Max = 15;
+  Hist2Max = 4;
   TH1D *Hist1[Hist1Max];
-  //   TH2D *Hist2[Hist2Max];
+  TH2D *Hist2[Hist2Max];
 
   //-Trigger Flag -------
   for(int i=0;i<32;i++){
@@ -347,21 +347,21 @@ void mtx_banch(int month, int runnum){
   Hist1[80] = new TH1D("SftTime Cut5 or Cut6","SftTime Cut5 or Cut6",200,-100,100);
 
 
-  //    Hist1[0 ]= new TH1D("m2","m2",100,0,40);
-  //    Hist1[1 ]= new TH1D("pKurama","pKurama",100,0,2);
-  //
-  //    Hist2[0]= new TH2D("pKurama % m2",     "pKurama % m2 "    ,100,-0.4,1.4,100,0,2);
+  Hist2[0]= new TH2D("TofMtOr Time % Sch Time Cut5","TofMtOr Time % Sch Time Cut5",200,-100,100,200,-100,100);
+  Hist2[1]= new TH2D("TofMtOr Time % Sch Time Cut6","TofMtOr Time % Sch Time Cut6",200,-100,100,200,-100,100);
+  Hist2[2]= new TH2D("Sft U Time % Sch Time Cut5","Sft U Time % Sch Time Cut5",200,-100,100,200,-100,100);
+  Hist2[3]= new TH2D("Sft D Time % Sch Time Cut6","Sft D Time % Sch Time Cut6",200,-100,100,200,-100,100);
 
   // m2 - momentum ...------
 
-  //-Legend def --------------------------------------------------------------------------------------
-  //  TLegend *Leg1 = new TLegend(0.1,0.7,0.48,0.9);
+//-Legend def --------------------------------------------------------------------------------------
+//  TLegend *Leg1 = new TLegend(0.1,0.7,0.48,0.9);
   TLegend *Leg1 = new TLegend(0.78,0.775,0.98,0.935);
   TLegend *Leg2 = new TLegend(0.78,0.775,0.98,0.935);
 
-  //-Event Loop --------------------------------------------------------------------------------------
-  //   Long64_t nentries = mtx->GetEntries();
-  Long64_t nentries =10000;
+//-Event Loop --------------------------------------------------------------------------------------
+   Long64_t nentries = mtx->GetEntries();
+//  Long64_t nentries =10000;
 
   Long64_t nbytes = 0;
   for (Long64_t s=0; s<nentries;s++) {
@@ -489,6 +489,8 @@ void mtx_banch(int month, int runnum){
                   Hist1[79]->Fill(m);
                   Hist1[76]->Fill(sftx_utime[m][0]);
                   Hist1[80]->Fill(sftx_utime[m][0]);
+                  Hist2[0]->Fill(sch_time[k][0],tofmt[i][0]);
+                  Hist2[1]->Fill(sch_time[k][0],sftx_utime[m][0]);
                 }
               }
               if(sftx_dnhits==1){
@@ -502,6 +504,8 @@ void mtx_banch(int month, int runnum){
                   Hist1[79]->Fill(m);
                   Hist1[78]->Fill(sftx_dtime[m][0]);
                   Hist1[80]->Fill(sftx_dtime[m][0]);
+                  Hist2[2]->Fill(sch_time[k][0],tofmt[i][0]);
+                  Hist2[3]->Fill(sch_time[k][0],sftx_dtime[m][0]);
                 }
               }
             }
