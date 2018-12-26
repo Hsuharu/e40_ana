@@ -278,6 +278,11 @@ void mtx_banch(int month, int runnum){
   double HULMHTDCCalib = -0.8333;
   double MaxBinValue=0.;
 
+  int Gate1 = 60;
+  int Gate2 = 30;
+  int Gate3 = 20;
+  int Gate4 = 10;
+
   int Hist1Max = 0;
   int Hist2Max = 0;
 
@@ -351,6 +356,14 @@ void mtx_banch(int month, int runnum){
   Hist2[1]= new TH2D("TofMtOr Time % Sch Time Cut6","TofMtOr Time % Sch Time Cut6",200,-100,100,200,-100,100);
   Hist2[2]= new TH2D("Sft U Time % Sch Time Cut5","Sft U Time % Sch Time Cut5",200,-100,100,200,-100,100);
   Hist2[3]= new TH2D("Sft D Time % Sch Time Cut6","Sft D Time % Sch Time Cut6",200,-100,100,200,-100,100);
+  Hist2[4]= new TH2D("TofMtOr Time % Sch Time Cut7","TofMtOr Time % Sch Time Cut7",200,-100,100,200,-100,100);
+  Hist2[5]= new TH2D("Sft U Time % Sch Time Cut7","Sft U Time % Sch Time Cut7",200,-100,100,200,-100,100);
+  Hist2[6]= new TH2D("TofMtOr Time % Sch Time Cut8","TofMtOr Time % Sch Time Cut8",200,-100,100,200,-100,100);
+  Hist2[7]= new TH2D("Sft U Time % Sch Time Cut8","Sft U Time % Sch Time Cut8",200,-100,100,200,-100,100);
+  Hist2[8]= new TH2D("TofMtOr Time % Sch Time Cut9","TofMtOr Time % Sch Time Cut9",200,-100,100,200,-100,100);
+  Hist2[9]= new TH2D("Sft U Time % Sch Time Cut9","Sft U Time % Sch Time Cut9",200,-100,100,200,-100,100);
+  Hist2[10]= new TH2D("TofMtOr Time % Sch Time Cut10","TofMtOr Time % Sch Time Cut10",200,-100,100,200,-100,100);
+  Hist2[11]= new TH2D("Sft U Time % Sch Time Cut10","Sft U Time % Sch Time Cut10",200,-100,100,200,-100,100);
 
   // m2 - momentum ...------
 
@@ -360,8 +373,8 @@ void mtx_banch(int month, int runnum){
   TLegend *Leg2 = new TLegend(0.78,0.775,0.98,0.935);
 
 //-Event Loop --------------------------------------------------------------------------------------
-   Long64_t nentries = mtx->GetEntries();
-//  Long64_t nentries =10000;
+//   Long64_t nentries = mtx->GetEntries();
+  Long64_t nentries =10000;
 
   Long64_t nbytes = 0;
   for (Long64_t s=0; s<nentries;s++) {
@@ -491,6 +504,30 @@ void mtx_banch(int month, int runnum){
                   Hist1[80]->Fill(sftx_utime[m][0]);
                   Hist2[0]->Fill(sch_time[k][0],tofmt[i][0]);
                   Hist2[1]->Fill(sch_time[k][0],sftx_utime[m][0]);
+                  if(   -Gate1<tofmt[i][0]     &&tofmt[i][0]     <Gate1
+                     && -Gate1<sch_time[k][0]  &&tsch_time[k]    <Gate1
+                     && -Gate1<sftx_utime[m][0]&&sftx_utime[m][0]<Gate1
+                    ) continue; //Cut7
+                  Hist2[4]->Fill(sch_time[k][0],tofmt[i][0]);
+                  Hist2[5]->Fill(sch_time[k][0],sftx_utime[m][0]);
+                  if(   -Gate2<tofmt[i][0]     &&tofmt[i][0]     <Gate2
+                     && -Gate2<sch_time[k][0]  &&tsch_time[k]    <Gate2
+                     && -Gate2<sftx_utime[m][0]&&sftx_utime[m][0]<Gate2
+                    ) continue; //Cut8
+                  Hist2[6]->Fill(sch_time[k][0],tofmt[i][0]);
+                  Hist2[7]->Fill(sch_time[k][0],sftx_utime[m][0]);
+                  if(   -Gate3<tofmt[i][0]     &&tofmt[i][0]     <Gate3
+                     && -Gate3<sch_time[k][0]  &&tsch_time[k]    <Gate3
+                     && -Gate3<sftx_utime[m][0]&&sftx_utime[m][0]<Gate3
+                    ) continue; //Cut9
+                  Hist2[8]->Fill(sch_time[k][0],tofmt[i][0]);
+                  Hist2[9]->Fill(sch_time[k][0],sftx_utime[m][0]);
+                  if(   -Gate4<tofmt[i][0]     &&tofmt[i][0]     <Gate4
+                     && -Gate4<sch_time[k][0]  &&tsch_time[k]    <Gate4
+                     && -Gate4<sftx_utime[m][0]&&sftx_utime[m][0]<Gate4
+                    ) continue; //Cut10
+                  Hist2[10]->Fill(sch_time[k][0],tofmt[i][0]);
+                  Hist2[11]->Fill(sch_time[k][0],sftx_utime[m][0]);
                 }
               }
               if(sftx_dnhits==1){
@@ -530,11 +567,11 @@ void mtx_banch(int month, int runnum){
     c1->Print(Form("%s/mtx_banch_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
   }
-  //   for(int i=0; i<Hist2Max; i++){
-  //   Hist2[i]->Draw("colz");
-  //   c1->Print(pdf);
-  //   c1->Print(Form("%s/mtx_banch_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
-  //   }
+  for(int i=0; i<Hist2Max; i++){
+  Hist2[i]->Draw("colz");
+  c1->Print(pdf);
+  c1->Print(Form("%s/mtx_banch_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
+  }
 
 
 
