@@ -53,7 +53,7 @@ const char* TriggerFlag[]=
     "TofTiming "
   };
 
-void SAC_Efficiency(int month,int runnum){
+void 3DMtx_Pos(int month,int runnum){
 //////////////////////////////////////////////////////////
 //   This file has been automatically generated 
 //     (Fri Dec 21 01:38:49 2018 by ROOT version6.10/08)
@@ -68,7 +68,7 @@ void SAC_Efficiency(int month,int runnum){
    gROOT->Reset();
    gROOT->Reset();
    TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-   TString pdf = Form("%s/pdf/trigger/SAC_Efficiency_run%05d.pdf", anadir.Data(),runnum);
+   TString pdf = Form("%s/pdf/trigger/3DMtx_Pos_run%05d.pdf", anadir.Data(),runnum);
    TString pdfDhire = Form("%s/pdf/trigger", anadir.Data());
 //   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/trigf19_tofht.root", anadir.Data(),Month[month]),"READ");
    TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_KuramaTracking.root", anadir.Data(),Month[month],runnum),"READ");
@@ -573,7 +573,7 @@ void SAC_Efficiency(int month,int runnum){
        Hist2[3]->Fill(xsacKurama[i],ysacKurama[i]);
 
        if(chisqrKurama[i]<chisqr&&qKurama[i]>0&&ntKurama==1){
-         Hist1[2]->Fill(pKurama[i]);
+         Hist1[2]->Fkll(pKurama[i]);
          Hist1[4]->Fill(m2[i]);
          Hist2[2]->Fill(m2[i],pKurama[i]);
          Hist2[4]->Fill(xsacKurama[i],ysacKurama[i]);
