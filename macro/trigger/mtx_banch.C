@@ -281,7 +281,7 @@ void mtx_banch(int month, int runnum){
   int Gate1 = 60;
   int Gate2 = 30;
   int Gate3 = 20;
-  int Gate4 = 10;
+  int Gate4 = 15;
 
   int Hist1Max = 0;
   int Hist2Max = 0;
