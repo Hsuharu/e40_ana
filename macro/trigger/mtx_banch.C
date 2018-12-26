@@ -373,8 +373,8 @@ void mtx_banch(int month, int runnum){
   TLegend *Leg2 = new TLegend(0.78,0.775,0.98,0.935);
 
 //-Event Loop --------------------------------------------------------------------------------------
-//   Long64_t nentries = mtx->GetEntries();
-  Long64_t nentries =10000;
+  Long64_t nentries = mtx->GetEntries();
+//  Long64_t nentries =10000;
 
   Long64_t nbytes = 0;
   for (Long64_t s=0; s<nentries;s++) {
