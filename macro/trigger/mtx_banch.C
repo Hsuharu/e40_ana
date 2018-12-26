@@ -282,7 +282,7 @@ void mtx_banch(int month, int runnum){
   int Hist2Max = 0;
 
   //-hist def-----------------------------------------------------------------------------------------
-  Hist1Max = 59;
+  Hist1Max = 67;
   //   Hist2Max = 15;
   TH1D *Hist1[Hist1Max];
   //   TH2D *Hist2[Hist2Max];
@@ -306,6 +306,8 @@ void mtx_banch(int month, int runnum){
   Hist1[40]= new TH1D("Sch Tdc"   ,"Sch Tdc"   ,100,0,1000);
   Hist1[51]= new TH1D("Sch Hitpat Cut2","Sch Hitpat Cut2",65,0,65);
   Hist1[52]= new TH1D("Sch Tdc Cut2"   ,"Sch Tdc Cut2"   ,100,0,1000);
+  Hist1[59]= new TH1D("Sch Time"   ,"Sch Time"   ,100,-100,100);
+  Hist1[60]= new TH1D("Sch Time Cut2"   ,"Sch Time Cut2"   ,100,-100,100);
 
   //-Sft ----------------
   Hist1[41] = new TH1D("SftX U Nhits","Sft U Nhits",50,0,50);
@@ -323,6 +325,12 @@ void mtx_banch(int month, int runnum){
   Hist1[56] = new TH1D("Sft U Tdc Cut3","Sft U Tdc Cut3",1000,0,1000);
   Hist1[57] = new TH1D("Sft D Tdc Cut3","Sft D Tdc Cut3",1000,0,1000);
   Hist1[58] = new TH1D("SftTdc Cut3","SftTdc Cut3",1000,0,1000);
+  Hist1[61] = new TH1D("Sft U Time","Sft U Time",1000,0,1000);
+  Hist1[62] = new TH1D("Sft D Time","Sft D Time",1000,0,1000);
+  Hist1[63] = new TH1D("SftTime","SftTime",1000,0,1000);
+  Hist1[64] = new TH1D("Sft U Time Cut3","Sft U Time Cut3",1000,0,1000);
+  Hist1[65] = new TH1D("Sft D Time Cut3","Sft D Time Cut3",1000,0,1000);
+  Hist1[66] = new TH1D("SftTime Cut3","SftTime Cut3",1000,0,1000);
 
 
   //    Hist1[0 ]= new TH1D("m2","m2",100,0,40);
@@ -378,11 +386,13 @@ void mtx_banch(int month, int runnum){
       for(int k=0; k<16; k++){
         if(sch_tdc[i][k]==-999) continue;
         Hist1[40]->Fill(sch_tdc[i][k]);
+        Hist1[60]->Fill(sch_time[i][k]);
         if(sch_nhits!=1) continue;
         if(sch_depth[i]!=1) continue;
         if(sch_hitpat[0]!=i) continue; //Cut2
         Hist1[51]->Fill(i);
         Hist1[52]->Fill(sch_tdc[i][k]);
+        Hist1[61]->Fill(sch_time[i][k]);
       }
     }
 
@@ -404,10 +414,14 @@ void mtx_banch(int month, int runnum){
         if(sftx_utdc[i][j]!=-999){
           Hist1[47]->Fill(sftx_utdc[i][j]);
           Hist1[49]->Fill(sftx_utdc[i][j]);
+          Hist1[62]->Fill(sftx_utime[i][j]);
+          Hist1[64]->Fill(sftx_utime[i][j]);
         }
         if(sftx_dtdc[i][j]!=-999){
           Hist1[48]->Fill(sftx_dtdc[i][j]);
           Hist1[49]->Fill(sftx_dtdc[i][j]);
+          Hist1[63]->Fill(sftx_dtime[i][j]);
+          Hist1[64]->Fill(sftx_dtime[i][j]);
         }
         if(sftx_unhits==1&&sftx_dnhits==0){ //Cut3
           if(sftx_udepth[i]!=1) continue;
@@ -416,6 +430,8 @@ void mtx_banch(int month, int runnum){
           Hist1[55]->Fill(i);
           Hist1[56]->Fill(sftx_utdc[i][j]);
           Hist1[58]->Fill(sftx_utdc[i][j]);
+          Hist1[64]->Fill(sftx_utime[i][j]);
+          Hist1[66]->Fill(sftx_utime[i][j]);
         }else if(sftx_unhits==0&&sftx_dnhits==1){
           if(sftx_ddepth[i]!=1) continue;
           if(sftx_dhitpat[0]!=i) continue;
@@ -423,6 +439,8 @@ void mtx_banch(int month, int runnum){
           Hist1[55]->Fill(i);
           Hist1[57]->Fill(sftx_dtdc[i][j]);
           Hist1[58]->Fill(sftx_dtdc[i][j]);
+          Hist1[65]->Fill(sftx_dtime[i][j]);
+          Hist1[66]->Fill(sftx_dtime[i][j]);
         }
       }
     }
