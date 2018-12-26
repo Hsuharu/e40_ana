@@ -493,11 +493,11 @@ void SAC_Efficiency(int month,int runnum){
     Hist1[4 ]= new TH1D("m2 Cut1","m2 Cut1",100,-0.4,1.4);
     Hist1[5 ]= new TH1D("chisqrKurama","chisqrKurama",100,0,200);
     Hist1[6 ]= new TH1D("qKurama","qKurama",6,-3,3);
-    Hist1[7 ]= new TH1D("xsacKurama     ","xsacKurama     ",100,-400,400);
-    Hist1[8 ]= new TH1D("xsacKurama Cut1","xsacKurama Cut1",100,-400,400);
+    Hist1[7 ]= new TH1D("xsacKurama     ","xsacKurama     ",100,-100,700);
+    Hist1[8 ]= new TH1D("xsacKurama Cut1","xsacKurama Cut1",100,-100,700);
     Hist1[9 ]= new TH1D("ysacKurama     ","ysacKurama     ",100,-400,400);
     Hist1[10]= new TH1D("ysacKurama Cut1","ysacKurama Cut1",100,-400,400);
-    Hist1[11]= new TH1D("xsacKurama Cut2","xsacKurama Cut2",100,-400,400);
+    Hist1[11]= new TH1D("xsacKurama Cut2","xsacKurama Cut2",100,-100,700);
     Hist1[12]= new TH1D("ysacKurama Cut2","ysacKurama Cut2",100,-400,400);
 //    for(int i=0; i<4; i++){
 //      Hist1[13+i]= new TH1D(Form("tSac Room%d",i),Form("tSac Room%d",i),1000,-2000,2000);
@@ -509,24 +509,24 @@ void SAC_Efficiency(int month,int runnum){
     Hist1[16]= new TH1D(Form("Trigger Flag %s Cut2",TriggerFlag[19]),Form("Trigger Flag %s Cut2",TriggerFlag[19]),2000,0,2000);
 //    Hist1[15]= new TH1D(Form("Trigger Flag %s  ",TriggerFlag[17]),Form("Trigger Flag %s  ",TriggerFlag[17]),2000,0,2000);
 //    Hist1[16]= new TH1D(Form("Trigger Flag %s Cut2",TriggerFlag[17]),Form("Trigger Flag %s Cut2",TriggerFlag[17]),2000,0,2000);
-    Hist1[17]= new TH1D("xsacKurama Cut3","xsacKurama Cut3",100,-400,400);
+    Hist1[17]= new TH1D("xsacKurama Cut3","xsacKurama Cut3",100,-100,700);
     Hist1[18]= new TH1D("ysacKurama Cut3","ysacKurama Cut3",100,-400,400);
     Hist1[19]= new TH1D("pKurama Cut3","pKurama Cut3",100,0,2);
     Hist1[20]= new TH1D("m2 Cut3","m2 Cut3",100,-0.4,1.4);
     Hist1[21]= new TH1D("tSac Or Cut4","tSac Or Cut4",1000,-1500,500);
-    Hist1[22]= new TH1D("xsacKurama Cut4","xsacKurama Cut4",100,-400,400);
+    Hist1[22]= new TH1D("xsacKurama Cut4","xsacKurama Cut4",100,-100,700);
     Hist1[23]= new TH1D("ysacKurama Cut4","ysacKurama Cut4",100,-400,400);
     Hist1[24]= new TH1D("pKurama Cut4","pKurama Cut4",100,0,2);
     Hist1[25]= new TH1D("m2 Cut4","m2 Cut4",100,-0.4,1.4);
-    Hist1[26]= new TH1D("xsacKurama Cut Ver 4","xsacKurama Cut Ver 4",100,-400,400);
+    Hist1[26]= new TH1D("xsacKurama Cut Ver 4","xsacKurama Cut Ver 4",100,-100,700);
     Hist1[27]= new TH1D("ysacKurama Cut Ver 4","ysacKurama Cut Ver 4",100,-400,400);
     Hist1[28]= new TH1D("pKurama Cut Ver 4","pKurama Cut Ver 4",100,0,2);
     Hist1[29]= new TH1D("m2 Cut Ver 4","m2 Cut Ver 4",100,-0.4,1.4);
-    Hist1[30]= new TH1D("xsacKurama Cut5","xsacKurama Cut5",100,-400,400);
+    Hist1[30]= new TH1D("xsacKurama Cut5","xsacKurama Cut5",100,-100,700);
     Hist1[31]= new TH1D("ysacKurama Cut5","ysacKurama Cut5",100,-400,400);
     Hist1[32]= new TH1D("pKurama Cut5","pKurama Cut5",100,0,2);
     Hist1[33]= new TH1D("m2 Cut5","m2 Cut5",100,-0.4,1.4);
-    Hist1[34]= new TH1D("xsacKurama Cut Ver 5","xsacKurama Cut Ver 5",100,-400,400);
+    Hist1[34]= new TH1D("xsacKurama Cut Ver 5","xsacKurama Cut Ver 5",100,-100,700);
     Hist1[35]= new TH1D("ysacKurama Cut Ver 5","ysacKurama Cut Ver 5",100,-400,400);
     Hist1[36]= new TH1D("pKurama Cut Ver 5","pKurama Cut Ver 5",100,0,2);
     Hist1[37]= new TH1D("m2 Cut Ver 5","m2 Cut Ver 5",100,-0.4,1.4);
@@ -537,18 +537,18 @@ void SAC_Efficiency(int month,int runnum){
     Hist2[0]= new TH2D("pKurama % ThetaKurama","pKurama % ThetaKurama",100,0,40,100,0,2);
     Hist2[1]= new TH2D("pKurama % m2",     "pKurama % m2 "    ,100,-0.4,1.4,100,0,2);
     Hist2[2]= new TH2D("pKurama % m2 Cut1","pKurama % m2 Cut1",100,-0.4,1.4,100,0,2);
-    Hist2[3]= new TH2D("ysacKurama % xsacKurama     ","ysacKurama % xsacKurama     ",100,-400,400,100,-400,400);
-    Hist2[4]= new TH2D("ysacKurama % xsacKurama Cut1","ysacKurama % xsacKurama Cut1",100,-400,400,100,-400,400);
+    Hist2[3]= new TH2D("ysacKurama % xsacKurama     ","ysacKurama % xsacKurama     ",100,-100,700,100,-400,400);
+    Hist2[4]= new TH2D("ysacKurama % xsacKurama Cut1","ysacKurama % xsacKurama Cut1",100,-100,700,100,-400,400);
     Hist2[5]= new TH2D("pKurama % m2 Cut3","pKurama % m2 Cut3",100,-0.4,1.4,100,0,2);
-    Hist2[6]= new TH2D("ysacKurama % xsacKurama Cut3","ysacKurama % xsacKurama Cut3",100,-400,400,100,-400,400);
+    Hist2[6]= new TH2D("ysacKurama % xsacKurama Cut3","ysacKurama % xsacKurama Cut3",100,-100,700,100,-400,400);
     Hist2[7]= new TH2D("pKurama % m2 Cut4","pKurama % m2 Cut4",100,-0.4,1.4,100,0,2);
-    Hist2[8]= new TH2D("ysacKurama % xsacKurama Cut4","ysacKurama % xsacKurama Cut4",100,-400,400,100,-400,400);
+    Hist2[8]= new TH2D("ysacKurama % xsacKurama Cut4","ysacKurama % xsacKurama Cut4",100,-100,700,100,-400,400);
     Hist2[9]= new TH2D("pKurama % m2 Cut Ver 4","pKurama % m2 Cut Ver 4",100,-0.4,1.4,100,0,2);
-    Hist2[10]= new TH2D("ysacKurama % xsacKurama Cut Ver 4","ysacKurama % xsacKurama Cut Ver 4",100,-400,400,100,-400,400);
+    Hist2[10]= new TH2D("ysacKurama % xsacKurama Cut Ver 4","ysacKurama % xsacKurama Cut Ver 4",100,-100,700,100,-400,400);
     Hist2[11]= new TH2D("pKurama % m2 Cut5","pKurama % m2 Cut5",100,-0.4,1.4,100,0,2);
-    Hist2[12]= new TH2D("ysacKurama % xsacKurama Cut5","ysacKurama % xsacKurama Cut5",100,-400,400,100,-400,400);
+    Hist2[12]= new TH2D("ysacKurama % xsacKurama Cut5","ysacKurama % xsacKurama Cut5",100,-100,700,100,-400,400);
     Hist2[13]= new TH2D("pKurama % m2 Cut Ver 5","pKurama % m2 Cut Ver 5",100,-0.4,1.4,100,0,2);
-    Hist2[14]= new TH2D("ysacKurama % xsacKurama Cut Ver 5","ysacKurama % xsacKurama Cut Ver 5",100,-400,400,100,-400,400);
+    Hist2[14]= new TH2D("ysacKurama % xsacKurama Cut Ver 5","ysacKurama % xsacKurama Cut Ver 5",100,-100,700,100,-400,400);
 
 //-Legend def --------------------------------------------------------------------------------------
 
@@ -642,8 +642,10 @@ void SAC_Efficiency(int month,int runnum){
    Hist1[16]->Fit("FitFunc1","","",MaximumBin-4,MaximumBin+4);
    Hist1[16]->SetAxisRange(MaximumBin-50,MaximumBin+80,"X");
 
-   double xsacKuramaGateMin = -200;
-   double xsacKuramaGateMax =  240;
+//   double xsacKuramaGateMin = -200;
+//   double xsacKuramaGateMax =  240;
+   double xsacKuramaGateMin =    0;
+   double xsacKuramaGateMax =  440;
    double ysacKuramaGateMin = -180;
    double ysacKuramaGateMax =  180;
 
