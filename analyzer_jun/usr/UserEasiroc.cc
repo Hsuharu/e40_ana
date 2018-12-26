@@ -897,87 +897,87 @@ EventEasiroc::ProcessingNormal( void )
       int nh = hodoAna->GetNHitsSFT(p);
       enum { U, D };
       for( int i=0; i<nh; ++i ){
-	const FiberHit* hit = hodoAna->GetHitSFT(p, i);
-	if(!hit) continue;
-	int plane  = p-SFT_X1;
-	int mhit_l = hit->GetNLeading();
-	int mhit_t = hit->GetNTrailing();
-	int seg    = hit->SegmentId();
-	if(plane==U) event.sftx_udepth[seg] = mhit_l;
-	if(plane==D) event.sftx_ddepth[seg] = mhit_l;
+        const FiberHit* hit = hodoAna->GetHitSFT(p, i);
+        if(!hit) continue;
+        int plane  = p-SFT_X1;
+        int mhit_l = hit->GetNLeading();
+        int mhit_t = hit->GetNTrailing();
+        int seg    = hit->SegmentId();
+        if(plane==U) event.sftx_udepth[seg] = mhit_l;
+        if(plane==D) event.sftx_ddepth[seg] = mhit_l;
 
-	int  prev = 0;
-	bool hit_flag = false;
+        int  prev = 0;
+        bool hit_flag = false;
 
-	// raw leading data
-	for( int m=0; m<mhit_l; ++m ){
-	  if(mhit_l > MaxDepth) break;
-	  double leading  = hit->GetLeading(m);
+        // raw leading data
+        for( int m=0; m<mhit_l; ++m ){
+          if(mhit_l > MaxDepth) break;
+          double leading  = hit->GetLeading(m);
 
-	  if(leading==prev) continue;
-	  prev = leading;
-	  HF1( SFTXHid +plane+6, leading );
-	  HF2( SFTXHid +plane+10, seg, leading );
-	  HF1( SFTXHid +1000*(plane+1)+seg+1, leading );
+          if(leading==prev) continue;
+          prev = leading;
+          HF1( SFTXHid +plane+6, leading );
+          HF2( SFTXHid +plane+10, seg, leading );
+          HF1( SFTXHid +1000*(plane+1)+seg+1, leading );
 
-	  if(plane==U){
-	    event.sftx_utdc[seg][m]      = leading;
-	  }
-	  if(plane==D){
-	    event.sftx_dtdc[seg][m]      = leading;
-	  }
+          if(plane==U){
+            event.sftx_utdc[seg][m]      = leading;
+          }
+          if(plane==D){
+            event.sftx_dtdc[seg][m]      = leading;
+          }
 
-	  if( MinTdcSFT<leading && leading<MaxTdcSFT ){
-	    hit_flag = true;
-	  }
-	}// for(m)
+          if( MinTdcSFT<leading && leading<MaxTdcSFT ){
+            hit_flag = true;
+          }
+        }// for(m)
 
-	// raw trailing data
-	for( int m=0; m<mhit_t; ++m ){
-	  if(mhit_t > MaxDepth) break;
-	  double trailing = hit->GetTrailing(m);
-	  if(plane==U){
-	    event.sftx_utrailing[seg][m] = trailing;
-	  }
-	  if(plane==D){
-	    event.sftx_dtrailing[seg][m] = trailing;
-	  }
-	}// for(m)
+        // raw trailing data
+        for( int m=0; m<mhit_t; ++m ){
+          if(mhit_t > MaxDepth) break;
+          double trailing = hit->GetTrailing(m);
+          if(plane==U){
+            event.sftx_utrailing[seg][m] = trailing;
+          }
+          if(plane==D){
+            event.sftx_dtrailing[seg][m] = trailing;
+          }
+        }// for(m)
 
-	int mhit_pair = hit->GetNPair();
-	// pair data
-	for( int m=0; m<mhit_pair; ++m ){
-	  if(mhit_pair > MaxDepth) break;
-	  double time     = hit->GetTime(m);
-	  double ctime    = hit->GetCTime(m);
-	  double width    = hit->GetWidth(m);
+        int mhit_pair = hit->GetNPair();
+        // pair data
+        for( int m=0; m<mhit_pair; ++m ){
+          if(mhit_pair > MaxDepth) break;
+          double time     = hit->GetTime(m);
+          double ctime    = hit->GetCTime(m);
+          double width    = hit->GetWidth(m);
 
-	  HF1( SFTXHid +plane+8, width );
+          HF1( SFTXHid +plane+8, width );
 
-	  HF2( SFTXHid +plane+12, seg, width );
-	  HF1( SFTXHid +plane+21, time );
-	  HF2( SFTXHid +plane+23, width, time );
-	  HF1( SFTXHid +plane+31, ctime );
-	  HF2( SFTXHid +plane+33, width, ctime );
+          HF2( SFTXHid +plane+12, seg, width );
+          HF1( SFTXHid +plane+21, time );
+          HF2( SFTXHid +plane+23, width, time );
+          HF1( SFTXHid +plane+31, ctime );
+          HF2( SFTXHid +plane+33, width, ctime );
 
-	  HF1( SFTXHid +1000*(plane+3)+seg+1, width );
-	  if( -10.<time && time<10. ){
-	    HF2( SFTXHid +1000*(plane+5)+seg+1, width, time );
-	    HF2( SFTXHid +1000*(plane+7)+seg+1, width, ctime );
-	  }
-	  if(plane==U){
-	    event.sftx_utot[seg][m]      = width;
-	  }
-	  if(plane==D){
-	    event.sftx_dtot[seg][m]      = width;
-	  }
-	}// for(m)
+          HF1( SFTXHid +1000*(plane+3)+seg+1, width );
+          if( -10.<time && time<10. ){
+            HF2( SFTXHid +1000*(plane+5)+seg+1, width, time );
+            HF2( SFTXHid +1000*(plane+7)+seg+1, width, ctime );
+          }
+          if(plane==U){
+            event.sftx_utot[seg][m]      = width;
+          }
+          if(plane==D){
+            event.sftx_dtot[seg][m]      = width;
+          }
+        }// for(m)
 
-	if(hit_flag){
-	  HF1( SFTXHid +plane+4, seg+0.5);
-	  if(plane==U) event.sftx_uhitpat[unhits++] = seg;
-	  if(plane==D) event.sftx_dhitpat[dnhits++] = seg;
-	}
+        if(hit_flag){
+          HF1( SFTXHid +plane+4, seg+0.5);
+          if(plane==U) event.sftx_uhitpat[unhits++] = seg;
+          if(plane==D) event.sftx_dhitpat[dnhits++] = seg;
+        }
       }// for(i)
     }// for(p)
     HF1( SFTXHid +1, unhits);
