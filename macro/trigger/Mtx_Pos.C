@@ -68,7 +68,7 @@ void Mtx_Pos(int month,int runnum){
    gROOT->Reset();
    gROOT->Reset();
    TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-   TString pdf = Form("%s/pdf/trigger/3DMtx_Pos_run%05d.pdf", anadir.Data(),runnum);
+   TString pdf = Form("%s/pdf/trigger/Mtx_Pos_run%05d.pdf", anadir.Data(),runnum);
    TString pdfDhire = Form("%s/pdf/trigger", anadir.Data());
 //   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/trigf19_tofht.root", anadir.Data(),Month[month]),"READ");
    TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_KuramaTracking.root", anadir.Data(),Month[month],runnum),"READ");
@@ -225,7 +225,7 @@ void Mtx_Pos(int month,int runnum){
    kurama->SetBranchStatus("tSac_khodo");
    kurama->SetBranchStatus("deSac");
 //   kurama->SetBranchStatus("nhTof",&nhTof);
-//   kurama->SetBranchStatus("TofSeg",TofSeg);
+   kurama->SetBranchStatus("TofSeg");
 //   kurama->SetBranchStatus("tTof",tTof);
 //   kurama->SetBranchStatus("dtTof",dtTof);
 //   kurama->SetBranchStatus("deTof",deTof);
@@ -354,7 +354,7 @@ void Mtx_Pos(int month,int runnum){
    kurama->SetBranchAddress("tSac_khodo",tSac_khodo);
    kurama->SetBranchAddress("deSac",deSac);
 //   kurama->SetBranchAddress("nhTof",&nhTof);
-//   kurama->SetBranchAddress("TofSeg",TofSeg);
+   kurama->SetBranchAddress("TofSeg",TofSeg);
 //   kurama->SetBranchAddress("tTof",tTof);
 //   kurama->SetBranchAddress("dtTof",dtTof);
 //   kurama->SetBranchAddress("deTof",deTof);
@@ -547,19 +547,19 @@ void Mtx_Pos(int month,int runnum){
 
        Hist2[2 ]->Fill(m2[i],pKurama[i]);
        Hist2[3 ]->Fill(vpx[1],vpy[1]);
-     } // Cut1
-     if(m2[i]<0.15)continue;
-     if(m2[i]>0.35)continue;  //Cut2
-     Hist1[14]->Fill(pKurama[i]);
-     Hist1[15]->Fill(m2[i]);
-     Hist1[16]->Fill(chisqrKurama[i]);
-     Hist1[17]->Fill(qKurama[i]);
-     Hist1[18]->Fill(vpx[1]);
-     Hist1[19]->Fill(vpy[1]);
-     Hist1[20]->Fill(vpseg[1]);
+       if(m2[i]<0.15)continue;
+       if(m2[i]>0.35)continue;  //Cut2
+       Hist1[14]->Fill(pKurama[i]);
+       Hist1[15]->Fill(m2[i]);
+       Hist1[16]->Fill(chisqrKurama[i]);
+       Hist1[17]->Fill(qKurama[i]);
+       Hist1[18]->Fill(vpx[1]);
+       Hist1[19]->Fill(vpy[1]);
+       Hist1[20]->Fill(vpseg[1]);
 
-     Hist2[4 ]->Fill(m2[i],pKurama[i]);
-     Hist2[5 ]->Fill(vpx[1],vpy[1]);
+       Hist2[4 ]->Fill(m2[i],pKurama[i]);
+       Hist2[5 ]->Fill(vpx[1],vpy[1]);
+     } // Cut1
    } 
 
 // Peak & Gate Make -----
@@ -587,13 +587,13 @@ void Mtx_Pos(int month,int runnum){
    if(i==15 || i==16 || i==38) gPad->SetLogy(1);
    Hist1[i]->Draw();
    c1->Print(pdf);
-   c1->Print(Form("%s/3DMtx_Pos_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
+   c1->Print(Form("%s/Mtx_Pos_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
    if(i==15 || i==16 || i==38) gPad->SetLogy(0);
    }
    for(int i=0; i<Hist2Max; i++){
    Hist2[i]->Draw("colz");
    c1->Print(pdf);
-   c1->Print(Form("%s/3DMtx_Pos_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
+   c1->Print(Form("%s/Mtx_Pos_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
    }
 
    c1->Print(pdf+"]"); 

@@ -713,12 +713,21 @@ EventKuramaTracking::ProcessingNormal( void )
 	double x, y;
 	tp->GetTrajectoryLocalPosition(21 + l, x, y);
 
-  int seg ;
-  seg = gGeom.CalcWireNumber(21+l,x);
+//  int seg ;
+//  seg = gGeom.CalcWireNumber(21 + l,x);
+  double m_offset = 18.;
+  double m_dd = 10.5;
+  double m_w0 = 32.5;
 
+  double dw = ( (x-m_offset)/m_dd ) + m_w0;
+  int    iw = int(dw);
+  if( (dw-double(iw))>0.5 ){
+    iw+=1;
+  }
+  
   event.vpx[l] = x;
   event.vpy[l] = y;
-  event.vpseg[l] = seg;
+  event.vpseg[l] = iw;
       }// for(l)
     }
 
