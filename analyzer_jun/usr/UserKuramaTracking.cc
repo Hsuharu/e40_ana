@@ -152,6 +152,7 @@ struct Event
   double resP[MaxHits];
   double vpx[NumOfLayersVP];
   double vpy[NumOfLayersVP];
+  double vpseg[NumOfLayersVP];
 
   double xtgtKurama[MaxHits];
   double ytgtKurama[MaxHits];
@@ -712,8 +713,12 @@ EventKuramaTracking::ProcessingNormal( void )
 	double x, y;
 	tp->GetTrajectoryLocalPosition(21 + l, x, y);
 
-	event.vpx[l] = x;
-	event.vpy[l] = y;
+  int seg ;
+  seg = gGeom.CalcWireNumber(21+l,x);
+
+  event.vpx[l] = x;
+  event.vpy[l] = y;
+  event.vpseg[l] = seg;
       }// for(l)
     }
 
@@ -1437,6 +1442,7 @@ ConfMan:: InitializeHistograms( void )
 
   tree->Branch("vpx",          event.vpx,          Form("vpx[%d]/D", NumOfLayersVP));
   tree->Branch("vpy",          event.vpy,          Form("vpy[%d]/D", NumOfLayersVP));
+  tree->Branch("vpseg",        event.vpseg,        Form("vpseg[%d]/I", NumOfLayersVP));
 
   event.resL.resize(NumOfLayersSdcIn+NumOfLayersSdcOut+2);
   event.resG.resize(NumOfLayersSdcIn+NumOfLayersSdcOut+2);

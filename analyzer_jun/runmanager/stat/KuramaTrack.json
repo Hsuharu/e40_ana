@@ -1,16 +1,58 @@
 {
+    "5115": {
+        "nproc": 1,
+        "conf": "./param_nakadashi/analyzer_jun.conf",
+        "queue": "s",
+        "unit": 100000,
+        "stat": 0,
+        "prog": 4,
+        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05115_KuramaTracking.root",
+        "nseg": 10,
+        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05115.dat",
+        "nev": 955578,
+        "bin": "./bin/KuramaTracking",
+        "time": 1841.5245344638824
+    },
+    "5368": {
+        "nproc": 1,
+        "conf": "./param_nakadashi/analyzer_jun.conf",
+        "queue": "s",
+        "unit": 100000,
+        "stat": 0,
+        "prog": 1,
+        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05368_KuramaTracking.root",
+        "nseg": 41,
+        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05368.dat.gz",
+        "nev": 4002406,
+        "bin": "./bin/KuramaTracking",
+        "time": 1839.9123814105988
+    },
     "5078": {
-        "nseg": 11,
+        "nproc": 1,
+        "conf": "./param_nakadashi/analyzer_jun.conf",
+        "queue": "s",
         "unit": 100000,
         "stat": true,
-        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05078_KuramaTracking.root",
-        "nev": 1004633,
-        "time": 1074.614996433258,
-        "nproc": 1,
-        "bin": "./bin/KuramaTracking",
-        "conf": "./param_nakadashi/analyzer_jun.conf",
         "prog": 11,
+        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05078_KuramaTracking.root",
+        "nseg": 11,
+        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05078.dat",
+        "nev": 1004633,
+        "bin": "./bin/KuramaTracking",
+        "time": 1192.775648355484
+    },
+    "5126": {
+        "nproc": 1,
+        "conf": "./param_nakadashi/analyzer_jun.conf",
         "queue": "s",
-        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05078.dat"
+        "unit": 100000,
+        "stat": 0,
+        "prog": 0,
+        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05126_KuramaTracking.root",
+        "nseg": 3,
+        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05126.dat",
+        "nev": 264862,
+        "bin": "./bin/KuramaTracking",
+        "time": 1841.8385469913483
     }
 }
