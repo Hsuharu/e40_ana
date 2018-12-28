@@ -542,7 +542,7 @@ void Mtx_Pos(int month,int runnum){
 
      Hist2[0 ]->Fill(m2[i],pKurama[i]);
      Hist2[1 ]->Fill(vpx[1],vpy[1]);
-     Hist2[6 ]->Fill(TofSeg[i],vpseg[1]);
+     Hist2[6 ]->Fill(vpseg[1],TofSeg[i]);
 
      if(chisqrKurama[i]<chisqr&&qKurama[i]>0){
        Hist1[7 ]->Fill(pKurama[i]);
@@ -556,7 +556,7 @@ void Mtx_Pos(int month,int runnum){
 
        Hist2[2 ]->Fill(m2[i],pKurama[i]);
        Hist2[3 ]->Fill(vpx[1],vpy[1]);
-       Hist2[7 ]->Fill(TofSeg[i],vpseg[1]);
+       Hist2[7 ]->Fill(vpseg[1],TofSeg[i]);
 
        if(m2[i]<0.15)continue;
        if(m2[i]>0.35)continue;  //Cut2
@@ -571,7 +571,7 @@ void Mtx_Pos(int month,int runnum){
 
        Hist2[4 ]->Fill(m2[i],pKurama[i]);
        Hist2[5 ]->Fill(vpx[1],vpy[1]);
-       Hist2[8 ]->Fill(TofSeg[i],vpseg[1]);
+       Hist2[8 ]->Fill(vpseg[1],TofSeg[i]);
 
      } // Cut1
    } 
