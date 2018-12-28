@@ -476,8 +476,8 @@ void Mtx_Pos(int month,int runnum){
    int chisqr = 0;
 
 //-hist def-----------------------------------------------------------------------------------------
-   Hist1Max = 21;
-   Hist2Max =  6;
+   Hist1Max = 24;
+   Hist2Max =  9;
    chisqr = 10;
    TH1D *Hist1[Hist1Max];
    TH2D *Hist2[Hist2Max];
@@ -503,6 +503,9 @@ void Mtx_Pos(int month,int runnum){
     Hist1[18]= new TH1D("vpx[1] Cut2","vpx[1] Cut2",200,-400,400);
     Hist1[19]= new TH1D("vpy[1] Cut2","vpy[1] Cut2",200,-400,400);
     Hist1[20]= new TH1D("vpseg[1] Cut2","vpseg[1] Cut2",64,1,65);
+    Hist1[21]= new TH1D("TofSeg[0]","TofSeg[0]",24,1,25);
+    Hist1[22]= new TH1D("TofSeg[0] Cut1","TofSeg[0] Cut1",24,1,25);
+    Hist1[23]= new TH1D("TofSeg[0] Cut2","TofSeg[0] Cut2",24,1,25);
             
 
     Hist2[0 ]= new TH2D("pKurama % m2",     "pKurama % m2 "    ,100,-0.4,1.4,100,0,2);
@@ -511,6 +514,9 @@ void Mtx_Pos(int month,int runnum){
     Hist2[3 ]= new TH2D("vpy[1] % vpx[1] Cut1     ","vpy[1] % vpx[1] Cut1     ",100,-400,400,100,-400,400);
     Hist2[4 ]= new TH2D("pKurama % m2 Cut2",     "pKurama % m2 Cut2 "    ,100,-0.4,1.4,100,0,2);
     Hist2[5 ]= new TH2D("vpy[1] % vpx[1] Cut2     ","vpy[1] % vpx[1] Cut2     ",100,-400,400,100,-400,400);
+    Hist2[6 ]= new TH2D("TofSeg[0] % vpseg[1]","TofSeg[0] % vpseg[1]",64,1,65,24,1,25);
+    Hist2[7 ]= new TH2D("TofSeg[0] % vpseg[1] Cut1","TofSeg[0] % vpseg[1] Cut1",64,1,65,24,1,25);
+    Hist2[8 ]= new TH2D("TofSeg[0] % vpseg[1] Cut2","TofSeg[0] % vpseg[1] Cut2",64,1,65,24,1,25);
 
 //-Legend def --------------------------------------------------------------------------------------
 
@@ -532,9 +538,11 @@ void Mtx_Pos(int month,int runnum){
      Hist1[4 ]->Fill(vpx[1]);
      Hist1[5 ]->Fill(vpy[1]);
      Hist1[6 ]->Fill(vpseg[1]);
+     Hist1[21]->Fill(TofSeg[i]);
 
      Hist2[0 ]->Fill(m2[i],pKurama[i]);
      Hist2[1 ]->Fill(vpx[1],vpy[1]);
+     Hist2[6 ]->Fill(TofSeg[i],vpseg[1]);
 
      if(chisqrKurama[i]<chisqr&&qKurama[i]>0){
        Hist1[7 ]->Fill(pKurama[i]);
@@ -544,9 +552,12 @@ void Mtx_Pos(int month,int runnum){
        Hist1[11]->Fill(vpx[1]);
        Hist1[12]->Fill(vpy[1]);
        Hist1[13]->Fill(vpseg[1]);
+       Hist1[22]->Fill(TofSeg[i]);
 
        Hist2[2 ]->Fill(m2[i],pKurama[i]);
        Hist2[3 ]->Fill(vpx[1],vpy[1]);
+       Hist2[7 ]->Fill(TofSeg[i],vpseg[1]);
+
        if(m2[i]<0.15)continue;
        if(m2[i]>0.35)continue;  //Cut2
        Hist1[14]->Fill(pKurama[i]);
@@ -556,9 +567,12 @@ void Mtx_Pos(int month,int runnum){
        Hist1[18]->Fill(vpx[1]);
        Hist1[19]->Fill(vpy[1]);
        Hist1[20]->Fill(vpseg[1]);
+       Hist1[23]->Fill(TofSeg[i]);
 
        Hist2[4 ]->Fill(m2[i],pKurama[i]);
        Hist2[5 ]->Fill(vpx[1],vpy[1]);
+       Hist2[8 ]->Fill(TofSeg[i],vpseg[1]);
+
      } // Cut1
    } 
 
@@ -584,11 +598,11 @@ void Mtx_Pos(int month,int runnum){
 //-Hist Draw----------------------------------------------------------------------------------------
    c1->cd();
    for(int i=0; i<Hist1Max; i++){
-   if(i==15 || i==16 || i==38) gPad->SetLogy(1);
+//   if(i==15 || i==16 || i==38) gPad->SetLogy(1);
    Hist1[i]->Draw();
    c1->Print(pdf);
    c1->Print(Form("%s/Mtx_Pos_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
-   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
+//   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
    }
    for(int i=0; i<Hist2Max; i++){
    Hist2[i]->Draw("colz");
