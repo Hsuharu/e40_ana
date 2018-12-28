@@ -152,7 +152,7 @@ struct Event
   double resP[MaxHits];
   double vpx[NumOfLayersVP];
   double vpy[NumOfLayersVP];
-  double vpseg[NumOfLayersVP];
+  int vpseg[NumOfLayersVP];
 
   double xtgtKurama[MaxHits];
   double ytgtKurama[MaxHits];
@@ -713,21 +713,24 @@ EventKuramaTracking::ProcessingNormal( void )
 	double x, y;
 	tp->GetTrajectoryLocalPosition(21 + l, x, y);
 
-//  int seg ;
-//  seg = gGeom.CalcWireNumber(21 + l,x);
-  double m_offset = 18.;
-  double m_dd = 10.5;
-  double m_w0 = 32.5;
-
-  double dw = ( (x-m_offset)/m_dd ) + m_w0;
-  int    iw = int(dw);
-  if( (dw-double(iw))>0.5 ){
-    iw+=1;
-  }
+  int seg ;
+  seg = gGeom.CalcWireNumber(21 + l,x);
+//  double m_offset = 18.;
+//  double m_dd = 10.5;
+//  double m_w0 = 32.5;
+//
+//  double dw = ( ( x - m_offset) / m_dd ) + m_w0;
+//  int    iw = int(dw);
+//  if( (dw-double(iw))>0.5 ){
+//    iw+=1;
+//  }
+//  std::cout << "x value   " << x  << std::endl;
+//  std::cout << "seg value " << iw << std::endl;
   
   event.vpx[l] = x;
   event.vpy[l] = y;
-  event.vpseg[l] = iw;
+//  event.vpseg[l] = iw;
+  event.vpseg[l] = seg;
       }// for(l)
     }
 
