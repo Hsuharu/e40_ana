@@ -609,8 +609,8 @@ void SAC_Efficiency(int month,int runnum){
    MaximumBintSac=Hist1[13]->GetXaxis()->GetBinCenter(Hist1[13]->GetMaximumBin());
    Hist1[13]->Fit("FitFunc1","","",MaximumBintSac-4,MaximumBintSac+4);
    Hist1[13]->SetAxisRange(MaximumBintSac-50,MaximumBintSac+80,"X");
-   tSacGateMin=FitFunc1->GetParameter(1) - 20 ;//FitFunc1->GetParameter(2);
-   tSacGateMax=FitFunc1->GetParameter(1) + 20 ;//FitFunc1->GetParameter(2);
+   tSacGateMin=FitFunc1->GetParameter(1) - 10 ;//FitFunc1->GetParameter(2);
+   tSacGateMax=FitFunc1->GetParameter(1) + 10 ;//FitFunc1->GetParameter(2);
    std::cout << "SAC Time Gate Min \t" << tSacGateMin << std::endl;
    std::cout << "SAC Time Gate Max \t" << tSacGateMax << std::endl;
 
@@ -619,8 +619,8 @@ void SAC_Efficiency(int month,int runnum){
    MaximumBintSac=Hist1[14]->GetXaxis()->GetBinCenter(Hist1[14]->GetMaximumBin());
    Hist1[14]->Fit("FitFunc1","","",MaximumBintSac-4,MaximumBintSac+4);
    Hist1[14]->SetAxisRange(MaximumBintSac-50,MaximumBintSac+80,"X");
-   tSacGateMin_Cut2=FitFunc1->GetParameter(1) - 20; //FitFunc1->GetParameter(2);
-   tSacGateMax_Cut2=FitFunc1->GetParameter(1) + 20; //FitFunc1->GetParameter(2);
+   tSacGateMin_Cut2=FitFunc1->GetParameter(1) - 10; //FitFunc1->GetParameter(2);
+   tSacGateMax_Cut2=FitFunc1->GetParameter(1) + 10; //FitFunc1->GetParameter(2);
 
    double MaximumBin=0.;
    double trigflag19GateMin   =0.;
@@ -730,10 +730,10 @@ void SAC_Efficiency(int month,int runnum){
          Hist2[10]->Fill(xsacKurama[0],ysacKurama[0]);
        } // Cut_Ver_4
 
-       //tSac Dif is khodo clustering and all tdc using
+       //tSac_khodo Dif is khodo clustering and all tdc using
        for(int i=0; i<nhSac_khodo; i++){
-         if( tSac[i]>tSacGateMin && tSac[i]<tSacGateMax){
-           Hist1[38]->Fill(tSac[i]);
+         if( tSac_khodo[i]>tSacGateMin && tSac_khodo[i]<tSacGateMax){
+           Hist1[38]->Fill(tSac_khodo[i]);
            hit_flg_khodo=true;
          }
        }
@@ -753,7 +753,7 @@ void SAC_Efficiency(int month,int runnum){
          Hist2[13]->Fill(m2[0],pKurama[0]);
          Hist2[14]->Fill(xsacKurama[0],ysacKurama[0]);
          for(int i=0; i<nhSac_khodo; i++){
-           Hist1[39]->Fill(tSac[i]);
+           Hist1[39]->Fill(tSac_khodo[i]);
          }
        } // Cut_Ver_5
        total += 1;
