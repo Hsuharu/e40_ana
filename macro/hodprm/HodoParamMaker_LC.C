@@ -104,10 +104,7 @@ void HodoParamMaker_LC(int month, int runnum){
    double        tofdt[24];
    int           lcnhits;
    int           lchitpat[28];
-   double        lcua[28];
-   double        lcut[28];
-   double        lcda[28];
-   double        lcdt[28];
+   double        lct[28][16];
    double        bh1utime[11];
    double        bh1dtime[11];
    double        bh1mt[11];
@@ -157,10 +154,7 @@ void HodoParamMaker_LC(int month, int runnum){
 //   tree->SetBranchStatus("tofdt");
    tree->SetBranchStatus("lcnhits");
    tree->SetBranchStatus("lchitpat");
-   tree->SetBranchStatus("lcua");
-   tree->SetBranchStatus("lcut");
-   tree->SetBranchStatus("lcda");
-   tree->SetBranchStatus("lcdt");
+   tree->SetBranchStatus("lct");
 //   tree->SetBranchStatus("bh1utime");
 //   tree->SetBranchStatus("bh1dtime");
 //   tree->SetBranchStatus("bh1mt");
@@ -173,8 +167,7 @@ void HodoParamMaker_LC(int month, int runnum){
 //   tree->SetBranchStatus("sacde");
 //   tree->SetBranchStatus("tofmt");
 //   tree->SetBranchStatus("tofde");
-   tree->SetBranchStatus("lcmt");
-   tree->SetBranchStatus("lcde");
+//   tree->SetBranchStatus("lcmt");
 //   tree->SetBranchStatus("t0");
 //   tree->SetBranchStatus("ct0");
 //   tree->SetBranchStatus("btof");
@@ -185,7 +178,7 @@ void HodoParamMaker_LC(int month, int runnum){
      tree->SetBranchAddress("trignhits",&trignhits);
      tree->SetBranchAddress("trigpat",trigpat);
      tree->SetBranchAddress("trigflag",trigflag);
-     tree->SetBranchAddress("bh1nhits",&bh1nhits);
+//   tree->SetBranchAddress("bh1nhits",&bh1nhits);
 //   tree->SetBranchAddress("bh1hitpat",bh1hitpat);
 //   tree->SetBranchAddress("bh1ua",bh1ua);
 //   tree->SetBranchAddress("bh1ut",bh1ut);
@@ -207,13 +200,10 @@ void HodoParamMaker_LC(int month, int runnum){
 //   tree->SetBranchAddress("tofut",tofut);
 //   tree->SetBranchAddress("tofda",tofda);
 //   tree->SetBranchAddress("tofdt",tofdt);
-//   tree->SetBranchAddress("lcnhits",&lcnhits);
+     tree->SetBranchAddress("lcnhits",&lcnhits);
      tree->SetBranchAddress("lchitpat",lchitpat);
-     tree->SetBranchAddress("lcua",lcua);
-     tree->SetBranchAddress("lcut",lcut);
-     tree->SetBranchAddress("lcda",lcda);
-     tree->SetBranchAddress("lcdt",lcdt);
-     tree->SetBranchAddress("bh1utime",bh1utime);
+     tree->SetBranchAddress("lct",lct);
+//     tree->SetBranchAddress("bh1utime",bh1utime);
 //   tree->SetBranchAddress("bh1dtime",bh1dtime);
 //   tree->SetBranchAddress("bh1mt",bh1mt);
 //   tree->SetBranchAddress("bh1de",bh1de);
@@ -225,9 +215,8 @@ void HodoParamMaker_LC(int month, int runnum){
 //   tree->SetBranchAddress("sacde",sacde);
 //   tree->SetBranchAddress("tofmt",tofmt);
 //   tree->SetBranchAddress("tofde",tofde);
-//   tree->SetBranchAddress("lcmt",lcmt);
-     tree->SetBranchAddress("lcde",lcde);
-     tree->SetBranchAddress("t0",t0);
+//     tree->SetBranchAddress("lcmt",lcmt);
+//     tree->SetBranchAddress("t0",t0);
 //   tree->SetBranchAddress("ct0",ct0);
 //   tree->SetBranchAddress("btof",btof);
 //   tree->SetBranchAddress("cbtof",cbtof);
@@ -248,13 +237,13 @@ void HodoParamMaker_LC(int month, int runnum){
    int l = 25;
 
   //-hist def-----------------------------------------------------------------------------------------
-  Hist1Max = 81;
-  Hist2Max = 12;
+  Hist1Max = 30;
+  Hist2Max = 1;
   TH1D *Hist1[Hist1Max];
   TH2D *Hist2[Hist2Max];
   
   for(int i=0;i<NumOfSegLC;i++){
-    Hist1[i]= new TH1D(Form("LC Mt Tdc %s",i+1),Form("LC Mt Tdc %s",i+1),2000,0,2000);
+    Hist1[i]= new TH1D(Form("LC Mt Tdc %d",i+1),Form("LC Mt Tdc %d",i+1),2000,0,2000);
   }
   Hist1[28]= new TH1D("LC Mt Nhits","LC Mt Nhits",28,1,29);
   Hist1[29]= new TH1D("LC Mt Hitpattern","LC Mt Hitpattern",28,1,29);
@@ -267,14 +256,15 @@ void HodoParamMaker_LC(int month, int runnum){
    Long64_t nentries = tree->GetEntries();
 
    Long64_t nbytes = 0;
-   for (Long64_t i=0; i<nentries;i++) {
-     nbytes += tree->GetEntry(i);
+   for (Long64_t s=0; s<nentries;s++) {
+     nbytes += tree->GetEntry(s);
+
      Hist1[28]->Fill(lcnhits);
 
      for(int i=0; i<NumOfSegLC; i++){
-       Hist[29]->Fill(lchitpat[i]);
-       bool flag=false;
+       Hist1[29]->Fill(lchitpat[i]);
        for(int j=0; j<16; j++){
+         if(lct[i][j]==-999) continue;
          Hist1[i]->Fill(lct[i][j]);
        }
      }
@@ -290,7 +280,7 @@ void HodoParamMaker_LC(int month, int runnum){
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(1);
     Hist1[i]->Draw();
     c1->Print(pdf);
-    c1->Print(Form("%s/HodoParam_LC_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
+    c1->Print(Form("%s/HodoParamMaker_LC_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
   }
 //  for(int i=0; i<Hist2Max; i++){
