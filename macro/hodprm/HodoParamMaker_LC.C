@@ -234,7 +234,7 @@ void HodoParamMaker_LC(int month, int runnum){
   int Hist2Max = 0;
 
    double lcmttdcpeak[NumOfSegLC]; 
-   int l = 5;
+   int l = 3;
 
   //-hist def-----------------------------------------------------------------------------------------
   Hist1Max = 30;
