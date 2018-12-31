@@ -280,12 +280,14 @@ void LC_Cut(int month, int runnum){
      for(int i=0; i<NumOfSegLC; i++){
        Hist1[29]->Fill(lchitpat[i]);
        for(int j=0; j<16; j++){
-         if(lct[i][j]==-9999.) continue;
-         Hist1[i]->Fill(lct[i][j]);
+         if(lct[i][j]!=-9999.){
+           Hist1[i]->Fill(lct[i][j]);
+         }
        }
        for(int j=0; j<16; j++){
-         if(lcmt[i][j]==-999.) continue;
-         Hist1[i]->Fill(lcmt[i][j]);
+         if(lcmt[i][j]!=-999.){
+           Hist1[i]->Fill(lcmt[i][j]);
+         }
        }
      }
    }
