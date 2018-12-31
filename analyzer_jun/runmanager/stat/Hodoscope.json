@@ -1,30 +1,44 @@
 {
-    "5126": {
+    "5115": {
         "nproc": 1,
-        "unit": 100000,
-        "nseg": 3,
+        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05115.dat",
         "conf": "./param_nakadashi/analyzer_jun.conf",
-        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05126.dat",
-        "bin": "./bin/Hodoscope",
-        "nev": 264862,
-        "time": 329.46085023880005,
-        "queue": "s",
+        "prog": 10,
         "stat": true,
-        "prog": 3,
-        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05126_Hodoscope.root"
+        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05115_Hodoscope.root",
+        "queue": "s",
+        "time": 466.841117143631,
+        "bin": "./bin/Hodoscope",
+        "nseg": 10,
+        "nev": 955578,
+        "unit": 100000
     },
-    "5368": {
+    "5395": {
         "nproc": 1,
-        "unit": 100000,
-        "nseg": 41,
+        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05395.dat.gz",
         "conf": "./param_nakadashi/analyzer_jun.conf",
-        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05368.dat.gz",
-        "bin": "./bin/Hodoscope",
-        "nev": 4002406,
-        "time": 1061.6189095973969,
-        "queue": "s",
+        "prog": 8,
         "stat": true,
-        "prog": 41,
-        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05368_Hodoscope.root"
+        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05395_Hodoscope.root",
+        "queue": "s",
+        "time": 341.1199862957001,
+        "bin": "./bin/Hodoscope",
+        "nseg": 8,
+        "nev": 723777,
+        "unit": 100000
+    },
+    "5078": {
+        "nproc": 1,
+        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05078.dat",
+        "conf": "./param_nakadashi/analyzer_jun.conf",
+        "prog": 11,
+        "stat": true,
+        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05078_Hodoscope.root",
+        "queue": "s",
+        "time": 396.7724907398224,
+        "bin": "./bin/Hodoscope",
+        "nseg": 11,
+        "nev": 1004633,
+        "unit": 100000
     }
 }
