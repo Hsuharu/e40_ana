@@ -214,11 +214,6 @@ struct Dst
   double HtTofSeg[NumOfSegTOF*MaxDepth];
   double tHtTof[NumOfSegTOF*MaxDepth];
 
-  int    nhLc;
-  int    csLc[NumOfSegLC*MaxDepth];
-  double LcSeg[NumOfSegLC*MaxDepth];
-  double tLc[NumOfSegLC*MaxDepth];
-
   int    nhSac;
   int    csSac[NumOfSegSAC*MaxDepth];
   double SacSeg[NumOfSegSAC*MaxDepth];
@@ -230,6 +225,17 @@ struct Dst
   double dtTofSeg[NumOfSegTOF][MaxDepth];
   double udeTofSeg[NumOfSegTOF];
   double ddeTofSeg[NumOfSegTOF];
+
+// LC
+  int lcnhits;
+  int lchitpat[MaxHits];
+  double lct[NumOfSegLC][MaxDepth];
+  double lcmt[NumOfSegLC][MaxDepth];
+
+  int    nhLc;
+  int    csLc[NumOfSegLC*MaxDepth];
+  double LcSeg[NumOfSegLC*MaxDepth];
+  double tLc[NumOfSegLC*MaxDepth];
 
 
 };
@@ -643,12 +649,14 @@ EventHodoscope::ProcessingNormal( void )
 	  int T = hit->GetTdcUp(m);
 	  if(T > 0) HF1( LCHid+100*seg+3, double(T) );
 	  event.lct[seg-1][m] = T;
+	  dst.lct[seg-1][m] = T;
 	}// for(m)
       }
 
       //Hitpat
       if( Tm >0 ){
 	event.lchitpat[lc_nhits] = seg;
+	dst.lchitpat[lc_nhits] = seg;
 	lc_nhits++;
       }
       if( Tm>0 ){
@@ -657,6 +665,7 @@ EventHodoscope::ProcessingNormal( void )
     }
     HF1( LCHid+2, double(nh1) );
     event.lcnhits = lc_nhits;
+    dst.lcnhits = lc_nhits;
   }
 
 
@@ -1209,6 +1218,7 @@ EventHodoscope::ProcessingNormal( void )
       for(int m = 0; m<n_mhit; ++m){
 	double mt  = hit->MeanTime(m), cmt = hit->CMeanTime(m);
 	event.lcmt[seg-1][m]  = mt;
+	dst.lcmt[seg-1][m]  = mt;
 
 	HF1( LCHid+100*seg+13, mt );
 	HF1( LCHid+100*seg+19, cmt );
@@ -1455,6 +1465,7 @@ EventHodoscope::InitializeEvent( void )
     event.tofhitpat[it]  = -1;
     event.tofhthitpat[it]  = -1;
     event.lchitpat[it]  = -1;
+    dst.lchitpat[it]  = -1;
     dst.tofhitpat[it]  = -1;
   }
 
@@ -1555,17 +1566,21 @@ EventHodoscope::InitializeEvent( void )
     }
   }
 
+  dst.lcnhits  = 0;
   for( int it=0; it<NumOfSegLC; it++){
 
     for(int m = 0; m<MaxDepth; ++m){
       event.lct[it][m]   = -9999.;
       event.lcmt[it][m]  = -999.0;
 
+      dst.lct[it][m]   = -9999.;
+      dst.lcmt[it][m]  = -999.0;
       dst.csLc[MaxDepth*it + m]  = 0;
       dst.LcSeg[MaxDepth*it + m] = -1;
       dst.tLc[MaxDepth*it + m]   = -9999.;
     }
   }
+
 }
 
 //______________________________________________________________________________
@@ -2182,6 +2197,7 @@ ConfMan::InitializeHistograms( void )
   tree->Branch("tofhtmt",   event.tofhtmt,   Form("tofhtmt[%d][%d]/D", NumOfSegTOF, MaxDepth));
   tree->Branch("lcmt",      event.lcmt,      Form("lcmt[%d][%d]/D", NumOfSegLC, MaxDepth));
 
+
   tree->Branch("t0",        event.t0,        Form("t0[%d][%d]/D",  NumOfSegBH2, MaxDepth));
   tree->Branch("ct0",       event.ct0,       Form("ct0[%d][%d]/D", NumOfSegBH2, MaxDepth));
   tree->Branch("btof",      event.btof,      Form("btof[%d][%d]/D",  NumOfSegBH1, NumOfSegBH2));
@@ -2252,6 +2268,11 @@ ConfMan::InitializeHistograms( void )
   hodo->Branch("csHtTof",      dst.csHtTof,     "csHtTof[nhHtTof]/I");
   hodo->Branch("HtTofSeg",     dst.HtTofSeg,    "HtTofSeg[nhHtTof]/D");
   hodo->Branch("tHtTof",       dst.tHtTof,      "tHtTof[nhHtTof]/D");
+
+  hodo->Branch("lcnhits",   &dst.lcnhits,   "lcnhits/I");
+  hodo->Branch("lchitpat",   dst.lchitpat,  Form("lchitpat[%d]/I", NumOfSegLC));
+  hodo->Branch("lct" ,       dst.lct,       Form("lct[%d][%d]/D", NumOfSegLC, MaxDepth));
+  hodo->Branch("lcmt",      dst.lcmt,      Form("lcmt[%d][%d]/D", NumOfSegLC, MaxDepth));
 
   hodo->Branch("nhLc",     &dst.nhLc,     "nhLc/I");
   hodo->Branch("csLc",      dst.csLc,     "csLc[nhLc]/I");
