@@ -252,8 +252,8 @@ void LC_Cut(int month, int runnum){
    double lcmttdcpeak[NumOfSegLC]; 
    int l = 3;
   //-hist def-----------------------------------------------------------------------------------------
-  Hist1Max = 62;
-  Hist2Max = 1;
+  Hist1Max = 66;
+  Hist2Max = 2;
   TH1D *Hist1[Hist1Max];
   TH2D *Hist2[Hist2Max];
   
@@ -267,7 +267,13 @@ void LC_Cut(int month, int runnum){
   Hist1[59]= new TH1D("m2 Cut1","m2 Cut1",100,-0.4,1.4);
   Hist1[60]= new TH1D("pKurama","pKurama",100,-0.4,1.4);
   Hist1[61]= new TH1D("pKurama Cut1","pKurama Cut1",100,-0.4,1.4);
+  Hist1[62]= new TH1D("m2 Cut2","m2 Cut2",100,-0.4,1.4);
+  Hist1[63]= new TH1D("pKurama Cut2","pKurama Cut2",100,-0.4,1.4);
+  Hist1[64]= new TH1D("m2 Cut3","m2 Cut3",100,-0.4,1.4);
+  Hist1[65]= new TH1D("pKurama Cut3","pKurama Cut3",100,-0.4,1.4);
 
+  Hist2[0]= new TH2D("m2 vs pKurama Cut2","m2 vs pKurama Cut2",100,-0.4,1.4,100,-0.4,1.4);
+  Hist2[1]= new TH2D("m2 vs pKurama Cut3","m2 vs pKurama Cut3",100,-0.4,1.4,100,-0.4,1.4);
 
 
    TF1 *fit = new TF1("fit","gaus"); 
@@ -312,6 +318,16 @@ void LC_Cut(int month, int runnum){
          Hist1[61]->Fill(pKurama[i]);
        }
      }
+     if(ntKurama==1){
+         Hist1[62]->Fill(m2[0]);
+         Hist1[63]->Fill(pKurama[0]);
+       Hist2[0]->Fill(m2[0],pKurama[0]);
+       if(LCFlag){
+         Hist1[64]->Fill(m2[0]);
+         Hist1[65]->Fill(pKurama[0]);
+         Hist2[1]->Fill(m2[0],pKurama[0]);
+       }
+     }
    }
 
 //-Hist Draw----------------------------------------------------------------------------------------
@@ -326,11 +342,11 @@ void LC_Cut(int month, int runnum){
     c1->Print(Form("%s/LC_Cut_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
   }
-//  for(int i=0; i<Hist2Max; i++){
-//  Hist2[i]->Draw("colz");
-//  c1->Print(pdf);
-//  c1->Print(Form("%s/HodoParam_LC_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
-//  }
+  for(int i=0; i<Hist2Max; i++){
+  Hist2[i]->Draw("colz");
+  c1->Print(pdf);
+  c1->Print(Form("%s/LC_Cut_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
+  }
 
    for (int i=0; i<NumOfSegLC;i++) {
        lcmttdcpeak[i] = Hist1[i]->GetMaximumBin();   
