@@ -358,6 +358,11 @@ void LC_Cut(int month, int runnum){
        c1->Print(pdf);
        lcmttdcpeak[i] = fit->GetParameter(1);  
    }
+
+   Hist1[62]->Draw();
+   Hist1[64]->Draw("same");
+  c1->Print(pdf);
+
    
   c1->Print(pdf+"]"); 
 
