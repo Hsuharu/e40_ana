@@ -266,7 +266,7 @@ void LC_Cut(int month, int runnum){
   Hist1[58]= new TH1D("m2","m2",100,-0.4,1.4);
   Hist1[59]= new TH1D("m2 Cut1","m2 Cut1",100,-0.4,1.4);
   Hist1[60]= new TH1D("pKurama","pKurama",100,0,1.6);
-  Hist1[61]= new TH1D("pKurama Cut1","pKurama Cut1",100,-0.4,1.4);
+  Hist1[61]= new TH1D("pKurama Cut1","pKurama Cut1",100,0,1.6);
   Hist1[62]= new TH1D("m2 Cut2","m2 Cut2",100,-0.4,1.4);
   Hist1[63]= new TH1D("pKurama Cut2","pKurama Cut2",100,0,1.6);
   Hist1[64]= new TH1D("m2 Cut3","m2 Cut3",100,-0.4,1.4);
