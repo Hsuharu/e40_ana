@@ -252,7 +252,7 @@ void LC_Cut(int month, int runnum){
    double lcmttdcpeak[NumOfSegLC]; 
    int l = 3;
   //-hist def-----------------------------------------------------------------------------------------
-  Hist1Max = 58;
+  Hist1Max = 62;
   Hist2Max = 1;
   TH1D *Hist1[Hist1Max];
   TH2D *Hist2[Hist2Max];
@@ -263,6 +263,10 @@ void LC_Cut(int month, int runnum){
   }
   Hist1[28]= new TH1D("LC Mt Nhits","LC Mt Nhits",28,1,29);
   Hist1[29]= new TH1D("LC Mt Hitpattern","LC Mt Hitpattern",28,1,29);
+  Hist1[58]= new TH1D("m2","m2",100,-0.4,1.4);
+  Hist1[59]= new TH1D("m2 Cut1","m2 Cut1",100,-0.4,1.4);
+  Hist1[60]= new TH1D("pKurama","pKurama",100,-0.4,1.4);
+  Hist1[61]= new TH1D("pKurama Cut1","pKurama Cut1",100,-0.4,1.4);
 
 
 
@@ -277,6 +281,8 @@ void LC_Cut(int month, int runnum){
 
      Hist1[28]->Fill(lcnhits);
 
+     bool LCFlag = false;
+
      for(int i=0; i<NumOfSegLC; i++){
        Hist1[29]->Fill(lchitpat[i]);
        for(int j=0; j<16; j++){
@@ -287,7 +293,23 @@ void LC_Cut(int month, int runnum){
        for(int j=0; j<16; j++){
          if(lcmt[i][j]!=-999.){
            Hist1[i+30]->Fill(lcmt[i][j]);
+           if(lcmt[i][j]>-10&&lcmt[i][j]<10){
+             LCFlag = true;
+           }
          }
+       }
+     }
+
+     for(int i=0; i<m2Combi; i++){
+       Hist1[58]->Fill(m2[i]);
+       if(LCFlag){
+         Hist1[59]->Fill(m2[i]);
+       }
+     }
+     for(int i=0; i<ntKurama; i++){
+       Hist1[60]->Fill(pKurama[i]);
+       if(LCFlag){
+         Hist1[61]->Fill(pKurama[i]);
        }
      }
    }
