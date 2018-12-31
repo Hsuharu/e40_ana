@@ -265,15 +265,15 @@ void LC_Cut(int month, int runnum){
   Hist1[29]= new TH1D("LC Mt Hitpattern","LC Mt Hitpattern",28,1,29);
   Hist1[58]= new TH1D("m2","m2",100,-0.4,1.4);
   Hist1[59]= new TH1D("m2 Cut1","m2 Cut1",100,-0.4,1.4);
-  Hist1[60]= new TH1D("pKurama","pKurama",100,-0.4,1.4);
+  Hist1[60]= new TH1D("pKurama","pKurama",100,0,1.6);
   Hist1[61]= new TH1D("pKurama Cut1","pKurama Cut1",100,-0.4,1.4);
   Hist1[62]= new TH1D("m2 Cut2","m2 Cut2",100,-0.4,1.4);
-  Hist1[63]= new TH1D("pKurama Cut2","pKurama Cut2",100,-0.4,1.4);
+  Hist1[63]= new TH1D("pKurama Cut2","pKurama Cut2",100,0,1.6);
   Hist1[64]= new TH1D("m2 Cut3","m2 Cut3",100,-0.4,1.4);
-  Hist1[65]= new TH1D("pKurama Cut3","pKurama Cut3",100,-0.4,1.4);
+  Hist1[65]= new TH1D("pKurama Cut3","pKurama Cut3",100,0,1.6);
 
-  Hist2[0]= new TH2D("m2 vs pKurama Cut2","m2 vs pKurama Cut2",100,-0.4,1.4,100,-0.4,1.4);
-  Hist2[1]= new TH2D("m2 vs pKurama Cut3","m2 vs pKurama Cut3",100,-0.4,1.4,100,-0.4,1.4);
+  Hist2[0]= new TH2D("m2 vs pKurama Cut2","m2 vs pKurama Cut2",100,-0.4,1.4,100,0,1.6);
+  Hist2[1]= new TH2D("m2 vs pKurama Cut3","m2 vs pKurama Cut3",100,-0.4,1.4,100,0,1.6);
 
 
    TF1 *fit = new TF1("fit","gaus"); 
