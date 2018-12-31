@@ -286,7 +286,7 @@ void LC_Cut(int month, int runnum){
        }
        for(int j=0; j<16; j++){
          if(lcmt[i][j]!=-999.){
-           Hist1[i]->Fill(lcmt[i][j]);
+           Hist1[i+30]->Fill(lcmt[i][j]);
          }
        }
      }
