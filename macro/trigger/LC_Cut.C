@@ -258,7 +258,6 @@ void LC_Cut(int month, int runnum){
   double NegGate2 = -15.;
   double NegGate3 = -20.;
 
-
   int l = 3;
   //-hist def-----------------------------------------------------------------------------------------
   Hist1Max = 74;
@@ -397,47 +396,47 @@ void LC_Cut(int month, int runnum){
 //    lcmttdcpeak[i] = fit->GetParameter(1);  
 //  }
 
-  Hist1[62]->SetStats(0);
-  Hist1[64]->SetStats(0);
-  Hist1[70]->SetStats(0);
-  Hist1[72]->SetStats(0);
-
-  Hist1[64]->SetLineColor(2);
-  Hist1[70]->SetLineColor(3);
-  Hist1[72]->SetLineColor(4);
-
-  Hist1[62]->Draw();
-  Hist1[64]->Draw("same");
-  Hist1[70]->Draw("same");
-  Hist1[72]->Draw("same");
-
-  Leg1->AddEntry(Hist1[62],"ntKurama==1","l");
-  Leg1->AddEntry(Hist1[64],Form("Cut Gate1 %dns",Gate1),"l");
-  Leg1->AddEntry(Hist1[70],Form("Cut Gate2 %dns",Gate2),"l");
-  Leg1->AddEntry(Hist1[72],Form("Cut Gate3 %dns",Gate3),"l");
-  Leg1->Draw();
-  c1->Print(pdf);
-
-  Hist1[58]->SetStats(0);
-  Hist1[59]->SetStats(0);
-  Hist1[66]->SetStats(0);
-  Hist1[67]->SetStats(0);
-
-  Hist1[59]->SetLineColor(2);
-  Hist1[66]->SetLineColor(3);
-  Hist1[67]->SetLineColor(4);
-
-  Hist1[58]->Draw();
-  Hist1[59]->Draw("same");
-  Hist1[66]->Draw("same");
-  Hist1[67]->Draw("same");
-
-  Leg2->AddEntry(Hist1[58],"No Cut   ","l");
-  Leg2->AddEntry(Hist1[59],Form("Cut Gate1 %dns",Gate1),"l");
-  Leg2->AddEntry(Hist1[66],Form("Cut Gate2 %dns",Gate2),"l");
-  Leg2->AddEntry(Hist1[67],Form("Cut Gate3 %dns",Gate3),"l");
-  Leg2->Draw();
-  c1->Print(pdf);
+//  Hist1[62]->SetStats(0);
+//  Hist1[64]->SetStats(0);
+//  Hist1[70]->SetStats(0);
+//  Hist1[72]->SetStats(0);
+//
+//  Hist1[64]->SetLineColor(2);
+//  Hist1[70]->SetLineColor(3);
+//  Hist1[72]->SetLineColor(4);
+//
+//  Hist1[62]->Draw();
+//  Hist1[64]->Draw("same");
+//  Hist1[70]->Draw("same");
+//  Hist1[72]->Draw("same");
+//
+//  Leg1->AddEntry(Hist1[62],"ntKurama==1","l");
+//  Leg1->AddEntry(Hist1[64],Form("Cut Gate1 %dns",Gate1),"l");
+//  Leg1->AddEntry(Hist1[70],Form("Cut Gate2 %dns",Gate2),"l");
+//  Leg1->AddEntry(Hist1[72],Form("Cut Gate3 %dns",Gate3),"l");
+//  Leg1->Draw();
+//  c1->Print(pdf);
+//
+//  Hist1[58]->SetStats(0);
+//  Hist1[59]->SetStats(0);
+//  Hist1[66]->SetStats(0);
+//  Hist1[67]->SetStats(0);
+//
+//  Hist1[59]->SetLineColor(2);
+//  Hist1[66]->SetLineColor(3);
+//  Hist1[67]->SetLineColor(4);
+//
+//  Hist1[58]->Draw();
+//  Hist1[59]->Draw("same");
+//  Hist1[66]->Draw("same");
+//  Hist1[67]->Draw("same");
+//
+//  Leg2->AddEntry(Hist1[58],"No Cut   ","l");
+//  Leg2->AddEntry(Hist1[59],Form("Cut Gate1 %dns",Gate1),"l");
+//  Leg2->AddEntry(Hist1[66],Form("Cut Gate2 %dns",Gate2),"l");
+//  Leg2->AddEntry(Hist1[67],Form("Cut Gate3 %dns",Gate3),"l");
+//  Leg2->Draw();
+//  c1->Print(pdf);
 
 
   c1->Print(pdf+"]"); 
