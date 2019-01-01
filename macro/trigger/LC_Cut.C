@@ -351,16 +351,16 @@ void LC_Cut(int month, int runnum){
         Hist1[65]->Fill(pKurama[0]);
         Hist2[1]->Fill(m2[0],pKurama[0]);
       }
-      if(LCGate2Flag==true){
-        Hist1[70]->Fill(m2[0]);
-        Hist1[71]->Fill(pKurama[0]);
-        Hist2[2]->Fill(m2[0],pKurama[0]);
-      }
-      if(LCGate3Flag==true){
-        Hist1[72]->Fill(m2[0]);
-        Hist1[73]->Fill(pKurama[0]);
-        Hist2[3]->Fill(m2[0],pKurama[0]);
-      }
+//      if(LCGate2Flag==true){
+//        Hist1[70]->Fill(m2[0]);
+//        Hist1[71]->Fill(pKurama[0]);
+//        Hist2[2]->Fill(m2[0],pKurama[0]);
+//      }
+//      if(LCGate3Flag==true){
+//        Hist1[72]->Fill(m2[0]);
+//        Hist1[73]->Fill(pKurama[0]);
+//        Hist2[3]->Fill(m2[0],pKurama[0]);
+//      }
     }
   }
 
