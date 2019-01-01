@@ -347,8 +347,8 @@ void LC_Cut(int month, int runnum){
       Hist1[63]->Fill(pKurama[0]);
       Hist2[0]->Fill(m2[0],pKurama[0]);
       if(LCGate1Flag == true){
-//        Hist1[64]->Fill(m2[0]);
-//        Hist1[65]->Fill(pKurama[0]);
+        Hist1[64]->Fill(m2[0]);
+        Hist1[65]->Fill(pKurama[0]);
 //        Hist2[1]->Fill(m2[0],pKurama[0]);
       }
       if(LCGate2Flag==true){
