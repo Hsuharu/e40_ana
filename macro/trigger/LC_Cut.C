@@ -258,6 +258,22 @@ void LC_Cut(int month, int runnum){
   double NegGate2 = -15.;
   double NegGate3 = -20.;
 
+  double MinGate1[NumOfSegLC];
+  double MinGate2[NumOfSegLC];
+  double MinGate3[NumOfSegLC];
+  double MaxGate1[NumOfSegLC];
+  double MaxGate2[NumOfSegLC];
+  double MaxGate3[NumOfSegLC];
+  for(int i=0; i<NumOfSegLC; i++){
+    MinGate1[i]=0.;
+    MinGate2[i]=0.;
+    MinGate3[i]=0.;
+    MaxGate1[i]=0.;
+    MaxGate2[i]=0.;
+    MaxGate3[i]=0.;
+  }
+
+
   int l = 3;
   //-hist def-----------------------------------------------------------------------------------------
   Hist1Max = 74;
@@ -303,9 +319,49 @@ void LC_Cut(int month, int runnum){
   //-Event Loop --------------------------------------------------------------------------------------
   Long64_t nentries = khodo_lc->GetEntries();
 
-  Long64_t nbytes = 0;
   for (Long64_t s=0; s<nentries;s++) {
-    nbytes += khodo_lc->GetEntry(s);
+    khodo_lc->GetEntry(s);
+
+    for(int i=0; i<NumOfSegLC; i++){
+      for(int j=0; j<16; j++){
+        if(lct[i][j]!=-9999.){
+          Hist1[i]->Fill(lct[i][j]);
+        }
+      }
+    }
+  }
+
+//-Hist Draw----------------------------------------------------------------------------------------
+  TCanvas *c1 = new TCanvas("c1","c1",800,700); 
+  c1->Print(pdf+"["); 
+  c1->cd();
+  for(int i=0; i<Hist1Max; i++){
+    Hist1[i]->Draw();
+    c1->Print(pdf);
+    c1->Print(Form("%s/pdf/trigger/LC_Cut_run%05d_Hist1_%03d_pre.pdf",anadir.Data(),runnum,i));
+  }
+  
+// Parameter Get ------------------------------------------------------------------------------------
+  for (int i=0; i<NumOfSegLC;i++) {
+    TF1 *fit = new TF1("fit","gaus"); 
+    lcmttdcpeak[i] = Hist1[i]->GetMaximumBin();   
+    lcmttdcpeak[i] = Hist1[i]->GetXaxis()->GetBinCenter(lcmttdcpeak[i]);  
+    Hist1[i]->SetAxisRange(lcmttdcpeak[i]-50,lcmttdcpeak[i]+80,"X");
+
+    Hist1[i]->Draw(); 
+    Hist1[i]->Fit("fit","","", lcmttdcpeak[i]-l, lcmttdcpeak[i]+l);  
+    lcmttdcpeak[i] = fit->GetParameter(1);  
+    MinGate1[i]=lcmttdcpeak[i] + Gate1/HULMHTDCCalib;
+    MinGate2[i]=lcmttdcpeak[i] + Gate2/HULMHTDCCalib;
+    MinGate3[i]=lcmttdcpeak[i] + Gate3/HULMHTDCCalib;
+    MaxGate1[i]=lcmttdcpeak[i] - Gate1/HULMHTDCCalib;
+    MaxGate2[i]=lcmttdcpeak[i] - Gate2/HULMHTDCCalib;
+    MaxGate3[i]=lcmttdcpeak[i] - Gate3/HULMHTDCCalib;
+  }
+
+  //-Event Loop --------------------------------------------------------------------------------------
+  for (Long64_t s=0; s<nentries;s++) {
+    khodo_lc->GetEntry(s);
 
     Hist1[28]->Fill(lcnhits);
 
@@ -323,9 +379,9 @@ void LC_Cut(int month, int runnum){
       for(int j=0; j<16; j++){
         if(lcmt[i][j]!=-999.){
           Hist1[i+30]->Fill(lcmt[i][j]);
-          if(lcmt[i][j]>NegGate1 && lcmt[i][j]<Gate1){ LCGate1Flag = true;}
-          if(lcmt[i][j]>NegGate2 && lcmt[i][j]<Gate2){ LCGate2Flag = true;}
-          if(lcmt[i][j]>NegGate3 && lcmt[i][j]<Gate3){ LCGate3Flag = true;}
+          if(lcmt[i][j]>MinGate1[i] && lcmt[i][j]<MaxGate1[i]){ LCGate1Flag = true;}
+          if(lcmt[i][j]>MinGate2[i] && lcmt[i][j]<MaxGate2[i]){ LCGate2Flag = true;}
+          if(lcmt[i][j]>MinGate3[i] && lcmt[i][j]<MaxGate3[i]){ LCGate3Flag = true;}
         }
       }
     }
@@ -341,23 +397,6 @@ void LC_Cut(int month, int runnum){
       if(LCGate1Flag==true){ Hist1[61]->Fill(pKurama[i]);}
       if(LCGate2Flag==true){ Hist1[68]->Fill(pKurama[i]);}
       if(LCGate3Flag==true){ Hist1[69]->Fill(pKurama[i]);}
-    }
-  }
-
-  for (Long64_t s=0; s<nentries;s++) {
-    khodo_lc->GetEntry(s);
-    bool LCGate1Flag = false;
-    bool LCGate2Flag = false;
-    bool LCGate3Flag = false;
-
-    for(int i=0; i<NumOfSegLC; i++){
-      for(int j=0; j<16; j++){
-        if(lcmt[i][j]!=-999.){
-          if(lcmt[i][j]>NegGate1 && lcmt[i][j]<Gate1){ LCGate1Flag = true;}
-          if(lcmt[i][j]>NegGate2 && lcmt[i][j]<Gate2){ LCGate2Flag = true;}
-          if(lcmt[i][j]>NegGate3 && lcmt[i][j]<Gate3){ LCGate3Flag = true;}
-        }
-      }
     }
 
     if(ntKurama==1){
@@ -385,10 +424,8 @@ void LC_Cut(int month, int runnum){
     }
   }
 
-  //-Hist Draw----------------------------------------------------------------------------------------
 
-  TCanvas *c1 = new TCanvas("c1","c1",800,700); 
-  c1->Print(pdf+"["); 
+//-Hist Draw----------------------------------------------------------------------------------------
   c1->cd();
   for(int i=0; i<Hist1Max; i++){
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(1);
@@ -410,18 +447,6 @@ void LC_Cut(int month, int runnum){
 //    c1->Print(Form("%s/LC_Cut_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
     c1->Print(Form("%s/pdf/trigger/LC_Cut_run%05d_Hist2_%03d.pdf",anadir.Data(),runnum,i));
   }
-
-//  for (int i=0; i<NumOfSegLC;i++) {
-//    TF1 *fit = new TF1("fit","gaus"); 
-//    lcmttdcpeak[i] = Hist1[i]->GetMaximumBin();   
-//    lcmttdcpeak[i] = Hist1[i]->GetXaxis()->GetBinCenter(lcmttdcpeak[i]);  
-//    Hist1[i]->SetAxisRange(lcmttdcpeak[i]-50,lcmttdcpeak[i]+80,"X");
-//
-//    Hist1[i]->Draw(); 
-//    Hist1[i]->Fit("fit","","", lcmttdcpeak[i]-l, lcmttdcpeak[i]+l);  
-//    c1->Print(pdf);
-//    lcmttdcpeak[i] = fit->GetParameter(1);  
-//  }
 
   Hist1[62]->SetStats(0);
   Hist1[64]->SetStats(0);
