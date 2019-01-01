@@ -320,24 +320,24 @@ void LC_Cut(int month, int runnum){
        for(int j=0; j<16; j++){
          if(lcmt[i][j]!=-999.){
            Hist1[i+30]->Fill(lcmt[i][j]);
-           if(lcmt[i][j]> -Gate1 &&lcmt[i][j]<Gate1) LCGate1Flag = true;
-           if(lcmt[i][j]> -Gate2 &&lcmt[i][j]<Gate2) LCGate2Flag = true;
-           if(lcmt[i][j]> -Gate3 &&lcmt[i][j]<Gate3) LCGate3Flag = true;
+           if(lcmt[i][j]> -Gate1 && lcmt[i][j]<Gate1){ LCGate1Flag = true;}
+           if(lcmt[i][j]> -Gate2 && lcmt[i][j]<Gate2){ LCGate2Flag = true;}
+           if(lcmt[i][j]> -Gate3 && lcmt[i][j]<Gate3){ LCGate3Flag = true;}
          }
        }
      }
 
      for(int i=0; i<m2Combi; i++){
        Hist1[58]->Fill(m2[i]);
-       if(LCGate1Flag) Hist1[59]->Fill(m2[i]);
-       if(LCGate2Flag) Hist1[66]->Fill(m2[i]);
-       if(LCGate3Flag) Hist1[67]->Fill(m2[i]);
+       if(LCGate1Flag){ Hist1[59]->Fill(m2[i]);}
+       if(LCGate2Flag){ Hist1[66]->Fill(m2[i]);}
+       if(LCGate3Flag){ Hist1[67]->Fill(m2[i]);}
      }
      for(int i=0; i<ntKurama; i++){
        Hist1[60]->Fill(pKurama[i]);
-       if(LCGate1Flag) Hist1[61]->Fill(pKurama[i]);
-       if(LCGate2Flag) Hist1[68]->Fill(pKurama[i]);
-       if(LCGate3Flag) Hist1[69]->Fill(pKurama[i]);
+       if(LCGate1Flag){ Hist1[61]->Fill(pKurama[i]);}
+       if(LCGate2Flag){ Hist1[68]->Fill(pKurama[i]);}
+       if(LCGate3Flag){ Hist1[69]->Fill(pKurama[i]);}
      }
      if(ntKurama==1){
          Hist1[62]->Fill(m2[0]);
