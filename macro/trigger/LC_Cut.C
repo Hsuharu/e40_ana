@@ -267,7 +267,7 @@ void LC_Cut(int month, int runnum){
 
   for(int i=0;i<NumOfSegLC;i++){
     Hist1[i]= new TH1D(Form("LC Mt Tdc %d",i+1),Form("LC Mt Tdc %d",i+1),2000,0,2000);
-    Hist1[30+i]= new TH1D(Form("LC Mt Time %d",i+1),Form("LC Mt Tdime %d",i+1),1000,-500,500);
+    Hist1[30+i]= new TH1D(Form("LC Mt Time %d",i+1),Form("LC Mt Time %d",i+1),1000,-500,500);
   }
   Hist1[28]= new TH1D("LC Mt Nhits","LC Mt Nhits",28,1,29);
   Hist1[29]= new TH1D("LC Mt Hitpattern","LC Mt Hitpattern",28,1,29);
@@ -330,12 +330,12 @@ void LC_Cut(int month, int runnum){
       }
     }
 
-//    for(int i=0; i<m2Combi; i++){
-//      Hist1[58]->Fill(m2[i]);
-//      if(LCGate1Flag==true){ Hist1[59]->Fill(m2[i]);}
-//      if(LCGate2Flag==true){ Hist1[66]->Fill(m2[i]);}
-//      if(LCGate3Flag==true){ Hist1[67]->Fill(m2[i]);}
-//    }
+    for(int i=0; i<m2Combi; i++){
+      Hist1[58]->Fill(m2[i]);
+      if(LCGate1Flag==true){ Hist1[59]->Fill(m2[i]);}
+      if(LCGate2Flag==true){ Hist1[66]->Fill(m2[i]);}
+      if(LCGate3Flag==true){ Hist1[67]->Fill(m2[i]);}
+    }
 //    for(int i=0; i<ntKurama; i++){
 //      Hist1[60]->Fill(pKurama[i]);
 //      if(LCGate1Flag==true){ Hist1[61]->Fill(pKurama[i]);}
