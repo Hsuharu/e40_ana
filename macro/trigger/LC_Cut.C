@@ -281,17 +281,17 @@ void LC_Cut(int month, int runnum){
   Hist1[68]= new TH1D("pKurama Cut1 Gate2","pKurama Cut1 Gate2",100,0,1.6);
   Hist1[69]= new TH1D("pKurama Cut1 Gate3","pKurama Cut1 Gate3",100,0,1.6);
 
-  Hist2[0]= new TH2D("m2 vs pKurama Cut2 Gate1","m2 vs pKurama Cut Gate12",100,-0.4,1.4,100,0,1.6);
-  Hist2[1]= new TH2D("m2 vs pKurama Cut3 Gate1","m2 vs pKurama Cut Gate13",100,-0.4,1.4,100,0,1.6);
-  Hist2[2]= new TH2D("m2 vs pKurama Cut3 Gate2","m2 vs pKurama Cut Gate23",100,-0.4,1.4,100,0,1.6);
-  Hist2[3]= new TH2D("m2 vs pKurama Cut3 Gate3","m2 vs pKurama Cut Gate33",100,-0.4,1.4,100,0,1.6);
+  Hist2[0]= new TH2D("m2 vs pKurama Cut2 Gate1","m2 vs pKurama Cut2 Gate1",100,-0.4,1.4,100,0,1.6);
+  Hist2[1]= new TH2D("m2 vs pKurama Cut3 Gate1","m2 vs pKurama Cut3 Gate1",100,-0.4,1.4,100,0,1.6);
+  Hist2[2]= new TH2D("m2 vs pKurama Cut3 Gate2","m2 vs pKurama Cut3 Gate2",100,-0.4,1.4,100,0,1.6);
+  Hist2[3]= new TH2D("m2 vs pKurama Cut3 Gate3","m2 vs pKurama Cut3 Gate3",100,-0.4,1.4,100,0,1.6);
 
   Hist1[70]= new TH1D("m2 Cut3 Gate2","m2 Cut3 Gate2",100,-0.4,1.4);
   Hist1[71]= new TH1D("pKurama Cut3 Gate2","pKurama Cut3 Gate2",100,0,1.6);
   Hist1[72]= new TH1D("m2 Cut3 Gate3","m2 Cut3 Gate3",100,-0.4,1.4);
   Hist1[73]= new TH1D("pKurama Cut3 Gate3","pKurama Cut3 Gate3",100,0,1.6);
 
-   TF1 *fit = new TF1("fit","gaus"); 
+//   TF1 *fit = new TF1("fit","gaus"); 
 
 //-Legend def --------------------------------------------------------------------------------------
   TLegend *Leg1 = new TLegend(0.78,0.775,0.98,0.935);
@@ -380,14 +380,15 @@ void LC_Cut(int month, int runnum){
   }
 
    for (int i=0; i<NumOfSegLC;i++) {
-       lcmttdcpeak[i] = Hist1[i]->GetMaximumBin();   
-       lcmttdcpeak[i] = Hist1[i]->GetXaxis()->GetBinCenter(lcmttdcpeak[i]);  
-       Hist1[i]->SetAxisRange(lcmttdcpeak[i]-50,lcmttdcpeak[i]+80,"X");
+     TF1 *fit = new TF1("fit","gaus"); 
+     lcmttdcpeak[i] = Hist1[i]->GetMaximumBin();   
+     lcmttdcpeak[i] = Hist1[i]->GetXaxis()->GetBinCenter(lcmttdcpeak[i]);  
+     Hist1[i]->SetAxisRange(lcmttdcpeak[i]-50,lcmttdcpeak[i]+80,"X");
 
-       Hist1[i]->Draw(); 
-       Hist1[i]->Fit("fit","","", lcmttdcpeak[i]-l, lcmttdcpeak[i]+l);  
-       c1->Print(pdf);
-       lcmttdcpeak[i] = fit->GetParameter(1);  
+     Hist1[i]->Draw(); 
+     Hist1[i]->Fit("fit","","", lcmttdcpeak[i]-l, lcmttdcpeak[i]+l);  
+     c1->Print(pdf);
+     lcmttdcpeak[i] = fit->GetParameter(1);  
    }
 
    Hist1[62]->SetStats(0);
