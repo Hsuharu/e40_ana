@@ -336,12 +336,12 @@ void LC_Cut(int month, int runnum){
       if(LCGate2Flag==true){ Hist1[66]->Fill(m2[i]);}
       if(LCGate3Flag==true){ Hist1[67]->Fill(m2[i]);}
     }
-//    for(int i=0; i<ntKurama; i++){
-//      Hist1[60]->Fill(pKurama[i]);
-//      if(LCGate1Flag==true){ Hist1[61]->Fill(pKurama[i]);}
-//      if(LCGate2Flag==true){ Hist1[68]->Fill(pKurama[i]);}
-//      if(LCGate3Flag==true){ Hist1[69]->Fill(pKurama[i]);}
-//    }
+    for(int i=0; i<ntKurama; i++){
+      Hist1[60]->Fill(pKurama[i]);
+      if(LCGate1Flag==true){ Hist1[61]->Fill(pKurama[i]);}
+      if(LCGate2Flag==true){ Hist1[68]->Fill(pKurama[i]);}
+      if(LCGate3Flag==true){ Hist1[69]->Fill(pKurama[i]);}
+    }
 //    if(ntKurama==1){
 //      Hist1[62]->Fill(m2[0]);
 //      Hist1[63]->Fill(pKurama[0]);
