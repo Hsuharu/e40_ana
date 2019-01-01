@@ -320,14 +320,14 @@ void LC_Cut(int month, int runnum){
           Hist1[i]->Fill(lct[i][j]);
         }
       }
-//      for(int j=0; j<16; j++){
-//        if(lcmt[i][j]!=-999.){
-//          Hist1[i+30]->Fill(lcmt[i][j]);
-//          if(lcmt[i][j]>NegGate1 && lcmt[i][j]<Gate1){ LCGate1Flag = true;}
-//          if(lcmt[i][j]>NegGate2 && lcmt[i][j]<Gate2){ LCGate2Flag = true;}
-//          if(lcmt[i][j]>NegGate3 && lcmt[i][j]<Gate3){ LCGate3Flag = true;}
-//        }
-//      }
+      for(int j=0; j<16; j++){
+        if(lcmt[i][j]!=-999.){
+          Hist1[i+30]->Fill(lcmt[i][j]);
+          if(lcmt[i][j]>NegGate1 && lcmt[i][j]<Gate1){ LCGate1Flag = true;}
+          if(lcmt[i][j]>NegGate2 && lcmt[i][j]<Gate2){ LCGate2Flag = true;}
+          if(lcmt[i][j]>NegGate3 && lcmt[i][j]<Gate3){ LCGate3Flag = true;}
+        }
+      }
     }
 
 //    for(int i=0; i<m2Combi; i++){
