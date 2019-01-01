@@ -344,9 +344,8 @@ void LC_Cut(int month, int runnum){
     }
   }
 
-  nbytes = 0;
   for (Long64_t s=0; s<nentries;s++) {
-    nbytes += khodo_lc->GetEntry(s);
+    khodo_lc->GetEntry(s);
     bool LCGate1Flag = false;
     bool LCGate2Flag = false;
     bool LCGate3Flag = false;
@@ -365,15 +364,19 @@ void LC_Cut(int month, int runnum){
       Hist1[62]->Fill(m2[0]);
       Hist1[63]->Fill(pKurama[0]);
       Hist2[0]->Fill(m2[0],pKurama[0]);
+
       if(LCGate1Flag == true){
         Hist1[64]->Fill(m2[0]);
         Hist1[65]->Fill(pKurama[0]);
+        Hist2[1]->Fill(m2[0],pKurama[0]);
       }
+
       if(LCGate2Flag == true){
         Hist1[70]->Fill(m2[0]);
         Hist1[71]->Fill(pKurama[0]);
         Hist2[2]->Fill(m2[0],pKurama[0]);
       }
+
       if(LCGate3Flag == true){
         Hist1[72]->Fill(m2[0]);
         Hist1[73]->Fill(pKurama[0]);
@@ -394,6 +397,12 @@ void LC_Cut(int month, int runnum){
 //    c1->Print(Form("%s/LC_Cut_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
     c1->Print(Form("%s/pdf/trigger/LC_Cut_run%05d_Hist1_%03d.pdf",anadir.Data(),runnum,i));
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
+    if(i>29 && i<58){
+    Hist1[i]->SetAxisRange(-20,20,"X");
+    Hist1[i]->Draw();
+    c1->Print(pdf);
+    c1->Print(Form("%s/pdf/trigger/LC_Cut_run%05d_Hist1_%03d_zoom.pdf",anadir.Data(),runnum,i));
+    }
   }
   for(int i=0; i<Hist2Max; i++){
     Hist2[i]->Draw("colz");
