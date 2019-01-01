@@ -250,10 +250,15 @@ void LC_Cut(int month, int runnum){
   int Hist2Max = 0;
 
    double lcmttdcpeak[NumOfSegLC]; 
+
+   double Gate1 = 10;
+   double Gate2 = 15;
+   double Gate3 = 20;
+
    int l = 3;
   //-hist def-----------------------------------------------------------------------------------------
-  Hist1Max = 66;
-  Hist2Max = 2;
+  Hist1Max = 74;
+  Hist2Max = 4;
   TH1D *Hist1[Hist1Max];
   TH2D *Hist2[Hist2Max];
   
@@ -264,19 +269,33 @@ void LC_Cut(int month, int runnum){
   Hist1[28]= new TH1D("LC Mt Nhits","LC Mt Nhits",28,1,29);
   Hist1[29]= new TH1D("LC Mt Hitpattern","LC Mt Hitpattern",28,1,29);
   Hist1[58]= new TH1D("m2","m2",100,-0.4,1.4);
-  Hist1[59]= new TH1D("m2 Cut1","m2 Cut1",100,-0.4,1.4);
+  Hist1[59]= new TH1D("m2 Cut1 Gate1","m2 Cut1 Gate1",100,-0.4,1.4);
   Hist1[60]= new TH1D("pKurama","pKurama",100,0,1.6);
-  Hist1[61]= new TH1D("pKurama Cut1","pKurama Cut1",100,0,1.6);
+  Hist1[61]= new TH1D("pKurama Cut1 Gate1","pKurama Cut1 Gate1",100,0,1.6);
   Hist1[62]= new TH1D("m2 Cut2","m2 Cut2",100,-0.4,1.4);
   Hist1[63]= new TH1D("pKurama Cut2","pKurama Cut2",100,0,1.6);
-  Hist1[64]= new TH1D("m2 Cut3","m2 Cut3",100,-0.4,1.4);
-  Hist1[65]= new TH1D("pKurama Cut3","pKurama Cut3",100,0,1.6);
+  Hist1[64]= new TH1D("m2 Cut3 Gate1","m2 Cut3 Gate1",100,-0.4,1.4);
+  Hist1[65]= new TH1D("pKurama Cut3 Gate1","pKurama Cut3 Gate1",100,0,1.6);
+  Hist1[66]= new TH1D("m2 Cut1 Gate2","m2 Cut1 Gate2",100,-0.4,1.4);
+  Hist1[67]= new TH1D("m2 Cut1 Gate3","m2 Cut1 Gate3",100,-0.4,1.4);
+  Hist1[68]= new TH1D("pKurama Cut1 Gate2","pKurama Cut1 Gate2",100,0,1.6);
+  Hist1[69]= new TH1D("pKurama Cut1 Gate3","pKurama Cut1 Gate3",100,0,1.6);
 
-  Hist2[0]= new TH2D("m2 vs pKurama Cut2","m2 vs pKurama Cut2",100,-0.4,1.4,100,0,1.6);
-  Hist2[1]= new TH2D("m2 vs pKurama Cut3","m2 vs pKurama Cut3",100,-0.4,1.4,100,0,1.6);
+  Hist2[0]= new TH2D("m2 vs pKurama Cut2 Gate1","m2 vs pKurama Cut Gate12",100,-0.4,1.4,100,0,1.6);
+  Hist2[1]= new TH2D("m2 vs pKurama Cut3 Gate1","m2 vs pKurama Cut Gate13",100,-0.4,1.4,100,0,1.6);
+  Hist2[2]= new TH2D("m2 vs pKurama Cut3 Gate2","m2 vs pKurama Cut Gate23",100,-0.4,1.4,100,0,1.6);
+  Hist2[3]= new TH2D("m2 vs pKurama Cut3 Gate3","m2 vs pKurama Cut Gate33",100,-0.4,1.4,100,0,1.6);
 
+  Hist1[70]= new TH1D("m2 Cut3 Gate2","m2 Cut3 Gate2",100,-0.4,1.4);
+  Hist1[71]= new TH1D("pKurama Cut3 Gate2","pKurama Cut3 Gate2",100,0,1.6);
+  Hist1[72]= new TH1D("m2 Cut3 Gate3","m2 Cut3 Gate3",100,-0.4,1.4);
+  Hist1[73]= new TH1D("pKurama Cut3 Gate3","pKurama Cut3 Gate3",100,0,1.6);
 
    TF1 *fit = new TF1("fit","gaus"); 
+
+//-Legend def --------------------------------------------------------------------------------------
+  TLegend *Leg1 = new TLegend(0.78,0.775,0.98,0.935);
+  TLegend *Leg2 = new TLegend(0.78,0.775,0.98,0.935);
 
 //-Event Loop --------------------------------------------------------------------------------------
    Long64_t nentries = khodo_lc->GetEntries();
@@ -287,7 +306,9 @@ void LC_Cut(int month, int runnum){
 
      Hist1[28]->Fill(lcnhits);
 
-     bool LCFlag = false;
+     bool LCGate1Flag = false;
+     bool LCGate2Flag = false;
+     bool LCGate3Flag = false;
 
      for(int i=0; i<NumOfSegLC; i++){
        Hist1[29]->Fill(lchitpat[i]);
@@ -299,33 +320,43 @@ void LC_Cut(int month, int runnum){
        for(int j=0; j<16; j++){
          if(lcmt[i][j]!=-999.){
            Hist1[i+30]->Fill(lcmt[i][j]);
-           if(lcmt[i][j]>-10&&lcmt[i][j]<10){
-             LCFlag = true;
-           }
+           if(lcmt[i][j]>-Gate1&&lcmt[i][j]<Gate1) LCGate1Flag = true;
+           if(lcmt[i][j]>-Gate2&&lcmt[i][j]<Gate2) LCGate2Flag = true;
+           if(lcmt[i][j]>-Gate3&&lcmt[i][j]<Gate3) LCGate3Flag = true;
          }
        }
      }
 
      for(int i=0; i<m2Combi; i++){
        Hist1[58]->Fill(m2[i]);
-       if(LCFlag){
-         Hist1[59]->Fill(m2[i]);
-       }
+       if(LCGate1Flag) Hist1[59]->Fill(m2[i]);
+       if(LCGate2Flag) Hist1[66]->Fill(m2[i]);
+       if(LCGate3Flag) Hist1[67]->Fill(m2[i]);
      }
      for(int i=0; i<ntKurama; i++){
        Hist1[60]->Fill(pKurama[i]);
-       if(LCFlag){
-         Hist1[61]->Fill(pKurama[i]);
-       }
+       if(LCGate1Flag) Hist1[61]->Fill(pKurama[i]);
+       if(LCGate2Flag) Hist1[68]->Fill(pKurama[i]);
+       if(LCGate3Flag) Hist1[69]->Fill(pKurama[i]);
      }
      if(ntKurama==1){
          Hist1[62]->Fill(m2[0]);
          Hist1[63]->Fill(pKurama[0]);
        Hist2[0]->Fill(m2[0],pKurama[0]);
-       if(LCFlag){
+       if(LCGate1Flag){
          Hist1[64]->Fill(m2[0]);
          Hist1[65]->Fill(pKurama[0]);
          Hist2[1]->Fill(m2[0],pKurama[0]);
+       }
+       if(LCGate2Flag){
+         Hist1[70]->Fill(m2[0]);
+         Hist1[71]->Fill(pKurama[0]);
+         Hist2[2]->Fill(m2[0],pKurama[0]);
+       }
+       if(LCGate3Flag){
+         Hist1[72]->Fill(m2[0]);
+         Hist1[73]->Fill(pKurama[0]);
+         Hist2[3]->Fill(m2[0],pKurama[0]);
        }
      }
    }
@@ -359,12 +390,46 @@ void LC_Cut(int month, int runnum){
        lcmttdcpeak[i] = fit->GetParameter(1);  
    }
 
+   Hist1[62]->SetStats(0);
+   Hist1[64]->SetStats(0);
+   Hist1[70]->SetStats(0);
+   Hist1[72]->SetStats(0);
+
+   Hist1[64]->SetLineColor(2);
+   Hist1[70]->SetLineColor(3);
+   Hist1[72]->SetLineColor(4);
+
    Hist1[62]->Draw();
    Hist1[64]->Draw("same");
+   Hist1[70]->Draw("same");
+   Hist1[72]->Draw("same");
+
+   Leg1->AddEntry(Hist1[64],"ntKurama==1","l");
+   Leg1->AddEntry(Hist1[64],"Cut Gate1  ","l");
+   Leg1->AddEntry(Hist1[70],"Cut Gate2  ","l");
+   Leg1->AddEntry(Hist1[72],"Cut Gate3  ","l");
+   Leg1->Draw();
   c1->Print(pdf);
+
+   Hist1[58]->SetStats(0);
+   Hist1[59]->SetStats(0);
+   Hist1[66]->SetStats(0);
+   Hist1[67]->SetStats(0);
+
+   Hist1[59]->SetLineColor(2);
+   Hist1[66]->SetLineColor(3);
+   Hist1[67]->SetLineColor(4);
 
    Hist1[58]->Draw();
    Hist1[59]->Draw("same");
+   Hist1[66]->Draw("same");
+   Hist1[67]->Draw("same");
+
+   Leg1->AddEntry(Hist1[58],"No Cut   ","l");
+   Leg1->AddEntry(Hist1[59],"Cut Gate1","l");
+   Leg1->AddEntry(Hist1[66],"Cut Gate2","l");
+   Leg1->AddEntry(Hist1[67],"Cut Gate3","l");
+   Leg1->Draw();
   c1->Print(pdf);
 
    
