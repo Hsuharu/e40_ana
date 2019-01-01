@@ -320,48 +320,48 @@ void LC_Cut(int month, int runnum){
           Hist1[i]->Fill(lct[i][j]);
         }
       }
-      for(int j=0; j<16; j++){
-        if(lcmt[i][j]!=-999.){
-          Hist1[i+30]->Fill(lcmt[i][j]);
-          if(lcmt[i][j]>NegGate1 && lcmt[i][j]<Gate1){ LCGate1Flag = true;}
-          if(lcmt[i][j]>NegGate2 && lcmt[i][j]<Gate2){ LCGate2Flag = true;}
-          if(lcmt[i][j]>NegGate3 && lcmt[i][j]<Gate3){ LCGate3Flag = true;}
-        }
-      }
+//      for(int j=0; j<16; j++){
+//        if(lcmt[i][j]!=-999.){
+//          Hist1[i+30]->Fill(lcmt[i][j]);
+//          if(lcmt[i][j]>NegGate1 && lcmt[i][j]<Gate1){ LCGate1Flag = true;}
+//          if(lcmt[i][j]>NegGate2 && lcmt[i][j]<Gate2){ LCGate2Flag = true;}
+//          if(lcmt[i][j]>NegGate3 && lcmt[i][j]<Gate3){ LCGate3Flag = true;}
+//        }
+//      }
     }
 
-    for(int i=0; i<m2Combi; i++){
-      Hist1[58]->Fill(m2[i]);
-      if(LCGate1Flag==true){ Hist1[59]->Fill(m2[i]);}
-      if(LCGate2Flag==true){ Hist1[66]->Fill(m2[i]);}
-      if(LCGate3Flag==true){ Hist1[67]->Fill(m2[i]);}
-    }
-    for(int i=0; i<ntKurama; i++){
-      Hist1[60]->Fill(pKurama[i]);
-      if(LCGate1Flag==true){ Hist1[61]->Fill(pKurama[i]);}
-      if(LCGate2Flag==true){ Hist1[68]->Fill(pKurama[i]);}
-      if(LCGate3Flag==true){ Hist1[69]->Fill(pKurama[i]);}
-    }
-    if(ntKurama==1){
-      Hist1[62]->Fill(m2[0]);
-      Hist1[63]->Fill(pKurama[0]);
-      Hist2[0]->Fill(m2[0],pKurama[0]);
-      if(LCGate1Flag==true){
-        Hist1[64]->Fill(m2[0]);
-        Hist1[65]->Fill(pKurama[0]);
-        Hist2[1]->Fill(m2[0],pKurama[0]);
-      }
-      if(LCGate2Flag==true){
-        Hist1[70]->Fill(m2[0]);
-        Hist1[71]->Fill(pKurama[0]);
-        Hist2[2]->Fill(m2[0],pKurama[0]);
-      }
-      if(LCGate3Flag==true){
-        Hist1[72]->Fill(m2[0]);
-        Hist1[73]->Fill(pKurama[0]);
-        Hist2[3]->Fill(m2[0],pKurama[0]);
-      }
-    }
+//    for(int i=0; i<m2Combi; i++){
+//      Hist1[58]->Fill(m2[i]);
+//      if(LCGate1Flag==true){ Hist1[59]->Fill(m2[i]);}
+//      if(LCGate2Flag==true){ Hist1[66]->Fill(m2[i]);}
+//      if(LCGate3Flag==true){ Hist1[67]->Fill(m2[i]);}
+//    }
+//    for(int i=0; i<ntKurama; i++){
+//      Hist1[60]->Fill(pKurama[i]);
+//      if(LCGate1Flag==true){ Hist1[61]->Fill(pKurama[i]);}
+//      if(LCGate2Flag==true){ Hist1[68]->Fill(pKurama[i]);}
+//      if(LCGate3Flag==true){ Hist1[69]->Fill(pKurama[i]);}
+//    }
+//    if(ntKurama==1){
+//      Hist1[62]->Fill(m2[0]);
+//      Hist1[63]->Fill(pKurama[0]);
+//      Hist2[0]->Fill(m2[0],pKurama[0]);
+//      if(LCGate1Flag==true){
+//        Hist1[64]->Fill(m2[0]);
+//        Hist1[65]->Fill(pKurama[0]);
+//        Hist2[1]->Fill(m2[0],pKurama[0]);
+//      }
+//      if(LCGate2Flag==true){
+//        Hist1[70]->Fill(m2[0]);
+//        Hist1[71]->Fill(pKurama[0]);
+//        Hist2[2]->Fill(m2[0],pKurama[0]);
+//      }
+//      if(LCGate3Flag==true){
+//        Hist1[72]->Fill(m2[0]);
+//        Hist1[73]->Fill(pKurama[0]);
+//        Hist2[3]->Fill(m2[0],pKurama[0]);
+//      }
+//    }
   }
 
   //-Hist Draw----------------------------------------------------------------------------------------
@@ -396,48 +396,48 @@ void LC_Cut(int month, int runnum){
 //    lcmttdcpeak[i] = fit->GetParameter(1);  
 //  }
 
-  Hist1[62]->SetStats(0);
-  Hist1[64]->SetStats(0);
-  Hist1[70]->SetStats(0);
-  Hist1[72]->SetStats(0);
-
-  Hist1[64]->SetLineColor(2);
-  Hist1[70]->SetLineColor(3);
-  Hist1[72]->SetLineColor(4);
-
-  Hist1[62]->Draw();
-  Hist1[64]->Draw("same");
-  Hist1[70]->Draw("same");
-  Hist1[72]->Draw("same");
-
-  Leg1->AddEntry(Hist1[62],"ntKurama==1","l");
-  Leg1->AddEntry(Hist1[64],Form("Cut Gate1 %dns",(int)Gate1),"l");
-  Leg1->AddEntry(Hist1[70],Form("Cut Gate2 %dns",(int)Gate2),"l");
-  Leg1->AddEntry(Hist1[72],Form("Cut Gate3 %dns",(int)Gate3),"l");
-  Leg1->Draw();
-  c1->Print(pdf);
-
-  Hist1[58]->SetStats(0);
-  Hist1[59]->SetStats(0);
-  Hist1[66]->SetStats(0);
-  Hist1[67]->SetStats(0);
-
-  Hist1[59]->SetLineColor(2);
-  Hist1[66]->SetLineColor(3);
-  Hist1[67]->SetLineColor(4);
-
-  Hist1[58]->Draw();
-  Hist1[59]->Draw("same");
-  Hist1[66]->Draw("same");
-  Hist1[67]->Draw("same");
-
-  Leg2->AddEntry(Hist1[58],"No Cut   ","l");
-  Leg2->AddEntry(Hist1[59],Form("Cut Gate1 %dns",(int)Gate1),"l");
-  Leg2->AddEntry(Hist1[66],Form("Cut Gate2 %dns",(int)Gate2),"l");
-  Leg2->AddEntry(Hist1[67],Form("Cut Gate3 %dns",(int)Gate3),"l");
-  Leg2->Draw();
-  c1->Print(pdf);
-
+//  Hist1[62]->SetStats(0);
+//  Hist1[64]->SetStats(0);
+//  Hist1[70]->SetStats(0);
+//  Hist1[72]->SetStats(0);
+//
+//  Hist1[64]->SetLineColor(2);
+//  Hist1[70]->SetLineColor(3);
+//  Hist1[72]->SetLineColor(4);
+//
+//  Hist1[62]->Draw();
+//  Hist1[64]->Draw("same");
+//  Hist1[70]->Draw("same");
+//  Hist1[72]->Draw("same");
+//
+//  Leg1->AddEntry(Hist1[62],"ntKurama==1","l");
+//  Leg1->AddEntry(Hist1[64],Form("Cut Gate1 %dns",(int)Gate1),"l");
+//  Leg1->AddEntry(Hist1[70],Form("Cut Gate2 %dns",(int)Gate2),"l");
+//  Leg1->AddEntry(Hist1[72],Form("Cut Gate3 %dns",(int)Gate3),"l");
+//  Leg1->Draw();
+//  c1->Print(pdf);
+//
+//  Hist1[58]->SetStats(0);
+//  Hist1[59]->SetStats(0);
+//  Hist1[66]->SetStats(0);
+//  Hist1[67]->SetStats(0);
+//
+//  Hist1[59]->SetLineColor(2);
+//  Hist1[66]->SetLineColor(3);
+//  Hist1[67]->SetLineColor(4);
+//
+//  Hist1[58]->Draw();
+//  Hist1[59]->Draw("same");
+//  Hist1[66]->Draw("same");
+//  Hist1[67]->Draw("same");
+//
+//  Leg2->AddEntry(Hist1[58],"No Cut   ","l");
+//  Leg2->AddEntry(Hist1[59],Form("Cut Gate1 %dns",(int)Gate1),"l");
+//  Leg2->AddEntry(Hist1[66],Form("Cut Gate2 %dns",(int)Gate2),"l");
+//  Leg2->AddEntry(Hist1[67],Form("Cut Gate3 %dns",(int)Gate3),"l");
+//  Leg2->Draw();
+//  c1->Print(pdf);
+//
 
   c1->Print(pdf+"]"); 
 
