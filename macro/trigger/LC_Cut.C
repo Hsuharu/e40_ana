@@ -335,7 +335,8 @@ void LC_Cut(int month, int runnum){
   TCanvas *c1 = new TCanvas("c1","c1",800,700); 
   c1->Print(pdf+"["); 
   c1->cd();
-  for(int i=0; i<Hist1Max; i++){
+//  for(int i=0; i<Hist1Max; i++){
+  for(int i=0; i<NumOfSegLC; i++){
     Hist1[i]->Draw();
     c1->Print(pdf);
     c1->Print(Form("%s/pdf/trigger/LC_Cut_run%05d_Hist1_%03d_pre.pdf",anadir.Data(),runnum,i));
@@ -373,15 +374,12 @@ void LC_Cut(int month, int runnum){
       Hist1[29]->Fill(lchitpat[i]);
       for(int j=0; j<16; j++){
         if(lct[i][j]!=-9999.){
-          Hist1[i]->Fill(lct[i][j]);
+          if(lct[i][j]>MinGate1[i] && lct[i][j]<MaxGate1[i]){ LCGate1Flag = true;}
+          if(lct[i][j]>MinGate2[i] && lct[i][j]<MaxGate2[i]){ LCGate2Flag = true;}
+          if(lct[i][j]>MinGate3[i] && lct[i][j]<MaxGate3[i]){ LCGate3Flag = true;}
         }
-      }
-      for(int j=0; j<16; j++){
         if(lcmt[i][j]!=-999.){
           Hist1[i+30]->Fill(lcmt[i][j]);
-          if(lcmt[i][j]>MinGate1[i] && lcmt[i][j]<MaxGate1[i]){ LCGate1Flag = true;}
-          if(lcmt[i][j]>MinGate2[i] && lcmt[i][j]<MaxGate2[i]){ LCGate2Flag = true;}
-          if(lcmt[i][j]>MinGate3[i] && lcmt[i][j]<MaxGate3[i]){ LCGate3Flag = true;}
         }
       }
     }
