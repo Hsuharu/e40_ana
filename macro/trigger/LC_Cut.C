@@ -333,31 +333,31 @@ void LC_Cut(int month, int runnum){
 
     for(int i=0; i<m2Combi; i++){
       Hist1[58]->Fill(m2[i]);
-      if(LCGate1Flag){ Hist1[59]->Fill(m2[i]);}
-      if(LCGate2Flag){ Hist1[66]->Fill(m2[i]);}
-      if(LCGate3Flag){ Hist1[67]->Fill(m2[i]);}
+      if(LCGate1Flag==true){ Hist1[59]->Fill(m2[i]);}
+      if(LCGate2Flag==true){ Hist1[66]->Fill(m2[i]);}
+      if(LCGate3Flag==true){ Hist1[67]->Fill(m2[i]);}
     }
     for(int i=0; i<ntKurama; i++){
       Hist1[60]->Fill(pKurama[i]);
-      if(LCGate1Flag){ Hist1[61]->Fill(pKurama[i]);}
-      if(LCGate2Flag){ Hist1[68]->Fill(pKurama[i]);}
-      if(LCGate3Flag){ Hist1[69]->Fill(pKurama[i]);}
+      if(LCGate1Flag==true){ Hist1[61]->Fill(pKurama[i]);}
+      if(LCGate2Flag==true){ Hist1[68]->Fill(pKurama[i]);}
+      if(LCGate3Flag==true){ Hist1[69]->Fill(pKurama[i]);}
     }
     if(ntKurama==1){
       Hist1[62]->Fill(m2[0]);
       Hist1[63]->Fill(pKurama[0]);
       Hist2[0]->Fill(m2[0],pKurama[0]);
-      if(LCGate1Flag){
+      if(LCGate1Flag==true){
         Hist1[64]->Fill(m2[0]);
         Hist1[65]->Fill(pKurama[0]);
         Hist2[1]->Fill(m2[0],pKurama[0]);
       }
-      if(LCGate2Flag){
+      if(LCGate2Flag==true){
         Hist1[70]->Fill(m2[0]);
         Hist1[71]->Fill(pKurama[0]);
         Hist2[2]->Fill(m2[0],pKurama[0]);
       }
-      if(LCGate3Flag){
+      if(LCGate3Flag==true){
         Hist1[72]->Fill(m2[0]);
         Hist1[73]->Fill(pKurama[0]);
         Hist2[3]->Fill(m2[0],pKurama[0]);
@@ -374,26 +374,26 @@ void LC_Cut(int month, int runnum){
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(1);
     Hist1[i]->Draw();
     c1->Print(pdf);
-    c1->Print(Form("%s/LC_Cut_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
+//    c1->Print(Form("%s/LC_Cut_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
   }
   for(int i=0; i<Hist2Max; i++){
     Hist2[i]->Draw("colz");
     c1->Print(pdf);
-    c1->Print(Form("%s/LC_Cut_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
+//    c1->Print(Form("%s/LC_Cut_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
   }
 
-  for (int i=0; i<NumOfSegLC;i++) {
-    TF1 *fit = new TF1("fit","gaus"); 
-    lcmttdcpeak[i] = Hist1[i]->GetMaximumBin();   
-    lcmttdcpeak[i] = Hist1[i]->GetXaxis()->GetBinCenter(lcmttdcpeak[i]);  
-    Hist1[i]->SetAxisRange(lcmttdcpeak[i]-50,lcmttdcpeak[i]+80,"X");
-
-    Hist1[i]->Draw(); 
-    Hist1[i]->Fit("fit","","", lcmttdcpeak[i]-l, lcmttdcpeak[i]+l);  
-    c1->Print(pdf);
-    lcmttdcpeak[i] = fit->GetParameter(1);  
-  }
+//  for (int i=0; i<NumOfSegLC;i++) {
+//    TF1 *fit = new TF1("fit","gaus"); 
+//    lcmttdcpeak[i] = Hist1[i]->GetMaximumBin();   
+//    lcmttdcpeak[i] = Hist1[i]->GetXaxis()->GetBinCenter(lcmttdcpeak[i]);  
+//    Hist1[i]->SetAxisRange(lcmttdcpeak[i]-50,lcmttdcpeak[i]+80,"X");
+//
+//    Hist1[i]->Draw(); 
+//    Hist1[i]->Fit("fit","","", lcmttdcpeak[i]-l, lcmttdcpeak[i]+l);  
+//    c1->Print(pdf);
+//    lcmttdcpeak[i] = fit->GetParameter(1);  
+//  }
 
   Hist1[62]->SetStats(0);
   Hist1[64]->SetStats(0);
