@@ -374,13 +374,15 @@ void LC_Cut(int month, int runnum){
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(1);
     Hist1[i]->Draw();
     c1->Print(pdf);
-    c1->Print(Form("%s/LC_Cut_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
+//    c1->Print(Form("%s/LC_Cut_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
+    c1->Print(Form("%s/pdf/trigger/LC_Cut_run%05d_Hist1_%03d.pdf",anadir.Data(),runnum,i));
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
   }
   for(int i=0; i<Hist2Max; i++){
     Hist2[i]->Draw("colz");
     c1->Print(pdf);
-    c1->Print(Form("%s/LC_Cut_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
+//    c1->Print(Form("%s/LC_Cut_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
+    c1->Print(Form("%s/pdf/trigger/LC_Cut_run%05d_Hist2_%03d.pdf",anadir.Data(),runnum,i));
   }
 
 //  for (int i=0; i<NumOfSegLC;i++) {
