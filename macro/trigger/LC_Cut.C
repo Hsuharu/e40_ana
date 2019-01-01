@@ -288,7 +288,7 @@ void LC_Cut(int month, int runnum){
   Hist1[72]= new TH1D("m2 Cut3 Gate3","m2 Cut3 Gate3",100,-0.4,1.4);
   Hist1[73]= new TH1D("pKurama Cut3 Gate3","pKurama Cut3 Gate3",100,0,1.6);
 
-  Hist2[0]= new TH2D("m2 vs pKurama Cut2 Gate1","m2 vs pKurama Cut2 Gate1",100,-0.4,1.4,100,0,1.6);
+  Hist2[0]= new TH2D("m2 vs pKurama Cut2","m2 vs pKurama Cut2",100,-0.4,1.4,100,0,1.6);
   Hist2[1]= new TH2D("m2 vs pKurama Cut3 Gate1","m2 vs pKurama Cut3 Gate1",100,-0.4,1.4,100,0,1.6);
   Hist2[2]= new TH2D("m2 vs pKurama Cut3 Gate2","m2 vs pKurama Cut3 Gate2",100,-0.4,1.4,100,0,1.6);
   Hist2[3]= new TH2D("m2 vs pKurama Cut3 Gate3","m2 vs pKurama Cut3 Gate3",100,-0.4,1.4,100,0,1.6);
@@ -342,25 +342,43 @@ void LC_Cut(int month, int runnum){
       if(LCGate2Flag==true){ Hist1[68]->Fill(pKurama[i]);}
       if(LCGate3Flag==true){ Hist1[69]->Fill(pKurama[i]);}
     }
+  }
+
+  nbytes = 0;
+  for (Long64_t s=0; s<nentries;s++) {
+    nbytes += khodo_lc->GetEntry(s);
+    bool LCGate1Flag = false;
+    bool LCGate2Flag = false;
+    bool LCGate3Flag = false;
+
+    for(int i=0; i<NumOfSegLC; i++){
+      for(int j=0; j<16; j++){
+        if(lcmt[i][j]!=-999.){
+          if(lcmt[i][j]>NegGate1 && lcmt[i][j]<Gate1){ LCGate1Flag = true;}
+          if(lcmt[i][j]>NegGate2 && lcmt[i][j]<Gate2){ LCGate2Flag = true;}
+          if(lcmt[i][j]>NegGate3 && lcmt[i][j]<Gate3){ LCGate3Flag = true;}
+        }
+      }
+    }
+
     if(ntKurama==1){
       Hist1[62]->Fill(m2[0]);
       Hist1[63]->Fill(pKurama[0]);
       Hist2[0]->Fill(m2[0],pKurama[0]);
-//      if(LCGate1Flag == true){
-//        Hist1[64]->Fill(m2[0]);
-//        Hist1[65]->Fill(pKurama[0]);
-////        Hist2[1]->Fill(m2[0],pKurama[0]);
-//      }
+      if(LCGate1Flag == true){
+        Hist1[64]->Fill(m2[0]);
+        Hist1[65]->Fill(pKurama[0]);
+      }
       if(LCGate2Flag == true){
         Hist1[70]->Fill(m2[0]);
         Hist1[71]->Fill(pKurama[0]);
-//        Hist2[2]->Fill(m2[0],pKurama[0]);
+        Hist2[2]->Fill(m2[0],pKurama[0]);
       }
-//      if(LCGate3Flag == true){
-//        Hist1[72]->Fill(m2[0]);
-//        Hist1[73]->Fill(pKurama[0]);
-////        Hist2[3]->Fill(m2[0],pKurama[0]);
-//      }
+      if(LCGate3Flag == true){
+        Hist1[72]->Fill(m2[0]);
+        Hist1[73]->Fill(pKurama[0]);
+        Hist2[3]->Fill(m2[0],pKurama[0]);
+      }
     }
   }
 
@@ -396,48 +414,48 @@ void LC_Cut(int month, int runnum){
 //    lcmttdcpeak[i] = fit->GetParameter(1);  
 //  }
 
-//  Hist1[62]->SetStats(0);
-//  Hist1[64]->SetStats(0);
-//  Hist1[70]->SetStats(0);
-//  Hist1[72]->SetStats(0);
-//
-//  Hist1[64]->SetLineColor(2);
-//  Hist1[70]->SetLineColor(3);
-//  Hist1[72]->SetLineColor(4);
-//
-//  Hist1[62]->Draw();
-//  Hist1[64]->Draw("same");
-//  Hist1[70]->Draw("same");
-//  Hist1[72]->Draw("same");
-//
-//  Leg1->AddEntry(Hist1[62],"ntKurama==1","l");
-//  Leg1->AddEntry(Hist1[64],Form("Cut Gate1 %dns",(int)Gate1),"l");
-//  Leg1->AddEntry(Hist1[70],Form("Cut Gate2 %dns",(int)Gate2),"l");
-//  Leg1->AddEntry(Hist1[72],Form("Cut Gate3 %dns",(int)Gate3),"l");
-//  Leg1->Draw();
-//  c1->Print(pdf);
-//
-//  Hist1[58]->SetStats(0);
-//  Hist1[59]->SetStats(0);
-//  Hist1[66]->SetStats(0);
-//  Hist1[67]->SetStats(0);
-//
-//  Hist1[59]->SetLineColor(2);
-//  Hist1[66]->SetLineColor(3);
-//  Hist1[67]->SetLineColor(4);
-//
-//  Hist1[58]->Draw();
-//  Hist1[59]->Draw("same");
-//  Hist1[66]->Draw("same");
-//  Hist1[67]->Draw("same");
-//
-//  Leg2->AddEntry(Hist1[58],"No Cut   ","l");
-//  Leg2->AddEntry(Hist1[59],Form("Cut Gate1 %dns",(int)Gate1),"l");
-//  Leg2->AddEntry(Hist1[66],Form("Cut Gate2 %dns",(int)Gate2),"l");
-//  Leg2->AddEntry(Hist1[67],Form("Cut Gate3 %dns",(int)Gate3),"l");
-//  Leg2->Draw();
-//  c1->Print(pdf);
-//
+  Hist1[62]->SetStats(0);
+  Hist1[64]->SetStats(0);
+  Hist1[70]->SetStats(0);
+  Hist1[72]->SetStats(0);
+
+  Hist1[64]->SetLineColor(2);
+  Hist1[70]->SetLineColor(3);
+  Hist1[72]->SetLineColor(4);
+
+  Hist1[62]->Draw();
+  Hist1[64]->Draw("same");
+  Hist1[70]->Draw("same");
+  Hist1[72]->Draw("same");
+
+  Leg1->AddEntry(Hist1[62],"ntKurama==1","l");
+  Leg1->AddEntry(Hist1[64],Form("Cut Gate1 %dns",(int)Gate1),"l");
+  Leg1->AddEntry(Hist1[70],Form("Cut Gate2 %dns",(int)Gate2),"l");
+  Leg1->AddEntry(Hist1[72],Form("Cut Gate3 %dns",(int)Gate3),"l");
+  Leg1->Draw();
+  c1->Print(pdf);
+
+  Hist1[58]->SetStats(0);
+  Hist1[59]->SetStats(0);
+  Hist1[66]->SetStats(0);
+  Hist1[67]->SetStats(0);
+
+  Hist1[59]->SetLineColor(2);
+  Hist1[66]->SetLineColor(3);
+  Hist1[67]->SetLineColor(4);
+
+  Hist1[58]->Draw();
+  Hist1[59]->Draw("same");
+  Hist1[66]->Draw("same");
+  Hist1[67]->Draw("same");
+
+  Leg2->AddEntry(Hist1[58],"No Cut   ","l");
+  Leg2->AddEntry(Hist1[59],Form("Cut Gate1 %dns",(int)Gate1),"l");
+  Leg2->AddEntry(Hist1[66],Form("Cut Gate2 %dns",(int)Gate2),"l");
+  Leg2->AddEntry(Hist1[67],Form("Cut Gate3 %dns",(int)Gate3),"l");
+  Leg2->Draw();
+  c1->Print(pdf);
+
 
   c1->Print(pdf+"]"); 
 
