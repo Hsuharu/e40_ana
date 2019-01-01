@@ -251,9 +251,9 @@ void LC_Cut(int month, int runnum){
 
    double lcmttdcpeak[NumOfSegLC]; 
 
-   double Gate1 = 10;
-   double Gate2 = 15;
-   double Gate3 = 20;
+   double Gate1 = 10.;
+   double Gate2 = 15.;
+   double Gate3 = 20.;
 
    int l = 3;
   //-hist def-----------------------------------------------------------------------------------------
@@ -404,10 +404,10 @@ void LC_Cut(int month, int runnum){
    Hist1[70]->Draw("same");
    Hist1[72]->Draw("same");
 
-   Leg1->AddEntry(Hist1[64],"ntKurama==1","l");
-   Leg1->AddEntry(Hist1[64],"Cut Gate1  ","l");
-   Leg1->AddEntry(Hist1[70],"Cut Gate2  ","l");
-   Leg1->AddEntry(Hist1[72],"Cut Gate3  ","l");
+   Leg1->AddEntry(Hist1[62],"ntKurama==1","l");
+   Leg1->AddEntry(Hist1[64],Form("Cut Gate1 %dns",(int)Gate1),"l");
+   Leg1->AddEntry(Hist1[70],Form("Cut Gate2 %dns",(int)Gate2),"l");
+   Leg1->AddEntry(Hist1[72],Form("Cut Gate3 %dns",(int)Gate3),"l");
    Leg1->Draw();
   c1->Print(pdf);
 
@@ -425,11 +425,11 @@ void LC_Cut(int month, int runnum){
    Hist1[66]->Draw("same");
    Hist1[67]->Draw("same");
 
-   Leg1->AddEntry(Hist1[58],"No Cut   ","l");
-   Leg1->AddEntry(Hist1[59],"Cut Gate1","l");
-   Leg1->AddEntry(Hist1[66],"Cut Gate2","l");
-   Leg1->AddEntry(Hist1[67],"Cut Gate3","l");
-   Leg1->Draw();
+   Leg2->AddEntry(Hist1[58],"No Cut   ","l");
+   Leg2->AddEntry(Hist1[59],Form("Cut Gate1 %dns",(int)Gate1),"l");
+   Leg2->AddEntry(Hist1[66],Form("Cut Gate2 %dns",(int)Gate2),"l");
+   Leg2->AddEntry(Hist1[67],Form("Cut Gate3 %dns",(int)Gate3),"l");
+   Leg2->Draw();
   c1->Print(pdf);
 
    
