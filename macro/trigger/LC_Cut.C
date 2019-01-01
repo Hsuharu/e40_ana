@@ -363,6 +363,10 @@ void LC_Cut(int month, int runnum){
    Hist1[64]->Draw("same");
   c1->Print(pdf);
 
+   Hist1[58]->Draw();
+   Hist1[59]->Draw("same");
+  c1->Print(pdf);
+
    
   c1->Print(pdf+"]"); 
 
