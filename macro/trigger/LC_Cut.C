@@ -544,9 +544,9 @@ void LC_Cut(int month, int runnum){
 
   g4->SetTitle("Title;momentum[GeV/c];index");
 
-  gStyle->SetOptTitle(0);
+//  gStyle->SetOptTitle(0);
 
-  g4->Draw();
+  g4->Draw("al");
   g1->Draw("same");
   g2->Draw("same");
   g3->Draw("same");
@@ -582,7 +582,7 @@ void LC_Cut(int month, int runnum){
   TGraph *g7 = new TGraph(n, x2, y7);
   TGraph *g8 = new TGraph(n, x2, y8);
   TGraph *g9 = new TGraph(n, x2, y9);
-  TGraph *g10 = new TGraph(n, x2, y4);
+  TGraph *g10 = new TGraph(n, x2, y10);
   TGraph *g11 = new TGraph(n, x2, y11);
   TGraph *g12 = new TGraph(n, x2, y12);
   
@@ -621,7 +621,7 @@ void LC_Cut(int month, int runnum){
   g8->SetFillStyle(0);
   g9->SetFillStyle(0);
 
-  g7->Draw("");
+  g7->Draw("al");
   g8->Draw("same");
   g9->Draw("same");
 
@@ -632,16 +632,16 @@ void LC_Cut(int month, int runnum){
   c1->Print(pdf);
   c1->Print(Form("%s/pdf/trigger/m2_p_plot_run%05d.pdf",anadir.Data(),runnum));
 
-  Hist2[0]->Draw();
-  g7->Draw("sames");
+  Hist2[0]->Draw("colz");
+  g7->Draw("same");
   g8->Draw("same");
   g9->Draw("same");
   Leg4->Draw();
   c1->Print(pdf);
   c1->Print(Form("%s/pdf/trigger/m2_p_plot_Cut2_run%05d.pdf",anadir.Data(),runnum));
 
-  Hist2[0]->Draw();
-  g7->Draw("sames");
+  Hist2[1]->Draw("colz");
+  g7->Draw("same");
   g8->Draw("same");
   g9->Draw("same");
   Leg4->Draw();
