@@ -156,4 +156,8 @@ usr/build/UserKuramaTracking.o: usr/UserKuramaTracking.cc \
  /group/had/sks/software/unpacker/unpacker.gcc530/include/Semaphore.hh \
  /group/had/sks/software/unpacker/unpacker.gcc530/include/Mutex.hh \
  /group/had/sks/software/unpacker/unpacker.gcc530/include/ScopedLock.hh \
- include/VEvent.hh
+ include/VEvent.hh include/DCGeomMan.hh include/BH2Cluster.hh \
+ include/BH2Hit.hh include/Hodo1Hit.hh include/Hodo2Hit.hh \
+ include/HodoAnalyzer.hh include/HodoCluster.hh include/HodoParamMan.hh \
+ include/HodoPHCMan.hh include/HodoRawHit.hh include/FiberCluster.hh \
+ include/FiberHit.hh
