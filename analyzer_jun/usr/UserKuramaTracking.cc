@@ -437,7 +437,6 @@ EventKuramaTracking::ProcessingNormal( void )
       // std::cout << "#W SCH too much number of clusters" << std::endl;
       ncl = NumOfSegSCH;
     }
-      std::cout << "# SCH clusters" << ncl << std::endl;
     event.sch_ncl = ncl;
     for(int i=0; i<ncl; ++i){
       FiberCluster *cl = hodoAna->GetClusterSCH(i);
@@ -780,216 +779,216 @@ EventKuramaTracking::ProcessingNormal( void )
       }// for(l)
     }
 
-  const ThreeVector& posTof = tp->TofPos();
-  const ThreeVector& momTof = tp->TofMom();
-  event.xtofKurama[i] = posTof.x();
-  event.ytofKurama[i] = posTof.y();
-  event.utofKurama[i] = momTof.x()/momTof.z();
-  event.vtofKurama[i] = momTof.y()/momTof.z();
+    const ThreeVector& posTof = tp->TofPos();
+    const ThreeVector& momTof = tp->TofMom();
+    event.xtofKurama[i] = posTof.x();
+    event.ytofKurama[i] = posTof.y();
+    event.utofKurama[i] = momTof.x()/momTof.z();
+    event.vtofKurama[i] = momTof.y()/momTof.z();
 
-  ///// w/  TOF
-  event.tofsegKurama[i] = tof_seg;
-  ///// w/o TOF
-  // TVector2 vecTof( posTof.x(), posTof.z() );
-  // vecTof -= TVector2( 250., 2015. );
-  // double sign = math::Sign( vecTof.X() );
-  // double TofSegKurama = sign*vecTof.Mod()/75.+12.5;
-  // event.tofsegKurama[i] = math::Round( TofSegKurama )
+    ///// w/  TOF
+    event.tofsegKurama[i] = tof_seg;
+    ///// w/o TOF
+    // TVector2 vecTof( posTof.x(), posTof.z() );
+    // vecTof -= TVector2( 250., 2015. );
+    // double sign = math::Sign( vecTof.X() );
+    // double TofSegKurama = sign*vecTof.Mod()/75.+12.5;
+    // event.tofsegKurama[i] = math::Round( TofSegKurama )
 #if 0
-  // std::cout << "posTof " << posTof << std::endl;
-  // std::cout << "momTof " << momTof << std::endl;
-  std::cout << std::setw(10) << vecTof.X()
-    << std::setw(10) << vecTof.Y()
-    << std::setw(10) << sign*vecTof.Mod()
-    << std::setw(10) << TofSegKurama << std::endl;
+    // std::cout << "posTof " << posTof << std::endl;
+    // std::cout << "momTof " << momTof << std::endl;
+    std::cout << std::setw(10) << vecTof.X()
+      << std::setw(10) << vecTof.Y()
+      << std::setw(10) << sign*vecTof.Mod()
+      << std::setw(10) << TofSegKurama << std::endl;
 #endif
-  // double minres = 1.0e10;
-  // int    TofSeg = -9999;
-  double time   = -9999.;
-  for( int j=0; j<nhTof; ++j ){
-    Hodo2Hit *hit = hodoAna->GetHitTOF(j);
-    if( !hit ) continue;
-    int seg  = hit->SegmentId()+1;
-    // w/  TOF
-    if( (int)tof_seg == seg ){
-      time = hit->CMeanTime()-time0+OffsetToF;
+    // double minres = 1.0e10;
+    // int    TofSeg = -9999;
+    double time   = -9999.;
+    for( int j=0; j<nhTof; ++j ){
+      Hodo2Hit *hit = hodoAna->GetHitTOF(j);
+      if( !hit ) continue;
+      int seg  = hit->SegmentId()+1;
+      // w/  TOF
+      if( (int)tof_seg == seg ){
+        time = hit->CMeanTime()-time0+OffsetToF;
+      }
+      // w/o TOF
+      // double res  = std::abs( tof_seg - seg );
+      // if( res<minres ){
+      // 	minres = res;
+      // 	TofSeg = seg;
+      // 	time   = hit->CMeanTime()-time0+OffsetToF;
+      // }
     }
-    // w/o TOF
-    // double res  = std::abs( tof_seg - seg );
-    // if( res<minres ){
-    // 	minres = res;
-    // 	TofSeg = seg;
-    // 	time   = hit->CMeanTime()-time0+OffsetToF;
-    // }
-  }
-  event.stof[i] = time;
-  if( time>0. ){
-    double m2 = Kinematics::MassSquare( p, path, time );
-    HF1( 63, m2 );
-    event.m2[i] = m2;
+    event.stof[i] = time;
+    if( time>0. ){
+      double m2 = Kinematics::MassSquare( p, path, time );
+      HF1( 63, m2 );
+      event.m2[i] = m2;
 # if 0
-    std::ios::fmtflags pre_flags     = std::cout.flags();
-    std::size_t        pre_precision = std::cout.precision();
-    std::cout.setf( std::ios::fixed );
-    std::cout.precision(5);
-    std::cout << "#D " << func_name << std::endl
-      << "   Mom  = " << p     << std::endl
-      << "   Path = " << path << std::endl
-      << "   Time = " << time  << std::endl
-      << "   m2   = " << m2    << std::endl;
-    std::cout.flags( pre_flags );
-    std::cout.precision( pre_precision );
+      std::ios::fmtflags pre_flags     = std::cout.flags();
+      std::size_t        pre_precision = std::cout.precision();
+      std::cout.setf( std::ios::fixed );
+      std::cout.precision(5);
+      std::cout << "#D " << func_name << std::endl
+        << "   Mom  = " << p     << std::endl
+        << "   Path = " << path << std::endl
+        << "   Time = " << time  << std::endl
+        << "   m2   = " << m2    << std::endl;
+      std::cout.flags( pre_flags );
+      std::cout.precision( pre_precision );
 # endif
-  }
-
-  for( int j=0; j<nh; ++j ){
-    TrackHit *hit=tp->GetHit(j);
-    if(!hit) continue;
-    int layerId = hit->GetLayer();
-    if( hit->GetLayer()>79 ) layerId -= 62;
-    else if( hit->GetLayer()>40 ) layerId -= 15;
-    else if( hit->GetLayer()>30 ) layerId -= 21;
-
-    HF1( 53, hit->GetLayer() );
-    double wire = hit->GetHit()->GetWire();
-    double dt   = hit->GetHit()->GetDriftTime();
-    double dl   = hit->GetHit()->GetDriftLength();
-    double pos  = hit->GetCalLPos();
-    double res  = hit->GetResidual();
-    DCLTrackHit *lhit = hit->GetHit();
-    double xcal = lhit->GetXcal();
-    double ycal = lhit->GetYcal();
-    HF1( 100*layerId+11, double(wire)-0.5 );
-    double wp   = lhit->GetWirePosition();
-    HF1( 100*layerId+12, dt );
-    HF1( 100*layerId+13, dl );
-    HF1( 100*layerId+14, pos );
-
-    if( nh>17 && q<=0. && chisqr<200. ){
-      HF1( 100*layerId+15, res );
-      HF2( 100*layerId+16, pos, res );
     }
-    HF2( 100*layerId+17, xcal, ycal );
-    if ( std::abs(dl-std::abs(xcal-wp))<2.0 ){
-      HF2( 100*layerId+22, dt, std::abs(xcal-wp));
+
+    for( int j=0; j<nh; ++j ){
+      TrackHit *hit=tp->GetHit(j);
+      if(!hit) continue;
+      int layerId = hit->GetLayer();
+      if( hit->GetLayer()>79 ) layerId -= 62;
+      else if( hit->GetLayer()>40 ) layerId -= 15;
+      else if( hit->GetLayer()>30 ) layerId -= 21;
+
+      HF1( 53, hit->GetLayer() );
+      double wire = hit->GetHit()->GetWire();
+      double dt   = hit->GetHit()->GetDriftTime();
+      double dl   = hit->GetHit()->GetDriftLength();
+      double pos  = hit->GetCalLPos();
+      double res  = hit->GetResidual();
+      DCLTrackHit *lhit = hit->GetHit();
+      double xcal = lhit->GetXcal();
+      double ycal = lhit->GetYcal();
+      HF1( 100*layerId+11, double(wire)-0.5 );
+      double wp   = lhit->GetWirePosition();
+      HF1( 100*layerId+12, dt );
+      HF1( 100*layerId+13, dl );
+      HF1( 100*layerId+14, pos );
+
+      if( nh>17 && q<=0. && chisqr<200. ){
+        HF1( 100*layerId+15, res );
+        HF2( 100*layerId+16, pos, res );
+      }
+      HF2( 100*layerId+17, xcal, ycal );
+      if ( std::abs(dl-std::abs(xcal-wp))<2.0 ){
+        HF2( 100*layerId+22, dt, std::abs(xcal-wp));
+      }
+      for( int l=0; l<NumOfLayersSdcIn; ++l ){
+        if( l==layerId-1 )
+          event.resG[l].push_back(res);
+      }
+      for( int l=0; l<NumOfLayersSdcOut+2; ++l ){
+        if( l==layerId-1-NumOfLayersSdcIn )
+          event.resG[l+NumOfLayersSdcIn].push_back(res);
+      }
     }
-    for( int l=0; l<NumOfLayersSdcIn; ++l ){
-      if( l==layerId-1 )
-        event.resG[l].push_back(res);
-    }
-    for( int l=0; l<NumOfLayersSdcOut+2; ++l ){
-      if( l==layerId-1-NumOfLayersSdcIn )
-        event.resG[l+NumOfLayersSdcIn].push_back(res);
-    }
-  }
 
-  DCLocalTrack *trSdcIn  = tp->GetLocalTrackIn();
-  DCLocalTrack *trSdcOut = tp->GetLocalTrackOut();
-  if(trSdcIn){
-    int nhSdcIn=trSdcIn->GetNHit();
-    double x0in=trSdcIn->GetX0(), y0in=trSdcIn->GetY0();
-    double u0in=trSdcIn->GetU0(), v0in=trSdcIn->GetV0();
-    double chiin=trSdcIn->GetChiSquare();
-    HF1( 21, double(nhSdcIn) ); HF1( 22, chiin );
-    HF1( 24, x0in ); HF1( 25, y0in ); HF1( 26, u0in ); HF1( 27, v0in );
-    HF2( 28, x0in, u0in ); HF2( 29, y0in, v0in );
-    for( int jin=0; jin<nhSdcIn; ++jin ){
-      int layer=trSdcIn->GetHit(jin)->GetLayer();
-      HF1( 23, layer );
+    DCLocalTrack *trSdcIn  = tp->GetLocalTrackIn();
+    DCLocalTrack *trSdcOut = tp->GetLocalTrackOut();
+    if(trSdcIn){
+      int nhSdcIn=trSdcIn->GetNHit();
+      double x0in=trSdcIn->GetX0(), y0in=trSdcIn->GetY0();
+      double u0in=trSdcIn->GetU0(), v0in=trSdcIn->GetV0();
+      double chiin=trSdcIn->GetChiSquare();
+      HF1( 21, double(nhSdcIn) ); HF1( 22, chiin );
+      HF1( 24, x0in ); HF1( 25, y0in ); HF1( 26, u0in ); HF1( 27, v0in );
+      HF2( 28, x0in, u0in ); HF2( 29, y0in, v0in );
+      for( int jin=0; jin<nhSdcIn; ++jin ){
+        int layer=trSdcIn->GetHit(jin)->GetLayer();
+        HF1( 23, layer );
+      }
     }
-  }
-  if(trSdcOut){
-    int nhSdcOut=trSdcOut->GetNHit();
-    double x0out=trSdcOut->GetX(zTOF), y0out=trSdcOut->GetY(zTOF);
-    double u0out=trSdcOut->GetU0(), v0out=trSdcOut->GetV0();
-    double chiout=trSdcOut->GetChiSquare();
-    HF1( 41, double(nhSdcOut) ); HF1( 42, chiout );
-    HF1( 44, x0out ); HF1( 45, y0out ); HF1( 46, u0out ); HF1( 47, v0out );
-    HF2( 48, x0out, u0out ); HF2( 49, y0out, v0out );
-    for( int jout=0; jout<nhSdcOut; ++jout ){
-      int layer=trSdcOut->GetHit(jout)->GetLayer();
-      HF1( 43, layer );
+    if(trSdcOut){
+      int nhSdcOut=trSdcOut->GetNHit();
+      double x0out=trSdcOut->GetX(zTOF), y0out=trSdcOut->GetY(zTOF);
+      double u0out=trSdcOut->GetU0(), v0out=trSdcOut->GetV0();
+      double chiout=trSdcOut->GetChiSquare();
+      HF1( 41, double(nhSdcOut) ); HF1( 42, chiout );
+      HF1( 44, x0out ); HF1( 45, y0out ); HF1( 46, u0out ); HF1( 47, v0out );
+      HF2( 48, x0out, u0out ); HF2( 49, y0out, v0out );
+      for( int jout=0; jout<nhSdcOut; ++jout ){
+        int layer=trSdcOut->GetHit(jout)->GetLayer();
+        HF1( 43, layer );
+      }
     }
   }
-}
 
-for( int i=0; i<ntKurama; ++i ){
-  KuramaTrack *tp=DCAna->GetKuramaTrack(i);
-  if(!tp) continue;
-  double x = 0;
-  double y = 0;
-  if ( tp->GetTrajectoryLocalPosition( 21, x, y ) ) {
-    event.xsacKurama[i] = x;
-    event.ysacKurama[i] = y;
-  }
-}
-
-for( int i=0; i<ntKurama; ++i ){
-  KuramaTrack *tp=DCAna->GetKuramaTrack(i);
-  if(!tp) continue;
-  DCLocalTrack *trSdcIn =tp->GetLocalTrackIn();
-  DCLocalTrack *trSdcOut=tp->GetLocalTrackOut();
-  if( !trSdcIn || !trSdcOut ) continue;
-  double yin=trSdcIn->GetY(500.), vin=trSdcIn->GetV0();
-  double yout=trSdcOut->GetY(3800.), vout=trSdcOut->GetV0();
-  HF2( 20021, yin, yout ); HF2( 20022, vin, vout );
-  HF2( 20023, vin, yout ); HF2( 20024, vout, yin );
-}
-
-if( ntKurama==0 ) return true;
-KuramaTrack *track = DCAna->GetKuramaTrack(0);
-double path = track->PathLengthToTOF();
-double p    = track->PrimaryMomentum().Mag();
-//double tTof[Event::nParticle];
-double calt[Event::nParticle] = {
-  Kinematics::CalcTimeOfFlight( p, path, pdg::PionMass() ),
-  Kinematics::CalcTimeOfFlight( p, path, pdg::KaonMass() ),
-  Kinematics::CalcTimeOfFlight( p, path, pdg::ProtonMass() )
-};
-for( int i=0; i<Event::nParticle; ++i ){
-  event.tTofCalc[i] = calt[i];
-}
-// TOF
-{
-  int nh = hodoAna->GetNHitsTOF();
-  for( int i=0; i<nh; ++i ){
-    Hodo2Hit *hit=hodoAna->GetHitTOF(i);
-    if(!hit) continue;
-    int seg=hit->SegmentId()+1;
-    double tu = hit->GetTUp(), td=hit->GetTDown();
-    // double ctu=hit->GetCTUp(), ctd=hit->GetCTDown();
-    double cmt=hit->CMeanTime();//, t= cmt-time0+OffsetToF;//cmt-time0;
-    double ude=hit->GetAUp(), dde=hit->GetADown();
-    // double de=hit->DeltaE();
-    // double m2 = Kinematics::MassSquare( p, path, t );
-    // event.tofmt[seg-1] = hit->MeanTime();
-    event.utTofSeg[seg-1]  =  tu - time0 + OffsetToF;
-    event.dtTofSeg[seg-1]  =  td - time0 + OffsetToF;
-    // event.uctTofSeg[seg-1] = ctu - time0 + offset;
-    // event.dctTofSeg[seg-1] = ctd - time0 + offset;
-    event.udeTofSeg[seg-1] = ude;
-    event.ddeTofSeg[seg-1] = dde;
-    // event.ctTofSeg[seg-1]  = t;
-    // event.deTofSeg[seg-1]  = de;
-    HF2( 30000+100*seg+83, ude, calt[Event::Pion]+time0-OffsetToF-cmt );
-    HF2( 30000+100*seg+84, dde, calt[Event::Pion]+time0-OffsetToF-cmt );
-    HF2( 30000+100*seg+83, ude, calt[Event::Pion]+time0-OffsetToF-tu );
-    HF2( 30000+100*seg+84, dde, calt[Event::Pion]+time0-OffsetToF-td );
+  for( int i=0; i<ntKurama; ++i ){
+    KuramaTrack *tp=DCAna->GetKuramaTrack(i);
+    if(!tp) continue;
+    double x = 0;
+    double y = 0;
+    if ( tp->GetTrajectoryLocalPosition( 21, x, y ) ) {
+      event.xsacKurama[i] = x;
+      event.ysacKurama[i] = y;
+    }
   }
 
-  const HodoRHitContainer &cont=rawData->GetTOFRawHC();
-  int NofHit = cont.size();
-  for(int i = 0; i<NofHit; ++i){
-    HodoRawHit *hit = cont[i];
-    int seg = hit->SegmentId();
-    event.tofua[seg] = hit->GetAdcUp();
-    event.tofda[seg] = hit->GetAdcDown();
+  for( int i=0; i<ntKurama; ++i ){
+    KuramaTrack *tp=DCAna->GetKuramaTrack(i);
+    if(!tp) continue;
+    DCLocalTrack *trSdcIn =tp->GetLocalTrackIn();
+    DCLocalTrack *trSdcOut=tp->GetLocalTrackOut();
+    if( !trSdcIn || !trSdcOut ) continue;
+    double yin=trSdcIn->GetY(500.), vin=trSdcIn->GetV0();
+    double yout=trSdcOut->GetY(3800.), vout=trSdcOut->GetV0();
+    HF2( 20021, yin, yout ); HF2( 20022, vin, vout );
+    HF2( 20023, vin, yout ); HF2( 20024, vout, yin );
   }
-}
 
-HF1( 1, 22. );
+  if( ntKurama==0 ) return true;
+  KuramaTrack *track = DCAna->GetKuramaTrack(0);
+  double path = track->PathLengthToTOF();
+  double p    = track->PrimaryMomentum().Mag();
+  //double tTof[Event::nParticle];
+  double calt[Event::nParticle] = {
+    Kinematics::CalcTimeOfFlight( p, path, pdg::PionMass() ),
+    Kinematics::CalcTimeOfFlight( p, path, pdg::KaonMass() ),
+    Kinematics::CalcTimeOfFlight( p, path, pdg::ProtonMass() )
+  };
+  for( int i=0; i<Event::nParticle; ++i ){
+    event.tTofCalc[i] = calt[i];
+  }
+  // TOF
+  {
+    int nh = hodoAna->GetNHitsTOF();
+    for( int i=0; i<nh; ++i ){
+      Hodo2Hit *hit=hodoAna->GetHitTOF(i);
+      if(!hit) continue;
+      int seg=hit->SegmentId()+1;
+      double tu = hit->GetTUp(), td=hit->GetTDown();
+      // double ctu=hit->GetCTUp(), ctd=hit->GetCTDown();
+      double cmt=hit->CMeanTime();//, t= cmt-time0+OffsetToF;//cmt-time0;
+      double ude=hit->GetAUp(), dde=hit->GetADown();
+      // double de=hit->DeltaE();
+      // double m2 = Kinematics::MassSquare( p, path, t );
+      // event.tofmt[seg-1] = hit->MeanTime();
+      event.utTofSeg[seg-1]  =  tu - time0 + OffsetToF;
+      event.dtTofSeg[seg-1]  =  td - time0 + OffsetToF;
+      // event.uctTofSeg[seg-1] = ctu - time0 + offset;
+      // event.dctTofSeg[seg-1] = ctd - time0 + offset;
+      event.udeTofSeg[seg-1] = ude;
+      event.ddeTofSeg[seg-1] = dde;
+      // event.ctTofSeg[seg-1]  = t;
+      // event.deTofSeg[seg-1]  = de;
+      HF2( 30000+100*seg+83, ude, calt[Event::Pion]+time0-OffsetToF-cmt );
+      HF2( 30000+100*seg+84, dde, calt[Event::Pion]+time0-OffsetToF-cmt );
+      HF2( 30000+100*seg+83, ude, calt[Event::Pion]+time0-OffsetToF-tu );
+      HF2( 30000+100*seg+84, dde, calt[Event::Pion]+time0-OffsetToF-td );
+    }
 
-return true;
+    const HodoRHitContainer &cont=rawData->GetTOFRawHC();
+    int NofHit = cont.size();
+    for(int i = 0; i<NofHit; ++i){
+      HodoRawHit *hit = cont[i];
+      int seg = hit->SegmentId();
+      event.tofua[seg] = hit->GetAdcUp();
+      event.tofda[seg] = hit->GetAdcDown();
+    }
+  }
+
+  HF1( 1, 22. );
+
+  return true;
 }
 
 //______________________________________________________________________________
