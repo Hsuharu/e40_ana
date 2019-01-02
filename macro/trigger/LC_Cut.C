@@ -316,6 +316,8 @@ void LC_Cut(int month, int runnum){
   TLegend *Leg1 = new TLegend(0.78,0.775,0.98,0.935);
   TLegend *Leg2 = new TLegend(0.78,0.775,0.98,0.935);
   TLegend *Leg3 = new TLegend(0.78,0.775,0.98,0.935);
+  TLegend *Leg4 = new TLegend(0.78,0.775,0.98,0.935);
+  TLegend *Leg5 = new TLegend(0.78,0.775,0.98,0.935);
 
   //-Event Loop --------------------------------------------------------------------------------------
   Long64_t nentries = khodo_lc->GetEntries();
@@ -490,25 +492,26 @@ void LC_Cut(int month, int runnum){
   c1->Print(pdf);
 
 // index fanction -----------------------------------------------------------------------------------
-  double x[n], y1[n], y2[n], y3[n], y4[n], y5[n], y6[n];
+  int n = 100;
+  double x1[n], y1[n], y2[n], y3[n], y4[n], y5[n], y6[n];
 
   for (int i=0; i<n; i++) {
-    x[i] = (i+1) * 0.02;
+    x1[i] = (i+1) * 0.02;
 //    y[i] = 10 * sin(x[i] + 0.2);
-    y1[i] = sqrt(1+(0.138/x[i])*(0.138/x[i]));
-    y2[i] = sqrt(1+(0.500/x[i])*(0.500/x[i]));
-    y3[i] = sqrt(1+(0.940/x[i])*(0.940/x[i]));
+    y1[i] = sqrt(1+(0.138/x1[i])*(0.138/x1[i]));
+    y2[i] = sqrt(1+(0.500/x1[i])*(0.500/x1[i]));
+    y3[i] = sqrt(1+(0.940/x1[i])*(0.940/x1[i]));
     y4[i] = 1.1;
     y5[i] = 1.49;
     y6[i] = 1.05;
   }
 
-  TGraph *g1 = new TGraph(n, x, y1);
-  TGraph *g2 = new TGraph(n, x, y2);
-  TGraph *g3 = new TGraph(n, x, y3);
-  TGraph *g4 = new TGraph(n, x, y4);
-  TGraph *g5 = new TGraph(n, x, y5);
-  TGraph *g6 = new TGraph(n, x, y6);
+  TGraph *g1 = new TGraph(n, x1, y1);
+  TGraph *g2 = new TGraph(n, x1, y2);
+  TGraph *g3 = new TGraph(n, x1, y3);
+  TGraph *g4 = new TGraph(n, x1, y4);
+  TGraph *g5 = new TGraph(n, x1, y5);
+  TGraph *g6 = new TGraph(n, x1, y6);
   
 
   g1->SetLineColor(2);
@@ -550,15 +553,113 @@ void LC_Cut(int month, int runnum){
   g5->Draw("same");
   g6->Draw("same");
 
-  Leg1->AddEntry(g1,"Pion"     ,"l");
-  Leg1->AddEntry(g2,"Kaon"     ,"l");
-  Leg1->AddEntry(g3,"Proton"   ,"l");
-  Leg1->AddEntry(g4,"SAC index 1.1","l");
-  Leg1->AddEntry(g5,"LC index 1.49","l");
-  Leg1->AddEntry(g6,"LAC index 1.05","l");
-  Leg1->Draw();
+  Leg3->AddEntry(g1,"Pion"     ,"l");
+  Leg3->AddEntry(g2,"Kaon"     ,"l");
+  Leg3->AddEntry(g3,"Proton"   ,"l");
+  Leg3->AddEntry(g4,"SAC index 1.1","l");
+  Leg3->AddEntry(g5,"LC index 1.49","l");
+  Leg3->AddEntry(g6,"LAC index 1.05","l");
+  Leg3->Draw();
 
-  c1->Print("./index_plot.pdf");
+  c1->Print(Form("%s/pdf/trigger/index_plot_run%05d.pdf",anadir.Data(),runnum));
+  c1->Print(pdf);
+
+  double x2[n], y7[n], y8[n], y9[n], y10[n], y11[n], y12[n];
+  double SAC_index = 1.1;
+  double LC_index = 1.49;
+  double LAC_index = 1.05;
+
+  for (int i=0; i<n; i++) {
+    x2[i] = (i+1) * 0.014;
+    y7[i] = sqrt(x2[i]/(-1+SAC_index*SAC_index));
+    y8[i] = sqrt(x2[i]/(-1+LC_index*LC_index  ));
+    y9[i] = sqrt(x2[i]/(-1+LAC_index*LAC_index));
+    y10[i] = x2[i]/sqrt(-1+SAC_index*SAC_index);
+    y11[i] = x2[i]/sqrt(-1+LC_index*LC_index  );
+    y12[i] = x2[i]/sqrt(-1+LAC_index*LAC_index);
+  }
+
+  TGraph *g7 = new TGraph(n, x2, y7);
+  TGraph *g8 = new TGraph(n, x2, y8);
+  TGraph *g9 = new TGraph(n, x2, y9);
+  TGraph *g10 = new TGraph(n, x2, y4);
+  TGraph *g11 = new TGraph(n, x2, y11);
+  TGraph *g12 = new TGraph(n, x2, y12);
+  
+
+  g7->SetLineStyle(9);
+  g8->SetLineStyle(10);
+  g9->SetLineStyle(5);
+//  g10->SetLineStyle(9);
+
+  g7->GetXaxis()->SetRangeUser(0,1.4);
+  g8->GetXaxis()->SetRangeUser(0,1.4);
+  g9->GetXaxis()->SetRangeUser(0,1.4);
+  g10->GetXaxis()->SetRangeUser(0,1.4);
+  g11->GetXaxis()->SetRangeUser(0,1.4);
+  g12->GetXaxis()->SetRangeUser(0,1.4);
+
+  g7->GetYaxis()->SetRangeUser(0,1.6);
+  g8->GetYaxis()->SetRangeUser(0,1.6);
+  g9->GetYaxis()->SetRangeUser(0,1.6);
+  g10->GetYaxis()->SetRangeUser(0,1.6);
+  g11->GetYaxis()->SetRangeUser(0,1.6);
+  g12->GetYaxis()->SetRangeUser(0,1.6);
+
+  g7->SetLineWidth(4);
+  g8->SetLineWidth(4);
+  g9->SetLineWidth(4);
+  g10->SetLineWidth(4);
+  g11->SetLineWidth(4);
+  g12->SetLineWidth(4);
+
+  g7->SetTitle("Title;m2;momentum[GeV/c]");
+  g10->SetTitle("Title;m[GeV/cc];momentum[GeV/c]");
+
+  gStyle->SetOptTitle(0);
+  g7->SetFillStyle(0);
+  g8->SetFillStyle(0);
+  g9->SetFillStyle(0);
+
+  g7->Draw("");
+  g8->Draw("same");
+  g9->Draw("same");
+
+  Leg4->AddEntry(g7,"SAC index 1.1","l");
+  Leg4->AddEntry(g8,"LC index 1.49","l");
+  Leg4->AddEntry(g9,"LAC index 1.05","l");
+  Leg4->Draw();
+  c1->Print(pdf);
+  c1->Print(Form("%s/pdf/trigger/m2_p_plot_run%05d.pdf",anadir.Data(),runnum));
+
+  Hist2[0]->Draw();
+  g7->Draw("sames");
+  g8->Draw("same");
+  g9->Draw("same");
+  Leg4->Draw();
+  c1->Print(pdf);
+  c1->Print(Form("%s/pdf/trigger/m2_p_plot_Cut2_run%05d.pdf",anadir.Data(),runnum));
+
+  Hist2[0]->Draw();
+  g7->Draw("sames");
+  g8->Draw("same");
+  g9->Draw("same");
+  Leg4->Draw();
+  c1->Print(pdf);
+  c1->Print(Form("%s/pdf/trigger/m2_p_plot_Cut3_run%05d.pdf",anadir.Data(),runnum));
+
+  g10->Draw();
+  g11->Draw("same");
+  g12->Draw("same");
+
+  Leg5->AddEntry(g10,"SAC index 1.1","l");
+  Leg5->AddEntry(g11,"LC index 1.49","l");
+  Leg5->AddEntry(g12,"LAC index 1.05","l");
+  Leg5->Draw();
+
+
+  c1->Print(pdf);
+  c1->Print(Form("%s/pdf/trigger/m_p_plot_run%05d.pdf",anadir.Data(),runnum));
 
   c1->Print(pdf+"]"); 
 
