@@ -448,8 +448,8 @@ void Mtx_Pos(int month,int runnum){
        Hist1[29]->Fill(vpseg[1]);
        Hist1[30]->Fill(TofSeg[i]);
        Hist1[31]->Fill(tofsegKurama[i]);
-       Hist2[6 ]->Fill(vpseg[1],TofSeg[i]);
-       Hist2[10]->Fill(vpseg[1],tofsegKurama[i]);
+       Hist2[13]->Fill(vpseg[1],TofSeg[i]);
+       Hist2[14]->Fill(vpseg[1],tofsegKurama[i]);
      }
 
      if(chisqrKurama[i]<chisqr&&qKurama[i]>0){
