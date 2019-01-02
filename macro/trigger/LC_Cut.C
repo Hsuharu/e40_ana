@@ -648,7 +648,7 @@ void LC_Cut(int month, int runnum){
   c1->Print(pdf);
   c1->Print(Form("%s/pdf/trigger/m2_p_plot_Cut3_run%05d.pdf",anadir.Data(),runnum));
 
-  g10->Draw();
+  g10->Draw("al");
   g11->Draw("same");
   g12->Draw("same");
 
