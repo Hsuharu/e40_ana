@@ -1,44 +1,16 @@
 {
-    "5129": {
-        "nseg": 3,
-        "stat": true,
+    "5368": {
+        "nseg": 41,
+        "prog": 41,
+        "time": 6299.977331876755,
         "nproc": 1,
+        "nev": 4002406,
+        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05368.dat.gz",
         "conf": "./param_nakadashi/analyzer_jun.conf",
-        "bin": "./bin/KuramaTracking",
         "queue": "s",
-        "time": 3924.6276388168335,
-        "nev": 228941,
-        "prog": 3,
-        "unit": 100000,
-        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05129_KuramaTracking.root",
-        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05129.dat"
-    },
-    "5127": {
-        "nseg": 2,
         "stat": true,
-        "nproc": 1,
-        "conf": "./param_nakadashi/analyzer_jun.conf",
         "bin": "./bin/KuramaTracking",
-        "queue": "s",
-        "time": 3792.4284336566925,
-        "nev": 108390,
-        "prog": 2,
-        "unit": 100000,
-        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05127_KuramaTracking.root",
-        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05127.dat"
-    },
-    "5395": {
-        "nseg": 8,
-        "stat": true,
-        "nproc": 1,
-        "conf": "./param_nakadashi/analyzer_jun.conf",
-        "bin": "./bin/KuramaTracking",
-        "queue": "s",
-        "time": 4759.823659181595,
-        "nev": 723777,
-        "prog": 8,
-        "unit": 100000,
-        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05395_KuramaTracking.root",
-        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05395.dat.gz"
+        "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05368_KuramaTracking.root",
+        "unit": 100000
     }
 }

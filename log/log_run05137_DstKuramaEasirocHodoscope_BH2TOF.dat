@@ -1,0 +1,305 @@
+ key = [Process]          arg[0] = ./bin/DstKuramaEasirocHodoscope
+ key = [ConfFile]         arg[1] = ./param_nakadashi/analyzer_jun.conf
+ key = [KuramaTracking]   arg[2] = ./rootfile/run05137_KuramaTracking_BH2TOF.root
+ key = [Easiroc]          arg[3] = ./rootfile/run05137_Easiroc_BH2TOF.root
+ key = [Hodoscope]        arg[4] = ./rootfile/run05137_Hodoscope_BH2TOF.root
+ key = [OutFile]          arg[5] = ./rootfile/run05137_DstKuramaEasirocHodoscope_BH2TOF.root
+#D [ConfMan::Initialize()]
+ key = UNPACK     value = param/UNPACK/unpacker.xml     
+ key = DIGIT      value = param/DIGIT/digit_data_20180602.xml
+ key = CMAP       value = param/CMAP/channel_map_20180604.xml
+ key = HDPRM      value = param_nakadashi/HodoParam_2018Jun_1
+ key = DCGEO      value = param/DCGEO/DCGeomParam_E40_jun_20180831
+ key = DCDRFT     value = param_nakadashi/DCDriftParam_jun_1
+ key = DCTDC      value = param_nakadashi/DCTdcCalib_jun_1
+ key = HDPHC      value = param_nakadashi/HodoPHCParam_2018Jun_period23
+ key = MASS       value = param/MASS/threshold_table_20170529.txt
+ key = USER       value = param_nakadashi/user_jun_1.txt
+ key = BH1MTH     value = param_nakadashi/BH1Matching.param
+ key = BH2FLT     value = param_nakadashi/BH2Filter_20180603
+ key = FLDCALC    value = 0.75008                       
+ key = FLDNMR     value = 0.763143                      
+ key = FLDMAP     value = fieldmap/KuramaFieldMap_E07_20170907
+ key = PK18       value = 1.330811                      
+ key = K18TM      value = param/K18TM/K18MatrixParam_1  
+ [DCGeomMan]        -> Initialized
+ [UserParamMan]     -> Initialized
+Error in <TTree::SetBranchStatus>: unknown branch -> csSac
+Error in <TTree::SetBranchAddress>: unknown branch -> csSac
+Error in <TTree::SetBranchStatus>: unknown branch -> sch_nhits
+Error in <TTree::SetBranchStatus>: unknown branch -> sch_hitpat
+Error in <TTree::SetBranchStatus>: unknown branch -> sch_tdc
+Error in <TTree::SetBranchStatus>: unknown branch -> sch_trailing
+Error in <TTree::SetBranchStatus>: unknown branch -> sch_tot
+Error in <TTree::SetBranchStatus>: unknown branch -> sch_depth
+Error in <TTree::SetBranchStatus>: unknown branch -> sftx_nhits
+Error in <TTree::SetBranchStatus>: unknown branch -> sftx_unhits
+Error in <TTree::SetBranchStatus>: unknown branch -> sftx_dnhits
+Error in <TTree::SetBranchStatus>: unknown branch -> sftx_uhitpat
+Error in <TTree::SetBranchStatus>: unknown branch -> sftx_dhitpat
+Error in <TTree::SetBranchStatus>: unknown branch -> sftx_utdc
+Error in <TTree::SetBranchStatus>: unknown branch -> sftx_dtdc
+Error in <TTree::SetBranchStatus>: unknown branch -> sftx_utrailing
+Error in <TTree::SetBranchStatus>: unknown branch -> sftx_dtrailing
+Error in <TTree::SetBranchStatus>: unknown branch -> sftx_utot
+Error in <TTree::SetBranchStatus>: unknown branch -> sftx_dtot
+Error in <TTree::SetBranchStatus>: unknown branch -> sftx_udepth
+Error in <TTree::SetBranchStatus>: unknown branch -> sftx_ddepth
+Error in <TTree::SetBranchAddress>: unknown branch -> sch_nhits
+Error in <TTree::SetBranchAddress>: unknown branch -> sch_hitpat
+Error in <TTree::SetBranchAddress>: unknown branch -> sch_tdc
+Error in <TTree::SetBranchAddress>: unknown branch -> sch_trailing
+Error in <TTree::SetBranchAddress>: unknown branch -> sch_tot
+Error in <TTree::SetBranchAddress>: unknown branch -> sch_depth
+Error in <TTree::SetBranchAddress>: unknown branch -> sftx_nhits
+Error in <TTree::SetBranchAddress>: unknown branch -> sftx_unhits
+Error in <TTree::SetBranchAddress>: unknown branch -> sftx_dnhits
+Error in <TTree::SetBranchAddress>: unknown branch -> sftx_uhitpat
+Error in <TTree::SetBranchAddress>: unknown branch -> sftx_dhitpat
+Error in <TTree::SetBranchAddress>: unknown branch -> sftx_utdc
+Error in <TTree::SetBranchAddress>: unknown branch -> sftx_dtdc
+Error in <TTree::SetBranchAddress>: unknown branch -> sftx_utrailing
+Error in <TTree::SetBranchAddress>: unknown branch -> sftx_dtrailing
+Error in <TTree::SetBranchAddress>: unknown branch -> sftx_utot
+Error in <TTree::SetBranchAddress>: unknown branch -> sftx_dtot
+Error in <TTree::SetBranchAddress>: unknown branch -> sftx_udepth
+Error in <TTree::SetBranchAddress>: unknown branch -> sftx_ddepth
+#D [UserParamMan::Print()] 
+ key = BH1_TDC             2 :     0  1000 
+ key = BTOF                2 :    -5     5 
+ key = DeBH1               2 :   0.3     4 
+ key = DeBH2               2 :   0.3     4 
+ key = DeTOF               2 :   0.3     4 
+ key = MaxMultiHitBcOut    1 :    16 
+ key = MaxMultiHitSdcIn    1 :    16 
+ key = MaxMultiHitSdcOut   1 :    16 
+ key = MinLayerBcOut       1 :    10 
+ key = MinLayerSdcIn       1 :     7 
+ key = MinLayerSdcOut      1 :     6 
+ key = MinTotSDC2          1 :    30 
+ key = MinTotSDC3          1 :    60 
+ key = MtBH2               2 :    -1     1 
+ key = OffsetToF           1 :  3.11 
+ key = TdcBC3              2 :   250   400 
+ key = TdcBC4              2 :   250   400 
+ key = TdcBFT              2 :   620   650 
+ key = TdcFBT1             2 :     0  1000 
+ key = TdcFBT2             2 :     0  1000 
+ key = TdcSCH              2 :   440   480 
+ key = TdcSDC1             2 :     0   400 
+ key = TdcSDC2             2 :   700  1150 
+ key = TdcSDC3             2 :   500  1200 
+ key = TdcSFT              2 :   500   560 
+ key = TimeBFT             2 :    -5     5 
+ key = TimeFBT1            2 :   -15     5 
+ key = TimeFBT2            2 :   -15     5 
+ key = TimeL1              2 :   235   245 
+ key = TimeSCH             2 :   -15     5 
+ key = TimeSFT             2 :   -15     5 
+ key = TimeTOF             2 :    -5     5 
+ key = dTOfs               1 : -161.85 
+#D Event Number: 0     
+#D Event Number: 10000 
+#D Event Number: 20000 
+#D Event Number: 30000 
+#D Event Number: 40000 
+#D Event Number: 50000 
+#D Event Number: 60000 
+#D Event Number: 70000 
+#D Event Number: 80000 
+#D Event Number: 90000 
+#D Event Number: 100000
+#D Event Number: 110000
+#D Event Number: 120000
+#D Event Number: 130000
+#D Event Number: 140000
+#D Event Number: 150000
+#D Event Number: 160000
+#D Event Number: 170000
+#D Event Number: 180000
+#D Event Number: 190000
+#D Event Number: 200000
+#D Event Number: 210000
+#D Event Number: 220000
+#D Event Number: 230000
+#D Event Number: 240000
+#D Event Number: 250000
+#D Event Number: 260000
+#D Event Number: 270000
+#D Event Number: 280000
+#D Event Number: 290000
+#D Event Number: 300000
+#D Event Number: 310000
+#D Event Number: 320000
+#D Event Number: 330000
+#D Event Number: 340000
+#D Event Number: 350000
+#D Event Number: 360000
+#D Event Number: 370000
+#D Event Number: 380000
+#D Event Number: 390000
+#D Event Number: 400000
+#D Event Number: 410000
+#D Event Number: 420000
+#D Event Number: 430000
+#D Event Number: 440000
+#D Event Number: 450000
+#D Event Number: 460000
+#D Event Number: 470000
+#D Event Number: 480000
+#D Event Number: 490000
+#D Event Number: 500000
+#D Event Number: 510000
+#D Event Number: 520000
+#D Event Number: 530000
+#D Event Number: 540000
+#D Event Number: 550000
+#D Event Number: 560000
+#D Event Number: 570000
+#D Event Number: 580000
+#D Event Number: 590000
+#D Event Number: 600000
+#D Event Number: 610000
+#D Event Number: 620000
+#D Event Number: 630000
+#D Event Number: 640000
+#D Event Number: 650000
+#D Event Number: 660000
+#D Event Number: 670000
+#D Event Number: 680000
+#D Event Number: 690000
+#D Event Number: 700000
+#D Event Number: 710000
+#D Event Number: 720000
+#D Event Number: 730000
+#D Event Number: 740000
+#D Event Number: 750000
+#D Event Number: 760000
+#D Event Number: 770000
+#D Event Number: 780000
+#D Event Number: 790000
+#D Event Number: 800000
+#D Event Number: 810000
+#D Event Number: 820000
+#D Event Number: 830000
+#D Event Number: 840000
+#D Event Number: 850000
+#D Event Number: 860000
+#D Event Number: 870000
+#D Event Number: 880000
+#D Event Number: 890000
+#D Event Number: 900000
+#D Event Number: 910000
+#D Event Number: 920000
+#D Event Number: 930000
+#D Event Number: 940000
+#D Event Number: 950000
+#D Event Number: 960000
+#D Event Number: 970000
+#D Event Number: 980000
+#D Event Number: 990000
+#D Event Number: 1000000
+#D Event Number: 1010000
+#D Event Number: 1020000
+#D Event Number: 1030000
+#D Event Number: 1040000
+#D Event Number: 1050000
+#D Event Number: 1060000
+#D Event Number: 1070000
+#D Event Number: 1080000
+#D Event Number: 1090000
+#D Event Number: 1100000
+#D Event Number: 1110000
+#D Event Number: 1120000
+#D Event Number: 1130000
+#D Event Number: 1140000
+#D Event Number: 1150000
+#D Event Number: 1160000
+#D Event Number: 1170000
+#D Event Number: 1180000
+#D Event Number: 1190000
+#D Event Number: 1200000
+#D Event Number: 1210000
+#D Event Number: 1220000
+#D Event Number: 1230000
+#D Event Number: 1240000
+#D Event Number: 1250000
+#D Event Number: 1260000
+#D Event Number: 1270000
+#D Event Number: 1280000
+#D Event Number: 1290000
+#D Event Number: 1300000
+#D Event Number: 1310000
+#D Event Number: 1320000
+#D Event Number: 1330000
+#D Event Number: 1340000
+#D Event Number: 1350000
+#D Event Number: 1360000
+#D Event Number: 1370000
+#D Event Number: 1380000
+#D Event Number: 1390000
+#D Event Number: 1400000
+#D Event Number: 1410000
+#D Event Number: 1420000
+#D Event Number: 1430000
+#D Event Number: 1440000
+#D Event Number: 1450000
+#D Event Number: 1460000
+#D Event Number: 1470000
+#D Event Number: 1480000
+#D Event Number: 1490000
+#D Event Number: 1500000
+#D Event Number: 1510000
+#D Event Number: 1520000
+#D Event Number: 1530000
+#D Event Number: 1540000
+#D Event Number: 1550000
+#D Event Number: 1560000
+#D Event Number: 1570000
+#D Event Number: 1580000
+#D Event Number: 1590000
+#D Event Number: 1600000
+#D Event Number: 1610000
+#D Event Number: 1620000
+#D Event Number: 1630000
+#D Event Number: 1640000
+#D Event Number: 1650000
+#D Event Number: 1660000
+#D Event Number: 1670000
+#D Event Number: 1680000
+#D Event Number: 1690000
+#D Event Number: 1700000
+#D Event Number: 1710000
+#D Event Number: 1720000
+#D Event Number: 1730000
+#D Event Number: 1740000
+#D Event Number: 1750000
+#D Event Number: 1760000
+#D Event Number: 1770000
+#D Event Number: 1780000
+#D Event Number: 1790000
+#D Event Number: 1800000
+#D Event Number: 1810000
+#D Event Number: 1820000
+#D Event Number: 1830000
+#D Event Number: 1840000
+#D Event Number: 1850000
+#D Event Number: 1860000
+#D Event Number: 1870000
+#D Event Number: 1880000
+#D Event Number: 1890000
+#D Event Number: 1900000
+#D Event Number: 1910000
+#D Event Number: 1920000
+#D Event Number: 1930000
+#D Event Number: 1940000
+#D Event Number: 1950000
+#D Event Number: 1960000
+#D Event Number: 1970000
+#D Event Number: 1980000
+#D Event Number: 1990000
+#D Event Number: 2000000
+#D Event Number: 2001286
+#D Close : ./rootfile/run05137_DstKuramaEasirocHodoscope_BH2TOF.root
+1648.28user 2.90system 27:38.45elapsed 99%CPU (0avgtext+0avgdata 598448maxresident)k
+0inputs+0outputs (0major+75516minor)pagefaults 0swaps
