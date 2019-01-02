@@ -83,6 +83,7 @@ void Mtx_Pos(int month,int runnum){
    Double_t        utgtKurama[4];
    Double_t        vtgtKurama[4];
    Double_t        thetaKurama[4];
+   Double_t        tofsegKurama[4];
    Double_t        vpx[5];
    Double_t        vpy[5];
    Int_t           vpseg[5];
@@ -171,6 +172,7 @@ void Mtx_Pos(int month,int runnum){
    k0hodo->SetBranchStatus("utgtKurama");
    k0hodo->SetBranchStatus("vtgtKurama");
    k0hodo->SetBranchStatus("thetaKurama");
+   k0hodo->SetBranchStatus("tofsegKurama");
    k0hodo->SetBranchStatus("vpx");
    k0hodo->SetBranchStatus("vpy");
    k0hodo->SetBranchStatus("vpseg");
@@ -194,12 +196,12 @@ void Mtx_Pos(int month,int runnum){
 //   k0hodo->SetBranchStatus("SacSeg");
 //   k0hodo->SetBranchStatus("tSac");
 //   k0hodo->SetBranchStatus("deSac");
-//   k0hodo->SetBranchStatus("nhTof");
-//   k0hodo->SetBranchStatus("csTof");
-//   k0hodo->SetBranchStatus("TofSeg");
-//   k0hodo->SetBranchStatus("tTof");
-//   k0hodo->SetBranchStatus("dtTof");
-//   k0hodo->SetBranchStatus("deTof");
+   k0hodo->SetBranchStatus("nhTof");
+   k0hodo->SetBranchStatus("csTof");
+   k0hodo->SetBranchStatus("TofSeg");
+   k0hodo->SetBranchStatus("tTof");
+   k0hodo->SetBranchStatus("dtTof");
+   k0hodo->SetBranchStatus("deTof");
 //   k0hodo->SetBranchStatus("tofnhits");
 //   k0hodo->SetBranchStatus("tofhitpat");
 //   k0hodo->SetBranchStatus("tofmt");
@@ -258,6 +260,7 @@ void Mtx_Pos(int month,int runnum){
    k0hodo->SetBranchAddress("utgtKurama",utgtKurama);
    k0hodo->SetBranchAddress("vtgtKurama",vtgtKurama);
    k0hodo->SetBranchAddress("thetaKurama",thetaKurama);
+   k0hodo->SetBranchAddress("tofsegKurama",tofsegKurama);
    k0hodo->SetBranchAddress("vpx",vpx);
    k0hodo->SetBranchAddress("vpy",vpy);
    k0hodo->SetBranchAddress("vpseg",vpseg);
@@ -281,12 +284,12 @@ void Mtx_Pos(int month,int runnum){
 //   k0hodo->SetBranchAddress("SacSeg",SacSeg);
 //   k0hodo->SetBranchAddress("tSac",tSac);
 //   k0hodo->SetBranchAddress("deSac",deSac);
-//   k0hodo->SetBranchAddress("nhTof",&nhTof);
-//   k0hodo->SetBranchAddress("csTof",csTof);
-//   k0hodo->SetBranchAddress("TofSeg",TofSeg);
-//   k0hodo->SetBranchAddress("tTof",tTof);
-//   k0hodo->SetBranchAddress("dtTof",dtTof);
-//   k0hodo->SetBranchAddress("deTof",deTof);
+   k0hodo->SetBranchAddress("nhTof",&nhTof);
+   k0hodo->SetBranchAddress("csTof",csTof);
+   k0hodo->SetBranchAddress("TofSeg",TofSeg);
+   k0hodo->SetBranchAddress("tTof",tTof);
+   k0hodo->SetBranchAddress("dtTof",dtTof);
+   k0hodo->SetBranchAddress("deTof",deTof);
 //   k0hodo->SetBranchAddress("tofnhits",&tofnhits);
 //   k0hodo->SetBranchAddress("tofhitpat",tofhitpat);
 //   k0hodo->SetBranchAddress("tofmt",tofmt);
@@ -346,8 +349,8 @@ void Mtx_Pos(int month,int runnum){
    int chisqr = 0;
 
 //-hist def-----------------------------------------------------------------------------------------
-   Hist1Max = 26;
-   Hist2Max =  10;
+   Hist1Max = 29;
+   Hist2Max =  13;
    chisqr = 10;
    TH1D *Hist1[Hist1Max];
    TH2D *Hist2[Hist2Max];
@@ -377,7 +380,10 @@ void Mtx_Pos(int month,int runnum){
     Hist1[22]= new TH1D("TofSeg[0] Cut1","TofSeg[0] Cut1",24,1,25);
     Hist1[23]= new TH1D("TofSeg[0] Cut2","TofSeg[0] Cut2",24,1,25);
     Hist1[24]= new TH1D("delta_x","delta_x",200,-100,100);
-    Hist1[25]= new TH1D("Sch Position by HitSegment","Sch Position by HitSegment",200,-400,400);
+    Hist1[25]= new TH1D("Sch Position by HitSegment","Sch Position by HitSegment",100,-400,400);
+    Hist1[26]= new TH1D("tofsegKurama[0]","tofsegKurama[0]",24,1,25);
+    Hist1[27]= new TH1D("tofsegKurama[0] Cut1","tofsegKurama[0] Cut1",24,1,25);
+    Hist1[28]= new TH1D("tofsegKurama[0] Cut2","tofsegKurama[0] Cut2",24,1,25);
 
 
             
@@ -391,7 +397,10 @@ void Mtx_Pos(int month,int runnum){
     Hist2[6 ]= new TH2D("TofSeg[0] % vpseg[1]","TofSeg[0] % vpseg[1]",64,1,65,24,1,25);
     Hist2[7 ]= new TH2D("TofSeg[0] % vpseg[1] Cut1","TofSeg[0] % vpseg[1] Cut1",64,1,65,24,1,25);
     Hist2[8 ]= new TH2D("TofSeg[0] % vpseg[1] Cut2","TofSeg[0] % vpseg[1] Cut2",64,1,65,24,1,25);
-    Hist2[9 ]= new TH2D("Sch Position by HitSegment % vpx[1]","Sch Position by HitSegment % vpx[1]",100,-400,400,100,-400,400);
+    Hist2[9 ]= new TH2D("Sch Position by HitSegment % vpx[1]","Sch Position by HitSegment % vpx[1]",80,-400,400,100,-400,400);
+    Hist2[10]= new TH2D("tofsegKurama[0] % vpseg[1]","tofsegKurama[0] % vpseg[1]",64,1,65,24,1,25);
+    Hist2[11]= new TH2D("tofsegKurama[0] % vpseg[1] Cut1","tofsegKurama[0] % vpseg[1] Cut1",64,1,65,24,1,25);
+    Hist2[12]= new TH2D("tofsegKurama[0] % vpseg[1] Cut2","tofsegKurama[0] % vpseg[1] Cut2",64,1,65,24,1,25);
 
 //-Legend def --------------------------------------------------------------------------------------
 
@@ -405,6 +414,13 @@ void Mtx_Pos(int month,int runnum){
      nbytes += k0hodo->GetEntry(s);
      //     for(int i=0; i<ntKurama; i++){
      if( ntKurama!=1) continue;
+
+     for(int i=0; i<nhSch; i++){
+       Hist1[24]->Fill(delta_x[i]);
+       Hist1[25]->Fill(SchPos[i]);
+       Hist2[9 ]->Fill(SchPos[i],vpx[1]);
+     }
+
      int i=0;
      Hist1[0 ]->Fill(pKurama[i]);
      Hist1[1 ]->Fill(m2[i]);
@@ -414,16 +430,12 @@ void Mtx_Pos(int month,int runnum){
      Hist1[5 ]->Fill(vpy[1]);
      Hist1[6 ]->Fill(vpseg[1]);
      Hist1[21]->Fill(TofSeg[i]);
-
-     for(int i=0; i<nhSch; i++){
-       Hist1[24]->Fill(delta_x[i]);
-       Hist1[25]->Fill(SchPos[i]);
-       Hist2[9 ]->Fill(SchPos[i],vpx[1]);
-     }
+     Hist1[26]->Fill(tofsegKurama[i]);
 
      Hist2[0 ]->Fill(m2[i],pKurama[i]);
      Hist2[1 ]->Fill(vpx[1],vpy[1]);
      Hist2[6 ]->Fill(vpseg[1],TofSeg[i]);
+     Hist2[10]->Fill(vpseg[1],tofsegKurama[i]);
 
      if(chisqrKurama[i]<chisqr&&qKurama[i]>0){
        Hist1[7 ]->Fill(pKurama[i]);
@@ -434,10 +446,12 @@ void Mtx_Pos(int month,int runnum){
        Hist1[12]->Fill(vpy[1]);
        Hist1[13]->Fill(vpseg[1]);
        Hist1[22]->Fill(TofSeg[i]);
+       Hist1[27]->Fill(tofsegKurama[i]);
 
        Hist2[2 ]->Fill(m2[i],pKurama[i]);
        Hist2[3 ]->Fill(vpx[1],vpy[1]);
        Hist2[7 ]->Fill(vpseg[1],TofSeg[i]);
+       Hist2[11]->Fill(vpseg[1],tofsegKurama[i]);
 
        if(m2[i]<0.15)continue;
        if(m2[i]>0.35)continue;  //Cut2
@@ -449,10 +463,12 @@ void Mtx_Pos(int month,int runnum){
        Hist1[19]->Fill(vpy[1]);
        Hist1[20]->Fill(vpseg[1]);
        Hist1[23]->Fill(TofSeg[i]);
+       Hist1[28]->Fill(tofsegKurama[i]);
 
        Hist2[4 ]->Fill(m2[i],pKurama[i]);
        Hist2[5 ]->Fill(vpx[1],vpy[1]);
        Hist2[8 ]->Fill(vpseg[1],TofSeg[i]);
+       Hist2[12]->Fill(vpseg[1],tofsegKurama[i]);
 
      } // Cut1
    } 
