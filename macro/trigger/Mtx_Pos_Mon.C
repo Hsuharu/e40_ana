@@ -350,8 +350,8 @@ void Mtx_Pos_Mon(int month,int runnum){
    int chisqr = 0;
 
 //-hist def-----------------------------------------------------------------------------------------
-   Hist1Max = 45;
-   Hist2Max =  22;
+   Hist1Max = 46;
+   Hist2Max =  101;
    chisqr = 50;
    TH1D *Hist1[Hist1Max];
    TH2D *Hist2[Hist2Max];
@@ -378,30 +378,30 @@ void Mtx_Pos_Mon(int month,int runnum){
     Hist1[19]= new TH1D("vpseg[1] Cut1","vpseg[1] Cut1",64,1,65);
     Hist1[20]= new TH1D("TofSeg[0] Cut1","TofSeg[0] Cut1",24,1,25);
     Hist1[21]= new TH1D("tofsegKurama[0] Cut1","tofsegKurama[0] Cut1",24,1,25);
-    Hist1[21]= new TH1D("pKurama Cut2","pKurama Cut2",100,0,2);
-    Hist1[22]= new TH1D("m2 Cut2","m2 Cut2",100,-0.4,1.4);
-    Hist1[23]= new TH1D("chisqrKurama Cut2","chisqrKurama Cut2",100,0,200);
-    Hist1[24]= new TH1D("qKurama Cut2","qKurama Cut2",6,-3,3);
-    Hist1[25]= new TH1D("vpx[1] Cut2","vpx[1] Cut2",200,-400,400);
-    Hist1[26]= new TH1D("vpseg[1] Cut2","vpseg[1] Cut2",64,1,65);
-    Hist1[27]= new TH1D("TofSeg[0] Cut2","TofSeg[0] Cut2",24,1,25);
-    Hist1[28]= new TH1D("tofsegKurama[0] Cut2","tofsegKurama[0] Cut2",24,1,25);
-    Hist1[29]= new TH1D("pKurama Cut3","pKurama Cut3",100,0,2);
-    Hist1[30]= new TH1D("m2 Cut3","m2 Cut3",100,-0.4,1.4);
-    Hist1[31]= new TH1D("chisqrKurama Cut3","chisqrKurama Cut3",100,0,200);
-    Hist1[32]= new TH1D("qKurama Cut3","qKurama Cut3",6,-3,3);
-    Hist1[33]= new TH1D("vpx[1] Cut3","vpx[1] Cut3",200,-400,400);
-    Hist1[34]= new TH1D("vpseg[1] Cut3","vpseg[1] Cut3",64,1,65);
-    Hist1[35]= new TH1D("TofSeg[0] Cut3","TofSeg[0] Cut3",24,1,25);
-    Hist1[36]= new TH1D("tofsegKurama[0] Cut3","tofsegKurama[0] Cut3",24,1,25);
-    Hist1[37]= new TH1D("pKurama Cut4","pKurama Cut4",100,0,2);
-    Hist1[38]= new TH1D("m2 Cut4","m2 Cut4",100,-0.4,1.4);
-    Hist1[39]= new TH1D("chisqrKurama Cut4","chisqrKurama Cut4",100,0,200);
-    Hist1[40]= new TH1D("qKurama Cut4","qKurama Cut4",6,-3,3);
-    Hist1[41]= new TH1D("vpx[1] Cut4","vpx[1] Cut4",200,-400,400);
-    Hist1[42]= new TH1D("vpseg[1] Cut4","vpseg[1] Cut4",64,1,65);
-    Hist1[43]= new TH1D("TofSeg[0] Cut4","TofSeg[0] Cut4",24,1,25);
-    Hist1[44]= new TH1D("tofsegKurama[0] Cut4","tofsegKurama[0] Cut4",24,1,25);
+    Hist1[22]= new TH1D("pKurama Cut2","pKurama Cut2",100,0,2);
+    Hist1[23]= new TH1D("m2 Cut2","m2 Cut2",100,-0.4,1.4);
+    Hist1[24]= new TH1D("chisqrKurama Cut2","chisqrKurama Cut2",100,0,200);
+    Hist1[25]= new TH1D("qKurama Cut2","qKurama Cut2",6,-3,3);
+    Hist1[26]= new TH1D("vpx[1] Cut2","vpx[1] Cut2",200,-400,400);
+    Hist1[27]= new TH1D("vpseg[1] Cut2","vpseg[1] Cut2",64,1,65);
+    Hist1[28]= new TH1D("TofSeg[0] Cut2","TofSeg[0] Cut2",24,1,25);
+    Hist1[29]= new TH1D("tofsegKurama[0] Cut2","tofsegKurama[0] Cut2",24,1,25);
+    Hist1[30]= new TH1D("pKurama Cut3","pKurama Cut3",100,0,2);
+    Hist1[31]= new TH1D("m2 Cut3","m2 Cut3",100,-0.4,1.4);
+    Hist1[32]= new TH1D("chisqrKurama Cut3","chisqrKurama Cut3",100,0,200);
+    Hist1[33]= new TH1D("qKurama Cut3","qKurama Cut3",6,-3,3);
+    Hist1[34]= new TH1D("vpx[1] Cut3","vpx[1] Cut3",200,-400,400);
+    Hist1[35]= new TH1D("vpseg[1] Cut3","vpseg[1] Cut3",64,1,65);
+    Hist1[36]= new TH1D("TofSeg[0] Cut3","TofSeg[0] Cut3",24,1,25);
+    Hist1[37]= new TH1D("tofsegKurama[0] Cut3","tofsegKurama[0] Cut3",24,1,25);
+    Hist1[38]= new TH1D("pKurama Cut4","pKurama Cut4",100,0,2);
+    Hist1[39]= new TH1D("m2 Cut4","m2 Cut4",100,-0.4,1.4);
+    Hist1[40]= new TH1D("chisqrKurama Cut4","chisqrKurama Cut4",100,0,200);
+    Hist1[41]= new TH1D("qKurama Cut4","qKurama Cut4",6,-3,3);
+    Hist1[42]= new TH1D("vpx[1] Cut4","vpx[1] Cut4",200,-400,400);
+    Hist1[43]= new TH1D("vpseg[1] Cut4","vpseg[1] Cut4",64,1,65);
+    Hist1[44]= new TH1D("TofSeg[0] Cut4","TofSeg[0] Cut4",24,1,25);
+    Hist1[45]= new TH1D("tofsegKurama[0] Cut4","tofsegKurama[0] Cut4",24,1,25);
 
 
     Hist2[0 ]= new TH2D("Sch Position by HitSegment % vpx[1]","Sch Position by HitSegment % vpx[1]",200,-400,400,100,-400,400);
@@ -426,6 +426,17 @@ void Mtx_Pos_Mon(int month,int runnum){
     Hist2[19]= new TH2D("vpy[1] % vpx[1]      Cut4","vpy[1] % vpx[1]      Cut4",100,-400,400,100,-400,400);
     Hist2[20]= new TH2D("TofSeg[0] % vpseg[1] Cut4","TofSeg[0] % vpseg[1] Cut4",64,1,65,24,1,25);
     Hist2[21]= new TH2D("tofsegKurama[0] % vpseg[1] Cut4","tofsegKurama[0] % vpseg[1] Cut4",64,1,65,24,1,25);
+    for(int p=0; p<10; p++ ){
+      int i=0;
+        Hist2[22+p*4]= new TH2D(Form("pKurama vs m2 Cut3 %lg<pKurama[%d]<%lg",(double)p*0.2,i,((double)p+1.)*0.2),Form("pKurama  vs  m2 Cut3 %lg<pKurama[%d]<%lg",(double)p*0.2,i,((double)p+1.)*0.2),100,-0.4,1.4,100,0,2);             
+        Hist2[23+p*4]= new TH2D(Form("vpy[1]  vs  vpx[1]      Cut3 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),Form("vpy[1]  vs  vpx[1]      Cut3 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),100,-400,400,100,-400,400);  
+        Hist2[24+p*4]= new TH2D(Form("TofSeg[0]  vs  vpseg[1] Cut3 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),Form("TofSeg[0]  vs  vpseg[1] Cut3 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),64,1,65,24,1,25);            
+        Hist2[25+p*4]= new TH2D(Form("tofsegKurama[0]  vs  vpseg[1] Cut3 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),Form("tofsegKurama[0]  vs  vpseg[1] Cut3 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),64,1,65,24,1,25);
+        Hist2[62+p*4]= new TH2D(Form("pKurama  vs  m2 Cut4 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),Form("pKurama  vs  m2 Cut4 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),100,-0.4,1.4,100,0,2);             
+        Hist2[63+p*4]= new TH2D(Form("vpy[1]  vs  vpx[1]      Cut4 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),Form("vpy[1]  vs  vpx[1]      Cut4 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),100,-400,400,100,-400,400);  
+        Hist2[64+p*4]= new TH2D(Form("TofSeg[0]  vs  vpseg[1] Cut4 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),Form("TofSeg[0]  vs  vpseg[1] Cut4 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),64,1,65,24,1,25);            
+        Hist2[65+p*4]= new TH2D(Form("tofsegKurama[0]  vs  vpseg[1] Cut4 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),Form("tofsegKurama[0]  vs  vpseg[1] Cut4 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),64,1,65,24,1,25);
+    }
 
 //-Legend def --------------------------------------------------------------------------------------
 
@@ -485,48 +496,64 @@ void Mtx_Pos_Mon(int month,int runnum){
        Hist2[8 ]->Fill(vpseg[1],TofSeg[i]);
        Hist2[9 ]->Fill(vpseg[1],tofsegKurama[i]);
        if(chisqrKurama[i]<chisqr){ // Cut2
-         Hist1[21]->Fill(pKurama[i]);
-         Hist1[22]->Fill(m2[i]);
-         Hist1[23]->Fill(chisqrKurama[i]);
-         Hist1[24]->Fill(qKurama[i]);
-         Hist1[25]->Fill(vpx[1]);
-         Hist1[26]->Fill(vpseg[1]);
-         Hist1[27]->Fill(TofSeg[i]);
-         Hist1[28]->Fill(tofsegKurama[i]);
+         Hist1[22]->Fill(pKurama[i]);
+         Hist1[23]->Fill(m2[i]);
+         Hist1[24]->Fill(chisqrKurama[i]);
+         Hist1[25]->Fill(qKurama[i]);
+         Hist1[26]->Fill(vpx[1]);
+         Hist1[27]->Fill(vpseg[1]);
+         Hist1[28]->Fill(TofSeg[i]);
+         Hist1[29]->Fill(tofsegKurama[i]);
 
          Hist2[10]->Fill(m2[i],pKurama[i]);
          Hist2[11]->Fill(vpx[1],vpy[1]);
          Hist2[12]->Fill(vpseg[1],TofSeg[i]);
          Hist2[13]->Fill(vpseg[1],tofsegKurama[i]);
          if(qKurama[i]>0){ // Cut3
-           Hist1[29]->Fill(pKurama[i]);
-           Hist1[30]->Fill(m2[i]);
-           Hist1[31]->Fill(chisqrKurama[i]);
-           Hist1[32]->Fill(qKurama[i]);
-           Hist1[33]->Fill(vpx[1]);
-           Hist1[34]->Fill(vpseg[1]);
-           Hist1[35]->Fill(TofSeg[i]);
-           Hist1[36]->Fill(tofsegKurama[i]);
+           Hist1[30]->Fill(pKurama[i]);
+           Hist1[31]->Fill(m2[i]);
+           Hist1[32]->Fill(chisqrKurama[i]);
+           Hist1[33]->Fill(qKurama[i]);
+           Hist1[34]->Fill(vpx[1]);
+           Hist1[35]->Fill(vpseg[1]);
+           Hist1[36]->Fill(TofSeg[i]);
+           Hist1[37]->Fill(tofsegKurama[i]);
 
            Hist2[14]->Fill(m2[i],pKurama[i]);
            Hist2[15]->Fill(vpx[1],vpy[1]);
            Hist2[16]->Fill(vpseg[1],TofSeg[i]);
            Hist2[17]->Fill(vpseg[1],tofsegKurama[i]);
+           for(int p=0; p<10; p++ ){
+             if(p*0.2<pKurama[i]&&(p+1)*0.2>pKurama[i]){
+               Hist2[22+p*4]->Fill(m2[i],pKurama[i]);
+               Hist2[23+p*4]->Fill(vpx[1],vpy[1]);
+               Hist2[24+p*4]->Fill(vpseg[1],TofSeg[i]);
+               Hist2[25+p*4]->Fill(vpseg[1],tofsegKurama[i]);
+             }
+           }
          } // Cut3
-         if(qKurama[i]>0){ // Cut4
-           Hist1[37]->Fill(pKurama[i]);
-           Hist1[38]->Fill(m2[i]);
-           Hist1[39]->Fill(chisqrKurama[i]);
-           Hist1[40]->Fill(qKurama[i]);
-           Hist1[41]->Fill(vpx[1]);
-           Hist1[42]->Fill(vpseg[1]);
-           Hist1[43]->Fill(TofSeg[i]);
-           Hist1[44]->Fill(tofsegKurama[i]);
+         if(qKurama[i]<0){ // Cut4
+           Hist1[38]->Fill(pKurama[i]);
+           Hist1[39]->Fill(m2[i]);
+           Hist1[40]->Fill(chisqrKurama[i]);
+           Hist1[41]->Fill(qKurama[i]);
+           Hist1[42]->Fill(vpx[1]);
+           Hist1[43]->Fill(vpseg[1]);
+           Hist1[44]->Fill(TofSeg[i]);
+           Hist1[45]->Fill(tofsegKurama[i]);
 
            Hist2[18]->Fill(m2[i],pKurama[i]);
            Hist2[19]->Fill(vpx[1],vpy[1]);
            Hist2[20]->Fill(vpseg[1],TofSeg[i]);
            Hist2[21]->Fill(vpseg[1],tofsegKurama[i]);
+           for(int p=0; p<10; p++ ){
+             if(p*0.2<pKurama[i]&&(p+1)*0.2>pKurama[i]){
+               Hist2[62+p*4]->Fill(m2[i],pKurama[i]);
+               Hist2[63+p*4]->Fill(vpx[1],vpy[1]);
+               Hist2[64+p*4]->Fill(vpseg[1],TofSeg[i]);
+               Hist2[65+p*4]->Fill(vpseg[1],tofsegKurama[i]);
+             }
+           }
          } // Cut4
        } // Cut2
      } //Cut1
