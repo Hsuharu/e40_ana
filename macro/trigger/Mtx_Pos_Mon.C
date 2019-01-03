@@ -443,8 +443,9 @@ void Mtx_Pos_Mon(int month,int runnum){
     }
 
 //-Legend def --------------------------------------------------------------------------------------
-  TLegend *Leg1 = new TLegend(0.78,0.775,0.98,0.935);
-  TLegend *Leg2 = new TLegend(0.78,0.775,0.98,0.935);
+  TLegend *Leg1 = new TLegend(0.78,0.675,0.98,0.935);
+  TLegend *Leg2 = new TLegend(0.78,0.675,0.98,0.935);
+  TLegend *Leg3 = new TLegend(0.78,0.675,0.98,0.935);
 
 //-Event Loop --------------------------------------------------------------------------------------
    Long64_t nentries = k0hodo->GetEntries();
