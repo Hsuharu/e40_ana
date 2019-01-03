@@ -604,7 +604,7 @@ void Mtx_Pos_Mon(int month,int runnum){
 
    for(int p=0; p<10; p++ ){
      if(p==1){
-       Hist2[25+p*4]->Draw();
+       Hist2[25+p*4]->Draw("colz");
      }else{
        Hist2[25+p*4]->Draw("same");
      }
