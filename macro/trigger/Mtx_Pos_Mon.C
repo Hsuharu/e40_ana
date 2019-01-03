@@ -351,7 +351,7 @@ void Mtx_Pos_Mon(int month,int runnum){
 
 //-hist def-----------------------------------------------------------------------------------------
    Hist1Max = 46;
-   Hist2Max =  101;
+   Hist2Max =  102;
    chisqr = 50;
    TH1D *Hist1[Hist1Max];
    TH2D *Hist2[Hist2Max];
