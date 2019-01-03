@@ -626,6 +626,23 @@ void Mtx_Pos_Mon(int month,int runnum){
    c1->Print(pdf);
    c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_same_Cut4.pdf",pdfDhire.Data(),runnum));
 
+   for(int p=0; p<10; p++ ){
+     if(p==1){
+       Hist2[25+p*4]->SetMarkerColor(p+1);
+       Hist2[25+p*4]->Draw();
+       Hist2[65+p*4]->SetMarkerColor(p+10);
+       Hist2[65+p*4]->Draw("same");
+     }else{
+       Hist2[25+p*4]->SetMarkerColor(p+1);
+       Hist2[25+p*4]->Draw("same");
+       Hist2[65+p*4]->SetMarkerColor(p+10);
+       Hist2[65+p*4]->Draw("same");
+     }
+   }
+   c1->Print(pdf);
+   c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_same_Cut34.pdf",pdfDhire.Data(),runnum));
+
+
    c1->Print(pdf+"]"); 
 
 
