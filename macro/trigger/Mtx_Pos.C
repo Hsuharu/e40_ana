@@ -65,8 +65,8 @@ void Mtx_Pos(int month,int runnum){
    TString pdf = Form("%s/pdf/trigger/Mtx_Pos_run%05d.pdf", anadir.Data(),runnum);
    TString pdfDhire = Form("%s/pdf/trigger", anadir.Data());
 //   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/trigf19_tofht.root", anadir.Data(),Month[month]),"READ");
-//   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstKuramaEasirocHodoscope_BH2TOF.root", anadir.Data(),Month[month],runnum),"READ");
-   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstKuramaEasirocHodoscope.root", anadir.Data(),Month[month],runnum),"READ");
+   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstKuramaEasirocHodoscope_BH2TOF.root", anadir.Data(),Month[month],runnum),"READ");
+//   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstKuramaEasirocHodoscope.root", anadir.Data(),Month[month],runnum),"READ");
    TTree *k0hodo;
     f->GetObject("k0hodo",k0hodo);
 
@@ -381,7 +381,7 @@ void Mtx_Pos(int month,int runnum){
     Hist1[22]= new TH1D("TofSeg[0] Cut1","TofSeg[0] Cut1",24,1,25);
     Hist1[23]= new TH1D("TofSeg[0] Cut2","TofSeg[0] Cut2",24,1,25);
     Hist1[24]= new TH1D("delta_x","delta_x",200,-100,100);
-    Hist1[25]= new TH1D("Sch Position by HitSegment","Sch Position by HitSegment",50,-400,400);
+    Hist1[25]= new TH1D("Sch Position by HitSegment","Sch Position by HitSegment",200,-400,400);
     Hist1[26]= new TH1D("tofsegKurama[0]","tofsegKurama[0]",24,1,25);
     Hist1[27]= new TH1D("tofsegKurama[0] Cut1","tofsegKurama[0] Cut1",24,1,25);
     Hist1[28]= new TH1D("tofsegKurama[0] Cut2","tofsegKurama[0] Cut2",24,1,25);
@@ -389,7 +389,7 @@ void Mtx_Pos(int month,int runnum){
     Hist1[30]= new TH1D("TofSeg[0] Cut3","TofSeg[0] Cut3",24,1,25);
     Hist1[31]= new TH1D("tofsegKurama[0] Cut3","tofsegKurama[0] Cut3",24,1,25);
     Hist1[32]= new TH1D("vpx[1] Cut3","vpx[1] Cut3",200,-400,400);
-    Hist1[33]= new TH1D("Sch Position by HitSegment Cut3","Sch Position by HitSegment Cut3",50,-400,400);
+    Hist1[33]= new TH1D("Sch Position by HitSegment Cut3","Sch Position by HitSegment Cut3",200,-400,400);
 
 
             
@@ -403,13 +403,13 @@ void Mtx_Pos(int month,int runnum){
     Hist2[6 ]= new TH2D("TofSeg[0] % vpseg[1]","TofSeg[0] % vpseg[1]",64,1,65,24,1,25);
     Hist2[7 ]= new TH2D("TofSeg[0] % vpseg[1] Cut1","TofSeg[0] % vpseg[1] Cut1",64,1,65,24,1,25);
     Hist2[8 ]= new TH2D("TofSeg[0] % vpseg[1] Cut2","TofSeg[0] % vpseg[1] Cut2",64,1,65,24,1,25);
-    Hist2[9 ]= new TH2D("Sch Position by HitSegment % vpx[1]","Sch Position by HitSegment % vpx[1]",50,-400,400,100,-400,400);
+    Hist2[9 ]= new TH2D("Sch Position by HitSegment % vpx[1]","Sch Position by HitSegment % vpx[1]",200,-400,400,100,-400,400);
     Hist2[10]= new TH2D("tofsegKurama[0] % vpseg[1]","tofsegKurama[0] % vpseg[1]",64,1,65,24,1,25);
     Hist2[11]= new TH2D("tofsegKurama[0] % vpseg[1] Cut1","tofsegKurama[0] % vpseg[1] Cut1",64,1,65,24,1,25);
     Hist2[12]= new TH2D("tofsegKurama[0] % vpseg[1] Cut2","tofsegKurama[0] % vpseg[1] Cut2",64,1,65,24,1,25);
     Hist2[13]= new TH2D("TofSeg[0] % vpseg[1] Cut3","TofSeg[0] % vpseg[1] Cut3",64,1,65,24,1,25);
     Hist2[14]= new TH2D("tofsegKurama[0] % vpseg[1] Cut3","tofsegKurama[0] % vpseg[1] Cut3",64,1,65,24,1,25);
-    Hist2[15]= new TH2D("Sch Position by HitSegment % vpx[1] Cut3","Sch Position by HitSegment % vpx[1] Cut3",50,-400,400,100,-400,400);
+    Hist2[15]= new TH2D("Sch Position by HitSegment % vpx[1] Cut3","Sch Position by HitSegment % vpx[1] Cut3",200,-400,400,100,-400,400);
 
 //-Legend def --------------------------------------------------------------------------------------
 
@@ -429,8 +429,8 @@ void Mtx_Pos(int month,int runnum){
        Hist1[24]->Fill(delta_x[i]);
        Hist1[25]->Fill(SchPos[i]);
        Hist2[9 ]->Fill(SchPos[i],vpx[1]);
-//       if(delta_x[i]<-10 || delta_x[i]>10) continue;
-       if(delta_x[i]<10 || delta_x[i]>25) continue;
+       if(delta_x[i]<-10 || delta_x[i]>10) continue;
+//       if(delta_x[i]<10 || delta_x[i]>25) continue;
        sch_flag = true;
        Hist1[32]->Fill(vpx[1]);
        Hist1[33]->Fill(SchPos[i]);
