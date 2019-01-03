@@ -443,6 +443,8 @@ void Mtx_Pos_Mon(int month,int runnum){
     }
 
 //-Legend def --------------------------------------------------------------------------------------
+  TLegend *Leg1 = new TLegend(0.78,0.775,0.98,0.935);
+  TLegend *Leg2 = new TLegend(0.78,0.775,0.98,0.935);
 
 //-Event Loop --------------------------------------------------------------------------------------
    Long64_t nentries = k0hodo->GetEntries();
@@ -605,40 +607,45 @@ void Mtx_Pos_Mon(int month,int runnum){
    for(int p=0; p<10; p++ ){
      if(p==1){
        Hist2[25+p*4]->SetMarkerColor(p+1);
+       Leg1->AddEntry(Hist2[25+p*4],Form("Cut3 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"l");
        Hist2[25+p*4]->Draw();
      }else{
        Hist2[25+p*4]->SetMarkerColor(p+1);
+       Leg1->AddEntry(Hist2[25+p*4],Form("Cut3 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"l");
        Hist2[25+p*4]->Draw("same");
      }
    }
+   Leg1->Draw();
    c1->Print(pdf);
    c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_same_Cut3.pdf",pdfDhire.Data(),runnum));
 
    for(int p=0; p<10; p++ ){
      if(p==1){
-       Hist2[65+p*4]->SetMarkerColor(p+10);
+       Hist2[65+p*4]->SetMarkerColor(p+151);
+       Leg1->AddEntry(Hist2[65+p*4],Form("Cut4 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"l");
+       Leg2->AddEntry(Hist2[65+p*4],Form("Cut4 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"l");
        Hist2[65+p*4]->Draw();
      }else{
-       Hist2[65+p*4]->SetMarkerColor(p+10);
+       Hist2[65+p*4]->SetMarkerColor(p+151);
+       Leg1->AddEntry(Hist2[65+p*4],Form("Cut4 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"l");
+       Leg2->AddEntry(Hist2[65+p*4],Form("Cut4 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"l");
        Hist2[65+p*4]->Draw("same");
      }
    }
+   Leg2->Draw();
    c1->Print(pdf);
    c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_same_Cut4.pdf",pdfDhire.Data(),runnum));
 
    for(int p=0; p<10; p++ ){
      if(p==1){
-       Hist2[25+p*4]->SetMarkerColor(p+1);
        Hist2[25+p*4]->Draw();
-       Hist2[65+p*4]->SetMarkerColor(p+10);
        Hist2[65+p*4]->Draw("same");
      }else{
-       Hist2[25+p*4]->SetMarkerColor(p+1);
        Hist2[25+p*4]->Draw("same");
-       Hist2[65+p*4]->SetMarkerColor(p+10);
        Hist2[65+p*4]->Draw("same");
      }
    }
+   Leg1->Draw();
    c1->Print(pdf);
    c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_same_Cut34.pdf",pdfDhire.Data(),runnum));
 
