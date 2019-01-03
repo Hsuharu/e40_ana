@@ -602,6 +602,16 @@ void Mtx_Pos_Mon(int month,int runnum){
      c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_box_%04d.pdf",pdfDhire.Data(),runnum,i));
    }
 
+   for(int p=0; p<10; p++ ){
+     if(p==1){
+       Hist2[25+p*4]->Draw();
+     }else{
+       Hist2[25+p*4]->Draw("same");
+     }
+   }
+   c1->Print(pdf);
+   c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_same.pdf",pdfDhire.Data(),runnum));
+
    c1->Print(pdf+"]"); 
 
 
