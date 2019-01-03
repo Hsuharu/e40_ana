@@ -428,7 +428,7 @@ void Mtx_Pos_Mon(int month,int runnum){
     Hist2[21]= new TH2D("tofsegKurama[0] % vpseg[1] Cut4","tofsegKurama[0] % vpseg[1] Cut4",64,1,65,24,1,25);
     for(int p=0; p<10; p++ ){
       int i=0;
-        Hist2[22+p*4]= new TH2D(Form("pKurama vs m2 Cut3 %lg<pKurama[%d]<%lg",(double)p*0.2,i,((double)p+1.)*0.2),Form("pKurama  vs  m2 Cut3 %lg<pKurama[%d]<%lg",(double)p*0.2,i,((double)p+1.)*0.2),100,-0.4,1.4,100,0,2);             
+        Hist2[22+p*4]= new TH2D(Form("pKurama vs m2 Cut3 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),Form("pKurama  vs  m2 Cut3 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),100,-0.4,1.4,100,0,2);             
         Hist2[23+p*4]= new TH2D(Form("vpy[1]  vs  vpx[1]      Cut3 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),Form("vpy[1]  vs  vpx[1]      Cut3 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),100,-400,400,100,-400,400);  
         Hist2[24+p*4]= new TH2D(Form("TofSeg[0]  vs  vpseg[1] Cut3 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),Form("TofSeg[0]  vs  vpseg[1] Cut3 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),64,1,65,24,1,25);            
         Hist2[25+p*4]= new TH2D(Form("tofsegKurama[0]  vs  vpseg[1] Cut3 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),Form("tofsegKurama[0]  vs  vpseg[1] Cut3 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),64,1,65,24,1,25);
@@ -436,6 +436,10 @@ void Mtx_Pos_Mon(int month,int runnum){
         Hist2[63+p*4]= new TH2D(Form("vpy[1]  vs  vpx[1]      Cut4 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),Form("vpy[1]  vs  vpx[1]      Cut4 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),100,-400,400,100,-400,400);  
         Hist2[64+p*4]= new TH2D(Form("TofSeg[0]  vs  vpseg[1] Cut4 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),Form("TofSeg[0]  vs  vpseg[1] Cut4 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),64,1,65,24,1,25);            
         Hist2[65+p*4]= new TH2D(Form("tofsegKurama[0]  vs  vpseg[1] Cut4 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),Form("tofsegKurama[0]  vs  vpseg[1] Cut4 %lg<pKurama[%d]<%lg",p*0.2,i,(p+1)*0.2),64,1,65,24,1,25);
+//        Hist2[22+p*4]= new TH2D(Form("pKurama vs m2 Cut3 %lg<pKurama[%d]<%lg",(double)p*0.2,i,((double)p+1.)*0.2),Form("pKurama  vs  m2 Cut3 %lg<pKurama[%d]<%lg",(double)p*0.2,i,((double)p+1.)*0.2),100,-0.4,1.4,100,0,2);             
+//        Hist2[23+p*4]= new TH2D(Form("vpy[1]  vs  vpx[1]      Cut3 %lg<pKurama[%d]<%lg",(double)p*0.2,i,((double)p.+1)*0.2),Form("vpy[1]  vs  vpx[1]      Cut3 %lg<pKurama[%d]<%lg",(double)p*0.2,i,((double)p+1.)*0.2),100,-400,400,100,-400,400);  
+//        Hist2[24+p*4]= new TH2D(Form("TofSeg[0]  vs  vpseg[1] Cut3 %lg<pKurama[%d]<%lg",(double)p*0.2,i,((double)p+1.)*0.2),Form("TofSeg[0]  vs  vpseg[1] Cut3 %lg<pKurama[%d]<%lg",(double)p*0.2,i,((double)p+1.)*0.2),64,1,65,24,1,25);            
+//        Hist2[25+p*4]= new TH2D(Form("tofsegKurama[0]  vs  vpseg[1] Cut3 %lg<pKurama[%d]<%lg",(double)p*0.2,i,((double)p+1.)*0.2),Form("tofsegKurama[0]  vs  vpseg[1] Cut3 %lg<pKurama[%d]<%lg",(double)p*0.2,i,((double)p+1.)*0.2),64,1,65,24,1,25);
     }
 
 //-Legend def --------------------------------------------------------------------------------------
@@ -588,11 +592,14 @@ void Mtx_Pos_Mon(int month,int runnum){
 //   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
    }
    for(int i=0; i<Hist2Max; i++){
-   Hist2[i]->Draw("colz");
-   c1->Print(pdf);
-   Hist2[i]->Draw("box");
-   c1->Print(pdf);
-   c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
+     Hist2[i]->Draw("colz");
+     c1->Print(pdf);
+     c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_colz_%03d.pdf",pdfDhire.Data(),runnum,i));
+   }
+   for(int i=0; i<Hist2Max; i++){
+     Hist2[i]->Draw("box");
+     c1->Print(pdf);
+     c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_box_%03d.pdf",pdfDhire.Data(),runnum,i));
    }
 
    c1->Print(pdf+"]"); 
