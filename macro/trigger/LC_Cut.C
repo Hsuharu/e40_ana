@@ -165,7 +165,7 @@ void LC_Cut(int month, int runnum){
   //   khodo_lc->SetBranchStatus("SacSeg");
   //   khodo_lc->SetBranchStatus("tSac");
   //   khodo_lc->SetBranchStatus("deSac");
-  //   khodo_lc->SetBranchStatus("nhTof");
+  khodo_lc->SetBranchStatus("nhTof");
   //   khodo_lc->SetBranchStatus("csTof");
   //   khodo_lc->SetBranchStatus("TofSeg");
   //   khodo_lc->SetBranchStatus("tTof");
@@ -219,7 +219,7 @@ void LC_Cut(int month, int runnum){
   //   khodo_lc->SetBranchAddress("SacSeg",SacSeg);
   //   khodo_lc->SetBranchAddress("tSac",tSac);
   //   khodo_lc->SetBranchAddress("deSac",deSac);
-  //   khodo_lc->SetBranchAddress("nhTof",&nhTof);
+  khodo_lc->SetBranchAddress("nhTof",&nhTof);
   //   khodo_lc->SetBranchAddress("csTof",csTof);
   //   khodo_lc->SetBranchAddress("TofSeg",TofSeg);
   //   khodo_lc->SetBranchAddress("tTof",tTof);
@@ -409,19 +409,19 @@ void LC_Cut(int month, int runnum){
       for(int j=0; j<nhTof; j++){
         if(LCGate1Flag==true){ 
           Hist1[74]->Fill(m2[nhTof*i+j]);
-          if(pKurama[i]>0.7&&pKurama[i]<0.9){
+          if(pKurama[i]>0.7&&pKurama[i]<0.9&&chisqrKurama[i]<50){
             Hist1[77]->Fill(m2[nhTof*i+j]);
           }
         }
         if(LCGate2Flag==true){ 
           Hist1[75]->Fill(m2[nhTof*i+j]);
-          if(pKurama[i]>0.7&&pKurama[i]<0.9){
+          if(pKurama[i]>0.7&&pKurama[i]<0.9&&chisqrKurama[i]<50){
             Hist1[78]->Fill(m2[nhTof*i+j]);
           }
         }
         if(LCGate3Flag==true){ 
           Hist1[76]->Fill(m2[nhTof*i+j]);
-          if(pKurama[i]>0.5&&pKurama[i]<0.9){
+          if(pKurama[i]>0.5&&pKurama[i]<0.9&&chisqrKurama[i]<50){
             Hist1[79]->Fill(m2[nhTof*i+j]);
           }
         }
