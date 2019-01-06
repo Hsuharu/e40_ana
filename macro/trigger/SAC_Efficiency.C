@@ -478,6 +478,7 @@ void SAC_Efficiency(int month,int runnum){
    int total=0;
    double eff=0.;
    double eff_khodo=0.;
+   double err_khodo=0.;
 
 //-hist def-----------------------------------------------------------------------------------------
    Hist1Max = 40;
@@ -770,6 +771,7 @@ void SAC_Efficiency(int month,int runnum){
 
    eff = (double)hit/total;
    eff_khodo = (double)hit_khodo/total;
+   err_khodo = sqrt(total*eff_khodo*(1-eff_khodo))/total;
 
 // Peak & Gate Make -----
    MaximumBintSac=0.;
@@ -810,6 +812,7 @@ std::cout << "eff \t\t" << eff << std::endl;
 std::cout << "hit_khodo \t" << hit_khodo << std::endl; 
 std::cout << "total \t\t" << total << std::endl; 
 std::cout << "eff_khodo \t" << eff_khodo << std::endl; 
+std::cout << "err_khodo \t" << err_khodo << std::endl; 
 
    c1->Print(pdf+"]"); 
 

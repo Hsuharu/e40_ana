@@ -276,7 +276,7 @@ void LC_Cut(int month, int runnum){
 
   int l = 3;
   //-hist def-----------------------------------------------------------------------------------------
-  Hist1Max = 74;
+  Hist1Max = 80;
   Hist2Max = 4;
   TH1D *Hist1[Hist1Max];
   TH2D *Hist2[Hist2Max];
@@ -304,6 +304,17 @@ void LC_Cut(int month, int runnum){
   Hist1[72]= new TH1D("m2 Cut3 Gate3","m2 Cut3 Gate3",100,-0.4,1.4);
   Hist1[73]= new TH1D("pKurama Cut3 Gate3","pKurama Cut3 Gate3",100,0,1.6);
 
+  Hist1[74]= new TH1D("m2 Cut1-2 Gate1","m2 Cut1-2 Gate1",100,-0.4,1.4);
+  Hist1[75]= new TH1D("m2 Cut1-2 Gate2","m2 Cut1-2 Gate2",100,-0.4,1.4);
+  Hist1[76]= new TH1D("m2 Cut1-2 Gate3","m2 Cut1-2 Gate3",100,-0.4,1.4);
+  Hist1[77]= new TH1D("m2 Cut4 Gate1","m2 Cut4 Gate1",100,-0.4,1.4);
+  Hist1[78]= new TH1D("m2 Cut4 Gate2","m2 Cut4 Gate2",100,-0.4,1.4);
+  Hist1[79]= new TH1D("m2 Cut4 Gate3","m2 Cut4 Gate3",100,-0.4,1.4);
+
+//  Hist1[73]= new TH1D("pKurama Cut4 Gate1","pKurama Cut4 Gate1",100,0,1.6);
+//  Hist1[73]= new TH1D("pKurama Cut4 Gate2","pKurama Cut4 Gate2",100,0,1.6);
+//  Hist1[73]= new TH1D("pKurama Cut4 Gate3","pKurama Cut4 Gate3",100,0,1.6);
+
   Hist2[0]= new TH2D("m2 vs pKurama Cut2","m2 vs pKurama Cut2",100,-0.4,1.4,100,0,1.6);
   Hist2[1]= new TH2D("m2 vs pKurama Cut3 Gate1","m2 vs pKurama Cut3 Gate1",100,-0.4,1.4,100,0,1.6);
   Hist2[2]= new TH2D("m2 vs pKurama Cut3 Gate2","m2 vs pKurama Cut3 Gate2",100,-0.4,1.4,100,0,1.6);
@@ -318,6 +329,7 @@ void LC_Cut(int month, int runnum){
   TLegend *Leg3 = new TLegend(0.78,0.775,0.98,0.935);
   TLegend *Leg4 = new TLegend(0.78,0.775,0.98,0.935);
   TLegend *Leg5 = new TLegend(0.78,0.775,0.98,0.935);
+  TLegend *Leg6 = new TLegend(0.78,0.775,0.98,0.935);
 
   //-Event Loop --------------------------------------------------------------------------------------
   Long64_t nentries = khodo_lc->GetEntries();
@@ -393,6 +405,30 @@ void LC_Cut(int month, int runnum){
       if(LCGate2Flag==true){ Hist1[66]->Fill(m2[i]);}
       if(LCGate3Flag==true){ Hist1[67]->Fill(m2[i]);}
     }
+    for(int i=0; i<ntKurama; i++){
+      for(int j=0; j<nhTof; j++){
+        if(LCGate1Flag==true){ 
+          Hist1[74]->Fill(m2[nhTof*i+j]);
+          if(pKurama[i]>0.7&&pKurama[i]<0.9){
+            Hist1[77]->Fill(m2[nhTof*i+j]);
+          }
+        }
+        if(LCGate2Flag==true){ 
+          Hist1[75]->Fill(m2[nhTof*i+j]);
+          if(pKurama[i]>0.7&&pKurama[i]<0.9){
+            Hist1[78]->Fill(m2[nhTof*i+j]);
+          }
+        }
+        if(LCGate3Flag==true){ 
+          Hist1[76]->Fill(m2[nhTof*i+j]);
+          if(pKurama[i]>0.5&&pKurama[i]<0.9){
+            Hist1[79]->Fill(m2[nhTof*i+j]);
+          }
+        }
+      }
+    }
+
+      
     for(int i=0; i<ntKurama; i++){
       Hist1[60]->Fill(pKurama[i]);
       if(LCGate1Flag==true){ Hist1[61]->Fill(pKurama[i]);}
@@ -490,6 +526,47 @@ void LC_Cut(int month, int runnum){
   Leg2->AddEntry(Hist1[67],Form("Cut Gate3 %dns",(int)Gate3),"l");
   Leg2->Draw();
   c1->Print(pdf);
+
+  Hist1[74]->SetStats(0);
+  Hist1[75]->SetStats(0);
+  Hist1[76]->SetStats(0);
+
+  Hist1[74]->SetLineColor(2);
+  Hist1[75]->SetLineColor(3);
+  Hist1[76]->SetLineColor(4);
+
+  Hist1[58]->Draw();
+  Hist1[74]->Draw("same");
+  Hist1[75]->Draw("same");
+  Hist1[76]->Draw("same");
+
+  Leg6->AddEntry(Hist1[58],"No Cut   ","l");
+  Leg6->AddEntry(Hist1[74],Form("Cut Gate1 %dns",(int)Gate1),"l");
+  Leg6->AddEntry(Hist1[75],Form("Cut Gate2 %dns",(int)Gate2),"l");
+  Leg6->AddEntry(Hist1[76],Form("Cut Gate3 %dns",(int)Gate3),"l");
+  Leg6->Draw();
+  c1->Print(pdf);
+
+  Hist1[77]->SetStats(0);
+  Hist1[78]->SetStats(0);
+  Hist1[79]->SetStats(0);
+
+  Hist1[77]->SetLineColor(2);
+  Hist1[78]->SetLineColor(3);
+  Hist1[79]->SetLineColor(4);
+
+  Hist1[58]->Draw();
+  Hist1[77]->Draw("same");
+  Hist1[78]->Draw("same");
+  Hist1[79]->Draw("same");
+
+  Leg6->AddEntry(Hist1[58],"No Cut   ","l");
+  Leg6->AddEntry(Hist1[77],Form("Cut4 Gate1 %dns",(int)Gate1),"l");
+  Leg6->AddEntry(Hist1[78],Form("Cut4 Gate2 %dns",(int)Gate2),"l");
+  Leg6->AddEntry(Hist1[79],Form("Cut4 Gate3 %dns",(int)Gate3),"l");
+  Leg6->Draw();
+  c1->Print(pdf);
+
 
 // index fanction -----------------------------------------------------------------------------------
   int n = 100;
