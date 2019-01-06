@@ -251,9 +251,9 @@ void LC_Cut(int month, int runnum){
 
   double lcmttdcpeak[NumOfSegLC]; 
 
-  double Gate1 = 10;
-  double Gate2 = 15;
-  double Gate3 = 20;
+  double Gate1 = 10.;
+  double Gate2 = 15.;
+  double Gate3 = 20.;
   double NegGate1 = -10.;
   double NegGate2 = -15.;
   double NegGate3 = -20.;
@@ -409,8 +409,10 @@ void LC_Cut(int month, int runnum){
     }
     for(int i=0; i<ntKurama; i++){
       for(int j=0; j<nhTof; j++){
-        if(pKurama[i]>0.7&&pKurama[i]<0.9&&chisqrKurama[i]<50){
-          Hist1[80]->Fill(m2[nhTof*i+j]);
+        if(LCGate1Flag==true ||LCGate2Flag==true ||  LCGate3Flag==true ){ 
+          if(pKurama[i]>0.7&&pKurama[i]<0.9&&chisqrKurama[i]<50){
+            Hist1[80]->Fill(m2[nhTof*i+j]);
+          }
         }
         if(LCGate1Flag==true){ 
           Hist1[74]->Fill(m2[nhTof*i+j]);
