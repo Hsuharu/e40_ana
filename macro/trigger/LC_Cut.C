@@ -251,7 +251,8 @@ void LC_Cut(int month, int runnum){
 
   double lcmttdcpeak[NumOfSegLC]; 
 
-  double Gate1 = 10.;
+//  double Gate1 = 10.;
+  double Gate1 = 20.;
   double Gate2 = 15.;
   double Gate3 = 20.;
   double NegGate1 = -10.;
@@ -407,12 +408,11 @@ void LC_Cut(int month, int runnum){
       if(LCGate2Flag==true){ Hist1[66]->Fill(m2[i]);}
       if(LCGate3Flag==true){ Hist1[67]->Fill(m2[i]);}
     }
+    
     for(int i=0; i<ntKurama; i++){
       for(int j=0; j<nhTof; j++){
-        if(LCGate1Flag==true || LCGate2Flag==true ||  LCGate3Flag==true ){ 
-          if(pKurama[i]>0.7&&pKurama[i]<0.9&&chisqrKurama[i]<50){
-            Hist1[80]->Fill(m2[nhTof*i+j]);
-          }
+        if(pKurama[i]>0.7&&pKurama[i]<0.9&&chisqrKurama[i]<50){
+          Hist1[80]->Fill(m2[nhTof*i+j]);
         }
         if(LCGate1Flag){ 
           Hist1[74]->Fill(m2[nhTof*i+j]);
@@ -512,6 +512,7 @@ void LC_Cut(int month, int runnum){
   Leg1->AddEntry(Hist1[72],Form("Cut Gate3 %dns",(int)Gate3),"l");
   Leg1->Draw();
   c1->Print(pdf);
+  c1->Print(Form("%s/pdf/trigger/LC_Cut_run%05d_sameDraw1.pdf",anadir.Data(),runnum));
 
   Hist1[58]->SetStats(0);
   Hist1[59]->SetStats(0);
@@ -533,6 +534,7 @@ void LC_Cut(int month, int runnum){
   Leg2->AddEntry(Hist1[67],Form("Cut Gate3 %dns",(int)Gate3),"l");
   Leg2->Draw();
   c1->Print(pdf);
+  c1->Print(Form("%s/pdf/trigger/LC_Cut_run%05d_sameDraw2.pdf",anadir.Data(),runnum));
 
   Hist1[74]->SetStats(0);
   Hist1[75]->SetStats(0);
@@ -553,10 +555,12 @@ void LC_Cut(int month, int runnum){
   Leg6->AddEntry(Hist1[76],Form("Cut Gate3 %dns",(int)Gate3),"l");
   Leg6->Draw();
   c1->Print(pdf);
+  c1->Print(Form("%s/pdf/trigger/LC_Cut_run%05d_sameDraw3.pdf",anadir.Data(),runnum));
 
   Hist1[77]->SetStats(0);
   Hist1[78]->SetStats(0);
   Hist1[79]->SetStats(0);
+  Hist1[80]->SetStats(0);
 
   Hist1[77]->SetLineColor(2);
   Hist1[78]->SetLineColor(3);
@@ -573,6 +577,7 @@ void LC_Cut(int month, int runnum){
   Leg7->AddEntry(Hist1[79],Form("Cut4 Gate3 %dns",(int)Gate3),"l");
   Leg7->Draw();
   c1->Print(pdf);
+  c1->Print(Form("%s/pdf/trigger/LC_Cut_run%05d_sameDraw4.pdf",anadir.Data(),runnum));
 
 
 // index fanction -----------------------------------------------------------------------------------
