@@ -414,19 +414,19 @@ void LC_Cut(int month, int runnum){
             Hist1[80]->Fill(m2[nhTof*i+j]);
           }
         }
-        if(LCGate1Flag==true){ 
+        if(LCGate1Flag){ 
           Hist1[74]->Fill(m2[nhTof*i+j]);
           if(pKurama[i]>0.7&&pKurama[i]<0.9&&chisqrKurama[i]<50){
             Hist1[77]->Fill(m2[nhTof*i+j]);
           }
         }
-        if(LCGate2Flag==true){ 
+        if(LCGate2Flag){ 
           Hist1[75]->Fill(m2[nhTof*i+j]);
           if(pKurama[i]>0.7&&pKurama[i]<0.9&&chisqrKurama[i]<50){
             Hist1[78]->Fill(m2[nhTof*i+j]);
           }
         }
-        if(LCGate3Flag==true){ 
+        if(LCGate3Flag){ 
           Hist1[76]->Fill(m2[nhTof*i+j]);
           if(pKurama[i]>0.5&&pKurama[i]<0.9&&chisqrKurama[i]<50){
             Hist1[79]->Fill(m2[nhTof*i+j]);
