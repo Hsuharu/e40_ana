@@ -276,7 +276,7 @@ void LC_Cut(int month, int runnum){
 
   int l = 3;
   //-hist def-----------------------------------------------------------------------------------------
-  Hist1Max = 80;
+  Hist1Max = 81;
   Hist2Max = 4;
   TH1D *Hist1[Hist1Max];
   TH2D *Hist2[Hist2Max];
@@ -310,6 +310,7 @@ void LC_Cut(int month, int runnum){
   Hist1[77]= new TH1D("m2 Cut4 Gate1","m2 Cut4 Gate1",100,-0.4,1.4);
   Hist1[78]= new TH1D("m2 Cut4 Gate2","m2 Cut4 Gate2",100,-0.4,1.4);
   Hist1[79]= new TH1D("m2 Cut4 Gate3","m2 Cut4 Gate3",100,-0.4,1.4);
+  Hist1[80]= new TH1D("m2 Cut4","m2 Cut4",100,-0.4,1.4);
 
 //  Hist1[73]= new TH1D("pKurama Cut4 Gate1","pKurama Cut4 Gate1",100,0,1.6);
 //  Hist1[73]= new TH1D("pKurama Cut4 Gate2","pKurama Cut4 Gate2",100,0,1.6);
@@ -330,6 +331,7 @@ void LC_Cut(int month, int runnum){
   TLegend *Leg4 = new TLegend(0.78,0.775,0.98,0.935);
   TLegend *Leg5 = new TLegend(0.78,0.775,0.98,0.935);
   TLegend *Leg6 = new TLegend(0.78,0.775,0.98,0.935);
+  TLegend *Leg7 = new TLegend(0.78,0.775,0.98,0.935);
 
   //-Event Loop --------------------------------------------------------------------------------------
   Long64_t nentries = khodo_lc->GetEntries();
@@ -407,6 +409,9 @@ void LC_Cut(int month, int runnum){
     }
     for(int i=0; i<ntKurama; i++){
       for(int j=0; j<nhTof; j++){
+        if(pKurama[i]>0.7&&pKurama[i]<0.9&&chisqrKurama[i]<50){
+          Hist1[80]->Fill(m2[nhTof*i+j]);
+        }
         if(LCGate1Flag==true){ 
           Hist1[74]->Fill(m2[nhTof*i+j]);
           if(pKurama[i]>0.7&&pKurama[i]<0.9&&chisqrKurama[i]<50){
@@ -555,16 +560,16 @@ void LC_Cut(int month, int runnum){
   Hist1[78]->SetLineColor(3);
   Hist1[79]->SetLineColor(4);
 
-  Hist1[58]->Draw();
+  Hist1[80]->Draw();
   Hist1[77]->Draw("same");
   Hist1[78]->Draw("same");
   Hist1[79]->Draw("same");
 
-  Leg6->AddEntry(Hist1[58],"No Cut   ","l");
-  Leg6->AddEntry(Hist1[77],Form("Cut4 Gate1 %dns",(int)Gate1),"l");
-  Leg6->AddEntry(Hist1[78],Form("Cut4 Gate2 %dns",(int)Gate2),"l");
-  Leg6->AddEntry(Hist1[79],Form("Cut4 Gate3 %dns",(int)Gate3),"l");
-  Leg6->Draw();
+  Leg7->AddEntry(Hist1[80],"Cut4   ","l");
+  Leg7->AddEntry(Hist1[77],Form("Cut4 Gate1 %dns",(int)Gate1),"l");
+  Leg7->AddEntry(Hist1[78],Form("Cut4 Gate2 %dns",(int)Gate2),"l");
+  Leg7->AddEntry(Hist1[79],Form("Cut4 Gate3 %dns",(int)Gate3),"l");
+  Leg7->Draw();
   c1->Print(pdf);
 
 
