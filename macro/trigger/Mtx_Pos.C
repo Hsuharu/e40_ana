@@ -622,8 +622,8 @@ void Mtx_Pos(int month,int runnum){
         double TOF_Max_y1;
         double TOF_Max_y2;
 
-        x1 =  (double)SCH_Seg.at(i);
-        x2 =  (double)(SCH_Seg.at(i)+1);
+        x1 =  (double)SCH_Seg.at(i)-1;
+        x2 =  (double)(SCH_Seg.at(i));
 
         TOF_Min_y1 = 1. + (double)TOF_Min.at(i)-1;
         TOF_Min_y2 = 1. + (double)TOF_Min.at(i)-1;
@@ -640,8 +640,6 @@ void Mtx_Pos(int month,int runnum){
         MtxGateMax->SetLineWidth(1);
         MtxGateMin->Draw("same");
         MtxGateMax->Draw("same");
-        if(i==0 || i==SCH_Seg.size()-1){
-
       }
 
       c1->Print(pdf);

@@ -128,5 +128,18 @@ void Matrix_Pattern_Out( int month){
     MtxGateMin->Draw("same");
     MtxGateMax->Draw("same");
   }
+  if(i==0 || i==SCH_Seg.size()-1){
+    TLine *MtxGateMin_Y = new TLine(x1,TOF_Min_y1,x1,TOF_Max_y1);
+    MtxGateMin_Y->Draw("same");
+  }else{
+    if(){
+      TLine *MtxGateMin_Y1 = new TLine(x1,TOF_Min_y1,x1,TOF_Max_y1);
+      MtxGateMin_Y1->Draw("same");
+    }
+    if(){
+      TLine *MtxGateMin_Y1 = new TLine(x1,TOF_Min_y1,x1,TOF_Max_y1);
+      MtxGateMin_Y2->Draw("same");
+    }
+  }
 }
 
