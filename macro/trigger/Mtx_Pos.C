@@ -456,20 +456,20 @@ void Mtx_Pos(int month,int runnum){
     Hist1[3 ]->Fill(qKurama[i]);
     Hist1[4 ]->Fill(vpx[1]);
     Hist1[5 ]->Fill(vpy[1]);
-    Hist1[6 ]->Fill(vpseg[1]-1);
-    Hist1[21]->Fill(TofSeg[i]-1);
+    Hist1[6 ]->Fill(vpseg[1]);
+    Hist1[21]->Fill(TofSeg[i]);
     Hist1[26]->Fill(tofsegKurama[i]-1);
 
     Hist2[0 ]->Fill(m2[i],pKurama[i]);
     Hist2[1 ]->Fill(vpx[1],vpy[1]);
-    Hist2[6 ]->Fill(vpseg[1]-1,TofSeg[i]-1);
-    Hist2[10]->Fill(vpseg[1]-1,tofsegKurama[i]-1);
+    Hist2[6 ]->Fill(vpseg[1],TofSeg[i]-1);
+    Hist2[10]->Fill(vpseg[1],tofsegKurama[i]-1);
     if(sch_flag){
-      Hist1[29]->Fill(vpseg[1]-1);
+      Hist1[29]->Fill(vpseg[1]);
       Hist1[30]->Fill(TofSeg[i]-1);
       Hist1[31]->Fill(tofsegKurama[i]-1);
-      Hist2[13]->Fill(vpseg[1]-1,TofSeg[i]-1);
-      Hist2[14]->Fill(vpseg[1]-1,tofsegKurama[i]-1);
+      Hist2[13]->Fill(vpseg[1],TofSeg[i]-1);
+      Hist2[14]->Fill(vpseg[1],tofsegKurama[i]-1);
 
       if(chisqrKurama[i]<chisqr&&qKurama[i]>0){
         Hist1[7 ]->Fill(pKurama[i]);
@@ -478,14 +478,14 @@ void Mtx_Pos(int month,int runnum){
         Hist1[10]->Fill(qKurama[i]);
         Hist1[11]->Fill(vpx[1]);
         Hist1[12]->Fill(vpy[1]);
-        Hist1[13]->Fill(vpseg[1]-1);
+        Hist1[13]->Fill(vpseg[1]);
         Hist1[22]->Fill(TofSeg[i]-1);
         Hist1[27]->Fill(tofsegKurama[i]-1);
 
         Hist2[2 ]->Fill(m2[i],pKurama[i]);
         Hist2[3 ]->Fill(vpx[1],vpy[1]);
-        Hist2[7 ]->Fill(vpseg[1]-1,TofSeg[i]-1);
-        Hist2[11]->Fill(vpseg[1]-1,tofsegKurama[i]-1);
+        Hist2[7 ]->Fill(vpseg[1],TofSeg[i]-1);
+        Hist2[11]->Fill(vpseg[1],tofsegKurama[i]-1);
 
         if(m2[i]<0.15)continue;
         if(m2[i]>0.35)continue;  //Cut2
@@ -495,14 +495,14 @@ void Mtx_Pos(int month,int runnum){
         Hist1[17]->Fill(qKurama[i]);
         Hist1[18]->Fill(vpx[1]);
         Hist1[19]->Fill(vpy[1]);
-        Hist1[20]->Fill(vpseg[1]-1);
-        Hist1[23]->Fill(TofSeg[i]-1);
+        Hist1[20]->Fill(vpseg[1]);
+        Hist1[23]->Fill(TofSeg[i]);
         Hist1[28]->Fill(tofsegKurama[i]-1);
 
         Hist2[4 ]->Fill(m2[i],pKurama[i]);
         Hist2[5 ]->Fill(vpx[1],vpy[1]);
-        Hist2[8 ]->Fill(vpseg[1]-1,TofSeg[i]-1);
-        Hist2[12]->Fill(vpseg[1]-1,tofsegKurama[i]-1);
+        Hist2[8 ]->Fill(vpseg[1],TofSeg[i]-1);
+        Hist2[12]->Fill(vpseg[1],tofsegKurama[i]-1);
 
       } // Cut1
     }
