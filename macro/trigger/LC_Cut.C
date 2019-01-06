@@ -428,7 +428,7 @@ void LC_Cut(int month, int runnum){
         }
         if(LCGate3Flag){ 
           Hist1[76]->Fill(m2[nhTof*i+j]);
-          if(pKurama[i]>0.5&&pKurama[i]<0.9&&chisqrKurama[i]<50){
+          if(pKurama[i]>0.7&&pKurama[i]<0.9&&chisqrKurama[i]<50){
             Hist1[79]->Fill(m2[nhTof*i+j]);
           }
         }
