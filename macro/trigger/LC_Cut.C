@@ -403,9 +403,9 @@ void LC_Cut(int month, int runnum){
 
     for(int i=0; i<m2Combi; i++){
       Hist1[58]->Fill(m2[i]);
-      if(LCGate1Flag==true){ Hist1[59]->Fill(m2[i]);}
-      if(LCGate2Flag==true){ Hist1[66]->Fill(m2[i]);}
-      if(LCGate3Flag==true){ Hist1[67]->Fill(m2[i]);}
+      if(LCGate1Flag){ Hist1[59]->Fill(m2[i]);}
+      if(LCGate2Flag){ Hist1[66]->Fill(m2[i]);}
+      if(LCGate3Flag){ Hist1[67]->Fill(m2[i]);}
     }
     
     for(int i=0; i<ntKurama; i++){
@@ -437,9 +437,9 @@ void LC_Cut(int month, int runnum){
       
     for(int i=0; i<ntKurama; i++){
       Hist1[60]->Fill(pKurama[i]);
-      if(LCGate1Flag==true){ Hist1[61]->Fill(pKurama[i]);}
-      if(LCGate2Flag==true){ Hist1[68]->Fill(pKurama[i]);}
-      if(LCGate3Flag==true){ Hist1[69]->Fill(pKurama[i]);}
+      if(LCGate1Flag){ Hist1[61]->Fill(pKurama[i]);}
+      if(LCGate2Flag){ Hist1[68]->Fill(pKurama[i]);}
+      if(LCGate3Flag){ Hist1[69]->Fill(pKurama[i]);}
     }
 
     if(ntKurama==1){
@@ -447,19 +447,19 @@ void LC_Cut(int month, int runnum){
       Hist1[63]->Fill(pKurama[0]);
       Hist2[0]->Fill(m2[0],pKurama[0]);
 
-      if(LCGate1Flag == true){
+      if(LCGate1Flag){
         Hist1[64]->Fill(m2[0]);
         Hist1[65]->Fill(pKurama[0]);
         Hist2[1]->Fill(m2[0],pKurama[0]);
       }
 
-      if(LCGate2Flag == true){
+      if(LCGate2Flag){
         Hist1[70]->Fill(m2[0]);
         Hist1[71]->Fill(pKurama[0]);
         Hist2[2]->Fill(m2[0],pKurama[0]);
       }
 
-      if(LCGate3Flag == true){
+      if(LCGate3Flag){
         Hist1[72]->Fill(m2[0]);
         Hist1[73]->Fill(pKurama[0]);
         Hist2[3]->Fill(m2[0],pKurama[0]);
