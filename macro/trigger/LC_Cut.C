@@ -409,7 +409,7 @@ void LC_Cut(int month, int runnum){
     }
     for(int i=0; i<ntKurama; i++){
       for(int j=0; j<nhTof; j++){
-        if(LCGate1Flag==true ||LCGate2Flag==true ||  LCGate3Flag==true ){ 
+        if(LCGate1Flag==true || LCGate2Flag==true ||  LCGate3Flag==true ){ 
           if(pKurama[i]>0.7&&pKurama[i]<0.9&&chisqrKurama[i]<50){
             Hist1[80]->Fill(m2[nhTof*i+j]);
           }
