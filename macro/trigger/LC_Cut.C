@@ -251,7 +251,7 @@ void LC_Cut(int month, int runnum){
 
   double lcmttdcpeak[NumOfSegLC]; 
 
-  double Gate1 = 10.;
+  double Gate1 = 0.;
   double Gate2 = 15.;
   double Gate3 = 20.;
   double NegGate1 = -10.;
