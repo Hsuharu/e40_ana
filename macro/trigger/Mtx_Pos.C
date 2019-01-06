@@ -581,18 +581,16 @@ void Mtx_Pos(int month,int runnum){
   for(int i=0; i<Mtx_prm.size(); i++){
     //        std::cout << "SCH=" << Mtx_prm.at(i).at(0)  << "\t" << "TOF="  <<  Mtx_prm.at(i).at(1)  << "\t"  << "SFT_Min=" << Mtx_prm.at(i).at(2)  << "\t"  << "SFT_Max=" << Mtx_prm.at(i).at(3)  << std::endl;
     if(i==0){
-      preSCH = Mtx_prm.at(i).at(0);
       SCH_Seg.push_back( Mtx_prm.at(i).at(0) );
       TOF_Min.push_back( Mtx_prm.at(i).at(1) );
     }else{
       if(i==Mtx_prm.size()-1){
-        TOF_Max.push_back( Mtx_prm.at(i-1).at(1) );
-      }else if(Mtx_prm.at(i).at(0)-preSCH!=0){
+        TOF_Max.push_back( Mtx_prm.at(i).at(1) );
+      }else if(Mtx_prm.at(i).at(0)!=Mtx_prm.at(i-1).at(0)){
         SCH_Seg.push_back( Mtx_prm.at(i).at(0) );
         TOF_Max.push_back( Mtx_prm.at(i-1).at(1) );
         TOF_Min.push_back( Mtx_prm.at(i).at(1) );
       }
-      preSCH = Mtx_prm.at(i).at(0);
     }
   }
 
@@ -612,6 +610,35 @@ void Mtx_Pos(int month,int runnum){
     if( (6<i && i<8) || (10<i && i<14) ){
       Hist2[i]->Draw("box");
 
+//      for(int i=0; i<SCH_Seg.size(); i++){
+//        double x1;
+//        double x2;
+//
+//        double TOF_Min_y1;
+//        double TOF_Min_y2;
+//
+//        double TOF_Max_y1;
+//        double TOF_Max_y2;
+//
+//        x1 =  (double)SCH_Seg.at(i);
+//        x2 =  (double)(SCH_Seg.at(i)+1);
+//
+//        TOF_Min_y1 = (double)TOF_Min.at(i);
+//        TOF_Min_y2 = (double)TOF_Min.at(i);
+//
+//        TOF_Max_y1 = 1. + (double)TOF_Max.at(i);
+//        TOF_Max_y2 = 1. + (double)TOF_Max.at(i);
+//
+//        TLine *MtxGateMin = new TLine(x1,TOF_Min_y1,x2,TOF_Min_y2);
+//        TLine *MtxGateMax = new TLine(x1,TOF_Max_y1,x2,TOF_Max_y2);
+//
+//        MtxGateMin->SetLineColor(2);
+//        MtxGateMax->SetLineColor(2);
+//        MtxGateMin->SetLineWidth(1);
+//        MtxGateMax->SetLineWidth(1);
+//        MtxGateMin->Draw("same");
+//        MtxGateMax->Draw("same");
+//      }
       for(int i=0; i<SCH_Seg.size(); i++){
         double x1;
         double x2;
@@ -622,14 +649,14 @@ void Mtx_Pos(int month,int runnum){
         double TOF_Max_y1;
         double TOF_Max_y2;
 
-        x1 =  (double)SCH_Seg.at(i)-1;
-        x2 =  (double)(SCH_Seg.at(i));
+        x1 =  (double)SCH_Seg.at(i);
+        x2 =  (double)(SCH_Seg.at(i)+1);
 
-        TOF_Min_y1 = 1. + (double)TOF_Min.at(i)-1;
-        TOF_Min_y2 = 1. + (double)TOF_Min.at(i)-1;
+        TOF_Min_y1 =(double)TOF_Min.at(i);
+        TOF_Min_y2 =(double)TOF_Min.at(i);
 
-        TOF_Max_y1 = 1. + (double)TOF_Max.at(i);
-        TOF_Max_y2 = 1. + (double)TOF_Max.at(i);
+        TOF_Max_y1 =  (double)TOF_Max.at(i)+1;
+        TOF_Max_y2 =  (double)TOF_Max.at(i)+1;
 
         TLine *MtxGateMin = new TLine(x1,TOF_Min_y1,x2,TOF_Min_y2);
         TLine *MtxGateMax = new TLine(x1,TOF_Max_y1,x2,TOF_Max_y2);
@@ -640,6 +667,30 @@ void Mtx_Pos(int month,int runnum){
         MtxGateMax->SetLineWidth(1);
         MtxGateMin->Draw("same");
         MtxGateMax->Draw("same");
+        if(i==0){
+          TLine *MtxGateMin_Y = new TLine(x1,TOF_Min_y1,x1,TOF_Max_y1);
+          MtxGateMin_Y->SetLineColor(2);
+          MtxGateMin_Y->SetLineWidth(1);
+          MtxGateMin_Y->Draw("same");
+        }else if(i==SCH_Seg.size()-1){
+          TLine *MtxGateMin_Y = new TLine(x2,TOF_Min_y1,x2,TOF_Max_y1);
+          MtxGateMin_Y->SetLineColor(2);
+          MtxGateMin_Y->SetLineWidth(1);
+          MtxGateMin_Y->Draw("same");
+        }else{
+          if(TOF_Min.at(i)-TOF_Min.at(i-1)!=0){
+            TLine *MtxGate_Y1 = new TLine(x1,(double)TOF_Min.at(i-1),x1,TOF_Min_y1);
+            MtxGate_Y1->SetLineColor(2);
+            MtxGate_Y1->SetLineWidth(1);
+            MtxGate_Y1->Draw("same");
+          }
+          if(TOF_Max.at(i)-TOF_Max.at(i-1)!=0){
+            TLine *MtxGate_Y2 = new TLine(x1,(double)TOF_Max.at(i-1)+1,x1,TOF_Max_y1);
+            MtxGate_Y2->SetLineColor(2);
+            MtxGate_Y2->SetLineWidth(1);
+            MtxGate_Y2->Draw("same");
+          }
+        }
       }
 
       c1->Print(pdf);
