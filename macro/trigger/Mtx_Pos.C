@@ -458,7 +458,6 @@ void Mtx_Pos(int month,int runnum){
        Hist1[31]->Fill(tofsegKurama[i]);
        Hist2[13]->Fill(vpseg[1],TofSeg[i]);
        Hist2[14]->Fill(vpseg[1],tofsegKurama[i]);
-     }
 
      if(chisqrKurama[i]<chisqr&&qKurama[i]>0){
        Hist1[7 ]->Fill(pKurama[i]);
@@ -494,6 +493,8 @@ void Mtx_Pos(int month,int runnum){
        Hist2[12]->Fill(vpseg[1],tofsegKurama[i]);
 
      } // Cut1
+     }
+
    } 
 
 // Peak & Gate Make -----
