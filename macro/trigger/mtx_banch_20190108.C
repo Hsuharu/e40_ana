@@ -86,6 +86,7 @@ void mtx_banch(int month, int runnum){
   //   TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("rootfile/run05126_DstKuramaEasirocHodoscope.root");
   TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
   TString pdf = Form("%s/pdf/trigger/mtx_banch_run%05d.pdf", anadir.Data(),runnum);
+  TString pdf_All = Form("%s/pdf/trigger/mtx_banch_All_run%05d.pdf", anadir.Data(),runnum);
   TString pdfDhire = Form("%s/pdf/trigger", anadir.Data());
   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_Matrix.root", anadir.Data(),Month[month], runnum),"READ");
   TTree *mtx;
@@ -407,8 +408,6 @@ void mtx_banch(int month, int runnum){
         Hist1[34]->Fill(j);
         Hist1[35]->Fill(tofmt[i][j]);
         Hist1_All[0]->Fill(tofmt[i][j]);
-      
-        
         if(tofnhits!=1)         continue;    
         if(tofmt[i][1]!=-999)   continue; //Cut1
         Hist1[36]->Fill(tofmt[i][0]);

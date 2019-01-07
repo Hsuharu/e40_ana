@@ -68,7 +68,7 @@ const char* TriggerFlag[]=
   "TofTiming "
 };
 //
-void mtx_banch(int month, int runnum){
+void Mtx_Banch(int month, int runnum){
   //////////////////////////////////////////////////////////
   //   This file has been automatically generated 
   //     (Wed Nov 28 17:12:44 2018 by ROOT version6.10/08)
@@ -309,26 +309,13 @@ void mtx_banch(int month, int runnum){
   Hist1[33] = new TH1D("TofMtOr Hitpat","TofMtOr Hitpat",25,0,24);
   Hist1[34] = new TH1D("TofMtOr DepthPat","TofMtOrDepthPat",20,0,20);
   Hist1[35] = new TH1D("TofMtOr","TofMtOr",100,-10,90);
-  Hist1[36] = new TH1D("TofMtOr Cut1","TofMtOrCut1",100,-10,90);
-  Hist1[50] = new TH1D("TofMtOr Hitpat Cut1","TofMtOr Hitpat Cut1",25,0,24);
-  Hist1[67] = new TH1D("TofMtOr Hitpat Cut5","TofMtOr Hitpat Cut5",25,0,24);
-  Hist1[68] = new TH1D("TofMtOr Cut5","TofMtOr Cut5",200,-100,100);
-  Hist1[69] = new TH1D("TofMtOr Hitpat Cut6","TofMtOr Hitpat Cut6",25,0,24);
-  Hist1[70] = new TH1D("TofMtOr Cut6","TofMtOr Cut6",200,-100,100);
 
   //-Sch ----------------
-  Hist1[37]= new TH1D("Sch Nhits" ,"Sch Nhits" ,20,0,20);
-  Hist1[38]= new TH1D("Sch Hitpat","Sch Hitpat",65,0,65);
-  Hist1[39]= new TH1D("Sch Depthpat","Sch Depthpat",65,0,65);
-  Hist1[40]= new TH1D("Sch Tdc"   ,"Sch Tdc"   ,100,0,1000);
-  Hist1[51]= new TH1D("Sch Hitpat Cut2","Sch Hitpat Cut2",65,0,65);
-  Hist1[52]= new TH1D("Sch Tdc Cut2"   ,"Sch Tdc Cut2"   ,100,0,1000);
-  Hist1[59]= new TH1D("Sch Time"   ,"Sch Time"   ,100,-100,100);
-  Hist1[60]= new TH1D("Sch Time Cut2"   ,"Sch Time Cut2"   ,100,-100,100);
-  Hist1[71]= new TH1D("Sch Hitpat Cut5","Sch Hitpat Cut5",65,0,65);
-  Hist1[72]= new TH1D("Sch Time Cut5"   ,"Sch Time Cut5"   ,100,-100,100);
-  Hist1[73]= new TH1D("Sch Hitpat Cut6","Sch Hitpat Cut6",65,0,65);
-  Hist1[74]= new TH1D("Sch Time Cut6"   ,"Sch Time Cut6"   ,100,-100,100);
+  Hist1[36]= new TH1D("Sch Nhits" ,"Sch Nhits" ,20,0,20);
+  Hist1[37]= new TH1D("Sch Hitpat","Sch Hitpat",65,0,65);
+  Hist1[38]= new TH1D("Sch Depthpat","Sch Depthpat",65,0,65);
+  Hist1[39]= new TH1D("Sch Tdc"   ,"Sch Tdc"   ,100,0,1000);
+  Hist1[40]= new TH1D("Sch Time"   ,"Sch Time"   ,100,-100,100);
 
   //-SftX ----------------
   Hist1[41] = new TH1D("SftX U Nhits","SftX U Nhits",50,0,50);
@@ -340,42 +327,9 @@ void mtx_banch(int month, int runnum){
   Hist1[47] = new TH1D("SftX U Tdc","SftX U Tdc",1000,0,1000);
   Hist1[48] = new TH1D("SftX D Tdc","SftX D Tdc",1000,0,1000);
   Hist1[49] = new TH1D("SftXTdc","SftXTdc",1000,0,1000);
-  Hist1[53] = new TH1D("SftX U Hitpat Cut3","SftX U Hitpat Cut3",256,0,256);
-  Hist1[55] = new TH1D("SftXHitpat Cut3 or Cut4","SftXHitpat Cut3 or Cut4",256,0,256);
-  Hist1[56] = new TH1D("SftX U Tdc Cut3","SftX U Tdc Cut3",1000,0,1000);
-  Hist1[61] = new TH1D("SftX U Time","SftX U Time",200,-100,100);
-  Hist1[62] = new TH1D("SftX D Time","SftX D Time",200,-100,100);
-  Hist1[64] = new TH1D("SftX U Time Cut3","SftX U Time Cut3",200,-100,100);
-  Hist1[58] = new TH1D("SftXTdc Cut3","SftXTdc Cut3",1000,0,1000);
-  Hist1[54] = new TH1D("SftX D Hitpat Cut4","SftX D Hitpat Cut4",256,0,256);
-  Hist1[57] = new TH1D("SftX D Tdc Cut4","SftX D Tdc Cut4",1000,0,1000);
-  Hist1[65] = new TH1D("SftX D Time Cut4","SftX D Time Cut4",200,-100,100);
-  Hist1[63] = new TH1D("SftXTime","SftXTime",200,-100,100);
-  Hist1[66] = new TH1D("SftXTime Cut3 or Cut4","SftXTime Cut3 or Cut4",200,-100,100);
-  Hist1[75] = new TH1D("SftX U Hitpat Cut5","SftX U Hitpat Cut5",256,0,256);
-  Hist1[76] = new TH1D("SftX U Time Cut5","SftX U Time Cut5",200,-100,100);
-  Hist1[77] = new TH1D("SftX D Hitpat Cut6","SftX D Hitpat Cut6",256,0,256);
-  Hist1[78] = new TH1D("SftX D Time Cut6","SftX D Time Cut6",200,-100,100);
-  Hist1[79] = new TH1D("SftXHitpat Cut5 or Cut6","SftXHitpat Cut5 or Cut6",256,0,256);
-  Hist1[80] = new TH1D("SftXTime Cut5 or Cut6","SftXTime Cut5 or Cut6",200,-100,100);
-
-
-  Hist2[0]= new TH2D("TofMtOr Time % Sch Time Cut5","TofMtOr Time % Sch Time Cut5",200,-100,100,200,-100,100);
-  Hist2[1]= new TH2D("TofMtOr Time % Sch Time Cut6","TofMtOr Time % Sch Time Cut6",200,-100,100,200,-100,100);
-  Hist2[2]= new TH2D("SftX U Time % Sch Time Cut5","SftX U Time % Sch Time Cut5",200,-100,100,200,-100,100);
-  Hist2[3]= new TH2D("SftX D Time % Sch Time Cut6","SftX D Time % Sch Time Cut6",200,-100,100,200,-100,100);
-  Hist2[4]= new TH2D("TofMtOr Time % Sch Time Cut7","TofMtOr Time % Sch Time Cut7",200,-100,100,200,-100,100);
-  Hist2[5]= new TH2D("SftX U Time % Sch Time Cut7","SftX U Time % Sch Time Cut7",200,-100,100,200,-100,100);
-  Hist2[6]= new TH2D("TofMtOr Time % Sch Time Cut8","TofMtOr Time % Sch Time Cut8",200,-100,100,200,-100,100);
-  Hist2[7]= new TH2D("SftX U Time % Sch Time Cut8","SftX U Time % Sch Time Cut8",200,-100,100,200,-100,100);
-  Hist2[8]= new TH2D("TofMtOr Time % Sch Time Cut9","TofMtOr Time % Sch Time Cut9",200,-100,100,200,-100,100);
-  Hist2[9]= new TH2D("SftX U Time % Sch Time Cut9","SftX U Time % Sch Time Cut9",200,-100,100,200,-100,100);
-  Hist2[10]= new TH2D("TofMtOr Time % Sch Time Cut10","TofMtOr Time % Sch Time Cut10",200,-100,100,200,-100,100);
-  Hist2[11]= new TH2D("SftX U Time % Sch Time Cut10","SftX U Time % Sch Time Cut10",200,-100,100,200,-100,100);
-
-  Hist1_All[0]= new TH1D("TofMtOr Time All","TofMtOr Time All",100,-100,100);
-  Hist1_All[1]= new TH1D("Sch Time All","Sch Time All",100,-100,100);
-  Hist1_All[2]= new TH1D("SftX Time All","SftX Time All",100,-100,100);
+  Hist1[50] = new TH1D("SftX U Time","SftX U Time",200,-100,100);
+  Hist1[51] = new TH1D("SftX D Time","SftX D Time",200,-100,100);
+  Hist1[52] = new TH1D("SftXTime","SftXTime",200,-100,100);
 
 //-Legend def --------------------------------------------------------------------------------------
 //  TLegend *Leg1 = new TLegend(0.1,0.7,0.48,0.9);
@@ -406,34 +360,21 @@ void mtx_banch(int month, int runnum){
         Hist1[33]->Fill(i);
         Hist1[34]->Fill(j);
         Hist1[35]->Fill(tofmt[i][j]);
-        Hist1_All[0]->Fill(tofmt[i][j]);
-      
-        
-        if(tofnhits!=1)         continue;    
-        if(tofmt[i][1]!=-999)   continue; //Cut1
-        Hist1[36]->Fill(tofmt[i][0]);
-        Hist1[50]->Fill(i);
       }
     }
 
     // Sch --------------------------------
-    Hist1[37]->Fill(sch_nhits);
+    Hist1[36]->Fill(sch_nhits);
     for(int i=0; i<sch_nhits; i++){
-      Hist1[38]->Fill(sch_hitpat[i]);
+      Hist1[37]->Fill(sch_hitpat[i]);
     }
     for(int i=0; i<NumOfSegSCH; i++){
-      Hist1[39]->Fill(sch_depth[i]);
+      Hist1[38]->Fill(sch_depth[i]);
       for(int k=0; k<16; k++){
         if(sch_tdc[i][k]==-999) continue;
-        Hist1[40]->Fill(sch_tdc[i][k]);
-        Hist1[59]->Fill(sch_time[i][k]);
-        Hist1_All[1]->Fill(sch_time[i][k]);
-        if(sch_nhits!=1) continue;
-        if(sch_depth[i]!=1) continue;
-        if(sch_hitpat[0]!=i) continue; //Cut2
-        Hist1[51]->Fill(i);
-        Hist1[52]->Fill(sch_tdc[i][k]);
-        Hist1[60]->Fill(sch_time[i][k]);
+        if(sch_time[i][k]==-999) continue;
+        Hist1[39]->Fill(sch_tdc[i][k]);
+        Hist1[40]->Fill(sch_time[i][k]);
       }
     }
 
@@ -455,118 +396,14 @@ void mtx_banch(int month, int runnum){
         if(sftx_utdc[i][j]!=-999){
           Hist1[47]->Fill(sftx_utdc[i][j]);
           Hist1[49]->Fill(sftx_utdc[i][j]);
-          Hist1[61]->Fill(sftx_utime[i][j]);
-          Hist1[63]->Fill(sftx_utime[i][j]);
-          Hist1_All[2]->Fill(sftx_utime[i][j]);
+          Hist1[50]->Fill(sftx_utime[i][j]);
+          Hist1[52]->Fill(sftx_utime[i][j]);
         }
         if(sftx_dtdc[i][j]!=-999){
           Hist1[48]->Fill(sftx_dtdc[i][j]);
           Hist1[49]->Fill(sftx_dtdc[i][j]);
-          Hist1[62]->Fill(sftx_dtime[i][j]);
-          Hist1[63]->Fill(sftx_dtime[i][j]);
-          Hist1_All[2]->Fill(sftx_dtime[i][j]);
-        }
-        if(sftx_unhits==1){ //Cut3
-          if(sftx_udepth[i]!=1) continue;
-          if(sftx_uhitpat[0]==i){
-            Hist1[53]->Fill(i);
-            Hist1[55]->Fill(i);
-            Hist1[56]->Fill(sftx_utdc[i][j]);
-            Hist1[58]->Fill(sftx_utdc[i][j]);
-            Hist1[64]->Fill(sftx_utime[i][j]);
-            Hist1[66]->Fill(sftx_utime[i][j]);
-          }
-        }
-        if(sftx_dnhits==1){ //Cut4
-          if(sftx_ddepth[i]!=1) continue;
-          if(sftx_dhitpat[0]==i){
-            Hist1[54]->Fill(i);
-            Hist1[55]->Fill(i);
-            Hist1[57]->Fill(sftx_dtdc[i][j]);
-            Hist1[58]->Fill(sftx_dtdc[i][j]);
-            Hist1[65]->Fill(sftx_dtime[i][j]);
-            Hist1[66]->Fill(sftx_dtime[i][j]);
-          }
-        }
-      }
-    }
-
-    // All Mtx Detector -------------------
-    // TofMtOr --------------------
-    for(int i=0; i<NumOfSegTOF; i++){
-      for(int j=0; j<16; j++){
-        if(tofmt[i][j]==-999)   continue;
-        if(tofnhits!=1)         continue;    
-        if(tofmt[i][1]!=-999)   continue;
-        // Sch ------------------------
-        for(int k=0; k<NumOfSegSCH; k++){
-          for(int l=0; l<16; l++){
-            if(sch_tdc[k][l]==-999) continue;
-            if(sch_nhits!=1) continue;
-            if(sch_depth[k]!=1) continue;
-            if(sch_hitpat[0]!=k) continue;
-            // Sft X ----------------------
-            for(int m=0; m<NumOfSegSFT_X; m++){
-              if(sftx_unhits==1){
-                if(sftx_udepth[m]!=1) continue;
-                if(sftx_uhitpat[0]==m){
-                  Hist1[67]->Fill(i);
-                  Hist1[68]->Fill(tofmt[i][0]);
-                  Hist1[71]->Fill(k);
-                  Hist1[72]->Fill(sch_time[k][0]);
-                  Hist1[75]->Fill(m);
-                  Hist1[79]->Fill(m);
-                  Hist1[76]->Fill(sftx_utime[m][0]);
-                  Hist1[80]->Fill(sftx_utime[m][0]);
-                  Hist2[0]->Fill(sch_time[k][0],tofmt[i][0]);
-                  Hist2[2]->Fill(sch_time[k][0],sftx_utime[m][0]);
-                  if(    -Gate1+10<tofmt[i][0]  &&tofmt[i][0] <Gate1+10 
-                      && -Gate1<sch_time[k][0]  &&sch_time[k][0]  <Gate1
-                      && -Gate1<sftx_utime[m][0]&&sftx_utime[m][0]<Gate1
-                    ){ //Cut7
-                  Hist2[4]->Fill(sch_time[k][0],tofmt[i][0]);
-                  Hist2[5]->Fill(sch_time[k][0],sftx_utime[m][0]);
-                  }
-                  if(    -Gate2+10<tofmt[i][0]  &&tofmt[i][0]  <Gate2+10
-                      && -Gate2<sch_time[k][0]  &&sch_time[k][0]  <Gate2
-                      && -Gate2<sftx_utime[m][0]&&sftx_utime[m][0]<Gate2
-                    ){ //Cut8
-                  Hist2[6]->Fill(sch_time[k][0],tofmt[i][0]);
-                  Hist2[7]->Fill(sch_time[k][0],sftx_utime[m][0]);
-                  }
-                  if(    -Gate3+10<tofmt[i][0]  &&tofmt[i][0]  <Gate3+10
-                      && -Gate3<sch_time[k][0]  &&sch_time[k][0]  <Gate3
-                      && -Gate3<sftx_utime[m][0]&&sftx_utime[m][0]<Gate3
-                    ){ //Cut9
-                  Hist2[8]->Fill(sch_time[k][0],tofmt[i][0]);
-                  Hist2[9]->Fill(sch_time[k][0],sftx_utime[m][0]);
-                  }
-                  if(    -Gate4+10<tofmt[i][0]  &&tofmt[i][0]  <Gate4+10
-                      && -Gate4<sch_time[k][0]  &&sch_time[k][0]  <Gate4
-                      && -Gate4<sftx_utime[m][0]&&sftx_utime[m][0]<Gate4
-                    ){ //Cut9
-                  Hist2[10]->Fill(sch_time[k][0],tofmt[i][0]);
-                  Hist2[11]->Fill(sch_time[k][0],sftx_utime[m][0]);
-                  }
-                }
-              }
-              if(sftx_dnhits==1){
-                if(sftx_ddepth[m]!=1) continue;
-                if(sftx_dhitpat[0]==m){
-                  Hist1[69]->Fill(i);
-                  Hist1[70]->Fill(tofmt[i][0]);
-                  Hist1[73]->Fill(k);
-                  Hist1[74]->Fill(sch_time[k][0]);
-                  Hist1[77]->Fill(m);
-                  Hist1[79]->Fill(m);
-                  Hist1[78]->Fill(sftx_dtime[m][0]);
-                  Hist1[80]->Fill(sftx_dtime[m][0]);
-                  Hist2[1]->Fill(sch_time[k][0],tofmt[i][0]);
-                  Hist2[3]->Fill(sch_time[k][0],sftx_dtime[m][0]);
-                }
-              }
-            }
-          }
+          Hist1[51]->Fill(sftx_dtime[i][j]);
+          Hist1[52]->Fill(sftx_dtime[i][j]);
         }
       }
     }
