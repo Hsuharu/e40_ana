@@ -84,6 +84,60 @@ void Mtx_Banch(int month, int runnum){
   //   found on file: rootfile/run05126_DstKuramaEasirocHodoscope.root
   //////////////////////////////////////////////////////////
 
+  //Matrix Patern txt file PATH -----------------------------------------------------------------------
+  //  TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
+  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
+
+  std::ifstream fin1(filein1);
+
+  // Param Vector Dif ----------------------------------------------------------------------
+  std::vector<std::vector<int>> Mtx_prm; 
+  std::string line;
+  int preSCH=0;
+  std::vector<std::vector<int>> sch_tof; 
+  std::vector<int> SCH_Seg; 
+  std::vector<int> TOF_Min; 
+  std::vector<int> TOF_Max; 
+
+
+  // Error Out ----------------------------------------------------------------------------------------
+  if(fin1.fail() ){
+    std::cerr << "file1" << std::endl;
+    exit(0); 
+  }  
+
+  while(std::getline(fin1, line)){
+    double sch=-1, tof=-1, sft_min=-1, sft_max=-1;
+    std::istringstream input_line( line );
+    std::vector<int> inner;
+    if( input_line >> sch >> tof >> sft_min >> sft_max ){
+      inner.push_back(sch);
+      inner.push_back(tof);
+      inner.push_back(sft_min-11);
+      inner.push_back(sft_max-1);
+      Mtx_prm.push_back(inner);
+    }
+  }
+
+  for(int i=0; i<Mtx_prm.size(); i++){
+    if(i==0){
+      SCH_Seg.push_back( Mtx_prm.at(i).at(0) );
+      TOF_Min.push_back( Mtx_prm.at(i).at(1) );
+    }else{
+      if(i==Mtx_prm.size()-1){
+        TOF_Max.push_back( Mtx_prm.at(i).at(1) );
+      }else if(Mtx_prm.at(i).at(0)!=Mtx_prm.at(i-1).at(0)){
+        SCH_Seg.push_back( Mtx_prm.at(i).at(0) );
+        TOF_Max.push_back( Mtx_prm.at(i-1).at(1) );
+        TOF_Min.push_back( Mtx_prm.at(i).at(1) );
+      }
+    }
+  }
+
+  if( !eq3(SCH_Seg.size(),TOF_Min.size(),TOF_Max.size()) ){
+    std::cerr << "Size Not Same" << std::endl;
+  }
+
 
   gStyle->SetOptStat(1111110); 
   gStyle->SetOptFit(1); 
@@ -298,6 +352,8 @@ void Mtx_Banch(int month, int runnum){
   int Hist1Max = 0;
   int Hist2Max = 0;
 
+  bool Gate1[3] = {false,false,false};
+
   //-hist def-----------------------------------------------------------------------------------------
   Hist1Max = 65;
   Hist2Max = 1;
@@ -313,10 +369,10 @@ void Mtx_Banch(int month, int runnum){
   Hist1[33] = new TH1D("TofMtOr Hitpat","TofMtOr Hitpat",25,0,24);
   Hist1[34] = new TH1D("TofMtOr DepthPat","TofMtOrDepthPat",20,0,20);
   Hist1[35] = new TH1D("TofMtOr","TofMtOr",100,-10,90);
-  Hist1[53] = new TH1D("TofMtOr Gate1","TofMtOr Gate1",100,-10,90);
-  Hist1[54] = new TH1D("TofMtOr Gate2","TofMtOr Gate2",100,-10,90);
-  Hist1[55] = new TH1D("TofMtOr Gate3","TofMtOr Gate3",100,-10,90);
-  Hist1[56] = new TH1D("TofMtOr Gate4","TofMtOr Gate4",100,-10,90);
+  Hist1[53] = new TH1D("TofMtOr Gate1","TofMtOr Gate1",180,-90,90);
+  Hist1[54] = new TH1D("TofMtOr Gate2","TofMtOr Gate2",180,-90,90);
+  Hist1[55] = new TH1D("TofMtOr Gate3","TofMtOr Gate3",180,-90,90);
+  Hist1[56] = new TH1D("TofMtOr Gate4","TofMtOr Gate4",180,-90,90);
 
   //-Sch ----------------
   Hist1[36]= new TH1D("Sch Nhits" ,"Sch Nhits" ,20,0,20);
@@ -324,10 +380,10 @@ void Mtx_Banch(int month, int runnum){
   Hist1[38]= new TH1D("Sch Depthpat","Sch Depthpat",65,0,65);
   Hist1[39]= new TH1D("Sch Tdc"   ,"Sch Tdc"   ,100,0,1000);
   Hist1[40]= new TH1D("Sch Time"   ,"Sch Time"   ,100,-100,100);
-  Hist1[57] = new TH1D("Sch Time Gate1","Sch Time Gate1",100,-10,90);
-  Hist1[58] = new TH1D("Sch Time Gate2","Sch Time Gate2",100,-10,90);
-  Hist1[59] = new TH1D("Sch Time Gate3","Sch Time Gate3",100,-10,90);
-  Hist1[60] = new TH1D("Sch Time Gate4","Sch Time Gate4",100,-10,90);
+  Hist1[57] = new TH1D("Sch Time Gate1","Sch Time Gate1",180,-90,90);
+  Hist1[58] = new TH1D("Sch Time Gate2","Sch Time Gate2",180,-90,90);
+  Hist1[59] = new TH1D("Sch Time Gate3","Sch Time Gate3",180,-90,90);
+  Hist1[60] = new TH1D("Sch Time Gate4","Sch Time Gate4",180,-90,90);
 
   //-SftX ----------------
   Hist1[41] = new TH1D("SftX U Nhits","SftX U Nhits",50,0,50);
@@ -342,10 +398,10 @@ void Mtx_Banch(int month, int runnum){
   Hist1[50] = new TH1D("SftX U Time","SftX U Time",200,-100,100);
   Hist1[51] = new TH1D("SftX D Time","SftX D Time",200,-100,100);
   Hist1[52] = new TH1D("SftXTime","SftXTime",200,-100,100);
-  Hist1[61] = new TH1D("SftXTime Gate1","SftXTime Gate1",100,-10,90);
-  Hist1[62] = new TH1D("SftXTime Gate2","SftXTime Gate2",100,-10,90);
-  Hist1[63] = new TH1D("SftXTime Gate3","SftXTime Gate3",100,-10,90);
-  Hist1[64] = new TH1D("SftXTime Gate4","SftXTime Gate4",100,-10,90);
+  Hist1[61] = new TH1D("SftXTime Gate1","SftXTime Gate1",180,-90,90);
+  Hist1[62] = new TH1D("SftXTime Gate2","SftXTime Gate2",180,-90,90);
+  Hist1[63] = new TH1D("SftXTime Gate3","SftXTime Gate3",180,-90,90);
+  Hist1[64] = new TH1D("SftXTime Gate4","SftXTime Gate4",180,-90,90);
 
   Hist2[0] = new TH2D("e","e",200,-100,100,200,-100,100);
 
@@ -497,60 +553,6 @@ void Mtx_Banch(int month, int runnum){
 //  c1->Print(Form("%s/Mtx_Banch_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
 //  }
   c1->Print(pdf+"]"); 
-
-  //Matrix Patern txt file PATH -----------------------------------------------------------------------
-  //  TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
-
-  std::ifstream fin1(filein1);
-
-  // Param Vector Dif ----------------------------------------------------------------------
-  std::vector<std::vector<int>> Mtx_prm; 
-  std::string line;
-  int preSCH=0;
-  std::vector<std::vector<int>> sch_tof; 
-  std::vector<int> SCH_Seg; 
-  std::vector<int> TOF_Min; 
-  std::vector<int> TOF_Max; 
-
-
-  // Error Out ----------------------------------------------------------------------------------------
-  if(fin1.fail() ){
-    std::cerr << "file1" << std::endl;
-    exit(0); 
-  }  
-
-  while(std::getline(fin1, line)){
-    double sch=-1, tof=-1, sft_min=-1, sft_max=-1;
-    std::istringstream input_line( line );
-    std::vector<int> inner;
-    if( input_line >> sch >> tof >> sft_min >> sft_max ){
-      inner.push_back(sch);
-      inner.push_back(tof);
-      inner.push_back(sft_min-11);
-      inner.push_back(sft_max-1);
-      Mtx_prm.push_back(inner);
-    }
-  }
-
-  for(int i=0; i<Mtx_prm.size(); i++){
-    if(i==0){
-      SCH_Seg.push_back( Mtx_prm.at(i).at(0) );
-      TOF_Min.push_back( Mtx_prm.at(i).at(1) );
-    }else{
-      if(i==Mtx_prm.size()-1){
-        TOF_Max.push_back( Mtx_prm.at(i).at(1) );
-      }else if(Mtx_prm.at(i).at(0)!=Mtx_prm.at(i-1).at(0)){
-        SCH_Seg.push_back( Mtx_prm.at(i).at(0) );
-        TOF_Max.push_back( Mtx_prm.at(i-1).at(1) );
-        TOF_Min.push_back( Mtx_prm.at(i).at(1) );
-      }
-    }
-  }
-
-  if( !eq3(SCH_Seg.size(),TOF_Min.size(),TOF_Max.size()) ){
-    std::cerr << "Size Not Same" << std::endl;
-  }
 
   //  TCanvas *c1= new TCanvas("c1","c1",800,700);
   //  TH2D *Hist = new TH2D("Hist","Hist",NumOfSegSCH,0,NumOfSegSCH,NumOfSegTOF,0,NumOfSegTOF);
