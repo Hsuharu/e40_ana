@@ -78,8 +78,8 @@ void Mtx_Pos(int month,int runnum){
   TString pdf = Form("%s/pdf/trigger/Mtx_Pos_run%05d.pdf", anadir.Data(),runnum);
   TString pdfDhire = Form("%s/pdf/trigger", anadir.Data());
   //   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/trigf19_tofht.root", anadir.Data(),Month[month]),"READ");
-//     TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstKuramaEasirocHodoscope_BH2TOF.root", anadir.Data(),Month[month],runnum),"READ");
-  TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstKuramaEasirocHodoscope.root", anadir.Data(),Month[month],runnum),"READ");
+     TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstKuramaEasirocHodoscope_BH2TOF.root", anadir.Data(),Month[month],runnum),"READ");
+//  TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstKuramaEasirocHodoscope.root", anadir.Data(),Month[month],runnum),"READ");
   TTree *k0hodo;
   f->GetObject("k0hodo",k0hodo);
 
@@ -441,8 +441,8 @@ void Mtx_Pos(int month,int runnum){
       Hist1[24]->Fill(delta_x[i]);
       Hist1[25]->Fill(SchPos[i]);
       Hist2[9 ]->Fill(SchPos[i],vpx[1]);
-//             if(delta_x[i]<-10 || delta_x[i]>10) continue;
-      if(delta_x[i]<10 || delta_x[i]>25) continue;
+      if(delta_x[i]<-10 || delta_x[i]>10) continue;
+//      if(delta_x[i]<10 || delta_x[i]>25) continue;
       sch_flag = true;
       Hist1[32]->Fill(vpx[1]);
       Hist1[33]->Fill(SchPos[i]);
@@ -607,7 +607,7 @@ void Mtx_Pos(int month,int runnum){
   //  Hist->Draw();
 
   for(int j=0; j<Hist2Max; j++){
-    if( (6<j && j<8) || (10<j && j<14) ){
+    if( (5<j && j<9) || (9<j && j<15) ){
       Hist2[j]->Draw("box");
 
 //      for(int i=0; i<SCH_Seg.size(); i++){
