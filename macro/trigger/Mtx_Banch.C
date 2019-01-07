@@ -568,7 +568,6 @@ void Mtx_Banch(int month, int runnum){
 //  c1->Print(pdf);
 //  c1->Print(Form("%s/Mtx_Banch_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
 //  }
-  c1->Print(pdf+"]"); 
 
   for(int n; n<nGate; n++){
     MtxEfficiency[n]= (double)Count1[n]/nentries;
@@ -582,7 +581,10 @@ void Mtx_Banch(int month, int runnum){
   g1->GetYaxis()->SetRangeUser(0,1);
   g1->Draw();
 
+  c1->Print(pdf);
+  c1->Print(Form("%s/Mtx_Banch_run%05d_Graph.pdf",pdfDhire.Data(),runnum));
 
+  c1->Print(pdf+"]"); 
 
 }
 
