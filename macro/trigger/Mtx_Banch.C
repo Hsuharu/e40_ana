@@ -67,7 +67,15 @@ const char* TriggerFlag[]=
   "MstClear  ",
   "TofTiming "
 };
-//
+
+bool eq3(int a,int b,int c){
+  if( a!= b ) return false;
+  if( b!= c ) return false;
+  if( c!= a ) return false;
+
+  return true;
+}
+
 void Mtx_Banch(int month, int runnum){
   //////////////////////////////////////////////////////////
   //   This file has been automatically generated 
@@ -85,7 +93,7 @@ void Mtx_Banch(int month, int runnum){
   gROOT->Reset();
   //   TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("rootfile/run05126_DstKuramaEasirocHodoscope.root");
   TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-  TString pdf = Form("%s/pdf/trigger/mtx_banch_run%05d.pdf", anadir.Data(),runnum);
+  TString pdf = Form("%s/pdf/trigger/Mtx_Banch_run%05d.pdf", anadir.Data(),runnum);
   TString pdfDhire = Form("%s/pdf/trigger", anadir.Data());
   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_Matrix.root", anadir.Data(),Month[month], runnum),"READ");
   TTree *mtx;
@@ -286,19 +294,11 @@ void Mtx_Banch(int month, int runnum){
   int Hist1Max = 0;
   int Hist2Max = 0;
 
-  int Hist1Max_All = 0;
-  int Hist2Max_All = 0;
-
   //-hist def-----------------------------------------------------------------------------------------
-  Hist1Max = 81;
-  Hist2Max = 12;
+  Hist1Max = 53;
+  Hist2Max = 1;
   TH1D *Hist1[Hist1Max];
   TH2D *Hist2[Hist2Max];
-
-  Hist1Max_All = 3;
-  Hist2Max_All = 3;
-  TH1D *Hist1_All[Hist1Max_All];
-  TH2D *Hist2_All[Hist2Max_All];
 
   //-Trigger Flag -------
   for(int i=0;i<32;i++){
@@ -331,6 +331,8 @@ void Mtx_Banch(int month, int runnum){
   Hist1[51] = new TH1D("SftX D Time","SftX D Time",200,-100,100);
   Hist1[52] = new TH1D("SftXTime","SftXTime",200,-100,100);
 
+  Hist2[0] = new TH2D("e","e",200,-100,100,200,-100,100);
+
 //-Legend def --------------------------------------------------------------------------------------
 //  TLegend *Leg1 = new TLegend(0.1,0.7,0.48,0.9);
   TLegend *Leg1 = new TLegend(0.78,0.775,0.98,0.935);
@@ -343,8 +345,8 @@ void Mtx_Banch(int month, int runnum){
   Long64_t nbytes = 0;
   for (Long64_t s=0; s<nentries;s++) {
     nbytes += mtx->GetEntry(s);
-    if(trigflag[17]<=0) continue;
-    if(trigflag[28]<=0) continue;
+//    if(trigflag[17]<=0) continue;
+//    if(trigflag[28]<=0) continue;
 
     // Trigger Flag -----------------------
     for(int i=0; i<32; i++){
@@ -416,32 +418,141 @@ void Mtx_Banch(int month, int runnum){
 
 //-Hist Draw----------------------------------------------------------------------------------------
 
-//  c1->Print(pdf+"["); 
-//  c1->cd();
-//  for(int i=0; i<Hist1Max; i++){
-//    //   if(i==15 || i==16 || i==38) gPad->SetLogy(1);
-//    Hist1[i]->Draw();
-//    c1->Print(pdf);
-//    c1->Print(Form("%s/mtx_banch_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
-//    //   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
-//  }
+  c1->Print(pdf+"["); 
+  c1->cd();
+  for(int i=0; i<Hist1Max; i++){
+    //   if(i==15 || i==16 || i==38) gPad->SetLogy(1);
+    Hist1[i]->Draw();
+    c1->Print(pdf);
+    c1->Print(Form("%s/Mtx_Banch_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
+    //   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
+  }
 //  for(int i=0; i<Hist2Max; i++){
 //  Hist2[i]->Draw("colz");
 //  c1->Print(pdf);
-//  c1->Print(Form("%s/mtx_banch_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
+//  c1->Print(Form("%s/Mtx_Banch_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
 //  }
-//  c1->Print(pdf+"]"); 
+  c1->Print(pdf+"]"); 
 
-  c1->cd();
-  c1->Print(pdf_All+"["); 
-  for(int i=0; i<Hist1Max_All; i++){
-    //   if(i==15 || i==16 || i==38) gPad->SetLogy(1);
-    Hist1_All[i]->Draw();
-    c1->Print(pdf_All);
-    c1->Print(Form("%s/mtx_banch_run%05d_Hist1_All_%03d.pdf",pdfDhire.Data(),runnum,i));
-    //   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
+  //Matrix Patern txt file PATH -----------------------------------------------------------------------
+  //  TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
+  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
+
+  std::ifstream fin1(filein1);
+
+  // Param Vector Dif ----------------------------------------------------------------------
+  std::vector<std::vector<int>> Mtx_prm; 
+  std::string line;
+  int preSCH=0;
+  std::vector<std::vector<int>> sch_tof; 
+  std::vector<int> SCH_Seg; 
+  std::vector<int> TOF_Min; 
+  std::vector<int> TOF_Max; 
+
+
+  // Error Out ----------------------------------------------------------------------------------------
+  if(fin1.fail() ){
+    std::cerr << "file1" << std::endl;
+    exit(0); 
+  }  
+
+  while(std::getline(fin1, line)){
+    double sch=-1, tof=-1, sft_min=-1, sft_max=-1;
+    std::istringstream input_line( line );
+    std::vector<int> inner;
+    if( input_line >> sch >> tof >> sft_min >> sft_max ){
+      inner.push_back(sch);
+      inner.push_back(tof);
+      inner.push_back(sft_min-11);
+      inner.push_back(sft_max-1);
+      Mtx_prm.push_back(inner);
+    }
   }
-  c1->Print(pdf_All+"]"); 
+
+  for(int i=0; i<Mtx_prm.size(); i++){
+    if(i==0){
+      SCH_Seg.push_back( Mtx_prm.at(i).at(0) );
+      TOF_Min.push_back( Mtx_prm.at(i).at(1) );
+    }else{
+      if(i==Mtx_prm.size()-1){
+        TOF_Max.push_back( Mtx_prm.at(i).at(1) );
+      }else if(Mtx_prm.at(i).at(0)!=Mtx_prm.at(i-1).at(0)){
+        SCH_Seg.push_back( Mtx_prm.at(i).at(0) );
+        TOF_Max.push_back( Mtx_prm.at(i-1).at(1) );
+        TOF_Min.push_back( Mtx_prm.at(i).at(1) );
+      }
+    }
+  }
+
+  if( !eq3(SCH_Seg.size(),TOF_Min.size(),TOF_Max.size()) ){
+    std::cerr << "Size Not Same" << std::endl;
+  }
+
+  //  TCanvas *c1= new TCanvas("c1","c1",800,700);
+  //  TH2D *Hist = new TH2D("Hist","Hist",NumOfSegSCH,0,NumOfSegSCH,NumOfSegTOF,0,NumOfSegTOF);
+  //  Hist->Draw();
+
+//  for(int j=0; j<Hist2Max; j++){
+//    if( (5<j && j<9) || (9<j && j<15) ){
+//      Hist2[j]->Draw("box");
+//      for(int i=0; i<SCH_Seg.size(); i++){
+//        double x1;
+//        double x2;
+//
+//        double TOF_Min_y1;
+//        double TOF_Min_y2;
+//
+//        double TOF_Max_y1;
+//        double TOF_Max_y2;
+//
+//        x1 =  (double)SCH_Seg.at(i);
+//        x2 =  (double)(SCH_Seg.at(i)+1);
+//
+//        TOF_Min_y1 =(double)TOF_Min.at(i);
+//        TOF_Min_y2 =(double)TOF_Min.at(i);
+//
+//        TOF_Max_y1 =  (double)TOF_Max.at(i)+1;
+//        TOF_Max_y2 =  (double)TOF_Max.at(i)+1;
+//
+//        TLine *MtxGateMin = new TLine(x1,TOF_Min_y1,x2,TOF_Min_y2);
+//        TLine *MtxGateMax = new TLine(x1,TOF_Max_y1,x2,TOF_Max_y2);
+//
+//        MtxGateMin->SetLineColor(2);
+//        MtxGateMax->SetLineColor(2);
+//        MtxGateMin->SetLineWidth(1);
+//        MtxGateMax->SetLineWidth(1);
+//        MtxGateMin->Draw("same");
+//        MtxGateMax->Draw("same");
+//        if(i==0){
+//          TLine *MtxGateMin_Y = new TLine(x1,TOF_Min_y1,x1,TOF_Max_y1);
+//          MtxGateMin_Y->SetLineColor(2);
+//          MtxGateMin_Y->SetLineWidth(1);
+//          MtxGateMin_Y->Draw("same");
+//        }else if(i==SCH_Seg.size()-1){
+//          TLine *MtxGateMin_Y = new TLine(x2,TOF_Min_y1,x2,TOF_Max_y1);
+//          MtxGateMin_Y->SetLineColor(2);
+//          MtxGateMin_Y->SetLineWidth(1);
+//          MtxGateMin_Y->Draw("same");
+//        }else{
+//          if(TOF_Min.at(i)-TOF_Min.at(i-1)!=0){
+//            TLine *MtxGate_Y1 = new TLine(x1,(double)TOF_Min.at(i-1),x1,TOF_Min_y1);
+//            MtxGate_Y1->SetLineColor(2);
+//            MtxGate_Y1->SetLineWidth(1);
+//            MtxGate_Y1->Draw("same");
+//          }
+//          if(TOF_Max.at(i)-TOF_Max.at(i-1)!=0){
+//            TLine *MtxGate_Y2 = new TLine(x1,(double)TOF_Max.at(i-1)+1,x1,TOF_Max_y1);
+//            MtxGate_Y2->SetLineColor(2);
+//            MtxGate_Y2->SetLineWidth(1);
+//            MtxGate_Y2->Draw("same");
+//          }
+//        }
+//      }
+//
+//      c1->Print(pdf);
+//      c1->Print(Form("%s/Mtx_Pos_run%05d_Hist2_box_%03d.pdf",pdfDhire.Data(),runnum,j));
+//    }
+//  }
 
 
 }
