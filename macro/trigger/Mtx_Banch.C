@@ -286,16 +286,20 @@ void Mtx_Banch(int month, int runnum){
   double HULMHTDCCalib = -0.8333;
   double MaxBinValue=0.;
 
-  int Gate1 = 60;
-  int Gate2 = 30;
-  int Gate3 = 20;
-  int Gate4 = 15;
+  int Gate1  = 15;
+  int Gate2  = 20;
+  int Gate3  = 30;
+  int Gate4  = 40;
+
+  double TofMid = 10;
+  double SchMid = 0;
+  double SftMid = 0;
 
   int Hist1Max = 0;
   int Hist2Max = 0;
 
   //-hist def-----------------------------------------------------------------------------------------
-  Hist1Max = 53;
+  Hist1Max = 65;
   Hist2Max = 1;
   TH1D *Hist1[Hist1Max];
   TH2D *Hist2[Hist2Max];
@@ -309,6 +313,10 @@ void Mtx_Banch(int month, int runnum){
   Hist1[33] = new TH1D("TofMtOr Hitpat","TofMtOr Hitpat",25,0,24);
   Hist1[34] = new TH1D("TofMtOr DepthPat","TofMtOrDepthPat",20,0,20);
   Hist1[35] = new TH1D("TofMtOr","TofMtOr",100,-10,90);
+  Hist1[53] = new TH1D("TofMtOr Gate1","TofMtOr Gate1",100,-10,90);
+  Hist1[54] = new TH1D("TofMtOr Gate2","TofMtOr Gate2",100,-10,90);
+  Hist1[55] = new TH1D("TofMtOr Gate3","TofMtOr Gate3",100,-10,90);
+  Hist1[56] = new TH1D("TofMtOr Gate4","TofMtOr Gate4",100,-10,90);
 
   //-Sch ----------------
   Hist1[36]= new TH1D("Sch Nhits" ,"Sch Nhits" ,20,0,20);
@@ -316,6 +324,10 @@ void Mtx_Banch(int month, int runnum){
   Hist1[38]= new TH1D("Sch Depthpat","Sch Depthpat",65,0,65);
   Hist1[39]= new TH1D("Sch Tdc"   ,"Sch Tdc"   ,100,0,1000);
   Hist1[40]= new TH1D("Sch Time"   ,"Sch Time"   ,100,-100,100);
+  Hist1[57] = new TH1D("Sch Time Gate1","Sch Time Gate1",100,-10,90);
+  Hist1[58] = new TH1D("Sch Time Gate2","Sch Time Gate2",100,-10,90);
+  Hist1[59] = new TH1D("Sch Time Gate3","Sch Time Gate3",100,-10,90);
+  Hist1[60] = new TH1D("Sch Time Gate4","Sch Time Gate4",100,-10,90);
 
   //-SftX ----------------
   Hist1[41] = new TH1D("SftX U Nhits","SftX U Nhits",50,0,50);
@@ -330,6 +342,10 @@ void Mtx_Banch(int month, int runnum){
   Hist1[50] = new TH1D("SftX U Time","SftX U Time",200,-100,100);
   Hist1[51] = new TH1D("SftX D Time","SftX D Time",200,-100,100);
   Hist1[52] = new TH1D("SftXTime","SftXTime",200,-100,100);
+  Hist1[61] = new TH1D("SftXTime Gate1","SftXTime Gate1",100,-10,90);
+  Hist1[62] = new TH1D("SftXTime Gate2","SftXTime Gate2",100,-10,90);
+  Hist1[63] = new TH1D("SftXTime Gate3","SftXTime Gate3",100,-10,90);
+  Hist1[64] = new TH1D("SftXTime Gate4","SftXTime Gate4",100,-10,90);
 
   Hist2[0] = new TH2D("e","e",200,-100,100,200,-100,100);
 
@@ -362,6 +378,18 @@ void Mtx_Banch(int month, int runnum){
         Hist1[33]->Fill(i);
         Hist1[34]->Fill(j);
         Hist1[35]->Fill(tofmt[i][j]);
+        if(tofmt[i][j]>TofMid-Gate1&&tofmt[i][j]<TofMid+Gate1){  
+          Hist1[53]->Fill(tofmt[i][j]);
+        }
+        if(tofmt[i][j]>TofMid-Gate2&&tofmt[i][j]<TofMid+Gate2){  
+          Hist1[54]->Fill(tofmt[i][j]);
+        }
+        if(tofmt[i][j]>TofMid-Gate3&&tofmt[i][j]<TofMid+Gate3){  
+          Hist1[55]->Fill(tofmt[i][j]);
+        }
+        if(tofmt[i][j]>TofMid-Gate4&&tofmt[i][j]<TofMid+Gate4){  
+          Hist1[56]->Fill(tofmt[i][j]);
+        }
       }
     }
 
@@ -377,6 +405,18 @@ void Mtx_Banch(int month, int runnum){
         if(sch_time[i][k]==-999) continue;
         Hist1[39]->Fill(sch_tdc[i][k]);
         Hist1[40]->Fill(sch_time[i][k]);
+        if(sch_time[i][k]>SchMid-Gate1&&sch_time[i][k]<SchMid+Gate1){  
+          Hist1[57]->Fill(sch_time[i][k]);
+        }
+        if(sch_time[i][k]>SchMid-Gate2&&sch_time[i][k]<SchMid+Gate2){  
+          Hist1[58]->Fill(sch_time[i][k]);
+        }
+        if(sch_time[i][k]>SchMid-Gate3&&sch_time[i][k]<SchMid+Gate3){  
+          Hist1[59]->Fill(sch_time[i][k]);
+        }
+        if(sch_time[i][k]>SchMid-Gate4&&sch_time[i][k]<SchMid+Gate4){  
+          Hist1[60]->Fill(sch_time[i][k]);
+        }
       }
     }
 
@@ -400,12 +440,36 @@ void Mtx_Banch(int month, int runnum){
           Hist1[49]->Fill(sftx_utdc[i][j]);
           Hist1[50]->Fill(sftx_utime[i][j]);
           Hist1[52]->Fill(sftx_utime[i][j]);
+          if(sftx_utime[i][j]>SftMid-Gate1&&sftx_utime[i][j]<SftMid+Gate1){  
+            Hist1[63]->Fill(sftx_utime[i][j]);
+          }
+          if(sftx_utime[i][j]>SftMid-Gate2&&sftx_utime[i][j]<SftMid+Gate2){  
+            Hist1[62]->Fill(sftx_utime[i][j]);
+          }
+          if(sftx_utime[i][j]>SftMid-Gate3&&sftx_utime[i][j]<SftMid+Gate3){  
+            Hist1[63]->Fill(sftx_utime[i][j]);
+          }
+          if(sftx_utime[i][j]>SftMid-Gate4&&sftx_utime[i][j]<SftMid+Gate4){  
+            Hist1[64]->Fill(sftx_utime[i][j]);
+          }
         }
         if(sftx_dtdc[i][j]!=-999){
           Hist1[48]->Fill(sftx_dtdc[i][j]);
           Hist1[49]->Fill(sftx_dtdc[i][j]);
           Hist1[51]->Fill(sftx_dtime[i][j]);
           Hist1[52]->Fill(sftx_dtime[i][j]);
+          if(sftx_dtime[i][j]>SftMid-Gate1&&sftx_dtime[i][j]<SftMid+Gate1){  
+            Hist1[61]->Fill(sftx_dtime[i][j]);
+          }
+          if(sftx_dtime[i][j]>SftMid-Gate2&&sftx_dtime[i][j]<SftMid+Gate2){  
+            Hist1[62]->Fill(sftx_dtime[i][j]);
+          }
+          if(sftx_dtime[i][j]>SftMid-Gate3&&sftx_dtime[i][j]<SftMid+Gate3){  
+            Hist1[63]->Fill(sftx_dtime[i][j]);
+          }
+          if(sftx_dtime[i][j]>SftMid-Gate4&&sftx_dtime[i][j]<SftMid+Gate4){  
+            Hist1[64]->Fill(sftx_dtime[i][j]);
+          }
         }
       }
     }
