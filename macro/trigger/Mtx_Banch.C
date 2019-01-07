@@ -416,7 +416,7 @@ void Mtx_Banch(int month, int runnum){
   for (Long64_t s=0; s<nentries;s++){
     mtx->GetEntry(s);
     if(s%10000 ==0){
-      std::cout << ( ((double)s)/nentries *100 ) << "%\t" << s << "/" << nentries  << std::endl;
+      std::cout << ( ((double)s)/nentries *100 ) << "%\t" << s << "/" << nentries << "\r"  << std::endl;
     }
     // Trigger Flag -----------------------
     for(int i=0; i<32; i++){
@@ -574,12 +574,17 @@ void Mtx_Banch(int month, int runnum){
     std::cout << "Total Event# is " << nentries << "\t" << Form("Count%d# is ",n+1) << Count1[n] << "\t" << "Efficiency is " << MtxEfficiency[n] << std::endl;
   }
 
+  c1->SetGrid();
+  c1->SetGridx();
+  c1->SetGridy();
+
   TGraph *g1 = new TGraph(nGate, x, MtxEfficiency);
-  g1->SetMarkerStyle(3);
-  g1->SetMarkerColor(4);
+  g1->SetMarkerStyle(8);
+  g1->SetMarkerColor(2);
+  g1->SetMarkerSize(2);
   g1->GetXaxis()->SetRangeUser(0,4.5);
   g1->GetYaxis()->SetRangeUser(0,1);
-  g1->Draw();
+  g1->Draw("AP");
 
   c1->Print(pdf);
   c1->Print(Form("%s/Mtx_Banch_run%05d_Graph.pdf",pdfDhire.Data(),runnum));
