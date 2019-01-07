@@ -335,7 +335,8 @@ void Mtx_Banch(int month, int runnum){
   double HULMHTDCCalib = -0.8333;
   double MaxBinValue=0.;
 
-  int Gate[4] = {15,20,30,40};
+  int nGate = 5;
+  int Gate[nGate] = {15,20,30,40,60};
 
   double TofMid = 10.;
   double SchMid = 0.;
@@ -345,10 +346,10 @@ void Mtx_Banch(int month, int runnum){
   int Hist2Max = 0;
 
 
-  int Count1[4]={0,0,0,0};
+  int Count1[nGate]={0,0,0,0,0};
 
   //-hist def-----------------------------------------------------------------------------------------
-  Hist1Max = 64;
+  Hist1Max = 66;
   TH1D *Hist1[Hist1Max];
   TH2D *Hist2[Hist2Max];
 
@@ -376,6 +377,7 @@ void Mtx_Banch(int month, int runnum){
   Hist1[57] = new TH1D("Sch Time Gate2","Sch Time Gate2",200,-100,100);
   Hist1[58] = new TH1D("Sch Time Gate3","Sch Time Gate3",200,-100,100);
   Hist1[59] = new TH1D("Sch Time Gate4","Sch Time Gate4",200,-100,100);
+  Hist1[64] = new TH1D("Sch Time TofFlag","Sch Time TofFlag",200,-100,100);
 
   //-SftX ----------------
   Hist1[40] = new TH1D("SftX U Nhits","SftX U Nhits",50,0,50);
@@ -394,6 +396,7 @@ void Mtx_Banch(int month, int runnum){
   Hist1[61] = new TH1D("SftX Time Gate2","SftX Time Gate2",200,-100,100);
   Hist1[62] = new TH1D("SftX Time Gate3","SftX Time Gate3",200,-100,100);
   Hist1[63] = new TH1D("SftX Time Gate4","SftX Time Gate4",200,-100,100);
+  Hist1[65] = new TH1D("SftX Time TofFlag","SftX Time TofFlag",200,-100,100);
 
   //-Event Loop --------------------------------------------------------------------------------------
     Long64_t nentries = mtx->GetEntries();
@@ -411,6 +414,7 @@ void Mtx_Banch(int month, int runnum){
 
     Hist1[32]->Fill(tofnhits);
 
+    bool TofFlag = false;
     // TofMtOr ----------------------------
     for(int i=0; i<NumOfSegTOF; i++){
       for(int j=0; j<16; j++){
@@ -418,6 +422,9 @@ void Mtx_Banch(int month, int runnum){
         Hist1[33]->Fill(i);
         Hist1[34]->Fill(j);
         Hist1[35]->Fill(tofmt[i][j]);
+        if(tofmt[i][j]>25&&tofmt[i][j]<35){
+          TofFlag = true;
+        }
       }
     }
 
@@ -431,6 +438,9 @@ void Mtx_Banch(int month, int runnum){
       for(int k=0; k<16; k++){
         if(sch_time[i][k]==-999) continue;
         Hist1[39]->Fill(sch_time[i][k]);
+        if(TofFlag){
+          Hist1[64]->Fill(sch_time[i][k]);
+        }
       }
     }
 
@@ -450,19 +460,30 @@ void Mtx_Banch(int month, int runnum){
     for(int i=0; i<NumOfSegSFT_X; i++){
       for(int j=0; j<16; j++){
         if(sftx_utime[i][j]!=-999){
-          Hist1[59]->Fill(sftx_utime[i][j]);
+          Hist1[49]->Fill(sftx_utime[i][j]);
           Hist1[51]->Fill(sftx_utime[i][j]);
+          if(TofFlag){
+            Hist1[65]->Fill(sftx_utime[i][j]);
+          }
         }
         if(sftx_dtime[i][j]!=-999){
           Hist1[50]->Fill(sftx_dtime[i][j]);
           Hist1[51]->Fill(sftx_dtime[i][j]);
+          if(TofFlag){
+            Hist1[65]->Fill(sftx_dtime[i][j]);
+          }
         }
       }
     }
 
-    bool Flag1[4] = {false,false,false,false};
-    bool Flag2[4] = {false,false,false,false};
-    bool Flag3[4] = {false,false,false,false};
+    bool Flag1[nGate];
+    bool Flag2[nGate];
+    bool Flag3[nGate];
+    for(int n=0; n<nGate; n++){
+      Flag1[n] = false;
+      Flag2[n] = false;
+      Flag3[n] = false;
+    }
 
     // Mtx Pattern ----------------------------
     for(int l=0; l < Mtx_prm.size(); l++){
@@ -475,7 +496,7 @@ void Mtx_Banch(int month, int runnum){
       min = Mtx_prm.at(l).at(2);
       max = Mtx_prm.at(l).at(3) + 1;
 //      std::cout << i << "\t" << j <<  "\t" << min << "\t" << max << "\t" << std::endl;
-      for(int n=0; n<4; n++){
+      for(int n=0; n<nGate; n++){
 //          if(!Flag1[n] && tofmt[i][m]      > (double)TofMid - Gate[n] && tofmt[i][m]     < (double)TofMid + Gate[n] ) Flag1[n]=true;
 //          if(!Flag2[n] && sch_time[j][m]   > (double)SchMid - Gate[n] && sch_time[j][m]  < (double)SchMid + Gate[n] ) Flag2[n]=true;
 //          for(int k = min; k < max; k++){
@@ -511,7 +532,7 @@ void Mtx_Banch(int month, int runnum){
       }
     }
 
-    for(int n=0; n<4; n++){
+    for(int n=0; n<nGate; n++){
       if(Flag1[n]&&Flag2[n]&&Flag3[n]){
         Count1[n]+=1;
       }
@@ -538,7 +559,7 @@ void Mtx_Banch(int month, int runnum){
 //  }
   c1->Print(pdf+"]"); 
 
-  for(int n; n<4; n++){
+  for(int n; n<nGate; n++){
     std::cout << "Total Event# is " << nentries << "\t" << Form("Count%d# is ",n+1) << Count1[n] << "\t" << "Efficiency is " << (double)Count1[n]/nentries << std::endl;
   }
 
