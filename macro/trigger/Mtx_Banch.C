@@ -415,7 +415,7 @@ void Mtx_Banch(int month, int runnum){
 
   for (Long64_t s=0; s<nentries;s++){
     mtx->GetEntry(s);
-    if(s%10000 ==0){
+    if(s%(nentries/10) ==0){
       std::cout << ( ((double)s)/nentries *100 ) << "%\t" << s << "/" << nentries << "\r"  << std::endl;
     }
     // Trigger Flag -----------------------
@@ -522,20 +522,20 @@ void Mtx_Banch(int month, int runnum){
         }
         for(int m=0; m<sch_depth[j] ;m++){
           if( sch_time[j][m]   > (double)SchMid - Gate[n] && sch_time[j][m]  < (double)SchMid + Gate[n] ){
-            Hist1[56+n]->Fill(sch_time[j][m]);
+            Hist1[57+n]->Fill(sch_time[j][m]);
             Flag2[n]=true;
           }
         }
         for(int k = min; k < max; k++){
           for(int m=0; m<sftx_udepth[k] ;m++){
             if( sftx_utime[k][m] > (double)SftMid - Gate[n] && sftx_utime[k][m]< (double)SftMid + Gate[n] ){
-              Hist1[60+n]->Fill(sftx_utime[k][m]);
+              Hist1[61+n]->Fill(sftx_utime[k][m]);
               Flag3[n]=true;
             }
           }
           for(int m=0; m<sftx_ddepth[k] ;m++){
             if( sftx_dtime[k][m] > (double)SftMid - Gate[n] && sftx_dtime[k][m]< (double)SftMid + Gate[n] ){ 
-              Hist1[60+n]->Fill(sftx_dtime[k][m]);
+              Hist1[61+n]->Fill(sftx_dtime[k][m]);
               Flag3[n]=true;
             }
           }
