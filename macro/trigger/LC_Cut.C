@@ -403,7 +403,7 @@ void LC_Cut(int month, int runnum){
 
     for(int i=0; i<m2Combi; i++){
       Hist1[58]->Fill(m2[i]);
-      if(LCGate1Flag){ Hist1[59]->Fill(m2[i]);}
+//      if(LCGate1Flag){ Hist1[59]->Fill(m2[i]);}
       if(LCGate2Flag){ Hist1[66]->Fill(m2[i]);}
       if(LCGate3Flag){ Hist1[67]->Fill(m2[i]);}
     }
