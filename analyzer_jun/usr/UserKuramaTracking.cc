@@ -139,6 +139,7 @@ struct Event
   double sch_clpos[NumOfSegSCH];
   double delta_x[NumOfSegSCH];
 
+  double sftxsegKurama;
 
   int ntSdcIn;
   int much; // debug
@@ -732,6 +733,7 @@ EventKuramaTracking::ProcessingNormal( void )
     double phi   = atan2( ut, vt );
     double initial_momentum = tp->GetInitialMomentum();
     double tof_seg = tp->TofSeg();
+//    double sft_wire = 
     HF1( 51, double(nh) );
     HF1( 52, chisqr );
     HF1( 54, xt ); HF1( 55, yt ); HF1( 56, ut ); HF1( 57,vt );
@@ -777,6 +779,20 @@ EventKuramaTracking::ProcessingNormal( void )
           }
         }
       }// for(l)
+
+// SFT X Hit Wire Number Fill -----------------------
+//        if(!tp) continue;
+//        DCLocalTrack *trSdcIn =tp->GetLocalTrackIn();
+      for( int j=0; j<nh; ++j ){
+        TrackHit *hit=tp->GetHit(j);
+        if(!hit) continue;
+        int layerId = hit->GetLayer();
+        int l = 9; //SFT_X Layer ID
+        if( l==layerId ){
+          double wire = hit->GetHit()->GetWire();
+          event.sftxsegKurama = double(wire);// - 0.5;
+        }
+      }
     }
 
     const ThreeVector& posTof = tp->TofPos();
@@ -1124,6 +1140,7 @@ EventKuramaTracking::InitializeEvent( void )
     event.sch_clpos[it]  = -999.;
     event.delta_x[it]  = -999.;
   }
+  event.sftxsegKurama  = -999.;
 }
 
 //______________________________________________________________________________
@@ -1550,6 +1567,8 @@ ConfMan:: InitializeHistograms( void )
   tree->Branch("sch_ctot",       event.sch_ctot,         "sch_ctot[sch_ncl]/D");
   tree->Branch("sch_clpos",      event.sch_clpos,        "sch_clpos[sch_ncl]/D");
   tree->Branch("delta_x",      event.delta_x,        "delta_x[sch_ncl]/D");
+
+  tree->Branch("sftxsegKurama",      &event.sftxsegKurama,        "sftxsegKurama/D");
 
   HPrint();
   return true;
