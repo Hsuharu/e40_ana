@@ -560,7 +560,6 @@ void Mtx_Pos_Mon(int month,int runnum){
        Hist1[2]->Fill(delta_x[i]);
        Hist2[0 ]->Fill(SchPos[i],vpx[1]);
        if(delta_x[i]<-10 || delta_x[i]>10) continue;
-       if(delta_x[i]<-10 || delta_x[i]>10) continue;
 //       if(delta_x[i]<10 || delta_x[i]>25) continue;
        sch_flag = true;
        Hist1[3]->Fill(vpx[1]);
@@ -778,74 +777,74 @@ void Mtx_Pos_Mon(int month,int runnum){
      c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_box_%04d.pdf",pdfDhire.Data(),runnum,j));
    }
 
-   for(int p=0; p<10; p++ ){
-     if(p==0){
-       Hist2[25+p*4]->SetMarkerColor(p+1);
-       Leg1->AddEntry(Hist2[25+p*4],Form("Cut3 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
-       Hist2[25+p*4]->Draw();
-     }else{
-       Hist2[25+p*4]->SetMarkerColor(p+1);
-       Leg1->AddEntry(Hist2[25+p*4],Form("Cut3 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
-       Hist2[25+p*4]->Draw("same");
-     }
-   }
-   Leg1->Draw();
-   c1->Print(pdf);
-   c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_same_Cut3.pdf",pdfDhire.Data(),runnum));
-
-   for(int p=0; p<10; p++ ){
-     if(p==0){
-       Hist2[65+p*4]->SetMarkerColor(p+1);
-       Leg1->AddEntry(Hist2[65+p*4],Form("Cut4 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
-       Leg2->AddEntry(Hist2[65+p*4],Form("Cut4 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
-       Hist2[65+p*4]->Draw();
-     }else{
-       Hist2[65+p*4]->SetMarkerColor(p+1);
-       Leg1->AddEntry(Hist2[65+p*4],Form("Cut4 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
-       Leg2->AddEntry(Hist2[65+p*4],Form("Cut4 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
-       Hist2[65+p*4]->Draw("same");
-     }
-   }
-   Leg2->Draw();
-   c1->Print(pdf);
-   c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_same_Cut4.pdf",pdfDhire.Data(),runnum));
-
-   for(int p=0; p<10; p++ ){
-     if(p==0){
-       Hist2[25+p*4]->Draw();
-       Hist2[65+p*4]->Draw("same");
-     }else{
-       Hist2[25+p*4]->Draw("same");
-       Hist2[65+p*4]->Draw("same");
-     }
-   }
-   Leg1->Draw();
-   c1->Print(pdf);
-   c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_same_Cut34.pdf",pdfDhire.Data(),runnum));
-
-   for(int p=0; p<10; p++ ){
-     if(p==2){
-       Hist2[25+p*4]->Draw();
-       Hist2[65+p*4]->Draw("same");
-       Leg3->AddEntry(Hist2[25+p*4],Form("Cut3 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
-       Leg3->AddEntry(Hist2[65+p*4],Form("Cut4 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
-     }
-     if(p==4){
-       Hist2[25+p*4]->Draw("same");
-       Hist2[65+p*4]->Draw("same");
-       Leg3->AddEntry(Hist2[25+p*4],Form("Cut3 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
-       Leg3->AddEntry(Hist2[65+p*4],Form("Cut4 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
-     }
-     if(p==6){
-       Hist2[25+p*4]->Draw("same");
-       Hist2[65+p*4]->Draw("same");
-       Leg3->AddEntry(Hist2[25+p*4],Form("Cut3 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
-       Leg3->AddEntry(Hist2[65+p*4],Form("Cut4 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
-     }
-   }
-   Leg3->Draw();
-   c1->Print(pdf);
-   c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_same_Cut34_Part.pdf",pdfDhire.Data(),runnum));
+//   for(int p=0; p<10; p++ ){
+//     if(p==0){
+//       Hist2[25+p*4]->SetMarkerColor(p+1);
+//       Leg1->AddEntry(Hist2[25+p*4],Form("Cut3 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
+//       Hist2[25+p*4]->Draw();
+//     }else{
+//       Hist2[25+p*4]->SetMarkerColor(p+1);
+//       Leg1->AddEntry(Hist2[25+p*4],Form("Cut3 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
+//       Hist2[25+p*4]->Draw("same");
+//     }
+//   }
+//   Leg1->Draw();
+//   c1->Print(pdf);
+//   c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_same_Cut3.pdf",pdfDhire.Data(),runnum));
+//
+//   for(int p=0; p<10; p++ ){
+//     if(p==0){
+//       Hist2[65+p*4]->SetMarkerColor(p+1);
+//       Leg1->AddEntry(Hist2[65+p*4],Form("Cut4 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
+//       Leg2->AddEntry(Hist2[65+p*4],Form("Cut4 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
+//       Hist2[65+p*4]->Draw();
+//     }else{
+//       Hist2[65+p*4]->SetMarkerColor(p+1);
+//       Leg1->AddEntry(Hist2[65+p*4],Form("Cut4 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
+//       Leg2->AddEntry(Hist2[65+p*4],Form("Cut4 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
+//       Hist2[65+p*4]->Draw("same");
+//     }
+//   }
+//   Leg2->Draw();
+//   c1->Print(pdf);
+//   c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_same_Cut4.pdf",pdfDhire.Data(),runnum));
+//
+//   for(int p=0; p<10; p++ ){
+//     if(p==0){
+//       Hist2[25+p*4]->Draw();
+//       Hist2[65+p*4]->Draw("same");
+//     }else{
+//       Hist2[25+p*4]->Draw("same");
+//       Hist2[65+p*4]->Draw("same");
+//     }
+//   }
+//   Leg1->Draw();
+//   c1->Print(pdf);
+//   c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_same_Cut34.pdf",pdfDhire.Data(),runnum));
+//
+//   for(int p=0; p<10; p++ ){
+//     if(p==2){
+//       Hist2[25+p*4]->Draw();
+//       Hist2[65+p*4]->Draw("same");
+//       Leg3->AddEntry(Hist2[25+p*4],Form("Cut3 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
+//       Leg3->AddEntry(Hist2[65+p*4],Form("Cut4 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
+//     }
+//     if(p==4){
+//       Hist2[25+p*4]->Draw("same");
+//       Hist2[65+p*4]->Draw("same");
+//       Leg3->AddEntry(Hist2[25+p*4],Form("Cut3 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
+//       Leg3->AddEntry(Hist2[65+p*4],Form("Cut4 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
+//     }
+//     if(p==6){
+//       Hist2[25+p*4]->Draw("same");
+//       Hist2[65+p*4]->Draw("same");
+//       Leg3->AddEntry(Hist2[25+p*4],Form("Cut3 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
+//       Leg3->AddEntry(Hist2[65+p*4],Form("Cut4 %lg<pKurama[0]<%lg",p*0.2,(p+1)*0.2),"p");
+//     }
+//   }
+//   Leg3->Draw();
+//   c1->Print(pdf);
+//   c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_same_Cut34_Part.pdf",pdfDhire.Data(),runnum));
 
 
    c1->Print(pdf+"]"); 
