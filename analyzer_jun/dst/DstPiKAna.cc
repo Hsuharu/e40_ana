@@ -115,6 +115,8 @@ struct Event
   double wSch[NumOfSegSCH];
   double SchPos[NumOfSegSCH];
   double SchSeg[NumOfSegSCH];
+  double delta_x[NumOfSegSCH];
+  double delta_seg[NumOfSegSCH];
 
   //DC Beam
   int ntBcOut;
@@ -177,6 +179,10 @@ struct Event
   double utofKurama[MaxHits];
   double vtofKurama[MaxHits];
   double tofsegKurama[MaxHits];
+  double sftxsegKurama;
+  double vpx[NumOfLayersVP*MaxHits];
+  double vpy[NumOfLayersVP*MaxHits];
+  double vpseg[NumOfLayersVP];
 
   //Reaction
   int    nPi;
@@ -260,6 +266,7 @@ struct Src
   double tSch[NumOfSegSCH];
   double wSch[NumOfSegSCH];
   double SchPos[NumOfSegSCH];
+  double SchSeg[NumOfSegSCH];
   int    nhFbh;
 
   //DC Beam
@@ -324,6 +331,10 @@ struct Src
   double utofKurama[MaxHits];
   double vtofKurama[MaxHits];
   double tofsegKurama[MaxHits];
+  double sftxsegKurama;
+  double vpx[NumOfLayersVP];
+  double vpy[NumOfLayersVP];
+  double vpseg[NumOfLayersVP];
 };
 
 //_____________________________________________________________________
@@ -423,6 +434,9 @@ dst::InitializeEvent( void )
     event.tSch[it]  = -999.;
     event.wSch[it]   = -999.;
     event.SchPos[it]  = -999.;
+    event.SchSeg[it]  = -999.;
+    event.delta_x[it]  = -999.;
+    event.delta_seg[it]  = -999.;
   }
 
   //DC
@@ -494,6 +508,14 @@ dst::InitializeEvent( void )
     event.utofKurama[it]   = -9999.;
     event.vtofKurama[it]   = -9999.;
     event.tofsegKurama[it] = -9999.;
+  }
+
+  event.sftxsegKurama = -9999.;
+  
+  for ( int l = 0; l < NumOfLayersVP; ++l ) {
+      event.vpx[l] = -9999.;
+      event.vpy[l] = -9999.;
+      event.vpseg[l] = -9999.;
   }
 
   //Reaction
@@ -677,6 +699,9 @@ dst::DstRead( int ievent )
     event.tSch[i]   = src.tSch[i];
     event.wSch[i]   = src.wSch[i];
     event.SchPos[i] = src.SchPos[i];
+    event.SchSeg[i] = src.SchSeg[i];
+    event.delta_x[i] = src.vpx[1]-src.SchPos[i];
+    event.delta_seg[i] = src.vpseg[1]-src.SchSeg[i];
   }
 
   // TOF
@@ -801,6 +826,14 @@ dst::DstRead( int ievent )
     event.stof[itKurama] = stof;
     event.path[itKurama] = path;
     event.m2[itKurama] = m2;
+    event.tofsegKurama[itKurama] = src.tofsegKurama[itKurama];
+    if ( src.ntKurama == 1 ) {
+      for ( int l = 0; l < NumOfLayersVP; ++l ) {
+        event.vpx[l] = src.vpx[l];
+        event.vpy[l] = src.vpy[l];
+        event.vpseg[l] = src.vpseg[l];
+      }
+    }
     HF1( 3202, double(nh) );
     HF1( 3203, chisqr );
     HF1( 3204, xt ); HF1( 3205, yt );
@@ -1274,6 +1307,9 @@ ConfMan::InitializeHistograms( void )
   tree->Branch("tSch",    event.tSch,   "tSch[nhSch]/D");
   tree->Branch("wSch",    event.wSch,   "wSch[nhSch]/D");
   tree->Branch("SchPos",  event.SchPos, "SchPos[nhSch]/D");
+  tree->Branch("SchSeg",  event.SchSeg, "SchSeg[nhSch]/D");
+  tree->Branch("delta_x", event.delta_x,  "delta_x[nhSch]/D" );
+  tree->Branch("delta_seg", event.delta_seg,  "delta_seg[nhSch]/D" );
 
   //Beam DC
   tree->Branch("nlBcOut",   &event.nlBcOut,     "nlBcOut/I");
@@ -1336,6 +1372,10 @@ ConfMan::InitializeHistograms( void )
   tree->Branch("utofKurama",    event.utofKurama,   "utofKurama[ntKurama]/D");
   tree->Branch("vtofKurama",    event.vtofKurama,   "vtofKurama[ntKurama]/D");
   tree->Branch("tofsegKurama",  event.tofsegKurama, "tofsegKurama[ntKurama]/D");
+  tree->Branch("sftxsegKurama",      &event.sftxsegKurama,        "sftxsegKurama/D");
+  tree->Branch("vpx", event.vpx, Form( "vpx[%d]/D", NumOfLayersVP ) );
+  tree->Branch("vpy", event.vpy, Form( "vpy[%d]/D", NumOfLayersVP ) );
+  tree->Branch("vpseg", event.vpseg, Form( "vpseg[%d]/D", NumOfLayersVP ) );
 
   //Reaction
   tree->Branch("nPi",           &event.nPi,            "nPi/I");
@@ -1459,6 +1499,10 @@ ConfMan::InitializeHistograms( void )
   TTreeCont[kKuramaTracking]->SetBranchStatus("utofKurama",  1);
   TTreeCont[kKuramaTracking]->SetBranchStatus("vtofKurama",  1);
   TTreeCont[kKuramaTracking]->SetBranchStatus("tofsegKurama",1);
+  TTreeCont[kKuramaTracking]->SetBranchStatus("sftxsegKurama",  1);
+  TTreeCont[kKuramaTracking]->SetBranchStatus("vpx",          1);
+  TTreeCont[kKuramaTracking]->SetBranchStatus("vpy",          1);
+  TTreeCont[kKuramaTracking]->SetBranchStatus("vpseg",          1);
 
   TTreeCont[kKuramaTracking]->SetBranchAddress("ntSdcIn",      &src.ntSdcIn      );
   TTreeCont[kKuramaTracking]->SetBranchAddress("nlSdcIn",      &src.nlSdcIn      );
@@ -1493,6 +1537,10 @@ ConfMan::InitializeHistograms( void )
   TTreeCont[kKuramaTracking]->SetBranchAddress("utofKurama",   src.utofKurama);
   TTreeCont[kKuramaTracking]->SetBranchAddress("vtofKurama",   src.vtofKurama);
   TTreeCont[kKuramaTracking]->SetBranchAddress("tofsegKurama", src.tofsegKurama);
+  TTreeCont[kKuramaTracking]->SetBranchAddress("sftxsegKurama", &src.sftxsegKurama);
+  TTreeCont[kKuramaTracking]->SetBranchAddress("vpx",        src.vpx);
+  TTreeCont[kKuramaTracking]->SetBranchAddress("vpy",        src.vpy);
+  TTreeCont[kKuramaTracking]->SetBranchAddress("vpseg",        src.vpseg);
 
   TTreeCont[kK18Tracking]->SetBranchStatus("*", 0);
   TTreeCont[kK18Tracking]->SetBranchStatus("ntBcOut",     1);
@@ -1553,6 +1601,7 @@ ConfMan::InitializeHistograms( void )
   TTreeCont[kEasiroc]->SetBranchAddress("sch_ctime",  &src.tSch);
   TTreeCont[kEasiroc]->SetBranchAddress("sch_ctot",   &src.wSch);
   TTreeCont[kEasiroc]->SetBranchAddress("sch_clpos",  &src.SchPos);
+  TTreeCont[kEasiroc]->SetBranchAddress("sch_clseg",   src.SchSeg);
 
   return true;
 }

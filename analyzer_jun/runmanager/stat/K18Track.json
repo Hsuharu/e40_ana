@@ -1,16 +1,16 @@
 {
     "5368": {
-        "unit": 100000,
-        "nev": 4002406,
-        "conf": "./param_nakadashi/analyzer_jun.conf",
-        "bin": "./bin/K18Tracking",
-        "time": 4242.753924131393,
-        "nproc": 1,
         "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05368.dat.gz",
-        "stat": true,
-        "nseg": 41,
-        "queue": "s",
+        "stat": 0,
+        "time": 3142.866419315338,
         "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05368_K18Tracking.root",
-        "prog": 41
+        "conf": "./param_nakadashi/analyzer_jun.conf",
+        "unit": 100000,
+        "queue": "s",
+        "nproc": 1,
+        "nev": 4002406,
+        "nseg": 41,
+        "prog": 1,
+        "bin": "./bin/K18Tracking"
     }
 }
