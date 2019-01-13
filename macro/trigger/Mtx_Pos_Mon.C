@@ -560,6 +560,7 @@ void Mtx_Pos_Mon(int month,int runnum){
        Hist1[2]->Fill(delta_x[i]);
        Hist2[0 ]->Fill(SchPos[i],vpx[1]);
        if(delta_x[i]<-10 || delta_x[i]>10) continue;
+       if(delta_x[i]<-10 || delta_x[i]>10) continue;
 //       if(delta_x[i]<10 || delta_x[i]>25) continue;
        sch_flag = true;
        Hist1[3]->Fill(vpx[1]);

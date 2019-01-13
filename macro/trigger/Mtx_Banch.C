@@ -346,11 +346,15 @@ void Mtx_Banch(int month, int runnum){
   int Hist2Max = 0;
 
   int Count1[nGate];
+  int Count1_MtxFlg[nGate];
   double MtxEfficiency[nGate];
+  double MtxEfficiency_MtxFlg[nGate];
   double x[nGate];
   for(int n=0; n<nGate; n++){
     Count1[n] = 0;
+    Count1_MtxFlg[n] = 0;
     MtxEfficiency[n] = 0.;
+    MtxEfficiency_MtxFlg[n] = 0.;
     x[n] = (double)nGate-n-1;
   }
 
@@ -411,6 +415,7 @@ void Mtx_Banch(int month, int runnum){
 
   //-Event Loop --------------------------------------------------------------------------------------
     Long64_t nentries = mtx->GetEntries();
+    Long64_t nentries_MtxFlg = 0;
 //  Long64_t nentries =10000;
 
   for (Long64_t s=0; s<nentries;s++){
@@ -490,10 +495,16 @@ void Mtx_Banch(int month, int runnum){
     bool Flag1[nGate];
     bool Flag2[nGate];
     bool Flag3[nGate];
+    bool Flag1_MtxFlg[nGate];
+    bool Flag2_MtxFlg[nGate];
+    bool Flag3_MtxFlg[nGate];
     for(int n=0; n<nGate; n++){
       Flag1[n] = false;
       Flag2[n] = false;
       Flag3[n] = false;
+      Flag1_MtxFlg[n] = false;
+      Flag2_MtxFlg[n] = false;
+      Flag3_MtxFlg[n] = false;
     }
 
     // Mtx Pattern ----------------------------
@@ -518,12 +529,14 @@ void Mtx_Banch(int month, int runnum){
           if( tofmt[i][m]      > (double)TofMid - Gate[n] && tofmt[i][m]     < (double)TofMid + Gate[n] ){ 
             Hist1[52+n]->Fill(tofmt[i][m]);
             Flag1[n]=true;
+            if(trigflag[28]>0) Flag1_MtxFlg[n]=true;
           }
         }
         for(int m=0; m<sch_depth[j] ;m++){
           if( sch_time[j][m]   > (double)SchMid - Gate[n] && sch_time[j][m]  < (double)SchMid + Gate[n] ){
             Hist1[57+n]->Fill(sch_time[j][m]);
             Flag2[n]=true;
+            if(trigflag[28]>0) Flag2_MtxFlg[n]=true;
           }
         }
         for(int k = min; k < max; k++){
@@ -531,12 +544,14 @@ void Mtx_Banch(int month, int runnum){
             if( sftx_utime[k][m] > (double)SftMid - Gate[n] && sftx_utime[k][m]< (double)SftMid + Gate[n] ){
               Hist1[61+n]->Fill(sftx_utime[k][m]);
               Flag3[n]=true;
+              if(trigflag[28]>0) Flag3_MtxFlg[n]=true;
             }
           }
           for(int m=0; m<sftx_ddepth[k] ;m++){
             if( sftx_dtime[k][m] > (double)SftMid - Gate[n] && sftx_dtime[k][m]< (double)SftMid + Gate[n] ){ 
               Hist1[61+n]->Fill(sftx_dtime[k][m]);
               Flag3[n]=true;
+              if(trigflag[28]>0) Flag3_MtxFlg[n]=true;
             }
           }
         }
@@ -547,7 +562,11 @@ void Mtx_Banch(int month, int runnum){
       if(Flag1[n]&&Flag2[n]&&Flag3[n]){
         Count1[n]+=1;
       }
+      if(Flag1_MtxFlg[n]&&Flag2_MtxFlg[n]&&Flag3_MtxFlg[n]){
+        Count1_MtxFlg[n]+=1;
+      }
     }
+    if(trigflag[28]>0) nentries_MtxFlg++;
   }
 
   //-Canvas def---------------------------------------------------------------------------------------
@@ -573,12 +592,17 @@ void Mtx_Banch(int month, int runnum){
     MtxEfficiency[n]= (double)Count1[n]/nentries;
     std::cout << "Total Event# is " << nentries << "\t" << Form("Count%d# is ",n+1) << Count1[n] << "\t" << "Efficiency is " << MtxEfficiency[n] << std::endl;
   }
+  for(int n; n<nGate; n++){
+    MtxEfficiency_MtxFlg[n]= (double)Count1_MtxFlg[n]/nentries_MtxFlg;
+    std::cout << "Total Event# is " << nentries_MtxFlg << "\t" << Form("Count%d_MtxFlg# is ",n+1) << Count1_MtxFlg[n] << "\t" << "Efficiency is " << MtxEfficiency_MtxFlg[n] << std::endl;
+  }
 
   c1->SetGrid();
   c1->SetGridx();
   c1->SetGridy();
 
   TGraph *g1 = new TGraph(nGate, x, MtxEfficiency);
+  TGraph *g2 = new TGraph(nGate, x, MtxEfficiency_MtxFlg);
   g1->SetMarkerStyle(8);
   g1->SetMarkerColor(2);
   g1->SetMarkerSize(2);
@@ -588,6 +612,16 @@ void Mtx_Banch(int month, int runnum){
 
   c1->Print(pdf);
   c1->Print(Form("%s/Mtx_Banch_run%05d_Graph.pdf",pdfDhire.Data(),runnum));
+
+  g2->SetMarkerStyle(8);
+  g2->SetMarkerColor(2);
+  g2->SetMarkerSize(2);
+  g2->GetXaxis()->SetRangeUser(0,4.5);
+  g2->GetYaxis()->SetRangeUser(0,1);
+  g2->Draw("AP");
+
+  c1->Print(pdf);
+  c1->Print(Form("%s/Mtx_Banch_run%05d_Graph_MtxFlg.pdf",pdfDhire.Data(),runnum));
 
   c1->Print(pdf+"]"); 
 
