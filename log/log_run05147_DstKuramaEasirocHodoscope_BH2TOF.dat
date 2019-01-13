@@ -301,5 +301,5 @@ Error in <TTree::SetBranchAddress>: unknown branch -> sftx_ddepth
 #D Event Number: 2000000
 #D Event Number: 2001255
 #D Close : ./rootfile/run05147_DstKuramaEasirocHodoscope_BH2TOF.root
-1612.73user 2.84system 27:05.44elapsed 99%CPU (0avgtext+0avgdata 594116maxresident)k
-0inputs+0outputs (0major+73615minor)pagefaults 0swaps
+1673.54user 4.58system 28:46.92elapsed 97%CPU (0avgtext+0avgdata 694600maxresident)k
+0inputs+8outputs (0major+76269minor)pagefaults 0swaps

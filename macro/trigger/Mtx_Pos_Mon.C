@@ -74,8 +74,69 @@ void Mtx_Pos_Mon(int month,int runnum){
    TString pdf = Form("%s/pdf/trigger/Mtx_Pos_Mon_run%05d.pdf", anadir.Data(),runnum);
    TString pdfDhire = Form("%s/pdf/trigger", anadir.Data());
 //   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/trigf19_tofht.root", anadir.Data(),Month[month]),"READ");
-   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstKuramaEasirocHodoscope_BH2TOF.root", anadir.Data(),Month[month],runnum),"READ");
-//   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstKuramaEasirocHodoscope.root", anadir.Data(),Month[month],runnum),"READ");
+//   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstKuramaEasirocHodoscope_BH2TOF.root", anadir.Data(),Month[month],runnum),"READ");
+
+//Matrix Patern txt file PATH -----------------------------------------------------------------------
+//  TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
+  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
+
+  std::ifstream fin1(filein1);
+
+  // Param Vector Dif ----------------------------------------------------------------------
+  std::vector<std::vector<int>> Mtx_prm; 
+  std::string line;
+  int preSCH=0;
+  std::vector<std::vector<int>> sch_tof; 
+  std::vector<int> SCH_Seg; 
+  std::vector<int> TOF_Min; 
+  std::vector<int> TOF_Max; 
+
+
+  // Error Out ----------------------------------------------------------------------------------------
+  if(fin1.fail() ){
+    std::cerr << "file1" << std::endl;
+    exit(0); 
+  }  
+
+  while(std::getline(fin1, line)){
+    double sch=-1, tof=-1, sft_min=-1, sft_max=-1;
+    std::istringstream input_line( line );
+    std::vector<int> inner;
+    if( input_line >> sch >> tof >> sft_min >> sft_max ){
+      inner.push_back(sch);
+      inner.push_back(tof);
+      inner.push_back(sft_min-11);
+      inner.push_back(sft_max-1);
+      Mtx_prm.push_back(inner);
+    }
+  }
+
+  for(int i=0; i<Mtx_prm.size(); i++){
+    //        std::cout << "SCH=" << Mtx_prm.at(i).at(0)  << "\t" << "TOF="  <<  Mtx_prm.at(i).at(1)  << "\t"  << "SFT_Min=" << Mtx_prm.at(i).at(2)  << "\t"  << "SFT_Max=" << Mtx_prm.at(i).at(3)  << std::endl;
+    if(i==0){
+      SCH_Seg.push_back( Mtx_prm.at(i).at(0) );
+      TOF_Min.push_back( Mtx_prm.at(i).at(1) );
+    }else{
+      if(i==Mtx_prm.size()-1){
+        TOF_Max.push_back( Mtx_prm.at(i).at(1) );
+      }else if(Mtx_prm.at(i).at(0)!=Mtx_prm.at(i-1).at(0)){
+        SCH_Seg.push_back( Mtx_prm.at(i).at(0) );
+        TOF_Max.push_back( Mtx_prm.at(i-1).at(1) );
+        TOF_Min.push_back( Mtx_prm.at(i).at(1) );
+      }
+    }
+  }
+
+  //  std::cout << "SCH_Seg size is" << SCH_Seg.size() << "\n"  
+  //    << "TOF_Min size is" << TOF_Min.size() << "\n"
+  //    << "TOF_Max size is" << TOF_Max.size() << std::endl;
+
+  if( !eq3(SCH_Seg.size(),TOF_Min.size(),TOF_Max.size()) ){
+    std::cerr << "Size Not Same" << std::endl;
+  }
+
+ // RootFile Open
+   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstKuramaEasirocHodoscope.root", anadir.Data(),Month[month],runnum),"READ");
    TTree *k0hodo;
     f->GetObject("k0hodo",k0hodo);
 
@@ -96,7 +157,7 @@ void Mtx_Pos_Mon(int month,int runnum){
    Double_t        tofsegKurama[4];
    Double_t        vpx[5];
    Double_t        vpy[5];
-   Int_t           vpseg[5];
+   Double_t           vpseg[5];
    Double_t        tTofCalc[3];
    Int_t           nhBh1;
    Double_t        csBh1[5];
@@ -165,6 +226,7 @@ void Mtx_Pos_Mon(int month,int runnum){
    Double_t        beta[36];
    Double_t        stof[36];
    Double_t        m2[36];
+   Double_t        sftxsegKurama;;
 
 
 // Select Branch ------------------------------------------------------------------------------------
@@ -183,6 +245,7 @@ void Mtx_Pos_Mon(int month,int runnum){
    k0hodo->SetBranchStatus("vtgtKurama");
    k0hodo->SetBranchStatus("thetaKurama");
    k0hodo->SetBranchStatus("tofsegKurama");
+   k0hodo->SetBranchStatus("sftxsegKurama");
    k0hodo->SetBranchStatus("vpx");
    k0hodo->SetBranchStatus("vpy");
    k0hodo->SetBranchStatus("vpseg");
@@ -271,6 +334,7 @@ void Mtx_Pos_Mon(int month,int runnum){
    k0hodo->SetBranchAddress("vtgtKurama",vtgtKurama);
    k0hodo->SetBranchAddress("thetaKurama",thetaKurama);
    k0hodo->SetBranchAddress("tofsegKurama",tofsegKurama);
+   k0hodo->SetBranchAddress("sftxsegKurama",&sftxsegKurama);
    k0hodo->SetBranchAddress("vpx",vpx);
    k0hodo->SetBranchAddress("vpy",vpy);
    k0hodo->SetBranchAddress("vpseg",vpseg);
@@ -349,6 +413,8 @@ void Mtx_Pos_Mon(int month,int runnum){
 // kurama->SetBranchStatus("*",0);  // disable all branches
 // TTreePlayer->SetBranchStatus("branchname",1);  // activate branchname
 
+//std::cout << Mtx_prm.size() <<std::endl;
+
 //
 //-para def-----------------------------------------------------------------------------------------
    double HULMHTDCCalib = -0.8333;
@@ -359,8 +425,8 @@ void Mtx_Pos_Mon(int month,int runnum){
    int chisqr = 0;
 
 //-hist def-----------------------------------------------------------------------------------------
-   Hist1Max = 46;
-   Hist2Max =  102;
+   Hist1Max = 1252;
+   Hist2Max =  405;
    chisqr = 50;
    TH1D *Hist1[Hist1Max];
    TH2D *Hist2[Hist2Max];
@@ -411,7 +477,14 @@ void Mtx_Pos_Mon(int month,int runnum){
     Hist1[43]= new TH1D("vpseg[1] Cut4","vpseg[1] Cut4",NumOfSegSCH,0,NumOfSegSCH);
     Hist1[44]= new TH1D("TofSeg[0] Cut4","TofSeg[0] Cut4",NumOfSegTOF,0,NumOfSegTOF);
     Hist1[45]= new TH1D("tofsegKurama[0] Cut4","tofsegKurama[0] Cut4",NumOfSegTOF,0,NumOfSegTOF);
-
+    Hist1[46]= new TH1D("m2 Cut5","m2 Cut5",100,-0.4,1.4);
+    Hist1[47]= new TH1D("pKurama Cut5","pKurama Cut5",100,0,2);
+    for(int l=0; l < Mtx_prm.size(); l++){
+      Hist1[48+Mtx_prm.size()*0+l]= new TH1D(Form("sftxsegKurama[0] Cut3 SchSeg%d - TofSeg%d",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftxsegKurama[0] Cut3 SchSeg%d - TofSeg%d",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),NumOfSegSFT_X,0,NumOfSegSFT_X);
+      Hist1[48+Mtx_prm.size()*1+l]= new TH1D(Form("sftxsegKurama[0] Cut5 SchSeg%d - TofSeg%d",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftxsegKurama[0] Cut5 SchSeg%d - TofSeg%d",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),NumOfSegSFT_X,0,NumOfSegSFT_X);
+      Hist1[48+Mtx_prm.size()*2+l]= new TH1D(Form("pKurama Cut5 SchSeg%d - TofSeg%d",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("pKurama Cut5 SchSeg%d - TofSeg%d",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,0,2);
+      Hist1[48+Mtx_prm.size()*3+l]= new TH1D(Form("m2      Cut5 SchSeg%d - TofSeg%d",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("m2      Cut5 SchSeg%d - TofSeg%d",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,-0.4,1.4);
+    }
 
     Hist2[0 ]= new TH2D("Sch Position by HitSegment % vpx[1]","Sch Position by HitSegment % vpx[1]",200,-400,400,100,-400,400);
     Hist2[1 ]= new TH2D("Sch Position by HitSegment % vpx[1] Cut1","Sch Position by HitSegment % vpx[1] Cut1",200,-400,400,100,-400,400);
@@ -451,6 +524,14 @@ void Mtx_Pos_Mon(int month,int runnum){
 //        Hist2[25+p*4]= new TH2D(Form("tofsegKurama[0]  vs  vpseg[1] Cut3 %lg<pKurama[%d]<%lg",(double)p*0.2,i,((double)p+1.)*0.2),Form("tofsegKurama[0]  vs  vpseg[1] Cut3 %lg<pKurama[%d]<%lg",(double)p*0.2,i,((double)p+1.)*0.2),64,1,65,24,1,25);
     }
 
+//   Hist2Max =  102;
+    Hist2[102]= new TH2D("tofsegKurama[0] % vpseg[1] Cut5","tofsegKurama[0] % vpseg[1] Cut5",NumOfSegSCH,0,NumOfSegSCH,NumOfSegTOF,0,NumOfSegTOF);
+    Hist2[103]= new TH2D("pKurama % m2 Cut5",     "pKurama % m2  Cut5"    ,100,-0.4,1.4,100,0,2);
+    for(int l=0; l < Mtx_prm.size(); l++){
+      Hist2[104+Mtx_prm.size()*0+l]= new TH2D(Form("pKurama % m2 Cut5 SchSeg%d - TofSeg%d",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1), Form("pKurama % m2 Cut5 SchSeg%d - TofSeg%d",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1)   ,100,-0.4,1.4,100,0,2);
+    }                                         
+
+
 //-Legend def --------------------------------------------------------------------------------------
   TLegend *Leg1 = new TLegend(0.78,0.575,0.98,0.935);
   TLegend *Leg2 = new TLegend(0.78,0.575,0.98,0.935);
@@ -465,6 +546,11 @@ void Mtx_Pos_Mon(int month,int runnum){
    for (Long64_t s=0; s<nentries;s++) {
      nbytes += k0hodo->GetEntry(s);
      //     for(int i=0; i<ntKurama; i++){
+     
+    if(s%(nentries/10) ==0){
+      std::cout << ( ((double)s)/nentries *100 ) << "%\t" << s << "/" << nentries << "\r"  << std::endl;
+    }
+
      if( ntKurama!=1) continue;
      bool sch_flag = false;
 
@@ -547,6 +633,29 @@ void Mtx_Pos_Mon(int month,int runnum){
                Hist2[25+p*4]->Fill(vpseg[1],tofsegKurama[i]-1);
              }
            }
+           for(int l=0; l < Mtx_prm.size(); l++){
+             double m = 0;
+             double n = 0;
+             double min = 0;
+             double max = 0;
+             m = (double)Mtx_prm.at(l).at(1);
+             n = (double)Mtx_prm.at(l).at(0);
+             min = (double)Mtx_prm.at(l).at(2);
+             max = (double)Mtx_prm.at(l).at(3) + 1;
+             if(vpseg[1]==n&&tofsegKurama[i]-1==m){
+                 Hist1[48+Mtx_prm.size()*0+l]->Fill(sftxsegKurama);
+               if(sftxsegKurama>min&&sftxsegKurama<max){
+                 Hist1[48+Mtx_prm.size()*1+l]->Fill(sftxsegKurama);
+                 Hist1[46]->Fill(m2[i]);
+                 Hist1[47]->Fill(pKurama[i]);
+                 Hist1[48+Mtx_prm.size()*2+l]->Fill(pKurama[i]);
+                 Hist1[48+Mtx_prm.size()*3+l]->Fill(m2[i]);
+                 Hist2[102]->Fill(vpseg[1],tofsegKurama[i]-1);
+                 Hist2[103]->Fill(m2[i],pKurama[i]);
+                 Hist2[104+Mtx_prm.size()*0+l]->Fill(m2[i],pKurama[i]);
+               }
+             }
+           }
          } // Cut3
          if(qKurama[i]<0){ // Cut4
            Hist1[38]->Fill(pKurama[i]);
@@ -603,65 +712,6 @@ void Mtx_Pos_Mon(int month,int runnum){
    c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist1_%04d.pdf",pdfDhire.Data(),runnum,i));
 //   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
    }
-
-  //Matrix Patern txt file PATH -----------------------------------------------------------------------
-  //  TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
-
-  std::ifstream fin1(filein1);
-
-  // Param Vector Dif ----------------------------------------------------------------------
-  std::vector<std::vector<int>> Mtx_prm; 
-  std::string line;
-  int preSCH=0;
-  std::vector<std::vector<int>> sch_tof; 
-  std::vector<int> SCH_Seg; 
-  std::vector<int> TOF_Min; 
-  std::vector<int> TOF_Max; 
-
-
-  // Error Out ----------------------------------------------------------------------------------------
-  if(fin1.fail() ){
-    std::cerr << "file1" << std::endl;
-    exit(0); 
-  }  
-
-  while(std::getline(fin1, line)){
-    double sch=-1, tof=-1, sft_min=-1, sft_max=-1;
-    std::istringstream input_line( line );
-    std::vector<int> inner;
-    if( input_line >> sch >> tof >> sft_min >> sft_max ){
-      inner.push_back(sch);
-      inner.push_back(tof);
-      inner.push_back(sft_min-11);
-      inner.push_back(sft_max-1);
-      Mtx_prm.push_back(inner);
-    }
-  }
-
-  for(int i=0; i<Mtx_prm.size(); i++){
-    //        std::cout << "SCH=" << Mtx_prm.at(i).at(0)  << "\t" << "TOF="  <<  Mtx_prm.at(i).at(1)  << "\t"  << "SFT_Min=" << Mtx_prm.at(i).at(2)  << "\t"  << "SFT_Max=" << Mtx_prm.at(i).at(3)  << std::endl;
-    if(i==0){
-      SCH_Seg.push_back( Mtx_prm.at(i).at(0) );
-      TOF_Min.push_back( Mtx_prm.at(i).at(1) );
-    }else{
-      if(i==Mtx_prm.size()-1){
-        TOF_Max.push_back( Mtx_prm.at(i).at(1) );
-      }else if(Mtx_prm.at(i).at(0)!=Mtx_prm.at(i-1).at(0)){
-        SCH_Seg.push_back( Mtx_prm.at(i).at(0) );
-        TOF_Max.push_back( Mtx_prm.at(i-1).at(1) );
-        TOF_Min.push_back( Mtx_prm.at(i).at(1) );
-      }
-    }
-  }
-
-  //  std::cout << "SCH_Seg size is" << SCH_Seg.size() << "\n"  
-  //    << "TOF_Min size is" << TOF_Min.size() << "\n"
-  //    << "TOF_Max size is" << TOF_Max.size() << std::endl;
-
-  if( !eq3(SCH_Seg.size(),TOF_Min.size(),TOF_Max.size()) ){
-    std::cerr << "Size Not Same" << std::endl;
-  }
    for(int i=0; i<Hist2Max; i++){
      Hist2[i]->Draw("colz");
      c1->Print(pdf);

@@ -136,6 +136,7 @@ struct Event
   double sch_ctime[NumOfSegSCH];
   double sch_ctot[NumOfSegSCH];
   double sch_clpos[NumOfSegSCH];
+  double sch_clseg[NumOfSegSCH];
 
   // SFT-V
   int    sftv_nhits;
@@ -661,15 +662,18 @@ EventEasiroc::ProcessingNormal( void )
       double ctime  = cl->CMeanTime();
       double ctot   = cl->Width();
       double pos    = cl->MeanPosition();
+      double seg    = cl->MeanSeg();
       event.sch_clsize[i] = clsize;
       event.sch_ctime[i]  = ctime;
       event.sch_ctot[i]   = ctot;
       event.sch_clpos[i]  = pos;
+      event.sch_clseg[i]  = seg;
       HF1( SCHHid +102, clsize );
       HF1( SCHHid +103, ctime );
       HF1( SCHHid +104, ctot );
       HF2( SCHHid +105, ctot, ctime );
       HF1( SCHHid +106, pos );
+      HF1( SCHHid +107, seg );
     }
   }
 
@@ -1384,6 +1388,7 @@ EventEasiroc::InitializeEvent( void )
     event.sch_ctime[it]  = -999.;
     event.sch_ctot[it]   = -999.;
     event.sch_clpos[it]  = -999.;
+    event.sch_clseg[it]  = -999.;
   }
 
   for( int it=0; it<NumOfSegSFT_UV; it++){
@@ -2056,6 +2061,7 @@ ConfMan:: InitializeHistograms( void )
   tree->Branch("sch_ctime",      event.sch_ctime,        "sch_ctime[sch_ncl]/D");
   tree->Branch("sch_ctot",       event.sch_ctot,         "sch_ctot[sch_ncl]/D");
   tree->Branch("sch_clpos",      event.sch_clpos,        "sch_clpos[sch_ncl]/D");
+  tree->Branch("sch_clseg",      event.sch_clseg,        "sch_clseg[sch_ncl]/D");
 
   //SFT-V
 #if FHitBranch
