@@ -1,8 +1,8 @@
 {
     "5368": {
         "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05368.dat.gz",
-        "stat": 0,
-        "time": 3142.866419315338,
+        "stat": true,
+        "time": 4444.662464857101,
         "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05368_K18Tracking.root",
         "conf": "./param_nakadashi/analyzer_jun.conf",
         "unit": 100000,
@@ -10,7 +10,7 @@
         "nproc": 1,
         "nev": 4002406,
         "nseg": 41,
-        "prog": 1,
+        "prog": 41,
         "bin": "./bin/K18Tracking"
     }
 }
