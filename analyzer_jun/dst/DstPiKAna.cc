@@ -833,6 +833,7 @@ dst::DstRead( int ievent )
         event.vpy[l] = src.vpy[l];
         event.vpseg[l] = src.vpseg[l];
       }
+    event.sftxsegKurama = src.sftxsegKurama;
     }
     HF1( 3202, double(nh) );
     HF1( 3203, chisqr );

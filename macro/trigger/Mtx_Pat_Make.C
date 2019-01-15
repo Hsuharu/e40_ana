@@ -708,7 +708,7 @@ void Mtx_Pat_Make(int month,int runnum){
            Hist2[8+Mtx_prm.size()*2+l]->Fill(m2[0],pKurama[0]);
            if( vtx[0]>-20 && vtx[0]<20 && vty[0]>-20 && vty[0]<20 && vtz[0]>-200 && vtz[0]<200 ){
              if(sftxsegKurama>min&&sftxsegKurama<max){
-               Hist1[34+Mtx_prm.size()*15 +l]->Fill(MissMass[0]); 
+               Hist1[34+Mtx_prm.size()*14 +l]->Fill(MissMass[0]); 
              }
              if( MissMass[0]>1.15 && MissMass[0]<1.35 ){
                Hist1[32]->Fill(pKurama[0]);
