@@ -535,26 +535,26 @@ void Mtx_Pat_Make(int month,int runnum){
     Hist1[2 ]= new TH1D("pKurama","pKurama",100,0,2);
     Hist1[3 ]= new TH1D("m2","m2",100,-0.4,1.4);
     Hist1[4 ]= new TH1D("chisqrKurama","chisqrKurama",100,0,200);
-    Hist1[5 ]= new TH1D("MissMass Sigma","MissMass Sigma",100,0,200);
+    Hist1[5 ]= new TH1D("MissMass Sigma","MissMass Sigma",100,0.8,1.4);
     Hist1[6 ]= new TH1D("qKurama","qKurama",4,-2,2);
     Hist1[7 ]= new TH1D("vpseg[1]","vpseg[1]",200,-400,400);
     Hist1[8 ]= new TH1D("tofsegKurama[0]","tofsegKurama[0]",NumOfSegTOF,0,NumOfSegTOF);
     Hist1[9 ]= new TH1D("sftxsegKurama","sftxsegKurama",NumOfSegSFT_X,0,NumOfSegSFT_X);
-    Hist1[10]= new TH1D("vtx[0]","vtx[0]",200,-200,200);
-    Hist1[11]= new TH1D("vty[0]","vty[0]",200,-200,200);
+    Hist1[10]= new TH1D("vtx[0]","vtx[0]",200,-100,100);
+    Hist1[11]= new TH1D("vty[0]","vty[0]",200,-100,100);
     Hist1[12]= new TH1D("vtz[0]","vtz[0]",200,-200,200);
     Hist1[13]= new TH1D("delta_x Cut1","delta_x Cut1",200,-100,100);
     Hist1[14]= new TH1D("delta_seg Cut1","delta__seg Cut1",20,-10,10);
     Hist1[15]= new TH1D("pKurama Cut1","pKurama Cut1",100,0,2);
     Hist1[16]= new TH1D("m2 Cut1","m2 Cut1",100,-0.4,1.4);
     Hist1[17]= new TH1D("chisqrKurama Cut1","chisqrKurama Cut1",100,0,200);
-    Hist1[18]= new TH1D("MissMass Sigma Cut1","MissMass Sigma Cut1",100,0,200);
+    Hist1[18]= new TH1D("MissMass Sigma Cut1","MissMass Sigma Cut1",100,0.8,1.4);
     Hist1[19]= new TH1D("qKurama Cut1","qKurama Cut1",4,-2,2);
     Hist1[20]= new TH1D("vpseg[1] Cut1","vpseg[1] Cut1",200,-400,400);
     Hist1[21]= new TH1D("tofsegKurama[0] Cut1","tofsegKurama[0] Cut1",NumOfSegTOF,0,NumOfSegTOF);
     Hist1[22]= new TH1D("sftxsegKurama Cut1","sftxsegKurama Cut1",NumOfSegSFT_X,0,NumOfSegSFT_X);
-    Hist1[23]= new TH1D("vtx[0] Cut1","vtx[0] Cut1",200,-200,200);
-    Hist1[24]= new TH1D("vty[0] Cut1","vty[0] Cut1",200,-200,200);
+    Hist1[23]= new TH1D("vtx[0] Cut1","vtx[0] Cut1",200,-100,100);
+    Hist1[24]= new TH1D("vty[0] Cut1","vty[0] Cut1",200,-100,100);
     Hist1[25]= new TH1D("vtz[0] Cut1","vtz[0] Cut1",200,-200,200);
 
     Hist1[26]= new TH1D("pKurama Cut2","pKurama Cut2",100,0,2);
@@ -581,7 +581,7 @@ void Mtx_Pat_Make(int month,int runnum){
       Hist1[34+Mtx_prm.size()*11+l]= new TH1D(Form("pKurama Cut3 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("pKurama Cut3 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),NumOfSegSFT_X,0,NumOfSegSFT_X);
       Hist1[34+Mtx_prm.size()*12+l]= new TH1D(Form("pKurama Cut4 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("pKurama Cut4 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),NumOfSegSFT_X,0,NumOfSegSFT_X);
       Hist1[34+Mtx_prm.size()*13+l]= new TH1D(Form("pKurama Cut5 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("pKurama Cut5 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),NumOfSegSFT_X,0,NumOfSegSFT_X);
-      Hist1[34+Mtx_prm.size()*14+l]= new TH1D(Form("MissMass Sigma Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("MissMass Sigma ch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),NumOfSegSFT_X,0,NumOfSegSFT_X);
+      Hist1[34+Mtx_prm.size()*14+l]= new TH1D(Form("MissMass Sigma Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("MissMass Sigma ch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,0.8,1.4);
     }                         
                               
     Hist2[0 ]= new TH2D("pKurama % m2",     "pKurama % m2 "    ,100,-0.4,1.4,100,0,2);
