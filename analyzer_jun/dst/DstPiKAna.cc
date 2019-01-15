@@ -723,7 +723,7 @@ dst::DstRead( int ievent )
     event.delta_seg[i] = src.vpseg[1]-src.SchSeg[i];
   }
   for( int i=0; i<sftx_unhits; ++i ){
-    event.sftx_uhitpat[i] = src.sftx_uhitpat[i]
+    event.sftx_uhitpat[i] = src.sftx_uhitpat[i];
   }
   for( int i=0; i<nhSftX; ++i ){
     event.SftXSeg[i] = src.SftXSeg[i];
