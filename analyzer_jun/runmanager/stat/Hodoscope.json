@@ -1,16 +1,16 @@
 {
     "5368": {
-        "unit": 100000,
-        "nproc": 1,
-        "bin": "./bin/Hodoscope",
-        "conf": "./param/conf/analyzer_jun_tune_05368.conf_0",
-        "queue": "s",
-        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05368.dat.gz",
-        "nseg": 41,
         "root": "/ghi/fs02/had/sks/Users/suharu/e40_2018jun/rootfile_jun/run05368_Hodoscope.root",
-        "time": 1131.220605134964,
+        "nproc": 1,
+        "queue": "s",
         "stat": true,
+        "unit": 100000,
+        "nev": 4002406,
         "prog": 41,
-        "nev": 4002406
+        "nseg": 41,
+        "bin": "./bin/Hodoscope",
+        "data": "/ghi/fs02/had/sks/E40/JPARC2018Jun/e40_2018jun/run05368.dat.gz",
+        "time": 1302.587393283844,
+        "conf": "./param_nakadashi/analyzer_jun.conf"
     }
 }
