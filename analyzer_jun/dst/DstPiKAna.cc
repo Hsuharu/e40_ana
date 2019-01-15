@@ -118,6 +118,8 @@ struct Event
   double delta_x[NumOfSegSCH];
   double delta_seg[NumOfSegSCH];
   
+  int    sftx_unhits;
+  double sftx_uhitpat[NumOfSegSFT_X];
   int    nhSftX;
   double SftXSeg[NumOfSegSFT_X];
 
@@ -270,6 +272,8 @@ struct Src
   double wSch[NumOfSegSCH];
   double SchPos[NumOfSegSCH];
   double SchSeg[NumOfSegSCH];
+  int    sftx_unhits;
+  double sftx_uhitpat[NumOfSegSFT_X];
   int    nhSftX;
   double SftXSeg[NumOfSegSFT_X];
   int    nhFbh;
@@ -443,8 +447,10 @@ dst::InitializeEvent( void )
     event.delta_x[it]  = -999.;
     event.delta_seg[it]  = -999.;
   }
+  event.sftx_unhits = 0;
   event.nhSftX = 0;
   for( int it=0; it<NumOfSegSFT_X; it++ ){
+    event.sftx_uhitpat[it] = -999.;
     event.SftXSeg[it]  = -999.;
   }
 
@@ -616,6 +622,7 @@ dst::DstRead( int ievent )
   event.nhBh1    = src.nhBh1;
   event.nhBh2    = src.nhBh2;
   event.nhSch    = src.nhSch;
+  event.sftx_unhits = src.sftx_unhits;
   event.nhSftX    = src.nhSftX;
   event.nhTof    = src.nhTof;
 
@@ -628,6 +635,7 @@ dst::DstRead( int ievent )
   const int nhBh1    = event.nhBh1;
   const int nhBh2    = event.nhBh2;
   const int nhSch    = event.nhSch;
+  const int sftx_unhits = event.sftx_unhits;
   const int nhSftX    = event.nhSftX;
   const int nhTof    = event.nhTof;
 
@@ -713,6 +721,9 @@ dst::DstRead( int ievent )
     event.SchSeg[i] = src.SchSeg[i];
     event.delta_x[i] = src.vpx[1]-src.SchPos[i];
     event.delta_seg[i] = src.vpseg[1]-src.SchSeg[i];
+  }
+  for( int i=0; i<sftx_unhits; ++i ){
+    event.sftx_uhitpat[i] = src.sftx_uhitpat[i]
   }
   for( int i=0; i<nhSftX; ++i ){
     event.SftXSeg[i] = src.SftXSeg[i];
@@ -1325,6 +1336,8 @@ ConfMan::InitializeHistograms( void )
   tree->Branch("SchSeg",  event.SchSeg, "SchSeg[nhSch]/D");
   tree->Branch("delta_x", event.delta_x,  "delta_x[nhSch]/D" );
   tree->Branch("delta_seg", event.delta_seg,  "delta_seg[nhSch]/D" );
+  tree->Branch("sftx_unhits",  &event.sftx_unhits,  "sftx_unhits/I");
+  tree->Branch("sftx_uhitpat",  event.sftx_uhitpat, "sftx_uhitpat[sftx_unhits]/D");
   tree->Branch("nhSftX",  &event.nhSftX,  "nhSftX/I");
   tree->Branch("SftXSeg",  event.SftXSeg, "SftXSeg[nhSftX]/D");
 
@@ -1608,6 +1621,8 @@ ConfMan::InitializeHistograms( void )
   TTreeCont[kEasiroc]->SetBranchStatus("sch_ctot",   1);
   TTreeCont[kEasiroc]->SetBranchStatus("sch_clpos",  1);
   TTreeCont[kEasiroc]->SetBranchStatus("sch_clseg", 1);
+  TTreeCont[kEasiroc]->SetBranchStatus("sftx_unhits", 1);
+  TTreeCont[kEasiroc]->SetBranchStatus("sftx_uhitpat",1);
   TTreeCont[kEasiroc]->SetBranchStatus("sftx_clseg", 1);
   TTreeCont[kEasiroc]->SetBranchStatus("sftx_ncl",    1);
 
@@ -1622,6 +1637,8 @@ ConfMan::InitializeHistograms( void )
   TTreeCont[kEasiroc]->SetBranchAddress("sch_ctot",   src.wSch);
   TTreeCont[kEasiroc]->SetBranchAddress("sch_clpos",  src.SchPos);
   TTreeCont[kEasiroc]->SetBranchAddress("sch_clseg",  src.SchSeg);
+  TTreeCont[kEasiroc]->SetBranchAddress("sftx_unhits",    &src.sftx_unhits);
+  TTreeCont[kEasiroc]->SetBranchAddress("sftx_uhitpat",  src.sftx_uhitpat);
   TTreeCont[kEasiroc]->SetBranchAddress("sftx_ncl",    &src.nhSftX);
   TTreeCont[kEasiroc]->SetBranchAddress("sftx_clseg",  src.SftXSeg);
 

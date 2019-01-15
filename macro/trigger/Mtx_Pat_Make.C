@@ -578,11 +578,13 @@ void Mtx_Pat_Make(int month,int runnum){
       Hist1[34+Mtx_prm.size()*2 +l]= new TH1D(Form("sftxseg Cut3 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Cut3 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),NumOfSegSFT_X,0,NumOfSegSFT_X);
       Hist1[34+Mtx_prm.size()*3 +l]= new TH1D(Form("sftxseg Cut4 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Cut4 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),NumOfSegSFT_X,0,NumOfSegSFT_X);
       Hist1[34+Mtx_prm.size()*4 +l]= new TH1D(Form("sftxseg Cut5 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Cut5 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),NumOfSegSFT_X,0,NumOfSegSFT_X);
-      Hist1[34+Mtx_prm.size()*0 +l]->SetFillColor(6); 
-      Hist1[34+Mtx_prm.size()*1 +l]->SetFillColor(2); 
-      Hist1[34+Mtx_prm.size()*2 +l]->SetFillColor(3); 
-      Hist1[34+Mtx_prm.size()*3 +l]->SetFillColor(4); 
-      Hist1[34+Mtx_prm.size()*4 +l]->SetFillColor(5); 
+//      Hist1[34+Mtx_prm.size()*1 +l]->SetFillColor(2); 
+//      Hist1[34+Mtx_prm.size()*2 +l]->SetFillColor(3); 
+      Hist1[34+Mtx_prm.size()*3 +l]->SetFillColor(kBlue); 
+      Hist1[34+Mtx_prm.size()*4 +l]->SetFillColor(kRed); 
+      Hist1[34+Mtx_prm.size()*0 +l]->SetFillStyle(3002); 
+      Hist1[34+Mtx_prm.size()*1 +l]->SetFillStyle(3305); 
+      Hist1[34+Mtx_prm.size()*2 +l]->SetFillStyle(3395); 
       Hist1[34+Mtx_prm.size()*5 +l]= new TH1D(Form("m2 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("m2 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,-0.4,1.4);
       Hist1[34+Mtx_prm.size()*6 +l]= new TH1D(Form("m2 Cut2 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("m2 Cut2 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,-0.4,1.4);
       Hist1[34+Mtx_prm.size()*7 +l]= new TH1D(Form("m2 Cut3 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("m2 Cut3 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,-0.4,1.4);
