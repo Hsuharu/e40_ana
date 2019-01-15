@@ -178,6 +178,8 @@ void Mtx_Pat_Make(int month,int runnum){
    Double_t        SchSeg[27];
    Double_t        delta_x[27];
    Double_t        delta_seg[27];
+   Int_t           sftx_unhits;
+   Int_t           sftx_uhitpat[131];
    Int_t           nhSftX;
    Double_t        SftXSeg[69];
    Int_t           nlBcOut;
@@ -306,6 +308,8 @@ void Mtx_Pat_Make(int month,int runnum){
    pik->SetBranchStatus("SchSeg");
    pik->SetBranchStatus("delta_x");
    pik->SetBranchStatus("delta_seg");
+   pik->SetBranchStatus("sftx_unhits");
+   pik->SetBranchStatus("sftx_uhitpat");
    pik->SetBranchStatus("nhSftX");
    pik->SetBranchStatus("SftXSeg");
 //   pik->SetBranchStatus("nlBcOut");
@@ -432,6 +436,8 @@ void Mtx_Pat_Make(int month,int runnum){
      pik->SetBranchAddress("SchSeg",SchSeg);
      pik->SetBranchAddress("delta_x",delta_x);
      pik->SetBranchAddress("delta_seg",delta_seg);
+     pik->SetBranchAddress("sftx_unhits",&sftx_unhits);
+     pik->SetBranchAddress("sftx_uhitpat",sftx_uhitpat);
      pik->SetBranchAddress("nhSftX",&nhSftX);
      pik->SetBranchAddress("SftXSeg",SftXSeg);
 //   pik->SetBranchAddress("nlBcOut",&nlBcOut);
@@ -643,8 +649,9 @@ void Mtx_Pat_Make(int month,int runnum){
        m = (double)Mtx_prm.at(l).at(1);
        n = (double)Mtx_prm.at(l).at(0);
        if( vpseg[1]==n && tofsegKurama[0]-1==m ){
-         for(int j=0; j<nhSftX; j++){
-           Hist1[34+Mtx_prm.size()*16+l]->Fill(SftXSeg[j]);
+//         for(int j=0; j<nhSftX; j++){
+         for(int j=0; j<sftx_unhits; j++){
+           Hist1[34+Mtx_prm.size()*16+l]->Fill(sftx_uhitpat[j]);
          }
        }
      }

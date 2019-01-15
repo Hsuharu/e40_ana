@@ -119,7 +119,7 @@ struct Event
   double delta_seg[NumOfSegSCH];
   
   int    sftx_unhits;
-  double sftx_uhitpat[NumOfSegSFT_X];
+  int sftx_uhitpat[NumOfSegSFT_X];
   int    nhSftX;
   double SftXSeg[NumOfSegSFT_X];
 
@@ -273,7 +273,7 @@ struct Src
   double SchPos[NumOfSegSCH];
   double SchSeg[NumOfSegSCH];
   int    sftx_unhits;
-  double sftx_uhitpat[NumOfSegSFT_X];
+  int sftx_uhitpat[NumOfSegSFT_X];
   int    nhSftX;
   double SftXSeg[NumOfSegSFT_X];
   int    nhFbh;
@@ -450,7 +450,7 @@ dst::InitializeEvent( void )
   event.sftx_unhits = 0;
   event.nhSftX = 0;
   for( int it=0; it<NumOfSegSFT_X; it++ ){
-    event.sftx_uhitpat[it] = -999.;
+    event.sftx_uhitpat[it] = -999;
     event.SftXSeg[it]  = -999.;
   }
 
@@ -1337,7 +1337,7 @@ ConfMan::InitializeHistograms( void )
   tree->Branch("delta_x", event.delta_x,  "delta_x[nhSch]/D" );
   tree->Branch("delta_seg", event.delta_seg,  "delta_seg[nhSch]/D" );
   tree->Branch("sftx_unhits",  &event.sftx_unhits,  "sftx_unhits/I");
-  tree->Branch("sftx_uhitpat",  event.sftx_uhitpat, "sftx_uhitpat[sftx_unhits]/D");
+  tree->Branch("sftx_uhitpat",  event.sftx_uhitpat, "sftx_uhitpat[sftx_unhits]/I");
   tree->Branch("nhSftX",  &event.nhSftX,  "nhSftX/I");
   tree->Branch("SftXSeg",  event.SftXSeg, "SftXSeg[nhSftX]/D");
 

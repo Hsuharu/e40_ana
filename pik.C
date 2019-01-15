@@ -1,7 +1,7 @@
 {
 //////////////////////////////////////////////////////////
 //   This file has been automatically generated 
-//     (Tue Jan 15 16:04:27 2019 by ROOT version6.10/08)
+//     (Tue Jan 15 17:51:10 2019 by ROOT version6.10/08)
 //   from TTree pik/tree of PiKAna
 //   found on file: analyzer_jun/rootfile/run05368_DstPiKAna.root
 //////////////////////////////////////////////////////////
@@ -54,6 +54,8 @@
    Double_t        SchSeg[27];
    Double_t        delta_x[27];
    Double_t        delta_seg[27];
+   Int_t           sftx_unhits;
+   Double_t        sftx_uhitpat[131];
    Int_t           nhSftX;
    Double_t        SftXSeg[69];
    Int_t           nlBcOut;
@@ -180,6 +182,8 @@
    pik->SetBranchAddress("SchSeg",SchSeg);
    pik->SetBranchAddress("delta_x",delta_x);
    pik->SetBranchAddress("delta_seg",delta_seg);
+   pik->SetBranchAddress("sftx_unhits",&sftx_unhits);
+   pik->SetBranchAddress("sftx_uhitpat",sftx_uhitpat);
    pik->SetBranchAddress("nhSftX",&nhSftX);
    pik->SetBranchAddress("SftXSeg",SftXSeg);
    pik->SetBranchAddress("nlBcOut",&nlBcOut);
