@@ -905,7 +905,6 @@ void Mtx_Pat_Make(int month,int runnum){
      MtxSftXGateMax->SetLineWidth(1);
      MtxSftXGateMin->Draw("same");
      MtxSftXGateMax->Draw("same");
-     gPad->SetLogy(0);
 
      c2->cd(2);
      Hist1[34+Mtx_prm.size()*14 +l]->Draw();
