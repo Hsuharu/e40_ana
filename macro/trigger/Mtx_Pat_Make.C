@@ -296,7 +296,7 @@ void Mtx_Pat_Make(int month,int runnum){
 //   pik->SetBranchStatus("tBft");
 //   pik->SetBranchStatus("wBft");
 //   pik->SetBranchStatus("BftPos");
-//   pik->SetBranchStatus("nhSch");
+   pik->SetBranchStatus("nhSch");
 //   pik->SetBranchStatus("csSch");
 //   pik->SetBranchStatus("tSch");
 //   pik->SetBranchStatus("wSch");
@@ -420,7 +420,7 @@ void Mtx_Pat_Make(int month,int runnum){
 //   pik->SetBranchAddress("tBft",tBft);
 //   pik->SetBranchAddress("wBft",wBft);
 //   pik->SetBranchAddress("BftPos",BftPos);
-//   pik->SetBranchAddress("nhSch",&nhSch);
+   pik->SetBranchAddress("nhSch",&nhSch);
 //   pik->SetBranchAddress("csSch",csSch);
 //   pik->SetBranchAddress("tSch",tSch);
 //   pik->SetBranchAddress("wSch",wSch);
