@@ -1590,18 +1590,19 @@ ConfMan::InitializeHistograms( void )
   TTreeCont[kEasiroc]->SetBranchStatus("sch_ctime",  1);
   TTreeCont[kEasiroc]->SetBranchStatus("sch_ctot",   1);
   TTreeCont[kEasiroc]->SetBranchStatus("sch_clpos",  1);
+  TTreeCont[kEasiroc]->SetBranchStatus("sch_clseg", 1);
 
   TTreeCont[kEasiroc]->SetBranchAddress("bft_ncl",    &src.nhBft);
-  TTreeCont[kEasiroc]->SetBranchAddress("bft_clsize", &src.csBft);
-  TTreeCont[kEasiroc]->SetBranchAddress("bft_ctime",  &src.tBft);
-  TTreeCont[kEasiroc]->SetBranchAddress("bft_ctot",   &src.wBft);
-  TTreeCont[kEasiroc]->SetBranchAddress("bft_clpos",  &src.BftPos);
+  TTreeCont[kEasiroc]->SetBranchAddress("bft_clsize", src.csBft);
+  TTreeCont[kEasiroc]->SetBranchAddress("bft_ctime",  src.tBft);
+  TTreeCont[kEasiroc]->SetBranchAddress("bft_ctot",   src.wBft);
+  TTreeCont[kEasiroc]->SetBranchAddress("bft_clpos",  src.BftPos);
   TTreeCont[kEasiroc]->SetBranchAddress("sch_ncl",    &src.nhSch);
-  TTreeCont[kEasiroc]->SetBranchAddress("sch_clsize", &src.csSch);
-  TTreeCont[kEasiroc]->SetBranchAddress("sch_ctime",  &src.tSch);
-  TTreeCont[kEasiroc]->SetBranchAddress("sch_ctot",   &src.wSch);
-  TTreeCont[kEasiroc]->SetBranchAddress("sch_clpos",  &src.SchPos);
-  TTreeCont[kEasiroc]->SetBranchAddress("sch_clseg",   src.SchSeg);
+  TTreeCont[kEasiroc]->SetBranchAddress("sch_clsize", src.csSch);
+  TTreeCont[kEasiroc]->SetBranchAddress("sch_ctime",  src.tSch);
+  TTreeCont[kEasiroc]->SetBranchAddress("sch_ctot",   src.wSch);
+  TTreeCont[kEasiroc]->SetBranchAddress("sch_clpos",  src.SchPos);
+  TTreeCont[kEasiroc]->SetBranchAddress("sch_clseg",  src.SchSeg);
 
   return true;
 }
