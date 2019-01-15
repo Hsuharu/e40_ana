@@ -167,6 +167,6 @@
 
 #./bin/DstKuramaEasirocHodoscope ./param_nakadashi/analyzer_jun.conf  ./rootfile/run05368_KuramaTracking.root ./rootfile/run05368_Easiroc.root ./rootfile/run05368_Hodoscope.root ./rootfile/run05368_DstKuramaEasirocHodoscope.root
 
-#./bin/DstPiKAna ./param_nakadashi/analyzer_jun.conf  ./rootfile/run05126_KuramaTracking.root ./rootfile/run05126_K18Tracking.root ./rootfile/run05126_Hodoscope.root ./rootfile/run05126_Easiroc.root ./rootfile/run05126_DstPiKAna.root 
-./bin/DstPiKAna ./param_nakadashi/analyzer_jun.conf  ./rootfile/run05368_KuramaTracking.root ./rootfile/run05368_K18Tracking.root ./rootfile/run05368_Hodoscope.root ./rootfile/run05368_Easiroc.root ./rootfile/run05368_DstPiKAna.root 
+./bin/DstPiKAna ./param_nakadashi/analyzer_jun.conf  ./rootfile/run05126_KuramaTracking.root ./rootfile/run05126_K18Tracking.root ./rootfile/run05126_Hodoscope.root ./rootfile/run05126_Easiroc.root ./rootfile/run05126_DstPiKAna.root 
+#./bin/DstPiKAna ./param_nakadashi/analyzer_jun.conf  ./rootfile/run05368_KuramaTracking.root ./rootfile/run05368_K18Tracking.root ./rootfile/run05368_Hodoscope.root ./rootfile/run05368_Easiroc.root ./rootfile/run05368_DstPiKAna.root 
 #END

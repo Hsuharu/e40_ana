@@ -183,6 +183,7 @@ struct Event
   double sftx_ctime[NumOfSegSFT_X];
   double sftx_ctot[NumOfSegSFT_X];
   double sftx_clpos[NumOfSegSFT_X];
+  double sftx_clseg[NumOfSegSFT_X];
 
   // FBT1
   int    fbt1_u1nhits;
@@ -1009,15 +1010,18 @@ EventEasiroc::ProcessingNormal( void )
       double ctime  = cl->CMeanTime();
       double ctot   = cl->Width();
       double pos    = cl->MeanPosition();
+      double seg    = cl->MeanSeg();
       event.sftx_clsize[i] = clsize;
       event.sftx_ctime[i]  = ctime;
       event.sftx_ctot[i]   = ctot;
       event.sftx_clpos[i]  = pos;
+      event.sftx_clseg[i]  = seg;
       HF1( SFTXHid +102, clsize );
       HF1( SFTXHid +103, ctime );
       HF1( SFTXHid +104, ctot );
       HF2( SFTXHid +105, ctot, ctime );
       HF1( SFTXHid +106, pos );
+      HF1( SFTXHid +107, seg );
     }
   }
 
@@ -1433,6 +1437,7 @@ EventEasiroc::InitializeEvent( void )
     event.sftx_ctime[it]  = -999.;
     event.sftx_ctot[it]   = -999.;
     event.sftx_clpos[it]  = -999.;
+    event.sftx_clseg[it]  = -999.;
   }
 
   for( int it=0; it<MaxSegFBT1; it++){
@@ -1646,6 +1651,8 @@ ConfMan:: InitializeHistograms( void )
        NbinTot, MinTot, MaxTot, NbinTime, MinTime, MaxTime );
   HB1( SCHHid +106, "SCH Cluster Position",
        NumOfSegSCH, -0.5*(double)NumOfSegSCH, 0.5*(double)NumOfSegSCH);
+  HB1( SCHHid +107, "SCH Cluster Segment",
+       NumOfSegSCH, -0.5*(double)NumOfSegSCH, 0.5*(double)NumOfSegSCH);
 
   //SFT-V
   HB1( SFTVHid + 1, "SFTV Nhits",     NumOfSegSFT_UV, 0., (double)NumOfSegSFT_UV );
@@ -1757,6 +1764,8 @@ ConfMan:: InitializeHistograms( void )
   HB2( SFTXHid +105, "SFTX CTime%Tot (Cluster)",
        NbinTot, MinTot, MaxTot, NbinTime, MinTime, MaxTime );
   HB1( SFTXHid +106, "SFTX Cluster Position",
+       NumOfSegSFT_X, -0.5*(double)NumOfSegSFT_X, 0.5*(double)NumOfSegSFT_X);
+  HB1( SFTXHid +107, "SFTX Cluster Segment",
        NumOfSegSFT_X, -0.5*(double)NumOfSegSFT_X, 0.5*(double)NumOfSegSFT_X);
 
   //FBT1-U1
@@ -2126,6 +2135,7 @@ ConfMan:: InitializeHistograms( void )
   tree->Branch("sftx_ctime",      event.sftx_ctime,        "sftx_ctime[sftx_ncl]/D");
   tree->Branch("sftx_ctot",       event.sftx_ctot,         "sftx_ctot[sftx_ncl]/D");
   tree->Branch("sftx_clpos",      event.sftx_clpos,        "sftx_clpos[sftx_ncl]/D");
+  tree->Branch("sftx_clseg",      event.sftx_clseg,        "sftx_clseg[sftx_ncl]/D");
 
   //FBT1
 #if FHitBranch

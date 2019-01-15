@@ -117,6 +117,9 @@ struct Event
   double SchSeg[NumOfSegSCH];
   double delta_x[NumOfSegSCH];
   double delta_seg[NumOfSegSCH];
+  
+  int    nhSftX;
+  double SftXSeg[NumOfSegSFT_X];
 
   //DC Beam
   int ntBcOut;
@@ -267,6 +270,8 @@ struct Src
   double wSch[NumOfSegSCH];
   double SchPos[NumOfSegSCH];
   double SchSeg[NumOfSegSCH];
+  int    nhSftX;
+  double SftXSeg[NumOfSegSFT_X];
   int    nhFbh;
 
   //DC Beam
@@ -438,6 +443,10 @@ dst::InitializeEvent( void )
     event.delta_x[it]  = -999.;
     event.delta_seg[it]  = -999.;
   }
+  event.nhSftX = 0;
+  for( int it=0; it<NumOfSegSFT_X; it++ ){
+    event.SftXSeg[it]  = -999.;
+  }
 
   //DC
   event.nlBcOut  = 0;
@@ -607,6 +616,7 @@ dst::DstRead( int ievent )
   event.nhBh1    = src.nhBh1;
   event.nhBh2    = src.nhBh2;
   event.nhSch    = src.nhSch;
+  event.nhSftX    = src.nhSftX;
   event.nhTof    = src.nhTof;
 
   const int ntBcOut  = event.ntBcOut;
@@ -618,6 +628,7 @@ dst::DstRead( int ievent )
   const int nhBh1    = event.nhBh1;
   const int nhBh2    = event.nhBh2;
   const int nhSch    = event.nhSch;
+  const int nhSftX    = event.nhSftX;
   const int nhTof    = event.nhTof;
 
 #if 0
@@ -702,6 +713,9 @@ dst::DstRead( int ievent )
     event.SchSeg[i] = src.SchSeg[i];
     event.delta_x[i] = src.vpx[1]-src.SchPos[i];
     event.delta_seg[i] = src.vpseg[1]-src.SchSeg[i];
+  }
+  for( int i=0; i<nhSftX; ++i ){
+    event.SftXSeg[i] = src.SftXSeg[i];
   }
 
   // TOF
@@ -1311,6 +1325,8 @@ ConfMan::InitializeHistograms( void )
   tree->Branch("SchSeg",  event.SchSeg, "SchSeg[nhSch]/D");
   tree->Branch("delta_x", event.delta_x,  "delta_x[nhSch]/D" );
   tree->Branch("delta_seg", event.delta_seg,  "delta_seg[nhSch]/D" );
+  tree->Branch("nhSftX",  &event.nhSftX,  "nhSftX/I");
+  tree->Branch("SftXSeg",  event.SftXSeg, "SftXSeg[nhSftX]/D");
 
   //Beam DC
   tree->Branch("nlBcOut",   &event.nlBcOut,     "nlBcOut/I");
@@ -1592,6 +1608,8 @@ ConfMan::InitializeHistograms( void )
   TTreeCont[kEasiroc]->SetBranchStatus("sch_ctot",   1);
   TTreeCont[kEasiroc]->SetBranchStatus("sch_clpos",  1);
   TTreeCont[kEasiroc]->SetBranchStatus("sch_clseg", 1);
+  TTreeCont[kEasiroc]->SetBranchStatus("sftx_clseg", 1);
+  TTreeCont[kEasiroc]->SetBranchStatus("sftx_ncl",    1);
 
   TTreeCont[kEasiroc]->SetBranchAddress("bft_ncl",    &src.nhBft);
   TTreeCont[kEasiroc]->SetBranchAddress("bft_clsize", src.csBft);
@@ -1604,6 +1622,8 @@ ConfMan::InitializeHistograms( void )
   TTreeCont[kEasiroc]->SetBranchAddress("sch_ctot",   src.wSch);
   TTreeCont[kEasiroc]->SetBranchAddress("sch_clpos",  src.SchPos);
   TTreeCont[kEasiroc]->SetBranchAddress("sch_clseg",  src.SchSeg);
+  TTreeCont[kEasiroc]->SetBranchAddress("sftx_ncl",    &src.nhSftX);
+  TTreeCont[kEasiroc]->SetBranchAddress("sftx_clseg",  src.SftXSeg);
 
   return true;
 }
