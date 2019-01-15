@@ -578,6 +578,11 @@ void Mtx_Pat_Make(int month,int runnum){
       Hist1[34+Mtx_prm.size()*2 +l]= new TH1D(Form("sftxseg Cut3 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Cut3 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),NumOfSegSFT_X,0,NumOfSegSFT_X);
       Hist1[34+Mtx_prm.size()*3 +l]= new TH1D(Form("sftxseg Cut4 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Cut4 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),NumOfSegSFT_X,0,NumOfSegSFT_X);
       Hist1[34+Mtx_prm.size()*4 +l]= new TH1D(Form("sftxseg Cut5 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Cut5 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),NumOfSegSFT_X,0,NumOfSegSFT_X);
+      Hist1[34+Mtx_prm.size()*0 +l]->SetFillColor(6); 
+      Hist1[34+Mtx_prm.size()*1 +l]->SetFillColor(2); 
+      Hist1[34+Mtx_prm.size()*2 +l]->SetFillColor(3); 
+      Hist1[34+Mtx_prm.size()*3 +l]->SetFillColor(4); 
+      Hist1[34+Mtx_prm.size()*4 +l]->SetFillColor(5); 
       Hist1[34+Mtx_prm.size()*5 +l]= new TH1D(Form("m2 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("m2 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,-0.4,1.4);
       Hist1[34+Mtx_prm.size()*6 +l]= new TH1D(Form("m2 Cut2 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("m2 Cut2 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,-0.4,1.4);
       Hist1[34+Mtx_prm.size()*7 +l]= new TH1D(Form("m2 Cut3 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("m2 Cut3 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,-0.4,1.4);
@@ -629,6 +634,19 @@ void Mtx_Pat_Make(int month,int runnum){
      bool sch_flag = false;
 
      if( trigflag[28]<0 ) continue; //Cut1
+
+     for(int l=0; l < Mtx_prm.size(); l++){
+       double m = 0;
+       double n = 0;
+       m = (double)Mtx_prm.at(l).at(1);
+       n = (double)Mtx_prm.at(l).at(0);
+       if( vpseg[1]==n && tofsegKurama[0]-1==m ){
+         for(int j=0; j<nhSftX; j++){
+           Hist1[34+Mtx_prm.size()*16+l]->Fill(SftXSeg[j]);
+         }
+       }
+     }
+
      if( ntKurama!=1 ) continue; //Cut1
 
      for(int i=0; i<nhSch; i++){
@@ -689,9 +707,6 @@ void Mtx_Pat_Make(int month,int runnum){
          Hist1[34+Mtx_prm.size()*0 +l]->Fill(sftxsegKurama);
          Hist1[34+Mtx_prm.size()*5 +l]->Fill(m2[0]); 
          Hist1[34+Mtx_prm.size()*10 +l]->Fill(pKurama[0]); 
-         for(int j=0; j<nhSftX; j++){
-           Hist1[34+Mtx_prm.size()*16+l]->Fill(SftXSeg[j]);
-         }
          if(m2[0]>-0.1 && m2[0]<0.1){
            Hist1[26]->Fill(pKurama[0]);
            Hist1[27]->Fill(m2[0]);
