@@ -1,0 +1,96 @@
+ key = [Process]          arg[0] = ./bin/DstPiKAna
+ key = [ConfFile]         arg[1] = ./param/conf/analyzer_jun_tune_05368.conf_0
+ key = [KuramaTracking]   arg[2] = ./rootfile2/run05126_KuramaTracking.root
+ key = [K18Tracking]      arg[3] = ./rootfile2/run05126_K18Tracking.root
+ key = [Hodoscope]        arg[4] = ./rootfile2/run05126_Hodoscope.root
+ key = [Easiroc]          arg[5] = ./rootfile2/run05126_Easiroc.root
+ key = [OutFile]          arg[6] = ./rootfile2/run05126_DstPiKAna.root
+#D [ConfMan::Initialize()]
+ key = UNPACK     value = ./param/UNPACK/unpacker.xml   
+ key = DIGIT      value = ./param/DIGIT/digit_data_20180602.xml
+ key = CMAP       value = ./param/CMAP/channel_map_20180604.xml
+ key = DCGEO      value = ./param/DCGEO/DCGeomParam_E40_jun_CFT
+ key = DCDRFT     value = ./param/DCDRFT/DCDriftParam_jun_05120
+ key = DCTDC      value = ./param/DCTDC/DCTdcCalib_jun_05120.1
+ key = HDPRM      value = ./param/HDPRM/HodoParam_2018Jun_05368
+ key = HDPHC      value = ./param/HDPHC/HodoPHCParam_2018Jun_05368
+ key = USER       value = ./param/USER/user_jun_CFT.txt 
+ key = BH2FLT     value = ./param/BH2FLT/BH2Filter.param
+ key = BH1MTH     value = ./param/BH1MTH/BH1Matching.param
+ key = CFTPED     value = ./param/CFTPED/pedestalCorOut2.txt
+ key = FLDCALC    value = 0.75008                       
+ key = FLDNMR     value = 0.763143                      
+ key = FLDMAP     value = ./fieldmap/KuramaFieldMap_E07_20170907
+ key = PK18       value = 1.330811                      
+ key = K18TM      value = ./param/K18TM/K18MatrixParam_1
+ key = BGOTEMP    value = ./param/BGOTEMP/run2341.txt   
+ key = BGOCALIB   value = ./param/BGOCALIB/BGOtable24_E40_400MeV.txt
+ [DCGeomMan]        -> Initialized
+ [UserParamMan]     -> Initialized
+#D [UserParamMan::Print()] 
+ key = BH1_TDC             2 :     0  1000 
+ key = BTOF                2 :    -2     2 
+ key = DeBH1               2 :   0.3     4 
+ key = DeBH2               2 :   0.3     4 
+ key = DeTOF               2 :   0.3     4 
+ key = MaxMultiHitBcOut    1 :    16 
+ key = MaxMultiHitSdcIn    1 :    16 
+ key = MaxMultiHitSdcOut   1 :    16 
+ key = MinLayerBcOut       1 :    10 
+ key = MinLayerCFT         1 :     3 
+ key = MinLayerCFT16       1 :     6 
+ key = MinLayerSdcIn       1 :     7 
+ key = MinLayerSdcOut      1 :     6 
+ key = MinTotSDC2          1 :    30 
+ key = MinTotSDC3          1 :    60 
+ key = MtBH2               2 :    -2     2 
+ key = OffsetToF           1 :     0 
+ key = TdcBC3              2 :   250   400 
+ key = TdcBC4              2 :   250   400 
+ key = TdcBFT              2 :   620   650 
+ key = TdcFBT1             2 :     0  1000 
+ key = TdcFBT2             2 :     0  1000 
+ key = TdcSCH              2 :   440   480 
+ key = TdcSDC1             2 :     0   400 
+ key = TdcSDC2             2 :   600  1150 
+ key = TdcSDC3             2 :   400  1200 
+ key = TdcSFT              2 :   500   560 
+ key = TimeBFT             2 :    -5     5 
+ key = TimeFBT1            2 :   -15     5 
+ key = TimeFBT2            2 :   -15     5 
+ key = TimeL1              2 :   230   260 
+ key = TimeSCH             2 :   -15     5 
+ key = TimeSFT             2 :   -15     5 
+ key = TimeTOF             2 :     7    25 
+ key = dTOfs               1 :   150 
+#D [DstPiKAna::DstRead] Event Number: 0     
+#D [DstPiKAna::DstRead] Event Number: 10000 
+#D [DstPiKAna::DstRead] Event Number: 20000 
+#D [DstPiKAna::DstRead] Event Number: 30000 
+#D [DstPiKAna::DstRead] Event Number: 40000 
+#D [DstPiKAna::DstRead] Event Number: 50000 
+#D [DstPiKAna::DstRead] Event Number: 60000 
+#D [DstPiKAna::DstRead] Event Number: 70000 
+#D [DstPiKAna::DstRead] Event Number: 80000 
+#D [DstPiKAna::DstRead] Event Number: 90000 
+#D [DstPiKAna::DstRead] Event Number: 100000
+#D [DstPiKAna::DstRead] Event Number: 110000
+#D [DstPiKAna::DstRead] Event Number: 120000
+#D [DstPiKAna::DstRead] Event Number: 130000
+#D [DstPiKAna::DstRead] Event Number: 140000
+#D [DstPiKAna::DstRead] Event Number: 150000
+#D [DstPiKAna::DstRead] Event Number: 160000
+#D [DstPiKAna::DstRead] Event Number: 170000
+#D [DstPiKAna::DstRead] Event Number: 180000
+#D [DstPiKAna::DstRead] Event Number: 190000
+#D [DstPiKAna::DstRead] Event Number: 200000
+#D [DstPiKAna::DstRead] Event Number: 210000
+#D [DstPiKAna::DstRead] Event Number: 220000
+#D [DstPiKAna::DstRead] Event Number: 230000
+#D [DstPiKAna::DstRead] Event Number: 240000
+#D [DstPiKAna::DstRead] Event Number: 250000
+#D [DstPiKAna::DstRead] Event Number: 260000
+#D Event Number: 264862
+#D Close : ./rootfile2/run05126_DstPiKAna.root
+24.49user 0.64system 0:32.57elapsed 77%CPU (0avgtext+0avgdata 510776maxresident)k
+0inputs+0outputs (0major+115195minor)pagefaults 0swaps

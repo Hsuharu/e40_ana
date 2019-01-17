@@ -7,7 +7,7 @@
 #ifndef BH2_HIT_HH
 #define BH2_HIT_HH
 
-#define USE_COINCIDENCE_OUT_FOR_FINAL_BH2 1
+#define USE_COINCIDENCE_OUT_FOR_FINAL_BH2 0
 
 #include "DebugCounter.hh"
 #include "Hodo2Hit.hh"
