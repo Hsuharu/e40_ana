@@ -9,7 +9,7 @@
  key = UNPACK     value = ./param/UNPACK/unpacker.xml   
  key = DIGIT      value = ./param/DIGIT/digit_data_20180602.xml
  key = CMAP       value = ./param/CMAP/channel_map_20180604.xml
- key = DCGEO      value = ./param/DCGEO/DCGeomParam_E40_jun_CFT
+ key = DCGEO      value = param/DCGEO/DCGeomParam_E40_jun_20180831
  key = DCDRFT     value = ./param/DCDRFT/DCDriftParam_jun_05120
  key = DCTDC      value = ./param/DCTDC/DCTdcCalib_jun_05120.1
  key = HDPRM      value = ./param/HDPRM/HodoParam_2018Jun_05368
@@ -466,5 +466,5 @@
 #D [DstPiKAna::DstRead] Event Number: 4000000
 #D Event Number: 4002406
 #D Close : ./rootfile2/run05368_DstPiKAna.root
-375.49user 2.45system 7:29.69elapsed 84%CPU (0avgtext+0avgdata 619040maxresident)k
-0inputs+0outputs (0major+145183minor)pagefaults 0swaps
+369.65user 2.74system 7:32.49elapsed 82%CPU (0avgtext+0avgdata 616416maxresident)k
+0inputs+0outputs (0major+144230minor)pagefaults 0swaps

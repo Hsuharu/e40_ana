@@ -335,8 +335,8 @@ void Mtx_Banch(int month, int runnum){
   double HULMHTDCCalib = -0.8333;
   double MaxBinValue=0.;
 
-  int nGate = 5;
-  int Gate[] = {15,20,30,40,60};
+  int nGate = 6;
+  int Gate[] = {15,20,30,40,60,120};
 
   double TofMid = 10.;
   double SchMid = 0.;
@@ -517,6 +517,32 @@ void Mtx_Banch(int month, int runnum){
       j = Mtx_prm.at(l).at(0);
       min = Mtx_prm.at(l).at(2);
       max = Mtx_prm.at(l).at(3) + 1;
+        for(int m=0; m<16 ;m++){
+          if( tofmt[i][m] != -999.0 ){ 
+            Flag1[5]=true;
+            if(trigflag[28]>0) Flag1_MtxFlg[5]=true;
+          }
+        }
+        for(int m=0; m<sch_depth[j] ;m++){
+          if( sch_time[j][m]!= -999. ){
+            Flag2[5]=true;
+            if(trigflag[28]>0) Flag2_MtxFlg[5]=true;
+          }
+        }
+        for(int k = min; k < max; k++){
+          for(int m=0; m<sftx_udepth[k] ;m++){
+            if( sftx_utime[k][m] != -999. ){
+              Flag3[5]=true;
+              if(trigflag[28]>0) Flag3_MtxFlg[5]=true;
+            }
+          }
+          for(int m=0; m<sftx_ddepth[k] ;m++){
+            if( sftx_dtime[k][m] != -999. ){
+              Flag3[5]=true;
+              if(trigflag[28]>0) Flag3_MtxFlg[5]=true;
+            }
+          }
+        }
 //      std::cout << i << "\t" << j <<  "\t" << min << "\t" << max << "\t" << std::endl;
       for(int n=0; n<nGate; n++){
 //          if(!Flag1[n] && tofmt[i][m]      > (double)TofMid - Gate[n] && tofmt[i][m]     < (double)TofMid + Gate[n] ) Flag1[n]=true;
