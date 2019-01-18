@@ -615,12 +615,15 @@ void Mtx_Banch(int month, int runnum){
 //  }
 
   for(int n; n<nGate; n++){
-    MtxEfficiency[n]= (double)Count1[n]/nentries;
-    std::cout << "Total Event# is " << nentries << "\t" << Form("Count%d# is ",n+1) << Count1[n] << "\t" << "Efficiency is " << MtxEfficiency[n] << std::endl;
+//    MtxEfficiency[n]= (double)Count1[n]/nentries;
+//    std::cout << "Total Event# is " << nentries << "\t" << Form("Count%d# is ",n+1) << Count1[n] << "\t" << "Efficiency is " << MtxEfficiency[n] << std::endl;
+    MtxEfficiency[n]= (double)Count1[n]/Count1[nGate-1];
+    std::cout << "Total Event# is " << Count1[nGate-1] << "\t" << Form("Count%d# is ",n+1) << Count1[n] << "\t" << "Efficiency is " << MtxEfficiency[n] << std::endl;
   }
   for(int n; n<nGate; n++){
-    MtxEfficiency_MtxFlg[n]= (double)Count1_MtxFlg[n]/nentries_MtxFlg;
-    std::cout << "Total Event# is " << nentries_MtxFlg << "\t" << Form("Count%d_MtxFlg# is ",n+1) << Count1_MtxFlg[n] << "\t" << "Efficiency is " << MtxEfficiency_MtxFlg[n] << std::endl;
+//    MtxEfficiency_MtxFlg[n]= (double)Count1_MtxFlg[n]/nentries_MtxFlg;
+    MtxEfficiency_MtxFlg[n]= (double)Count1_MtxFlg[n]/ Count1_MtxFlg[nGate-1];
+    std::cout << "Total Event# is " << nentries_MtxFlg << "\t" << Form("Count%d_MtxFlg# is ",nGate-1) << Count1_MtxFlg[nGate-1]  << "\t" << Form("Count%d_MtxFlg# is ",n+1) << Count1_MtxFlg[n] << "\t" << "Efficiency is " << MtxEfficiency_MtxFlg[n] << std::endl;
   }
 
   c1->SetGrid();

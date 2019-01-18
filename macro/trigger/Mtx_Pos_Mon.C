@@ -790,7 +790,7 @@ void Mtx_Pos_Mon(int month,int runnum){
      ratio[i] = Hist1[47]->GetBinContent(i+1) / Hist1[30]->GetBinContent(i+1);
    }
 
-   TGraphErrors *graph1 = new TGraphErrors(nBin,x,xerr,ratio,ratioerr);
+   TGraphErrors *graph1 = new TGraphErrors(nBin,x,ratio,xerr,ratioerr);
    graph1->SetMarkerStyle(20);
    graph1->SetMarkerColor(2);
    graph1->Draw("p");
