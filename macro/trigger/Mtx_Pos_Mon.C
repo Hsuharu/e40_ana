@@ -777,6 +777,20 @@ void Mtx_Pos_Mon(int month,int runnum){
      c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_box_%04d.pdf",pdfDhire.Data(),runnum,j));
    }
 
+//   int nBin = 100;
+//   for(int i = 0; i<nBin; i++){
+//   }
+
+
+   TH1D *h = (TH1D*)Hist1[47]->Clone("Hist1[47]");
+   h->Divide(Hist1[30]);
+   h->SetXTitle("GeV/c");
+   h->SetYTitle("ratio");
+   h->Draw();
+   c1->Print(pdf);
+   c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist1_ratio.pdf",pdfDhire.Data(),runnum));
+
+
 //   for(int p=0; p<10; p++ ){
 //     if(p==0){
 //       Hist2[25+p*4]->SetMarkerColor(p+1);

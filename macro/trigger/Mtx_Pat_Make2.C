@@ -621,7 +621,7 @@ void Mtx_Pat_Make2(int month,int runnum){
       Hist2[8+Mtx_prm.size()*3+l]= new TH2D(Form("pKurama %% m2 Cut5 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1), Form("pKurama %% m2 Cut5 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1)   ,100,-0.4,1.4,100,0,2);
     }                                         
 
-    Hist2[1212]= new TH2D("tofsegKurama[0] % vpseg[1] Sigma","tofsegKurama[0] % vpseg[1] Sigma" ,NumOfSegSCH,0,NumOfSegSCH,NumOfSegTOF,0,NumOfSegTOF);
+    Hist2[1212]= new TH2D("tofsegKurama[0] % vpseg[1] Sigma w/Matrix","tofsegKurama[0] % vpseg[1] Sigma w/Matrix" ,NumOfSegSCH,0,NumOfSegSCH,NumOfSegTOF,0,NumOfSegTOF);
     Hist2[1213]= new TH2D("tofsegKurama[0] % vpseg[1] Sigma","tofsegKurama[0] % vpseg[1] Sigma" ,NumOfSegSCH,0,NumOfSegSCH,NumOfSegTOF,0,NumOfSegTOF);
 
 //-Legend def --------------------------------------------------------------------------------------
@@ -711,6 +711,12 @@ void Mtx_Pat_Make2(int month,int runnum){
      Hist2[2 ]->Fill(m2[0],pKurama[0]);
      Hist2[3 ]->Fill(vpseg[1],tofsegKurama[0]-1.);
 
+     if(m2[0]>0.15 && m2[0]<0.35 && qKurama[0]>0){
+       if( vtx[0]>-20 && vtx[0]<20 && vty[0]>-20 && vty[0]<20 && vtz[0]>-200 && vtz[0]<200 ){
+         Hist2[1213]->Fill(vpseg[1],tofsegKurama[0]-1.);
+       }//Cut5
+     }//Cut4
+
      for(int l=0; l < Mtx_prm.size(); l++){
        double m = 0;
        double n = 0;
@@ -755,7 +761,7 @@ void Mtx_Pat_Make2(int month,int runnum){
                Hist1[34+Mtx_prm.size()*15 +l]->Fill(MissMass[0]); 
 
              }
-             if( MissMass[0]>1.15 && MissMass[0]<1.35 ){
+             if( MissMass[0]>1.15 && MissMass[0]<1.25 ){
                Hist1[32]->Fill(pKurama[0]);
                Hist1[33]->Fill(m2[0]);
                Hist1[34+Mtx_prm.size()*4 +l]->Fill(sftxsegKurama); 
@@ -807,7 +813,7 @@ void Mtx_Pat_Make2(int month,int runnum){
 //     c1->Print(Form("%s/Mtx_Pat_Make2_run%05d_Hist2_colz_%04d.pdf",pdfDhire.Data(),runnum,i));
    }
    for(int j=0; j<Hist2Max; j++){
-     if(j==1 || j==3 || j ==1212){
+     if(j==1 || j==3 || j ==1212 || j ==1213){
        Hist2[j]->Draw("box");
 
        for(int i=0; i<SCH_Seg.size(); i++){
@@ -872,7 +878,7 @@ void Mtx_Pat_Make2(int month,int runnum){
 
    c1->Print(pdf1+"["); 
    for(int j=0; j<Hist2Max; j++){
-     if(j==1 || j==3 || j ==1212){
+     if(j==1 || j==3 || j ==1212 || j ==1213){
        Hist2[j]->Draw("box");
        for(int i=0; i<SCH_Seg.size(); i++){
          double x1;

@@ -758,7 +758,7 @@ void Mtx_Pat_Make(int month,int runnum){
                Hist1[34+Mtx_prm.size()*15 +l]->Fill(MissMass[0]); 
 
              }
-             if( MissMass[0]>1.15 && MissMass[0]<1.35 ){
+             if( MissMass[0]>1.15 && MissMass[0]<1.25 ){
                Hist1[32]->Fill(pKurama[0]);
                Hist1[33]->Fill(m2[0]);
                Hist1[34+Mtx_prm.size()*4 +l]->Fill(sftxsegKurama); 
@@ -810,7 +810,7 @@ void Mtx_Pat_Make(int month,int runnum){
 //     c1->Print(Form("%s/Mtx_Pat_Make_run%05d_Hist2_colz_%04d.pdf",pdfDhire.Data(),runnum,i));
    }
    for(int j=0; j<Hist2Max; j++){
-     if(j==1 || j==3 || j ==1212){
+     if(j==1 || j==3 || j ==1212 || j ==1213){
        Hist2[j]->Draw("box");
 
        for(int i=0; i<SCH_Seg.size(); i++){
