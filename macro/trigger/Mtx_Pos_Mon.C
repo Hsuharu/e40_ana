@@ -777,6 +777,11 @@ void Mtx_Pos_Mon(int month,int runnum){
      c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_box_%04d.pdf",pdfDhire.Data(),runnum,j));
    }
 
+   TH1D *test = new TH1D("test","Momentum Ration Cut5/Cut3 w/MtxCut",100,0,2);
+   test->SetAxisRange(0,1,"Y");
+   test->Draw();
+   
+
    int nBin = 100;
    double x[nBin];
    double ratio[nBin];
