@@ -786,7 +786,8 @@ void Mtx_Pos_Mon(int month,int runnum){
    h->Divide(Hist1[30]);
    h->SetXTitle("GeV/c");
    h->SetYTitle("ratio");
-   h->Draw();
+   h->Sumw2();
+   h->Draw("e1");
    c1->Print(pdf);
    c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist1_ratio.pdf",pdfDhire.Data(),runnum));
 
