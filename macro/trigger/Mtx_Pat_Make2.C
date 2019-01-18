@@ -146,42 +146,42 @@ void Mtx_Pat_Make2(int month,int runnum){
    Int_t           trigpat[32];
    Int_t           trigflag[32];
    Int_t           nhBh1;
-   Int_t           csBh1[6];
-   Double_t        Bh1Seg[6];
-   Double_t        tBh1[6];
-   Double_t        dtBh1[6];
-   Double_t        deBh1[6];
-   Double_t        btof[6];
+   Int_t           csBh1[7];
+   Double_t        Bh1Seg[7];
+   Double_t        tBh1[7];
+   Double_t        dtBh1[7];
+   Double_t        deBh1[7];
+   Double_t        btof[7];
    Int_t           nhBh2;
-   Int_t           csBh2[5];
-   Double_t        Bh2Seg[5];
-   Double_t        tBh2[5];
-   Double_t        t0Bh2[5];
-   Double_t        dtBh2[5];
-   Double_t        deBh2[5];
+   Int_t           csBh2[6];
+   Double_t        Bh2Seg[6];
+   Double_t        tBh2[6];
+   Double_t        t0Bh2[6];
+   Double_t        dtBh2[6];
+   Double_t        deBh2[6];
    Int_t           nhTof;
-   Int_t           csTof[22];
-   Double_t        TofSeg[22];
-   Double_t        tTof[22];
-   Double_t        dtTof[22];
-   Double_t        deTof[22];
+   Int_t           csTof[25];
+   Double_t        TofSeg[25];
+   Double_t        tTof[25];
+   Double_t        dtTof[25];
+   Double_t        deTof[25];
    Int_t           nhBft;
-   Int_t           csBft[33];
-   Double_t        tBft[33];
-   Double_t        wBft[33];
-   Double_t        BftPos[33];
+   Int_t           csBft[43];
+   Double_t        tBft[43];
+   Double_t        wBft[43];
+   Double_t        BftPos[43];
    Int_t           nhSch;
-   Int_t           csSch[27];
-   Double_t        tSch[27];
-   Double_t        wSch[27];
-   Double_t        SchPos[27];
-   Double_t        SchSeg[27];
-   Double_t        delta_x[27];
-   Double_t        delta_seg[27];
+   Int_t           csSch[25];
+   Double_t        tSch[25];
+   Double_t        wSch[25];
+   Double_t        SchPos[25];
+   Double_t        SchSeg[25];
+   Double_t        delta_x[25];
+   Double_t        delta_seg[25];
    Int_t           sftx_unhits;
-   Int_t           sftx_uhitpat[131];
+   Int_t           sftx_uhitpat[179];
    Int_t           nhSftX;
-   Double_t        SftXSeg[69];
+   Double_t        SftXSeg[71];
    Int_t           nlBcOut;
    Int_t           ntBcOut;
    Int_t           nhBcOut[4];
@@ -205,20 +205,20 @@ void Mtx_Pat_Make2(int month,int runnum){
    Double_t        thetaK18[4];
    Int_t           nlSdcIn;
    Int_t           ntSdcIn;
-   Int_t           nhSdcIn[8];
-   Double_t        chisqrSdcIn[8];
-   Double_t        x0SdcIn[8];
-   Double_t        y0SdcIn[8];
-   Double_t        u0SdcIn[8];
-   Double_t        v0SdcIn[8];
+   Int_t           nhSdcIn[9];
+   Double_t        chisqrSdcIn[9];
+   Double_t        x0SdcIn[9];
+   Double_t        y0SdcIn[9];
+   Double_t        u0SdcIn[9];
+   Double_t        v0SdcIn[9];
    Int_t           nlSdcOut;
    Int_t           ntSdcOut;
-   Int_t           nhSdcOut[4];
-   Double_t        chisqrSdcOut[4];
-   Double_t        x0SdcOut[4];
-   Double_t        y0SdcOut[4];
-   Double_t        u0SdcOut[4];
-   Double_t        v0SdcOut[4];
+   Int_t           nhSdcOut[6];
+   Double_t        chisqrSdcOut[6];
+   Double_t        x0SdcOut[6];
+   Double_t        y0SdcOut[6];
+   Double_t        u0SdcOut[6];
+   Double_t        v0SdcOut[6];
    Int_t           ntKurama;
    Int_t           nhKurama[4];
    Double_t        chisqrKurama[4];
@@ -266,7 +266,6 @@ void Mtx_Pat_Make2(int month,int runnum){
    Double_t        pCalc[12];
    Double_t        pCorr[12];
    Double_t        pCorrDE[12];
-
 
 // Select Branch ------------------------------------------------------------------------------------
    pik->SetBranchStatus("*", 0);
@@ -537,7 +536,7 @@ void Mtx_Pat_Make2(int month,int runnum){
 
 //-hist def-----------------------------------------------------------------------------------------
    Hist1Max = 5151;
-   Hist2Max = 1213;
+   Hist2Max = 1214;
    chisqr = 50;
    TH1D *Hist1[Hist1Max];
    TH2D *Hist2[Hist2Max];
@@ -623,6 +622,7 @@ void Mtx_Pat_Make2(int month,int runnum){
     }                                         
 
     Hist2[1212]= new TH2D("tofsegKurama[0] % vpseg[1] Sigma","tofsegKurama[0] % vpseg[1] Sigma" ,NumOfSegSCH,0,NumOfSegSCH,NumOfSegTOF,0,NumOfSegTOF);
+    Hist2[1213]= new TH2D("tofsegKurama[0] % vpseg[1] Sigma","tofsegKurama[0] % vpseg[1] Sigma" ,NumOfSegSCH,0,NumOfSegSCH,NumOfSegTOF,0,NumOfSegTOF);
 
 //-Legend def --------------------------------------------------------------------------------------
 //  TLegend *Leg1 = new TLegend(0.78,0.575,0.98,0.935);
@@ -667,9 +667,13 @@ void Mtx_Pat_Make2(int month,int runnum){
      Hist1[2 ]->Fill(pKurama[0]);
      Hist1[3 ]->Fill(m2[0]);
      Hist1[4 ]->Fill(chisqrKurama[0]);
+
      if(m2[0]>0.15 && m2[0]<0.35 && qKurama[0]>0 && pKurama[0]<0.9){ 
-       Hist1[5 ]->Fill(MissMass[0]);
+       if( vtx[0]>-20 && vtx[0]<20 && vty[0]>-20 && vty[0]<20 && vtz[0]>-200 && vtz[0]<200 ){
+         Hist1[5 ]->Fill(MissMass[0]);
+       }
      }
+
      Hist1[6 ]->Fill(qKurama[0]);
      Hist1[7 ]->Fill(vpseg[1]);
      Hist1[8 ]->Fill(tofsegKurama[0]-1.);
@@ -689,9 +693,13 @@ void Mtx_Pat_Make2(int month,int runnum){
      Hist1[15]->Fill(pKurama[0]);
      Hist1[16]->Fill(m2[0]);
      Hist1[17]->Fill(chisqrKurama[0]);
+
      if(m2[0]>0.15 && m2[0]<0.35 && qKurama[0]>0 && pKurama[0]<0.9){ 
-       Hist1[18]->Fill(MissMass[0]);
+       if( vtx[0]>-20 && vtx[0]<20 && vty[0]>-20 && vty[0]<20 && vtz[0]>-200 && vtz[0]<200 ){
+         Hist1[18]->Fill(MissMass[0]);
+       }
      }
+
      Hist1[19]->Fill(qKurama[0]);
      Hist1[20]->Fill(vpseg[1]);
      Hist1[21]->Fill(tofsegKurama[0]-1.);
