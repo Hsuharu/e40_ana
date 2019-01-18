@@ -777,9 +777,24 @@ void Mtx_Pos_Mon(int month,int runnum){
      c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_box_%04d.pdf",pdfDhire.Data(),runnum,j));
    }
 
-//   int nBin = 100;
-//   for(int i = 0; i<nBin; i++){
-//   }
+   int nBin = 100;
+   double x[nBin];
+   double ratio[nBin];
+   double xerr[nBin];
+   double ratioerr[nBin];
+   for(int i = 0; i<nBin; i++){
+     xerr[i] = 2./(double)nBin/2.;
+     ratioerr[i] = 0.1;
+     x[i] = 2./(double)nBin/2. + (double)i*2./nBin;
+//   x[i]=Hist1[47]->GetXaxis()->GetBinCenter(i+i);
+     ratio[i] = Hist1[47]->GetBinContent(i+1) / Hist1[30]->GetBinContent(i+1);
+   }
+
+   TGraphErrors *graph1 = new TGraphErrors(nBin,x,xerr,ratio,ratioerr);
+   graph1->SetMarkerStyle(20);
+   graph1->SetMarkerColor(2);
+   graph1->Draw("p");
+   c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist1_graph.pdf",pdfDhire.Data(),runnum));
 
 
    TH1D *h = (TH1D*)Hist1[47]->Clone("Hist1[47]");
@@ -787,9 +802,12 @@ void Mtx_Pos_Mon(int month,int runnum){
    h->SetXTitle("GeV/c");
    h->SetYTitle("ratio");
 //   h->Sumw2();
-   h->Draw("E");
+   h->Draw("");
    c1->Print(pdf);
    c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist1_ratio.pdf",pdfDhire.Data(),runnum));
+
+
+
 
 
 //   for(int p=0; p<10; p++ ){
