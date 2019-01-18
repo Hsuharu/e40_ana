@@ -777,9 +777,10 @@ void Mtx_Pos_Mon(int month,int runnum){
      c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_box_%04d.pdf",pdfDhire.Data(),runnum,j));
    }
 
-   TH1D *test = new TH1D("test","Momentum Ration Cut5/Cut3 w/MtxCut",100,0,2);
+   TH1D *test = new TH1D("test","Momentum Ratio Cut5/Cut3 w/MtxCut;GeV/c;Ratio",100,0,2);
    test->SetAxisRange(0,1,"Y");
    test->Draw();
+   gStyle->SetOptStat(0);
    
 
    int nBin = 100;
@@ -809,6 +810,7 @@ void Mtx_Pos_Mon(int month,int runnum){
    graph1->SetMinimum(0);
    graph1->GetXaxis()->SetLimits(0,2);
    graph1->Draw("p");
+   c1->Print(pdf);
    c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist1_graph.pdf",pdfDhire.Data(),runnum));
 
 
