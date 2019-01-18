@@ -797,8 +797,12 @@ void Mtx_Pos_Mon(int month,int runnum){
    TGraphErrors *graph1 = new TGraphErrors(nBin,x,ratio,xerr,ratioerr);
    graph1->SetMarkerStyle(20);
    graph1->SetMarkerColor(2);
-   graph1->GetXaxis()->SetRangeUser(0,2);
-   graph1->GetYaxis()->SetRangeUser(0,1);
+//   graph1->GetXaxis()->SetRangeUser(0,2);
+//   graph1->GetYaxis()->SetRangeUser(0,1);
+//   gPad->GetRangeAxis(0,2,0,1);
+   graph1->SetMaximum(1);
+   graph1->SetMinimum(0);
+   graph1->GetXaxis()->SetLimits(0,2);
    graph1->Draw("p");
    c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist1_graph.pdf",pdfDhire.Data(),runnum));
 
