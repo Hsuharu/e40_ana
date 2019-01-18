@@ -528,7 +528,7 @@ void Mtx_Pos_Mon(int month,int runnum){
     Hist2[102]= new TH2D("tofsegKurama[0] % vpseg[1] Cut5","tofsegKurama[0] % vpseg[1] Cut5",NumOfSegSCH,0,NumOfSegSCH,NumOfSegTOF,0,NumOfSegTOF);
     Hist2[103]= new TH2D("pKurama % m2 Cut5",     "pKurama % m2  Cut5"    ,100,-0.4,1.4,100,0,2);
     for(int l=0; l < Mtx_prm.size(); l++){
-      Hist2[104+Mtx_prm.size()*0+l]= new TH2D(Form("pKurama % m2 Cut5 SchSeg%d - TofSeg%d",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1), Form("pKurama % m2 Cut5 SchSeg%d - TofSeg%d",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1)   ,100,-0.4,1.4,100,0,2);
+      Hist2[104+Mtx_prm.size()*0+l]= new TH2D(Form("pKurama %% m2 Cut5 SchSeg%d - TofSeg%d",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1), Form("pKurama %% m2 Cut5 SchSeg%d - TofSeg%d",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1)   ,100,-0.4,1.4,100,0,2);
     }                                         
 
 
@@ -783,16 +783,22 @@ void Mtx_Pos_Mon(int month,int runnum){
    double xerr[nBin];
    double ratioerr[nBin];
    for(int i = 0; i<nBin; i++){
-     xerr[i] = 2./(double)nBin/2.;
-     ratioerr[i] = 0.1;
      x[i] = 2./(double)nBin/2. + (double)i*2./nBin;
+     double a=0.;
+     double b=0.;
+     a=  Hist1[47]->GetBinContent(i+1);
+     b=  Hist1[30]->GetBinContent(i+1);
 //   x[i]=Hist1[47]->GetXaxis()->GetBinCenter(i+i);
-     ratio[i] = Hist1[47]->GetBinContent(i+1) / Hist1[30]->GetBinContent(i+1);
+     ratio[i] = a/b ;
+     xerr[i] = 2./(double)nBin/2.;
+     ratioerr[i] = sqrt(b*ratio[i]*(1-ratio[i]))/b;
    }
 
    TGraphErrors *graph1 = new TGraphErrors(nBin,x,ratio,xerr,ratioerr);
    graph1->SetMarkerStyle(20);
    graph1->SetMarkerColor(2);
+   graph1->GetXaxis()->SetRangeUser(0,2);
+   graph1->GetYaxis()->SetRangeUser(0,1);
    graph1->Draw("p");
    c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist1_graph.pdf",pdfDhire.Data(),runnum));
 
