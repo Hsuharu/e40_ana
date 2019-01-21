@@ -109,6 +109,8 @@ void Matrix_Pattern_Maker(int month,int runnum){
       inner.push_back(tof);
       inner.push_back(sft_min-11);
       inner.push_back(sft_max-1);
+      SFTX_Min.push_back(sft_min-11);
+      SFTX_Max.push_back(sft_max-1);
       Mtx_prm.push_back(inner);
     }
     Mtx_Flag.push_back(true);
@@ -819,7 +821,7 @@ void Matrix_Pattern_Maker(int month,int runnum){
       b1 = Hist1[34+Mtx_prm.size()*15+l]->Integral(1,65) + Hist1[34+Mtx_prm.size()*15+l]->Integral(76,100);
       if(PartSigmaTotal / SigmaTotal < 1/100*300 || a1/b1 < a2/b2){
         Mtx_Flag.at(l)=false;
-        std::cout << "false" << "\t" << "TOFSeg" << Mtx_prm.at(l).at(1) <<"\tSCHSeg"<< Mtx_prm.at(l).at(0)<< std::endl;
+        std::cout << "false" << "\t" << "TOFSeg" << Mtx_prm.at(l).at(1) << "\t" <<  "SCHSeg" << Mtx_prm.at(l).at(0) << std::endl;
       }
       if(Mtx_Flag.at(l)==false) continue;
       int min = 0;
@@ -829,6 +831,7 @@ void Matrix_Pattern_Maker(int month,int runnum){
 
       min = Mtx_prm.at(l).at(2);
       max = Mtx_prm.at(l).at(3) + 1;
+      cmin = min;
       cmax = max;
       bool flag10=false;
       bool flag11=false;
@@ -852,7 +855,7 @@ void Matrix_Pattern_Maker(int month,int runnum){
       SFTX_Max.at(l) = cmax;
 
       if(Mtx_Flag.at(l)==false) continue;
-      while(cmin<256 && cmin<cmax && Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) > 999/1000){
+      while(cmin<256 && cmin<cmax && Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) > 999/1000){
           flag10_min=false;
           flag11_min=false;
         if(cmin%32==22){
@@ -868,7 +871,7 @@ void Matrix_Pattern_Maker(int month,int runnum){
       if(cmin==256 || cmin>cmax ) Mtx_Flag.at(l)=false;
       SFTX_Min.at(l) = cmin;
 
-      std::cout << "max" << max << "cmax" << cmax << "min" << min  << "cmin" << cmin  << std::endl
+//      std::cout << "max" << max << "cmax" << cmax << "min" << min  << "cmin" << cmin  << std::endl;
 
     }                         
                               
