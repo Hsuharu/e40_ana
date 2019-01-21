@@ -472,5 +472,5 @@ Error in <TTree::SetBranchAddress>: unknown branch -> sch_time
 #D [DstPiKAna2::DstRead] Event Number: 4000000
 #D Event Number: 4002406
 #D Close : ./rootfile2/run05368_DstPiKAna2.root
-1524.72user 5.50system 27:15.84elapsed 93%CPU (0avgtext+0avgdata 699036maxresident)k
-0inputs+8outputs (0major+114912minor)pagefaults 0swaps
+1526.77user 4.84system 27:05.85elapsed 94%CPU (0avgtext+0avgdata 698832maxresident)k
+0inputs+0outputs (0major+114308minor)pagefaults 0swaps
