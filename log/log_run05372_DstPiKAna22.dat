@@ -1,10 +1,10 @@
  key = [Process]          arg[0] = ./bin/DstPiKAna2
  key = [ConfFile]         arg[1] = ./param/conf/analyzer_jun_tune_05368.conf_0
- key = [KuramaTracking]   arg[2] = ./rootfile/run05375_KuramaTracking.root
- key = [K18Tracking]      arg[3] = ./rootfile/run05375_K18Tracking.root
- key = [Hodoscope]        arg[4] = ./rootfile/run05375_Hodoscope.root
- key = [Easiroc]          arg[5] = ./rootfile/run05375_Easiroc.root
- key = [OutFile]          arg[6] = ./rootfile/run05375_DstPiKAna2.root
+ key = [KuramaTracking]   arg[2] = ./rootfile2/run05372_KuramaTracking.root
+ key = [K18Tracking]      arg[3] = ./rootfile2/run05372_K18Tracking.root
+ key = [Hodoscope]        arg[4] = ./rootfile2/run05372_Hodoscope.root
+ key = [Easiroc]          arg[5] = ./rootfile2/run05372_Easiroc.root
+ key = [OutFile]          arg[6] = ./rootfile2/run05372_DstPiKAna2.root
 #D [ConfMan::Initialize()]
  key = UNPACK     value = ./param/UNPACK/unpacker.xml   
  key = DIGIT      value = ./param/DIGIT/digit_data_20180602.xml
@@ -470,7 +470,7 @@ Error in <TTree::SetBranchAddress>: unknown branch -> sch_time
 #D [DstPiKAna2::DstRead] Event Number: 3980000
 #D [DstPiKAna2::DstRead] Event Number: 3990000
 #D [DstPiKAna2::DstRead] Event Number: 4000000
-#D Event Number: 4001488
-#D Close : ./rootfile/run05375_DstPiKAna2.root
-1524.26user 5.47system 27:12.90elapsed 93%CPU (0avgtext+0avgdata 700376maxresident)k
-0inputs+0outputs (0major+113145minor)pagefaults 0swaps
+#D Event Number: 4000542
+#D Close : ./rootfile2/run05372_DstPiKAna2.root
+1547.27user 5.65system 27:55.99elapsed 92%CPU (0avgtext+0avgdata 685320maxresident)k
+0inputs+0outputs (0major+109513minor)pagefaults 0swaps

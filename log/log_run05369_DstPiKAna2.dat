@@ -1,10 +1,10 @@
- key = [Process]          arg[0] = ./bin/DstPiKAna
+ key = [Process]          arg[0] = ./bin/DstPiKAna2
  key = [ConfFile]         arg[1] = ./param/conf/analyzer_jun_tune_05368.conf_0
- key = [KuramaTracking]   arg[2] = ./rootfile2/run05369_KuramaTracking.root
- key = [K18Tracking]      arg[3] = ./rootfile2/run05369_K18Tracking.root
- key = [Hodoscope]        arg[4] = ./rootfile2/run05369_Hodoscope.root
- key = [Easiroc]          arg[5] = ./rootfile2/run05369_Easiroc.root
- key = [OutFile]          arg[6] = ./rootfile2/run05369_DstPiKAna.root
+ key = [KuramaTracking]   arg[2] = ./rootfile/run05369_KuramaTracking.root
+ key = [K18Tracking]      arg[3] = ./rootfile/run05369_K18Tracking.root
+ key = [Hodoscope]        arg[4] = ./rootfile/run05369_Hodoscope.root
+ key = [Easiroc]          arg[5] = ./rootfile/run05369_Easiroc.root
+ key = [OutFile]          arg[6] = ./rootfile/run05369_DstPiKAna2.root
 #D [ConfMan::Initialize()]
  key = UNPACK     value = ./param/UNPACK/unpacker.xml   
  key = DIGIT      value = ./param/DIGIT/digit_data_20180602.xml
@@ -27,6 +27,12 @@
  key = BGOCALIB   value = ./param/BGOCALIB/BGOtable24_E40_400MeV.txt
  [DCGeomMan]        -> Initialized
  [UserParamMan]     -> Initialized
+Error in <TTree::SetBranchStatus>: unknown branch -> sftx_utime
+Error in <TTree::SetBranchStatus>: unknown branch -> sftx_dtime
+Error in <TTree::SetBranchStatus>: unknown branch -> sch_time
+Error in <TTree::SetBranchAddress>: unknown branch -> sftx_utime
+Error in <TTree::SetBranchAddress>: unknown branch -> sftx_dtime
+Error in <TTree::SetBranchAddress>: unknown branch -> sch_time
 #D [UserParamMan::Print()] 
  key = BH1_TDC             2 :     0  1000 
  key = BTOF                2 :    -2     2 
@@ -63,97 +69,97 @@
  key = TimeSFT             2 :   -15     5 
  key = TimeTOF             2 :     7    25 
  key = dTOfs               1 :   150 
-#D [DstPiKAna::DstRead] Event Number: 0     
-#D [DstPiKAna::DstRead] Event Number: 10000 
-#D [DstPiKAna::DstRead] Event Number: 20000 
-#D [DstPiKAna::DstRead] Event Number: 30000 
-#D [DstPiKAna::DstRead] Event Number: 40000 
-#D [DstPiKAna::DstRead] Event Number: 50000 
-#D [DstPiKAna::DstRead] Event Number: 60000 
-#D [DstPiKAna::DstRead] Event Number: 70000 
-#D [DstPiKAna::DstRead] Event Number: 80000 
-#D [DstPiKAna::DstRead] Event Number: 90000 
-#D [DstPiKAna::DstRead] Event Number: 100000
-#D [DstPiKAna::DstRead] Event Number: 110000
-#D [DstPiKAna::DstRead] Event Number: 120000
-#D [DstPiKAna::DstRead] Event Number: 130000
-#D [DstPiKAna::DstRead] Event Number: 140000
-#D [DstPiKAna::DstRead] Event Number: 150000
-#D [DstPiKAna::DstRead] Event Number: 160000
-#D [DstPiKAna::DstRead] Event Number: 170000
-#D [DstPiKAna::DstRead] Event Number: 180000
-#D [DstPiKAna::DstRead] Event Number: 190000
-#D [DstPiKAna::DstRead] Event Number: 200000
-#D [DstPiKAna::DstRead] Event Number: 210000
-#D [DstPiKAna::DstRead] Event Number: 220000
-#D [DstPiKAna::DstRead] Event Number: 230000
-#D [DstPiKAna::DstRead] Event Number: 240000
-#D [DstPiKAna::DstRead] Event Number: 250000
-#D [DstPiKAna::DstRead] Event Number: 260000
-#D [DstPiKAna::DstRead] Event Number: 270000
-#D [DstPiKAna::DstRead] Event Number: 280000
-#D [DstPiKAna::DstRead] Event Number: 290000
-#D [DstPiKAna::DstRead] Event Number: 300000
-#D [DstPiKAna::DstRead] Event Number: 310000
-#D [DstPiKAna::DstRead] Event Number: 320000
-#D [DstPiKAna::DstRead] Event Number: 330000
-#D [DstPiKAna::DstRead] Event Number: 340000
-#D [DstPiKAna::DstRead] Event Number: 350000
-#D [DstPiKAna::DstRead] Event Number: 360000
-#D [DstPiKAna::DstRead] Event Number: 370000
-#D [DstPiKAna::DstRead] Event Number: 380000
-#D [DstPiKAna::DstRead] Event Number: 390000
-#D [DstPiKAna::DstRead] Event Number: 400000
-#D [DstPiKAna::DstRead] Event Number: 410000
-#D [DstPiKAna::DstRead] Event Number: 420000
-#D [DstPiKAna::DstRead] Event Number: 430000
-#D [DstPiKAna::DstRead] Event Number: 440000
-#D [DstPiKAna::DstRead] Event Number: 450000
-#D [DstPiKAna::DstRead] Event Number: 460000
-#D [DstPiKAna::DstRead] Event Number: 470000
-#D [DstPiKAna::DstRead] Event Number: 480000
-#D [DstPiKAna::DstRead] Event Number: 490000
-#D [DstPiKAna::DstRead] Event Number: 500000
-#D [DstPiKAna::DstRead] Event Number: 510000
-#D [DstPiKAna::DstRead] Event Number: 520000
-#D [DstPiKAna::DstRead] Event Number: 530000
-#D [DstPiKAna::DstRead] Event Number: 540000
-#D [DstPiKAna::DstRead] Event Number: 550000
-#D [DstPiKAna::DstRead] Event Number: 560000
-#D [DstPiKAna::DstRead] Event Number: 570000
-#D [DstPiKAna::DstRead] Event Number: 580000
-#D [DstPiKAna::DstRead] Event Number: 590000
-#D [DstPiKAna::DstRead] Event Number: 600000
-#D [DstPiKAna::DstRead] Event Number: 610000
-#D [DstPiKAna::DstRead] Event Number: 620000
-#D [DstPiKAna::DstRead] Event Number: 630000
-#D [DstPiKAna::DstRead] Event Number: 640000
-#D [DstPiKAna::DstRead] Event Number: 650000
-#D [DstPiKAna::DstRead] Event Number: 660000
-#D [DstPiKAna::DstRead] Event Number: 670000
-#D [DstPiKAna::DstRead] Event Number: 680000
-#D [DstPiKAna::DstRead] Event Number: 690000
-#D [DstPiKAna::DstRead] Event Number: 700000
-#D [DstPiKAna::DstRead] Event Number: 710000
-#D [DstPiKAna::DstRead] Event Number: 720000
-#D [DstPiKAna::DstRead] Event Number: 730000
-#D [DstPiKAna::DstRead] Event Number: 740000
-#D [DstPiKAna::DstRead] Event Number: 750000
-#D [DstPiKAna::DstRead] Event Number: 760000
-#D [DstPiKAna::DstRead] Event Number: 770000
-#D [DstPiKAna::DstRead] Event Number: 780000
-#D [DstPiKAna::DstRead] Event Number: 790000
-#D [DstPiKAna::DstRead] Event Number: 800000
-#D [DstPiKAna::DstRead] Event Number: 810000
-#D [DstPiKAna::DstRead] Event Number: 820000
-#D [DstPiKAna::DstRead] Event Number: 830000
-#D [DstPiKAna::DstRead] Event Number: 840000
-#D [DstPiKAna::DstRead] Event Number: 850000
-#D [DstPiKAna::DstRead] Event Number: 860000
-#D [DstPiKAna::DstRead] Event Number: 870000
-#D [DstPiKAna::DstRead] Event Number: 880000
-#D [DstPiKAna::DstRead] Event Number: 890000
+#D [DstPiKAna2::DstRead] Event Number: 0     
+#D [DstPiKAna2::DstRead] Event Number: 10000 
+#D [DstPiKAna2::DstRead] Event Number: 20000 
+#D [DstPiKAna2::DstRead] Event Number: 30000 
+#D [DstPiKAna2::DstRead] Event Number: 40000 
+#D [DstPiKAna2::DstRead] Event Number: 50000 
+#D [DstPiKAna2::DstRead] Event Number: 60000 
+#D [DstPiKAna2::DstRead] Event Number: 70000 
+#D [DstPiKAna2::DstRead] Event Number: 80000 
+#D [DstPiKAna2::DstRead] Event Number: 90000 
+#D [DstPiKAna2::DstRead] Event Number: 100000
+#D [DstPiKAna2::DstRead] Event Number: 110000
+#D [DstPiKAna2::DstRead] Event Number: 120000
+#D [DstPiKAna2::DstRead] Event Number: 130000
+#D [DstPiKAna2::DstRead] Event Number: 140000
+#D [DstPiKAna2::DstRead] Event Number: 150000
+#D [DstPiKAna2::DstRead] Event Number: 160000
+#D [DstPiKAna2::DstRead] Event Number: 170000
+#D [DstPiKAna2::DstRead] Event Number: 180000
+#D [DstPiKAna2::DstRead] Event Number: 190000
+#D [DstPiKAna2::DstRead] Event Number: 200000
+#D [DstPiKAna2::DstRead] Event Number: 210000
+#D [DstPiKAna2::DstRead] Event Number: 220000
+#D [DstPiKAna2::DstRead] Event Number: 230000
+#D [DstPiKAna2::DstRead] Event Number: 240000
+#D [DstPiKAna2::DstRead] Event Number: 250000
+#D [DstPiKAna2::DstRead] Event Number: 260000
+#D [DstPiKAna2::DstRead] Event Number: 270000
+#D [DstPiKAna2::DstRead] Event Number: 280000
+#D [DstPiKAna2::DstRead] Event Number: 290000
+#D [DstPiKAna2::DstRead] Event Number: 300000
+#D [DstPiKAna2::DstRead] Event Number: 310000
+#D [DstPiKAna2::DstRead] Event Number: 320000
+#D [DstPiKAna2::DstRead] Event Number: 330000
+#D [DstPiKAna2::DstRead] Event Number: 340000
+#D [DstPiKAna2::DstRead] Event Number: 350000
+#D [DstPiKAna2::DstRead] Event Number: 360000
+#D [DstPiKAna2::DstRead] Event Number: 370000
+#D [DstPiKAna2::DstRead] Event Number: 380000
+#D [DstPiKAna2::DstRead] Event Number: 390000
+#D [DstPiKAna2::DstRead] Event Number: 400000
+#D [DstPiKAna2::DstRead] Event Number: 410000
+#D [DstPiKAna2::DstRead] Event Number: 420000
+#D [DstPiKAna2::DstRead] Event Number: 430000
+#D [DstPiKAna2::DstRead] Event Number: 440000
+#D [DstPiKAna2::DstRead] Event Number: 450000
+#D [DstPiKAna2::DstRead] Event Number: 460000
+#D [DstPiKAna2::DstRead] Event Number: 470000
+#D [DstPiKAna2::DstRead] Event Number: 480000
+#D [DstPiKAna2::DstRead] Event Number: 490000
+#D [DstPiKAna2::DstRead] Event Number: 500000
+#D [DstPiKAna2::DstRead] Event Number: 510000
+#D [DstPiKAna2::DstRead] Event Number: 520000
+#D [DstPiKAna2::DstRead] Event Number: 530000
+#D [DstPiKAna2::DstRead] Event Number: 540000
+#D [DstPiKAna2::DstRead] Event Number: 550000
+#D [DstPiKAna2::DstRead] Event Number: 560000
+#D [DstPiKAna2::DstRead] Event Number: 570000
+#D [DstPiKAna2::DstRead] Event Number: 580000
+#D [DstPiKAna2::DstRead] Event Number: 590000
+#D [DstPiKAna2::DstRead] Event Number: 600000
+#D [DstPiKAna2::DstRead] Event Number: 610000
+#D [DstPiKAna2::DstRead] Event Number: 620000
+#D [DstPiKAna2::DstRead] Event Number: 630000
+#D [DstPiKAna2::DstRead] Event Number: 640000
+#D [DstPiKAna2::DstRead] Event Number: 650000
+#D [DstPiKAna2::DstRead] Event Number: 660000
+#D [DstPiKAna2::DstRead] Event Number: 670000
+#D [DstPiKAna2::DstRead] Event Number: 680000
+#D [DstPiKAna2::DstRead] Event Number: 690000
+#D [DstPiKAna2::DstRead] Event Number: 700000
+#D [DstPiKAna2::DstRead] Event Number: 710000
+#D [DstPiKAna2::DstRead] Event Number: 720000
+#D [DstPiKAna2::DstRead] Event Number: 730000
+#D [DstPiKAna2::DstRead] Event Number: 740000
+#D [DstPiKAna2::DstRead] Event Number: 750000
+#D [DstPiKAna2::DstRead] Event Number: 760000
+#D [DstPiKAna2::DstRead] Event Number: 770000
+#D [DstPiKAna2::DstRead] Event Number: 780000
+#D [DstPiKAna2::DstRead] Event Number: 790000
+#D [DstPiKAna2::DstRead] Event Number: 800000
+#D [DstPiKAna2::DstRead] Event Number: 810000
+#D [DstPiKAna2::DstRead] Event Number: 820000
+#D [DstPiKAna2::DstRead] Event Number: 830000
+#D [DstPiKAna2::DstRead] Event Number: 840000
+#D [DstPiKAna2::DstRead] Event Number: 850000
+#D [DstPiKAna2::DstRead] Event Number: 860000
+#D [DstPiKAna2::DstRead] Event Number: 870000
+#D [DstPiKAna2::DstRead] Event Number: 880000
+#D [DstPiKAna2::DstRead] Event Number: 890000
 #D Event Number: 898180
-#D Close : ./rootfile2/run05369_DstPiKAna.root
-86.43user 1.24system 1:51.63elapsed 78%CPU (0avgtext+0avgdata 535996maxresident)k
-0inputs+0outputs (0major+119455minor)pagefaults 0swaps
+#D Close : ./rootfile/run05369_DstPiKAna2.root
+343.24user 2.48system 6:16.18elapsed 91%CPU (0avgtext+0avgdata 623972maxresident)k
+0inputs+0outputs (0major+89255minor)pagefaults 0swaps

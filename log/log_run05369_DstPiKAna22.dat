@@ -1,10 +1,10 @@
  key = [Process]          arg[0] = ./bin/DstPiKAna2
  key = [ConfFile]         arg[1] = ./param/conf/analyzer_jun_tune_05368.conf_0
- key = [KuramaTracking]   arg[2] = ./rootfile/run05371_KuramaTracking.root
- key = [K18Tracking]      arg[3] = ./rootfile/run05371_K18Tracking.root
- key = [Hodoscope]        arg[4] = ./rootfile/run05371_Hodoscope.root
- key = [Easiroc]          arg[5] = ./rootfile/run05371_Easiroc.root
- key = [OutFile]          arg[6] = ./rootfile/run05371_DstPiKAna2.root
+ key = [KuramaTracking]   arg[2] = ./rootfile2/run05369_KuramaTracking.root
+ key = [K18Tracking]      arg[3] = ./rootfile2/run05369_K18Tracking.root
+ key = [Hodoscope]        arg[4] = ./rootfile2/run05369_Hodoscope.root
+ key = [Easiroc]          arg[5] = ./rootfile2/run05369_Easiroc.root
+ key = [OutFile]          arg[6] = ./rootfile2/run05369_DstPiKAna2.root
 #D [ConfMan::Initialize()]
  key = UNPACK     value = ./param/UNPACK/unpacker.xml   
  key = DIGIT      value = ./param/DIGIT/digit_data_20180602.xml
@@ -159,18 +159,7 @@ Error in <TTree::SetBranchAddress>: unknown branch -> sch_time
 #D [DstPiKAna2::DstRead] Event Number: 870000
 #D [DstPiKAna2::DstRead] Event Number: 880000
 #D [DstPiKAna2::DstRead] Event Number: 890000
-#D [DstPiKAna2::DstRead] Event Number: 900000
-#D [DstPiKAna2::DstRead] Event Number: 910000
-#D [DstPiKAna2::DstRead] Event Number: 920000
-#D [DstPiKAna2::DstRead] Event Number: 930000
-#D [DstPiKAna2::DstRead] Event Number: 940000
-#D [DstPiKAna2::DstRead] Event Number: 950000
-#D [DstPiKAna2::DstRead] Event Number: 960000
-#D [DstPiKAna2::DstRead] Event Number: 970000
-#D [DstPiKAna2::DstRead] Event Number: 980000
-#D [DstPiKAna2::DstRead] Event Number: 990000
-#D [DstPiKAna2::DstRead] Event Number: 1000000
-#D Event Number: 1002406
-#D Close : ./rootfile/run05371_DstPiKAna2.root
-391.64user 2.60system 7:10.35elapsed 91%CPU (0avgtext+0avgdata 606344maxresident)k
-0inputs+8outputs (0major+89496minor)pagefaults 0swaps
+#D Event Number: 898180
+#D Close : ./rootfile2/run05369_DstPiKAna2.root
+348.09user 2.44system 6:21.59elapsed 91%CPU (0avgtext+0avgdata 618060maxresident)k
+0inputs+0outputs (0major+86958minor)pagefaults 0swaps
