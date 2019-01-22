@@ -242,7 +242,7 @@ void Mtx_Banch2(int month, int runnum){
 
 
   //-hist def-----------------------------------------------------------------------------------------
-  Hist1Max = 32;
+  Hist1Max = 33;
   TH1D *Hist1[Hist1Max];
 
 
@@ -284,8 +284,8 @@ void Mtx_Banch2(int month, int runnum){
   Hist1[28] = new TH1D("MissMass Sigma Gate2","MissMass Sigma Gate2",100,0.8,1.4);
   Hist1[29] = new TH1D("MissMass Sigma Gate3","MissMass Sigma Gate3",100,0.8,1.4);
   Hist1[30] = new TH1D("MissMass Sigma Gate4","MissMass Sigma Gate4",100,0.8,1.4);
-  Hist1[30] = new TH1D("MissMass Sigma Gate5","MissMass Sigma Gate5",100,0.8,1.4);
-  Hist1[31] = new TH1D("MissMass Sigma Gate6","MissMass Sigma Gate6",100,0.8,1.4);
+  Hist1[31] = new TH1D("MissMass Sigma Gate5","MissMass Sigma Gate5",100,0.8,1.4);
+  Hist1[32] = new TH1D("MissMass Sigma Gate6","MissMass Sigma Gate6",100,0.8,1.4);
 
   //-Event Loop --------------------------------------------------------------------------------------
   Long64_t nentries = pik->GetEntries();
@@ -349,6 +349,7 @@ void Mtx_Banch2(int month, int runnum){
     // Mtx Pattern ----------------------------
     if(ntKurama==1&&chisqrKurama[0]<50){ 
       if(m2[0]>0.15 && m2[0]<0.35 && qKurama[0]>0 && pKurama[0]<0.9){ 
+          Hist1[26]->Fill(MissMass[0]);
         if( vtx[0]>-20 && vtx[0]<20 && vty[0]>-20 && vty[0]<20 && vtz[0]>-200 && vtz[0]<200 ){
           Hist1[23]->Fill(MissMass[0]);
           SigmaCount+=1;
@@ -430,7 +431,7 @@ void Mtx_Banch2(int month, int runnum){
       }
       if(Flag1_Sigma[n]&&Flag2_Sigma[n]&&Flag3_Sigma[n]){
         Count1_Sigma[n]+=1;
-        Hist1[24+n]->Fill(MissMass[0]);
+        Hist1[27+n]->Fill(MissMass[0]);
       }
     }
   }
