@@ -397,7 +397,7 @@ void Mtx_Banch2(int month, int runnum){
               }
               for(int m=0; m<sch_depth[j] ;m++){
                 if( sch_time[j][m]   > (double)SchMid - Gate[n] && sch_time[j][m]  < (double)SchMid + Gate[n] ){
-                  Hist1[13+n]->Fill(sch_time[j][m]);
+                  Hist1[14+n]->Fill(sch_time[j][m]);
                   Flag2[n]=true;
                   if(trigflag[28]>0) Flag2_Sigma[n]=true;
                 }
@@ -405,14 +405,14 @@ void Mtx_Banch2(int month, int runnum){
               for(int k = min; k < max; k++){
                 for(int m=0; m<sftx_udepth[k] ;m++){
                   if( sftx_utime[k][m] > (double)SftMid - Gate[n] && sftx_utime[k][m]< (double)SftMid + Gate[n] ){
-                    Hist1[18+n]->Fill(sftx_utime[k][m]);
+                    Hist1[20+n]->Fill(sftx_utime[k][m]);
                     Flag3[n]=true;
                     if(trigflag[28]>0) Flag3_Sigma[n]=true;
                   }
                 }
                 for(int m=0; m<sftx_ddepth[k] ;m++){
                   if( sftx_dtime[k][m] > (double)SftMid - Gate[n] && sftx_dtime[k][m]< (double)SftMid + Gate[n] ){ 
-                    Hist1[18+n]->Fill(sftx_dtime[k][m]);
+                    Hist1[20+n]->Fill(sftx_dtime[k][m]);
                     Flag3[n]=true;
                     if(trigflag[28]>0) Flag3_Sigma[n]=true;
                   }
@@ -465,7 +465,7 @@ void Mtx_Banch2(int month, int runnum){
   g1->SetMarkerStyle(8);
   g1->SetMarkerColor(2);
   g1->SetMarkerSize(2);
-  g1->GetXaxis()->SetRangeUser(0,4.5);
+  g1->GetXaxis()->SetRangeUser(0,5.5);
   g1->GetYaxis()->SetRangeUser(0,1);
   g1->Draw("AP");
 
@@ -475,7 +475,7 @@ void Mtx_Banch2(int month, int runnum){
   g2->SetMarkerStyle(8);
   g2->SetMarkerColor(2);
   g2->SetMarkerSize(2);
-  g2->GetXaxis()->SetRangeUser(0,4.5);
+  g2->GetXaxis()->SetRangeUser(0,5.5);
   g2->GetYaxis()->SetRangeUser(0,1);
   g2->Draw("AP");
 
