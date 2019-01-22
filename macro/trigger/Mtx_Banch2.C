@@ -79,7 +79,7 @@ bool eq3(int a,int b,int c){
   return true;
 }
 
-void Mtx_Banch2(int month, int runnum){
+void Mtx_Banch2(int month, int runnum, int filesel){
   //Matrix Patern txt file PATH -----------------------------------------------------------------------
   TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
   TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
@@ -145,7 +145,7 @@ void Mtx_Banch2(int month, int runnum){
   TString pdf = Form("%s/pdf/trigger/Mtx_Banch2_run%05d.pdf", anadir.Data(),runnum);
   TString pdfDhire = Form("%s/pdf/trigger", anadir.Data());
   //  TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_Matrix.root", anadir.Data(),Month[month], runnum),"READ");
-  TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstPiKAna2.root", anadir.Data(),Month[month], runnum),"READ");
+  TFile *f = new TFile(Form("%s/analyzer_%s/rootfile%d/run%05d_DstPiKAna2.root", anadir.Data(),Month[month],filesel, runnum),"READ");
   TTree *pik;
   f->GetObject("pik",pik);
 

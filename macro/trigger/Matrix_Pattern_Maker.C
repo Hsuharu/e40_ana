@@ -832,7 +832,9 @@ void Matrix_Pattern_Maker(int month,int runnum){
     bool flag10_min=false;
     bool flag11_min=false;
 
-    while(cmax>0 && cmax>min && Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) > 999/1000){
+//    while(cmax>0 && cmax>min && Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) > 999/1000){
+    for(int i=0; i<24; i++){
+      if(cmax>0 && cmax>min && Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < 999/1000) continue;
       flag10=false;
       flag11=false;
       if(cmax%32==0){
@@ -843,13 +845,39 @@ void Matrix_Pattern_Maker(int month,int runnum){
         flag11=true;
       }
     }
+//    while(cmax>0 && cmax>min && Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) > 999/1000){
+//      flag10=false;
+//      flag11=false;
+//      if(cmax%32==0){
+//        cmax-=10;
+//        flag10=true;
+//      }else{
+//        cmax-=11;
+//        flag11=true;
+//      }
+//    }
     if(flag10) cmax+=10;
     if(flag11) cmax+=11;
     if(cmax==0 || cmax<min ) Mtx_Flag.at(l)=false;
     SFTX_Max.at(l) = cmax;
 
-    if(!Mtx_Flag.at(l)) continue;
-    while(cmin<256 && cmin<cmax && Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) > 999/1000){
+//    if(!Mtx_Flag.at(l)) continue;
+//    while(cmin<256 && cmin<cmax && Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) > 999/1000){
+//      flag10_min=false;
+//      flag11_min=false;
+//      if(cmin%32==22){
+//        cmax+=10;
+//        flag10_min=true;
+//      }else{
+//        cmax+=11;
+//        flag11_min=true;
+//      }
+//    }
+//    if(flag10_min) cmin-=10;
+//    if(flag11_min) cmin-=11;
+//    if(cmin==256 || cmin>cmax ) Mtx_Flag.at(l)=false;
+    for(int i=0; i<24; i++){
+    if(cmin<256 && cmin<cmax && Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) > 999/1000) continue;
       flag10_min=false;
       flag11_min=false;
       if(cmin%32==22){
