@@ -4,7 +4,8 @@
  key = [K18Tracking]      arg[3] = ./rootfile/run05371_K18Tracking.root
  key = [Hodoscope]        arg[4] = ./rootfile/run05371_Hodoscope.root
  key = [Easiroc]          arg[5] = ./rootfile/run05371_Easiroc.root
- key = [OutFile]          arg[6] = ./rootfile/run05371_DstPiKAna2.root
+ key = [Matrix]           arg[6] = ./rootfile/run05371_Matrix.root
+ key = [OutFile]          arg[7] = ./rootfile/run05371_DstPiKAna2.root
 #D [ConfMan::Initialize()]
  key = UNPACK     value = param/UNPACK/unpacker.xml     
  key = DIGIT      value = param/DIGIT/digit_data_20180602.xml
@@ -25,12 +26,6 @@
  key = K18TM      value = param/K18TM/K18MatrixParam_1  
  [DCGeomMan]        -> Initialized
  [UserParamMan]     -> Initialized
-Error in <TTree::SetBranchStatus>: unknown branch -> sftx_utime
-Error in <TTree::SetBranchStatus>: unknown branch -> sftx_dtime
-Error in <TTree::SetBranchStatus>: unknown branch -> sch_time
-Error in <TTree::SetBranchAddress>: unknown branch -> sftx_utime
-Error in <TTree::SetBranchAddress>: unknown branch -> sftx_dtime
-Error in <TTree::SetBranchAddress>: unknown branch -> sch_time
 #D [UserParamMan::Print()] 
  key = BH1_TDC             2 :     0  1000 
  key = BTOF                2 :    -5     5 
@@ -168,5 +163,5 @@ Error in <TTree::SetBranchAddress>: unknown branch -> sch_time
 #D [DstPiKAna2::DstRead] Event Number: 1000000
 #D Event Number: 1002406
 #D Close : ./rootfile/run05371_DstPiKAna2.root
-391.08user 2.36system 7:07.62elapsed 92%CPU (0avgtext+0avgdata 606728maxresident)k
-0inputs+0outputs (0major+89256minor)pagefaults 0swaps
+469.40user 2.84system 8:40.97elapsed 90%CPU (0avgtext+0avgdata 716428maxresident)k
+0inputs+0outputs (0major+94042minor)pagefaults 0swaps
