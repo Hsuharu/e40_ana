@@ -242,7 +242,7 @@ void Mtx_Banch2(int month, int runnum){
 
 
   //-hist def-----------------------------------------------------------------------------------------
-  Hist1Max = 29;
+  Hist1Max = 32;
   TH1D *Hist1[Hist1Max];
 
 
