@@ -237,7 +237,7 @@ void Mtx_Banch2(int month, int runnum){
     Count1_Sigma[n] = 0;
     MtxEfficiency[n] = 0.;
     MtxEfficiency_Sigma[n] = 0.;
-    x[n] = (double)nGate-n-1;
+    x[n] = (double)nGate - (double)n -1.;
   }
 
 
