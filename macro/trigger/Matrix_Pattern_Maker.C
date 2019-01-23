@@ -62,7 +62,7 @@ bool eq3(int a,int b,int c){
 }
 
 
-void Matrix_Pattern_Maker(int month,int runnum){
+void Matrix_Pattern_Maker(int month,int runnum, int file=1){
 
   gStyle->SetOptStat(1111110); 
   gStyle->SetOptFit(1); 
@@ -83,6 +83,7 @@ void Matrix_Pattern_Maker(int month,int runnum){
 
   // Param Vector Dif ----------------------------------------------------------------------
   std::vector<std::vector<int>> Mtx_prm; //size() = 301
+  std::vector<std::vector<int>> New_Mtx_prm; //size() = 301
   std::string line;
   int preSCH=0;
   std::vector<std::vector<int>> sch_tof; 
@@ -141,7 +142,12 @@ void Matrix_Pattern_Maker(int month,int runnum){
   }
 
   // RootFile Open
-  TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstPiKAna.root", anadir.Data(),Month[month],runnum),"READ");
+  TFile *f;
+  if(file==2){
+    f = new TFile(Form("%s/analyzer_%s/rootfile2/run%05d_DstPiKAna.root", anadir.Data(),Month[month],runnum),"READ");
+  }else{
+    f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstPiKAna.root", anadir.Data(),Month[month],runnum),"READ");
+  }
   TTree *pik;
   f->GetObject("pik",pik);
 
@@ -781,7 +787,7 @@ void Matrix_Pattern_Maker(int month,int runnum){
           }//Cut5
         }//Cut4
       }
-    }// for Mtx_Pat.size()
+    }// for Mtx_prm.size()
   } 
 
   // Peak & Gate Make -----
@@ -895,8 +901,21 @@ void Matrix_Pattern_Maker(int month,int runnum){
     //      std::cout << "max" << max << "cmax" << cmax << "min" << min  << "cmin" << cmin  << std::endl;
   }                         
   for(int i=0; i<Mtx_prm.size(); i++){
-    if(Mtx_Flag.at(i)) std::cout << "SCH=" << Mtx_prm.at(i).at(0)  << "\t" << "TOF="  <<  Mtx_prm.at(i).at(1)  << "\t"  << "SFT_Min=" << Mtx_prm.at(i).at(2)  << "\t"  << "SFT_Max=" << Mtx_prm.at(i).at(3)  << std::endl;
+    if(Mtx_Flag.at(i)) std::cout << "SCH=" << Mtx_prm.at(i).at(0)  << "\t" << "TOF="  <<  Mtx_prm.at(i).at(1)  << "\t"  << "SFT_Min=" << Mtx_prm.at(i).at(2)  << "\t"  << "SFT_max=" << Mtx_prm.at(i).at(3)  << std::endl;
   }
+/////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                         //
+//    New Matrix Pattern Maker                                                             //
+//                                                                                         //
+/////////////////////////////////////////////////////////////////////////////////////////////
+  TString fileout1 = ("%s/analyzer_%s/param/MATRIXSFT/SFT_Newtable.txt.2019Jan.1_%d",anadir.Data(),Month[month], file );
+//  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
+   
+  std::ofstream fout1(fileout1.Data()); 
+  for(int l=0; l<Mtx_prm.size(); l++){
+    if(!Mtx_Flag.at(l)) continue;
+     fout1 << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" << SFTX_Min.at(l) <<  "\t"  << SFTX_Max.at(l) << endl;
+  }     
 
   ////-Canvas def---------------------------------------------------------------------------------------
   //
