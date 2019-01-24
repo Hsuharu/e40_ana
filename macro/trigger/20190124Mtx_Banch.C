@@ -119,20 +119,20 @@ void Mtx_Banch(int month, int runnum){
     }
   }
 
-  //  for(int i=0; i<Mtx_prm.size(); i++){
-  //    if(i==0){
-  //      SCH_Seg.push_back( Mtx_prm.at(i).at(0) );
-  //      TOF_Min.push_back( Mtx_prm.at(i).at(1) );
-  //    }else{
-  //      if(i==Mtx_prm.size()-1){
-  //        TOF_Max.push_back( Mtx_prm.at(i).at(1) );
-  //      }else if(Mtx_prm.at(i).at(0)!=Mtx_prm.at(i-1).at(0)){
-  //        SCH_Seg.push_back( Mtx_prm.at(i).at(0) );
-  //        TOF_Max.push_back( Mtx_prm.at(i-1).at(1) );
-  //        TOF_Min.push_back( Mtx_prm.at(i).at(1) );
-  //      }
-  //    }
-  //  }
+//  for(int i=0; i<Mtx_prm.size(); i++){
+//    if(i==0){
+//      SCH_Seg.push_back( Mtx_prm.at(i).at(0) );
+//      TOF_Min.push_back( Mtx_prm.at(i).at(1) );
+//    }else{
+//      if(i==Mtx_prm.size()-1){
+//        TOF_Max.push_back( Mtx_prm.at(i).at(1) );
+//      }else if(Mtx_prm.at(i).at(0)!=Mtx_prm.at(i-1).at(0)){
+//        SCH_Seg.push_back( Mtx_prm.at(i).at(0) );
+//        TOF_Max.push_back( Mtx_prm.at(i-1).at(1) );
+//        TOF_Min.push_back( Mtx_prm.at(i).at(1) );
+//      }
+//    }
+//  }
 
   gStyle->SetOptStat(1111110); 
   gStyle->SetOptFit(1); 
@@ -150,46 +150,46 @@ void Mtx_Banch(int month, int runnum){
 
   //Declaration of leaves types
   Int_t           evnum;
-  //  Int_t           spill;
-  //  Int_t           trignhits;
-  //  Int_t           trigpat[17];
+//  Int_t           spill;
+//  Int_t           trignhits;
+//  Int_t           trigpat[17];
   Int_t           trigflag[32];
-  //  Int_t           bh2nhits;
-  //  Int_t           bh2hitpat[8];
-  //  Double_t        bh2ua[8];
-  //  Double_t        bh2ut[8][16];
-  //  Double_t        bh2da[8];
-  //  Double_t        bh2dt[8][16];
-  //  Int_t           fpga_bh2mtnhits;
-  //  Int_t           fpga_bh2mthitpat[8][16];
-  //  Double_t        fpga_bh2mt[8][16];
+//  Int_t           bh2nhits;
+//  Int_t           bh2hitpat[8];
+//  Double_t        bh2ua[8];
+//  Double_t        bh2ut[8][16];
+//  Double_t        bh2da[8];
+//  Double_t        bh2dt[8][16];
+//  Int_t           fpga_bh2mtnhits;
+//  Int_t           fpga_bh2mthitpat[8][16];
+//  Double_t        fpga_bh2mt[8][16];
   Int_t           tofnhits;
-  //  Int_t           tofhitpat[24];
-  //  Double_t        tofua[24];
-  //  Double_t        tofut[24][16];
-  //  Double_t        tofda[24];
-  //  Double_t        tofdt[24][16];
-  //  Double_t        bh2mt[8][16];
-  //  Double_t        bh2de[8];
+//  Int_t           tofhitpat[24];
+//  Double_t        tofua[24];
+//  Double_t        tofut[24][16];
+//  Double_t        tofda[24];
+//  Double_t        tofdt[24][16];
+//  Double_t        bh2mt[8][16];
+//  Double_t        bh2de[8];
   Double_t        tofmt[24][16];
-  //  Double_t        tofde[24];
-  //  Double_t        t0[8][16];
-  //  Double_t        ct0[8][16];
-  //  Double_t        btof[11][8];
-  //  Double_t        cbtof[11][8];
-  //  Double_t        Time0Seg;
-  //  Double_t        deTime0;
-  //  Double_t        Time0;
-  //  Double_t        CTime0;
-  //  Double_t        Btof0Seg;
-  //  Double_t        deBtof0;
-  //  Double_t        Btof0;
-  //  Double_t        CBtof0;
+//  Double_t        tofde[24];
+//  Double_t        t0[8][16];
+//  Double_t        ct0[8][16];
+//  Double_t        btof[11][8];
+//  Double_t        cbtof[11][8];
+//  Double_t        Time0Seg;
+//  Double_t        deTime0;
+//  Double_t        Time0;
+//  Double_t        CTime0;
+//  Double_t        Btof0Seg;
+//  Double_t        deBtof0;
+//  Double_t        Btof0;
+//  Double_t        CBtof0;
   Int_t           sch_nhits;
   Int_t           sch_hitpat[36];
-  //  Double_t        sch_tdc[64][16];
-  //  Double_t        sch_trailing[64][16];
-  //  Double_t        sch_tot[64][16];
+//  Double_t        sch_tdc[64][16];
+//  Double_t        sch_trailing[64][16];
+//  Double_t        sch_tot[64][16];
   Double_t        sch_time[64][16];
   Int_t           sch_depth[64];
   Int_t           sftx_nhits;
@@ -197,12 +197,12 @@ void Mtx_Banch(int month, int runnum){
   Int_t           sftx_dnhits;
   Int_t           sftx_uhitpat[123];
   Int_t           sftx_dhitpat[140];
-  //  Double_t        sftx_utdc[256][16];
-  //  Double_t        sftx_dtdc[256][16];
-  //  Double_t        sftx_utrailing[256][16];
-  //  Double_t        sftx_dtrailing[256][16];
-  //  Double_t        sftx_utot[256][16];
-  //  Double_t        sftx_dtot[256][16];
+//  Double_t        sftx_utdc[256][16];
+//  Double_t        sftx_dtdc[256][16];
+//  Double_t        sftx_utrailing[256][16];
+//  Double_t        sftx_dtrailing[256][16];
+//  Double_t        sftx_utot[256][16];
+//  Double_t        sftx_dtot[256][16];
   Double_t        sftx_utime[256][16];
   Double_t        sftx_dtime[256][16];
   Int_t           sftx_udepth[256];
@@ -210,11 +210,11 @@ void Mtx_Banch(int month, int runnum){
 
   // Set branch atatus.
   mtx->SetBranchStatus("*",0);  // disable all branches
-  mtx->SetBranchStatus("evnum");
+    mtx->SetBranchStatus("evnum");
   //  mtx->SetBranchStatus("spill");
   //  mtx->SetBranchStatus("trignhits");
   //  mtx->SetBranchStatus("trigpat");
-  mtx->SetBranchStatus("trigflag");
+    mtx->SetBranchStatus("trigflag");
   //   mtx->SetBranchStatus("bh2nhits");
   //   mtx->SetBranchStatus("bh2hitpat");
   //   mtx->SetBranchStatus("bh2ua");
@@ -224,7 +224,7 @@ void Mtx_Banch(int month, int runnum){
   //   mtx->SetBranchStatus("fpga_bh2mtnhits");
   //   mtx->SetBranchStatus("fpga_bh2mthitpat");
   //   mtx->SetBranchStatus("fpga_bh2mt");
-  mtx->SetBranchStatus("tofnhits");
+    mtx->SetBranchStatus("tofnhits");
   //  mtx->SetBranchStatus("tofhitpat");
   //  mtx->SetBranchStatus("tofua");
   //  mtx->SetBranchStatus("tofut");
@@ -246,18 +246,18 @@ void Mtx_Banch(int month, int runnum){
   //   mtx->SetBranchStatus("deBtof0");
   //   mtx->SetBranchStatus("Btof0");
   //   mtx->SetBranchStatus("CBtof0");
-  mtx->SetBranchStatus("sch_nhits");
-  mtx->SetBranchStatus("sch_hitpat");
+    mtx->SetBranchStatus("sch_nhits");
+    mtx->SetBranchStatus("sch_hitpat");
   //  mtx->SetBranchStatus("sch_tdc");
   //  mtx->SetBranchStatus("sch_trailing");
   //  mtx->SetBranchStatus("sch_tot");
   mtx->SetBranchStatus("sch_time");
-  mtx->SetBranchStatus("sch_depth");
-  mtx->SetBranchStatus("sftx_nhits");
-  mtx->SetBranchStatus("sftx_unhits");
-  mtx->SetBranchStatus("sftx_dnhits");
-  mtx->SetBranchStatus("sftx_uhitpat");
-  mtx->SetBranchStatus("sftx_dhitpat");
+    mtx->SetBranchStatus("sch_depth");
+    mtx->SetBranchStatus("sftx_nhits");
+    mtx->SetBranchStatus("sftx_unhits");
+    mtx->SetBranchStatus("sftx_dnhits");
+    mtx->SetBranchStatus("sftx_uhitpat");
+    mtx->SetBranchStatus("sftx_dhitpat");
   //  mtx->SetBranchStatus("sftx_utdc");
   //  mtx->SetBranchStatus("sftx_dtdc");
   //  mtx->SetBranchStatus("sftx_utrailing");
@@ -266,16 +266,16 @@ void Mtx_Banch(int month, int runnum){
   //  mtx->SetBranchStatus("sftx_dtot");
   mtx->SetBranchStatus("sftx_utime");
   mtx->SetBranchStatus("sftx_dtime");
-  mtx->SetBranchStatus("sftx_udepth");
-  mtx->SetBranchStatus("sftx_ddepth");
+    mtx->SetBranchStatus("sftx_udepth");
+    mtx->SetBranchStatus("sftx_ddepth");
 
 
   // Set branch addresses.
-  mtx->SetBranchAddress("evnum",&evnum);
+    mtx->SetBranchAddress("evnum",&evnum);
   //  mtx->SetBranchAddress("spill",&spill);
   //  mtx->SetBranchAddress("trignhits",&trignhits);
   //  mtx->SetBranchAddress("trigpat",trigpat);
-  mtx->SetBranchAddress("trigflag",trigflag);
+    mtx->SetBranchAddress("trigflag",trigflag);
   //  mtx->SetBranchAddress("bh2nhits",&bh2nhits);
   //  mtx->SetBranchAddress("bh2hitpat",bh2hitpat);
   //  mtx->SetBranchAddress("bh2ua",bh2ua);
@@ -285,7 +285,7 @@ void Mtx_Banch(int month, int runnum){
   //  mtx->SetBranchAddress("fpga_bh2mtnhits",&fpga_bh2mtnhits);
   //  mtx->SetBranchAddress("fpga_bh2mthitpat",fpga_bh2mthitpat);
   //  mtx->SetBranchAddress("fpga_bh2mt",fpga_bh2mt);
-  mtx->SetBranchAddress("tofnhits",&tofnhits);
+    mtx->SetBranchAddress("tofnhits",&tofnhits);
   //  mtx->SetBranchAddress("tofhitpat",tofhitpat);
   //  mtx->SetBranchAddress("tofua",tofua);
   //  mtx->SetBranchAddress("tofut",tofut);
@@ -307,18 +307,18 @@ void Mtx_Banch(int month, int runnum){
   //  mtx->SetBranchAddress("deBtof0",&deBtof0);
   //  mtx->SetBranchAddress("Btof0",&Btof0);
   //  mtx->SetBranchAddress("CBtof0",&CBtof0);
-  mtx->SetBranchAddress("sch_nhits",&sch_nhits);
-  mtx->SetBranchAddress("sch_hitpat",sch_hitpat);
+    mtx->SetBranchAddress("sch_nhits",&sch_nhits);
+    mtx->SetBranchAddress("sch_hitpat",sch_hitpat);
   //  mtx->SetBranchAddress("sch_tdc",sch_tdc);
   //  mtx->SetBranchAddress("sch_trailing",sch_trailing);
   //  mtx->SetBranchAddress("sch_tot",sch_tot);
   mtx->SetBranchAddress("sch_time",sch_time);
-  mtx->SetBranchAddress("sch_depth",sch_depth);
-  mtx->SetBranchAddress("sftx_nhits",&sftx_nhits);
-  mtx->SetBranchAddress("sftx_unhits",&sftx_unhits);
-  mtx->SetBranchAddress("sftx_dnhits",&sftx_dnhits);
-  mtx->SetBranchAddress("sftx_uhitpat",sftx_uhitpat);
-  mtx->SetBranchAddress("sftx_dhitpat",sftx_dhitpat);
+    mtx->SetBranchAddress("sch_depth",sch_depth);
+    mtx->SetBranchAddress("sftx_nhits",&sftx_nhits);
+    mtx->SetBranchAddress("sftx_unhits",&sftx_unhits);
+    mtx->SetBranchAddress("sftx_dnhits",&sftx_dnhits);
+    mtx->SetBranchAddress("sftx_uhitpat",sftx_uhitpat);
+    mtx->SetBranchAddress("sftx_dhitpat",sftx_dhitpat);
   //  mtx->SetBranchAddress("sftx_utdc",sftx_utdc);
   //  mtx->SetBranchAddress("sftx_dtdc",sftx_dtdc);
   //  mtx->SetBranchAddress("sftx_utrailing",sftx_utrailing);
@@ -327,8 +327,8 @@ void Mtx_Banch(int month, int runnum){
   //  mtx->SetBranchAddress("sftx_dtot",sftx_dtot);
   mtx->SetBranchAddress("sftx_utime",sftx_utime);
   mtx->SetBranchAddress("sftx_dtime",sftx_dtime);
-  mtx->SetBranchAddress("sftx_udepth",sftx_udepth);
-  mtx->SetBranchAddress("sftx_ddepth",sftx_ddepth);
+    mtx->SetBranchAddress("sftx_udepth",sftx_udepth);
+    mtx->SetBranchAddress("sftx_ddepth",sftx_ddepth);
 
 
   //-para def-----------------------------------------------------------------------------------------
@@ -409,14 +409,14 @@ void Mtx_Banch(int month, int runnum){
   Hist1[63] = new TH1D("SftX Time Gate3","SftX Time Gate3",200,-100,100);
   Hist1[64] = new TH1D("SftX Time Gate4","SftX Time Gate4",200,-100,100);
   Hist1[65] = new TH1D("SftX Time Gate5","SftX Time Gate5",200,-100,100);
-
+  
   Hist1[66] = new TH1D("Sch Time TofFlag","Sch Time TofFlag",200,-100,100);
   Hist1[67] = new TH1D("SftX Time TofFlag","SftX Time TofFlag",200,-100,100);
 
   //-Event Loop --------------------------------------------------------------------------------------
-  Long64_t nentries = mtx->GetEntries();
-  Long64_t nentries_MtxFlg = 0;
-  //  Long64_t nentries =10000;
+    Long64_t nentries = mtx->GetEntries();
+    Long64_t nentries_MtxFlg = 0;
+//  Long64_t nentries =10000;
 
   for (Long64_t s=0; s<nentries;s++){
     mtx->GetEntry(s);
@@ -492,20 +492,16 @@ void Mtx_Banch(int month, int runnum){
       }
     }
 
-    bool Flag[nGate];
     bool Flag1[nGate];
     bool Flag2[nGate];
     bool Flag3[nGate];
-    bool Flag_MtxFlg[nGate];
     bool Flag1_MtxFlg[nGate];
     bool Flag2_MtxFlg[nGate];
     bool Flag3_MtxFlg[nGate];
     for(int n=0; n<nGate; n++){
-      Flag[n] = false;
       Flag1[n] = false;
       Flag2[n] = false;
       Flag3[n] = false;
-      Flag_MtxFlg[n] = false;
       Flag1_MtxFlg[n] = false;
       Flag2_MtxFlg[n] = false;
       Flag3_MtxFlg[n] = false;
@@ -521,40 +517,40 @@ void Mtx_Banch(int month, int runnum){
       j = Mtx_prm.at(l).at(0);
       min = Mtx_prm.at(l).at(2);
       max = Mtx_prm.at(l).at(3) + 1;
-      for(int m=0; m<16 ;m++){
-        if( tofmt[i][m] != -999.0 ){ 
-          Flag1[5]=true;
-          if(trigflag[28]>0) Flag1_MtxFlg[5]=true;
-        }
-      }
-      for(int m=0; m<sch_depth[j] ;m++){
-        if( sch_time[j][m]!= -999. ){
-          Flag2[5]=true;
-          if(trigflag[28]>0) Flag2_MtxFlg[5]=true;
-        }
-      }
-      for(int k = min; k < max; k++){
-        for(int m=0; m<sftx_udepth[k] ;m++){
-          if( sftx_utime[k][m] != -999. ){
-            Flag3[5]=true;
-            if(trigflag[28]>0) Flag3_MtxFlg[5]=true;
+        for(int m=0; m<16 ;m++){
+          if( tofmt[i][m] != -999.0 ){ 
+            Flag1[5]=true;
+            if(trigflag[28]>0) Flag1_MtxFlg[5]=true;
           }
         }
-        for(int m=0; m<sftx_ddepth[k] ;m++){
-          if( sftx_dtime[k][m] != -999. ){
-            Flag3[5]=true;
-            if(trigflag[28]>0) Flag3_MtxFlg[5]=true;
+        for(int m=0; m<sch_depth[j] ;m++){
+          if( sch_time[j][m]!= -999. ){
+            Flag2[5]=true;
+            if(trigflag[28]>0) Flag2_MtxFlg[5]=true;
           }
         }
-      }
-      //      std::cout << i << "\t" << j <<  "\t" << min << "\t" << max << "\t" << std::endl;
+        for(int k = min; k < max; k++){
+          for(int m=0; m<sftx_udepth[k] ;m++){
+            if( sftx_utime[k][m] != -999. ){
+              Flag3[5]=true;
+              if(trigflag[28]>0) Flag3_MtxFlg[5]=true;
+            }
+          }
+          for(int m=0; m<sftx_ddepth[k] ;m++){
+            if( sftx_dtime[k][m] != -999. ){
+              Flag3[5]=true;
+              if(trigflag[28]>0) Flag3_MtxFlg[5]=true;
+            }
+          }
+        }
+//      std::cout << i << "\t" << j <<  "\t" << min << "\t" << max << "\t" << std::endl;
       for(int n=0; n<nGate; n++){
-        //          if(!Flag1[n] && tofmt[i][m]      > (double)TofMid - Gate[n] && tofmt[i][m]     < (double)TofMid + Gate[n] ) Flag1[n]=true;
-        //          if(!Flag2[n] && sch_time[j][m]   > (double)SchMid - Gate[n] && sch_time[j][m]  < (double)SchMid + Gate[n] ) Flag2[n]=true;
-        //          for(int k = min; k < max; k++){
-        //            if(!Flag3[n] &&  sftx_utime[k][m] > (double)SftMid - Gate[n] && sftx_utime[k][m]< (double)SftMid + Gate[n] ) Flag3[n]=true;
-        //            if(!Flag3[n] &&  sftx_dtime[k][m] > (double)SftMid - Gate[n] && sftx_dtime[k][m]< (double)SftMid + Gate[n] ) Flag3[n]=true;
-        //          }
+//          if(!Flag1[n] && tofmt[i][m]      > (double)TofMid - Gate[n] && tofmt[i][m]     < (double)TofMid + Gate[n] ) Flag1[n]=true;
+//          if(!Flag2[n] && sch_time[j][m]   > (double)SchMid - Gate[n] && sch_time[j][m]  < (double)SchMid + Gate[n] ) Flag2[n]=true;
+//          for(int k = min; k < max; k++){
+//            if(!Flag3[n] &&  sftx_utime[k][m] > (double)SftMid - Gate[n] && sftx_utime[k][m]< (double)SftMid + Gate[n] ) Flag3[n]=true;
+//            if(!Flag3[n] &&  sftx_dtime[k][m] > (double)SftMid - Gate[n] && sftx_dtime[k][m]< (double)SftMid + Gate[n] ) Flag3[n]=true;
+//          }
         for(int m=0; m<16 ;m++){
           if( tofmt[i][m]      > (double)TofMid - Gate[n] && tofmt[i][m]     < (double)TofMid + Gate[n] ){ 
             Hist1[52+n]->Fill(tofmt[i][m]);
@@ -586,29 +582,13 @@ void Mtx_Banch(int month, int runnum){
           }
         }
       }
-      for(int n=0; n<nGate; n++){
-        if(Flag1[n]&&Flag2[n]&&Flag3[n]){
-          Flag[n]=true;
-        }
-        if(Flag1_MtxFlg[n]&&Flag2_MtxFlg[n]&&Flag3_MtxFlg[n]){
-          Flag_MtxFlg[n]=true;
-        }
-      }
-      for(int n=0; n<nGate; n++){
-        Flag1[n] = false;
-        Flag2[n] = false;
-        Flag3[n] = false;
-        Flag1_MtxFlg[n] = false;
-        Flag2_MtxFlg[n] = false;
-        Flag3_MtxFlg[n] = false;
-      }
     }
 
     for(int n=0; n<nGate; n++){
-      if(Flag[n]){
+      if(Flag1[n]&&Flag2[n]&&Flag3[n]){
         Count1[n]+=1;
       }
-      if(Flag_MtxFlg[n]){
+      if(Flag1_MtxFlg[n]&&Flag2_MtxFlg[n]&&Flag3_MtxFlg[n]){
         Count1_MtxFlg[n]+=1;
       }
     }
@@ -617,7 +597,7 @@ void Mtx_Banch(int month, int runnum){
 
   //-Canvas def---------------------------------------------------------------------------------------
   TCanvas *c1 = new TCanvas("c1","c1",1200,900);
-  //-Hist Draw----------------------------------------------------------------------------------------
+//-Hist Draw----------------------------------------------------------------------------------------
 
   c1->Print(pdf+"["); 
   c1->cd();
@@ -628,20 +608,20 @@ void Mtx_Banch(int month, int runnum){
     c1->Print(Form("%s/Mtx_Banch_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
   }
-  //  for(int i=0; i<Hist2Max; i++){
-  //  Hist2[i]->Draw("colz");
-  //  c1->Print(pdf);
-  //  c1->Print(Form("%s/Mtx_Banch_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
-  //  }
+//  for(int i=0; i<Hist2Max; i++){
+//  Hist2[i]->Draw("colz");
+//  c1->Print(pdf);
+//  c1->Print(Form("%s/Mtx_Banch_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
+//  }
 
   for(int n; n<nGate; n++){
-    //    MtxEfficiency[n]= (double)Count1[n]/nentries;
-    //    std::cout << "Total Event# is " << nentries << "\t" << Form("Count%d# is ",n+1) << Count1[n] << "\t" << "Efficiency is " << MtxEfficiency[n] << std::endl;
+//    MtxEfficiency[n]= (double)Count1[n]/nentries;
+//    std::cout << "Total Event# is " << nentries << "\t" << Form("Count%d# is ",n+1) << Count1[n] << "\t" << "Efficiency is " << MtxEfficiency[n] << std::endl;
     MtxEfficiency[n]= (double)Count1[n]/Count1[nGate-1];
     std::cout << "Total Event# is " << Count1[nGate-1] << "\t" << Form("Count%d# is ",n+1) << Count1[n] << "\t" << "Efficiency is " << MtxEfficiency[n] << std::endl;
   }
   for(int n; n<nGate; n++){
-    //    MtxEfficiency_MtxFlg[n]= (double)Count1_MtxFlg[n]/nentries_MtxFlg;
+//    MtxEfficiency_MtxFlg[n]= (double)Count1_MtxFlg[n]/nentries_MtxFlg;
     MtxEfficiency_MtxFlg[n]= (double)Count1_MtxFlg[n]/ Count1_MtxFlg[nGate-1];
     std::cout << "Total Event# is " << nentries_MtxFlg << "\t" << Form("Count%d_MtxFlg# is ",nGate-1) << Count1_MtxFlg[nGate-1]  << "\t" << Form("Count%d_MtxFlg# is ",n+1) << Count1_MtxFlg[n] << "\t" << "Efficiency is " << MtxEfficiency_MtxFlg[n] << std::endl;
   }

@@ -79,7 +79,7 @@ bool eq3(int a,int b,int c){
   return true;
 }
 
-void Mtx_Banch2(int month, int runnum, int filesel=1){
+void Mtx_Banch2(int month, int runnum, int filesel){
   //Matrix Patern txt file PATH -----------------------------------------------------------------------
   TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
   TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
@@ -142,15 +142,10 @@ void Mtx_Banch2(int month, int runnum, int filesel=1){
   gROOT->Reset();
   //   TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("rootfile/run05126_DstKuramaEasirocHodoscope.root");
   //  TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-  TString pdf = Form("%s/pdf/trigger/Mtx_Banch2_run%05d_%d.pdf", anadir.Data(),runnum,filesel);
+  TString pdf = Form("%s/pdf/trigger/Mtx_Banch2_run%05d.pdf", anadir.Data(),runnum);
   TString pdfDhire = Form("%s/pdf/trigger", anadir.Data());
-    TFile *f;
-  if(filesel==1){
-//    TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_Matrix.root", anadir.Data(),Month[month], runnum),"READ");
-    f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstPiKAna2.root", anadir.Data(),Month[month], runnum),"READ");
-  }else{
-    f = new TFile(Form("%s/analyzer_%s/rootfile%d/run%05d_DstPiKAna2.root", anadir.Data(),Month[month],filesel, runnum),"READ");
-  }
+  //  TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_Matrix.root", anadir.Data(),Month[month], runnum),"READ");
+  TFile *f = new TFile(Form("%s/analyzer_%s/rootfile%d/run%05d_DstPiKAna2.root", anadir.Data(),Month[month],filesel, runnum),"READ");
   TTree *pik;
   f->GetObject("pik",pik);
 
@@ -336,20 +331,16 @@ void Mtx_Banch2(int month, int runnum, int filesel=1){
       }
     }
 
-    bool Flag[nGate];
     bool Flag1[nGate];
     bool Flag2[nGate];
     bool Flag3[nGate];
-    bool Flag_Sigma[nGate];
     bool Flag1_Sigma[nGate];
     bool Flag2_Sigma[nGate];
     bool Flag3_Sigma[nGate];
     for(int n=0; n<nGate; n++){
-      Flag[n] = false;
       Flag1[n] = false;
       Flag2[n] = false;
       Flag3[n] = false;
-      Flag_Sigma[n] = false;
       Flag1_Sigma[n] = false;
       Flag2_Sigma[n] = false;
       Flag3_Sigma[n] = false;
@@ -358,7 +349,7 @@ void Mtx_Banch2(int month, int runnum, int filesel=1){
     // Mtx Pattern ----------------------------
     if(ntKurama==1&&chisqrKurama[0]<50){ 
       if(m2[0]>0.15 && m2[0]<0.35 && qKurama[0]>0 && pKurama[0]<0.9){ 
-        Hist1[26]->Fill(MissMass[0]);
+          Hist1[26]->Fill(MissMass[0]);
         if( vtx[0]>-20 && vtx[0]<20 && vty[0]>-20 && vty[0]<20 && vtz[0]>-200 && vtz[0]<200 ){
           Hist1[23]->Fill(MissMass[0]);
           SigmaCount+=1;
@@ -429,85 +420,70 @@ void Mtx_Banch2(int month, int runnum, int filesel=1){
                 }
               }
             }
-            for(int n=0; n<nGate; n++){
-              if(Flag1[n]&&Flag2[n]&&Flag3[n]){
-                Flag[n]=true;
-              }
-              if(Flag1_Sigma[n]&&Flag2_Sigma[n]&&Flag3_Sigma[n]){
-                Flag_Sigma[n]=true;
-              }
-            }
-            for(int n=0; n<nGate; n++){
-              Flag1[n] = false;
-              Flag2[n] = false;
-              Flag3[n] = false;
-              Flag1_Sigma[n] = false;
-              Flag2_Sigma[n] = false;
-              Flag3_Sigma[n] = false;
-            }
           }
         }
       }
     }
 
     for(int n=0; n<nGate; n++){
-      if(Flag[n]){
+      if(Flag1[n]&&Flag2[n]&&Flag3[n]){
         Count1[n]+=1;
       }
-      if(Flag_Sigma[n]){
+      if(Flag1_Sigma[n]&&Flag2_Sigma[n]&&Flag3_Sigma[n]){
         Count1_Sigma[n]+=1;
+        Hist1[27+n]->Fill(MissMass[0]);
       }
     }
   }
 
-    //-Canvas def---------------------------------------------------------------------------------------
-    TCanvas *c1 = new TCanvas("c1","c1",1200,900);
-    //-Hist Draw----------------------------------------------------------------------------------------
+  //-Canvas def---------------------------------------------------------------------------------------
+  TCanvas *c1 = new TCanvas("c1","c1",1200,900);
+  //-Hist Draw----------------------------------------------------------------------------------------
 
-    c1->Print(pdf+"["); 
-    c1->cd();
-    for(int i=0; i<Hist1Max; i++){
-      Hist1[i]->Draw();
-      c1->Print(pdf);
-      c1->Print(Form("%s/Mtx_Banch2_run%05d_Hist1_%03d_%d.pdf",pdfDhire.Data(),runnum,i, filesel));
-    }
-
-    for(int n; n<nGate; n++){
-      MtxEfficiency[n]= (double)Count1[n]/Count1[nGate-1];
-      std::cout << "Total Event# is " << Count1[nGate-1] << "\t" << Form("Count%d# is ",n+1) << Count1[n] << "\t" << "Efficiency is " << MtxEfficiency[n] << std::endl;
-    }
-    for(int n; n<nGate; n++){
-      MtxEfficiency_Sigma[n]= (double)Count1_Sigma[n]/ Count1_Sigma[nGate-1];
-      std::cout << "Total Event# is " << SigmaCount << "\t" << Form("Count%d_Sigma# is ",nGate-1) << Count1_Sigma[nGate-1]  << "\t" << Form("Count%d_Sigma# is ",n+1) << Count1_Sigma[n] << "\t" << "Efficiency is " << MtxEfficiency_Sigma[n] << std::endl;
-    }
-
-    c1->SetGrid();
-    c1->SetGridx();
-    c1->SetGridy();
-
-    TGraph *g1 = new TGraph(nGate, x, MtxEfficiency);
-    TGraph *g2 = new TGraph(nGate, x, MtxEfficiency_Sigma);
-    g1->SetMarkerStyle(8);
-    g1->SetMarkerColor(2);
-    g1->SetMarkerSize(2);
-    g1->GetXaxis()->SetRangeUser(0,5.5);
-    g1->GetYaxis()->SetRangeUser(0,1);
-    g1->Draw("AP");
-
+  c1->Print(pdf+"["); 
+  c1->cd();
+  for(int i=0; i<Hist1Max; i++){
+    Hist1[i]->Draw();
     c1->Print(pdf);
-    c1->Print(Form("%s/Mtx_Banch2_run%05d_Graph_%d.pdf",pdfDhire.Data(),runnum, filesel));
-
-    g2->SetMarkerStyle(8);
-    g2->SetMarkerColor(2);
-    g2->SetMarkerSize(2);
-    g2->GetXaxis()->SetRangeUser(0,5.5);
-    g2->GetYaxis()->SetRangeUser(0,1);
-    g2->Draw("AP");
-
-    c1->Print(pdf);
-    c1->Print(Form("%s/Mtx_Banch2_run%05d_Graph_Sigma_%d.pdf",pdfDhire.Data(),runnum, filesel));
-
-    c1->Print(pdf+"]"); 
-
+    c1->Print(Form("%s/Mtx_Banch2_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
   }
+
+  for(int n; n<nGate; n++){
+    MtxEfficiency[n]= (double)Count1[n]/Count1[nGate-1];
+    std::cout << "Total Event# is " << Count1[nGate-1] << "\t" << Form("Count%d# is ",n+1) << Count1[n] << "\t" << "Efficiency is " << MtxEfficiency[n] << std::endl;
+  }
+  for(int n; n<nGate; n++){
+    MtxEfficiency_Sigma[n]= (double)Count1_Sigma[n]/ Count1_Sigma[nGate-1];
+    std::cout << "Total Event# is " << SigmaCount << "\t" << Form("Count%d_Sigma# is ",nGate-1) << Count1_Sigma[nGate-1]  << "\t" << Form("Count%d_Sigma# is ",n+1) << Count1_Sigma[n] << "\t" << "Efficiency is " << MtxEfficiency_Sigma[n] << std::endl;
+  }
+
+  c1->SetGrid();
+  c1->SetGridx();
+  c1->SetGridy();
+
+  TGraph *g1 = new TGraph(nGate, x, MtxEfficiency);
+  TGraph *g2 = new TGraph(nGate, x, MtxEfficiency_Sigma);
+  g1->SetMarkerStyle(8);
+  g1->SetMarkerColor(2);
+  g1->SetMarkerSize(2);
+  g1->GetXaxis()->SetRangeUser(0,5.5);
+  g1->GetYaxis()->SetRangeUser(0,1);
+  g1->Draw("AP");
+
+  c1->Print(pdf);
+  c1->Print(Form("%s/Mtx_Banch2_run%05d_Graph.pdf",pdfDhire.Data(),runnum));
+
+  g2->SetMarkerStyle(8);
+  g2->SetMarkerColor(2);
+  g2->SetMarkerSize(2);
+  g2->GetXaxis()->SetRangeUser(0,5.5);
+  g2->GetYaxis()->SetRangeUser(0,1);
+  g2->Draw("AP");
+
+  c1->Print(pdf);
+  c1->Print(Form("%s/Mtx_Banch2_run%05d_Graph_Sigma.pdf",pdfDhire.Data(),runnum));
+
+  c1->Print(pdf+"]"); 
+
+}
 

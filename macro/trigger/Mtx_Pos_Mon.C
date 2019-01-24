@@ -105,7 +105,11 @@ void Mtx_Pos_Mon(int month,int runnum){
     if( input_line >> sch >> tof >> sft_min >> sft_max ){
       inner.push_back(sch);
       inner.push_back(tof);
-      inner.push_back(sft_min-11);
+      if((int)sft_min%32==0){
+        inner.push_back(sft_min-10);
+      }else{
+        inner.push_back(sft_min-11);
+      }
       inner.push_back(sft_max-1);
       Mtx_prm.push_back(inner);
     }
