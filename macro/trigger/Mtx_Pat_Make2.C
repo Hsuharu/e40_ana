@@ -1,5 +1,12 @@
 #include "DetectorID.hh"
 
+ const char* MPG[] =
+ {
+   "SFT_Newtable.txt.2019Jan.1_1",
+   "SFT_Newtable.txt.2019Jan.1_2",
+   "SFT_table.txt.2018Jun.3_1   "
+ };
+
  const char* Month[] =
  {
    "zero",
@@ -62,7 +69,7 @@ bool eq3(int a,int b,int c){
 }
 
 
-void Mtx_Pat_Make2(int month,int runnum ,int bin){
+void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
 
   gStyle->SetOptStat(1111110); 
   gStyle->SetOptFit(1); 
@@ -71,13 +78,14 @@ void Mtx_Pat_Make2(int month,int runnum ,int bin){
    gROOT->Reset();
    gROOT->Reset();
    TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-   TString pdf = Form("%s/pdf/trigger/Mtx_Pat_Make2_bin%d_run%05d.pdf", anadir.Data(),bin,runnum);
-   TString pdf1 = Form("%s/pdf/trigger/Mtx_Check2_bin%d_run%05d.pdf", anadir.Data(),bin,runnum);
+   TString pdf = Form("%s/pdf/trigger/Mtx_Pat_Make2_bin%d_%d_run%05d.pdf", anadir.Data(), bin, matrixnum,runnum);
+   TString pdf1 = Form("%s/pdf/trigger/Mtx_Check2_bin%d_%d_run%05d.pdf", anadir.Data(), bin, matrixnum,runnum);
    TString pdfDhire = Form("%s/pdf/trigger", anadir.Data());
 
 //Matrix Patern txt file PATH -----------------------------------------------------------------------
 //  TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
+//  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
+  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/%s",anadir.Data(),Month[month],MPG[matrixnum] ); 
 
   std::ifstream fin1(filein1);
 
