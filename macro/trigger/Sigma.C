@@ -562,7 +562,7 @@ void Sigma(int month,int runnum, int file=1){
   TH1D *Hist1[Hist1Max];
   TH2D *Hist2[Hist2Max];
 
-  Hist1[0 ]= new TH1D("MissMass[0]","delta_x",100,0.5,1.5);
+  Hist1[0 ]= new TH1D("MissMass[0] w/Sigma","MissMass[0] w/Sigma",100,0.5,1.5);
   Hist1[1 ]= new TH1D("pKurama[0] w/Sigma","pKurama[0] w/Sigma",100,0,2);
 
 //  Hist2[0 ]= new TH2D("pKurama % m2",     "pKurama % m2 "    ,100,-0.4,1.4,100,0,2);
@@ -623,7 +623,7 @@ void Sigma(int month,int runnum, int file=1){
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(1);
     Hist1[i]->Draw();
     c1->Print(pdf);
-    c1->Print(Form("%s/Mtx_Pat_Make_run%05d_Hist1_%04d.pdf",pdfDhire.Data(),runnum,i));
+    c1->Print(Form("%s/Sigma_run%05d_Hist1_%04d.pdf",pdfDhire.Data(),runnum,i));
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
   }
   //     for(int i=0; i<Hist2Max; i++){

@@ -113,7 +113,11 @@ void Mtx_Banch2(int month, int runnum, int filesel=1){
     if( input_line >> sch >> tof >> sft_min >> sft_max ){
       inner.push_back(sch);
       inner.push_back(tof);
-      inner.push_back(sft_min-11);
+      if((int)sft_min%32==0){
+        inner.push_back(sft_min-10);
+      }else{
+        inner.push_back(sft_min-11);
+      }
       inner.push_back(sft_max-1);
       Mtx_prm.push_back(inner);
     }
@@ -221,8 +225,8 @@ void Mtx_Banch2(int month, int runnum, int filesel=1){
   double HULMHTDCCalib = -0.8333;
   double MaxBinValue=0.;
 
-  int nGate = 6;
-  int Gate[] = {15,20,30,40,60,120};
+  int nGate = 12;
+  int Gate[] = {1,2,3,4,5,10,15,20,30,40,60,120};
 
   double TofMid = 10.;
   double SchMid = 0.;
@@ -247,7 +251,7 @@ void Mtx_Banch2(int month, int runnum, int filesel=1){
 
 
   //-hist def-----------------------------------------------------------------------------------------
-  Hist1Max = 33;
+  Hist1Max = 35;
   TH1D *Hist1[Hist1Max];
 
 
@@ -291,6 +295,8 @@ void Mtx_Banch2(int month, int runnum, int filesel=1){
   Hist1[30] = new TH1D("MissMass Sigma Gate4","MissMass Sigma Gate4",100,0.8,1.4);
   Hist1[31] = new TH1D("MissMass Sigma Gate5","MissMass Sigma Gate5",100,0.8,1.4);
   Hist1[32] = new TH1D("MissMass Sigma Gate6","MissMass Sigma Gate6",100,0.8,1.4);
+  Hist1[33] = new TH1D("MissMass Sigma vtx & K","MissMass Sigma vtx & K",100,0.8,1.4);
+  Hist1[34] = new TH1D("MissMass Sigma vtx & K & MissMass","MissMass Sigma vtx & K & MissMass",100,0.8,1.4);
 
   //-Event Loop --------------------------------------------------------------------------------------
   Long64_t nentries = pik->GetEntries();
@@ -360,90 +366,93 @@ void Mtx_Banch2(int month, int runnum, int filesel=1){
       if(m2[0]>0.15 && m2[0]<0.35 && qKurama[0]>0 && pKurama[0]<0.9){ 
         Hist1[26]->Fill(MissMass[0]);
         if( vtx[0]>-20 && vtx[0]<20 && vty[0]>-20 && vty[0]<20 && vtz[0]>-200 && vtz[0]<200 ){
-          Hist1[23]->Fill(MissMass[0]);
-          SigmaCount+=1;
-          for(int l=0; l < Mtx_prm.size(); l++){
-            int i = 0;
-            int j = 0;
-            int min = 0;
-            int max = 0;
-            i = Mtx_prm.at(l).at(1);
-            j = Mtx_prm.at(l).at(0);
-            min = Mtx_prm.at(l).at(2);
-            max = Mtx_prm.at(l).at(3) + 1;
-            for(int m=0; m<16 ;m++){
-              if( tofmt[i][m] != -999.0 ){ 
-                Flag1[5]=true;
-                if(trigflag[28]>0) Flag1_Sigma[5]=true;
-              }
-            }
-            for(int m=0; m<sch_depth[j] ;m++){
-              if( sch_time[j][m]!= -999. ){
-                Flag2[5]=true;
-                if(trigflag[28]>0) Flag2_Sigma[5]=true;
-              }
-            }
-            for(int k = min; k < max; k++){
-              for(int m=0; m<sftx_udepth[k] ;m++){
-                if( sftx_utime[k][m] != -999. ){
-                  Flag3[5]=true;
-                  if(trigflag[28]>0) Flag3_Sigma[5]=true;
-                }
-              }
-              for(int m=0; m<sftx_ddepth[k] ;m++){
-                if( sftx_dtime[k][m] != -999. ){
-                  Flag3[5]=true;
-                  if(trigflag[28]>0) Flag3_Sigma[5]=true;
-                }
-              }
-            }
-            for(int n=0; n<nGate; n++){
+          Hist1[33]->Fill(MissMass[0]);
+          if(MissMass[0]>1.15&&MissMass[0]<1.25){
+            Hist1[34]->Fill(MissMass[0]);
+            SigmaCount+=1;
+            for(int l=0; l < Mtx_prm.size(); l++){
+              int i = 0;
+              int j = 0;
+              int min = 0;
+              int max = 0;
+              i = Mtx_prm.at(l).at(1);
+              j = Mtx_prm.at(l).at(0);
+              min = Mtx_prm.at(l).at(2);
+              max = Mtx_prm.at(l).at(3) + 1;
               for(int m=0; m<16 ;m++){
-                if( tofmt[i][m]      > (double)TofMid - Gate[n] && tofmt[i][m]     < (double)TofMid + Gate[n] ){ 
-                  Hist1[8+n]->Fill(tofmt[i][m]);
-                  Flag1[n]=true;
-                  if(trigflag[28]>0) Flag1_Sigma[n]=true;
+                if( tofmt[i][m] != -999.0 ){ 
+                  Flag1[nGate-1]=true;
+                  if(trigflag[28]>0) Flag1_Sigma[nGate-1]=true;
                 }
               }
               for(int m=0; m<sch_depth[j] ;m++){
-                if( sch_time[j][m]   > (double)SchMid - Gate[n] && sch_time[j][m]  < (double)SchMid + Gate[n] ){
-                  Hist1[14+n]->Fill(sch_time[j][m]);
-                  Flag2[n]=true;
-                  if(trigflag[28]>0) Flag2_Sigma[n]=true;
+                if( sch_time[j][m]!= -999. ){
+                  Flag2[nGate-1]=true;
+                  if(trigflag[28]>0) Flag2_Sigma[nGate-1]=true;
                 }
               }
               for(int k = min; k < max; k++){
                 for(int m=0; m<sftx_udepth[k] ;m++){
-                  if( sftx_utime[k][m] > (double)SftMid - Gate[n] && sftx_utime[k][m]< (double)SftMid + Gate[n] ){
-                    Hist1[20+n]->Fill(sftx_utime[k][m]);
-                    Flag3[n]=true;
-                    if(trigflag[28]>0) Flag3_Sigma[n]=true;
+                  if( sftx_utime[k][m] != -999. ){
+                    Flag3[nGate-1]=true;
+                    if(trigflag[28]>0) Flag3_Sigma[nGate-1]=true;
                   }
                 }
                 for(int m=0; m<sftx_ddepth[k] ;m++){
-                  if( sftx_dtime[k][m] > (double)SftMid - Gate[n] && sftx_dtime[k][m]< (double)SftMid + Gate[n] ){ 
-                    Hist1[20+n]->Fill(sftx_dtime[k][m]);
-                    Flag3[n]=true;
-                    if(trigflag[28]>0) Flag3_Sigma[n]=true;
+                  if( sftx_dtime[k][m] != -999. ){
+                    Flag3[nGate-1]=true;
+                    if(trigflag[28]>0) Flag3_Sigma[nGate-1]=true;
                   }
                 }
               }
-            }
-            for(int n=0; n<nGate; n++){
-              if(Flag1[n]&&Flag2[n]&&Flag3[n]){
-                Flag[n]=true;
+              for(int n=0; n<nGate; n++){
+                for(int m=0; m<16 ;m++){
+                  if( tofmt[i][m]      > (double)TofMid - Gate[n] && tofmt[i][m]     < (double)TofMid + Gate[n] ){ 
+                    Hist1[8+n]->Fill(tofmt[i][m]);
+                    Flag1[n]=true;
+                    if(trigflag[28]>0) Flag1_Sigma[n]=true;
+                  }
+                }
+                for(int m=0; m<sch_depth[j] ;m++){
+                  if( sch_time[j][m]   > (double)SchMid - Gate[n] && sch_time[j][m]  < (double)SchMid + Gate[n] ){
+                    Hist1[14+n]->Fill(sch_time[j][m]);
+                    Flag2[n]=true;
+                    if(trigflag[28]>0) Flag2_Sigma[n]=true;
+                  }
+                }
+                for(int k = min; k < max; k++){
+                  for(int m=0; m<sftx_udepth[k] ;m++){
+                    if( sftx_utime[k][m] > (double)SftMid - Gate[n] && sftx_utime[k][m]< (double)SftMid + Gate[n] ){
+                      Hist1[20+n]->Fill(sftx_utime[k][m]);
+                      Flag3[n]=true;
+                      if(trigflag[28]>0) Flag3_Sigma[n]=true;
+                    }
+                  }
+                  for(int m=0; m<sftx_ddepth[k] ;m++){
+                    if( sftx_dtime[k][m] > (double)SftMid - Gate[n] && sftx_dtime[k][m]< (double)SftMid + Gate[n] ){ 
+                      Hist1[20+n]->Fill(sftx_dtime[k][m]);
+                      Flag3[n]=true;
+                      if(trigflag[28]>0) Flag3_Sigma[n]=true;
+                    }
+                  }
+                }
               }
-              if(Flag1_Sigma[n]&&Flag2_Sigma[n]&&Flag3_Sigma[n]){
-                Flag_Sigma[n]=true;
+              for(int n=0; n<nGate; n++){
+                if(Flag1[n]&&Flag2[n]&&Flag3[n]){
+                  Flag[n]=true;
+                }
+                if(Flag1_Sigma[n]&&Flag2_Sigma[n]&&Flag3_Sigma[n]){
+                  Flag_Sigma[n]=true;
+                }
               }
-            }
-            for(int n=0; n<nGate; n++){
-              Flag1[n] = false;
-              Flag2[n] = false;
-              Flag3[n] = false;
-              Flag1_Sigma[n] = false;
-              Flag2_Sigma[n] = false;
-              Flag3_Sigma[n] = false;
+              for(int n=0; n<nGate; n++){
+                Flag1[n] = false;
+                Flag2[n] = false;
+                Flag3[n] = false;
+                Flag1_Sigma[n] = false;
+                Flag2_Sigma[n] = false;
+                Flag3_Sigma[n] = false;
+              }
             }
           }
         }
