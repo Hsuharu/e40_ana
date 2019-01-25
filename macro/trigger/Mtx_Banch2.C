@@ -509,7 +509,7 @@ void Mtx_Banch2(int month, int runnum, int filesel=1){
     g2->SetMarkerStyle(8);
     g2->SetMarkerColor(2);
     g2->SetMarkerSize(2);
-    g2->GetXaxis()->SetRangeUser(0,5.5);
+    g2->GetXaxis()->SetRangeUser(0,nGate - 0.5);
     g2->GetYaxis()->SetRangeUser(0,1);
     g2->Draw("AP");
 
