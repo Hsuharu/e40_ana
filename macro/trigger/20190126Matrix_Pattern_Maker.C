@@ -826,12 +826,11 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
     PartSigmaTotal = Hist1[34+Mtx_prm.size()*16+l]->Integral();
     a1 = Hist1[34+Mtx_prm.size()*15+l]->Integral(65,75);
     b1 = Hist1[34+Mtx_prm.size()*15+l]->Integral(1,65) + Hist1[34+Mtx_prm.size()*15+l]->Integral(76,100);
-    if(PartSigmaTotal==0 || a1==0){ //|| b1==0){
+    if(PartSigmaTotal==0 || a1==0 || b1==0){
       Mtx_Flag.at(l)=false;
       continue;
     }
-//    if((double)PartSigmaTotal / SigmaTotal < (double)1/1000/300 || (double)a1/b1 < (double)a2/b2){
-    if(b1!=0&&(double)a1/b1 < (double)a2/b2){
+    if((double)PartSigmaTotal / SigmaTotal < (double)1/1000/300 || (double)a1/b1 < (double)a2/b2){
       Mtx_Flag.at(l)=false;
       std::cout << "false" << "\t" << "TOFSeg" << Mtx_prm.at(l).at(1) << "\t" <<  "SCHSeg" << Mtx_prm.at(l).at(0) << std::endl;
     }
@@ -856,9 +855,8 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
       continue;
     }
     for(int i=0; i<24; i++){
-      if(cmax==0 ||  min>=cmax) continue;
-      if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)999/1000) continue;
       std::cout << Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) << "\t" << Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) << std::endl;
+      if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)999/1000) continue;
       flag10=false;
       flag11=false;
       if(cmax+1%32==0){
@@ -871,7 +869,7 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
     }
     if(flag10) cmax+=10;
     if(flag11) cmax+=11;
-    if(cmax==0 || cmax<min ) std::cout << "ERROR1\t" <<"|| cmax=" << cmax << "\t|| min= " << min << std::endl; // Mtx_Flag.at(l)=false;
+    if(cmax==0 || cmax<min ) std::cout << "ERROR1" << std::endl; // Mtx_Flag.at(l)=false;
     SFTX_Max.at(l) = cmax;
 
     if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)==0){
@@ -879,10 +877,9 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
       continue;
     }
     for(int i=0; i<24; i++){
-      if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)==0) continue;
-      if(cmin==255 ||  cmin>=cmax) continue;
-      if((double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)999/1000) continue;
       std::cout << Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) << "\t" << Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) << std::endl;
+      if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)==0) continue;
+      if(cmin<255 && cmin<cmax && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)999/1000) continue;
       flag10_min=false;
       flag11_min=false;
       if(cmin+1%32==22){
@@ -895,7 +892,7 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
     }
     if(flag10_min) cmin-=10;
     if(flag11_min) cmin-=11;
-    if(cmin==255 || cmin>cmax ) std::cout << "ERROR2\t" <<"|| cmax=" << cmax << "\t|| cmin= " << cmin  << std::endl; // Mtx_Flag.at(l)=false;
+    if(cmin==255 || cmin>cmax ) std::cout << "ERROR2" << std::endl; // Mtx_Flag.at(l)=false;
     SFTX_Min.at(l) = cmin;
   }                         
 
