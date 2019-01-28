@@ -31,6 +31,7 @@ const char* Plane[] =
 
 //Work Directry
   TString anadir=Form("%s/work/e40/ana",std::getenv("HOME"));
+  TString pdfDhire = Form("%s/pdf/trigger", anadir.Data());
 
 //Global constant
   std::map<std::string, double> param_map;
@@ -225,6 +226,7 @@ void SFTPlaneRateDistribution(){
     graph1[i]->GetXaxis()->SetRangeUser(-1000000,22000000);
     graph1[i]->Draw("ap");
     c1->Print(pdf1); 
+    c1->Print(Form("%s/SFTByPlane%sDist.pdf",pdfDhire.Data(),Plane[i]));
   }
 
   c1->Print(pdf1+"]");        
