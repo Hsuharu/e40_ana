@@ -174,10 +174,12 @@ void triggerrate(){
   g[9] = new TGraph(Matrix.size(),Matrix.data(),DAQEff.data());
   g[10] = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),L1Req.data());
   for(int i=0; i<10; i++ ){
+    gStyle->SetOptStat(0);
     g[i]->SetMarkerStyle(8);
     g[i]->SetMarkerColor(2);
     g[i]->SetMarkerSize(2);
     g[i]->Draw("AP");
+    c1->Print(pdf);
     c1->Print(Form("%s/DAQEffbyTriggerRate%d.pdf",pdfDhire.Data(), i+1));
   }
   c1->Print(pdf+"]"); 
