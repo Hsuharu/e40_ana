@@ -832,7 +832,7 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
     }
 //    if((double)PartSigmaTotal / SigmaTotal < (double)1/1000/300 || (double)a1/b1 < (double)a2/b2){
     std::cout << "a1/b1=" << a1/b1 << "\ta2/b2=" << a2/b2 << std::endl;
-    if(b1!=0&&(double)a1/b1 < (double)a2/b2/2.){
+    if(b1!=0&&(double)a1/b1 < (double)a2/b2/10.){
       Mtx_Flag.at(l)=false;
       std::cout << "false" << "\t" << "TOFSeg" << Mtx_prm.at(l).at(1) << "\t" <<  "SCHSeg" << Mtx_prm.at(l).at(0) << std::endl;
     }
