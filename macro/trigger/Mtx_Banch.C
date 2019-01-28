@@ -83,8 +83,10 @@ void Mtx_Banch(int month, int runnum){
   //Matrix Patern txt file PATH -----------------------------------------------------------------------
   TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
   TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
+  TString filein2=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_Newtable.txt.2019Jan.1_2",anadir.Data(),Month[month] ); 
 
   std::ifstream fin1(filein1);
+  std::ifstream fin2(filein2);
 
   // Param Vector Dif ----------------------------------------------------------------------
   std::vector<std::vector<int>> Mtx_prm; 
@@ -95,15 +97,27 @@ void Mtx_Banch(int month, int runnum){
   std::vector<int> TOF_Min; 
   std::vector<int> TOF_Max; 
 
+  std::vector<std::vector<int>> Mtx_prm2; 
+  std::string line2;
+  int preSCH2 = 0;
+  std::vector<std::vector<int>> sch_tof2; 
+  std::vector<int> SCH_Seg2; 
+  std::vector<int> TOF_Min2; 
+  std::vector<int> TOF_Max2; 
+
 
   // Error Out ----------------------------------------------------------------------------------------
-  if(fin1.fail() ){
-    std::cerr << "file1" << std::endl;
+  if(fin1.fail() ||  fin2.fail() ){
+    std::cerr << "file1 or file2" << std::endl;
     exit(0); 
   }  
 
   if( !eq3(SCH_Seg.size(),TOF_Min.size(),TOF_Max.size()) ){
     std::cerr << "Size Not Same" << std::endl;
+  }
+
+  if( !eq3(SCH_Seg2.size(),TOF_Min2.size(),TOF_Max2.size()) ){
+    std::cerr << "Size Not Same 2" << std::endl;
   }
 
   while(std::getline(fin1, line)){
@@ -113,9 +127,30 @@ void Mtx_Banch(int month, int runnum){
     if( input_line >> sch >> tof >> sft_min >> sft_max ){
       inner.push_back(sch);
       inner.push_back(tof);
-      inner.push_back(sft_min-11);
+      if((int)sft_min%32==0){
+        inner.push_back(sft_min-10);
+      }else{
+        inner.push_back(sft_min-11);
+      }
       inner.push_back(sft_max-1);
       Mtx_prm.push_back(inner);
+    }
+  }
+
+  while(std::getline(fin2, line2)){
+    double sch=-1, tof=-1, sft_min=-1, sft_max=-1;
+    std::istringstream input_line( line2 );
+    std::vector<int> inner;
+    if( input_line >> sch >> tof >> sft_min >> sft_max ){
+      inner.push_back(sch);
+      inner.push_back(tof);
+      if((int)sft_min%32==0){
+        inner.push_back(sft_min-10);
+      }else{
+        inner.push_back(sft_min-11);
+      }
+      inner.push_back(sft_max-1);
+      Mtx_prm2.push_back(inner);
     }
   }
 
@@ -347,16 +382,26 @@ void Mtx_Banch(int month, int runnum){
 
   int Count1[nGate];
   int Count1_MtxFlg[nGate];
+  int Count1_2[nGate];
+  int Count1_2_MtxFlg[nGate];
   double MtxEfficiency[nGate];
   double MtxEfficiency_MtxFlg[nGate];
+  double MtxEfficiency_2_MtxFlg[nGate+1];
   double x[nGate];
+  double x2[nGate+1];
   for(int n=0; n<nGate; n++){
     Count1[n] = 0;
     Count1_MtxFlg[n] = 0;
+    Count1_2[n] = 0;
+    Count1_2_MtxFlg[n] = 0;
     MtxEfficiency[n] = 0.;
     MtxEfficiency_MtxFlg[n] = 0.;
+    MtxEfficiency_2_MtxFlg[n] = 0.;
     x[n] = (double)nGate-n-1;
+    x2[n] = (double)nGate-n;
   }
+    MtxEfficiency_2_MtxFlg[nGate] = 0.;
+    x2[nGate] = 0;
 
 
   //-hist def-----------------------------------------------------------------------------------------
@@ -419,7 +464,7 @@ void Mtx_Banch(int month, int runnum){
   //-Event Loop --------------------------------------------------------------------------------------
   Long64_t nentries = mtx->GetEntries();
   Long64_t nentries_MtxFlg = 0;
-  //  Long64_t nentries =10000;
+//    Long64_t nentries =10000;
 
   for (Long64_t s=0; s<nentries;s++){
     mtx->GetEntry(s);
@@ -499,10 +544,18 @@ void Mtx_Banch(int month, int runnum){
     bool Flag1[nGate];
     bool Flag2[nGate];
     bool Flag3[nGate];
+    bool Flag_2[nGate];
+    bool Flag1_2[nGate];
+    bool Flag2_2[nGate];
+    bool Flag3_2[nGate];
     bool Flag_MtxFlg[nGate];
     bool Flag1_MtxFlg[nGate];
     bool Flag2_MtxFlg[nGate];
     bool Flag3_MtxFlg[nGate];
+    bool Flag_2_MtxFlg[nGate];
+    bool Flag1_2_MtxFlg[nGate];
+    bool Flag2_2_MtxFlg[nGate];
+    bool Flag3_2_MtxFlg[nGate];
     for(int n=0; n<nGate; n++){
       Flag[n] = false;
       Flag1[n] = false;
@@ -512,6 +565,14 @@ void Mtx_Banch(int month, int runnum){
       Flag1_MtxFlg[n] = false;
       Flag2_MtxFlg[n] = false;
       Flag3_MtxFlg[n] = false;
+      Flag_2[n] = false;
+      Flag1_2[n] = false;
+      Flag2_2[n] = false;
+      Flag3_2[n] = false;
+      Flag_2_MtxFlg[n] = false;
+      Flag1_2_MtxFlg[n] = false;
+      Flag2_2_MtxFlg[n] = false;
+      Flag3_2_MtxFlg[n] = false;
     }
 
     // Mtx Pattern ----------------------------
@@ -607,6 +668,88 @@ void Mtx_Banch(int month, int runnum){
       }
     }
 
+    // Mtx Pattern2 ----------------------------
+    for(int l=0; l < Mtx_prm2.size(); l++){
+      int i = 0;
+      int j = 0;
+      int min = 0;
+      int max = 0;
+      i = Mtx_prm2.at(l).at(1);
+      j = Mtx_prm2.at(l).at(0);
+      min = Mtx_prm2.at(l).at(2);
+      max = Mtx_prm2.at(l).at(3) + 1;
+      for(int m=0; m<16 ;m++){
+        if( tofmt[i][m] != -999.0 ){ 
+          Flag1_2[5]=true;
+          if(trigflag[28]>0) Flag1_2_MtxFlg[5]=true;
+        }
+      }
+      for(int m=0; m<sch_depth[j] ;m++){
+        if( sch_time[j][m]!= -999. ){
+          Flag2_2[5]=true;
+          if(trigflag[28]>0) Flag2_2_MtxFlg[5]=true;
+        }
+      }
+      for(int k = min; k < max; k++){
+        for(int m=0; m<sftx_udepth[k] ;m++){
+          if( sftx_utime[k][m] != -999. ){
+            Flag3_2[5]=true;
+            if(trigflag[28]>0) Flag3_2_MtxFlg[5]=true;
+          }
+        }
+        for(int m=0; m<sftx_ddepth[k] ;m++){
+          if( sftx_dtime[k][m] != -999. ){
+            Flag3_2[5]=true;
+            if(trigflag[28]>0) Flag3_2_MtxFlg[5]=true;
+          }
+        }
+      }
+      for(int n=0; n<nGate; n++){
+        for(int m=0; m<16 ;m++){
+          if( tofmt[i][m]      > (double)TofMid - Gate[n] && tofmt[i][m]     < (double)TofMid + Gate[n] ){ 
+            Flag1_2[n]=true;
+            if(trigflag[28]>0) Flag1_2_MtxFlg[n]=true;
+          }
+        }
+        for(int m=0; m<sch_depth[j] ;m++){
+          if( sch_time[j][m]   > (double)SchMid - Gate[n] && sch_time[j][m]  < (double)SchMid + Gate[n] ){
+            Flag2_2[n]=true;
+            if(trigflag[28]>0) Flag2_2_MtxFlg[n]=true;
+          }
+        }
+        for(int k = min; k < max; k++){
+          for(int m=0; m<sftx_udepth[k] ;m++){
+            if( sftx_utime[k][m] > (double)SftMid - Gate[n] && sftx_utime[k][m]< (double)SftMid + Gate[n] ){
+              Flag3_2[n]=true;
+              if(trigflag[28]>0) Flag3_2_MtxFlg[n]=true;
+            }
+          }
+          for(int m=0; m<sftx_ddepth[k] ;m++){
+            if( sftx_dtime[k][m] > (double)SftMid - Gate[n] && sftx_dtime[k][m]< (double)SftMid + Gate[n] ){ 
+              Flag3_2[n]=true;
+              if(trigflag[28]>0) Flag3_2_MtxFlg[n]=true;
+            }
+          }
+        }
+      }
+      for(int n=0; n<nGate; n++){
+        if(Flag1_2[n]&&Flag2_2[n]&&Flag3_2[n]){
+          Flag_2[n]=true;
+        }
+        if(Flag1_2_MtxFlg[n]&&Flag2_2_MtxFlg[n]&&Flag3_2_MtxFlg[n]){
+          Flag_2_MtxFlg[n]=true;
+        }
+      }
+      for(int n=0; n<nGate; n++){
+        Flag1_2[n] = false;
+        Flag2_2[n] = false;
+        Flag3_2[n] = false;
+        Flag1_2_MtxFlg[n] = false;
+        Flag2_2_MtxFlg[n] = false;
+        Flag3_2_MtxFlg[n] = false;
+      }
+    }
+
     for(int n=0; n<nGate; n++){
       if(Flag[n]){
         Count1[n]+=1;
@@ -615,7 +758,15 @@ void Mtx_Banch(int month, int runnum){
         Count1_MtxFlg[n]+=1;
       }
     }
-    if(trigflag[28]>0) nentries_MtxFlg++;
+
+    for(int n=0; n<nGate; n++){
+      if(Flag_2[n]){
+        Count1_2[n]+=1;
+      }
+      if(Flag_2_MtxFlg[n]){
+        Count1_2_MtxFlg[n]+=1;
+      }
+    }
   }
 
   //-Canvas def---------------------------------------------------------------------------------------
@@ -637,16 +788,25 @@ void Mtx_Banch(int month, int runnum){
   //  c1->Print(Form("%s/Mtx_Banch_run%05d_Hist2_%03d.pdf",pdfDhire.Data(),runnum,i));
   //  }
 
-  for(int n; n<nGate; n++){
+  for(int n=0; n<nGate; n++){
     //    MtxEfficiency[n]= (double)Count1[n]/nentries;
     //    std::cout << "Total Event# is " << nentries << "\t" << Form("Count%d# is ",n+1) << Count1[n] << "\t" << "Efficiency is " << MtxEfficiency[n] << std::endl;
     MtxEfficiency[n]= (double)Count1[n]/Count1[nGate-1];
     std::cout << "Total Event# is " << Count1[nGate-1] << "\t" << Form("Count%d# is ",n+1) << Count1[n] << "\t" << "Efficiency is " << MtxEfficiency[n] << std::endl;
   }
-  for(int n; n<nGate; n++){
+  for(int n=0; n<nGate; n++){
     //    MtxEfficiency_MtxFlg[n]= (double)Count1_MtxFlg[n]/nentries_MtxFlg;
     MtxEfficiency_MtxFlg[n]= (double)Count1_MtxFlg[n]/ Count1_MtxFlg[nGate-1];
     std::cout << "Total Event# is " << nentries_MtxFlg << "\t" << Form("Count%d_MtxFlg# is ",nGate-1) << Count1_MtxFlg[nGate-1]  << "\t" << Form("Count%d_MtxFlg# is ",n+1) << Count1_MtxFlg[n] << "\t" << "Efficiency is " << MtxEfficiency_MtxFlg[n] << std::endl;
+  }
+  for(int n=0; n<nGate+1; n++){
+    if(n==nGate){
+      MtxEfficiency_2_MtxFlg[n]= (double)Count1_MtxFlg[n-1]/ Count1_MtxFlg[nGate-1];
+      std::cout << "Total Event# is " << Count1_MtxFlg[nGate-1] << "\t" <<  Form("Count%d_MtxFlg# is ",n+1) << Count1_MtxFlg[n-1] << "\t" << "Efficiency is " << MtxEfficiency_2_MtxFlg[n] << std::endl;
+    }else{
+      MtxEfficiency_2_MtxFlg[n]= (double)Count1_2_MtxFlg[n]/ Count1_MtxFlg[nGate-1];
+      std::cout << "Total Event# is " << Count1_MtxFlg[nGate-1] << "\t" <<  Form("Count%d_MtxFlg# is ",n+1) << Count1_2_MtxFlg[n-1] << "\t" << "Efficiency is " << MtxEfficiency_2_MtxFlg[n] << std::endl;
+    }
   }
 
   c1->SetGrid();
@@ -655,6 +815,7 @@ void Mtx_Banch(int month, int runnum){
 
   TGraph *g1 = new TGraph(nGate, x, MtxEfficiency);
   TGraph *g2 = new TGraph(nGate, x, MtxEfficiency_MtxFlg);
+  TGraph *g3 = new TGraph(nGate+1, x2, MtxEfficiency_2_MtxFlg);
   g1->SetMarkerStyle(8);
   g1->SetMarkerColor(2);
   g1->SetMarkerSize(2);
@@ -674,6 +835,16 @@ void Mtx_Banch(int month, int runnum){
 
   c1->Print(pdf);
   c1->Print(Form("%s/Mtx_Banch_run%05d_Graph_MtxFlg.pdf",pdfDhire.Data(),runnum));
+
+  g3->SetMarkerStyle(8);
+  g3->SetMarkerColor(2);
+  g3->SetMarkerSize(2);
+  g3->GetXaxis()->SetRangeUser(0,5.5);
+  g3->GetYaxis()->SetRangeUser(0,1);
+  g3->Draw("AP");
+
+  c1->Print(pdf);
+  c1->Print(Form("%s/Mtx_Banch_run%05d_Graph_MtxFlg_NewPat.pdf",pdfDhire.Data(),runnum));
 
   c1->Print(pdf+"]"); 
 
