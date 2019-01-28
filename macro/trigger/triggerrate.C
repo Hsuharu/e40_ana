@@ -95,7 +95,7 @@ void triggerrate(){
   std::vector<double> TOF_HT  ;
 
 //  std::vector<int> runnumber{5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
-  std::vector<int> runnumber{5298,5299,5300,5301,5302,5303,5304,5316};
+  std::vector<int> runnumber{5296,5298,5299,5300,5301,5302,5303,5304};
 
   for(int i=0; i<runnumber.size(); i++){
     double SCounts = 0.;
