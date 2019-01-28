@@ -858,7 +858,13 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
     }
     for(int i=0; i<24; i++){
       if(cmax==0 ||  min>=cmax) continue;
-      if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)999/1000) continue;
+      if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max)>1000){
+        if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)999/1000) continue;
+      }else if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max)>100){
+        if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)99/100) continue;
+      }else{
+        if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)9/10) continue;
+      }
       std::cout << Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) << "\t" << Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) << std::endl;
       flag10=false;
       flag11=false;
@@ -882,7 +888,13 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
     for(int i=0; i<24; i++){
       if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)==0) continue;
       if(cmin==255 ||  cmin>=cmax) continue;
-      if((double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)999/1000) continue;
+      if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)>1000){
+        if((double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)999/1000) continue;
+      }else if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)>100){
+        if((double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)99/100) continue;
+      }else{
+        if((double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)9/10) continue;
+      }
       std::cout << Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) << "\t" << Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) << std::endl;
       flag10_min=false;
       flag11_min=false;

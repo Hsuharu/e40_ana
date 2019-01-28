@@ -23,6 +23,7 @@ const char* Month[] =
 
 //Work Directry
   TString anadir=Form("%s/work/e40/ana",std::getenv("HOME"));
+  TString pdfDhire = Form("%s/pdf/trigger", anadir.Data());
 
 //Global constant
   std::map<std::string, double> param_map;
@@ -85,6 +86,7 @@ void triggerrate(){
 //  std::vector<double> L2Acc;
   std::vector<double> BH2SUMMparSpillCounts;
   std::vector<double> SCHCounts;
+  std::vector<double> Matrix;
 
 //  std::vector<int> runnumber{5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
   std::vector<int> runnumber{5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
@@ -96,13 +98,15 @@ void triggerrate(){
     double preL1Req = 0.;
 //    double preL2Acc = 0.;
     double preDAQEff = 0.;
+    double preMatrix = 0.;
 
     std::tie(SCounts
             ,BCounts
              ) = scaler_get(6,runnumber.at(i));
-    BMpSCounts = BCounts/SCounts/1000000 ;
+    BMpSCounts = BCounts/SCounts;///1000000 ;
     preDAQEff= param("DAQ-Eff");
     preL1Req= param("L1-Req/Spill");
+    preMatrix = param("Matrix");
 
     std::cout << "Run# \t" <<runnumber.at(i) 
               << "\t || Spill \t" << SCounts
@@ -110,6 +114,7 @@ void triggerrate(){
               << "\t || BH2-SUM[M/Spill] \t" << param("BH2-SUM")/param("Spill")/1000000
               << "\t || L1-Req [k/Spill]\t" << preL1Req/1000
               << "\t || DAQ-Eff\t" << preDAQEff
+              << "\t || Matrix\t" << preMatrix
               
               << std::endl;
     SpillCounts.push_back(SCounts);
@@ -118,7 +123,32 @@ void triggerrate(){
 //    SCHCounts.push_back(param("SCH"));
     L1Req.push_back(preL1Req);
     DAQEff.push_back(preDAQEff);
+    Matrix.push_back(preMatrix);
   }
+
+  TCanvas *c1 = new TCanvas("c1","c1",1200,900);
+  TGraph *g1 = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),DAQEff.data());
+  TGraph *g2 = new TGraph(L1Req.size(),L1Req.data(),DAQEff.data());
+  TGraph *g3 = new TGraph(Matrix.size(),Matrix.data(),DAQEff.data());
+  g1->SetMarkerStyle(8);
+  g1->SetMarkerColor(2);
+  g1->SetMarkerSize(2);
+  g2->SetMarkerStyle(8);
+  g2->SetMarkerColor(2);
+  g2->SetMarkerSize(2);
+  g3->SetMarkerStyle(8);
+  g3->SetMarkerColor(2);
+  g3->SetMarkerSize(2);
+//  g1->GetXaxis()->SetRangeUser(0,4.5);
+//  g1->GetYaxis()->SetRangeUser(0,1);
+  g1->Draw("AP");
+  c1->Print(Form("%s/DAQEffbyTriggerRate1.pdf",pdfDhire.Data()));
+
+  g2->Draw("AP");
+  c1->Print(Form("%s/DAQEffbyTriggerRate2.pdf",pdfDhire.Data()));
+
+  g3->Draw("AP");
+  c1->Print(Form("%s/DAQEffbyTriggerRate3.pdf",pdfDhire.Data()));
 
 //  std::ofstream fout1;
 //  fout1.open(Form("%s/dat/trigger/SpillByRate.txt", anadir.Data()));
