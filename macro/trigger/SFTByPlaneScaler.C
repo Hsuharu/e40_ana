@@ -276,8 +276,7 @@ void SFTByPlane_get( int month, int runnum){
 
   sftscr[2] = SFTXUTDC->Integral(range3,range4) + SFTXUTDC->Integral(range1,range2);
   sftscr[3] = SFTXDTDC->Integral(range3,range4) + SFTXDTDC->Integral(range1,range2);
-  sftscr[4] += SFTXUTDC->Integral(range3,range2);
-  sftscr[4] += SFTXDTDC->Integral(range3,range2);
+  sftscr[4] = sftscr[2] + sftscr[3];
 
   double max;
   double sigma;

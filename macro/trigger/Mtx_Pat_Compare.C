@@ -116,11 +116,11 @@ void Mtx_Pat_Compare(int month,int runnum, int bin, int file, int matrixnum1 =2,
       inner.push_back(tof);
       inner.push_back(sft_min-11);
       inner.push_back(sft_max-1);
-      Mtx_prm.push_back(inner);
+      Mtx_prm1.push_back(inner);
     }
   }
 
-  for(int i=0; i<Mtx_prm.size(); i++){
+  for(int i=0; i<Mtx_prm1.size(); i++){
     //        std::cout << "SCH=" << Mtx_prm.at(i).at(0)  << "\t" << "TOF="  <<  Mtx_prm.at(i).at(1)  << "\t"  << "SFT_Min=" << Mtx_prm.at(i).at(2)  << "\t"  << "SFT_Max=" << Mtx_prm.at(i).at(3)  << std::endl;
     if(i==0){
       SCH_Seg.push_back( Mtx_prm.at(i).at(0) );
