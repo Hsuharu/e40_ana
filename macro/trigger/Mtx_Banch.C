@@ -805,7 +805,7 @@ void Mtx_Banch(int month, int runnum){
       std::cout << "Total Event# is " << Count1_MtxFlg[nGate-1] << "\t" <<  Form("Count%d_MtxFlg# is ",n+1) << Count1_MtxFlg[n-1] << "\t" << "Efficiency is " << MtxEfficiency_2_MtxFlg[n] << std::endl;
     }else{
       MtxEfficiency_2_MtxFlg[n]= (double)Count1_2_MtxFlg[n]/ Count1_MtxFlg[nGate-1];
-      std::cout << "Total Event# is " << Count1_MtxFlg[nGate-1] << "\t" <<  Form("Count%d_MtxFlg# is ",n+1) << Count1_2_MtxFlg[n-1] << "\t" << "Efficiency is " << MtxEfficiency_2_MtxFlg[n] << std::endl;
+      std::cout << "Total Event# is " << Count1_MtxFlg[nGate-1] << "\t" <<  Form("Count%d_MtxFlg# is ",n+1) << Count1_2_MtxFlg[n] << "\t" << "Efficiency is " << MtxEfficiency_2_MtxFlg[n] << std::endl;
     }
   }
 
@@ -819,7 +819,7 @@ void Mtx_Banch(int month, int runnum){
   g1->SetMarkerStyle(8);
   g1->SetMarkerColor(2);
   g1->SetMarkerSize(2);
-  g1->GetXaxis()->SetRangeUser(0,4.5);
+  g1->GetXaxis()->SetRangeUser(0,5.5);
   g1->GetYaxis()->SetRangeUser(0,1);
   g1->Draw("AP");
 
@@ -829,7 +829,7 @@ void Mtx_Banch(int month, int runnum){
   g2->SetMarkerStyle(8);
   g2->SetMarkerColor(2);
   g2->SetMarkerSize(2);
-  g2->GetXaxis()->SetRangeUser(0,4.5);
+  g2->GetXaxis()->SetRangeUser(0,5.5);
   g2->GetYaxis()->SetRangeUser(0,1);
   g2->Draw("AP");
 
@@ -839,7 +839,7 @@ void Mtx_Banch(int month, int runnum){
   g3->SetMarkerStyle(8);
   g3->SetMarkerColor(2);
   g3->SetMarkerSize(2);
-  g3->GetXaxis()->SetRangeUser(0,5.5);
+  g3->GetXaxis()->SetRangeUser(0,6.5);
   g3->GetYaxis()->SetRangeUser(0,1);
   g3->Draw("AP");
 
