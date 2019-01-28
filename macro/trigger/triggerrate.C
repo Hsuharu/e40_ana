@@ -23,11 +23,13 @@ const char* Month[] =
 
 //Work Directry
   TString anadir=Form("%s/work/e40/ana",std::getenv("HOME"));
+  TString pdf = Form("%s/pdf/trigger/TriggerRateSum.pdf", anadir.Data());
   TString pdfDhire = Form("%s/pdf/trigger", anadir.Data());
 
 //Global constant
   std::map<std::string, double> param_map;
   std::vector<int> runnumber{5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
+//  std::vector<int> runnumber{5300,5301,5302,5303,5304};
 
 //Fanction ---------------------------------------------------------------------------
 ///// Param //////
@@ -87,9 +89,15 @@ void triggerrate(){
   std::vector<double> BH2SUMMparSpillCounts;
   std::vector<double> SCHCounts;
   std::vector<double> Matrix;
+  std::vector<double> BH2_K  ;
+  std::vector<double> K_Scat  ;
+  std::vector<double> TOF  ;
+  std::vector<double> SAC  ;
+  std::vector<double> SCH  ;
+  std::vector<double> TOF_HT  ;
 
-//  std::vector<int> runnumber{5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
   std::vector<int> runnumber{5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
+//  std::vector<int> runnumber{5300,5301,5302,5303,5304}
 
   for(int i=0; i<runnumber.size(); i++){
     double SCounts = 0.;
@@ -99,6 +107,12 @@ void triggerrate(){
 //    double preL2Acc = 0.;
     double preDAQEff = 0.;
     double preMatrix = 0.;
+    double preBH2_K  ;
+    double preK_Scat  ;
+    double preTOF  ;
+    double preSAC  ;
+    double preSCH  ;
+    double preTOF_HT  ;
 
     std::tie(SCounts
             ,BCounts
@@ -107,16 +121,29 @@ void triggerrate(){
     preDAQEff= param("DAQ-Eff");
     preL1Req= param("L1-Req/Spill");
     preMatrix = param("Matrix");
+    preMatrix = preMatrix/SCounts;
+    preBH2_K = param("(BH2,K)");
+    preK_Scat= param("K-Scat");
+    preTOF   = param("TOF");
+    preSAC   = param("SAC");
+    preSCH   = param("SCH");
+    preTOF_HT= param("TOF-HT");
+    preBH2_K = preBH2_K/SCounts;
+    preK_Scat= preK_Scat/SCounts;
+    preTOF   = preTOF/SCounts;
+    preSAC   = preSAC/SCounts;
+    preSCH   = preSCH/SCounts;
+    preTOF_HT= preTOF_HT/SCounts;
 
-    std::cout << "Run# \t" <<runnumber.at(i) 
-              << "\t || Spill \t" << SCounts
-              << "\t || BH2-SUM \t" << BCounts 
-              << "\t || BH2-SUM[M/Spill] \t" << param("BH2-SUM")/param("Spill")/1000000
-              << "\t || L1-Req [k/Spill]\t" << preL1Req/1000
-              << "\t || DAQ-Eff\t" << preDAQEff
-              << "\t || Matrix\t" << preMatrix
-              
-              << std::endl;
+//    std::cout << "Run# \t" <<runnumber.at(i) 
+//              << "\t || Spill \t" << SCounts
+//              << "\t || BH2-SUM \t" << BCounts 
+//              << "\t || BH2-SUM[M/Spill] \t" << param("BH2-SUM")/param("Spill")/1000000
+//              << "\t || L1-Req [k/Spill]\t" << preL1Req/1000
+//              << "\t || DAQ-Eff\t" << preDAQEff
+//              << "\t || Matrix\t" << preMatrix
+//              
+//              << std::endl;
     SpillCounts.push_back(SCounts);
     BH2SUMCounts.push_back(BCounts);
     BH2SUMMparSpillCounts.push_back(BMpSCounts);
@@ -124,31 +151,39 @@ void triggerrate(){
     L1Req.push_back(preL1Req);
     DAQEff.push_back(preDAQEff);
     Matrix.push_back(preMatrix);
+    BH2_K.push_back(preBH2_K);
+    K_Scat.push_back(preK_Scat);
+    TOF.push_back(preTOF);
+    SAC.push_back(preSAC);
+    SCH.push_back(preSCH);
+    TOF_HT.push_back(preTOF_HT);
   }
 
   TCanvas *c1 = new TCanvas("c1","c1",1200,900);
-  TGraph *g1 = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),DAQEff.data());
-  TGraph *g2 = new TGraph(L1Req.size(),L1Req.data(),DAQEff.data());
-  TGraph *g3 = new TGraph(Matrix.size(),Matrix.data(),DAQEff.data());
-  g1->SetMarkerStyle(8);
-  g1->SetMarkerColor(2);
-  g1->SetMarkerSize(2);
-  g2->SetMarkerStyle(8);
-  g2->SetMarkerColor(2);
-  g2->SetMarkerSize(2);
-  g3->SetMarkerStyle(8);
-  g3->SetMarkerColor(2);
-  g3->SetMarkerSize(2);
+  c1->Print(pdf+"["); 
+  TGraph *g[11];
+  g[0] = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),DAQEff.data());
+  g[1] = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),Matrix.data());
+  g[2] = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),BH2_K.data());
+  g[3] = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),K_Scat.data());
+  g[4] = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),TOF.data());
+  g[5] = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),SAC.data());
+  g[6] = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),SCH.data());
+  g[7] = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),TOF_HT.data());
+  g[8] = new TGraph(L1Req.size(),L1Req.data(),DAQEff.data());
+  g[9] = new TGraph(Matrix.size(),Matrix.data(),DAQEff.data());
+  g[10] = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),L1Req.data());
+  for(int i=0; i<10; i++ ){
+    g[i]->SetMarkerStyle(8);
+    g[i]->SetMarkerColor(2);
+    g[i]->SetMarkerSize(2);
+    g[i]->Draw("AP");
+    c1->Print(Form("%s/DAQEffbyTriggerRate%d.pdf",pdfDhire.Data(), i+1));
+  }
+  c1->Print(pdf+"]"); 
 //  g1->GetXaxis()->SetRangeUser(0,4.5);
 //  g1->GetYaxis()->SetRangeUser(0,1);
-  g1->Draw("AP");
-  c1->Print(Form("%s/DAQEffbyTriggerRate1.pdf",pdfDhire.Data()));
 
-  g2->Draw("AP");
-  c1->Print(Form("%s/DAQEffbyTriggerRate2.pdf",pdfDhire.Data()));
-
-  g3->Draw("AP");
-  c1->Print(Form("%s/DAQEffbyTriggerRate3.pdf",pdfDhire.Data()));
 
 //  std::ofstream fout1;
 //  fout1.open(Form("%s/dat/trigger/SpillByRate.txt", anadir.Data()));
