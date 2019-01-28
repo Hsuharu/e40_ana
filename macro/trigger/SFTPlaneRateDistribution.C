@@ -217,10 +217,9 @@ void SFTPlaneRateDistribution(){
   
   for(int i=0 ; i<5; i++){
     graph1[i]->SetTitle(Form("SFT Plane%s Counts/spill ;BH2-SUM [ M/Spill ];SFT Plane%s [Counts/Spill]",Plane[i],Plane[i]));
-    graph1[i]->SetMarkerStyle(20);
-    graph1[i]->SetLineStyle(2);
+    graph1[i]->SetMarkerStyle(8);
     graph1[i]->SetMarkerColor(2);
-    graph1[i]->SetLineColor(2);
+    graph1[i]->SetMarkerSize(2);
 //    graph1[i]->GetHistogram()->SetMinimum(0);
     graph1[i]->SetMinimum(0);
     graph1[i]->GetXaxis()->SetRangeUser(-1000000,22000000);

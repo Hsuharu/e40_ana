@@ -176,6 +176,7 @@ void triggerrate(){
     g[i]->SetMarkerStyle(8);
     g[i]->SetMarkerColor(2);
     g[i]->SetMarkerSize(2);
+    g[i]->SetMinimum(0);
     g[i]->Draw("AP");
     c1->Print(pdf);
     c1->Print(Form("%s/DAQEffbyTriggerRate%d.pdf",pdfDhire.Data(), i+1));
