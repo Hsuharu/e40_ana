@@ -183,7 +183,7 @@ void SFTPlaneRateDistribution(){
 // TCanvas--------------------------------------------------------------------
 //  TString pdf = Form("%s/pdf/trigger/SCHSegRateDistribution.pdf", anadir.Data());
   TString pdf1 = Form("%s/pdf/trigger/SFTPlaneRateDistribution2.pdf", anadir.Data());
-  TCanvas *c1 = new TCanvas("c1","c1",800,700);
+  TCanvas *c1 = new TCanvas("c1","c1",1200,900);
 //  TCanvas *c2 = new TCanvas("c2","c2",1600,900);
 //  c2->Divide(4,2);
 //  c1->Print(pdf+"["); 
