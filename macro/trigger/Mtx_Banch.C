@@ -360,7 +360,7 @@ void Mtx_Banch(int month, int runnum){
 
 
   //-hist def-----------------------------------------------------------------------------------------
-  Hist1Max = 68;
+  Hist1Max = 72;
   TH1D *Hist1[Hist1Max];
   TH2D *Hist2[Hist2Max];
 
@@ -379,17 +379,19 @@ void Mtx_Banch(int month, int runnum){
   Hist1[54] = new TH1D("TofMtOr Gate3","TofMtOr Gate3",200,-100,100);
   Hist1[55] = new TH1D("TofMtOr Gate4","TofMtOr Gate4",200,-100,100);
   Hist1[56] = new TH1D("TofMtOr Gate5","TofMtOr Gate5",200,-100,100);
+  Hist1[57] = new TH1D("TofMtOr Gate6","TofMtOr Gate6",200,-100,100);
 
   //-Sch ----------------
   Hist1[36]= new TH1D("Sch Nhits" ,"Sch Nhits" ,20,0,20);
   Hist1[37]= new TH1D("Sch Hitpat","Sch Hitpat",65,0,65);
   Hist1[38]= new TH1D("Sch Depthpat","Sch Depthpat",65,0,65);
   Hist1[39]= new TH1D("Sch Time"   ,"Sch Time"   ,200,-100,100);
-  Hist1[57] = new TH1D("Sch Time Gate1","Sch Time Gate1",200,-100,100);
-  Hist1[58] = new TH1D("Sch Time Gate2","Sch Time Gate2",200,-100,100);
-  Hist1[59] = new TH1D("Sch Time Gate3","Sch Time Gate3",200,-100,100);
-  Hist1[60] = new TH1D("Sch Time Gate4","Sch Time Gate4",200,-100,100);
-  Hist1[61] = new TH1D("Sch Time Gate5","Sch Time Gate5",200,-100,100);
+  Hist1[58] = new TH1D("Sch Time Gate1","Sch Time Gate1",200,-100,100);
+  Hist1[59] = new TH1D("Sch Time Gate2","Sch Time Gate2",200,-100,100);
+  Hist1[60] = new TH1D("Sch Time Gate3","Sch Time Gate3",200,-100,100);
+  Hist1[61] = new TH1D("Sch Time Gate4","Sch Time Gate4",200,-100,100);
+  Hist1[62] = new TH1D("Sch Time Gate5","Sch Time Gate5",200,-100,100);
+  Hist1[63] = new TH1D("Sch Time Gate6","Sch Time Gate6",200,-100,100);
 
   //-SftX ----------------
   Hist1[40] = new TH1D("SftX U Nhits","SftX U Nhits",50,0,50);
@@ -404,14 +406,15 @@ void Mtx_Banch(int month, int runnum){
   Hist1[49] = new TH1D("SftX U Time","SftX U Time",200,-100,100);
   Hist1[50] = new TH1D("SftX D Time","SftX D Time",200,-100,100);
   Hist1[51] = new TH1D("SftXTime","SftXTime",200,-100,100);
-  Hist1[61] = new TH1D("SftX Time Gate1","SftX Time Gate1",200,-100,100);
-  Hist1[62] = new TH1D("SftX Time Gate2","SftX Time Gate2",200,-100,100);
-  Hist1[63] = new TH1D("SftX Time Gate3","SftX Time Gate3",200,-100,100);
-  Hist1[64] = new TH1D("SftX Time Gate4","SftX Time Gate4",200,-100,100);
-  Hist1[65] = new TH1D("SftX Time Gate5","SftX Time Gate5",200,-100,100);
+  Hist1[64] = new TH1D("SftX Time Gate1","SftX Time Gate1",200,-100,100);
+  Hist1[65] = new TH1D("SftX Time Gate2","SftX Time Gate2",200,-100,100);
+  Hist1[66] = new TH1D("SftX Time Gate3","SftX Time Gate3",200,-100,100);
+  Hist1[67] = new TH1D("SftX Time Gate4","SftX Time Gate4",200,-100,100);
+  Hist1[68] = new TH1D("SftX Time Gate5","SftX Time Gate5",200,-100,100);
+  Hist1[69] = new TH1D("SftX Time Gate6","SftX Time Gate6",200,-100,100);
 
-  Hist1[66] = new TH1D("Sch Time TofFlag","Sch Time TofFlag",200,-100,100);
-  Hist1[67] = new TH1D("SftX Time TofFlag","SftX Time TofFlag",200,-100,100);
+  Hist1[70] = new TH1D("Sch Time TofFlag","Sch Time TofFlag",200,-100,100);
+  Hist1[71] = new TH1D("SftX Time TofFlag","SftX Time TofFlag",200,-100,100);
 
   //-Event Loop --------------------------------------------------------------------------------------
   Long64_t nentries = mtx->GetEntries();
@@ -455,7 +458,7 @@ void Mtx_Banch(int month, int runnum){
         if(sch_time[i][k]==-999) continue;
         Hist1[39]->Fill(sch_time[i][k]);
         if(TofFlag){
-          Hist1[66]->Fill(sch_time[i][k]);
+          Hist1[70]->Fill(sch_time[i][k]);
         }
       }
     }
@@ -479,14 +482,14 @@ void Mtx_Banch(int month, int runnum){
           Hist1[49]->Fill(sftx_utime[i][j]);
           Hist1[51]->Fill(sftx_utime[i][j]);
           if(TofFlag){
-            Hist1[67]->Fill(sftx_utime[i][j]);
+            Hist1[71]->Fill(sftx_utime[i][j]);
           }
         }
         if(sftx_dtime[i][j]!=-999){
           Hist1[50]->Fill(sftx_dtime[i][j]);
           Hist1[51]->Fill(sftx_dtime[i][j]);
           if(TofFlag){
-            Hist1[65]->Fill(sftx_dtime[i][j]);
+            Hist1[71]->Fill(sftx_dtime[i][j]);
           }
         }
       }

@@ -86,6 +86,7 @@ void mtx_gate_20181226(int month, int runnum){
 //   TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("rootfile/run05126_DstKuramaEasirocHodoscope.root");
    TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
    TString pdf = Form("%s/pdf/trigger/mtx_gate_20181226_run%05d.pdf", anadir.Data(),runnum);
+  TString pdfDhire = Form("%s/pdf/trigger", anadir.Data());
    TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstKuramaEasirocHodoscope.root", anadir.Data(),Month[month], runnum),"READ");
    TTree *k0hodo;
     f->GetObject("k0hodo",k0hodo);
