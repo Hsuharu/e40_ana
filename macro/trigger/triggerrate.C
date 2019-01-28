@@ -173,7 +173,7 @@ void triggerrate(){
   g[8] = new TGraph(L1Req.size(),L1Req.data(),DAQEff.data());
   g[9] = new TGraph(Matrix.size(),Matrix.data(),DAQEff.data());
   g[10] = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),L1Req.data());
-  for(int i=0; i<10; i++ ){
+  for(int i=0; i<11; i++ ){
     gStyle->SetOptStat(0);
     g[i]->SetMarkerStyle(8);
     g[i]->SetMarkerColor(2);
