@@ -23,10 +23,13 @@
    "U",
    "XU",
    "XD",
+   "X"
  };
 
- double sftscr[4]; 
- std::vector<int> runnumber{5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
+ double sftscr[5]={0.,0.,0.,0.,0.}; 
+// std::vector<int> runnumber{5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
+//  std::vector<int> runnumber{5272,5275,5283,5298,5299,5300,5301,5302,5303,5304};
+  int runnumber[] = {5272,5275,5283,5298,5299,5300,5301,5302,5303,5304};
 // int runnumber[] = {5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
 // int runnumber[] = {5080,5139,5118,5120,5123,5304,5303,5126,5129,5275,5283};
 // int runnumber1[] = {5080,5139,5118,5120,5123,5304};
@@ -130,79 +133,81 @@ void SFTByPlane_get( int month, int runnum){
 
    // Set branch addresses.
    ea0c->SetBranchStatus("*",0);
-   ea0c->SetBranchAddress("evnum",&evnum);
-   ea0c->SetBranchAddress("trignhits",&trignhits);
-   ea0c->SetBranchAddress("trigpat",trigpat);
-   ea0c->SetBranchAddress("trigflag",trigflag);
-   ea0c->SetBranchAddress("bft_nhits",&bft_nhits);
-   ea0c->SetBranchAddress("bft_unhits",&bft_unhits);
-   ea0c->SetBranchAddress("bft_dnhits",&bft_dnhits);
-   ea0c->SetBranchAddress("bft_uhitpat",bft_uhitpat);
-   ea0c->SetBranchAddress("bft_dhitpat",bft_dhitpat);
-   ea0c->SetBranchAddress("bft_utdc",bft_utdc);
-   ea0c->SetBranchAddress("bft_dtdc",bft_dtdc);
-   ea0c->SetBranchAddress("bft_utrailing",bft_utrailing);
-   ea0c->SetBranchAddress("bft_dtrailing",bft_dtrailing);
-   ea0c->SetBranchAddress("bft_utot",bft_utot);
-   ea0c->SetBranchAddress("bft_dtot",bft_dtot);
-   ea0c->SetBranchAddress("bft_udepth",bft_udepth);
-   ea0c->SetBranchAddress("bft_ddepth",bft_ddepth);
-   ea0c->SetBranchAddress("bft_ncl",&bft_ncl);
-   ea0c->SetBranchAddress("bft_clsize",bft_clsize);
-   ea0c->SetBranchAddress("bft_ctime",bft_ctime);
-   ea0c->SetBranchAddress("bft_ctot",bft_ctot);
-   ea0c->SetBranchAddress("bft_clpos",bft_clpos);
-   ea0c->SetBranchAddress("sch_nhits",&sch_nhits);
-   ea0c->SetBranchAddress("sch_hitpat",sch_hitpat);
-   ea0c->SetBranchAddress("sch_tdc",sch_tdc);
-   ea0c->SetBranchAddress("sch_trailing",sch_trailing);
-   ea0c->SetBranchAddress("sch_tot",sch_tot);
-   ea0c->SetBranchAddress("sch_depth",sch_depth);
-   ea0c->SetBranchAddress("sch_ncl",&sch_ncl);
-   ea0c->SetBranchAddress("sch_clsize",sch_clsize);
-   ea0c->SetBranchAddress("sch_ctime",sch_ctime);
-   ea0c->SetBranchAddress("sch_ctot",sch_ctot);
-   ea0c->SetBranchAddress("sch_clpos",sch_clpos);
-   ea0c->SetBranchAddress("sftv_nhits",&sftv_nhits);
-   ea0c->SetBranchAddress("sftv_hitpat",sftv_hitpat);
+   ea0c->SetBranchStatus("sftv_tdc");
+   ea0c->SetBranchStatus("sftu_tdc");
+//   ea0c->SetBranchAddress("evnum",&evnum);
+//   ea0c->SetBranchAddress("trignhits",&trignhits);
+//   ea0c->SetBranchAddress("trigpat",trigpat);
+//   ea0c->SetBranchAddress("trigflag",trigflag);
+//   ea0c->SetBranchAddress("bft_nhits",&bft_nhits);
+//   ea0c->SetBranchAddress("bft_unhits",&bft_unhits);
+//   ea0c->SetBranchAddress("bft_dnhits",&bft_dnhits);
+//   ea0c->SetBranchAddress("bft_uhitpat",bft_uhitpat);
+//   ea0c->SetBranchAddress("bft_dhitpat",bft_dhitpat);
+//   ea0c->SetBranchAddress("bft_utdc",bft_utdc);
+//   ea0c->SetBranchAddress("bft_dtdc",bft_dtdc);
+//   ea0c->SetBranchAddress("bft_utrailing",bft_utrailing);
+//   ea0c->SetBranchAddress("bft_dtrailing",bft_dtrailing);
+//   ea0c->SetBranchAddress("bft_utot",bft_utot);
+//   ea0c->SetBranchAddress("bft_dtot",bft_dtot);
+//   ea0c->SetBranchAddress("bft_udepth",bft_udepth);
+//   ea0c->SetBranchAddress("bft_ddepth",bft_ddepth);
+//   ea0c->SetBranchAddress("bft_ncl",&bft_ncl);
+//   ea0c->SetBranchAddress("bft_clsize",bft_clsize);
+//   ea0c->SetBranchAddress("bft_ctime",bft_ctime);
+//   ea0c->SetBranchAddress("bft_ctot",bft_ctot);
+//   ea0c->SetBranchAddress("bft_clpos",bft_clpos);
+//   ea0c->SetBranchAddress("sch_nhits",&sch_nhits);
+//   ea0c->SetBranchAddress("sch_hitpat",sch_hitpat);
+//   ea0c->SetBranchAddress("sch_tdc",sch_tdc);
+//   ea0c->SetBranchAddress("sch_trailing",sch_trailing);
+//   ea0c->SetBranchAddress("sch_tot",sch_tot);
+//   ea0c->SetBranchAddress("sch_depth",sch_depth);
+//   ea0c->SetBranchAddress("sch_ncl",&sch_ncl);
+//   ea0c->SetBranchAddress("sch_clsize",sch_clsize);
+//   ea0c->SetBranchAddress("sch_ctime",sch_ctime);
+//   ea0c->SetBranchAddress("sch_ctot",sch_ctot);
+//   ea0c->SetBranchAddress("sch_clpos",sch_clpos);
+//   ea0c->SetBranchAddress("sftv_nhits",&sftv_nhits);
+//   ea0c->SetBranchAddress("sftv_hitpat",sftv_hitpat);
    ea0c->SetBranchAddress("sftv_tdc",sftv_tdc);
-   ea0c->SetBranchAddress("sftv_trailing",sftv_trailing);
-   ea0c->SetBranchAddress("sftv_tot",sftv_tot);
-   ea0c->SetBranchAddress("sftv_depth",sftv_depth);
-   ea0c->SetBranchAddress("sftv_ncl",&sftv_ncl);
-   ea0c->SetBranchAddress("sftv_clsize",sftv_clsize);
-   ea0c->SetBranchAddress("sftv_ctime",sftv_ctime);
-   ea0c->SetBranchAddress("sftv_ctot",sftv_ctot);
-   ea0c->SetBranchAddress("sftv_clpos",sftv_clpos);
-   ea0c->SetBranchAddress("sftu_nhits",&sftu_nhits);
-   ea0c->SetBranchAddress("sftu_hitpat",sftu_hitpat);
+//   ea0c->SetBranchAddress("sftv_trailing",sftv_trailing);
+//   ea0c->SetBranchAddress("sftv_tot",sftv_tot);
+//   ea0c->SetBranchAddress("sftv_depth",sftv_depth);
+//   ea0c->SetBranchAddress("sftv_ncl",&sftv_ncl);
+//   ea0c->SetBranchAddress("sftv_clsize",sftv_clsize);
+//   ea0c->SetBranchAddress("sftv_ctime",sftv_ctime);
+//   ea0c->SetBranchAddress("sftv_ctot",sftv_ctot);
+//   ea0c->SetBranchAddress("sftv_clpos",sftv_clpos);
+//   ea0c->SetBranchAddress("sftu_nhits",&sftu_nhits);
+//   ea0c->SetBranchAddress("sftu_hitpat",sftu_hitpat);
    ea0c->SetBranchAddress("sftu_tdc",sftu_tdc);
-   ea0c->SetBranchAddress("sftu_trailing",sftu_trailing);
-   ea0c->SetBranchAddress("sftu_tot",sftu_tot);
-   ea0c->SetBranchAddress("sftu_depth",sftu_depth);
-   ea0c->SetBranchAddress("sftu_ncl",&sftu_ncl);
-   ea0c->SetBranchAddress("sftu_clsize",sftu_clsize);
-   ea0c->SetBranchAddress("sftu_ctime",sftu_ctime);
-   ea0c->SetBranchAddress("sftu_ctot",sftu_ctot);
-   ea0c->SetBranchAddress("sftu_clpos",sftu_clpos);
-   ea0c->SetBranchAddress("sftx_nhits",&sftx_nhits);
-   ea0c->SetBranchAddress("sftx_unhits",&sftx_unhits);
-   ea0c->SetBranchAddress("sftx_dnhits",&sftx_dnhits);
-   ea0c->SetBranchAddress("sftx_uhitpat",sftx_uhitpat);
-   ea0c->SetBranchAddress("sftx_dhitpat",sftx_dhitpat);
-   ea0c->SetBranchAddress("sftx_utdc",sftx_utdc);
-   ea0c->SetBranchAddress("sftx_dtdc",sftx_dtdc);
-   ea0c->SetBranchAddress("sftx_utrailing",sftx_utrailing);
-   ea0c->SetBranchAddress("sftx_dtrailing",sftx_dtrailing);
-   ea0c->SetBranchAddress("sftx_utot",sftx_utot);
-   ea0c->SetBranchAddress("sftx_dtot",sftx_dtot);
-   ea0c->SetBranchAddress("sftx_udepth",sftx_udepth);
-   ea0c->SetBranchAddress("sftx_ddepth",sftx_ddepth);
-   ea0c->SetBranchAddress("sftx_ncl",&sftx_ncl);
-   ea0c->SetBranchAddress("sftx_clsize",sftx_clsize);
-   ea0c->SetBranchAddress("sftx_ctime",sftx_ctime);
-   ea0c->SetBranchAddress("sftx_ctot",sftx_ctot);
-   ea0c->SetBranchAddress("sftx_clpos",sftx_clpos);
+//   ea0c->SetBranchAddress("sftu_trailing",sftu_trailing);
+//   ea0c->SetBranchAddress("sftu_tot",sftu_tot);
+//   ea0c->SetBranchAddress("sftu_depth",sftu_depth);
+//   ea0c->SetBranchAddress("sftu_ncl",&sftu_ncl);
+//   ea0c->SetBranchAddress("sftu_clsize",sftu_clsize);
+//   ea0c->SetBranchAddress("sftu_ctime",sftu_ctime);
+//   ea0c->SetBranchAddress("sftu_ctot",sftu_ctot);
+//   ea0c->SetBranchAddress("sftu_clpos",sftu_clpos);
+//   ea0c->SetBranchAddress("sftx_nhits",&sftx_nhits);
+//   ea0c->SetBranchAddress("sftx_unhits",&sftx_unhits);
+//   ea0c->SetBranchAddress("sftx_dnhits",&sftx_dnhits);
+//   ea0c->SetBranchAddress("sftx_uhitpat",sftx_uhitpat);
+//   ea0c->SetBranchAddress("sftx_dhitpat",sftx_dhitpat);
+//   ea0c->SetBranchAddress("sftx_utdc",sftx_utdc);
+//   ea0c->SetBranchAddress("sftx_dtdc",sftx_dtdc);
+//   ea0c->SetBranchAddress("sftx_utrailing",sftx_utrailing);
+//   ea0c->SetBranchAddress("sftx_dtrailing",sftx_dtrailing);
+//   ea0c->SetBranchAddress("sftx_utot",sftx_utot);
+//   ea0c->SetBranchAddress("sftx_dtot",sftx_dtot);
+//   ea0c->SetBranchAddress("sftx_udepth",sftx_udepth);
+//   ea0c->SetBranchAddress("sftx_ddepth",sftx_ddepth);
+//   ea0c->SetBranchAddress("sftx_ncl",&sftx_ncl);
+//   ea0c->SetBranchAddress("sftx_clsize",sftx_clsize);
+//   ea0c->SetBranchAddress("sftx_ctime",sftx_ctime);
+//   ea0c->SetBranchAddress("sftx_ctot",sftx_ctot);
+//   ea0c->SetBranchAddress("sftx_clpos",sftx_clpos);
 
 
 //     This is the loop skeleton
@@ -234,7 +239,7 @@ void SFTByPlane_get( int month, int runnum){
 //Integral range
    int range1 = 700; 
    int range2 = 1000; 
-   int range3 = 0; 
+   int range3 = 1; 
    int range4 = 400; 
    int v_seg_range1 = 0; 
    int v_seg_range2 = 0; 
@@ -260,8 +265,8 @@ void SFTByPlane_get( int month, int runnum){
   SFTXUHitPat = (TH1F*)f->Get("h50004");
   SFTXDHitPat = (TH1F*)f->Get("h50005");
   
-//  SFTVTDC  = (TH1F*)f->Get("h30006");
-//  SFTUTDC  = (TH1F*)f->Get("h40006");
+  SFTVTDC  = (TH1F*)f->Get("h30006");
+  SFTUTDC  = (TH1F*)f->Get("h40006");
   SFTXUTDC = (TH1F*)f->Get("h50006");
   SFTXDTDC = (TH1F*)f->Get("h50007");
   
@@ -271,6 +276,8 @@ void SFTByPlane_get( int month, int runnum){
 
   sftscr[2] = SFTXUTDC->Integral(range3,range4) + SFTXUTDC->Integral(range1,range2);
   sftscr[3] = SFTXDTDC->Integral(range3,range4) + SFTXDTDC->Integral(range1,range2);
+  sftscr[4] += SFTXUTDC->Integral(range3,range2);
+  sftscr[4] += SFTXDTDC->Integral(range3,range2);
 
   double max;
   double sigma;
@@ -311,26 +318,26 @@ void SFTByPlane_get( int month, int runnum){
 //                                                                                         //
 /////////////////////////////////////////////////////////////////////////////////////////////
    Long64_t nbytes = 0;
-   for (Long64_t s=0; s<nentries;s++) {
-      nbytes += ea0c->GetEntry(s);
-//      if(s%10000 == 0) std::cout << s << std::endl;
-      for (int i=0; i<NumOfSegSFT_UV;i++) {
-        if(i>v_seg_range1 && i<v_seg_range2) continue;
-          if(sftv_tdc[i]>0){
-            for(int j=0; j<MaxDepth; j++){
-              SFTVTDC->Fill(sftv_tdc[i][j]);
-            }
-          }
-      }
-      for (int i=0; i<NumOfSegSFT_UV;i++) {
-        if(i>u_seg_range1 && i<u_seg_range2) continue;
-          if(sftu_tdc[i]>0){
-            for(int j=0; j<MaxDepth; j++){
-              SFTUTDC->Fill(sftu_tdc[i][j]);
-            }
-          }
-      }
-   }
+//   for (Long64_t s=0; s<nentries;s++) {
+//      nbytes += ea0c->GetEntry(s);
+////      if(s%10000 == 0) std::cout << s << std::endl;
+//      for (int i=0; i<NumOfSegSFT_UV;i++) {
+//        if(i>v_seg_range1 && i<v_seg_range2) continue;
+//          if(sftv_tdc[i]>0){
+//            for(int j=0; j<MaxDepth; j++){
+//              SFTVTDC->Fill(sftv_tdc[i][j]);
+//            }
+//          }
+//      }
+//      for (int i=0; i<NumOfSegSFT_UV;i++) {
+//        if(i>u_seg_range1 && i<u_seg_range2) continue;
+//          if(sftu_tdc[i]>0){
+//            for(int j=0; j<MaxDepth; j++){
+//              SFTUTDC->Fill(sftu_tdc[i][j]);
+//            }
+//          }
+//      }
+//   }
 
   sftscr[0] = SFTVTDC->Integral(range3,range4)  + SFTVTDC->Integral(range1,range2);
   sftscr[1] = SFTUTDC->Integral(range3,range4)  + SFTUTDC->Integral(range1,range2);
@@ -355,14 +362,16 @@ void SFTByPlane_get( int month, int runnum){
   TString fout1 = (Form( "%s/dat/trigger/SFTByPlaneScaler_%05d.dat", anadir.Data() ,runnum));  
    
   std::ofstream fout_2(fout1.Data()); 
-  for(int i=0; i<4; i++){
+  for(int i=0; i<5; i++){
      fout_2 << Form("Plane%s",Plane[i]) <<  "\t"  << sftscr[i] << endl;
   }     
+
                              
 }                            
 
 void SFTByPlaneScaler( int month){
-  for(int i=0; i<12; i++){
+  for(int i=0; i<10; i++){
+//    SFTByPlane_get(6, runnumber.at(i));
     SFTByPlane_get(6, runnumber[i]);
   }
 //  for(int i=0; i<11; i++){

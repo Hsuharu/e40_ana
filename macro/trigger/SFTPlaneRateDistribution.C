@@ -26,6 +26,7 @@ const char* Plane[] =
   "U",
   "XU",
   "XD",
+  "X"
 };
 
 //Work Directry
@@ -33,7 +34,8 @@ const char* Plane[] =
 
 //Global constant
   std::map<std::string, double> param_map;
-  std::vector<int> runnumber{5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
+//  std::vector<int> runnumber{5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
+  std::vector<int> runnumber{5272,5275,5283,5298,5299,5300,5301,5302,5303,5304};
 
 //Fanction ---------------------------------------------------------------------------
 ///// Param //////
@@ -107,7 +109,7 @@ void SFTPlaneRateDistribution(){
   std::vector<std::vector<double>> SFTPlaneCounts(NumOfSegSCH);
 //file open
    ifstream fin1;
-   fin1.open(Form("%s/dat/trigger/SpillByRate.txt", anadir.Data()));
+   fin1.open(Form("%s/dat/trigger/SpillByRate2.txt", anadir.Data()));
 //file error
    if(!fin1){
      std::cout << "File Open error\n" << std::endl;
@@ -128,7 +130,7 @@ void SFTPlaneRateDistribution(){
    }
    fin1.close();
 
-   fin1.open(Form("%s/dat/trigger/BH2_SUMByRate.txt", anadir.Data()));
+   fin1.open(Form("%s/dat/trigger/BH2_SUMByRate2.txt", anadir.Data()));
 
 //file error
    if(!fin1){
@@ -149,7 +151,7 @@ void SFTPlaneRateDistribution(){
    fin1.close();
 
    for(int i=0; i<runnumber.size(); i++){
-    BH2SUMCounts[i] = BH2SUMCounts[i]/SpillCounts[i];
+    BH2SUMCounts.at(i) = BH2SUMCounts.at(i)/SpillCounts.at(i);
    }
 
 //   for(int i=0; i<runnumber.size(); i++){
@@ -160,9 +162,9 @@ void SFTPlaneRateDistribution(){
 //   }
 
    for(int i=0; i<runnumber.size(); i++){
-     SFTPlaneRate_get(runnumber[i]);
-     for(int j=0; j<4; j++){
-       SFTPlaneCounts[j].push_back(param(Form("Plane%s",Plane[j]))/SpillCounts[i]);
+     SFTPlaneRate_get(runnumber.at(i));
+     for(int j=0; j<5; j++){
+       SFTPlaneCounts.at(j).push_back(param(Form("Plane%s",Plane[j]))/SpillCounts.at(i));
      }
    }
 
@@ -172,14 +174,14 @@ void SFTPlaneRateDistribution(){
 //    graph[i] = new TGraph(runnumber.size(),&BH2SUMCounts[0],&SCHSegCounts[i][0]);
 //  }
 
-  TGraph *graph1[4];
-  for(int i=0; i<4; i++){ 
-    graph1[i] = new TGraph(runnumber.size(),&BH2SUMCounts[0],&SFTPlaneCounts[i][0]);
+  TGraph *graph1[5];
+  for(int i=0; i<5; i++){ 
+    graph1[i] = new TGraph(runnumber.size(),BH2SUMCounts.data(),SFTPlaneCounts.at(i).data());
   }
 
 // TCanvas--------------------------------------------------------------------
 //  TString pdf = Form("%s/pdf/trigger/SCHSegRateDistribution.pdf", anadir.Data());
-  TString pdf1 = Form("%s/pdf/trigger/SFTPlaneRateDistribution.pdf", anadir.Data());
+  TString pdf1 = Form("%s/pdf/trigger/SFTPlaneRateDistribution2.pdf", anadir.Data());
   TCanvas *c1 = new TCanvas("c1","c1",800,700);
 //  TCanvas *c2 = new TCanvas("c2","c2",1600,900);
 //  c2->Divide(4,2);
@@ -212,7 +214,7 @@ void SFTPlaneRateDistribution(){
 //  c1->Print(pdf+"]");        
   c1->Print(pdf1+"["); 
   
-  for(int i=0 ; i<4; i++){
+  for(int i=0 ; i<5; i++){
     graph1[i]->SetTitle(Form("SFT Plane%s Counts/spill ;BH2-SUM [ M/Spill ];SFT Plane%s [Counts/Spill]",Plane[i],Plane[i]));
     graph1[i]->SetMarkerStyle(20);
     graph1[i]->SetLineStyle(2);

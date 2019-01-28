@@ -185,18 +185,18 @@ void triggerrate(){
 //  g1->GetYaxis()->SetRangeUser(0,1);
 
 
-//  std::ofstream fout1;
-//  fout1.open(Form("%s/dat/trigger/SpillByRate.txt", anadir.Data()));
-//  for(int i=0; i<SpillCounts.size(); i++){
-//    fout1 << Form("run%05d",runnumber[i]) << "\t" << SpillCounts[i] << std::endl;
-//  }
-//
-//  std::ofstream fout2;
-//  fout2.open(Form("%s/dat/trigger/BH2_SUMByRate.txt", anadir.Data()));
-//  for(int i=0; i<BH2SUMCounts.size(); i++){
-//    fout2 << Form("run%05d",runnumber[i]) << "\t" << BH2SUMCounts[i] << std::endl;
-//  }
-//  
+  std::ofstream fout1;
+  fout1.open(Form("%s/dat/trigger/SpillByRate2.txt", anadir.Data()));
+  for(int i=0; i<SpillCounts.size(); i++){
+    fout1 << Form("run%05d",runnumber[i]) << "\t" << SpillCounts[i] << std::endl;
+  }
+
+  std::ofstream fout2;
+  fout2.open(Form("%s/dat/trigger/BH2_SUMByRate2.txt", anadir.Data()));
+  for(int i=0; i<BH2SUMCounts.size(); i++){
+    fout2 << Form("run%05d",runnumber[i]) << "\t" << BH2SUMCounts[i] << std::endl;
+  }
+  
 //  std::ofstream fout3;
 //  fout3.open(Form("%s/dat/trigger/BH2_SUM_MparSpillByRate.txt", anadir.Data()));
 //  for(int i=0; i<BH2SUMMparSpillCounts.size(); i++){

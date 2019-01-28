@@ -29,12 +29,20 @@ bool eq3(int a,int b,int c){
 }
 
 
+ const char* MPG[] =
+ {
+   "SFT_Newtable.txt.2019Jan.1_1",
+   "SFT_Newtable.txt.2019Jan.1_2",
+   "SFT_table.txt.2018Jun.3_1   "
+ };
 
-void Matrix_Pattern_Out( int month){
+
+void Matrix_Pattern_Out( int month, int matrixnum =2){
 
   //Matrix Patern txt file PATH -----------------------------------------------------------------------
   TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
+//  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
+  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/%s",anadir.Data(),Month[month],MPG[matrixnum] ); 
 
   std::ifstream fin1(filein1);
 
