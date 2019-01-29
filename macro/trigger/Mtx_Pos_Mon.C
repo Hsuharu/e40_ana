@@ -86,7 +86,7 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
 //Matrix Patern txt file PATH -----------------------------------------------------------------------
 //  TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
 //  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
-  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/%s",anadir.Data(),Month[month],MPG[matrixnum] ); 
+  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/%s",anadir.Data(),Month[month],MPG[matrix] ); 
 
   std::ifstream fin1(filein1);
 
