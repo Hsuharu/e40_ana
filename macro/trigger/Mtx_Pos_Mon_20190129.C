@@ -1,12 +1,5 @@
 #include "DetectorID.hh"
 
- const char* MPG[] =
- {
-   "SFT_Newtable.txt.2019Jan.1_1",
-   "SFT_Newtable.txt.2019Jan.1_2",
-   "SFT_table.txt.2018Jun.3_1   "
- };
-
  const char* Month[] =
  {
    "zero",
@@ -69,7 +62,7 @@ bool eq3(int a,int b,int c){
 }
 
 
-void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
+void Mtx_Pos_Mon(int month,int runnum){
 
   gStyle->SetOptStat(1111110); 
   gStyle->SetOptFit(1); 
@@ -78,15 +71,14 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
    gROOT->Reset();
    gROOT->Reset();
    TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-   TString pdf = Form("%s/pdf/trigger/Mtx_Pos_Mon%d_run%05d.pdf", anadir.Data(),matrix,runnum);
+   TString pdf = Form("%s/pdf/trigger/Mtx_Pos_Mon_run%05d.pdf", anadir.Data(),runnum);
    TString pdfDhire = Form("%s/pdf/trigger", anadir.Data());
 //   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/trigf19_tofht.root", anadir.Data(),Month[month]),"READ");
 //   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstKuramaEasirocHodoscope_BH2TOF.root", anadir.Data(),Month[month],runnum),"READ");
 
 //Matrix Patern txt file PATH -----------------------------------------------------------------------
 //  TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-//  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
-  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/%s",anadir.Data(),Month[month],MPG[matrixnum] ); 
+  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
 
   std::ifstream fin1(filein1);
 
@@ -437,10 +429,8 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
    int chisqr = 0;
 
 //-hist def-----------------------------------------------------------------------------------------
-//   Hist1Max = 1252;
-   Hist1Max = 48 + Mtx_prm.size()*4;
-//   Hist2Max =  405;
-   Hist2Max =  104 + Mtx_prm.size();
+   Hist1Max = 1252;
+   Hist2Max =  405;
    chisqr = 50;
    TH1D *Hist1[Hist1Max];
    TH2D *Hist2[Hist2Max];
@@ -723,13 +713,13 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
 //   if(i==15 || i==16 || i==38) gPad->SetLogy(1);
    Hist1[i]->Draw();
    c1->Print(pdf);
-   c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_%04d.pdf",pdfDhire.Data(),matrix,runnum,i));
+   c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist1_%04d.pdf",pdfDhire.Data(),runnum,i));
 //   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
    }
    for(int i=0; i<Hist2Max; i++){
      Hist2[i]->Draw("colz");
      c1->Print(pdf);
-     c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist2_colz_%04d.pdf",pdfDhire.Data(),matrix,runnum,i));
+     c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_colz_%04d.pdf",pdfDhire.Data(),runnum,i));
    }
    for(int j=0; j<Hist2Max; j++){
      Hist2[j]->Draw("box");
@@ -788,7 +778,7 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
        }
      }
      c1->Print(pdf);
-     c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist2_box_%04d.pdf",pdfDhire.Data(),matrix,runnum,j));
+     c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist2_box_%04d.pdf",pdfDhire.Data(),runnum,j));
    }
 
    TH1D *test = new TH1D("test","Momentum Ratio Cut5/Cut3 w/MtxCut;GeV/c;Ratio",100,0,2);
@@ -825,7 +815,7 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
    graph1->GetXaxis()->SetLimits(0,2);
    graph1->Draw("p");
    c1->Print(pdf);
-   c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_graph.pdf",pdfDhire.Data(),matrix,runnum));
+   c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist1_graph.pdf",pdfDhire.Data(),runnum));
 
 
    TH1D *h = (TH1D*)Hist1[47]->Clone("Hist1[47]");
@@ -835,7 +825,7 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
 //   h->Sumw2();
    h->Draw("");
    c1->Print(pdf);
-   c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_ratio.pdf",pdfDhire.Data(),matrix,runnum));
+   c1->Print(Form("%s/Mtx_Pos_Mon_run%05d_Hist1_ratio.pdf",pdfDhire.Data(),runnum));
 
 
 
