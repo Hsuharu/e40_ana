@@ -794,9 +794,6 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
    TH1D *test = new TH1D("test","Momentum Ratio Cut5/Cut3 w/MtxCut;GeV/c;Ratio",100,0,2);
    test->SetAxisRange(0,1,"Y");
    test->Draw();
-   gStyle->SetOptStat(0);
-   gStyle->SetOptTitle(0);
-   
 
    int nBin = 100;
    double x[nBin];
@@ -828,11 +825,14 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
    c1->Print(pdf);
    c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_graph.pdf",pdfDhire.Data(),matrix,runnum));
    
+   gStyle->SetOptStat(0);
+   gStyle->SetOptTitle(0);
+   
    Hist1[30]->Draw();
    Hist1[47]->SetLineColor(kRed); 
    Hist1[47]->Draw("same");
    c1->Print(pdf);
-   c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist130_47_same.pdf",pdfDhire.Data(),matrix,runnum));
+   c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_30_47_same.pdf",pdfDhire.Data(),matrix,runnum));
 
 
    TH1D *h = (TH1D*)Hist1[47]->Clone("Hist1[47]");
