@@ -4,7 +4,7 @@
  {
    "SFT_Newtable.txt.2019Jan.1_1",
    "SFT_Newtable.txt.2019Jan.1_2",
-   "SFT_table.txt.2018Jun.3_1   "
+   "SFT_table.txt.2018Jun.3_1"
  };
 
  const char* Month[] =
@@ -475,7 +475,7 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
     Hist1[27]= new TH1D("vpseg[1] Cut2","vpseg[1] Cut2",NumOfSegSCH,0,NumOfSegSCH);
     Hist1[28]= new TH1D("TofSeg[0] Cut2","TofSeg[0] Cut2",NumOfSegTOF,0,NumOfSegTOF);
     Hist1[29]= new TH1D("tofsegKurama[0] Cut2","tofsegKurama[0] Cut2",NumOfSegTOF,0,NumOfSegTOF);
-    Hist1[30]= new TH1D("pKurama Cut3","pKurama Cut3",100,0,2);
+    Hist1[30]= new TH1D("pKurama Cut3","pKurama Cut3;Momentum[GeV/c];Counts",100,0,2);
     Hist1[31]= new TH1D("m2 Cut3","m2 Cut3",100,-0.4,1.4);
     Hist1[32]= new TH1D("chisqrKurama Cut3","chisqrKurama Cut3",100,0,200);
     Hist1[33]= new TH1D("qKurama Cut3","qKurama Cut3",6,-3,3);
@@ -492,7 +492,7 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
     Hist1[44]= new TH1D("TofSeg[0] Cut4","TofSeg[0] Cut4",NumOfSegTOF,0,NumOfSegTOF);
     Hist1[45]= new TH1D("tofsegKurama[0] Cut4","tofsegKurama[0] Cut4",NumOfSegTOF,0,NumOfSegTOF);
     Hist1[46]= new TH1D("m2 Cut5","m2 Cut5",100,-0.4,1.4);
-    Hist1[47]= new TH1D("pKurama Cut5","pKurama Cut5",100,0,2);
+    Hist1[47]= new TH1D("pKurama Cut5","pKurama Cut5;Momentum[GeV/c];Counts",100,0,2);
     for(int l=0; l < Mtx_prm.size(); l++){
       Hist1[48+Mtx_prm.size()*0+l]= new TH1D(Form("sftxsegKurama[0] Cut3 SchSeg%d - TofSeg%d",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftxsegKurama[0] Cut3 SchSeg%d - TofSeg%d",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),NumOfSegSFT_X,0,NumOfSegSFT_X);
       Hist1[48+Mtx_prm.size()*1+l]= new TH1D(Form("sftxsegKurama[0] Cut5 SchSeg%d - TofSeg%d",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftxsegKurama[0] Cut5 SchSeg%d - TofSeg%d",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),NumOfSegSFT_X,0,NumOfSegSFT_X);
@@ -795,6 +795,7 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
    test->SetAxisRange(0,1,"Y");
    test->Draw();
    gStyle->SetOptStat(0);
+   gStyle->SetOptTitle(0);
    
 
    int nBin = 100;
@@ -826,6 +827,12 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
    graph1->Draw("p");
    c1->Print(pdf);
    c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_graph.pdf",pdfDhire.Data(),matrix,runnum));
+   
+   Hist1[30]->Draw();
+   Hist1[47]->SetLineColor(kRed); 
+   Hist1[47]->Draw("same");
+   c1->Print(pdf);
+   c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist130_47_same.pdf",pdfDhire.Data(),matrix,runnum));
 
 
    TH1D *h = (TH1D*)Hist1[47]->Clone("Hist1[47]");
