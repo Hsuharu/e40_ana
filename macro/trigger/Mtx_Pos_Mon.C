@@ -827,6 +827,8 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
    
    gStyle->SetOptStat(0);
    gStyle->SetOptTitle(0);
+   gStyle->SetPadLeftMargin(0.14);
+   gStyle->SetPadBottomMargin(0.14);
    
    Hist1[30]->Draw();
    Hist1[47]->SetLineColor(kRed); 

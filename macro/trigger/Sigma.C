@@ -619,6 +619,8 @@ void Sigma(int month,int runnum, int file=1){
   c1->Print(pdf+"["); 
    gStyle->SetOptStat(0);
    gStyle->SetOptTitle(0);
+   gStyle->SetPadLeftMargin(0.14);
+   gStyle->SetPadBottomMargin(0.14);
    
   //-Hist Draw----------------------------------------------------------------------------------------
   c1->cd();
