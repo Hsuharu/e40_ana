@@ -245,6 +245,9 @@ void triggerrate(){
   graph->Draw("AP");
   c1->Print(Form("%s/Gate_Yield.pdf",pdfDhire.Data()));
 
+  graph->SetMinimum(0.9);
+  graph->Draw("AP");
+  c1->Print(Form("%s/Gate_Yield_min0.9.pdf",pdfDhire.Data()));
 
 
   std::ofstream fout1;
