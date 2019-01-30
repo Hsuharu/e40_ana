@@ -948,8 +948,7 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
   for(int j=0; j<Hist2Max; j++){
     if(j==1 || j==3 || j ==8+Mtx_prm2.size()*4 || j ==8+Mtx_prm2.size()*4+1){
       Hist2[j]->Draw("box");
-      //matrix2 
-      for(int i=0; i<SCH_Seg2.size(); i++){
+      for(int k=0; k<SCH_Seg1.size(); k++){
         double x1;
         double x2;
 
@@ -959,104 +958,93 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
         double TOF_Max_y1;
         double TOF_Max_y2;
 
-        x1 =  (double)SCH_Seg2.at(i);
-        x2 =  (double)(SCH_Seg2.at(i)+1);
+        x1 =  (double)SCH_Seg1.at(k);
+        x2 =  (double)(SCH_Seg1.at(k)+1);
 
-        TOF_Min_y1 =(double)TOF_Min2.at(i);
-        TOF_Min_y2 =(double)TOF_Min2.at(i);
+        TOF_Min_y1 =(double)TOF_Min1.at(k);
+        TOF_Min_y2 =(double)TOF_Min1.at(k);
 
-        TOF_Max_y1 =  (double)TOF_Max2.at(i)+1;
-        TOF_Max_y2 =  (double)TOF_Max2.at(i)+1;
+        TOF_Max_y1 =  (double)TOF_Max1.at(k)+1;
+        TOF_Max_y2 =  (double)TOF_Max1.at(k)+1;
 
-        TLine *MtxGateMin = new TLine(x1,TOF_Min_y1,x2,TOF_Min_y2);
-        TLine *MtxGateMax = new TLine(x1,TOF_Max_y1,x2,TOF_Max_y2);
+        TLine *MtxGateMin1 = new TLine(x1,TOF_Min_y1,x2,TOF_Min_y2);
+        TLine *MtxGateMax1 = new TLine(x1,TOF_Max_y1,x2,TOF_Max_y2);
 
-        MtxGateMin->SetLineColor(2);
-        MtxGateMax->SetLineColor(2);
-        MtxGateMin->SetLineWidth(1);
-        MtxGateMax->SetLineWidth(1);
-        MtxGateMin->Draw("same");
-        MtxGateMax->Draw("same");
-        if(i==0){
-          TLine *MtxGateMin_Y = new TLine(x1,TOF_Min_y1,x1,TOF_Max_y1);
-          MtxGateMin_Y->SetLineColor(2);
-          MtxGateMin_Y->SetLineWidth(1);
-          MtxGateMin_Y->Draw("same");
-        }else if(i==SCH_Seg2.size()-1){
-          TLine *MtxGateMin_Y = new TLine(x2,TOF_Min_y1,x2,TOF_Max_y1);
-          MtxGateMin_Y->SetLineColor(2);
-          MtxGateMin_Y->SetLineWidth(1);
-          MtxGateMin_Y->Draw("same");
-          if(i==SCH_Seg2.size()-1){
-            //matrix1
-            for(int k=0; k<SCH_Seg1.size(); k++){
-              //            double x1;
-              //            double x2;
-              //
-              //            double TOF_Min_y1;
-              //            double TOF_Min_y2;
-              //
-              //            double TOF_Max_y1;
-              //            double TOF_Max_y2;
+        MtxGateMin1->SetLineColor(1);
+        MtxGateMax1->SetLineColor(1);
+        MtxGateMin1->SetLineWidth(1);
+        MtxGateMax1->SetLineWidth(1);
+        MtxGateMin1->Draw("same");
+        MtxGateMax1->Draw("same");
+        if(k==0){
+          TLine *MtxGateMin_Y1 = new TLine(x1,TOF_Min_y1,x1,TOF_Max_y1);
+          MtxGateMin_Y1->SetLineColor(1);
+          MtxGateMin_Y1->SetLineWidth(1);
+          MtxGateMin_Y1->Draw("same");
+        }else if(k==SCH_Seg1.size()-1){
+          TLine *MtxGateMin_Y1 = new TLine(x2,TOF_Min_y1,x2,TOF_Max_y1);
+          MtxGateMin_Y1->SetLineColor(1);
+          MtxGateMin_Y1->SetLineWidth(1);
+          MtxGateMin_Y1->Draw("same");
+          //matrix2 
+          for(int i=0; i<SCH_Seg2.size(); i++){
+            x1 =  (double)SCH_Seg2.at(i);
+            x2 =  (double)(SCH_Seg2.at(i)+1);
 
-              x1 =  (double)SCH_Seg1.at(k);
-              x2 =  (double)(SCH_Seg1.at(k)+1);
+            TOF_Min_y1 =(double)TOF_Min2.at(i);
+            TOF_Min_y2 =(double)TOF_Min2.at(i);
 
-              TOF_Min_y1 =(double)TOF_Min1.at(k);
-              TOF_Min_y2 =(double)TOF_Min1.at(k);
+            TOF_Max_y1 =  (double)TOF_Max2.at(i)+1;
+            TOF_Max_y2 =  (double)TOF_Max2.at(i)+1;
 
-              TOF_Max_y1 =  (double)TOF_Max1.at(k)+1;
-              TOF_Max_y2 =  (double)TOF_Max1.at(k)+1;
+            TLine *MtxGateMin = new TLine(x1,TOF_Min_y1,x2,TOF_Min_y2);
+            TLine *MtxGateMax = new TLine(x1,TOF_Max_y1,x2,TOF_Max_y2);
 
-              TLine *MtxGateMin1 = new TLine(x1,TOF_Min_y1,x2,TOF_Min_y2);
-              TLine *MtxGateMax1 = new TLine(x1,TOF_Max_y1,x2,TOF_Max_y2);
-
-              MtxGateMin1->SetLineColor(1);
-              MtxGateMax1->SetLineColor(1);
-              MtxGateMin1->SetLineWidth(1);
-              MtxGateMax1->SetLineWidth(1);
-              MtxGateMin1->Draw("same");
-              MtxGateMax1->Draw("same");
-              if(k==0){
-                TLine *MtxGateMin_Y1 = new TLine(x1,TOF_Min_y1,x1,TOF_Max_y1);
-                MtxGateMin_Y1->SetLineColor(1);
-                MtxGateMin_Y1->SetLineWidth(1);
-                MtxGateMin_Y1->Draw("same");
-              }else if(k==SCH_Seg1.size()-1){
-                TLine *MtxGateMin_Y1 = new TLine(x2,TOF_Min_y1,x2,TOF_Max_y1);
-                MtxGateMin_Y1->SetLineColor(1);
-                MtxGateMin_Y1->SetLineWidth(1);
-                MtxGateMin_Y1->Draw("same");
-              }else{
-                if(TOF_Min1.at(k)-TOF_Min1.at(k-1)!=0){
-                  TLine *MtxGate_Y1_1 = new TLine(x1,(double)TOF_Min1.at(k-1),x1,TOF_Min_y1);
-                  MtxGate_Y1_1->SetLineColor(1);
-                  MtxGate_Y1_1->SetLineWidth(1);
-                  MtxGate_Y1_1->Draw("same");
-                }
-                if(TOF_Max1.at(k)-TOF_Max1.at(k-1)!=0){
-                  TLine *MtxGate_Y2_1 = new TLine(x1,(double)TOF_Max1.at(k-1)+1,x1,TOF_Max_y1);
-                  MtxGate_Y2_1->SetLineColor(1);
-                  MtxGate_Y2_1->SetLineWidth(1);
-                  MtxGate_Y2_1->Draw("same");
-                }
-              }
+            MtxGateMin->SetLineColor(2);
+            MtxGateMax->SetLineColor(2);
+            MtxGateMin->SetLineWidth(1);
+            MtxGateMax->SetLineWidth(1);
+            MtxGateMin->Draw("same");
+            MtxGateMax->Draw("same");
+            if(i==0){
+              TLine *MtxGateMin_Y = new TLine(x1,TOF_Min_y1,x1,TOF_Max_y1);
+              MtxGateMin_Y->SetLineColor(2);
+              MtxGateMin_Y->SetLineWidth(1);
+              MtxGateMin_Y->Draw("same");
+            }else if(i==SCH_Seg2.size()-1){
+              TLine *MtxGateMin_Y = new TLine(x2,TOF_Min_y1,x2,TOF_Max_y1);
+              MtxGateMin_Y->SetLineColor(2);
+              MtxGateMin_Y->SetLineWidth(1);
+              MtxGateMin_Y->Draw("same");
+              c1->Print(pdf1);
+              c1->Print(Form("%s/Mtx_Pat_Compare_matrix%d_%d_run%05d_Hist2_box2_%04d.pdf",pdfDhire.Data(),matrixnum1,matrixnum2,runnum,j));
+          }else{
+            if(TOF_Min2.at(i)-TOF_Min2.at(i-1)!=0){
+              TLine *MtxGate_Y1 = new TLine(x1,(double)TOF_Min2.at(i-1),x1,TOF_Min_y1);
+              MtxGate_Y1->SetLineColor(2);
+              MtxGate_Y1->SetLineWidth(1);
+              MtxGate_Y1->Draw("same");
+            }
+            if(TOF_Max2.at(i)-TOF_Max2.at(i-1)!=0){
+              TLine *MtxGate_Y2 = new TLine(x1,(double)TOF_Max2.at(i-1)+1,x1,TOF_Max_y1);
+              MtxGate_Y2->SetLineColor(2);
+              MtxGate_Y2->SetLineWidth(1);
+              MtxGate_Y2->Draw("same");
             }
           }
-          c1->Print(pdf1);
-          c1->Print(Form("%s/Mtx_Pat_Compare_matrix%d_%d_run%05d_Hist2_box2_%04d.pdf",pdfDhire.Data(),matrixnum1,matrixnum2,runnum,j));
+            }
         }else{
-          if(TOF_Min2.at(i)-TOF_Min2.at(i-1)!=0){
-            TLine *MtxGate_Y1 = new TLine(x1,(double)TOF_Min2.at(i-1),x1,TOF_Min_y1);
-            MtxGate_Y1->SetLineColor(2);
-            MtxGate_Y1->SetLineWidth(1);
-            MtxGate_Y1->Draw("same");
+          if(TOF_Min1.at(k)-TOF_Min1.at(k-1)!=0){
+            TLine *MtxGate_Y1_1 = new TLine(x1,(double)TOF_Min1.at(k-1),x1,TOF_Min_y1);
+            MtxGate_Y1_1->SetLineColor(1);
+            MtxGate_Y1_1->SetLineWidth(1);
+            MtxGate_Y1_1->Draw("same");
           }
-          if(TOF_Max2.at(i)-TOF_Max2.at(i-1)!=0){
-            TLine *MtxGate_Y2 = new TLine(x1,(double)TOF_Max2.at(i-1)+1,x1,TOF_Max_y1);
-            MtxGate_Y2->SetLineColor(2);
-            MtxGate_Y2->SetLineWidth(1);
-            MtxGate_Y2->Draw("same");
+          if(TOF_Max1.at(k)-TOF_Max1.at(k-1)!=0){
+            TLine *MtxGate_Y2_1 = new TLine(x1,(double)TOF_Max1.at(k-1)+1,x1,TOF_Max_y1);
+            MtxGate_Y2_1->SetLineColor(1);
+            MtxGate_Y2_1->SetLineWidth(1);
+            MtxGate_Y2_1->Draw("same");
           }
         }
       }
@@ -1127,6 +1115,7 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
       MtxSftXGateMax1->Draw("same");
       c1->Print(Form("%s/Mtx_Pat_Compare_bin%d_run%05d_Hist1_SFTX_%04d.pdf",pdfDhire.Data(),bin,runnum,l));
 
+      gPad->SetLogy(0);
       y3 = Hist1[34+Mtx_prm2.size()*15 +l]->GetBinContent(Hist1[34+Mtx_prm2.size()*15 +l]->GetMaximumBin());
       TLine *MMSigmaMin = new TLine(1.15,y1,1.15,y3);
       TLine *MMSigmaMax = new TLine(1.25,y1,1.25,y3);
