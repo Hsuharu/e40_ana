@@ -235,7 +235,7 @@ void triggerrate(){
   sort(DAQEff.begin(),DAQEff.end());
 
   for(int i=0; i<Gate.size(); i++){
-    Yield.at(i) = SigmaEffi.at(i)*((Matrix.back()*Accept.at(i)*a1+b1)*a2+b2)*0.99/DAQEff.front();
+    Yield.push_back(SigmaEffi.at(i)*((Matrix.back()*Accept.at(i)*a1+b1)*a2+b2)*0.99/DAQEff.front());
   }
   TGraph *graph = new TGraph(Gate.size(),Gate.data(),Yield.data());
   graph->Draw("AP");
