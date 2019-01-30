@@ -1107,6 +1107,8 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
     if(Mtx_prm2.at(l).at(0)%10==0){
       c1->cd();
       gPad->SetLogy(1);
+      gStyle->SetOptStat(0);
+      gStyle->SetOptTitle(0);
       Hist1[34+Mtx_prm2.size()*16 +l]->Draw();
       Hist1[34+Mtx_prm2.size()*4 +l]->Draw("same");
       MtxSftXGateMin->Draw("same");
@@ -1116,6 +1118,8 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
       c1->Print(Form("%s/Mtx_Pat_Compare_bin%d_run%05d_Hist1_SFTX_%04d.pdf",pdfDhire.Data(),bin,runnum,l));
 
       gPad->SetLogy(0);
+      gStyle->SetOptStat(0);
+      gStyle->SetOptTitle(0);
       y3 = Hist1[34+Mtx_prm2.size()*15 +l]->GetBinContent(Hist1[34+Mtx_prm2.size()*15 +l]->GetMaximumBin());
       TLine *MMSigmaMin = new TLine(1.15,y1,1.15,y3);
       TLine *MMSigmaMax = new TLine(1.25,y1,1.25,y3);

@@ -370,8 +370,9 @@ void Mtx_Banch(int month, int runnum){
   double HULMHTDCCalib = -0.8333;
   double MaxBinValue=0.;
 
-  int nGate = 6;
-  int Gate[] = {15,20,30,40,60,120};
+  int nGate = 9;
+  int Gate[] = {1,5,10,15,20,30,40,60,120};
+  double Gate_d[] = {1.,5.,10.,15.,20.,30.,40.,60.,120.};
 
   double TofMid = 10.;
   double SchMid = 0.;
@@ -380,13 +381,14 @@ void Mtx_Banch(int month, int runnum){
   int Hist1Max = 0;
   int Hist2Max = 0;
 
-  int Count1[nGate];
-  int Count1_MtxFlg[nGate];
-  int Count1_2[nGate];
-  int Count1_2_MtxFlg[nGate];
+  int Count1[nGate+1];
+  int Count1_MtxFlg[nGate+1];
+  int Count1_2[nGate+1];
+  int Count1_2_MtxFlg[nGate+1];
   double MtxEfficiency[nGate];
   double MtxEfficiency_MtxFlg[nGate];
-  double MtxEfficiency_2_MtxFlg[nGate+1];
+  double MtxEfficiency_2_MtxFlg[nGate];
+  double MtxEfficiency_Gate[nGate];
   double x[nGate];
   double x2[nGate+1];
   for(int n=0; n<nGate; n++){
@@ -540,23 +542,23 @@ void Mtx_Banch(int month, int runnum){
       }
     }
 
-    bool Flag[nGate];
-    bool Flag1[nGate];
-    bool Flag2[nGate];
-    bool Flag3[nGate];
-    bool Flag_2[nGate];
-    bool Flag1_2[nGate];
-    bool Flag2_2[nGate];
-    bool Flag3_2[nGate];
-    bool Flag_MtxFlg[nGate];
-    bool Flag1_MtxFlg[nGate];
-    bool Flag2_MtxFlg[nGate];
-    bool Flag3_MtxFlg[nGate];
-    bool Flag_2_MtxFlg[nGate];
-    bool Flag1_2_MtxFlg[nGate];
-    bool Flag2_2_MtxFlg[nGate];
-    bool Flag3_2_MtxFlg[nGate];
-    for(int n=0; n<nGate; n++){
+    bool Flag[nGate+1];
+    bool Flag1[nGate+1];
+    bool Flag2[nGate+1];
+    bool Flag3[nGate+1];
+    bool Flag_2[nGate+1];
+    bool Flag1_2[nGate+1];
+    bool Flag2_2[nGate+1];
+    bool Flag3_2[nGate+1];
+    bool Flag_MtxFlg[nGate+1];
+    bool Flag1_MtxFlg[nGate+1];
+    bool Flag2_MtxFlg[nGate+1];
+    bool Flag3_MtxFlg[nGate+1];
+    bool Flag_2_MtxFlg[nGate+1];
+    bool Flag1_2_MtxFlg[nGate+1];
+    bool Flag2_2_MtxFlg[nGate+1];
+    bool Flag3_2_MtxFlg[nGate+1];
+    for(int n=0; n<nGate+1; n++){
       Flag[n] = false;
       Flag1[n] = false;
       Flag2[n] = false;
@@ -587,27 +589,27 @@ void Mtx_Banch(int month, int runnum){
       max = Mtx_prm.at(l).at(3) + 1;
       for(int m=0; m<16 ;m++){
         if( tofmt[i][m] != -999.0 ){ 
-          Flag1[5]=true;
-          if(trigflag[28]>0) Flag1_MtxFlg[5]=true;
+          Flag1[nGate]=true;
+          if(trigflag[28]>0) Flag1_MtxFlg[nGate]=true;
         }
       }
       for(int m=0; m<sch_depth[j] ;m++){
         if( sch_time[j][m]!= -999. ){
-          Flag2[5]=true;
-          if(trigflag[28]>0) Flag2_MtxFlg[5]=true;
+          Flag2[nGate]=true;
+          if(trigflag[28]>0) Flag2_MtxFlg[nGate]=true;
         }
       }
       for(int k = min; k < max; k++){
         for(int m=0; m<sftx_udepth[k] ;m++){
           if( sftx_utime[k][m] != -999. ){
-            Flag3[5]=true;
-            if(trigflag[28]>0) Flag3_MtxFlg[5]=true;
+            Flag3[nGate]=true;
+            if(trigflag[28]>0) Flag3_MtxFlg[nGate]=true;
           }
         }
         for(int m=0; m<sftx_ddepth[k] ;m++){
           if( sftx_dtime[k][m] != -999. ){
-            Flag3[5]=true;
-            if(trigflag[28]>0) Flag3_MtxFlg[5]=true;
+            Flag3[nGate]=true;
+            if(trigflag[28]>0) Flag3_MtxFlg[nGate]=true;
           }
         }
       }
@@ -658,7 +660,7 @@ void Mtx_Banch(int month, int runnum){
           Flag_MtxFlg[n]=true;
         }
       }
-      for(int n=0; n<nGate; n++){
+      for(int n=0; n<nGate+1; n++){
         Flag1[n] = false;
         Flag2[n] = false;
         Flag3[n] = false;
@@ -680,27 +682,27 @@ void Mtx_Banch(int month, int runnum){
       max = Mtx_prm2.at(l).at(3) + 1;
       for(int m=0; m<16 ;m++){
         if( tofmt[i][m] != -999.0 ){ 
-          Flag1_2[5]=true;
-          if(trigflag[28]>0) Flag1_2_MtxFlg[5]=true;
+          Flag1_2[nGate]=true;
+          if(trigflag[28]>0) Flag1_2_MtxFlg[nGate]=true;
         }
       }
       for(int m=0; m<sch_depth[j] ;m++){
         if( sch_time[j][m]!= -999. ){
-          Flag2_2[5]=true;
-          if(trigflag[28]>0) Flag2_2_MtxFlg[5]=true;
+          Flag2_2[nGate]=true;
+          if(trigflag[28]>0) Flag2_2_MtxFlg[nGate]=true;
         }
       }
       for(int k = min; k < max; k++){
         for(int m=0; m<sftx_udepth[k] ;m++){
           if( sftx_utime[k][m] != -999. ){
-            Flag3_2[5]=true;
-            if(trigflag[28]>0) Flag3_2_MtxFlg[5]=true;
+            Flag3_2[nGate]=true;
+            if(trigflag[28]>0) Flag3_2_MtxFlg[nGate]=true;
           }
         }
         for(int m=0; m<sftx_ddepth[k] ;m++){
           if( sftx_dtime[k][m] != -999. ){
-            Flag3_2[5]=true;
-            if(trigflag[28]>0) Flag3_2_MtxFlg[5]=true;
+            Flag3_2[nGate]=true;
+            if(trigflag[28]>0) Flag3_2_MtxFlg[nGate]=true;
           }
         }
       }
@@ -732,7 +734,7 @@ void Mtx_Banch(int month, int runnum){
           }
         }
       }
-      for(int n=0; n<nGate; n++){
+      for(int n=0; n<nGate+1; n++){
         if(Flag1_2[n]&&Flag2_2[n]&&Flag3_2[n]){
           Flag_2[n]=true;
         }
@@ -740,7 +742,7 @@ void Mtx_Banch(int month, int runnum){
           Flag_2_MtxFlg[n]=true;
         }
       }
-      for(int n=0; n<nGate; n++){
+      for(int n=0; n<nGate+1; n++){
         Flag1_2[n] = false;
         Flag2_2[n] = false;
         Flag3_2[n] = false;
@@ -750,7 +752,7 @@ void Mtx_Banch(int month, int runnum){
       }
     }
 
-    for(int n=0; n<nGate; n++){
+    for(int n=0; n<nGate+1; n++){
       if(Flag[n]){
         Count1[n]+=1;
       }
@@ -759,7 +761,7 @@ void Mtx_Banch(int month, int runnum){
       }
     }
 
-    for(int n=0; n<nGate; n++){
+    for(int n=0; n<nGate+1; n++){
       if(Flag_2[n]){
         Count1_2[n]+=1;
       }
@@ -775,6 +777,11 @@ void Mtx_Banch(int month, int runnum){
 
   c1->Print(pdf+"["); 
   c1->cd();
+
+  gStyle->SetOptStat(0);
+  gStyle->SetOptTitle(0);
+
+
   for(int i=0; i<Hist1Max; i++){
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(1);
     Hist1[i]->Draw();
@@ -796,17 +803,21 @@ void Mtx_Banch(int month, int runnum){
   }
   for(int n=0; n<nGate; n++){
     //    MtxEfficiency_MtxFlg[n]= (double)Count1_MtxFlg[n]/nentries_MtxFlg;
-    MtxEfficiency_MtxFlg[n]= (double)Count1_MtxFlg[n]/ Count1_MtxFlg[nGate-1];
-    std::cout << "Total Event# is " << nentries_MtxFlg << "\t" << Form("Count%d_MtxFlg# is ",nGate-1) << Count1_MtxFlg[nGate-1]  << "\t" << Form("Count%d_MtxFlg# is ",n+1) << Count1_MtxFlg[n] << "\t" << "Efficiency is " << MtxEfficiency_MtxFlg[n] << std::endl;
+    MtxEfficiency_MtxFlg[n]= (double)Count1_MtxFlg[n]/ Count1_MtxFlg[nGate];
+    std::cout << "Total Event# is " << nentries_MtxFlg << "\t" << Form("Count%d_MtxFlg# is ",nGate) << Count1_MtxFlg[nGate]  << "\t" << Form("Count%d_MtxFlg# is ",n+1) << Count1_MtxFlg[n] << "\t" << "Efficiency is " << MtxEfficiency_MtxFlg[n] << std::endl;
   }
   for(int n=0; n<nGate+1; n++){
     if(n==nGate){
-      MtxEfficiency_2_MtxFlg[n]= (double)Count1_MtxFlg[n-1]/ Count1_MtxFlg[nGate-1];
-      std::cout << "Total Event# is " << Count1_MtxFlg[nGate-1] << "\t" <<  Form("Count%d_MtxFlg# is ",n+1) << Count1_MtxFlg[n-1] << "\t" << "Efficiency is " << MtxEfficiency_2_MtxFlg[n] << std::endl;
+      MtxEfficiency_2_MtxFlg[n]= (double)Count1_MtxFlg[n-1]/ Count1_MtxFlg[nGate];
+      std::cout << "Total Event# is " << Count1_MtxFlg[nGate-1] << "\t" <<  Form("Count%d_MtxFlg# is ",n+1) << Count1_MtxFlg[n] << "\t" << "Efficiency is " << MtxEfficiency_2_MtxFlg[n] << std::endl;
     }else{
-      MtxEfficiency_2_MtxFlg[n]= (double)Count1_2_MtxFlg[n]/ Count1_MtxFlg[nGate-1];
+      MtxEfficiency_2_MtxFlg[n]= (double)Count1_2_MtxFlg[n]/ Count1_MtxFlg[nGate];
       std::cout << "Total Event# is " << Count1_MtxFlg[nGate-1] << "\t" <<  Form("Count%d_MtxFlg# is ",n+1) << Count1_2_MtxFlg[n] << "\t" << "Efficiency is " << MtxEfficiency_2_MtxFlg[n] << std::endl;
     }
+  }
+  for(int n=0; n<nGate; n++){
+    MtxEfficiency_Gate[n]= (double)Count1_2_MtxFlg[n]/ Count1_MtxFlg[nGate];
+    std::cout << "Total Event# is " << Count1_MtxFlg[nGate] << "\t" <<  Form("Count%d_MtxFlg# is ",n+1) << Count1_2_MtxFlg[n] << "\t" << "Efficiency is " << MtxEfficiency_Gate[n] << std::endl;
   }
 
   c1->SetGrid();
@@ -816,6 +827,7 @@ void Mtx_Banch(int month, int runnum){
   TGraph *g1 = new TGraph(nGate, x, MtxEfficiency);
   TGraph *g2 = new TGraph(nGate, x, MtxEfficiency_MtxFlg);
   TGraph *g3 = new TGraph(nGate+1, x2, MtxEfficiency_2_MtxFlg);
+  TGraph *g4 = new TGraph(nGate, Gate_d, MtxEfficiency_Gate);
   g1->SetMarkerStyle(8);
   g1->SetMarkerColor(2);
   g1->SetMarkerSize(2);
@@ -845,6 +857,22 @@ void Mtx_Banch(int month, int runnum){
 
   c1->Print(pdf);
   c1->Print(Form("%s/Mtx_Banch_run%05d_Graph_MtxFlg_NewPat.pdf",pdfDhire.Data(),runnum));
+
+  g4->SetMarkerStyle(8);
+  g4->SetMarkerColor(2);
+  g4->SetMarkerSize(2);
+  g4->GetXaxis()->SetRangeUser(0,Gate[nGate-1]+10);
+  g4->GetYaxis()->SetRangeUser(0,1);
+  g4->Draw("AP");
+
+  c1->Print(pdf);
+  c1->Print(Form("%s/Mtx_Banch_run%05d_Graph_MtxFlg_NewPat_Accept.pdf",pdfDhire.Data(),runnum));
+
+  std::ofstream fout1;
+  fout1.open(Form("%s/dat/trigger/GateAccept.txt", anadir.Data()));
+  for(int i=0; i<nGate; i++){
+    fout1 << Gate_d[i] << "\t" << MtxEfficiency_Gate[i] << std::endl;
+  }
 
   c1->Print(pdf+"]"); 
 

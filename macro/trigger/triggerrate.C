@@ -157,9 +157,38 @@ void triggerrate(){
     TOF_HT.push_back(preTOF_HT);
   }
 
+  TString filein1=Form("%s/dat/trigger/GateAccept.txt", anadir.Data()); 
+  TString filein2=Form("%s/dat/trigger/SigmaEffi.txt", anadir.Data()); 
+
+  std::ifstream fin1(filein1);
+  std::ifstream fin2(filein2);
+  std::string line;
+  std::vector<double> Gate; 
+  std::vector<double> Accept; 
+  std::vector<double> SigmaEffi; 
+  std::vector<double> Yield    ; 
+  while(std::getline(fin1, line)){
+    double a=-1., b=-1.;
+    std::istringstream input_line( line );
+    if( input_line >> a >> b ){
+      Gate.push_back(a);
+      Accept.push_back(b);
+    }
+  }
+
+  while(std::getline(fin2, line)){
+    double a=-1.;
+    std::istringstream input_line( line );
+    if( input_line >> a  ){
+      SigmaEffi.push_back(a);
+    }
+  }
+
+
   TCanvas *c1 = new TCanvas("c1","c1",1200,900);
   c1->Print(pdf+"["); 
-  TGraph *g[11];
+  int gnum = 12;
+  TGraph *g[gnum];
   g[0] = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),DAQEff.data());
   g[1] = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),Matrix.data());
   g[2] = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),BH2_K.data());
@@ -171,8 +200,10 @@ void triggerrate(){
   g[8] = new TGraph(L1Req.size(),L1Req.data(),DAQEff.data());
   g[9] = new TGraph(Matrix.size(),Matrix.data(),DAQEff.data());
   g[10] = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),L1Req.data());
-  for(int i=0; i<11; i++ ){
+  g[11] = new TGraph(L1Req.size(),Matrix.data(),L1Req.data());
+  for(int i=0; i<gnum; i++ ){
     gStyle->SetOptStat(0);
+    g[i]->SetTitle("");
     g[i]->SetMarkerStyle(8);
     g[i]->SetMarkerColor(2);
     g[i]->SetMarkerSize(2);
@@ -184,6 +215,32 @@ void triggerrate(){
   c1->Print(pdf+"]"); 
 //  g1->GetXaxis()->SetRangeUser(0,4.5);
 //  g1->GetYaxis()->SetRangeUser(0,1);
+
+
+  TF1 *fit = new TF1("fit","pol1"); 
+  fit->SetParameters(10,1);
+  g[8]->Fit("fit","","R",L1Req.at(0),L1Req.at(L1Req.size()-1));
+    c1->Print(pdf);
+  c1->Print(Form("%s/L1_DAQ_%d.pdf",pdfDhire.Data(), 8));
+  double b2=fit->GetParameter(0);
+  double a2=fit->GetParameter(1);
+
+  g[11]->Fit("fit","","R",Matrix.at(0),Matrix.at(Matrix.size()-1));
+  c1->Print(pdf);
+  c1->Print(Form("%s/Mtx_L1_%d.pdf",pdfDhire.Data(), 11));
+  double b1=fit->GetParameter(0);
+  double a1=fit->GetParameter(1);
+
+  sort(Matrix.begin(),Matrix.end());
+  sort(DAQEff.begin(),DAQEff.end());
+
+  for(int i=0; i<Gate.size(); i++){
+    Yield.at(i) = SigmaEffi.at(i)*((Matrix.back()*Accept.at(i)*a1+b1)*a2+b2)*0.99/DAQEff.front();
+  }
+  TGraph *graph = new TGraph(Gate.size(),Gate.data(),Yield.data());
+  graph->Draw("AP");
+  c1->Print(Form("%s/Gate_Yield.pdf",pdfDhire.Data()));
+
 
 
   std::ofstream fout1;

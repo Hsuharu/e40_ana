@@ -1,0 +1,9 @@
+1	inf
+5	inf
+10	inf
+15	inf
+20	inf
+30	inf
+40	inf
+60	inf
+120	inf
