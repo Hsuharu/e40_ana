@@ -1018,21 +1018,21 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
               MtxGateMin_Y->Draw("same");
               c1->Print(pdf1);
               c1->Print(Form("%s/Mtx_Pat_Compare_matrix%d_%d_run%05d_Hist2_box2_%04d.pdf",pdfDhire.Data(),matrixnum1,matrixnum2,runnum,j));
-          }else{
-            if(TOF_Min2.at(i)-TOF_Min2.at(i-1)!=0){
-              TLine *MtxGate_Y1 = new TLine(x1,(double)TOF_Min2.at(i-1),x1,TOF_Min_y1);
-              MtxGate_Y1->SetLineColor(2);
-              MtxGate_Y1->SetLineWidth(1);
-              MtxGate_Y1->Draw("same");
-            }
-            if(TOF_Max2.at(i)-TOF_Max2.at(i-1)!=0){
-              TLine *MtxGate_Y2 = new TLine(x1,(double)TOF_Max2.at(i-1)+1,x1,TOF_Max_y1);
-              MtxGate_Y2->SetLineColor(2);
-              MtxGate_Y2->SetLineWidth(1);
-              MtxGate_Y2->Draw("same");
+            }else{
+              if(TOF_Min2.at(i)-TOF_Min2.at(i-1)!=0){
+                TLine *MtxGate_Y1 = new TLine(x1,(double)TOF_Min2.at(i-1),x1,TOF_Min_y1);
+                MtxGate_Y1->SetLineColor(2);
+                MtxGate_Y1->SetLineWidth(1);
+                MtxGate_Y1->Draw("same");
+              }
+              if(TOF_Max2.at(i)-TOF_Max2.at(i-1)!=0){
+                TLine *MtxGate_Y2 = new TLine(x1,(double)TOF_Max2.at(i-1)+1,x1,TOF_Max_y1);
+                MtxGate_Y2->SetLineColor(2);
+                MtxGate_Y2->SetLineWidth(1);
+                MtxGate_Y2->Draw("same");
+              }
             }
           }
-            }
         }else{
           if(TOF_Min1.at(k)-TOF_Min1.at(k-1)!=0){
             TLine *MtxGate_Y1_1 = new TLine(x1,(double)TOF_Min1.at(k-1),x1,TOF_Min_y1);
@@ -1071,8 +1071,8 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
     max = (double)Mtx_prm2.at(l).at(3) + 1;
     for(int i=0; i < Mtx_prm1.size(); i++){
       if(Mtx_prm1.at(i).at(0)==Mtx_prm2.at(l).at(0) && Mtx_prm1.at(i).at(1)==Mtx_prm2.at(l).at(1)){
-        min1 = (double)Mtx_prm2.at(i).at(2);
-        max1 = (double)Mtx_prm2.at(i).at(3) + 1;
+        min1 = (double)Mtx_prm1.at(i).at(2);
+        max1 = (double)Mtx_prm1.at(i).at(3) + 1;
       }
     }
     y2 = Hist1[34+Mtx_prm2.size()*16 +l]->GetBinContent(Hist1[34+Mtx_prm2.size()*16 +l]->GetMaximumBin());
