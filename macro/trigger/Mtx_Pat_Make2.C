@@ -991,11 +991,13 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
      Hist1[34+Mtx_prm.size()*10 +l]->Draw();
 
      c2->Print(pdf1);
-     if(l%10==0){
+     if(Mtx_prm.at(l).at(0)%10==0){
        c1->cd();
      gPad->SetLogy(1);
        Hist1[34+Mtx_prm.size()*16 +l]->Draw();
        Hist1[34+Mtx_prm.size()*4 +l]->Draw("same");
+       MtxSftXGateMin->Draw("same");
+       MtxSftXGateMax->Draw("same");
        c1->Print(Form("%s/Mtx_Pat_Make2_bin%d_run%05d_Hist1_SFTX_%04d.pdf",pdfDhire.Data(),bin,runnum,l));
      }
    }
