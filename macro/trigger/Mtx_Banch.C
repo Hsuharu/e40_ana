@@ -402,6 +402,8 @@ void Mtx_Banch(int month, int runnum){
     x[n] = (double)nGate-n-1;
     x2[n] = (double)nGate-n;
   }
+    Count1[nGate] = 0;
+    Count1_MtxFlg[nGate] = 0;
     MtxEfficiency_2_MtxFlg[nGate] = 0.;
     x2[nGate] = 0;
 
@@ -652,7 +654,7 @@ void Mtx_Banch(int month, int runnum){
           }
         }
       }
-      for(int n=0; n<nGate; n++){
+      for(int n=0; n<nGate+1; n++){
         if(Flag1[n]&&Flag2[n]&&Flag3[n]){
           Flag[n]=true;
         }
