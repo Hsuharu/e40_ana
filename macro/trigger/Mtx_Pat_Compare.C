@@ -1020,7 +1020,7 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
             TOF_Min_y2 =(double)TOF_Min1.at(k);
 
             TOF_Max_y1 =  (double)TOF_Max1.at(k)+1;
-            TOF_Max_y2 =  (double)TOF_Max1.at()+1;
+            TOF_Max_y2 =  (double)TOF_Max1.at(k)+1;
 
             TLine *MtxGateMin1 = new TLine(x1,TOF_Min_y1,x2,TOF_Min_y2);
             TLine *MtxGateMax1 = new TLine(x1,TOF_Max_y1,x2,TOF_Max_y2);
