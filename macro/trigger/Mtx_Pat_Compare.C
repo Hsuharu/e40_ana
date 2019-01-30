@@ -1121,7 +1121,7 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
     Hist1[34+Mtx_prm2.size()*10 +l]->Draw();
 
     c2->Print(pdf1);
-    if(Mtx_prm1.at(l).at(0)%10==0){
+    if(Mtx_prm2.at(l).at(0)%10==0){
       c1->cd();
       gPad->SetLogy(1);
       Hist1[34+Mtx_prm2.size()*16 +l]->Draw();
