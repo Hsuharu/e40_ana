@@ -160,7 +160,7 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
 
   while(std::getline(fin2, line2)){
     double sch=-1, tof=-1, sft_min=-1, sft_max=-1;
-    std::istringstream input_line( line1 );
+    std::istringstream input_line( line2 );
     std::vector<int> inner;
     if( input_line >> sch >> tof >> sft_min >> sft_max ){
       inner.push_back(sch);
@@ -949,9 +949,6 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
     if(j==1 || j==3 || j ==8+Mtx_prm2.size()*4 || j ==8+Mtx_prm2.size()*4+1){
       Hist2[j]->Draw("box");
       //matrix2 
-      TLine *MtxGateMin;
-      TLine *MtxGateMax;
-
       for(int i=0; i<SCH_Seg2.size(); i++){
         double x1;
         double x2;
@@ -971,10 +968,8 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
         TOF_Max_y1 =  (double)TOF_Max2.at(i)+1;
         TOF_Max_y2 =  (double)TOF_Max2.at(i)+1;
 
-//        TLine *MtxGateMin = new TLine(x1,TOF_Min_y1,x2,TOF_Min_y2);
-//        TLine *MtxGateMax = new TLine(x1,TOF_Max_y1,x2,TOF_Max_y2);
-        MtxGateMin = new TLine(x1,TOF_Min_y1,x2,TOF_Min_y2);
-        MtxGateMax = new TLine(x1,TOF_Max_y1,x2,TOF_Max_y2);
+        TLine *MtxGateMin = new TLine(x1,TOF_Min_y1,x2,TOF_Min_y2);
+        TLine *MtxGateMax = new TLine(x1,TOF_Max_y1,x2,TOF_Max_y2);
 
         MtxGateMin->SetLineColor(2);
         MtxGateMax->SetLineColor(2);
@@ -1009,14 +1004,14 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
         if(i==SCH_Seg1.size()-1){
           //matrix1
           for(int i=0; i<SCH_Seg1.size(); i++){
-//            double x1;
-//            double x2;
-//
-//            double TOF_Min_y1;
-//            double TOF_Min_y2;
-//
-//            double TOF_Max_y1;
-//            double TOF_Max_y2;
+            //            double x1;
+            //            double x2;
+            //
+            //            double TOF_Min_y1;
+            //            double TOF_Min_y2;
+            //
+            //            double TOF_Max_y1;
+            //            double TOF_Max_y2;
 
             x1 =  (double)SCH_Seg1.at(i);
             x2 =  (double)(SCH_Seg1.at(i)+1);
@@ -1069,7 +1064,6 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
   }
 
   for(int l=0; l < Mtx_prm2.size(); l++){
-
     c2->cd(1);
     gPad->SetLogy(1);
     Hist1[34+Mtx_prm2.size()*16 +l]->Draw();
@@ -1121,6 +1115,7 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
     Hist1[34+Mtx_prm2.size()*10 +l]->Draw();
 
     c2->Print(pdf1);
+
     if(Mtx_prm2.at(l).at(0)%10==0){
       c1->cd();
       gPad->SetLogy(1);
@@ -1131,6 +1126,7 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
       MtxSftXGateMin1->Draw("same");
       MtxSftXGateMax1->Draw("same");
       c1->Print(Form("%s/Mtx_Pat_Compare_bin%d_run%05d_Hist1_SFTX_%04d.pdf",pdfDhire.Data(),bin,runnum,l));
+
       y3 = Hist1[34+Mtx_prm2.size()*15 +l]->GetBinContent(Hist1[34+Mtx_prm2.size()*15 +l]->GetMaximumBin());
       TLine *MMSigmaMin = new TLine(1.15,y1,1.15,y3);
       TLine *MMSigmaMax = new TLine(1.25,y1,1.25,y3);
