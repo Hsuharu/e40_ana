@@ -238,6 +238,10 @@ void triggerrate(){
     Yield.push_back(SigmaEffi.at(i)*((Matrix.back()*Accept.at(i)*a1+b1)*a2+b2)*0.99/DAQEff.front());
   }
   TGraph *graph = new TGraph(Gate.size(),Gate.data(),Yield.data());
+  graph->SetTitle("");
+  graph->SetMarkerStyle(8);
+  graph->SetMarkerColor(2);
+  graph->SetMarkerSize(2);
   graph->Draw("AP");
   c1->Print(Form("%s/Gate_Yield.pdf",pdfDhire.Data()));
 
@@ -255,6 +259,12 @@ void triggerrate(){
     fout2 << Form("run%05d",runnumber[i]) << "\t" << BH2SUMCounts[i] << std::endl;
   }
   
+  std::ofstream fout3;
+  fout3.open(Form("%s/dat/trigger/Yield.txt", anadir.Data()));
+  for(int i=0; i<Yield.size(); i++){
+    fout3 << Yield.at(i) << std::endl;
+  }
+
 //  std::ofstream fout3;
 //  fout3.open(Form("%s/dat/trigger/BH2_SUM_MparSpillByRate.txt", anadir.Data()));
 //  for(int i=0; i<BH2SUMMparSpillCounts.size(); i++){
