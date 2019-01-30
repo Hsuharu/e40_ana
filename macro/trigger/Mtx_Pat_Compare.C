@@ -1001,7 +1001,7 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
             MtxGate_Y2->Draw("same");
           }
         }
-        if(i==SCH_Seg1.size()-1){
+        if(i==SCH_Seg2.size()-1){
           //matrix1
           for(int k=0; k<SCH_Seg1.size(); k++){
             //            double x1;
