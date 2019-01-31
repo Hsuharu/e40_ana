@@ -805,9 +805,6 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
    c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_30_47_same.pdf",pdfDhire.Data(),matrix,runnum));
 
 
-   TH1D *test = new TH1D("test","Momentum Ratio Cut5/Cut3 w/MtxCut;GeV/c;Ratio",100,0,2);
-   test->SetAxisRange(0,1,"Y");
-   test->Draw();
 
    int nBin = 100;
    double x[nBin];
@@ -832,13 +829,16 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
 //   graph1->GetXaxis()->SetRangeUser(0,2);
 //   graph1->GetYaxis()->SetRangeUser(0,1);
 //   gPad->GetRangeAxis(0,2,0,1);
-   graph1->SetMaximum(1);
-   graph1->SetMinimum(0);
-   graph1->GetXaxis()->SetLimits(0,2);
+//   graph1->SetMaximum(1);
+//   graph1->SetMinimum(0);
+//   graph1->GetXaxis()->SetLimits(0,2);
 //   graph1->GetYaxis()->SetDecimals(2);
+   TH1D *test = new TH1D("test","Momentum Ratio Cut5/Cut3 w/MtxCut;GeV/c;Ratio",100,0,2);
+   test->SetAxisRange(0,1,"Y");
+   test->Draw();
    graph1->Draw("p");
    c1->Print(pdf);
-   c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_graph.pdf",pdfDhire.Data(),matrix,runnum));
+   c1->Print(Form("%s/Mtx_Pos_Mon_matrix%d_run%05d_Hist1_graph.pdf",pdfDhire.Data(),matrix,runnum));
 
    TH1D *h = (TH1D*)Hist1[47]->Clone("Hist1[47]");
    h->Divide(Hist1[30]);
