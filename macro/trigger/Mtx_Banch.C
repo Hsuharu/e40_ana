@@ -83,7 +83,7 @@ void Mtx_Banch(int month, int runnum){
 
   gStyle->SetOptTitle(0);
   gStyle->SetLabelSize(0.05,"XYZ");
-  gStyle->SetTitleSize(0.9,"XYZ");
+  gStyle->SetTitleSize(0.05,"XYZ");
   gStyle->SetTitleOffset(1.0,"X");
   gStyle->SetTitleOffset(1.1,"Y");
   gStyle->SetPadLeftMargin(0.16);
