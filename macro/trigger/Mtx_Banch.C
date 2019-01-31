@@ -908,7 +908,7 @@ void Mtx_Banch(int month, int runnum){
 
   g5->Draw("AP");
   g4->SetMarkerColor(2);
-  g4->Draw("same");
+  g4->Draw("same AP");
 
   c1->Print(pdf);
   c1->Print(Form("%s/Mtx_Banch_run%05d_Graph_MtxFlg_OldAndNewPat_Accept.pdf",pdfDhire.Data(),runnum));
