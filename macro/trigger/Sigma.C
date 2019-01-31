@@ -648,8 +648,8 @@ void Sigma(int month,int runnum, int file=1){
       Max->SetLineColor(2);
       Min->SetLineWidth(1);
       Max->SetLineWidth(1);
-      Min-Draw("same");
-      Max-Draw("same");
+      Min->Draw("same");
+      Max->Draw("same");
     }
     if(i==3){
       double y1 = 0.;
@@ -661,8 +661,8 @@ void Sigma(int month,int runnum, int file=1){
       Max->SetLineColor(2);
       Min->SetLineWidth(1);
       Max->SetLineWidth(1);
-      Min-Draw("same");
-      Max-Draw("same");
+      Min->Draw("same");
+      Max->Draw("same");
     }
     c1->Print(pdf);
     c1->Print(Form("%s/Sigma_run%05d_Hist1_%04d.pdf",pdfDhire.Data(),runnum,i));
