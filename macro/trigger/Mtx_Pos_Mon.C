@@ -726,11 +726,11 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
    c1->Print(pdf+"["); 
 //-Hist Draw----------------------------------------------------------------------------------------
    c1->cd();
-   for(int i=0; i<Hist1Max; i++){
-//   if(i==15 || i==16 || i==38) gPad->SetLogy(1);
-   Hist1[i]->Draw();
-   c1->Print(pdf);
-   c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_%04d.pdf",pdfDhire.Data(),matrix,runnum,i));
+//   for(int i=0; i<Hist1Max; i++){
+////   if(i==15 || i==16 || i==38) gPad->SetLogy(1);
+//   Hist1[i]->Draw();
+//   c1->Print(pdf);
+//   c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_%04d.pdf",pdfDhire.Data(),matrix,runnum,i));
 //   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
    }
 //   for(int i=0; i<Hist2Max; i++){
@@ -820,6 +820,7 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
    TGraphErrors *graph1 = new TGraphErrors(nBin,x,ratio,xerr,ratioerr);
    graph1->SetMarkerStyle(8);
    graph1->SetMarkerColor(2);
+   graph1->SetMarkerSize(2);
 //   graph1->GetXaxis()->SetRangeUser(0,2);
 //   graph1->GetYaxis()->SetRangeUser(0,1);
 //   gPad->GetRangeAxis(0,2,0,1);
@@ -830,7 +831,7 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
    TH1D *test = new TH1D("test","Momentum Ratio Cut5/Cut3 w/MtxCut;GeV/c;Ratio",100,0,2);
    test->SetAxisRange(0,1,"Y");
    test->Draw();
-   graph1->Draw("AP");
+   graph1->Draw("P");
    c1->Print(pdf);
    c1->Print(Form("%s/Mtx_Pos_Mon_matrix%d_run%05d_Hist1_graph.pdf",pdfDhire.Data(),matrix,runnum));
 
