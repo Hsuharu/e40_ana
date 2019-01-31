@@ -64,8 +64,10 @@ bool eq3(int a,int b,int c){
 
 void Sigma(int month,int runnum, int file=1){
 
-  gStyle->SetOptStat(1111110); 
+//  gStyle->SetOptStat(1111110); 
   gStyle->SetOptFit(1); 
+   gStyle->SetOptStat(0);
+//   gStyle->SetOptTitle(0);
 
   //Reset ROOT and connect tree file
   gROOT->Reset();
@@ -556,14 +558,16 @@ void Sigma(int month,int runnum, int file=1){
   int chisqr = 0;
 
   //-hist def-----------------------------------------------------------------------------------------
-  Hist1Max = 2;
+  Hist1Max = 4;
   Hist2Max = 1;
   chisqr = 50;
   TH1D *Hist1[Hist1Max];
   TH2D *Hist2[Hist2Max];
 
-  Hist1[0 ]= new TH1D("MissMass[0] w/Sigma","MissMass[0] w/Sigma;GeV/cc;Counts",100,0.5,1.5);
-  Hist1[1 ]= new TH1D("pKurama[0] w/Sigma","pKurama[0] w/Sigma;Momentum[GeV.c];Counts",100,0,2);
+  Hist1[0 ]= new TH1D("MissMass[0] w/Sigma",";GeV/cc;Counts",100,0.5,1.5);
+  Hist1[1 ]= new TH1D("pKurama[0] w/Sigma",";Momentum[GeV/c];Counts",100,0,2);
+  Hist1[2 ]= new TH1D("m2[0]",";Mass Square[GeV/cc];Counts",100,-0.4,1.4);
+  Hist1[3 ]= new TH1D("MissMass[0] all",";GeV/cc;Counts",100,0.5,1.5);
 
 //  Hist2[0 ]= new TH2D("pKurama % m2",     "pKurama % m2 "    ,100,-0.4,1.4,100,0,2);
 
@@ -584,8 +588,10 @@ void Sigma(int month,int runnum, int file=1){
     if( trigflag[28]<0 ) continue; //Cut1
     if( ntKurama!=1 ) continue; //Cut1
     if( chisqrKurama[0]>50 ) continue; //Cut1
+          Hist1[2]->Fill(m2[0]);
+          Hist1[3]->Fill(MissMass[0]);
 
-    if(m2[0]>0.15 && m2[0]<0.35 && qKurama[0]>0 && pKurama[0]<0.9){ 
+    if(m2[0]>0.15 && m2[0]<0.35 && qKurama[0]>0){// && pKurama[0]<0.9){ 
       if( vtx[0]>-20 && vtx[0]<20 && vty[0]>-20 && vty[0]<20 && vtz[0]>-200 && vtz[0]<200 ){
         if(MissMass[0]<1.25&&MissMass[0]>1.15){
           Hist1[0]->Fill(MissMass[0]);

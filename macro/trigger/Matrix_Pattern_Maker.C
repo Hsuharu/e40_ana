@@ -64,8 +64,10 @@ bool eq3(int a,int b,int c){
 
 void Matrix_Pattern_Maker(int month,int runnum, int file=1){
 
-  gStyle->SetOptStat(1111110); 
+//  gStyle->SetOptStat(1111110); 
   gStyle->SetOptFit(1); 
+   gStyle->SetOptStat(0);
+   gStyle->SetOptTitle(0);
 
   //Reset ROOT and connect tree file
   gROOT->Reset();
@@ -597,8 +599,8 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
   Hist1[31]= new TH1D("m2 Cut4","m2 Cut4",100,-0.4,1.4);
   Hist1[32]= new TH1D("pKurama Cut5","pKurama Cut5",100,0,2);
   Hist1[33]= new TH1D("m2 Cut5","m2 Cut5",100,-0.4,1.4);
-  Hist1[5452]= new TH1D("MissMass Sigma w/Mtrix Sigma","MissMass Sigma w/Mtrix Sigma",100,0.5,1.5);
-  Hist1[5453]= new TH1D("MissMass Sigma w/Mtrix","MissMass Sigma w/Mtrix",100,0.5,1.5);
+  Hist1[5452]= new TH1D("MissMass Sigma w/Mtrix Sigma","MissMass Sigma w/Mtrix Sigma;MissMass[GeV/cc];Counts",100,0.5,1.5);
+  Hist1[5453]= new TH1D("MissMass Sigma w/Mtrix","MissMass Sigma w/Mtrix;MissMass[GeV/cc];Counts",100,0.5,1.5);
 
   for(int l=0; l < Mtx_prm.size(); l++){
     Hist1[34+Mtx_prm.size()*0 +l]= new TH1D(Form("sftxseg Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),NumOfSegSFT_X,0,NumOfSegSFT_X);
@@ -924,20 +926,20 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
   //    New Matrix Pattern Maker                                                             //
   //                                                                                         //
   /////////////////////////////////////////////////////////////////////////////////////////////
-  TString fileout1 = Form("%s/analyzer_%s/param/MATRIXSFT/SFT_Newtable.txt.2019Jan.1_%d",anadir.Data(),Month[month], file );
-  //  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
-
-  std::ofstream fout1(fileout1.Data()); 
-  for(int l=0; l<Mtx_prm.size(); l++){
-    if(!Mtx_Flag.at(l)) continue;
-    if(Mtx_prm.at(l).at(2)%32==22){
-      fout1 << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" << SFTX_Min.at(l) + 10 <<  "\t"  << SFTX_Max.at(l)+1 << endl;
-//      std::cout << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" <<  Mtx_prm.at(l).at(2) + 10 << "to" << SFTX_Min.at(l) + 10 << "\t"  << Mtx_prm.at(l).at(3) + 1 << "to" << SFTX_Max.at(l)+1 << endl;
-    }else{
-      fout1 << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" << SFTX_Min.at(l) + 11 <<  "\t"  << SFTX_Max.at(l)+1 << endl;
-//      std::cout << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" <<  Mtx_prm.at(l).at(2) + 11 << "to" << SFTX_Min.at(l) + 11 << "\t"  << Mtx_prm.at(l).at(3) + 1 << "to" << SFTX_Max.at(l)+1 << endl;
-    }
-  }     
+//  TString fileout1 = Form("%s/analyzer_%s/param/MATRIXSFT/SFT_Newtable.txt.2019Jan.1_%d",anadir.Data(),Month[month], file );
+//  //  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
+//
+//  std::ofstream fout1(fileout1.Data()); 
+//  for(int l=0; l<Mtx_prm.size(); l++){
+//    if(!Mtx_Flag.at(l)) continue;
+//    if(Mtx_prm.at(l).at(2)%32==22){
+//      fout1 << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" << SFTX_Min.at(l) + 10 <<  "\t"  << SFTX_Max.at(l)+1 << endl;
+////      std::cout << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" <<  Mtx_prm.at(l).at(2) + 10 << "to" << SFTX_Min.at(l) + 10 << "\t"  << Mtx_prm.at(l).at(3) + 1 << "to" << SFTX_Max.at(l)+1 << endl;
+//    }else{
+//      fout1 << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" << SFTX_Min.at(l) + 11 <<  "\t"  << SFTX_Max.at(l)+1 << endl;
+////      std::cout << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" <<  Mtx_prm.at(l).at(2) + 11 << "to" << SFTX_Min.at(l) + 11 << "\t"  << Mtx_prm.at(l).at(3) + 1 << "to" << SFTX_Max.at(l)+1 << endl;
+//    }
+//  }     
 
   ////-Canvas def---------------------------------------------------------------------------------------
   //

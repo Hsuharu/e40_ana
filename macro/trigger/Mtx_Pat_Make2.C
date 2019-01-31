@@ -71,8 +71,10 @@ bool eq3(int a,int b,int c){
 
 void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
 
-  gStyle->SetOptStat(1111110); 
+//  gStyle->SetOptStat(1111110); 
   gStyle->SetOptFit(1); 
+   gStyle->SetOptStat(0);
+   gStyle->SetOptTitle(0);
 
 //Reset ROOT and connect tree file
    gROOT->Reset();
@@ -773,7 +775,6 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
            if( vtx[0]>-20 && vtx[0]<20 && vty[0]>-20 && vty[0]<20 && vtz[0]>-200 && vtz[0]<200 ){
              if(sftxsegKurama>min&&sftxsegKurama<max){
                Hist1[34+Mtx_prm.size()*15 +l]->Fill(MissMass[0]); 
-
              }
              if( MissMass[0]>1.15 && MissMass[0]<1.25 ){
                Hist1[32]->Fill(pKurama[0]);
@@ -891,8 +892,6 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
    c1->Print(pdf+"]"); 
 
    c1->Print(pdf1+"["); 
-   gStyle->SetOptStat(0);
-   gStyle->SetOptTitle(0);
 
    for(int j=0; j<Hist2Max; j++){
      if(j==1 || j==3 || j ==8+Mtx_prm.size()*4 || j ==8+Mtx_prm.size()*4+1 || j ==8+Mtx_prm.size()*4+2){

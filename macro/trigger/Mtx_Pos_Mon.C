@@ -71,8 +71,13 @@ bool eq3(int a,int b,int c){
 
 void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
 
-  gStyle->SetOptStat(1111110); 
+//  gStyle->SetOptStat(1111110); 
   gStyle->SetOptFit(1); 
+   gStyle->SetOptStat(0);
+   gStyle->SetOptTitle(0);
+   gStyle->SetPadLeftMargin(0.14);
+   gStyle->SetPadBottomMargin(0.14);
+   
 
 //Reset ROOT and connect tree file
    gROOT->Reset();
@@ -824,11 +829,6 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
    graph1->Draw("p");
    c1->Print(pdf);
    c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_graph.pdf",pdfDhire.Data(),matrix,runnum));
-   
-   gStyle->SetOptStat(0);
-   gStyle->SetOptTitle(0);
-   gStyle->SetPadLeftMargin(0.14);
-   gStyle->SetPadBottomMargin(0.14);
    
    Hist1[30]->Draw();
    Hist1[47]->SetLineColor(kRed); 
