@@ -884,6 +884,9 @@ void Mtx_Banch(int month, int runnum){
   g4->SetMarkerSize(2);
   g4->GetXaxis()->SetRangeUser(0,Gate[nGate-1]+10);
   g4->GetYaxis()->SetRangeUser(0,1);
+  g4->GetXaxis()->SetTitle("Gate [ns]");
+  g4->GetYaxis()->SetTitle("Accept");
+  g4->GetYaxis()->SetDecimals(2);
   g4->Draw("AP");
 
   c1->Print(pdf);
@@ -894,6 +897,9 @@ void Mtx_Banch(int month, int runnum){
   g5->SetMarkerSize(2);
   g5->GetXaxis()->SetRangeUser(0,Gate[nGate-1]+10);
   g5->GetYaxis()->SetRangeUser(0,1);
+  g5->GetXaxis()->SetTitle("Gate [ns]");
+  g5->GetYaxis()->SetTitle("Accept");
+  g5->GetYaxis()->SetDecimals(2);
   g5->Draw("AP");
 
   c1->Print(pdf);
