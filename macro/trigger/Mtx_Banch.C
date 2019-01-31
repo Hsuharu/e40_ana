@@ -848,7 +848,7 @@ void Mtx_Banch(int month, int runnum){
   TGraph *g2 = new TGraph(nGate, x, MtxEfficiency_MtxFlg);
   TGraph *g3 = new TGraph(nGate+1, x2, MtxEfficiency_2_MtxFlg);
   TGraph *g4 = new TGraph(nGate, Gate_d, MtxEfficiency_Gate);
-  TGraph *g4 = new TGraph(nGate, Gate_d, MtxEfficiency_Gate);
+  TGraph *g5 = new TGraph(nGate, Gate_d, MtxEfficiency_OldGate);
   g1->SetMarkerStyle(8);
   g1->SetMarkerColor(2);
   g1->SetMarkerSize(2);
@@ -880,7 +880,7 @@ void Mtx_Banch(int month, int runnum){
   c1->Print(Form("%s/Mtx_Banch_run%05d_Graph_MtxFlg_NewPat.pdf",pdfDhire.Data(),runnum));
 
   g4->SetMarkerStyle(8);
-  g4->SetMarkerColor(2);
+  g4->SetMarkerColor(1);
   g4->SetMarkerSize(2);
   g4->GetXaxis()->SetRangeUser(0,Gate[nGate-1]+10);
   g4->GetYaxis()->SetRangeUser(0,1);
@@ -890,7 +890,7 @@ void Mtx_Banch(int month, int runnum){
   c1->Print(Form("%s/Mtx_Banch_run%05d_Graph_MtxFlg_NewPat_Accept.pdf",pdfDhire.Data(),runnum));
 
   g5->SetMarkerStyle(8);
-  g5->SetMarkerColor(2);
+  g5->SetMarkerColor(1);
   g5->SetMarkerSize(2);
   g5->GetXaxis()->SetRangeUser(0,Gate[nGate-1]+10);
   g5->GetYaxis()->SetRangeUser(0,1);
@@ -898,6 +898,14 @@ void Mtx_Banch(int month, int runnum){
 
   c1->Print(pdf);
   c1->Print(Form("%s/Mtx_Banch_run%05d_Graph_MtxFlg_OldPat_Accept.pdf",pdfDhire.Data(),runnum));
+
+
+  g5->Draw("AP");
+  g4->SetMarkerColor(2);
+  g4->Draw("same");
+
+  c1->Print(pdf);
+  c1->Print(Form("%s/Mtx_Banch_run%05d_Graph_MtxFlg_OldAndNewPat_Accept.pdf",pdfDhire.Data(),runnum));
 
   std::ofstream fout1;
   fout1.open(Form("%s/dat/trigger/GateAccept.txt", anadir.Data()));
