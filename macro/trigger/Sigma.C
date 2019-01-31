@@ -64,9 +64,14 @@ bool eq3(int a,int b,int c){
 
 void Sigma(int month,int runnum, int file=1){
 
-//  gStyle->SetOptStat(1111110); 
-  gStyle->SetOptFit(1); 
-   gStyle->SetOptStat(0);
+  gStyle->SetOptStat(0);
+  gStyle->SetOptTitle(0);
+  gStyle->SetLabelSize(0.04,"XYZ");
+  gStyle->SetTitleSize(0.05,"XYZ");
+  gStyle->SetTitleOffset(1.2,"X");
+  gStyle->SetTitleOffset(1.3,"Y");
+  gStyle->SetPadLeftMargin(0.16);
+  gStyle->SetPadBottomMargin(0.16);
 //   gStyle->SetOptTitle(0);
 
   //Reset ROOT and connect tree file
@@ -575,8 +580,8 @@ void Sigma(int month,int runnum, int file=1){
   //  TLegend *Leg1 = new TLegend(0.78,0.575,0.98,0.935);
 
   //-Event Loop --------------------------------------------------------------------------------------
-  Long64_t nentries = pik->GetEntries();
-  //   Long64_t nentries = 10000;
+//  Long64_t nentries = pik->GetEntries();
+     Long64_t nentries = 10000;
 
   //-Event Loop First --------
   for (Long64_t s=0; s<nentries;s++) {
@@ -633,6 +638,32 @@ void Sigma(int month,int runnum, int file=1){
   for(int i=0; i<Hist1Max; i++){
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(1);
     Hist1[i]->Draw();
+    if(i==2){
+      double y1 = 0.;
+      double y3 = 0.;
+      y3 = Hist1[2]->GetBinContent(Hist1[2]->GetMaximumBin());
+      TLine *Min = new TLine(0.15,y1,0.15,y3);
+      TLine *Max = new TLine(0.35,y1,0.35,y3);
+      Min->SetLineColor(2);
+      Max->SetLineColor(2);
+      Min->SetLineWidth(1);
+      Max->SetLineWidth(1);
+      Min-Draw("same");
+      Max-Draw("same");
+    }
+    if(i==3){
+      double y1 = 0.;
+      double y3 = 0.;
+      y3 = Hist1[3]->GetBinContent(Hist1[3]->GetMaximumBin());
+      TLine *Min = new TLine(1.15,y1,1.15,y3);
+      TLine *Max = new TLine(1.25,y1,1.25,y3);
+      Min->SetLineColor(2);
+      Max->SetLineColor(2);
+      Min->SetLineWidth(1);
+      Max->SetLineWidth(1);
+      Min-Draw("same");
+      Max-Draw("same");
+    }
     c1->Print(pdf);
     c1->Print(Form("%s/Sigma_run%05d_Hist1_%04d.pdf",pdfDhire.Data(),runnum,i));
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
