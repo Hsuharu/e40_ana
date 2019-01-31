@@ -620,7 +620,7 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
       Hist1[34+Mtx_prm.size()*13+l]= new TH1D(Form("pKurama Cut4 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("pKurama Cut4 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,0,2);
       Hist1[34+Mtx_prm.size()*14+l]= new TH1D(Form("pKurama Cut5 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("pKurama Cut5 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,0,2);
       Hist1[34+Mtx_prm.size()*15+l]= new TH1D(Form("MissMass Sigma Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("MissMass Sigma Sch[%d]-Tof[%d];[Gev/cc];Counts",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,0.8,1.4);
-      Hist1[34+Mtx_prm.size()*16+l]= new TH1D(Form("sftxseg all Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx all;SFTX Segment SCH[%d]-TOF[%d];Counts",Mtx_prm.at(l).at(0),Mtx_prm.at(l).at(1)),bin,0,NumOfSegSFT_X);
+      Hist1[34+Mtx_prm.size()*16+l]= new TH1D(Form("sftxseg all Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx all;SCH[%d]-TOF[%d]    SFTX Segment ;Counts",Mtx_prm.at(l).at(0),Mtx_prm.at(l).at(1)),bin,0,NumOfSegSFT_X);
     }                         
                               
     Hist2[0 ]= new TH2D("pKurama % m2",     "pKurama % m2 "    ,100,-0.4,1.4,100,0,2);
