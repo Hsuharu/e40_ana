@@ -835,6 +835,7 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
    graph1->SetMaximum(1);
    graph1->SetMinimum(0);
    graph1->GetXaxis()->SetLimits(0,2);
+   graph1->GetYaxis()->SetDecimals(2);
    graph1->Draw("p");
    c1->Print(pdf);
    c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_graph.pdf",pdfDhire.Data(),matrix,runnum));
