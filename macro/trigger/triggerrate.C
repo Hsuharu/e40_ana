@@ -250,14 +250,16 @@ void triggerrate(){
   double b2=fit->GetParameter(0);
   double a2=fit->GetParameter(1);
 
-  g[11]->GetXaxis()->SetRangeUser(0,Matrix.back()*1.1);
-  g[11]->GetYaxis()->SetRangeUser(0,L1Req.back()*1.1);
-  g[11]->GetXaxis()->SetTitle("Matrix [Counts/Spill]");
-  g[11]->GetYaxis()->SetTitle("L1 [Counts/Spill]");
+//  g[11]->GetXaxis()->SetRangeUser(0,Matrix.back()*1.1);
+//  g[11]->GetYaxis()->SetRangeUser(0,L1Req.back()*1.1);
+//  g[11]->GetXaxis()->SetTitle("Matrix [Counts/Spill]");
+//  g[11]->GetYaxis()->SetTitle("L1 [Counts/Spill]");
+  TH1D *h11 = new TH1D("h8",";Matrix [Counts/Spill];L1 [Counts/Spill]",100,0,Matrix.back()*1.1);
+  h11->SetAxisRange(0,L1Req.back()*1.1,"Y");
+  h11->Draw();
   g[11]->GetYaxis()->SetDecimals(2);
-  g[11]->Draw("AP");
+  g[11]->Draw("P");
   g[11]->Fit("fit","","R",Matrix.at(0),Matrix.at(Matrix.size()-1));
-  base->Draw("P");
   c1->Print(pdf);
   c1->Print(Form("%s/Mtx_L1_%d.pdf",pdfDhire.Data(), 11));
   double b1=fit->GetParameter(0);
