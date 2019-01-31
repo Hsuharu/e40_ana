@@ -399,6 +399,7 @@ void Mtx_Banch(int month, int runnum){
   double MtxEfficiency_MtxFlg[nGate];
   double MtxEfficiency_2_MtxFlg[nGate];
   double MtxEfficiency_Gate[nGate];
+  double MtxEfficiency_OldGate[nGate];
   double x[nGate];
   double x2[nGate+1];
   for(int n=0; n<nGate; n++){
@@ -407,6 +408,8 @@ void Mtx_Banch(int month, int runnum){
     Count1_2[n] = 0;
     Count1_2_MtxFlg[n] = 0;
     MtxEfficiency[n] = 0.;
+    MtxEfficiency_Gate[n] = 0.;
+    MtxEfficiency_OldGate[n] = 0.;
     MtxEfficiency_MtxFlg[n] = 0.;
     MtxEfficiency_2_MtxFlg[n] = 0.;
     x[n] = (double)nGate-n-1;
@@ -831,6 +834,8 @@ void Mtx_Banch(int month, int runnum){
     }
   }
   for(int n=0; n<nGate; n++){
+    MtxEfficiency_OldGate[n]= (double)Count1_MtxFlg[n]/ Count1_MtxFlg[nGate];
+    std::cout << "Total Event# is " << Count1_MtxFlg[nGate] << "\t" <<  Form("Count%d_MtxFlg# is ",n+1) << Count1_MtxFlg[n] << "\t" << "Efficiency is " << MtxEfficiency_OldGate[n] << std::endl;
     MtxEfficiency_Gate[n]= (double)Count1_2_MtxFlg[n]/ Count1_MtxFlg[nGate];
     std::cout << "Total Event# is " << Count1_MtxFlg[nGate] << "\t" <<  Form("Count%d_MtxFlg# is ",n+1) << Count1_2_MtxFlg[n] << "\t" << "Efficiency is " << MtxEfficiency_Gate[n] << std::endl;
   }
@@ -842,6 +847,7 @@ void Mtx_Banch(int month, int runnum){
   TGraph *g1 = new TGraph(nGate, x, MtxEfficiency);
   TGraph *g2 = new TGraph(nGate, x, MtxEfficiency_MtxFlg);
   TGraph *g3 = new TGraph(nGate+1, x2, MtxEfficiency_2_MtxFlg);
+  TGraph *g4 = new TGraph(nGate, Gate_d, MtxEfficiency_Gate);
   TGraph *g4 = new TGraph(nGate, Gate_d, MtxEfficiency_Gate);
   g1->SetMarkerStyle(8);
   g1->SetMarkerColor(2);
@@ -882,6 +888,16 @@ void Mtx_Banch(int month, int runnum){
 
   c1->Print(pdf);
   c1->Print(Form("%s/Mtx_Banch_run%05d_Graph_MtxFlg_NewPat_Accept.pdf",pdfDhire.Data(),runnum));
+
+  g5->SetMarkerStyle(8);
+  g5->SetMarkerColor(2);
+  g5->SetMarkerSize(2);
+  g5->GetXaxis()->SetRangeUser(0,Gate[nGate-1]+10);
+  g5->GetYaxis()->SetRangeUser(0,1);
+  g5->Draw("AP");
+
+  c1->Print(pdf);
+  c1->Print(Form("%s/Mtx_Banch_run%05d_Graph_MtxFlg_OldPat_Accept.pdf",pdfDhire.Data(),runnum));
 
   std::ofstream fout1;
   fout1.open(Form("%s/dat/trigger/GateAccept.txt", anadir.Data()));
