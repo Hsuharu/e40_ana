@@ -738,65 +738,65 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
 //     c1->Print(pdf);
 //     c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist2_colz_%04d.pdf",pdfDhire.Data(),matrix,runnum,i));
 //   }
-   for(int j=0; j<Hist2Max; j++){
-     Hist2[j]->Draw("box");
-
-     for(int i=0; i<SCH_Seg.size(); i++){
-       double x1;
-       double x2;
-
-       double TOF_Min_y1;
-       double TOF_Min_y2;
-
-       double TOF_Max_y1;
-       double TOF_Max_y2;
-
-       x1 =  (double)SCH_Seg.at(i);
-       x2 =  (double)(SCH_Seg.at(i)+1);
-
-       TOF_Min_y1 =(double)TOF_Min.at(i);
-       TOF_Min_y2 =(double)TOF_Min.at(i);
-
-       TOF_Max_y1 =  (double)TOF_Max.at(i)+1;
-       TOF_Max_y2 =  (double)TOF_Max.at(i)+1;
-
-       TLine *MtxGateMin = new TLine(x1,TOF_Min_y1,x2,TOF_Min_y2);
-       TLine *MtxGateMax = new TLine(x1,TOF_Max_y1,x2,TOF_Max_y2);
-
-       MtxGateMin->SetLineColor(2);
-       MtxGateMax->SetLineColor(2);
-       MtxGateMin->SetLineWidth(1);
-       MtxGateMax->SetLineWidth(1);
-       MtxGateMin->Draw("same");
-       MtxGateMax->Draw("same");
-       if(i==0){
-         TLine *MtxGateMin_Y = new TLine(x1,TOF_Min_y1,x1,TOF_Max_y1);
-         MtxGateMin_Y->SetLineColor(2);
-         MtxGateMin_Y->SetLineWidth(1);
-         MtxGateMin_Y->Draw("same");
-       }else if(i==SCH_Seg.size()-1){
-         TLine *MtxGateMin_Y = new TLine(x2,TOF_Min_y1,x2,TOF_Max_y1);
-         MtxGateMin_Y->SetLineColor(2);
-         MtxGateMin_Y->SetLineWidth(1);
-         MtxGateMin_Y->Draw("same");
-       }else{
-         if(TOF_Min.at(i)-TOF_Min.at(i-1)!=0){
-           TLine *MtxGate_Y1 = new TLine(x1,(double)TOF_Min.at(i-1),x1,TOF_Min_y1);
-           MtxGate_Y1->SetLineColor(2);
-           MtxGate_Y1->SetLineWidth(1);
-           MtxGate_Y1->Draw("same");
-         }
-         if(TOF_Max.at(i)-TOF_Max.at(i-1)!=0){
-           TLine *MtxGate_Y2 = new TLine(x1,(double)TOF_Max.at(i-1)+1,x1,TOF_Max_y1);
-           MtxGate_Y2->SetLineColor(2);
-           MtxGate_Y2->SetLineWidth(1);
-           MtxGate_Y2->Draw("same");
-         }
-       }
-     }
-     c1->Print(pdf);
-     c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist2_box_%04d.pdf",pdfDhire.Data(),matrix,runnum,j));
-   }
+//   for(int j=0; j<Hist2Max; j++){
+//     Hist2[j]->Draw("box");
+//
+//     for(int i=0; i<SCH_Seg.size(); i++){
+//       double x1;
+//       double x2;
+//
+//       double TOF_Min_y1;
+//       double TOF_Min_y2;
+//
+//       double TOF_Max_y1;
+//       double TOF_Max_y2;
+//
+//       x1 =  (double)SCH_Seg.at(i);
+//       x2 =  (double)(SCH_Seg.at(i)+1);
+//
+//       TOF_Min_y1 =(double)TOF_Min.at(i);
+//       TOF_Min_y2 =(double)TOF_Min.at(i);
+//
+//       TOF_Max_y1 =  (double)TOF_Max.at(i)+1;
+//       TOF_Max_y2 =  (double)TOF_Max.at(i)+1;
+//
+//       TLine *MtxGateMin = new TLine(x1,TOF_Min_y1,x2,TOF_Min_y2);
+//       TLine *MtxGateMax = new TLine(x1,TOF_Max_y1,x2,TOF_Max_y2);
+//
+//       MtxGateMin->SetLineColor(2);
+//       MtxGateMax->SetLineColor(2);
+//       MtxGateMin->SetLineWidth(1);
+//       MtxGateMax->SetLineWidth(1);
+//       MtxGateMin->Draw("same");
+//       MtxGateMax->Draw("same");
+//       if(i==0){
+//         TLine *MtxGateMin_Y = new TLine(x1,TOF_Min_y1,x1,TOF_Max_y1);
+//         MtxGateMin_Y->SetLineColor(2);
+//         MtxGateMin_Y->SetLineWidth(1);
+//         MtxGateMin_Y->Draw("same");
+//       }else if(i==SCH_Seg.size()-1){
+//         TLine *MtxGateMin_Y = new TLine(x2,TOF_Min_y1,x2,TOF_Max_y1);
+//         MtxGateMin_Y->SetLineColor(2);
+//         MtxGateMin_Y->SetLineWidth(1);
+//         MtxGateMin_Y->Draw("same");
+//       }else{
+//         if(TOF_Min.at(i)-TOF_Min.at(i-1)!=0){
+//           TLine *MtxGate_Y1 = new TLine(x1,(double)TOF_Min.at(i-1),x1,TOF_Min_y1);
+//           MtxGate_Y1->SetLineColor(2);
+//           MtxGate_Y1->SetLineWidth(1);
+//           MtxGate_Y1->Draw("same");
+//         }
+//         if(TOF_Max.at(i)-TOF_Max.at(i-1)!=0){
+//           TLine *MtxGate_Y2 = new TLine(x1,(double)TOF_Max.at(i-1)+1,x1,TOF_Max_y1);
+//           MtxGate_Y2->SetLineColor(2);
+//           MtxGate_Y2->SetLineWidth(1);
+//           MtxGate_Y2->Draw("same");
+//         }
+//       }
+//     }
+//     c1->Print(pdf);
+//     c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist2_box_%04d.pdf",pdfDhire.Data(),matrix,runnum,j));
+//   }
    
 
 
@@ -830,7 +830,7 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
    TH1D *test = new TH1D("test","Momentum Ratio Cut5/Cut3 w/MtxCut;GeV/c;Ratio",100,0,2);
    test->SetAxisRange(0,1,"Y");
    test->Draw();
-   graph1->Draw("p");
+   graph1->Draw("AP");
    c1->Print(pdf);
    c1->Print(Form("%s/Mtx_Pos_Mon_matrix%d_run%05d_Hist1_graph.pdf",pdfDhire.Data(),matrix,runnum));
 
