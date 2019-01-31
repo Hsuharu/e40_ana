@@ -71,13 +71,15 @@ bool eq3(int a,int b,int c){
 
 void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
 
-//  gStyle->SetOptStat(1111110); 
-  gStyle->SetOptFit(1); 
-   gStyle->SetOptStat(0);
-   gStyle->SetOptTitle(0);
-   gStyle->SetPadLeftMargin(0.14);
-   gStyle->SetPadBottomMargin(0.14);
-   
+  gStyle->SetOptTitle(0);
+  gStyle->SetOptStat(0);
+  gStyle->SetLabelSize(0.04,"XYZ");
+  gStyle->SetTitleSize(0.05,"XYZ");
+  gStyle->SetTitleOffset(1.2,"X");
+  gStyle->SetTitleOffset(1.3,"Y");
+  gStyle->SetPadLeftMargin(0.16);
+  gStyle->SetPadBottomMargin(0.16);
+
 
 //Reset ROOT and connect tree file
    gROOT->Reset();
@@ -557,8 +559,8 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
   TLegend *Leg3 = new TLegend(0.78,0.575,0.98,0.935);
 
 //-Event Loop --------------------------------------------------------------------------------------
-   Long64_t nentries = k0hodo->GetEntries();
-//   Long64_t nentries = 10000;
+//   Long64_t nentries = k0hodo->GetEntries();
+   Long64_t nentries = 10000;
 
 //-Event Loop First --------
    Long64_t nbytes = 0;
