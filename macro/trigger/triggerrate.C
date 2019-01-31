@@ -240,7 +240,7 @@ void triggerrate(){
   g[8]->GetXaxis()->SetTitle("L1 [Counts/Spill]");
   g[8]->GetYaxis()->SetTitle("DAQ Efficiency");
   g[8]->GetYaxis()->SetDecimals(2);
-  g[8]->Draw("AP");
+  g[8]->Draw("P");
   base->Draw("P");
   g[8]->Fit("fit","","R",L1Req.at(0),L1Req.at(L1Req.size()-1));
   c1->Print(pdf);
