@@ -527,6 +527,11 @@ void Mtx_Banch2(int month, int runnum, int filesel=1){
   c1->Print(pdf);
   c1->Print(Form("%s/Mtx_Banch2_run%05d_Graph_Sigma_Gate_%d.pdf",pdfDhire.Data(),runnum, filesel));
 
+  g3->GetYaxis()->SetRangeUser(0.9,1);
+  g3->Draw("AP");
+  c1->Print(pdf);
+  c1->Print(Form("%s/Mtx_Banch2_run%05d_Graph_Sigma_Gate_zoom_%d.pdf",pdfDhire.Data(),runnum, filesel));
+
   std::ofstream fout1;
   fout1.open(Form("%s/dat/trigger/SigmaEffi.txt", anadir.Data()));
   for(int i=0; i<nGate; i++){
