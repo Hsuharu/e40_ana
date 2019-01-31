@@ -795,6 +795,13 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
      c1->Print(pdf);
      c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist2_box_%04d.pdf",pdfDhire.Data(),matrix,runnum,j));
    }
+   
+   Hist1[30]->Draw();
+   Hist1[47]->SetLineColor(kRed); 
+   Hist1[47]->Draw("same");
+   c1->Print(pdf);
+   c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_30_47_same.pdf",pdfDhire.Data(),matrix,runnum));
+
 
    TH1D *test = new TH1D("test","Momentum Ratio Cut5/Cut3 w/MtxCut;GeV/c;Ratio",100,0,2);
    test->SetAxisRange(0,1,"Y");
@@ -829,13 +836,6 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
    graph1->Draw("p");
    c1->Print(pdf);
    c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_graph.pdf",pdfDhire.Data(),matrix,runnum));
-   
-   Hist1[30]->Draw();
-   Hist1[47]->SetLineColor(kRed); 
-   Hist1[47]->Draw("same");
-   c1->Print(pdf);
-   c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_30_47_same.pdf",pdfDhire.Data(),matrix,runnum));
-
 
    TH1D *h = (TH1D*)Hist1[47]->Clone("Hist1[47]");
    h->Divide(Hist1[30]);
