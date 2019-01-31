@@ -783,15 +783,21 @@ void Mtx_Banch(int month, int runnum){
 
   gStyle->SetOptStat(0);
   gStyle->SetOptTitle(0);
+  gStyle->SetLabelSize(0.05,"XYZ");
+  gStyle->SetTitleSize(0.06,"XYZ");
+  gStyle->SetTitleOffset(1.0,"X");
+  gStyle->SetTitleOffset(1.1,"Y");
+  gStyle->SetPadLeftMargin(0.14);
+  gStyle->SetPadBottomMargin(0.14);
 
 
   for(int i=0; i<Hist1Max; i++){
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(1);
 //    Hist1[i]->GetXaxis()->SetLabelSize(0.05);
 //    Hist1[i]->GetYaxis()->SetLabelSize(0.05);
-    Hist1[i]->GetXaxis()->SetTitleSize(0.05);
-    Hist1[i]->GetYaxis()->SetTitleSize(0.05);
-    Hist1[i]->GetYaxis()->SetDecimals(3);
+//    Hist1[i]->GetXaxis()->SetTitleSize(0.05);
+//    Hist1[i]->GetYaxis()->SetTitleSize(0.05);
+//    Hist1[i]->GetYaxis()->SetDecimals(3);
     Hist1[i]->Draw();
     c1->Print(pdf);
     c1->Print(Form("%s/Mtx_Banch_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));

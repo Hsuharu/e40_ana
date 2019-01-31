@@ -71,7 +71,7 @@ bool eq3(int a,int b,int c){
 
 void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnum1 =2, int matrixnum2 =1){
 
-  gStyle->SetOptStat(1111110); 
+//  gStyle->SetOptStat(1111110); 
   gStyle->SetOptFit(1); 
 
   //Reset ROOT and connect tree file
