@@ -237,8 +237,10 @@ void triggerrate(){
   fit->SetParameters(10,0.1);
   g[8]->GetXaxis()->SetRangeUser(0,L1Req.back()*1.1);
   g[8]->GetYaxis()->SetRangeUser(0,DAQEff.back()*1.1);
-  g[8]->GetXaxis()->SetTitle("L1 [Counts/Spill]");
-  g[8]->GetYaxis()->SetTitle("DAQ Efficiency");
+  g[8]->GetXaxis()->SetTitle("");
+  g[8]->GetYaxis()->SetTitle("");
+  TH1D *h8 = new TH1D("h8",";L1 [Counts/Spill];DAQ Efficiency",100,0,L1Req.back()*1.1);
+  h8->Draw();
   g[8]->GetYaxis()->SetDecimals(2);
   g[8]->Draw("AP");
   g[8]->Fit("fit","","R",L1Req.at(0),L1Req.at(L1Req.size()-1));
