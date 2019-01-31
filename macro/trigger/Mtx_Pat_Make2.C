@@ -71,10 +71,14 @@ bool eq3(int a,int b,int c){
 
 void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
 
-//  gStyle->SetOptStat(1111110); 
-  gStyle->SetOptFit(1); 
-   gStyle->SetOptStat(0);
-   gStyle->SetOptTitle(0);
+  gStyle->SetOptTitle(0);
+  gStyle->SetLabelSize(0.04,"XYZ");
+  gStyle->SetTitleSize(0.05,"XYZ");
+  gStyle->SetTitleOffset(1.2,"X");
+  gStyle->SetTitleOffset(1.3,"Y");
+  gStyle->SetPadLeftMargin(0.16);
+  gStyle->SetPadBottomMargin(0.16);
+
 
 //Reset ROOT and connect tree file
    gROOT->Reset();
@@ -591,11 +595,11 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
     Hist1[34+Mtx_prm.size()*17]= new TH1D("MissMass Sigma all",";Missing Mass [GeV/cc];Counts",100,0.8,1.4);
 
     for(int l=0; l < Mtx_prm.size(); l++){
-      Hist1[34+Mtx_prm.size()*0 +l]= new TH1D(Form("sftxseg Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),bin,0,NumOfSegSFT_X);
-      Hist1[34+Mtx_prm.size()*1 +l]= new TH1D(Form("sftxseg Cut2 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Cut2 Sch[%d]-Tof[%d];SFTX Segment;Counts",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),bin,0,NumOfSegSFT_X);
-      Hist1[34+Mtx_prm.size()*2 +l]= new TH1D(Form("sftxseg Cut3 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Cut3 Sch[%d]-Tof[%d];SFTX Segment;Counts",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),bin,0,NumOfSegSFT_X);
-      Hist1[34+Mtx_prm.size()*3 +l]= new TH1D(Form("sftxseg Cut4 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Cut4 Sch[%d]-Tof[%d];SFTX Segment;Counts",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),bin,0,NumOfSegSFT_X);
-      Hist1[34+Mtx_prm.size()*4 +l]= new TH1D(Form("sftxseg Cut5 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Cut5 Sch[%d]-Tof[%d];SFTX Segment;Counts",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),bin,0,NumOfSegSFT_X);
+      Hist1[34+Mtx_prm.size()*0 +l]= new TH1D(Form("sftxseg Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Sch;SFTX Segment SCH[%d]-TOF[%d];Counts",Mtx_prm.at(l).at(0),Mtx_prm.at(l).at(1)),bin,0,NumOfSegSFT_X);
+      Hist1[34+Mtx_prm.size()*1 +l]= new TH1D(Form("sftxseg Cut2 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Cut2;SFTX Segment SCH[%d]-TOF[%d];Counts",Mtx_prm.at(l).at(0),Mtx_prm.at(l).at(1)),bin,0,NumOfSegSFT_X);
+      Hist1[34+Mtx_prm.size()*2 +l]= new TH1D(Form("sftxseg Cut3 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Cut3;SFTX Segment SCH[%d]-TOF[%d];Counts",Mtx_prm.at(l).at(0),Mtx_prm.at(l).at(1)),bin,0,NumOfSegSFT_X);
+      Hist1[34+Mtx_prm.size()*3 +l]= new TH1D(Form("sftxseg Cut4 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Cut4;SFTX Segment SCH[%d]-TOF[%d];Counts",Mtx_prm.at(l).at(0),Mtx_prm.at(l).at(1)),bin,0,NumOfSegSFT_X);
+      Hist1[34+Mtx_prm.size()*4 +l]= new TH1D(Form("sftxseg Cut5 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Cut5;SFTX Segment SCH[%d]-TOF[%d];Counts",Mtx_prm.at(l).at(0),Mtx_prm.at(l).at(1)),bin,0,NumOfSegSFT_X);
       Hist1[34+Mtx_prm.size()*1 +l]->SetLineColor(8); 
       Hist1[34+Mtx_prm.size()*2 +l]->SetLineColor(9); 
       Hist1[34+Mtx_prm.size()*3 +l]->SetLineColor(kBlue); 
@@ -619,7 +623,7 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
     }                         
                               
     Hist2[0 ]= new TH2D("pKurama % m2",     "pKurama % m2 "    ,100,-0.4,1.4,100,0,2);
-    Hist2[1 ]= new TH2D("tofsegKurama[0] % vpseg[1]","tofsegKurama[0] % vpseg[1]" ,NumOfSegSCH,0,NumOfSegSCH,NumOfSegTOF,0,NumOfSegTOF);
+    Hist2[1 ]= new TH2D("tofsegKurama[0] % vpseg[1]","tofsegKurama[0] % vpseg[1];SCH Segment;TOF Segment" ,NumOfSegSCH,0,NumOfSegSCH,NumOfSegTOF,0,NumOfSegTOF);
     Hist2[2 ]= new TH2D("pKurama % m2 Cut1",     "pKurama % m2  Cut1"    ,100,-0.4,1.4,100,0,2);
     Hist2[3 ]= new TH2D("tofsegKurama[0] % vpseg[1] Cut1","tofsegKurama[0] % vpseg[1] Cut1;SCH Segment;TOF Segment" ,NumOfSegSCH,0,NumOfSegSCH,NumOfSegTOF,0,NumOfSegTOF);
     Hist2[4]= new TH2D("pKurama % m2 Cut2",     "pKurama % m2  Cut2"    ,100,-0.4,1.4,100,0,2);
@@ -642,8 +646,8 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
 //  TLegend *Leg1 = new TLegend(0.78,0.575,0.98,0.935);
 
 //-Event Loop --------------------------------------------------------------------------------------
-   Long64_t nentries = pik->GetEntries();
-//   Long64_t nentries = 10000;
+//   Long64_t nentries = pik->GetEntries();
+   Long64_t nentries = 10000;
 
 //-Event Loop First --------
    for (Long64_t s=0; s<nentries;s++) {
@@ -1008,13 +1012,16 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
      c2->Print(pdf1);
      if(Mtx_prm.at(l).at(0)%10==0){
        c1->cd();
-     gPad->SetLogy(1);
-     gStyle->SetOptStat(0);
+       gPad->SetLogy(1);
+       gStyle->SetOptStat(0);
        Hist1[34+Mtx_prm.size()*16 +l]->Draw();
+       gStyle->SetOptStat(0);
        Hist1[34+Mtx_prm.size()*4 +l]->Draw("same");
+       gStyle->SetOptStat(0);
        MtxSftXGateMin->Draw("same");
+       gStyle->SetOptStat(0);
        MtxSftXGateMax->Draw("same");
-       c1->Print(Form("%s/Mtx_Pat_Make2_bin%d_run%05d_Hist1_SFTX_matrix%d__%04d.pdf",pdfDhire.Data(),bin,runnum,matrixnum,l));
+       c1->Print(Form("%s/Mtx_Pat_Make2_bin%d_run%05d_Hist1_SFTX_matrix%d_%d_%d.pdf",pdfDhire.Data(),bin,runnum,matrixnum,Mtx_prm.at(l).at(0),Mtx_prm.at(l).at(1)));
      }
    }
 
