@@ -475,13 +475,13 @@ void Mtx_Banch(int month, int runnum){
   Hist1[68] = new TH1D("SftX Time Gate5","SftX Time Gate5",200,-100,100);
   Hist1[69] = new TH1D("SftX Time Gate6","SftX Time Gate6",200,-100,100);
 
-  Hist1[70] = new TH1D("Sch Time TofFlag","Sch Time TofFlag",200,-100,100);
-  Hist1[71] = new TH1D("SftX Time TofFlag","SftX Time TofFlag",200,-100,100);
+  Hist1[70] = new TH1D("Sch Time TofFlag","Sch Time TofFlag;SCH time [ns];Counts",200,-100,100);
+  Hist1[71] = new TH1D("SftX Time TofFlag","SftX Time TofFlag;SFT time [ns];Counts",200,-100,100);
 
   //-Event Loop --------------------------------------------------------------------------------------
-//  Long64_t nentries = mtx->GetEntries();
+  Long64_t nentries = mtx->GetEntries();
   Long64_t nentries_MtxFlg = 0;
-    Long64_t nentries =10000;
+//    Long64_t nentries =10000;
 
   for (Long64_t s=0; s<nentries;s++){
     mtx->GetEntry(s);

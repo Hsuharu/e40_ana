@@ -80,6 +80,15 @@ bool eq3(int a,int b,int c){
 }
 
 void Mtx_Banch2(int month, int runnum, int filesel=1){
+
+  gStyle->SetOptTitle(0);
+  gStyle->SetLabelSize(0.04,"XYZ");
+  gStyle->SetTitleSize(0.05,"XYZ");
+  gStyle->SetTitleOffset(1.2,"X");
+  gStyle->SetTitleOffset(1.3,"Y");
+  gStyle->SetPadLeftMargin(0.16);
+  gStyle->SetPadBottomMargin(0.16);
+  
   //Matrix Patern txt file PATH -----------------------------------------------------------------------
   TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
   TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
@@ -287,8 +296,8 @@ void Mtx_Banch2(int month, int runnum, int filesel=1){
   Hist1[9+nGate*4+1] = new TH1D("MissMass Sigma vtx & K & MissMass","MissMass Sigma vtx & K & MissMass",100,0.8,1.4);
 
   //-Event Loop --------------------------------------------------------------------------------------
-  Long64_t nentries = pik->GetEntries();
-//    Long64_t nentries =10000;
+//  Long64_t nentries = pik->GetEntries();
+    Long64_t nentries =10000;
 
   for (Long64_t s=0; s<nentries;s++){
     pik->GetEntry(s);
@@ -506,10 +515,13 @@ void Mtx_Banch2(int month, int runnum, int filesel=1){
   c1->Print(Form("%s/Mtx_Banch2_run%05d_Graph_Sigma_%d.pdf",pdfDhire.Data(),runnum, filesel));
 
   g3->SetMarkerStyle(8);
-  g3->SetMarkerColor(2);
+  g3->SetMarkerColor(1);
   g3->SetMarkerSize(2);
   g3->GetXaxis()->SetRangeUser(0,Gate[nGate-1]+10);
   g3->GetYaxis()->SetRangeUser(0,1);
+  g3->GetXaxis()->SetTitle("Gate [ns]");
+  g3->GetYaxis()->SetTitle("Efficiency");
+  g3->GetYaxis()->SetDecimals(2);
   g3->Draw("AP");
 
   c1->Print(pdf);
