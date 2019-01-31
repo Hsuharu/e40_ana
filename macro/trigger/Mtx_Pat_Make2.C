@@ -72,6 +72,7 @@ bool eq3(int a,int b,int c){
 void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
 
   gStyle->SetOptTitle(0);
+  gStyle->SetOptStat(0);
   gStyle->SetLabelSize(0.04,"XYZ");
   gStyle->SetTitleSize(0.05,"XYZ");
   gStyle->SetTitleOffset(1.2,"X");
@@ -915,6 +916,7 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
 
    for(int j=0; j<Hist2Max; j++){
      if(j==1 || j==3 || j ==8+Mtx_prm.size()*4 || j ==8+Mtx_prm.size()*4+1 || j ==8+Mtx_prm.size()*4+2){
+       gStyle->SetOptStat(0);
        Hist2[j]->Draw("box");
        for(int i=0; i<SCH_Seg.size(); i++){
          double x1;
