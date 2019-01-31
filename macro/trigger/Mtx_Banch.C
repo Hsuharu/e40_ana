@@ -423,7 +423,7 @@ void Mtx_Banch(int month, int runnum){
   Hist1[32] = new TH1D("TofMtOr Nhits","TofMtOr Nhits",20,0,20);
   Hist1[33] = new TH1D("TofMtOr Hitpat","TofMtOr Hitpat",25,0,24);
   Hist1[34] = new TH1D("TofMtOr DepthPat","TofMtOrDepthPat",20,0,20);
-  Hist1[35] = new TH1D("TofMtOr","TofMtOr",200,-100,100);
+  Hist1[35] = new TH1D("TofMtOr","TofMtOr;TofMt[ns];Counts",200,-100,100);
   Hist1[52] = new TH1D("TofMtOr Gate1","TofMtOr Gate1",200,-100,100);
   Hist1[53] = new TH1D("TofMtOr Gate2","TofMtOr Gate2",200,-100,100);
   Hist1[54] = new TH1D("TofMtOr Gate3","TofMtOr Gate3",200,-100,100);
@@ -435,7 +435,7 @@ void Mtx_Banch(int month, int runnum){
   Hist1[36]= new TH1D("Sch Nhits" ,"Sch Nhits" ,20,0,20);
   Hist1[37]= new TH1D("Sch Hitpat","Sch Hitpat",65,0,65);
   Hist1[38]= new TH1D("Sch Depthpat","Sch Depthpat",65,0,65);
-  Hist1[39]= new TH1D("Sch Time"   ,"Sch Time"   ,200,-100,100);
+  Hist1[39]= new TH1D("Sch Time"   ,"Sch Time;SCH time[ns];Counts"   ,200,-100,100);
   Hist1[58] = new TH1D("Sch Time Gate1","Sch Time Gate1",200,-100,100);
   Hist1[59] = new TH1D("Sch Time Gate2","Sch Time Gate2",200,-100,100);
   Hist1[60] = new TH1D("Sch Time Gate3","Sch Time Gate3",200,-100,100);
@@ -455,7 +455,7 @@ void Mtx_Banch(int month, int runnum){
   Hist1[48] = new TH1D("SftXTdc","SftXTdc",1000,0,1000);
   Hist1[49] = new TH1D("SftX U Time","SftX U Time",200,-100,100);
   Hist1[50] = new TH1D("SftX D Time","SftX D Time",200,-100,100);
-  Hist1[51] = new TH1D("SftXTime","SftXTime",200,-100,100);
+  Hist1[51] = new TH1D("SftXTime","SftXTime;SFT X time[ns];Counts",200,-100,100);
   Hist1[64] = new TH1D("SftX Time Gate1","SftX Time Gate1",200,-100,100);
   Hist1[65] = new TH1D("SftX Time Gate2","SftX Time Gate2",200,-100,100);
   Hist1[66] = new TH1D("SftX Time Gate3","SftX Time Gate3",200,-100,100);
@@ -467,9 +467,9 @@ void Mtx_Banch(int month, int runnum){
   Hist1[71] = new TH1D("SftX Time TofFlag","SftX Time TofFlag",200,-100,100);
 
   //-Event Loop --------------------------------------------------------------------------------------
-  Long64_t nentries = mtx->GetEntries();
+//  Long64_t nentries = mtx->GetEntries();
   Long64_t nentries_MtxFlg = 0;
-//    Long64_t nentries =10000;
+    Long64_t nentries =10000;
 
   for (Long64_t s=0; s<nentries;s++){
     mtx->GetEntry(s);
