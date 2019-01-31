@@ -784,11 +784,11 @@ void Mtx_Banch(int month, int runnum){
   gStyle->SetOptStat(0);
   gStyle->SetOptTitle(0);
   gStyle->SetLabelSize(0.05,"XYZ");
-  gStyle->SetTitleSize(0.06,"XYZ");
+  gStyle->SetTitleSize(0.08,"XYZ");
   gStyle->SetTitleOffset(1.0,"X");
   gStyle->SetTitleOffset(1.1,"Y");
-  gStyle->SetPadLeftMargin(0.14);
-  gStyle->SetPadBottomMargin(0.14);
+  gStyle->SetPadLeftMargin(0.15);
+  gStyle->SetPadBottomMargin(0.15);
 
 
   for(int i=0; i<Hist1Max; i++){
