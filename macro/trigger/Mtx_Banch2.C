@@ -296,8 +296,8 @@ void Mtx_Banch2(int month, int runnum, int filesel=1){
   Hist1[9+nGate*4+1] = new TH1D("MissMass Sigma vtx & K & MissMass","MissMass Sigma vtx & K & MissMass",100,0.8,1.4);
 
   //-Event Loop --------------------------------------------------------------------------------------
-//  Long64_t nentries = pik->GetEntries();
-    Long64_t nentries =10000;
+  Long64_t nentries = pik->GetEntries();
+//    Long64_t nentries =10000;
 
   for (Long64_t s=0; s<nentries;s++){
     pik->GetEntry(s);

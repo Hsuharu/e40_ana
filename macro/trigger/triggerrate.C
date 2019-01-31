@@ -79,6 +79,15 @@ const char* Month[] =
 
 //Main -------------------------------------------------------------------------------
 void triggerrate(){
+
+  gStyle->SetOptTitle(0);
+  gStyle->SetLabelSize(0.04,"XYZ");
+  gStyle->SetTitleSize(0.05,"XYZ");
+  gStyle->SetTitleOffset(1.2,"X");
+  gStyle->SetTitleOffset(1.3,"Y");
+  gStyle->SetPadLeftMargin(0.16);
+  gStyle->SetPadBottomMargin(0.16);
+
   std::vector<double> SpillCounts;
   std::vector<double> BH2SUMCounts;
   std::vector<double> DAQEff;
@@ -205,7 +214,7 @@ void triggerrate(){
     gStyle->SetOptStat(0);
     g[i]->SetTitle("");
     g[i]->SetMarkerStyle(8);
-    g[i]->SetMarkerColor(2);
+    g[i]->SetMarkerColor(1);
     g[i]->SetMarkerSize(2);
     g[i]->SetMinimum(0);
     g[i]->Draw("AP");
@@ -217,22 +226,33 @@ void triggerrate(){
 //  g1->GetYaxis()->SetRangeUser(0,1);
 
 
+  sort(Matrix.begin(),Matrix.end());
+  sort(DAQEff.begin(),DAQEff.end());
+  sort(L1Req.begin(),L1Req.end());
+
   TF1 *fit = new TF1("fit","pol1"); 
-  fit->SetParameters(10,1);
+  fit->SetParameters(10,0.1);
+  g[8]->GetXaxis()->SetRangeUser(0,L1Req.back()*1.1);
+  g[8]->GetYaxis()->SetRangeUser(0,DAQEff.back()*1.1);
+  g[8]->GetXaxis()->SetTitle("L1 [Counts/Spill]");
+  g[8]->GetYaxis()->SetTitle("DAQ Efficiency");
+  g[8]->GetYaxis()->SetDecimals(2);
   g[8]->Fit("fit","","R",L1Req.at(0),L1Req.at(L1Req.size()-1));
     c1->Print(pdf);
   c1->Print(Form("%s/L1_DAQ_%d.pdf",pdfDhire.Data(), 8));
   double b2=fit->GetParameter(0);
   double a2=fit->GetParameter(1);
 
+  g[11]->GetXaxis()->SetRangeUser(0,Matrix.back()*1.1);
+  g[11]->GetYaxis()->SetRangeUser(0,L1Req.back()*1.1);
+  g[11]->GetXaxis()->SetTitle("Matrix [Counts/Spill]");
+  g[11]->GetYaxis()->SetTitle("L1 [Counts/Spill]");
+  g[11]->GetYaxis()->SetDecimals(2);
   g[11]->Fit("fit","","R",Matrix.at(0),Matrix.at(Matrix.size()-1));
   c1->Print(pdf);
   c1->Print(Form("%s/Mtx_L1_%d.pdf",pdfDhire.Data(), 11));
   double b1=fit->GetParameter(0);
   double a1=fit->GetParameter(1);
-
-  sort(Matrix.begin(),Matrix.end());
-  sort(DAQEff.begin(),DAQEff.end());
 
   for(int i=0; i<Gate.size(); i++){
     Yield.push_back(SigmaEffi.at(i)*((Matrix.back()*Accept.at(i)*a1+b1)*a2+b2)*0.99/DAQEff.front());
@@ -240,12 +260,14 @@ void triggerrate(){
   TGraph *graph = new TGraph(Gate.size(),Gate.data(),Yield.data());
   graph->SetTitle("");
   graph->SetMarkerStyle(8);
-  graph->SetMarkerColor(2);
+  graph->SetMarkerColor(1);
   graph->SetMarkerSize(2);
+  graoh->GetXaxis()->SetTitle("Gate [ns]");
+  graoh->GetYaxis()->SetTitle("Efficiency");
   graph->Draw("AP");
   c1->Print(Form("%s/Gate_Yield.pdf",pdfDhire.Data()));
 
-  graph->SetMinimum(0.9);
+  graph->SetMinimum(0.95);
   graph->Draw("AP");
   c1->Print(Form("%s/Gate_Yield_min0.9.pdf",pdfDhire.Data()));
 
