@@ -817,8 +817,8 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
   }
 
   TGraphErrors *graph1 = new TGraphErrors(nBin,x,ratio,xerr,ratioerr);
-  graph1->SetMarkerStyle(8);
-  graph1->SetMarkerColor(2);
+  graph1->SetMarkerStyle(20);
+  graph1->SetMarkerColor(1);
   graph1->SetMarkerSize(2);
   //   graph1->GetXaxis()->SetRangeUser(0,2);
   //   graph1->GetYaxis()->SetRangeUser(0,1);
