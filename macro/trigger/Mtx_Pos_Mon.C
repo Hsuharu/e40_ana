@@ -733,11 +733,11 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
    c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_%04d.pdf",pdfDhire.Data(),matrix,runnum,i));
 //   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
    }
-   for(int i=0; i<Hist2Max; i++){
-     Hist2[i]->Draw("colz");
-     c1->Print(pdf);
-     c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist2_colz_%04d.pdf",pdfDhire.Data(),matrix,runnum,i));
-   }
+//   for(int i=0; i<Hist2Max; i++){
+//     Hist2[i]->Draw("colz");
+//     c1->Print(pdf);
+//     c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist2_colz_%04d.pdf",pdfDhire.Data(),matrix,runnum,i));
+//   }
    for(int j=0; j<Hist2Max; j++){
      Hist2[j]->Draw("box");
 
@@ -835,8 +835,8 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
    graph1->SetMaximum(1);
    graph1->SetMinimum(0);
    graph1->GetXaxis()->SetLimits(0,2);
-   graph1->GetYaxis()->SetDecimals(2);
-   graph1->Draw("P");
+//   graph1->GetYaxis()->SetDecimals(2);
+   graph1->Draw("p");
    c1->Print(pdf);
    c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_graph.pdf",pdfDhire.Data(),matrix,runnum));
 
