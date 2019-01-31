@@ -81,7 +81,6 @@ bool eq3(int a,int b,int c){
 
 void Mtx_Banch(int month, int runnum){
 
-  gStyle->SetOptStat(0);
   gStyle->SetOptTitle(0);
   gStyle->SetLabelSize(0.05,"XYZ");
   gStyle->SetTitleSize(0.9,"XYZ");
@@ -798,6 +797,7 @@ void Mtx_Banch(int month, int runnum){
 //    Hist1[i]->GetXaxis()->SetTitleSize(0.05);
 //    Hist1[i]->GetYaxis()->SetTitleSize(0.05);
 //    Hist1[i]->GetYaxis()->SetDecimals(3);
+  gStyle->SetOptStat(0);
     Hist1[i]->Draw();
     c1->Print(pdf);
     c1->Print(Form("%s/Mtx_Banch_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
