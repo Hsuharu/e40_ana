@@ -193,11 +193,14 @@ void triggerrate(){
     }
   }
 
+  double bx[] = {0.};
+  double by[] = {0.};
 
   TCanvas *c1 = new TCanvas("c1","c1",1200,900);
   c1->Print(pdf+"["); 
   int gnum = 12;
   TGraph *g[gnum];
+  TGraph *base = new TGraph(1,&bx[0],&by[0]);
   g[0] = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),DAQEff.data());
   g[1] = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),Matrix.data());
   g[2] = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),BH2_K.data());
@@ -238,6 +241,7 @@ void triggerrate(){
   g[8]->GetYaxis()->SetTitle("DAQ Efficiency");
   g[8]->GetYaxis()->SetDecimals(2);
   g[8]->Draw("AP");
+  base->Draw("P");
   g[8]->Fit("fit","","R",L1Req.at(0),L1Req.at(L1Req.size()-1));
   c1->Print(pdf);
   c1->Print(Form("%s/L1_DAQ_%d.pdf",pdfDhire.Data(), 8));
@@ -250,6 +254,7 @@ void triggerrate(){
   g[11]->GetYaxis()->SetTitle("L1 [Counts/Spill]");
   g[11]->GetYaxis()->SetDecimals(2);
   g[11]->Draw("AP");
+  base->Draw("P");
   g[11]->Fit("fit","","R",Matrix.at(0),Matrix.at(Matrix.size()-1));
   c1->Print(pdf);
   c1->Print(Form("%s/Mtx_L1_%d.pdf",pdfDhire.Data(), 11));
