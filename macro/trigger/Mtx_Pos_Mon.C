@@ -559,8 +559,8 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
   TLegend *Leg3 = new TLegend(0.78,0.575,0.98,0.935);
 
   //-Event Loop --------------------------------------------------------------------------------------
-  //   Long64_t nentries = k0hodo->GetEntries();
-  Long64_t nentries = 10000;
+     Long64_t nentries = k0hodo->GetEntries();
+//  Long64_t nentries = 10000;
 
   //-Event Loop First --------
   Long64_t nbytes = 0;
@@ -827,7 +827,7 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
   //   graph1->SetMinimum(0);
   //   graph1->GetXaxis()->SetLimits(0,2);
   //   graph1->GetYaxis()->SetDecimals(2);
-  TH1D *test = new TH1D("test","Momentum Ratio Cut5/Cut3 w/MtxCut;GeV/c;Ratio",100,0,2);
+  TH1D *test = new TH1D("test","Momentum Ratio Cut5/Cut3 w/MtxCut;Momentum   [GeV/c];Ratio",100,0,2);
   test->SetAxisRange(0,1,"Y");
   test->Draw();
   graph1->Draw("P");
