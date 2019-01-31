@@ -225,9 +225,14 @@ void Mtx_Banch2(int month, int runnum, int filesel=1){
   double HULMHTDCCalib = -0.8333;
   double MaxBinValue=0.;
 
-  int nGate = 9;
-  int Gate[] = {1,5,10,15,20,30,40,60,120};
-  double Gate_d[] = {1.,5.,10.,15.,20.,30.,40.,60.,120.};
+//  int nGate = 9;
+//  int Gate[] = {1,5,10,15,20,30,40,60,120};
+//  double Gate_d[] = {1.,5.,10.,15.,20.,30.,40.,60.,120.};
+
+  int nGate = 15;
+//  int Gate[] = {1,5,10,15,20,30,40,60,120};
+  int  Gate[] = {1,5,10,15,20,30,40,50,60,70,80,90,100,110,120};
+  double Gate_d[] = {1.,5.,10.,15.,20.,30.,40.,50.,60.,70.,80.,90.,100.,110.,120.};
 
   double TofMid = 10.;
   double SchMid = 0.;
@@ -254,7 +259,7 @@ void Mtx_Banch2(int month, int runnum, int filesel=1){
 
 
   //-hist def-----------------------------------------------------------------------------------------
-  Hist1Max = 35;
+  Hist1Max = 9+nGate*4+2;
   TH1D *Hist1[Hist1Max];
 
 
@@ -262,44 +267,24 @@ void Mtx_Banch2(int month, int runnum, int filesel=1){
   Hist1[0] = new TH1D("TofMtOr Hitpat","TofMtOr Hitpat",25,0,24);
   Hist1[1] = new TH1D("TofMtOr DepthPat","TofMtOrDepthPat",20,0,20);
   Hist1[2] = new TH1D("TofMtOr","TofMtOr",200,-100,100);
-  Hist1[8] = new TH1D("TofMtOr Gate1","TofMtOr Gate1",200,-100,100);
-  Hist1[9] = new TH1D("TofMtOr Gate2","TofMtOr Gate2",200,-100,100);
-  Hist1[10] = new TH1D("TofMtOr Gate3","TofMtOr Gate3",200,-100,100);
-  Hist1[11] = new TH1D("TofMtOr Gate4","TofMtOr Gate4",200,-100,100);
-  Hist1[12] = new TH1D("TofMtOr Gate5","TofMtOr Gate5",200,-100,100);
-  Hist1[13] = new TH1D("TofMtOr Gate6","TofMtOr Gate6",200,-100,100);
-
-  //-Sch ----------------
   Hist1[3]= new TH1D("Sch Depthpat","Sch Depthpat",65,0,65);
   Hist1[4]= new TH1D("Sch Time"   ,"Sch Time"   ,200,-100,100);
-  Hist1[14] = new TH1D("Sch Time Gate1","Sch Time Gate1",200,-100,100);
-  Hist1[15] = new TH1D("Sch Time Gate2","Sch Time Gate2",200,-100,100);
-  Hist1[16] = new TH1D("Sch Time Gate3","Sch Time Gate3",200,-100,100);
-  Hist1[17] = new TH1D("Sch Time Gate4","Sch Time Gate4",200,-100,100);
-  Hist1[18] = new TH1D("Sch Time Gate5","Sch Time Gate5",200,-100,100);
-  Hist1[19] = new TH1D("Sch Time Gate6","Sch Time Gate6",200,-100,100);
-
-  //-SftX ----------------
   Hist1[5] = new TH1D("SftX U Time","SftX U Time",200,-100,100);
   Hist1[6] = new TH1D("SftX D Time","SftX D Time",200,-100,100);
   Hist1[7] = new TH1D("SftXTime","SftXTime",200,-100,100);
-  Hist1[20] = new TH1D("SftX Time Gate1","SftX Time Gate1",200,-100,100);
-  Hist1[21] = new TH1D("SftX Time Gate2","SftX Time Gate2",200,-100,100);
-  Hist1[22] = new TH1D("SftX Time Gate3","SftX Time Gate3",200,-100,100);
-  Hist1[23] = new TH1D("SftX Time Gate4","SftX Time Gate4",200,-100,100);
-  Hist1[24] = new TH1D("SftX Time Gate5","SftX Time Gate5",200,-100,100);
-  Hist1[25] = new TH1D("SftX Time Gate6","SftX Time Gate6",200,-100,100);
+  Hist1[8] = new TH1D("MissMass Sigma","MissMass Sigma",100,0.8,1.4);
 
+  //-Sch ----------------
+  for(int i=0; i<nGate; i++){
+    Hist1[9+nGate*0+i] = new TH1D(Form("TofMtOr %dnsGate",Gate[i]),Form("TofMtOr %dnsGate",Gate[i]),200,-100,100);
+    Hist1[9+nGate*1+i] = new TH1D(Form("Sch Time %dnsGate",Gate[i]),Form("Sch Time %dnsGate",Gate[i]),200,-100,100);
+    Hist1[9+nGate*2+i] = new TH1D(Form("SftX Time %dnsGate",Gate[i]),Form("SftX Time %dnsGate",Gate[i]),200,-100,100);
+    Hist1[9+nGate*3+i] = new TH1D(Form("MissMass Sigma %dnsGate",Gate[i]),Form("MissMass Sigma %dnsGate",Gate[i]),100,0.8,1.4);
+    }
+  //-SftX ----------------
 
-  Hist1[26] = new TH1D("MissMass Sigma","MissMass Sigma",100,0.8,1.4);
-  Hist1[27] = new TH1D("MissMass Sigma Gate1","MissMass Sigma Gate1",100,0.8,1.4);
-  Hist1[28] = new TH1D("MissMass Sigma Gate2","MissMass Sigma Gate2",100,0.8,1.4);
-  Hist1[29] = new TH1D("MissMass Sigma Gate3","MissMass Sigma Gate3",100,0.8,1.4);
-  Hist1[30] = new TH1D("MissMass Sigma Gate4","MissMass Sigma Gate4",100,0.8,1.4);
-  Hist1[31] = new TH1D("MissMass Sigma Gate5","MissMass Sigma Gate5",100,0.8,1.4);
-  Hist1[32] = new TH1D("MissMass Sigma Gate6","MissMass Sigma Gate6",100,0.8,1.4);
-  Hist1[33] = new TH1D("MissMass Sigma vtx & K","MissMass Sigma vtx & K",100,0.8,1.4);
-  Hist1[34] = new TH1D("MissMass Sigma vtx & K & MissMass","MissMass Sigma vtx & K & MissMass",100,0.8,1.4);
+  Hist1[9+nGate*4+0] = new TH1D("MissMass Sigma vtx & K","MissMass Sigma vtx & K",100,0.8,1.4);
+  Hist1[9+nGate*4+1] = new TH1D("MissMass Sigma vtx & K & MissMass","MissMass Sigma vtx & K & MissMass",100,0.8,1.4);
 
   //-Event Loop --------------------------------------------------------------------------------------
   Long64_t nentries = pik->GetEntries();
@@ -367,11 +352,11 @@ void Mtx_Banch2(int month, int runnum, int filesel=1){
     // Mtx Pattern ----------------------------
     if(ntKurama==1&&chisqrKurama[0]<50){ 
       if(m2[0]>0.15 && m2[0]<0.35 && qKurama[0]>0 && pKurama[0]<0.9){ 
-        Hist1[26]->Fill(MissMass[0]);
+        Hist1[8]->Fill(MissMass[0]);
         if( vtx[0]>-20 && vtx[0]<20 && vty[0]>-20 && vty[0]<20 && vtz[0]>-200 && vtz[0]<200 ){
-          Hist1[33]->Fill(MissMass[0]);
+          Hist1[9+nGate*4+0]->Fill(MissMass[0]);
           if(MissMass[0]>1.15&&MissMass[0]<1.25){
-            Hist1[34]->Fill(MissMass[0]);
+            Hist1[9+nGate*4+1]->Fill(MissMass[0]);
             SigmaCount+=1;
             for(int l=0; l < Mtx_prm.size(); l++){
               int i = 0;
@@ -411,14 +396,14 @@ void Mtx_Banch2(int month, int runnum, int filesel=1){
               for(int n=0; n<nGate; n++){
                 for(int m=0; m<16 ;m++){
                   if( tofmt[i][m]      > (double)TofMid - Gate[n] && tofmt[i][m]     < (double)TofMid + Gate[n] ){ 
-                    Hist1[8+n]->Fill(tofmt[i][m]);
+                    Hist1[9+nGate*0+n]->Fill(tofmt[i][m]);
                     Flag1[n]=true;
                     if(trigflag[28]>0) Flag1_Sigma[n]=true;
                   }
                 }
                 for(int m=0; m<sch_depth[j] ;m++){
                   if( sch_time[j][m]   > (double)SchMid - Gate[n] && sch_time[j][m]  < (double)SchMid + Gate[n] ){
-                    Hist1[14+n]->Fill(sch_time[j][m]);
+                    Hist1[9+nGate*1+n]->Fill(sch_time[j][m]);
                     Flag2[n]=true;
                     if(trigflag[28]>0) Flag2_Sigma[n]=true;
                   }
@@ -426,14 +411,14 @@ void Mtx_Banch2(int month, int runnum, int filesel=1){
                 for(int k = min; k < max; k++){
                   for(int m=0; m<sftx_udepth[k] ;m++){
                     if( sftx_utime[k][m] > (double)SftMid - Gate[n] && sftx_utime[k][m]< (double)SftMid + Gate[n] ){
-                      Hist1[20+n]->Fill(sftx_utime[k][m]);
+                      Hist1[9+nGate*2+n]->Fill(sftx_utime[k][m]);
                       Flag3[n]=true;
                       if(trigflag[28]>0) Flag3_Sigma[n]=true;
                     }
                   }
                   for(int m=0; m<sftx_ddepth[k] ;m++){
                     if( sftx_dtime[k][m] > (double)SftMid - Gate[n] && sftx_dtime[k][m]< (double)SftMid + Gate[n] ){ 
-                      Hist1[20+n]->Fill(sftx_dtime[k][m]);
+                      Hist1[9+nGate*2+n]->Fill(sftx_dtime[k][m]);
                       Flag3[n]=true;
                       if(trigflag[28]>0) Flag3_Sigma[n]=true;
                     }

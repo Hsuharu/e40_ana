@@ -370,9 +370,10 @@ void Mtx_Banch(int month, int runnum){
   double HULMHTDCCalib = -0.8333;
   double MaxBinValue=0.;
 
-  int nGate = 9;
-  int Gate[] = {1,5,10,15,20,30,40,60,120};
-  double Gate_d[] = {1.,5.,10.,15.,20.,30.,40.,60.,120.};
+  int nGate = 15;
+//  int Gate[] = {1,5,10,15,20,30,40,60,120};
+  int  Gate[] = {1,5,10,15,20,30,40,50,60,70,80,90,100,110,120};
+  double Gate_d[] = {1.,5.,10.,15.,20.,30.,40.,50.,60.,70.,80.,90.,100.,110.,120.};
 
   double TofMid = 10.;
   double SchMid = 0.;
@@ -625,14 +626,14 @@ void Mtx_Banch(int month, int runnum){
         //          }
         for(int m=0; m<16 ;m++){
           if( tofmt[i][m]      > (double)TofMid - Gate[n] && tofmt[i][m]     < (double)TofMid + Gate[n] ){ 
-            Hist1[52+n]->Fill(tofmt[i][m]);
+//            Hist1[52+n]->Fill(tofmt[i][m]);
             Flag1[n]=true;
             if(trigflag[28]>0) Flag1_MtxFlg[n]=true;
           }
         }
         for(int m=0; m<sch_depth[j] ;m++){
           if( sch_time[j][m]   > (double)SchMid - Gate[n] && sch_time[j][m]  < (double)SchMid + Gate[n] ){
-            Hist1[57+n]->Fill(sch_time[j][m]);
+//            Hist1[57+n]->Fill(sch_time[j][m]);
             Flag2[n]=true;
             if(trigflag[28]>0) Flag2_MtxFlg[n]=true;
           }
@@ -640,14 +641,14 @@ void Mtx_Banch(int month, int runnum){
         for(int k = min; k < max; k++){
           for(int m=0; m<sftx_udepth[k] ;m++){
             if( sftx_utime[k][m] > (double)SftMid - Gate[n] && sftx_utime[k][m]< (double)SftMid + Gate[n] ){
-              Hist1[61+n]->Fill(sftx_utime[k][m]);
+//              Hist1[61+n]->Fill(sftx_utime[k][m]);
               Flag3[n]=true;
               if(trigflag[28]>0) Flag3_MtxFlg[n]=true;
             }
           }
           for(int m=0; m<sftx_ddepth[k] ;m++){
             if( sftx_dtime[k][m] > (double)SftMid - Gate[n] && sftx_dtime[k][m]< (double)SftMid + Gate[n] ){ 
-              Hist1[61+n]->Fill(sftx_dtime[k][m]);
+//              Hist1[61+n]->Fill(sftx_dtime[k][m]);
               Flag3[n]=true;
               if(trigflag[28]>0) Flag3_MtxFlg[n]=true;
             }
