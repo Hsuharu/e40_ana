@@ -702,8 +702,8 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
   //  TLegend *Leg1 = new TLegend(0.78,0.575,0.98,0.935);
 
   //-Event Loop --------------------------------------------------------------------------------------
-//  Long64_t nentries = pik->GetEntries();
-     Long64_t nentries = 10000;
+  Long64_t nentries = pik->GetEntries();
+//     Long64_t nentries = 10000;
 
   //-Event Loop First --------
   for (Long64_t s=0; s<nentries;s++) {

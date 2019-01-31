@@ -559,8 +559,8 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
   TLegend *Leg3 = new TLegend(0.78,0.575,0.98,0.935);
 
 //-Event Loop --------------------------------------------------------------------------------------
-   Long64_t nentries = k0hodo->GetEntries();
-//   Long64_t nentries = 10000;
+//   Long64_t nentries = k0hodo->GetEntries();
+   Long64_t nentries = 10000;
 
 //-Event Loop First --------
    Long64_t nbytes = 0;
@@ -836,7 +836,7 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
    graph1->SetMinimum(0);
    graph1->GetXaxis()->SetLimits(0,2);
    graph1->GetYaxis()->SetDecimals(2);
-   graph1->Draw("p");
+   graph1->Draw("P");
    c1->Print(pdf);
    c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_graph.pdf",pdfDhire.Data(),matrix,runnum));
 
