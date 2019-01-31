@@ -798,12 +798,6 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
      c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist2_box_%04d.pdf",pdfDhire.Data(),matrix,runnum,j));
    }
    
-   Hist1[30]->Draw();
-   Hist1[47]->SetLineColor(kRed); 
-   Hist1[47]->Draw("same");
-   c1->Print(pdf);
-   c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_30_47_same.pdf",pdfDhire.Data(),matrix,runnum));
-
 
 
    int nBin = 100;
@@ -849,6 +843,12 @@ void Mtx_Pos_Mon(int month,int runnum, int matrix = 2){
    c1->Print(pdf);
    c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_ratio.pdf",pdfDhire.Data(),matrix,runnum));
 
+
+   Hist1[30]->Draw();
+   Hist1[47]->SetLineColor(kRed); 
+   Hist1[47]->Draw("same");
+   c1->Print(pdf);
+   c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist1_30_47_same.pdf",pdfDhire.Data(),matrix,runnum));
 
 
 
