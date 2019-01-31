@@ -237,8 +237,9 @@ void triggerrate(){
   g[8]->GetXaxis()->SetTitle("L1 [Counts/Spill]");
   g[8]->GetYaxis()->SetTitle("DAQ Efficiency");
   g[8]->GetYaxis()->SetDecimals(2);
+  g[8]->Draw("AP");
   g[8]->Fit("fit","","R",L1Req.at(0),L1Req.at(L1Req.size()-1));
-    c1->Print(pdf);
+  c1->Print(pdf);
   c1->Print(Form("%s/L1_DAQ_%d.pdf",pdfDhire.Data(), 8));
   double b2=fit->GetParameter(0);
   double a2=fit->GetParameter(1);
@@ -248,6 +249,7 @@ void triggerrate(){
   g[11]->GetXaxis()->SetTitle("Matrix [Counts/Spill]");
   g[11]->GetYaxis()->SetTitle("L1 [Counts/Spill]");
   g[11]->GetYaxis()->SetDecimals(2);
+  g[11]->Draw("AP");
   g[11]->Fit("fit","","R",Matrix.at(0),Matrix.at(Matrix.size()-1));
   c1->Print(pdf);
   c1->Print(Form("%s/Mtx_L1_%d.pdf",pdfDhire.Data(), 11));
