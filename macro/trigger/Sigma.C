@@ -589,10 +589,10 @@ void Sigma(int month,int runnum, int file=1){
     if( ntKurama!=1 ) continue; //Cut1
     if( chisqrKurama[0]>50 ) continue; //Cut1
           Hist1[2]->Fill(m2[0]);
-          Hist1[3]->Fill(MissMass[0]);
 
     if(m2[0]>0.15 && m2[0]<0.35 && qKurama[0]>0){// && pKurama[0]<0.9){ 
       if( vtx[0]>-20 && vtx[0]<20 && vty[0]>-20 && vty[0]<20 && vtz[0]>-200 && vtz[0]<200 ){
+        Hist1[3]->Fill(MissMass[0]);
         if(MissMass[0]<1.25&&MissMass[0]>1.15){
           Hist1[0]->Fill(MissMass[0]);
           Hist1[1]->Fill(pKurama[0]);
@@ -625,8 +625,8 @@ void Sigma(int month,int runnum, int file=1){
   c1->Print(pdf+"["); 
    gStyle->SetOptStat(0);
    gStyle->SetOptTitle(0);
-   gStyle->SetPadLeftMargin(0.14);
-   gStyle->SetPadBottomMargin(0.14);
+   gStyle->SetPadLeftMargin(0.15);
+   gStyle->SetPadBottomMargin(0.15);
    
   //-Hist Draw----------------------------------------------------------------------------------------
   c1->cd();
