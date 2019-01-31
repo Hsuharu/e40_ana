@@ -1122,7 +1122,7 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
       MtxSftXGateMax->Draw("same");
       MtxSftXGateMin1->Draw("same");
       MtxSftXGateMax1->Draw("same");
-      c1->Print(Form("%s/Mtx_Pat_Compare_bin%d_run%05d_Hist1_SFTX_%d_%d.pdf",pdfDhire.Data(),bin,runnum,,Mtx_prm2.at(l).at(0),Mtx_prm2.at(l).at(1)));
+      c1->Print(Form("%s/Mtx_Pat_Compare_bin%d_run%05d_Hist1_SFTX_%d_%d.pdf",pdfDhire.Data(),bin,runnum,Mtx_prm2.at(l).at(0),Mtx_prm2.at(l).at(1)));
 
       gPad->SetLogy(0);
       gStyle->SetOptStat(0);
