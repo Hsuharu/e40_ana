@@ -789,8 +789,9 @@ void Mtx_Banch(int month, int runnum){
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(1);
 //    Hist1[i]->GetXaxis()->SetLabelSize(0.05);
 //    Hist1[i]->GetYaxis()->SetLabelSize(0.05);
-    Hist1[i]->GetXaxis()->SetTitleSize(0.08);
-    Hist1[i]->GetYaxis()->SetTitleSize(0.08);
+    Hist1[i]->GetXaxis()->SetTitleSize(0.05);
+    Hist1[i]->GetYaxis()->SetTitleSize(0.05);
+    Hist1[i]->GetYaxis()->SetDecimals(3);
     Hist1[i]->Draw();
     c1->Print(pdf);
     c1->Print(Form("%s/Mtx_Banch_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
