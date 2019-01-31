@@ -235,16 +235,16 @@ void triggerrate(){
 
   TF1 *fit = new TF1("fit","pol1"); 
   fit->SetParameters(10,0.1);
-  g[8]->GetXaxis()->SetRangeUser(0,L1Req.back()*1.1);
-  g[8]->GetYaxis()->SetRangeUser(0,DAQEff.back()*1.1);
-  g[8]->GetXaxis()->SetTitle("");
-  g[8]->GetYaxis()->SetTitle("");
+//  g[8]->GetXaxis()->SetRangeUser(0,L1Req.back()*1.1);
+//  g[8]->GetYaxis()->SetRangeUser(0,DAQEff.back()*1.1);
+//  g[8]->GetXaxis()->SetTitle("");
+//  g[8]->GetYaxis()->SetTitle("");
   TH1D *h8 = new TH1D("h8",";L1 [Counts/Spill];DAQ Efficiency",100,0,L1Req.back()*1.1);
+  h8->SetAxisRange(0,DAQEff.back()*1.1,"Y");
   h8->Draw();
   g[8]->GetYaxis()->SetDecimals(2);
-  g[8]->Draw("AP");
+  g[8]->Draw("P");
   g[8]->Fit("fit","","R",L1Req.at(0),L1Req.at(L1Req.size()-1));
-  base->Draw("P");
   c1->Print(pdf);
   c1->Print(Form("%s/L1_DAQ_%d.pdf",pdfDhire.Data(), 8));
   double b2=fit->GetParameter(0);
