@@ -262,8 +262,8 @@ void triggerrate(){
   graph->SetMarkerStyle(8);
   graph->SetMarkerColor(1);
   graph->SetMarkerSize(2);
-  graoh->GetXaxis()->SetTitle("Gate [ns]");
-  graoh->GetYaxis()->SetTitle("Efficiency");
+  graph->GetXaxis()->SetTitle("Gate [ns]");
+  graph->GetYaxis()->SetTitle("Efficiency");
   graph->Draw("AP");
   c1->Print(Form("%s/Gate_Yield.pdf",pdfDhire.Data()));
 
