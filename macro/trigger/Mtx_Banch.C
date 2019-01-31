@@ -80,6 +80,16 @@ bool eq3(int a,int b,int c){
 }
 
 void Mtx_Banch(int month, int runnum){
+
+  gStyle->SetOptStat(0);
+  gStyle->SetOptTitle(0);
+  gStyle->SetLabelSize(0.05,"XYZ");
+  gStyle->SetTitleSize(0.9,"XYZ");
+  gStyle->SetTitleOffset(1.0,"X");
+  gStyle->SetTitleOffset(1.1,"Y");
+  gStyle->SetPadLeftMargin(0.16);
+  gStyle->SetPadBottomMargin(0.16);
+
   //Matrix Patern txt file PATH -----------------------------------------------------------------------
   TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
   TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
@@ -780,16 +790,6 @@ void Mtx_Banch(int month, int runnum){
 
   c1->Print(pdf+"["); 
   c1->cd();
-
-  gStyle->SetOptStat(0);
-  gStyle->SetOptTitle(0);
-  gStyle->SetLabelSize(0.05,"XYZ");
-  gStyle->SetTitleSize(0.9,"XYZ");
-  gStyle->SetTitleOffset(1.0,"X");
-  gStyle->SetTitleOffset(1.1,"Y");
-  gStyle->SetPadLeftMargin(0.16);
-  gStyle->SetPadBottomMargin(0.16);
-
 
   for(int i=0; i<Hist1Max; i++){
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(1);
