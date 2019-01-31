@@ -652,31 +652,31 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
   Hist1[33]= new TH1D("m2 Cut5","m2 Cut5",100,-0.4,1.4);
 
   for(int l=0; l < Mtx_prm2.size(); l++){
-      Hist1[34+Mtx_prm.size()*0 +l]= new TH1D(Form("sftxseg Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Sch;SFTX Segment SCH[%d]-TOF[%d];Counts",Mtx_prm.at(l).at(0),Mtx_prm.at(l).at(1)),bin,0,NumOfSegSFT_X);
-      Hist1[34+Mtx_prm.size()*1 +l]= new TH1D(Form("sftxseg Cut2 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Cut2;SFTX Segment SCH[%d]-TOF[%d];Counts",Mtx_prm.at(l).at(0),Mtx_prm.at(l).at(1)),bin,0,NumOfSegSFT_X);
-      Hist1[34+Mtx_prm.size()*2 +l]= new TH1D(Form("sftxseg Cut3 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Cut3;SFTX Segment SCH[%d]-TOF[%d];Counts",Mtx_prm.at(l).at(0),Mtx_prm.at(l).at(1)),bin,0,NumOfSegSFT_X);
-      Hist1[34+Mtx_prm.size()*3 +l]= new TH1D(Form("sftxseg Cut4 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Cut4;SFTX Segment SCH[%d]-TOF[%d];Counts",Mtx_prm.at(l).at(0),Mtx_prm.at(l).at(1)),bin,0,NumOfSegSFT_X);
-      Hist1[34+Mtx_prm.size()*4 +l]= new TH1D(Form("sftxseg Cut5 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Cut5;SFTX Segment SCH[%d]-TOF[%d];Counts",Mtx_prm.at(l).at(0),Mtx_prm.at(l).at(1)),bin,0,NumOfSegSFT_X);
-      Hist1[34+Mtx_prm.size()*1 +l]->SetLineColor(8); 
-      Hist1[34+Mtx_prm.size()*2 +l]->SetLineColor(9); 
-      Hist1[34+Mtx_prm.size()*3 +l]->SetLineColor(kBlue); 
-      Hist1[34+Mtx_prm.size()*4 +l]->SetLineColor(kRed); 
-      Hist1[34+Mtx_prm.size()*1 +l]->SetFillColor(8); 
-      Hist1[34+Mtx_prm.size()*2 +l]->SetFillColor(9); 
-      Hist1[34+Mtx_prm.size()*3 +l]->SetFillColor(kBlue); 
-      Hist1[34+Mtx_prm.size()*4 +l]->SetFillColor(kRed); 
-      Hist1[34+Mtx_prm.size()*5 +l]= new TH1D(Form("m2 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("m2 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,-0.4,1.4);
-      Hist1[34+Mtx_prm.size()*6 +l]= new TH1D(Form("m2 Cut2 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("m2 Cut2 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,-0.4,1.4);
-      Hist1[34+Mtx_prm.size()*7 +l]= new TH1D(Form("m2 Cut3 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("m2 Cut3 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,-0.4,1.4);
-      Hist1[34+Mtx_prm.size()*8 +l]= new TH1D(Form("m2 Cut4 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("m2 Cut4 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,-0.4,1.4);
-      Hist1[34+Mtx_prm.size()*9 +l]= new TH1D(Form("m2 Cut5 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("m2 Cut5 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,-0.4,1.4);
-      Hist1[34+Mtx_prm.size()*10+l]= new TH1D(Form("pKurama Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("pKurama Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,0,2);
-      Hist1[34+Mtx_prm.size()*11+l]= new TH1D(Form("pKurama Cut2 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("pKurama Cut2 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,0,2);
-      Hist1[34+Mtx_prm.size()*12+l]= new TH1D(Form("pKurama Cut3 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("pKurama Cut3 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,0,2);
-      Hist1[34+Mtx_prm.size()*13+l]= new TH1D(Form("pKurama Cut4 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("pKurama Cut4 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,0,2);
-      Hist1[34+Mtx_prm.size()*14+l]= new TH1D(Form("pKurama Cut5 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("pKurama Cut5 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,0,2);
-      Hist1[34+Mtx_prm.size()*15+l]= new TH1D(Form("MissMass Sigma Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("MissMass Sigma Sch[%d]-Tof[%d];[Gev/cc];Counts",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,0.8,1.4);
-      Hist1[34+Mtx_prm.size()*16+l]= new TH1D(Form("sftxseg all Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx all;SCH[%d]-TOF[%d]    SFTX Segment ;Counts",Mtx_prm.at(l).at(0),Mtx_prm.at(l).at(1)),bin,0,NumOfSegSFT_X);
+      Hist1[34+Mtx_prm2.size()*0 +l]= new TH1D(Form("sftxseg Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("sftx Sch;SFTX Segment SCH[%d]-TOF[%d];Counts",Mtx_prm2.at(l).at(0),Mtx_prm2.at(l).at(1)),bin,0,NumOfSegSFT_X);
+      Hist1[34+Mtx_prm2.size()*1 +l]= new TH1D(Form("sftxseg Cut2 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("sftx Cut2;SFTX Segment SCH[%d]-TOF[%d];Counts",Mtx_prm2.at(l).at(0),Mtx_prm2.at(l).at(1)),bin,0,NumOfSegSFT_X);
+      Hist1[34+Mtx_prm2.size()*2 +l]= new TH1D(Form("sftxseg Cut3 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("sftx Cut3;SFTX Segment SCH[%d]-TOF[%d];Counts",Mtx_prm2.at(l).at(0),Mtx_prm2.at(l).at(1)),bin,0,NumOfSegSFT_X);
+      Hist1[34+Mtx_prm2.size()*3 +l]= new TH1D(Form("sftxseg Cut4 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("sftx Cut4;SFTX Segment SCH[%d]-TOF[%d];Counts",Mtx_prm2.at(l).at(0),Mtx_prm2.at(l).at(1)),bin,0,NumOfSegSFT_X);
+      Hist1[34+Mtx_prm2.size()*4 +l]= new TH1D(Form("sftxseg Cut5 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("sftx Cut5;SFTX Segment SCH[%d]-TOF[%d];Counts",Mtx_prm2.at(l).at(0),Mtx_prm2.at(l).at(1)),bin,0,NumOfSegSFT_X);
+      Hist1[34+Mtx_prm2.size()*1 +l]->SetLineColor(8); 
+      Hist1[34+Mtx_prm2.size()*2 +l]->SetLineColor(9); 
+      Hist1[34+Mtx_prm2.size()*3 +l]->SetLineColor(kBlue); 
+      Hist1[34+Mtx_prm2.size()*4 +l]->SetLineColor(kRed); 
+      Hist1[34+Mtx_prm2.size()*1 +l]->SetFillColor(8); 
+      Hist1[34+Mtx_prm2.size()*2 +l]->SetFillColor(9); 
+      Hist1[34+Mtx_prm2.size()*3 +l]->SetFillColor(kBlue); 
+      Hist1[34+Mtx_prm2.size()*4 +l]->SetFillColor(kRed); 
+      Hist1[34+Mtx_prm2.size()*5 +l]= new TH1D(Form("m2 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("m2 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),100,-0.4,1.4);
+      Hist1[34+Mtx_prm2.size()*6 +l]= new TH1D(Form("m2 Cut2 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("m2 Cut2 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),100,-0.4,1.4);
+      Hist1[34+Mtx_prm2.size()*7 +l]= new TH1D(Form("m2 Cut3 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("m2 Cut3 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),100,-0.4,1.4);
+      Hist1[34+Mtx_prm2.size()*8 +l]= new TH1D(Form("m2 Cut4 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("m2 Cut4 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),100,-0.4,1.4);
+      Hist1[34+Mtx_prm2.size()*9 +l]= new TH1D(Form("m2 Cut5 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("m2 Cut5 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),100,-0.4,1.4);
+      Hist1[34+Mtx_prm2.size()*10+l]= new TH1D(Form("pKurama Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("pKurama Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),100,0,2);
+      Hist1[34+Mtx_prm2.size()*11+l]= new TH1D(Form("pKurama Cut2 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("pKurama Cut2 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),100,0,2);
+      Hist1[34+Mtx_prm2.size()*12+l]= new TH1D(Form("pKurama Cut3 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("pKurama Cut3 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),100,0,2);
+      Hist1[34+Mtx_prm2.size()*13+l]= new TH1D(Form("pKurama Cut4 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("pKurama Cut4 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),100,0,2);
+      Hist1[34+Mtx_prm2.size()*14+l]= new TH1D(Form("pKurama Cut5 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("pKurama Cut5 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),100,0,2);
+      Hist1[34+Mtx_prm2.size()*15+l]= new TH1D(Form("MissMass Sigma Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("MissMass Sigma Sch[%d]-Tof[%d];[Gev/cc];Counts",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),100,0.8,1.4);
+      Hist1[34+Mtx_prm2.size()*16+l]= new TH1D(Form("sftxseg all Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("sftx all;SCH[%d]-TOF[%d]    SFTX Segment ;Counts",Mtx_prm2.at(l).at(0),Mtx_prm2.at(l).at(1)),bin,0,NumOfSegSFT_X);
   }                         
 
   Hist2[0 ]= new TH2D("pKurama % m2",     "pKurama % m2 "    ,100,-0.4,1.4,100,0,2);
@@ -702,8 +702,8 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
   //  TLegend *Leg1 = new TLegend(0.78,0.575,0.98,0.935);
 
   //-Event Loop --------------------------------------------------------------------------------------
-  Long64_t nentries = pik->GetEntries();
-  //   Long64_t nentries = 10000;
+//  Long64_t nentries = pik->GetEntries();
+     Long64_t nentries = 10000;
 
   //-Event Loop First --------
   for (Long64_t s=0; s<nentries;s++) {
@@ -1122,7 +1122,7 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
       MtxSftXGateMax->Draw("same");
       MtxSftXGateMin1->Draw("same");
       MtxSftXGateMax1->Draw("same");
-      c1->Print(Form("%s/Mtx_Pat_Compare_bin%d_run%05d_Hist1_SFTX_%04d.pdf",pdfDhire.Data(),bin,runnum,l));
+      c1->Print(Form("%s/Mtx_Pat_Compare_bin%d_run%05d_Hist1_SFTX_%d_%d.pdf",pdfDhire.Data(),bin,runnum,,Mtx_prm2.at(l).at(0),Mtx_prm2.at(l).at(1)));
 
       gPad->SetLogy(0);
       gStyle->SetOptStat(0);
@@ -1137,7 +1137,7 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
       Hist1[34+Mtx_prm2.size()*15 +l]->Draw();
       MMSigmaMin->Draw("same");
       MMSigmaMax->Draw("same");
-      c1->Print(Form("%s/Mtx_Pat_Compare_bin%d_run%05d_Hist1_MissMassSigma_%04d.pdf",pdfDhire.Data(),bin,runnum,l));
+      c1->Print(Form("%s/Mtx_Pat_Compare_bin%d_run%05d_Hist1_MissMassSigma_%d_%d.pdf",pdfDhire.Data(),bin,runnum,Mtx_prm2.at(l).at(0),Mtx_prm2.at(l).at(1)));
     }
   }
 
