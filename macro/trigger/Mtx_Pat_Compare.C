@@ -1061,6 +1061,7 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
   for(int l=0; l < Mtx_prm2.size(); l++){
     c2->cd(1);
     gPad->SetLogy(1);
+    Hist1[34+Mtx_prm2.size()*16 +l]->SetMinimum(0.1);
     Hist1[34+Mtx_prm2.size()*16 +l]->Draw();
     //     Hist1[34+Mtx_prm2.size()*0 +l]->Draw("same");
     Hist1[34+Mtx_prm2.size()*1 +l]->Draw("same");
@@ -1116,6 +1117,7 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
       gPad->SetLogy(1);
       gStyle->SetOptStat(0);
       gStyle->SetOptTitle(0);
+      Hist1[34+Mtx_prm2.size()*16 +l]->SetMinimum(0.1);
       Hist1[34+Mtx_prm2.size()*16 +l]->Draw();
       Hist1[34+Mtx_prm2.size()*4 +l]->Draw("same");
       MtxSftXGateMin->Draw("same");

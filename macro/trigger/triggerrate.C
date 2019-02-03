@@ -244,6 +244,7 @@ void triggerrate(){
   h8->Draw();
   g[8]->GetYaxis()->SetDecimals(2);
   g[8]->Draw("P");
+  c1->Print(Form("%s/L1_DAQ_pre_%d.pdf",pdfDhire.Data(), 8));
   g[8]->Fit("fit","","R",L1Req.at(0),L1Req.at(L1Req.size()-1));
   c1->Print(pdf);
   c1->Print(Form("%s/L1_DAQ_%d.pdf",pdfDhire.Data(), 8));
@@ -259,6 +260,7 @@ void triggerrate(){
   h11->Draw();
   g[11]->GetYaxis()->SetDecimals(2);
   g[11]->Draw("P");
+  c1->Print(Form("%s/Mtx_L1_pre_%d.pdf",pdfDhire.Data(), 11));
   g[11]->Fit("fit","","R",Matrix.at(0),Matrix.at(Matrix.size()-1));
   c1->Print(pdf);
   c1->Print(Form("%s/Mtx_L1_%d.pdf",pdfDhire.Data(), 11));
