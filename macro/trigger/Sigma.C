@@ -569,10 +569,10 @@ void Sigma(int month,int runnum, int file=1){
   TH1D *Hist1[Hist1Max];
   TH2D *Hist2[Hist2Max];
 
-  Hist1[0 ]= new TH1D("MissMass[0] w/Sigma",";GeV/cc;Counts",100,0.5,1.5);
-  Hist1[1 ]= new TH1D("pKurama[0] w/Sigma",";Momentum[GeV/c];Counts",100,0,2);
-  Hist1[2 ]= new TH1D("m2[0]",";Mass Square[GeV/cc];Counts",100,-0.4,1.4);
-  Hist1[3 ]= new TH1D("MissMass[0] all",";GeV/cc;Counts",100,0.5,1.5);
+  Hist1[0 ]= new TH1D("MissMass[0] w/Sigma",";GeV/c^{2};Counts",100,0.8,1.5);
+  Hist1[1 ]= new TH1D("pKurama[0] w/Sigma",";Momentum[GeV/c];Counts",100,0.2,1.4);
+  Hist1[2 ]= new TH1D("m2[0]",";Mass Square[(GeV/c^{2})^{2}];Counts",100,-0.4,1.4);
+  Hist1[3 ]= new TH1D("MissMass[0] all",";GeV/c^{2};Counts",100,0.8,1.5);
 
 //  Hist2[0 ]= new TH2D("pKurama % m2",     "pKurama % m2 "    ,100,-0.4,1.4,100,0,2);
 
@@ -580,8 +580,8 @@ void Sigma(int month,int runnum, int file=1){
   //  TLegend *Leg1 = new TLegend(0.78,0.575,0.98,0.935);
 
   //-Event Loop --------------------------------------------------------------------------------------
-  Long64_t nentries = pik->GetEntries();
-//     Long64_t nentries = 10000;
+//  Long64_t nentries = pik->GetEntries();
+     Long64_t nentries = 10000;
 
   //-Event Loop First --------
   for (Long64_t s=0; s<nentries;s++) {
