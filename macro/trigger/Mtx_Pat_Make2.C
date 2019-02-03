@@ -647,8 +647,8 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
 //  TLegend *Leg1 = new TLegend(0.78,0.575,0.98,0.935);
 
 //-Event Loop --------------------------------------------------------------------------------------
-   Long64_t nentries = pik->GetEntries();
-//   Long64_t nentries = 10000;
+//   Long64_t nentries = pik->GetEntries();
+   Long64_t nentries = 10000;
 
 //-Event Loop First --------
    for (Long64_t s=0; s<nentries;s++) {
@@ -980,6 +980,7 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
 
      c2->cd(1);
      gPad->SetLogy(1);
+     Hist1[34+Mtx_prm.size()*16 +l]->SetMinimum(0.1);
      Hist1[34+Mtx_prm.size()*16 +l]->Draw();
 //     Hist1[34+Mtx_prm.size()*0 +l]->Draw("same");
      Hist1[34+Mtx_prm.size()*1 +l]->Draw("same");
@@ -1016,6 +1017,7 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
        c1->cd();
        gPad->SetLogy(1);
        gStyle->SetOptStat(0);
+       Hist1[34+Mtx_prm.size()*16 +l]->SetMinimum(0.1);
        Hist1[34+Mtx_prm.size()*16 +l]->Draw();
        gStyle->SetOptStat(0);
        Hist1[34+Mtx_prm.size()*4 +l]->Draw("same");
