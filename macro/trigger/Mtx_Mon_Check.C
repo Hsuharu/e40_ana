@@ -568,7 +568,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   Hist1Max = 15;
   //   Hist2Max =  405;
     Hist2Max =  6;
-  chisqr = 50;
+  chisqr = 10;
   TH1D *Hist1[Hist1Max];
   TH2D *Hist2[Hist2Max];
 
