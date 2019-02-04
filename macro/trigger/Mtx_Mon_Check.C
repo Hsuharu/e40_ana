@@ -381,7 +381,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   pik->SetBranchStatus("ytgtKurama");
   //   pik->SetBranchStatus("utgtKurama");
   //   pik->SetBranchStatus("vtgtKurama");
-  //   pik->SetBranchStatus("thetaKurama");
+     pik->SetBranchStatus("thetaKurama");
   //   pik->SetBranchStatus("xtofKurama");
   //   pik->SetBranchStatus("ytofKurama");
   //   pik->SetBranchStatus("utofKurama");
@@ -509,7 +509,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   pik->SetBranchAddress("ytgtKurama",ytgtKurama);
   //   pik->SetBranchAddress("utgtKurama",utgtKurama);
   //   pik->SetBranchAddress("vtgtKurama",vtgtKurama);
-  //   pik->SetBranchAddress("thetaKurama",thetaKurama);
+     pik->SetBranchAddress("thetaKurama",thetaKurama);
   //   pik->SetBranchAddress("xtofKurama",xtofKurama);
   //   pik->SetBranchAddress("ytofKurama",ytofKurama);
   //   pik->SetBranchAddress("utofKurama",utofKurama);
@@ -565,24 +565,32 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
 
   //-hist def-----------------------------------------------------------------------------------------
   //   Hist1Max = 1252;
-  Hist1Max = 9;
+  Hist1Max = 12;
   //   Hist2Max =  405;
-    Hist2Max =  1;
+    Hist2Max =  6;
   chisqr = 50;
   TH1D *Hist1[Hist1Max];
   TH2D *Hist2[Hist2Max];
 
-  Hist1[0]= new TH1D("pKurama Cut3",";Momentum[GeV/c];Counts",100,0,2);
-  Hist1[1]= new TH1D("pKurama Cut5",";Momentum[GeV/c];Counts",100,0,2);
-  Hist1[2]= new TH1D("pKurama Cut3 w/oCut5",";Momentum[GeV/c];Counts",100,0,2);
-  Hist1[3]= new TH1D("MissMass Cut3",";MissMass[GeV/c^{2}];Counts",100,-2,2);
-  Hist1[4]= new TH1D("MissMass Cut5",";MissMass[GeV/c^{2}];Counts",100,-2,2);
-  Hist1[5]= new TH1D("MissMass ",";MissMass [GeV/c^{2}];Counts",100,-2,2);
-  Hist1[6]= new TH1D("MissMass Cut3 zoom",";MissMass[GeV/c^{2}];Counts",80,1,1.35);
-  Hist1[7]= new TH1D("MissMass Cut5 zoom",";MissMass[GeV/c^{2}];Counts",80,1,1.35);
-  Hist1[8]= new TH1D("MissMass Cut3 w/oCut5 zoom",";MissMass[GeV/c^{2}];Counts",80,1,1.35);
+  Hist1[0 ]= new TH1D("pKurama Cut3",";Momentum[GeV/c];Counts",100,0,2);
+  Hist1[1 ]= new TH1D("pKurama Cut5",";Momentum[GeV/c];Counts",100,0,2);
+  Hist1[2 ]= new TH1D("pKurama Cut3 w/oCut5",";Momentum[GeV/c];Counts",100,0,2);
+  Hist1[3 ]= new TH1D("MissMass Cut3",";MissMass[GeV/c^{2}];Counts",100,-2,2);
+  Hist1[4 ]= new TH1D("MissMass Cut5",";MissMass[GeV/c^{2}];Counts",100,-2,2);
+  Hist1[5 ]= new TH1D("MissMass ",";MissMass [GeV/c^{2}];Counts",100,-2,2);
+  Hist1[6 ]= new TH1D("MissMass Cut3 zoom",";MissMass[GeV/c^{2}];Counts",80,1,1.35);
+  Hist1[7 ]= new TH1D("MissMass Cut5 zoom",";MissMass[GeV/c^{2}];Counts",80,1,1.35);
+  Hist1[8 ]= new TH1D("MissMass Cut3 w/oCut5 zoom",";MissMass[GeV/c^{2}];Counts",80,1,1.35);
+  Hist1[9 ]= new TH1D("Theta Cut3 zoom",";Theta[GeV/c^{2}];Counts",100,0,35);
+  Hist1[10]= new TH1D("Theta Cut5 zoom",";Theta[GeV/c^{2}];Counts",100,0,35);
+  Hist1[11]= new TH1D("Theta Cut3 w/oCut5 zoom",";Theta [GeV/c^{2}];Counts",100,0,35);
 
-  Hist2[0 ]= new TH2D("m2 %% p Cut3 w/oCut5",";[(GeV/c^{2})^{2}];[GeV/c]",100,-0.4,1.6,100,0,2);
+  Hist2[0 ]= new TH2D("p %% m2 Cut3 w/oCut5"                      ,";[(GeV/c^{2})^{2}];[GeV/c]"   ,100,-0.4,1.6,100,0,2);
+  Hist2[1 ]= new TH2D("p %% Theta Cut3 "                          ,";[theta];[GeV/c]"       ,100,0,35,100,0,2);
+  Hist2[2 ]= new TH2D("p %% Theta Cut5"                           ,";[theta];[GeV/c]"        ,100,0,35,100,0,2);
+  Hist2[3 ]= new TH2D("p %% Theta Cut3 w/oCut5"                   ,";[theta];[GeV/c]",100,0,35,100,0,2);
+  Hist2[4 ]= new TH2D("p %% Theta Cut3 w/MissMassCut"             ,";[theta];[GeV/c]",100,0,35,100,0,2);
+  Hist2[5 ]= new TH2D("p %% Theta Cut3 w/MissMassCut*MtxCut"      ,";[theta];[GeV/c]",100,0,35,100,0,2);
   //  Hist2[1 ]= new TH2D("Sch Position by HitSegment % vpx[1] Cut1","Sch Position by HitSegment % vpx[1] Cut1",200,-400,400,100,-400,400);
 
 
@@ -622,6 +630,8 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
           Hist1[0]->Fill(pKurama[0]);
           Hist1[3]->Fill(MissMass[0]);
           Hist1[6]->Fill(MissMass[0]);
+          Hist1[9]->Fill(thetaKurama[0]);
+          Hist2[1]->Fill(thetaKurama[0],pKurama[0]);
           for(int l=0; l < Mtx_prm.size(); l++){
             double m = 0;
             double n = 0;
@@ -636,7 +646,12 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
                 Hist1[1]->Fill(pKurama[0]);
                 Hist1[4]->Fill(MissMass[0]);
                 Hist1[7]->Fill(MissMass[0]);
+                Hist1[10]->Fill(thetaKurama[0]);
+                Hist2[2]->Fill(thetaKurama[0],pKurama[0]);
                 mtx_flg = true;
+                if(MissMass[0]>1.19&&MissMass[0]<1.29){
+                  Hist2[5]->Fill(thetaKurama[0],pKurama[0]);
+                }
               }
             }
           } // Cut3
@@ -645,6 +660,11 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
             Hist1[5]->Fill(MissMass[0]);
             Hist2[0]->Fill(m2[0],pKurama[0]);
             Hist1[8]->Fill(MissMass[0]);
+            Hist1[11]->Fill(thetaKurama[0]);
+            Hist2[3]->Fill(thetaKurama[0],pKurama[0]);
+          }
+          if(MissMass[0]>1.19&&MissMass[0]<1.29){
+            Hist2[4]->Fill(thetaKurama[0],pKurama[0]);
           }
         } // Cut2
       } //Cut1
