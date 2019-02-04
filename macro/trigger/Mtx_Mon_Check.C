@@ -72,7 +72,7 @@ bool eq3(int a,int b,int c){
 void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
 
   gStyle->SetOptTitle(0);
-  gStyle->SetOptStat(0);
+//  gStyle->SetOptStat(0);
   gStyle->SetLabelSize(0.04,"XYZ");
   gStyle->SetTitleSize(0.05,"XYZ");
   gStyle->SetTitleOffset(1.2,"X");
@@ -572,28 +572,28 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   TH1D *Hist1[Hist1Max];
   TH2D *Hist2[Hist2Max];
 
-  Hist1[0 ]= new TH1D("pKurama Cut3",";Momentum[GeV/c];Counts",100,0,2);
-  Hist1[1 ]= new TH1D("pKurama Cut5",";Momentum[GeV/c];Counts",100,0,2);
-  Hist1[2 ]= new TH1D("pKurama Cut3 w/oCut5",";Momentum[GeV/c];Counts",100,0,2);
-  Hist1[3 ]= new TH1D("MissMass Cut3",";MissMass[GeV/c^{2}];Counts",100,-2,2);
-  Hist1[4 ]= new TH1D("MissMass Cut5",";MissMass[GeV/c^{2}];Counts",100,-2,2);
-  Hist1[5 ]= new TH1D("MissMass ",";MissMass [GeV/c^{2}];Counts",100,-2,2);
-  Hist1[6 ]= new TH1D("MissMass Cut3 zoom",";MissMass[GeV/c^{2}];Counts",80,1,1.35);
-  Hist1[7 ]= new TH1D("MissMass Cut5 zoom",";MissMass[GeV/c^{2}];Counts",80,1,1.35);
-  Hist1[8 ]= new TH1D("MissMass Cut3 w/oCut5 zoom",";MissMass[GeV/c^{2}];Counts",80,1,1.35);
-  Hist1[9 ]= new TH1D("Theta Cut3 zoom",";Theta[GeV/c^{2}];Counts",100,0,35);
-  Hist1[10]= new TH1D("Theta Cut5 zoom",";Theta[GeV/c^{2}];Counts",100,0,35);
-  Hist1[11]= new TH1D("Theta Cut3 w/oCut5 zoom",";Theta [GeV/c^{2}];Counts",100,0,35);
-  Hist1[12]= new TH1D("Chisq Cut3 zoom"        ,";Chisq;Counts",100,0,60);
-  Hist1[13]= new TH1D("Chisq Cut5 zoom"        ,";Chisq;Counts",100,0,60);
-  Hist1[14]= new TH1D("Chisq Cut3 w/oCut5 zoom",";Chisq;Counts",100,0,60);
+  Hist1[0 ]= new TH1D("pKurama Cut3              ","pKurama Cut3              ;Momentum[GeV/c];Counts",100,0,2);
+  Hist1[1 ]= new TH1D("pKurama Cut5              ","pKurama Cut5              ;Momentum[GeV/c];Counts",100,0,2);
+  Hist1[2 ]= new TH1D("pKurama Cut3 w/oCut5      ","pKurama Cut3 w/oCut5      ;Momentum[GeV/c];Counts",100,0,2);
+  Hist1[3 ]= new TH1D("MissMass Cut3             ","MissMass Cut3             ;MissMass[GeV/c^{2}];Counts",100,-2,2);
+  Hist1[4 ]= new TH1D("MissMass Cut5             ","MissMass Cut5             ;MissMass[GeV/c^{2}];Counts",100,-2,2);
+  Hist1[5 ]= new TH1D("MissMass                  ","MissMass                  ;MissMass [GeV/c^{2}];Counts",100,-2,2);
+  Hist1[6 ]= new TH1D("MissMass Cut3 zoom        ","MissMass Cut3 zoom        ;MissMass[GeV/c^{2}];Counts",80,1,1.35);
+  Hist1[7 ]= new TH1D("MissMass Cut5 zoom        ","MissMass Cut5 zoom        ;MissMass[GeV/c^{2}];Counts",80,1,1.35);
+  Hist1[8 ]= new TH1D("MissMass Cut3 w/oCut5 zoom","MissMass Cut3 w/oCut5 zoom;MissMass[GeV/c^{2}];Counts",80,1,1.35);
+  Hist1[9 ]= new TH1D("Theta Cut3 zoom           ","Theta Cut3 zoom           ;Theta[GeV/c^{2}];Counts",100,0,35);
+  Hist1[10]= new TH1D("Theta Cut5 zoom           ","Theta Cut5 zoom           ;Theta[GeV/c^{2}];Counts",100,0,35);
+  Hist1[11]= new TH1D("Theta Cut3 w/oCut5 zoom   ","Theta Cut3 w/oCut5 zoom   ;Theta [GeV/c^{2}];Counts",100,0,35);
+  Hist1[12]= new TH1D("Chisq Cut3 zoom           ","Chisq Cut3 zoom           ;Chisq;Counts",100,0,60);
+  Hist1[13]= new TH1D("Chisq Cut5 zoom           ","Chisq Cut5 zoom           ;Chisq;Counts",100,0,60);
+  Hist1[14]= new TH1D("Chisq Cut3 w/oCut5 zoom   ","Chisq Cut3 w/oCut5 zoom   ;Chisq;Counts",100,0,60);
 
-  Hist2[0 ]= new TH2D("p %% m2 Cut3 w/oCut5"                      ,";[(GeV/c^{2})^{2}];[GeV/c]"   ,100,-0.4,1.6,100,0,2);
-  Hist2[1 ]= new TH2D("p %% Theta Cut3 "                          ,";[theta];[GeV/c]"       ,100,0,35,100,0,2);
-  Hist2[2 ]= new TH2D("p %% Theta Cut5"                           ,";[theta];[GeV/c]"        ,100,0,35,100,0,2);
-  Hist2[3 ]= new TH2D("p %% Theta Cut3 w/oCut5"                   ,";[theta];[GeV/c]",100,0,35,100,0,2);
-  Hist2[4 ]= new TH2D("p %% Theta Cut3 w/MissMassCut"             ,";[theta];[GeV/c]",100,0,35,100,0,2);
-  Hist2[5 ]= new TH2D("p %% Theta Cut3 w/MissMassCut*MtxCut"      ,";[theta];[GeV/c]",100,0,35,100,0,2);
+  Hist2[0 ]= new TH2D("p %% m2 Cut3 w/oCut5                ","p %% m2 Cut3 w/oCut5                ;[(GeV/c^{2})^{2}];[GeV/c]"   ,100,-0.4,1.6,100,0,2);
+  Hist2[1 ]= new TH2D("p %% Theta Cut3                     ","p %% Theta Cut3                     ;[theta];[GeV/c]"       ,100,0,35,100,0,2);
+  Hist2[2 ]= new TH2D("p %% Theta Cut5                     ","p %% Theta Cut5                     ;[theta];[GeV/c]"        ,100,0,35,100,0,2);
+  Hist2[3 ]= new TH2D("p %% Theta Cut3 w/oCut5             ","p %% Theta Cut3 w/oCut5             ;[theta];[GeV/c]",100,0,35,100,0,2);
+  Hist2[4 ]= new TH2D("p %% Theta Cut3 w/MissMassCut       ","p %% Theta Cut3 w/MissMassCut       ;[theta];[GeV/c]",100,0,35,100,0,2);
+  Hist2[5 ]= new TH2D("p %% Theta Cut3 w/MissMassCut*MtxCut","p %% Theta Cut3 w/MissMassCut*MtxCut;[theta];[GeV/c]",100,0,35,100,0,2);
   //  Hist2[1 ]= new TH2D("Sch Position by HitSegment % vpx[1] Cut1","Sch Position by HitSegment % vpx[1] Cut1",200,-400,400,100,-400,400);
 
 
