@@ -817,7 +817,6 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   Hist1[7]->SetLineColor(kRed); 
   Hist1[7]->Draw("same");
   c1->Print(pdf);
-
   test1->Draw();
   graph3->Draw("P");
   c1->Print(pdf);
