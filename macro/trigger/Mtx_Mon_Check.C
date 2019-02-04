@@ -565,7 +565,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
 
   //-hist def-----------------------------------------------------------------------------------------
   //   Hist1Max = 1252;
-  Hist1Max = 12;
+  Hist1Max = 15;
   //   Hist2Max =  405;
     Hist2Max =  6;
   chisqr = 50;
@@ -584,6 +584,9 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   Hist1[9 ]= new TH1D("Theta Cut3 zoom",";Theta[GeV/c^{2}];Counts",100,0,35);
   Hist1[10]= new TH1D("Theta Cut5 zoom",";Theta[GeV/c^{2}];Counts",100,0,35);
   Hist1[11]= new TH1D("Theta Cut3 w/oCut5 zoom",";Theta [GeV/c^{2}];Counts",100,0,35);
+  Hist1[12]= new TH1D("Chisq Cut3 zoom"        ,";Chisq;Counts",100,0,60);
+  Hist1[13]= new TH1D("Chisq Cut5 zoom"        ,";Chisq;Counts",100,0,60);
+  Hist1[14]= new TH1D("Chisq Cut3 w/oCut5 zoom",";Chisq;Counts",100,0,60);
 
   Hist2[0 ]= new TH2D("p %% m2 Cut3 w/oCut5"                      ,";[(GeV/c^{2})^{2}];[GeV/c]"   ,100,-0.4,1.6,100,0,2);
   Hist2[1 ]= new TH2D("p %% Theta Cut3 "                          ,";[theta];[GeV/c]"       ,100,0,35,100,0,2);
@@ -630,6 +633,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
           Hist1[0]->Fill(pKurama[0]);
           Hist1[3]->Fill(MissMass[0]);
           Hist1[6]->Fill(MissMass[0]);
+          Hist1[10]->Fill(chisqrKurama[0]);
           Hist1[9]->Fill(thetaKurama[0]);
           Hist2[1]->Fill(thetaKurama[0],pKurama[0]);
           for(int l=0; l < Mtx_prm.size(); l++){
@@ -647,6 +651,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
                 Hist1[4]->Fill(MissMass[0]);
                 Hist1[7]->Fill(MissMass[0]);
                 Hist1[10]->Fill(thetaKurama[0]);
+                Hist1[11]->Fill(chisqrKurama[0]);
                 Hist2[2]->Fill(thetaKurama[0],pKurama[0]);
                 mtx_flg = true;
                 if(MissMass[0]>1.19&&MissMass[0]<1.29){
@@ -662,6 +667,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
             Hist1[8]->Fill(MissMass[0]);
             Hist1[11]->Fill(thetaKurama[0]);
             Hist2[3]->Fill(thetaKurama[0],pKurama[0]);
+            Hist1[12]->Fill(chisqrKurama[0]);
           }
           if(MissMass[0]>1.19&&MissMass[0]<1.29){
             Hist2[4]->Fill(thetaKurama[0],pKurama[0]);
