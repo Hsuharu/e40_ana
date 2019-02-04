@@ -771,13 +771,13 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     m_ratioerr[i] = sqrt(b2*m_ratio[i]*(1-m_ratio[i]))/b2;
   }
   for(int i = 0; i<nBinz; i++){
-    mz[i] = 1.35/(double)nBinz/1.35 + (double)i*1.35/nBinz + 1;
+    mz[i] = 0.35/(double)nBinz/0.35 + (double)i*0.35/nBinz + 1;
     double  a1=0.,b1=0.;
     a1=  Hist1[7]->GetBinContent(i+1);
     b1=  Hist1[6]->GetBinContent(i+1);
     //   x[i]=Hist1[g7]->GetXaxis()->GetBinCenter(i+i);
     mz_ratio[i] = a1/b1 ;
-    mzerr[i] = 1./(double)nBinz/1.35;
+    mzerr[i] = 1./(double)nBinz/0.35;
     mz_ratioerr[i] = sqrt(b1*mz_ratio[i]*(1-mz_ratio[i]))/b1;
   }
 
