@@ -749,13 +749,13 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     double  b1=0.,b2=0.;
     a1=  Hist1[1]->GetBinContent(i+1);
     b1=  Hist1[0]->GetBinContent(i+1);
-    a2=  Hist1[4]->GetBinContent(i+1);
-    b2=  Hist1[3]->GetBinContent(i+1);
-    //   x[i]=Hist1[47]->GetXaxis()->GetBinCenter(i+i);
+    a2=  Hist1[3]->GetBinContent(i+1);
+    b2=  Hist1[4]->GetBinContent(i+1);
+    //   x[i]=Hist1[g7]->GetXaxis()->GetBinCenter(i+i);
     ratio[i] = a1/b1 ;
     m_ratio[i] = a2/b2 ;
-    xerr[i] = 2./(double)nBin/2.;
-    merr[i] = 20./(double)nBin/20.;
+    xerr[i] = 1./(double)nBin/2.;
+    merr[i] = 4./(double)nBin/4.;
     ratioerr[i] = sqrt(b1*ratio[i]*(1-ratio[i]))/b1;
     m_ratioerr[i] = sqrt(b2*m_ratio[i]*(1-m_ratio[i]))/b2;
   }
