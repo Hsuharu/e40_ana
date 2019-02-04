@@ -755,7 +755,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     ratio[i] = a1/b1 ;
     m_ratio[i] = a2/b2 ;
     xerr[i] = 1./(double)nBin/2.;
-    merr[i] = 4./(double)nBin/4.;
+    merr[i] = 1./(double)nBin/4.;
     ratioerr[i] = sqrt(b1*ratio[i]*(1-ratio[i]))/b1;
     m_ratioerr[i] = sqrt(b2*m_ratio[i]*(1-m_ratio[i]))/b2;
   }
