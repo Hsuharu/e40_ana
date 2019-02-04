@@ -565,7 +565,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
 
   //-hist def-----------------------------------------------------------------------------------------
   //   Hist1Max = 1252;
-  Hist1Max = 6;
+  Hist1Max = 8;
   //   Hist2Max =  405;
     Hist2Max =  1;
   chisqr = 50;
@@ -578,6 +578,9 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   Hist1[3]= new TH1D("MissMass Cut3",";MissMass[GeV/c^{2}];Counts",100,-2,2);
   Hist1[4]= new TH1D("MissMass Cut5",";MissMass[GeV/c^{2}];Counts",100,-2,2);
   Hist1[5]= new TH1D("MissMass ",";MissMass [GeV/c^{2}];Counts",100,-2,2);
+  Hist1[6]= new TH1D("MissMass Cut3 zoom",";MissMass[GeV/c^{2}];Counts",100,1,1.35);
+  Hist1[7]= new TH1D("MissMass Cut5 zoom",";MissMass[GeV/c^{2}];Counts",100,1,1.35);
+  Hist1[8]= new TH1D("MissMass Cut3 w/oCut5 zoom",";MissMass[GeV/c^{2}];Counts",100,1,1.35);
 
   Hist2[0 ]= new TH2D("m2 %% p Cut3 w/oCut5",";[(GeV/c^{2})^{2}];[GeV/c]",100,-0.4,1.6,100,0,2);
   //  Hist2[1 ]= new TH2D("Sch Position by HitSegment % vpx[1] Cut1","Sch Position by HitSegment % vpx[1] Cut1",200,-400,400,100,-400,400);
@@ -618,6 +621,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
         if(qKurama[0]>0){ // Cut3
           Hist1[0]->Fill(pKurama[0]);
           Hist1[3]->Fill(MissMass[0]);
+          Hist1[7]->Fill(MissMass[0]);
           for(int l=0; l < Mtx_prm.size(); l++){
             double m = 0;
             double n = 0;
@@ -631,6 +635,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
               if(sftxsegKurama>min&&sftxsegKurama<max){
                 Hist1[1]->Fill(pKurama[0]);
                 Hist1[4]->Fill(MissMass[0]);
+                Hist1[6]->Fill(MissMass[0]);
                 mtx_flg = true;
               }
             }
@@ -639,6 +644,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
             Hist1[2]->Fill(pKurama[0]);
             Hist1[5]->Fill(MissMass[0]);
             Hist2[0]->Fill(m2[0],pKurama[0]);
+            Hist1[8]->Fill(MissMass[0]);
           }
         } // Cut2
       } //Cut1
@@ -790,6 +796,11 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   Hist1[3]->Draw();
   Hist1[4]->SetLineColor(kRed); 
   Hist1[4]->Draw("same");
+  c1->Print(pdf);
+
+  Hist1[6]->Draw();
+  Hist1[7]->SetLineColor(kRed); 
+  Hist1[7]->Draw("same");
   c1->Print(pdf);
   //  c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_Hist1_0_1_same.pdf",pdfDhire.Data(),matrix,runnum));
 
