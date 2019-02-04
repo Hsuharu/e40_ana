@@ -563,7 +563,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
 
   int chisqr = 0;
 
-  int chisqrG[] ={2,5,10,20,50,100};
+  int chisqrG[] ={3,5,10,20,50,100};
   int nchisqr=6;
 
   //-hist def-----------------------------------------------------------------------------------------
@@ -892,8 +892,8 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   for(int j=0;j<nchisqr; j++){
     for(int i = 0; i<nBin; i++){
       cx[j][i] = 2./(double)nBin/2. + (double)i*2./nBin;
-      double  a1=0.,a2=0.;
-      double  b1=0.,b2=0.;
+      double  a1=0.;
+      double  b1=0.;
       a1=  Hist1[15+j+nchisqr]->GetBinContent(i+1);
       b1=  Hist1[15+j]->GetBinContent(i+1);
       //   x[i]=Hist1[g7]->GetXaxis()->GetBinCenter(i+i);
@@ -905,15 +905,15 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     graph[j]->SetMarkerStyle(20);
     graph[j]->SetMarkerColor(1);
     graph[j]->SetMarkerSize(2);
+    test->Draw();
+    graph[j]->Draw("P");
+    c1->Print(pdf);
   }
 
   for(int j=0;j<nchisqr; j++){
     Hist1[15+j]->Draw();
     Hist1[15+j+nchisqr]->SetLineColor(kRed); 
     Hist1[15+j+nchisqr]->Draw("same");
-    c1->Print(pdf);
-    test->Draw();
-    graph[j]->Draw("P");
     c1->Print(pdf);
   }
 
