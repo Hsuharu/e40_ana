@@ -563,9 +563,12 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
 
   int chisqr = 0;
 
+  int chisqrG[] ={2,5,10,20,50,100};
+  int nchisqr=6;
+
   //-hist def-----------------------------------------------------------------------------------------
   //   Hist1Max = 1252;
-  Hist1Max = 15;
+  Hist1Max = 15+ 2*nchisqr;
   //   Hist2Max =  405;
     Hist2Max =  6;
   chisqr = 5;
@@ -595,6 +598,11 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   Hist2[4 ]= new TH2D("p %% Theta Cut3 w/MissMassCut       ","p %% Theta Cut3 w/MissMassCut       ;[theta];[GeV/c]",100,0,35,100,0,2);
   Hist2[5 ]= new TH2D("p %% Theta Cut3 w/MissMassCut*MtxCut","p %% Theta Cut3 w/MissMassCut*MtxCut;[theta];[GeV/c]",100,0,35,100,0,2);
   //  Hist2[1 ]= new TH2D("Sch Position by HitSegment % vpx[1] Cut1","Sch Position by HitSegment % vpx[1] Cut1",200,-400,400,100,-400,400);
+  //
+  for(int i=0; i<nchisqr;i++){
+    Hist1[15+i]= new TH1D(Form("Momentum Chisq<%d Cut3        ",chisqrG[i]),Form("Momentum Chisq<%d Cut3     ;Momentum[GeV/c];Counts",chisqrG[i]),100,0,2);
+    Hist1[15+i+nchisqr]= new TH1D(Form("Momentum Chisq<%d Cut5        ",chisqrG[i]),Form("Momentum Chisq<%d Cut5     ;Momentum[GeV/c];Counts",chisqrG[i]),100,0,2);
+  }
 
 
   //-Legend def --------------------------------------------------------------------------------------
@@ -626,7 +634,6 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
       if(delta_x[i]<-10 || delta_x[i]>10) continue;
       sch_flag = true;
     }
-
     if(sch_flag){ //Cut1
       if(chisqrKurama[0]<chisqr){ // Cut2
         if(qKurama[0]>0){ // Cut3
@@ -674,6 +681,40 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
           }
         } // Cut2
       } //Cut1
+    } 
+
+    // chisqr 
+    for(int i=0; i<nchisqr; i++){
+      if(sch_flag){ //Cut1
+        if(chisqrKurama[0]<chisqrG[i]){ // Cut2
+          if(qKurama[0]>0){ // Cut3
+            for(int l=0; l < Mtx_prm.size(); l++){
+              double m = 0;
+              double n = 0;
+              double min = 0;
+              double max = 0;
+              m = (double)Mtx_prm.at(l).at(1);
+              n = (double)Mtx_prm.at(l).at(0);
+              min = (double)Mtx_prm.at(l).at(2);
+              max = (double)Mtx_prm.at(l).at(3) + 1;
+
+              Hist1[15+i]->Fill(pKurama[0]);
+              if(vpseg[1]==n&&tofsegKurama[0]-1==m){
+                if(sftxsegKurama>min&&sftxsegKurama<max){
+                  mtx_flg = true;
+                  Hist1[15+i+nchisqr]->Fill(pKurama[0]);
+                  if(MissMass[0]>1.19&&MissMass[0]<1.29){
+                  }
+                }
+              }
+            } // Cut3
+            if(!mtx_flg){
+            }
+            if(MissMass[0]>1.19&&MissMass[0]<1.29){
+            }
+          } // Cut2
+        } //Cut1
+      } 
     } 
   } 
 
@@ -851,6 +892,38 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   c1->Print(pdf);
   //  c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_Hist1_0_1_same.pdf",pdfDhire.Data(),matrix,runnum));
 
+  TGraphErrors *graph[nchisqr];
+  double cx[nchisqr][100];
+  double cratio[nchisqr][100];
+  double cxerr[nchisqr][100];
+  double cratioerr[nchisqr][100];
+  for(int j=0;j<nchisqr; j++){
+    for(int i = 0; i<nBin; i++){
+      cx[j][i] = 2./(double)nBin/2. + (double)i*2./nBin;
+      double  a1=0.,a2=0.;
+      double  b1=0.,b2=0.;
+      a1=  Hist1[15+j+nchisqr]->GetBinContent(i+1);
+      b1=  Hist1[15+j]->GetBinContent(i+1);
+      //   x[i]=Hist1[g7]->GetXaxis()->GetBinCenter(i+i);
+      cratio[j][i] = a1/b1 ;
+      cxerr[j][i] = 1./(double)nBin/2.;
+      cratioerr[j][i] = sqrt(b1*cratio[j][i]*(1-cratio[j][i]))/b1;
+    }
+    graph[j]->SetMarkerStyle(20);
+    graph[j]->SetMarkerColor(1);
+    graph[j]->SetMarkerSize(2);
+    graph[j] = new TGraphErrors(nBin,&cx[j][0],&cratio[j][0],&cxerr[j][0],&cratioerr[j][0]);
+  }
+
+  for(int j=0;j<nchisqr; j++){
+    Hist1[15+j]->Draw();
+    Hist1[15+j+nchisqr]->SetLineColor(kRed); 
+    Hist1[15+j+nchisqr]->Draw("same");
+    c1->Print(pdf);
+    test->Draw();
+    graph[j]->Draw("P");
+    c1->Print(pdf);
+  }
 
 
 
