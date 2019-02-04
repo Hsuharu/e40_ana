@@ -688,6 +688,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
       for(int i=0; i<nchisqr; i++){
         if(chisqrKurama[0] < chisqrG[i]){ // Cut2
           if(qKurama[0]>0){ // Cut3
+            Hist1[15+i]->Fill(pKurama[0]);
             for(int l=0; l < Mtx_prm.size(); l++){
               double m = 0;
               double n = 0;
@@ -697,7 +698,6 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
               n = (double)Mtx_prm.at(l).at(0);
               min = (double)Mtx_prm.at(l).at(2);
               max = (double)Mtx_prm.at(l).at(3) + 1;
-              Hist1[15+i]->Fill(pKurama[0]);
               if(vpseg[1]==n&&tofsegKurama[0]-1==m){
                 if(sftxsegKurama>min&&sftxsegKurama<max){
                   Hist1[15+i+nchisqr]->Fill(pKurama[0]);
