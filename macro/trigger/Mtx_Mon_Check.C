@@ -795,7 +795,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   graph3->SetMarkerSize(2);
   TH1D *test = new TH1D("test",";Momentum   [GeV/c];Ratio",100,0,2);
   TH1D *test1 = new TH1D("test1",";Missig Mass   [GeV/c^{2}];Ratio",100,-2,2);
-  TH1D *test2 = new TH1D("test1",";Missig Mass   [GeV/c^{2}];Ratio",80,1,1.35);
+  TH1D *test2 = new TH1D("test2",";Missig Mass   [GeV/c^{2}];Ratio",80,1,1.35);
   test->SetAxisRange(0,1,"Y");
   //  c1->Print(Form("%s/Mtx_Pos_Mon_matrix%d_run%05d_Hist1_graph.pdf",pdfDhire.Data(),matrix,runnum));
 
