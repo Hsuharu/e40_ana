@@ -565,7 +565,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
 
   //-hist def-----------------------------------------------------------------------------------------
   //   Hist1Max = 1252;
-  Hist1Max = 8;
+  Hist1Max = 9;
   //   Hist2Max =  405;
     Hist2Max =  1;
   chisqr = 50;
@@ -771,7 +771,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     m_ratioerr[i] = sqrt(b2*m_ratio[i]*(1-m_ratio[i]))/b2;
   }
   for(int i = 0; i<nBinz; i++){
-    mz[i] = 1.35/(double)nBin/1.35 + (double)i*1.35/nBin + 1;
+    mz[i] = 1.35/(double)nBinz/1.35 + (double)i*1.35/nBinz + 1;
     double  a1=0.,b1=0.;
     a1=  Hist1[7]->GetBinContent(i+1);
     b1=  Hist1[6]->GetBinContent(i+1);
@@ -795,7 +795,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   graph3->SetMarkerSize(2);
   TH1D *test = new TH1D("test",";Momentum   [GeV/c];Ratio",100,0,2);
   TH1D *test1 = new TH1D("test1",";Missig Mass   [GeV/c^{2}];Ratio",100,-2,2);
-  TH1D *test2 = new TH1D("test1",";Missig Mass   [GeV/c^{2}];Ratio",100,1,1.35);
+  TH1D *test2 = new TH1D("test1",";Missig Mass   [GeV/c^{2}];Ratio",80,1,1.35);
   test->SetAxisRange(0,1,"Y");
   //  c1->Print(Form("%s/Mtx_Pos_Mon_matrix%d_run%05d_Hist1_graph.pdf",pdfDhire.Data(),matrix,runnum));
 
