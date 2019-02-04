@@ -911,6 +911,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     c1->Print(pdf);
   }
 
+  gStyle->SetOptTitle(0);
   for(int j=0;j<nchisqr; j++){
     Hist1[15+j]->Draw();
     Hist1[15+j+nchisqr]->SetLineColor(kRed); 
@@ -920,6 +921,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     graph[j]->Draw("P");
     c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_graph_ratio_chisqr%d.pdf",pdfDhire.Data(),matrix,runnum,chisqrG[j]));
   }
+  gStyle->SetOptTitle(1);
 
   c1->Print(pdfc+"["); 
   for(int j=0;j<nchisqr; j++){
