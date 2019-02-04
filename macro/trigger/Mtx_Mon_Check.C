@@ -568,7 +568,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
 
   //-hist def-----------------------------------------------------------------------------------------
   //   Hist1Max = 1252;
-  Hist1Max = 15+ 2*nchisqr;
+  Hist1Max = 27;
   //   Hist2Max =  405;
     Hist2Max =  6;
   chisqr = 5;
@@ -590,6 +590,10 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   Hist1[12]= new TH1D("Chisq Cut3 zoom           ","Chisq Cut3 zoom           ;Chisq;Counts",100,0,60);
   Hist1[13]= new TH1D("Chisq Cut5 zoom           ","Chisq Cut5 zoom           ;Chisq;Counts",100,0,60);
   Hist1[14]= new TH1D("Chisq Cut3 w/oCut5        ","Chisq Cut3 w/oCut5        ;Chisq;Counts",100,0,60);
+  for(int i=0; i<nchisqr;i++){
+    Hist1[15+i]= new TH1D(Form("Momentum Chisq<%d Cut3        ",chisqrG[i]),Form("Momentum Chisq<%d Cut3     ;Momentum[GeV/c];Counts",chisqrG[i]),100,0,2);
+    Hist1[15+i+nchisqr]= new TH1D(Form("Momentum Chisq<%d Cut5        ",chisqrG[i]),Form("Momentum Chisq<%d Cut5     ;Momentum[GeV/c];Counts",chisqrG[i]),100,0,2);
+  }
 
   Hist2[0 ]= new TH2D("p %% m2 Cut3 w/oCut5                ","p %% m2 Cut3 w/oCut5                ;[(GeV/c^{2})^{2}];[GeV/c]"   ,100,-0.4,1.6,100,0,2);
   Hist2[1 ]= new TH2D("p %% Theta Cut3                     ","p %% Theta Cut3                     ;[theta];[GeV/c]"       ,100,0,35,100,0,2);
@@ -599,10 +603,6 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   Hist2[5 ]= new TH2D("p %% Theta Cut3 w/MissMassCut*MtxCut","p %% Theta Cut3 w/MissMassCut*MtxCut;[theta];[GeV/c]",100,0,35,100,0,2);
   //  Hist2[1 ]= new TH2D("Sch Position by HitSegment % vpx[1] Cut1","Sch Position by HitSegment % vpx[1] Cut1",200,-400,400,100,-400,400);
   //
-  for(int i=0; i<nchisqr;i++){
-    Hist1[15+i]= new TH1D(Form("Momentum Chisq<%d Cut3        ",chisqrG[i]),Form("Momentum Chisq<%d Cut3     ;Momentum[GeV/c];Counts",chisqrG[i]),100,0,2);
-    Hist1[15+i+nchisqr]= new TH1D(Form("Momentum Chisq<%d Cut5        ",chisqrG[i]),Form("Momentum Chisq<%d Cut5     ;Momentum[GeV/c];Counts",chisqrG[i]),100,0,2);
-  }
 
 
   //-Legend def --------------------------------------------------------------------------------------
@@ -686,7 +686,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     // chisqr 
     if(sch_flag){ //Cut1
       for(int i=0; i<nchisqr; i++){
-        if(chisqrKurama[0]<chisqrG[i]){ // Cut2
+        if(chisqrKurama[0] < chisqrG[i]){ // Cut2
           if(qKurama[0]>0){ // Cut3
             for(int l=0; l < Mtx_prm.size(); l++){
               double m = 0;
@@ -700,17 +700,10 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
               Hist1[15+i]->Fill(pKurama[0]);
               if(vpseg[1]==n&&tofsegKurama[0]-1==m){
                 if(sftxsegKurama>min&&sftxsegKurama<max){
-                  mtx_flg = true;
                   Hist1[15+i+nchisqr]->Fill(pKurama[0]);
-                  if(MissMass[0]>1.19&&MissMass[0]<1.29){
-                  }
                 }
               }
             } // Cut3
-            if(!mtx_flg){
-            }
-            if(MissMass[0]>1.19&&MissMass[0]<1.29){
-            }
           } // Cut2
         } //Cut1
       } 
@@ -821,7 +814,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   for(int i = 0; i<nBin; i++){
     x[i] = 2./(double)nBin/2. + (double)i*2./nBin;
     m[i] = 4./(double)nBin/4. + (double)i*4./nBin -2;
-    mz[i] = 4./(double)nBin/4. + (double)i*4./nBin -2;
+    mz[i]= 4./(double)nBin/4. + (double)i*4./nBin -2;
     double  a1=0.,a2=0.;
     double  b1=0.,b2=0.;
     a1=  Hist1[1]->GetBinContent(i+1);

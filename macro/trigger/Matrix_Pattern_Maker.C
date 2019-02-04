@@ -64,10 +64,8 @@ bool eq3(int a,int b,int c){
 
 void Matrix_Pattern_Maker(int month,int runnum, int file=1){
 
-//  gStyle->SetOptStat(1111110); 
+  gStyle->SetOptStat(1111110); 
   gStyle->SetOptFit(1); 
-   gStyle->SetOptStat(0);
-   gStyle->SetOptTitle(0);
 
   //Reset ROOT and connect tree file
   gROOT->Reset();
@@ -104,24 +102,16 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
   }  
 
   while(std::getline(fin1, line)){
-    int sch=-1, tof=-1, sft_min=-1, sft_max=-1;
+    double sch=-1, tof=-1, sft_min=-1, sft_max=-1;
     std::istringstream input_line( line );
     std::vector<int> inner;
     if( input_line >> sch >> tof >> sft_min >> sft_max ){
       inner.push_back(sch);
       inner.push_back(tof);
-      if((int)sft_min%32==0){
-        inner.push_back(sft_min-10);
-      }else{
-        inner.push_back(sft_min-11);
-      }
+      inner.push_back(sft_min-11);
       inner.push_back(sft_max-1);
       Mtx_prm.push_back(inner);
-      if((int)sft_min%32==0){
-        SFTX_Min.push_back(sft_min-10);
-      }else{
-        SFTX_Min.push_back(sft_min-11);
-      }
+      SFTX_Min.push_back(sft_min-11);
       SFTX_Max.push_back(sft_max-1);
     }
     Mtx_Flag.push_back(true);
@@ -599,8 +589,8 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
   Hist1[31]= new TH1D("m2 Cut4","m2 Cut4",100,-0.4,1.4);
   Hist1[32]= new TH1D("pKurama Cut5","pKurama Cut5",100,0,2);
   Hist1[33]= new TH1D("m2 Cut5","m2 Cut5",100,-0.4,1.4);
-  Hist1[5452]= new TH1D("MissMass Sigma w/Mtrix Sigma","MissMass Sigma w/Mtrix Sigma;MissMass[GeV/cc];Counts",100,0.5,1.5);
-  Hist1[5453]= new TH1D("MissMass Sigma w/Mtrix","MissMass Sigma w/Mtrix;MissMass[GeV/cc];Counts",100,0.5,1.5);
+  Hist1[5452]= new TH1D("MissMass Sigma w/Mtrix Sigma","MissMass Sigma w/Mtrix Sigma",100,0.5,1.5);
+  Hist1[5453]= new TH1D("MissMass Sigma w/Mtrix","MissMass Sigma w/Mtrix",100,0.5,1.5);
 
   for(int l=0; l < Mtx_prm.size(); l++){
     Hist1[34+Mtx_prm.size()*0 +l]= new TH1D(Form("sftxseg Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),NumOfSegSFT_X,0,NumOfSegSFT_X);
@@ -828,25 +818,23 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
     PartSigmaTotal = Hist1[34+Mtx_prm.size()*16+l]->Integral();
     a1 = Hist1[34+Mtx_prm.size()*15+l]->Integral(65,75);
     b1 = Hist1[34+Mtx_prm.size()*15+l]->Integral(1,65) + Hist1[34+Mtx_prm.size()*15+l]->Integral(76,100);
-    if(PartSigmaTotal==0 || a1==0){ //|| b1==0){
+    if(PartSigmaTotal==0 || a1==0 || b1==0){
       Mtx_Flag.at(l)=false;
       continue;
     }
-//    if((double)PartSigmaTotal / SigmaTotal < (double)1/1000/300 || (double)a1/b1 < (double)a2/b2){
-    std::cout << "a1/b1=" << a1/b1 << "\ta2/b2=" << a2/b2 << std::endl;
-    if(b1!=0&&(double)a1/b1 < (double)a2/b2/10.){
+    if(PartSigmaTotal / SigmaTotal < 1/100/300 || a1/b1 < a2/b2){
       Mtx_Flag.at(l)=false;
       std::cout << "false" << "\t" << "TOFSeg" << Mtx_prm.at(l).at(1) << "\t" <<  "SCHSeg" << Mtx_prm.at(l).at(0) << std::endl;
     }
     if(!Mtx_Flag.at(l)) continue;
-
+    
     int min = 0;
     int max = 0;
     int cmax = 0;
     int cmin = 0;
 
     min = Mtx_prm.at(l).at(2);
-    max = Mtx_prm.at(l).at(3);
+    max = Mtx_prm.at(l).at(3) + 1;
     cmin = min;
     cmax = max;
     bool flag10=false;
@@ -859,18 +847,11 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
       continue;
     }
     for(int i=0; i<24; i++){
-      if(cmax==0 ||  min>=cmax) continue;
-      if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max)>1000){
-        if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)999/1000) continue;
-      }else if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max)>100){
-        if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)99/100) continue;
-      }else{
-        if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)9/10) continue;
-      }
       std::cout << Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) << "\t" << Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) << std::endl;
+      if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)99/100) continue;
       flag10=false;
       flag11=false;
-      if(cmax+1%32==0){
+      if(cmax%32==0){
         cmax-=10;
         flag10=true;
       }else{
@@ -880,7 +861,7 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
     }
     if(flag10) cmax+=10;
     if(flag11) cmax+=11;
-    if(cmax==0 || cmax<min ) std::cout << "ERROR1\t" <<"|| cmax=" << cmax << "\t|| min= " << min << std::endl; // Mtx_Flag.at(l)=false;
+    if(cmax==0 || cmax<min ) std::cout << "ERROR1" << std::endl; // Mtx_Flag.at(l)=false;
     SFTX_Max.at(l) = cmax;
 
     if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)==0){
@@ -888,58 +869,41 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
       continue;
     }
     for(int i=0; i<24; i++){
-      if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)==0) continue;
-      if(cmin==255 ||  cmin>=cmax) continue;
-      if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)>1000){
-        if((double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)999/1000) continue;
-      }else if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)>100){
-        if((double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)99/100) continue;
-      }else{
-        if((double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)9/10) continue;
-      }
       std::cout << Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) << "\t" << Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) << std::endl;
+      if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)==0) continue;
+      if(cmin<256 && cmin<cmax && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)99/100) continue;
       flag10_min=false;
       flag11_min=false;
-      if(cmin+1%32==22){
-        cmin+=10;
+      if(cmin%32==22){
+        cmax+=10;
         flag10_min=true;
       }else{
-        cmin+=11;
+        cmax+=11;
         flag11_min=true;
       }
     }
     if(flag10_min) cmin-=10;
     if(flag11_min) cmin-=11;
-    if(cmin==255 || cmin>cmax ) std::cout << "ERROR2\t" <<"|| cmax=" << cmax << "\t|| cmin= " << cmin  << std::endl; // Mtx_Flag.at(l)=false;
+    if(cmin==256 || cmin>cmax ) std::cout << "ERROR2" << std::endl; // Mtx_Flag.at(l)=false;
     SFTX_Min.at(l) = cmin;
   }                         
 
-//  for(int i=0; i<Mtx_prm.size(); i++){
-//    if(Mtx_prm.at(i).at(2)+1%32==0){
-//      if(Mtx_Flag.at(i)) std::cout << "SCH=" << Mtx_prm.at(i).at(0)  << "\t" << "TOF="  <<  Mtx_prm.at(i).at(1)  << "\t"  << "SFT_Min=" << Mtx_prm.at(i).at(2)+10  << "\t"  << "SFT_max=" << Mtx_prm.at(i).at(3) +1 << std::endl;
-//    }else{
-//      if(Mtx_Flag.at(i)) std::cout << "SCH=" << Mtx_prm.at(i).at(0)  << "\t" << "TOF="  <<  Mtx_prm.at(i).at(1)  << "\t"  << "SFT_Min=" << Mtx_prm.at(i).at(2)+11  << "\t"  << "SFT_max=" << Mtx_prm.at(i).at(3) +1 << std::endl;
-//    }
-//  }
-  /////////////////////////////////////////////////////////////////////////////////////////////
-  //                                                                                         //
-  //    New Matrix Pattern Maker                                                             //
-  //                                                                                         //
-  /////////////////////////////////////////////////////////////////////////////////////////////
-//  TString fileout1 = Form("%s/analyzer_%s/param/MATRIXSFT/SFT_Newtable.txt.2019Jan.1_%d",anadir.Data(),Month[month], file );
-//  //  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
-//
-//  std::ofstream fout1(fileout1.Data()); 
-//  for(int l=0; l<Mtx_prm.size(); l++){
-//    if(!Mtx_Flag.at(l)) continue;
-//    if(Mtx_prm.at(l).at(2)%32==22){
-//      fout1 << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" << SFTX_Min.at(l) + 10 <<  "\t"  << SFTX_Max.at(l)+1 << endl;
-////      std::cout << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" <<  Mtx_prm.at(l).at(2) + 10 << "to" << SFTX_Min.at(l) + 10 << "\t"  << Mtx_prm.at(l).at(3) + 1 << "to" << SFTX_Max.at(l)+1 << endl;
-//    }else{
-//      fout1 << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" << SFTX_Min.at(l) + 11 <<  "\t"  << SFTX_Max.at(l)+1 << endl;
-////      std::cout << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" <<  Mtx_prm.at(l).at(2) + 11 << "to" << SFTX_Min.at(l) + 11 << "\t"  << Mtx_prm.at(l).at(3) + 1 << "to" << SFTX_Max.at(l)+1 << endl;
-//    }
-//  }     
+  for(int i=0; i<Mtx_prm.size(); i++){
+    if(Mtx_Flag.at(i)) std::cout << "SCH=" << Mtx_prm.at(i).at(0)  << "\t" << "TOF="  <<  Mtx_prm.at(i).at(1)  << "\t"  << "SFT_Min=" << Mtx_prm.at(i).at(2)  << "\t"  << "SFT_max=" << Mtx_prm.at(i).at(3)  << std::endl;
+  }
+/////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                         //
+//    New Matrix Pattern Maker                                                             //
+//                                                                                         //
+/////////////////////////////////////////////////////////////////////////////////////////////
+  TString fileout1 = Form("%s/analyzer_%s/param/MATRIXSFT/SFT_Newtable.txt.2019Jan.1_%d",anadir.Data(),Month[month], file );
+//  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
+   
+  std::ofstream fout1(fileout1.Data()); 
+  for(int l=0; l<Mtx_prm.size(); l++){
+    if(!Mtx_Flag.at(l)) continue;
+    fout1 << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" << SFTX_Min.at(l) + 11 <<  "\t"  << SFTX_Max.at(l)+1 << endl;
+  }     
 
   ////-Canvas def---------------------------------------------------------------------------------------
   //
