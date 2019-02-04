@@ -803,7 +803,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     b1=  Hist1[6]->GetBinContent(i+1);
     //   x[i]=Hist1[g7]->GetXaxis()->GetBinCenter(i+i);
     mz_ratio[i] = a1/b1 ;
-    mzerr[i] = 1./(double)nBinz/0.35;
+    mzerr[i] = 0;//.35./(double)nBinz;
     mz_ratioerr[i] = sqrt(b1*mz_ratio[i]*(1-mz_ratio[i]))/b1;
   }
 
