@@ -790,6 +790,9 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   graph2->SetMarkerStyle(20);
   graph2->SetMarkerColor(1);
   graph2->SetMarkerSize(2);
+  graph3->SetMarkerStyle(20);
+  graph3->SetMarkerColor(1);
+  graph3->SetMarkerSize(2);
   TH1D *test = new TH1D("test",";Momentum   [GeV/c];Ratio",100,0,2);
   TH1D *test1 = new TH1D("test1",";Missig Mass   [GeV/c^{2}];Ratio",100,-2,2);
   TH1D *test2 = new TH1D("test1",";Missig Mass   [GeV/c^{2}];Ratio",100,1,1.35);
@@ -817,7 +820,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   Hist1[7]->SetLineColor(kRed); 
   Hist1[7]->Draw("same");
   c1->Print(pdf);
-  test1->Draw();
+  test2->Draw();
   graph3->Draw("P");
   c1->Print(pdf);
   //  c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_Hist1_0_1_same.pdf",pdfDhire.Data(),matrix,runnum));
