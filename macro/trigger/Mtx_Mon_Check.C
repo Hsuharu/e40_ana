@@ -792,32 +792,34 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   graph2->SetMarkerSize(2);
   TH1D *test = new TH1D("test",";Momentum   [GeV/c];Ratio",100,0,2);
   TH1D *test1 = new TH1D("test1",";Missig Mass   [GeV/c^{2}];Ratio",100,-2,2);
+  TH1D *test2 = new TH1D("test1",";Missig Mass   [GeV/c^{2}];Ratio",100,1,1.35);
   test->SetAxisRange(0,1,"Y");
-  test->Draw();
-  graph1->Draw("P");
-  c1->Print(pdf);
-  test1->Draw();
-  graph2->Draw("P");
-  c1->Print(pdf);
-
-  test1->Draw();
-  graph3->Draw("P");
-  c1->Print(pdf);
   //  c1->Print(Form("%s/Mtx_Pos_Mon_matrix%d_run%05d_Hist1_graph.pdf",pdfDhire.Data(),matrix,runnum));
 
   Hist1[0]->Draw();
   Hist1[1]->SetLineColor(kRed); 
   Hist1[1]->Draw("same");
   c1->Print(pdf);
+  test->Draw();
+  graph1->Draw("P");
+  c1->Print(pdf);
 
   Hist1[3]->Draw();
   Hist1[4]->SetLineColor(kRed); 
   Hist1[4]->Draw("same");
   c1->Print(pdf);
+  test1->Draw();
+  graph2->Draw("P");
+  c1->Print(pdf);
+
 
   Hist1[6]->Draw();
   Hist1[7]->SetLineColor(kRed); 
   Hist1[7]->Draw("same");
+  c1->Print(pdf);
+
+  test1->Draw();
+  graph3->Draw("P");
   c1->Print(pdf);
   //  c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_Hist1_0_1_same.pdf",pdfDhire.Data(),matrix,runnum));
 
