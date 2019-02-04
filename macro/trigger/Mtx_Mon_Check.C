@@ -575,9 +575,9 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   Hist1[0]= new TH1D("pKurama Cut3",";Momentum[GeV/c];Counts",100,0,2);
   Hist1[1]= new TH1D("pKurama Cut5",";Momentum[GeV/c];Counts",100,0,2);
   Hist1[2]= new TH1D("pKurama Cut3 w/oCut5",";Momentum[GeV/c];Counts",100,0,2);
-  Hist1[3]= new TH1D("MissMass Cut3",";MissMass[GeV/c^{2}];Counts",100,-10,10);
-  Hist1[4]= new TH1D("MissMass Cut5",";MissMass[GeV/c^{2}];Counts",100,-10,10);
-  Hist1[5]= new TH1D("MissMass Cut3 w/oCut5",";MissMass[GeV/c^{2}];Counts",100,-10,10);
+  Hist1[3]= new TH1D("MissMass Cut3",";MissMass[GeV/c^{2}];Counts",100,-2,2);
+  Hist1[4]= new TH1D("MissMass Cut5",";MissMass[GeV/c^{2}];Counts",100,-2,2);
+  Hist1[5]= new TH1D("MissMass Cut3 w/oCut5",";MissMass[GeV/c^{2}];Counts",100,-2,2);
 
   //  Hist2[0 ]= new TH2D("Sch Position by HitSegment % vpx[1]","Sch Position by HitSegment % vpx[1]",200,-400,400,100,-400,400);
   //  Hist2[1 ]= new TH2D("Sch Position by HitSegment % vpx[1] Cut1","Sch Position by HitSegment % vpx[1] Cut1",200,-400,400,100,-400,400);
@@ -744,13 +744,13 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   double ratioerr[100],m_ratioerr[100];
   for(int i = 0; i<nBin; i++){
     x[i] = 2./(double)nBin/2. + (double)i*2./nBin;
-    m[i] = 20./(double)nBin/20. + (double)i*20./nBin;
+    m[i] = 4./(double)nBin/4. + (double)i*4./nBin;
     double  a1=0.,a2=0.;
     double  b1=0.,b2=0.;
     a1=  Hist1[1]->GetBinContent(i+1);
     b1=  Hist1[0]->GetBinContent(i+1);
-    a2=  Hist1[3]->GetBinContent(i+1);
-    b2=  Hist1[4]->GetBinContent(i+1);
+    a2=  Hist1[4]->GetBinContent(i+1);
+    b2=  Hist1[3]->GetBinContent(i+1);
     //   x[i]=Hist1[g7]->GetXaxis()->GetBinCenter(i+i);
     ratio[i] = a1/b1 ;
     m_ratio[i] = a2/b2 ;
@@ -769,11 +769,12 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   graph2->SetMarkerColor(1);
   graph2->SetMarkerSize(2);
   TH1D *test = new TH1D("test",";Momentum   [GeV/c];Ratio",100,0,2);
+  TH1D *test1 = new TH1D("test1",";Momentum   [GeV/c^{2}];Ratio",100,-2,2);
   test->SetAxisRange(0,1,"Y");
   test->Draw();
   graph1->Draw("P");
   c1->Print(pdf);
-  test->Draw();
+  test1->Draw();
   graph2->Draw("P");
   c1->Print(pdf);
   //  c1->Print(Form("%s/Mtx_Pos_Mon_matrix%d_run%05d_Hist1_graph.pdf",pdfDhire.Data(),matrix,runnum));
