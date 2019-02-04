@@ -684,8 +684,8 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     } 
 
     // chisqr 
-    for(int i=0; i<nchisqr; i++){
-      if(sch_flag){ //Cut1
+    if(sch_flag){ //Cut1
+      for(int i=0; i<nchisqr; i++){
         if(chisqrKurama[0]<chisqrG[i]){ // Cut2
           if(qKurama[0]>0){ // Cut3
             for(int l=0; l < Mtx_prm.size(); l++){
@@ -697,7 +697,6 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
               n = (double)Mtx_prm.at(l).at(0);
               min = (double)Mtx_prm.at(l).at(2);
               max = (double)Mtx_prm.at(l).at(3) + 1;
-
               Hist1[15+i]->Fill(pKurama[0]);
               if(vpseg[1]==n&&tofsegKurama[0]-1==m){
                 if(sftxsegKurama>min&&sftxsegKurama<max){
@@ -909,10 +908,10 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
       cxerr[j][i] = 1./(double)nBin/2.;
       cratioerr[j][i] = sqrt(b1*cratio[j][i]*(1-cratio[j][i]))/b1;
     }
+    graph[j] = new TGraphErrors(nBin,&cx[j][0],&cratio[j][0],&cxerr[j][0],&cratioerr[j][0]);
     graph[j]->SetMarkerStyle(20);
     graph[j]->SetMarkerColor(1);
     graph[j]->SetMarkerSize(2);
-    graph[j] = new TGraphErrors(nBin,&cx[j][0],&cratio[j][0],&cxerr[j][0],&cratioerr[j][0]);
   }
 
   for(int j=0;j<nchisqr; j++){
