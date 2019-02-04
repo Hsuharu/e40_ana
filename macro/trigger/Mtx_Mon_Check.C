@@ -783,9 +783,9 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   Hist1[1]->Draw("same");
   c1->Print(pdf);
 
-  Hist1[2]->Draw();
-  Hist1[3]->SetLineColor(kRed); 
-  Hist1[3]->Draw("same");
+  Hist1[3]->Draw();
+  Hist1[4]->SetLineColor(kRed); 
+  Hist1[4]->Draw("same");
   c1->Print(pdf);
   //  c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_Hist1_0_1_same.pdf",pdfDhire.Data(),matrix,runnum));
 
