@@ -744,7 +744,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   double ratioerr[100],m_ratioerr[100];
   for(int i = 0; i<nBin; i++){
     x[i] = 2./(double)nBin/2. + (double)i*2./nBin;
-    m[i] = 4./(double)nBin/4. + (double)i*4./nBin;
+    m[i] = 4./(double)nBin/4. + (double)i*4./nBin -2;
     double  a1=0.,a2=0.;
     double  b1=0.,b2=0.;
     a1=  Hist1[1]->GetBinContent(i+1);
