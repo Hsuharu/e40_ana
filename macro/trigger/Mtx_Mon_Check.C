@@ -578,9 +578,9 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   Hist1[3]= new TH1D("MissMass Cut3",";MissMass[GeV/c^{2}];Counts",100,-2,2);
   Hist1[4]= new TH1D("MissMass Cut5",";MissMass[GeV/c^{2}];Counts",100,-2,2);
   Hist1[5]= new TH1D("MissMass ",";MissMass [GeV/c^{2}];Counts",100,-2,2);
-  Hist1[6]= new TH1D("MissMass Cut3 zoom",";MissMass[GeV/c^{2}];Counts",100,1,1.35);
-  Hist1[7]= new TH1D("MissMass Cut5 zoom",";MissMass[GeV/c^{2}];Counts",100,1,1.35);
-  Hist1[8]= new TH1D("MissMass Cut3 w/oCut5 zoom",";MissMass[GeV/c^{2}];Counts",100,1,1.35);
+  Hist1[6]= new TH1D("MissMass Cut3 zoom",";MissMass[GeV/c^{2}];Counts",80,1,1.35);
+  Hist1[7]= new TH1D("MissMass Cut5 zoom",";MissMass[GeV/c^{2}];Counts",80,1,1.35);
+  Hist1[8]= new TH1D("MissMass Cut3 w/oCut5 zoom",";MissMass[GeV/c^{2}];Counts",80,1,1.35);
 
   Hist2[0 ]= new TH2D("m2 %% p Cut3 w/oCut5",";[(GeV/c^{2})^{2}];[GeV/c]",100,-0.4,1.6,100,0,2);
   //  Hist2[1 ]= new TH2D("Sch Position by HitSegment % vpx[1] Cut1","Sch Position by HitSegment % vpx[1] Cut1",200,-400,400,100,-400,400);
@@ -621,7 +621,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
         if(qKurama[0]>0){ // Cut3
           Hist1[0]->Fill(pKurama[0]);
           Hist1[3]->Fill(MissMass[0]);
-          Hist1[7]->Fill(MissMass[0]);
+          Hist1[6]->Fill(MissMass[0]);
           for(int l=0; l < Mtx_prm.size(); l++){
             double m = 0;
             double n = 0;
@@ -635,7 +635,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
               if(sftxsegKurama>min&&sftxsegKurama<max){
                 Hist1[1]->Fill(pKurama[0]);
                 Hist1[4]->Fill(MissMass[0]);
-                Hist1[6]->Fill(MissMass[0]);
+                Hist1[7]->Fill(MissMass[0]);
                 mtx_flg = true;
               }
             }
@@ -747,13 +747,15 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
 
 
   int nBin = 100;
-  double x[100],m[100];
-  double ratio[100],m_ratio[100];
-  double xerr[100],merr[100];
-  double ratioerr[100],m_ratioerr[100];
+  int nBinz = 80;
+  double x[100],m[100],mz[80];
+  double ratio[100],m_ratio[100],mz_ratio[80];
+  double xerr[100],merr[100],mzerr[80];
+  double ratioerr[100],m_ratioerr[100],mz_ratioerr[80];
   for(int i = 0; i<nBin; i++){
     x[i] = 2./(double)nBin/2. + (double)i*2./nBin;
     m[i] = 4./(double)nBin/4. + (double)i*4./nBin -2;
+    mz[i] = 4./(double)nBin/4. + (double)i*4./nBin -2;
     double  a1=0.,a2=0.;
     double  b1=0.,b2=0.;
     a1=  Hist1[1]->GetBinContent(i+1);
@@ -768,9 +770,20 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     ratioerr[i] = sqrt(b1*ratio[i]*(1-ratio[i]))/b1;
     m_ratioerr[i] = sqrt(b2*m_ratio[i]*(1-m_ratio[i]))/b2;
   }
+  for(int i = 0; i<nBinz; i++){
+    mz[i] = 1.35/(double)nBin/1.35 + (double)i*1.35/nBin 1;
+    double  a1=0.,a2=0.;
+    a1=  Hist1[7]->GetBinContent(i+1);
+    b1=  Hist1[6]->GetBinContent(i+1);
+    //   x[i]=Hist1[g7]->GetXaxis()->GetBinCenter(i+i);
+    mz_ratio[i] = a1/b1 ;
+    mzerr[i] = 1./(double)nBinz/1.35;
+    mz_ratioerr[i] = sqrt(b1*mz_ratio[i]*(1-mz_ratio[i]))/b1;
+  }
 
   TGraphErrors *graph1 = new TGraphErrors(nBin,x,ratio,xerr,ratioerr);
   TGraphErrors *graph2 = new TGraphErrors(nBin,m,m_ratio,merr,m_ratioerr);
+  TGraphErrors *graph3 = new TGraphErrors(nBinz,mz,mz_ratio,mzerr,mz_ratioerr);
   graph1->SetMarkerStyle(20);
   graph1->SetMarkerColor(1);
   graph1->SetMarkerSize(2);
@@ -783,6 +796,10 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   test->Draw();
   graph1->Draw("P");
   c1->Print(pdf);
+  test1->Draw();
+  graph2->Draw("P");
+  c1->Print(pdf);
+
   test1->Draw();
   graph2->Draw("P");
   c1->Print(pdf);
