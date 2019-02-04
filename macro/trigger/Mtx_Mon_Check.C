@@ -86,6 +86,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   gROOT->Reset();
   TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
   TString pdf = Form("%s/pdf/trigger/Mtx_Mon_Check%d_run%05d.pdf", anadir.Data(),matrix,runnum);
+  TString pdfc = Form("%s/pdf/trigger/Mtx_Mon_Check%dbychisqr_run%05d.pdf", anadir.Data(),matrix,runnum);
   TString pdfDhire = Form("%s/pdf/trigger", anadir.Data());
   //   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/trigf19_tofht.root", anadir.Data(),Month[month]),"READ");
   //   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_DstKuramaEasirocHodoscope_BH2TOF.root", anadir.Data(),Month[month],runnum),"READ");
@@ -592,7 +593,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   Hist1[14]= new TH1D("Chisq Cut3 w/oCut5        ","Chisq Cut3 w/oCut5        ;Chisq;Counts",100,0,60);
   for(int i=0; i<nchisqr;i++){
     Hist1[15+i]= new TH1D(Form("Momentum Chisq<%d Cut3        ",chisqrG[i]),Form("Momentum Chisq<%d Cut3     ;Momentum[GeV/c];Counts",chisqrG[i]),100,0,2);
-    Hist1[15+i+nchisqr]= new TH1D(Form("Momentum Chisq<%d Cut5        ",chisqrG[i]),Form("Momentum Chisq<%d Cut5     ;Momentum[GeV/c];Counts",chisqrG[i]),100,0,2);
+    Hist1[15+i+nchisqr]= new TH1D(Form("Momentum Chisq<%d Cut5",chisqrG[i]),Form("Momentum Chisq<%d Cut5     ;Momentum[GeV/c];Counts",chisqrG[i]),100,0,2);
   }
 
   Hist2[0 ]= new TH2D("p %% m2 Cut3 w/oCut5                ","p %% m2 Cut3 w/oCut5                ;[(GeV/c^{2})^{2}];[GeV/c]"   ,100,-0.4,1.6,100,0,2);
@@ -914,9 +915,26 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     Hist1[15+j]->Draw();
     Hist1[15+j+nchisqr]->SetLineColor(kRed); 
     Hist1[15+j+nchisqr]->Draw("same");
-    c1->Print(pdf);
+    c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_Hist1_ratio_chisqr%d.pdf",pdfDhire.Data(),matrix,runnum,chisqrG[j]));
+    test->Draw();
+    graph[j]->Draw("P");
+    c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_graph_ratio_chisqr%d.pdf",pdfDhire.Data(),matrix,runnum,chisqrG[j]));
   }
 
+  c1->Print(pdfc+"["); 
+  for(int j=0;j<nchisqr; j++){
+    Hist1[15+j]->Draw();
+    Hist1[15+j+nchisqr]->SetLineColor(kRed); 
+    Hist1[15+j+nchisqr]->Draw("same");
+    c1->Print(pdf);
+    c1->Print(pdfc);
+    test->SetTitle(Form("Momentum Ratio(Cut5/Cut3)  Chisq<%d",chisqrG[j]));
+    test->Draw();
+    graph[j]->Draw("P");
+    c1->Print(pdf);
+    c1->Print(pdfc);
+  }
+  c1->Print(pdfc+"]"); 
 
 
   //   for(int p=0; p<10; p++ ){
