@@ -12,15 +12,15 @@ src/build/Utility.o: src/Utility.cc \
  /group/had/sks/software/unpacker/unpacker.gcc530/include/Unpacker.hh \
  /group/had/sks/software/unpacker/unpacker.gcc530/include/UnpackerManager.hh \
  /group/had/sks/software/unpacker/unpacker.gcc530/include/Singleton.hh \
- include/Utility.hh /sw/packages/root/6.10.08/include/TTimeStamp.h \
- /sw/packages/root/6.10.08/include/Rtypes.h \
- /sw/packages/root/6.10.08/include/RtypesCore.h \
- /sw/packages/root/6.10.08/include/RConfig.h \
- /sw/packages/root/6.10.08/include/RVersion.h \
- /sw/packages/root/6.10.08/include/DllImport.h \
- /sw/packages/root/6.10.08/include/snprintf.h \
- /sw/packages/root/6.10.08/include/strlcpy.h \
- /sw/packages/root/6.10.08/include/TGenericClassInfo.h \
- /sw/packages/root/6.10.08/include/TSchemaHelper.h \
- /sw/packages/root/6.10.08/include/TIsAProxy.h \
- /sw/packages/root/6.10.08/include/TVirtualIsAProxy.h
+ include/Utility.hh /sw/packages/root/6.12.06/include/TTimeStamp.h \
+ /sw/packages/root/6.12.06/include/Rtypes.h \
+ /sw/packages/root/6.12.06/include/RtypesCore.h \
+ /sw/packages/root/6.12.06/include/RConfig.h \
+ /sw/packages/root/6.12.06/include/RVersion.h \
+ /sw/packages/root/6.12.06/include/DllImport.h \
+ /sw/packages/root/6.12.06/include/snprintf.h \
+ /sw/packages/root/6.12.06/include/strlcpy.h \
+ /sw/packages/root/6.12.06/include/TGenericClassInfo.h \
+ /sw/packages/root/6.12.06/include/TSchemaHelper.h \
+ /sw/packages/root/6.12.06/include/TIsAProxy.h \
+ /sw/packages/root/6.12.06/include/TVirtualIsAProxy.h
