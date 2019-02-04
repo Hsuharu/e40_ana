@@ -577,9 +577,9 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   Hist1[2]= new TH1D("pKurama Cut3 w/oCut5",";Momentum[GeV/c];Counts",100,0,2);
   Hist1[3]= new TH1D("MissMass Cut3",";MissMass[GeV/c^{2}];Counts",100,-2,2);
   Hist1[4]= new TH1D("MissMass Cut5",";MissMass[GeV/c^{2}];Counts",100,-2,2);
-  Hist1[5]= new TH1D("MissMass ",";MissMass[GeV/c^{2}];Counts",100,-2,2);
+  Hist1[5]= new TH1D("MissMass ",";MissMass [GeV/c^{2}];Counts",100,-2,2);
 
-  Hist2[0 ]= new TH2D("m2 %% p Cut3 w/oCut5",";[GeV/c];[(GeV/c^{2})^{2}]",100,-0.4,1.6,100,0,2);
+  Hist2[0 ]= new TH2D("m2 %% p Cut3 w/oCut5",";[(GeV/c^{2})^{2}];[GeV/c]",100,-0.4,1.6,100,0,2);
   //  Hist2[1 ]= new TH2D("Sch Position by HitSegment % vpx[1] Cut1","Sch Position by HitSegment % vpx[1] Cut1",200,-400,400,100,-400,400);
 
 
@@ -772,7 +772,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   graph2->SetMarkerColor(1);
   graph2->SetMarkerSize(2);
   TH1D *test = new TH1D("test",";Momentum   [GeV/c];Ratio",100,0,2);
-  TH1D *test1 = new TH1D("test1",";Momentum   [GeV/c^{2}];Ratio",100,-2,2);
+  TH1D *test1 = new TH1D("test1",";Missig Mass   [GeV/c^{2}];Ratio",100,-2,2);
   test->SetAxisRange(0,1,"Y");
   test->Draw();
   graph1->Draw("P");
