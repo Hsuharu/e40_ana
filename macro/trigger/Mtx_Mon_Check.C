@@ -774,7 +774,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   graph1->Draw("P");
   c1->Print(pdf);
   test->Draw();
-  graph1->Draw("P");
+  graph2->Draw("P");
   c1->Print(pdf);
   //  c1->Print(Form("%s/Mtx_Pos_Mon_matrix%d_run%05d_Hist1_graph.pdf",pdfDhire.Data(),matrix,runnum));
 
