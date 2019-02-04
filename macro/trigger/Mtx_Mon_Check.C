@@ -740,7 +740,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   int nBin = 100;
   double x[100],m[100];
   double ratio[100],m_ratio[100];
-  double xerr[100],merr[0];
+  double xerr[100],merr[100];
   double ratioerr[100],m_ratioerr[100];
   for(int i = 0; i<nBin; i++){
     x[i] = 2./(double)nBin/2. + (double)i*2./nBin;
