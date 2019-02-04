@@ -567,7 +567,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   //   Hist1Max = 1252;
   Hist1Max = 6;
   //   Hist2Max =  405;
-  //  Hist2Max =  2;
+    Hist2Max =  1;
   chisqr = 50;
   TH1D *Hist1[Hist1Max];
   TH2D *Hist2[Hist2Max];
@@ -577,9 +577,9 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   Hist1[2]= new TH1D("pKurama Cut3 w/oCut5",";Momentum[GeV/c];Counts",100,0,2);
   Hist1[3]= new TH1D("MissMass Cut3",";MissMass[GeV/c^{2}];Counts",100,-2,2);
   Hist1[4]= new TH1D("MissMass Cut5",";MissMass[GeV/c^{2}];Counts",100,-2,2);
-  Hist1[5]= new TH1D("MissMass Cut3 w/oCut5",";MissMass[GeV/c^{2}];Counts",100,-2,2);
+  Hist1[5]= new TH1D("MissMass ",";MissMass[GeV/c^{2}];Counts",100,-2,2);
 
-  //  Hist2[0 ]= new TH2D("Sch Position by HitSegment % vpx[1]","Sch Position by HitSegment % vpx[1]",200,-400,400,100,-400,400);
+  Hist2[0 ]= new TH2D("m2 %% p Cut3 w/oCut5",";[GeV/c];[(GeV/c^{2})^{2}]",100,-0.4,1.6,100,0,2);
   //  Hist2[1 ]= new TH2D("Sch Position by HitSegment % vpx[1] Cut1","Sch Position by HitSegment % vpx[1] Cut1",200,-400,400,100,-400,400);
 
 
@@ -596,12 +596,14 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   Long64_t nbytes = 0;
   for (Long64_t s=0; s<nentries;s++) {
     nbytes += pik->GetEntry(s);
-
-    bool mtx_flg = false;
-
     if(s%(nentries/10) ==0){
       std::cout << ( ((double)s)/nentries *100 ) << "%\t" << s << "/" << nentries << "\r"  << std::endl;
     }
+
+    if(!(trigflag[19]>0)) continue;
+
+    bool mtx_flg = false;
+
 
     if( ntKurama!=1) continue;
     bool sch_flag = false;
@@ -636,6 +638,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
           if(!mtx_flg){
             Hist1[2]->Fill(pKurama[0]);
             Hist1[5]->Fill(MissMass[0]);
+            Hist2[0]->Fill(m2[0],pKurama[0]);
           }
         } // Cut2
       } //Cut1
@@ -670,11 +673,11 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     //     c1->Print(Form("%s/Mtx_Mon_Chack%d_run%05d_Hist1_%04d.pdf",pdfDhire.Data(),matrix,runnum,i));
     //     if(i==15 || i==16 || i==38) gPad->SetLogy(0);
   }
-  //   for(int i=0; i<Hist2Max; i++){
-  //     Hist2[i]->Draw("colz");
-  //     c1->Print(pdf);
-  //     c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist2_colz_%04d.pdf",pdfDhire.Data(),matrix,runnum,i));
-  //   }
+  for(int i=0; i<Hist2Max; i++){
+    Hist2[i]->Draw("colz");
+    c1->Print(pdf);
+//    c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist2_colz_%04d.pdf",pdfDhire.Data(),matrix,runnum,i));
+  }
   //   for(int j=0; j<Hist2Max; j++){
   //     Hist2[j]->Draw("box");
   //
