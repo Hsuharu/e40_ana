@@ -277,7 +277,7 @@ void triggerrate(){
   graph->SetMarkerColor(1);
   graph->SetMarkerSize(2);
   graph->GetXaxis()->SetTitle("Gate [ns]");
-  graph->GetYaxis()->SetTitle("Efficiency");
+  graph->GetYaxis()->SetTitle("Sigma N");
   graph->Draw("AP");
   c1->Print(Form("%s/Gate_Yield.pdf",pdfDhire.Data()));
 

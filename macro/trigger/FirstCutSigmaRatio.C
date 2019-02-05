@@ -112,6 +112,8 @@ void FirstCutSigmaRatio(){
     g[i]->SetMarkerColor(1);
     g[i]->SetMarkerSize(2);
     g[i]->Draw("AP");
+    g[i]->GetXaxis()->SetTitle("Ratio");
+    g[i]->GetYaxis()->SetTitle("Counts");
     c1->Print(pdf);
     c1->Print(Form("%s/SigmabyNumber%d.pdf",pdfDhire.Data(), i+1));
   }
@@ -123,6 +125,8 @@ void FirstCutSigmaRatio(){
     ge[i]->SetMarkerSize(2);
     ge[i]->SetMaximum(1);
     ge[i]->SetMinimum(0.9);
+    ge[i]->GetXaxis()->SetTitle("Ratio");
+    ge[i]->GetYaxis()->SetTitle("Efficiency");
     ge[i]->Draw("AP");
     c1->Print(pdf);
     c1->Print(Form("%s/SigmabyRatio%d.pdf",pdfDhire.Data(), i+1));
