@@ -104,7 +104,8 @@ void FirstCutSigmaRatio(){
     g[i]->SetMarkerStyle(8);
     g[i]->SetMarkerColor(1);
     g[i]->SetMarkerSize(2);
-    g[i]->SetMinimum(0);
+//    g[i]->SetMinimum(0.9);
+    if(i==2||i==3) g[i]->SetMinimum(0.9);
     g[i]->Draw("AP");
     c1->Print(pdf);
     c1->Print(Form("%s/SigmabyRatio%d.pdf",pdfDhire.Data(), i+1));
