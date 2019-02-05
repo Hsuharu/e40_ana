@@ -130,6 +130,10 @@ void FirstCutSigmaRatio(){
     ge[i]->Draw("AP");
     c1->Print(pdf);
     c1->Print(Form("%s/SigmabyRatio%d.pdf",pdfDhire.Data(), i+1));
+    ge[i]->SetMinimum(0.95);
+    ge[i]->Draw("AP");
+    c1->Print(pdf);
+    c1->Print(Form("%s/SigmabyRatio%dzoom.pdf",pdfDhire.Data(), i+1));
   }
   c1->Print(pdf+"]"); 
 
