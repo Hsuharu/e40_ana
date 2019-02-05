@@ -117,6 +117,9 @@ void FirstCutSigmaRatio(){
     c1->Print(pdf);
     c1->Print(Form("%s/SigmabyNumber%d.pdf",pdfDhire.Data(), i+1));
   }
+      TLine *line99 = new TLine(0,0.99,20,0.99);
+      line99->SetLineColor(2);
+      line99->SetLineWidth(1);
   for(int i=0; i<gnum; i++ ){
     gStyle->SetOptStat(0);
     ge[i]->SetTitle("");
@@ -127,11 +130,13 @@ void FirstCutSigmaRatio(){
     ge[i]->SetMinimum(0.9);
     ge[i]->GetXaxis()->SetTitle("Ratio");
     ge[i]->GetYaxis()->SetTitle("Efficiency");
-    ge[i]->Draw("AP");
+    line99->Draw();
+    ge[i]->Draw("P");
     c1->Print(pdf);
     c1->Print(Form("%s/SigmabyRatio%d.pdf",pdfDhire.Data(), i+1));
     ge[i]->SetMinimum(0.95);
-    ge[i]->Draw("AP");
+    line99->Draw();
+    ge[i]->Draw("P");
     c1->Print(pdf);
     c1->Print(Form("%s/SigmabyRatio%dzoom.pdf",pdfDhire.Data(), i+1));
   }
