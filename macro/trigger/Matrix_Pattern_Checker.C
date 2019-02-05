@@ -62,7 +62,7 @@ bool eq3(int a,int b,int c){
 }
 
 
-void Matrix_Pattern_Maker(int month,int runnum, int file=1){
+void Matrix_Pattern_Checker(int month,int runnum, int file=2, int ratio=10){
 
 //  gStyle->SetOptStat(1111110); 
   gStyle->SetOptFit(1); 
@@ -73,8 +73,8 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
   gROOT->Reset();
   gROOT->Reset();
   TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-  TString pdf = Form("%s/pdf/trigger/Matrix_Pattern_Maker_run%05d.pdf", anadir.Data(),runnum);
-  TString pdf1 = Form("%s/pdf/trigger/Matrix_Pattern_Maker_Check_run%05d.pdf", anadir.Data(),runnum);
+  TString pdf = Form("%s/pdf/trigger/Matrix_Pattern_Checker_run%05d.pdf", anadir.Data(),runnum);
+  TString pdf1 = Form("%s/pdf/trigger/Matrix_Pattern_Checker_Check_run%05d.pdf", anadir.Data(),runnum);
   TString pdfDhire = Form("%s/pdf/trigger", anadir.Data());
 
   //Matrix Patern txt file PATH -----------------------------------------------------------------------
@@ -655,7 +655,7 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
 
   //-Event Loop --------------------------------------------------------------------------------------
   Long64_t nentries = pik->GetEntries();
-  //   Long64_t nentries = 10000;
+//     Long64_t nentries = 10000;
 
   //-Event Loop First --------
   for (Long64_t s=0; s<nentries;s++) {
@@ -833,11 +833,40 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
       continue;
     }
 //    if((double)PartSigmaTotal / SigmaTotal < (double)1/1000/300 || (double)a1/b1 < (double)a2/b2){
-    std::cout << "a1/b1=" << a1/b1 << "\ta2/b2=" << a2/b2 << std::endl;
-    if(b1!=0&&(double)a1/b1 < (double)a2/b2/10.){
-      Mtx_Flag.at(l)=false;
-      std::cout << "false" << "\t" << "TOFSeg" << Mtx_prm.at(l).at(1) << "\t" <<  "SCHSeg" << Mtx_prm.at(l).at(0) << std::endl;
+    if(b1!=0){
+      std::cout << "a1/b1=" << (double)a1/b1 << "\ta2/b2=" << (double)a2/b2 << "\ta1/b1 / a2/b2=" << (double)(a1/b1)/(a2/b2)<<  std::endl;
+      if((double)a1/b1 < (double)a2/b2/ratio){
+        Mtx_Flag.at(l)=false;
+        std::cout << "false" << "\t" << "TOFSeg" << Mtx_prm.at(l).at(1) << "\t" <<  "SCHSeg" << Mtx_prm.at(l).at(0) << std::endl;
+      }
+    }else{
+      std::cout << "a1/0.1=" << (double)a1/0.1 << "\ta2/b2=" << (double)a2/b2 << "\ta1/0.1 / a2/b2=" << (double)(a1/0.1)/(a2/b2)<<  std::endl;
+      if((double)a1/0.1 < (double)a2/b2/ratio){
+        Mtx_Flag.at(l)=false;
+        std::cout << "false" << "\t" << "TOFSeg" << Mtx_prm.at(l).at(1) << "\t" <<  "SCHSeg" << Mtx_prm.at(l).at(0) << std::endl;
+      }
     }
+    
+  /////////////////////////////////////////////////////////////////////////////////////////////
+  //                                                                                         //
+  //    Matrix Pattern Maker   Checker                                                       //
+  //                                                                                         //
+  /////////////////////////////////////////////////////////////////////////////////////////////
+  TString fileout2 = Form("%s/analyzer_%s/param/MATRIXSFT/SFT_CutFirst_ratio%d_Newtable.txt.2019Jan.1_%d",anadir.Data(),Month[month],ratio, file );
+  //  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
+
+  std::ofstream fout2(fileout2.Data()); 
+  for(int l=0; l<Mtx_prm.size(); l++){
+    if(!Mtx_Flag.at(l)) continue;
+    if(Mtx_prm.at(l).at(2)%32==22){
+      fout2 << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" << SFTX_Min.at(l) + 10 <<  "\t"  << SFTX_Max.at(l)+1 << endl;
+//      std::cout << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" <<  Mtx_prm.at(l).at(2) + 10 << "to" << SFTX_Min.at(l) + 10 << "\t"  << Mtx_prm.at(l).at(3) + 1 << "to" << SFTX_Max.at(l)+1 << endl;
+    }else{
+      fout2 << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" << SFTX_Min.at(l) + 11 <<  "\t"  << SFTX_Max.at(l)+1 << endl;
+//      std::cout << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" <<  Mtx_prm.at(l).at(2) + 11 << "to" << SFTX_Min.at(l) + 11 << "\t"  << Mtx_prm.at(l).at(3) + 1 << "to" << SFTX_Max.at(l)+1 << endl;
+    }
+  }     
+
     if(!Mtx_Flag.at(l)) continue;
 
     int min = 0;

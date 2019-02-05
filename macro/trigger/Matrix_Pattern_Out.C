@@ -33,7 +33,15 @@ bool eq3(int a,int b,int c){
  {
    "SFT_Newtable.txt.2019Jan.1_1",
    "SFT_Newtable.txt.2019Jan.1_2",
-   "SFT_table.txt.2018Jun.3_1   "
+   "SFT_table.txt.2018Jun.3_1",
+   "SFT_CutFirst_ratio100_Newtable.txt.2019Jan.1_2",  
+    "SFT_CutFirst_ratio10_Newtable.txt.2019Jan.1_2",  
+     "SFT_CutFirst_ratio1_Newtable.txt.2019Jan.1_2",  
+     "SFT_CutFirst_ratio2_Newtable.txt.2019Jan.1_2",  
+     "SFT_CutFirst_ratio4_Newtable.txt.2019Jan.1_2",  
+     "SFT_CutFirst_ratio5_Newtable.txt.2019Jan.1_2",  
+     "SFT_CutFirst_ratio6_Newtable.txt.2019Jan.1_2",  
+     "SFT_CutFirst_ratio8_Newtable.txt.2019Jan.1_2"  
  };
 
 
