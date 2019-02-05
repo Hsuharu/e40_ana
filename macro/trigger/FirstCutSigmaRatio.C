@@ -43,6 +43,9 @@ void FirstCutSigmaRatio(){
   std::vector<double> FirstCutSigmaNum2  ;
   std::vector<double> FirstCutSigmaAccept1  ;
   std::vector<double> FirstCutSigmaAccept2  ;
+  std::vector<double> Accept1err  ;
+  std::vector<double> Accept2err  ;
+  std::vector<double> xerr  ;
 
   TString filein1=Form("%s/dat/trigger/SigmaNumberByMatrix123.txt", anadir.Data()); 
   TString filein2=Form("%s/dat/trigger/SigmaNumberByMatrix1.txt", anadir.Data()); 
@@ -86,17 +89,21 @@ void FirstCutSigmaRatio(){
     FirstCutSigmaAccept1.push_back(a);
     b = FirstCutSigmaNum2.at(i)/AllCutSigmaNum.at(2);
     FirstCutSigmaAccept2.push_back(b);
+    Accept1err.push_back(sqrt(AllCutSigmaNum.at(2)*a*(1-a))/AllCutSigmaNum.at(2));
+    Accept2err.push_back(sqrt(AllCutSigmaNum.at(2)*b*(1-b))/AllCutSigmaNum.at(2));
+    xerr.push_back(0);
   }
 
 
   TCanvas *c1 = new TCanvas("c1","c1",1200,900);
   c1->Print(pdf+"["); 
-  int gnum = 4;
+  int gnum = 2;
   TGraph *g[gnum];
+  TGraphErrors *ge[gnum];
   g[0] = new TGraph(FirstCutRatio1.size(),FirstCutRatio1.data(),FirstCutSigmaNum1.data());
   g[1] = new TGraph(FirstCutRatio2.size(),FirstCutRatio2.data(),FirstCutSigmaNum2.data());
-  g[2] = new TGraph(FirstCutRatio1.size(),FirstCutRatio1.data(),FirstCutSigmaAccept1.data());
-  g[3] = new TGraph(FirstCutRatio2.size(),FirstCutRatio2.data(),FirstCutSigmaAccept2.data());
+  ge[0] = new TGraphErrors(FirstCutRatio1.size(),FirstCutRatio1.data(),FirstCutSigmaAccept1.data(),xerr.data(),Accept1err.data());
+  ge[1] = new TGraphErrors(FirstCutRatio2.size(),FirstCutRatio2.data(),FirstCutSigmaAccept2.data(),xerr.data(),Accept2err.data());
 
   for(int i=0; i<gnum; i++ ){
     gStyle->SetOptStat(0);
@@ -104,9 +111,19 @@ void FirstCutSigmaRatio(){
     g[i]->SetMarkerStyle(8);
     g[i]->SetMarkerColor(1);
     g[i]->SetMarkerSize(2);
-//    g[i]->SetMinimum(0.9);
-    if(i==2||i==3) g[i]->SetMinimum(0.9);
     g[i]->Draw("AP");
+    c1->Print(pdf);
+    c1->Print(Form("%s/SigmabyNumber%d.pdf",pdfDhire.Data(), i+1));
+  }
+  for(int i=0; i<gnum; i++ ){
+    gStyle->SetOptStat(0);
+    ge[i]->SetTitle("");
+    ge[i]->SetMarkerStyle(8);
+    ge[i]->SetMarkerColor(1);
+    ge[i]->SetMarkerSize(2);
+    ge[i]->SetMaximum(1);
+    ge[i]->SetMinimum(0.9);
+    ge[i]->Draw("AP");
     c1->Print(pdf);
     c1->Print(Form("%s/SigmabyRatio%d.pdf",pdfDhire.Data(), i+1));
   }
