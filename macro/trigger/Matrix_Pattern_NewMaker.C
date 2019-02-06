@@ -62,7 +62,7 @@ bool eq3(int a,int b,int c){
 }
 
 
-void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
+void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2,int parcent=36){
 
   gStyle->SetOptTitle(0);
   gStyle->SetOptStat(0);
@@ -664,7 +664,7 @@ void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
     //    a1 = Hist1[34+Mtx_prm.size()*15+l]->Integral(65,75);
     a1 = Hist1[2+Mtx_prm.size()*1+l]->Integral();
     //    b1 = Hist1[34+Mtx_prm.size()*15+l]->Integral(1,65) + Hist1[34+Mtx_prm.size()*15+l]->Integral(76,100);
-    if(PartSigmaTotal==0 || a1==0){
+    if(PartSigmaTotal==0 || a1==0|| PartSigmaTotal==0){
       Mtx_Flag.at(l)=false;
       continue;
     }
@@ -674,21 +674,32 @@ void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
       Hist1[2+Mtx_prm.size()*2+1]->Fill(a1/PartSigmaTotal);
     }
 
+    if(a1/PartSigmaTotal<(double)parcent/100){
+      Mtx_Flag.at(l)=false;
+      continue;
+    }
+  }                         
 
-    //    if(b1!=0){
-    //      std::cout << "a1/b1=" << (double)a1/b1 << "\ta2/b2=" << (double)a2/b2 << "\ta1/b1 / a2/b2=" << (double)(a1/b1)/(a2/b2)<<  std::endl;
-    //      if((double)a1/b1 < (double)a2/b2/15.){
-    //        Mtx_Flag.at(l)=false;
-    //        std::cout << "false" << "\t" << "TOFSeg" << Mtx_prm.at(l).at(1) << "\t" <<  "SCHSeg" << Mtx_prm.at(l).at(0) << std::endl;
-    //      }
-    //    }else{
-    //      std::cout << "a1/0.1=" << (double)a1/0.1 << "\ta2/b2=" << (double)a2/b2 << "\ta1/0.1 / a2/b2=" << (double)(a1/0.1)/(a2/b2)<<  std::endl;
-    //      if((double)a1/0.1 < (double)a2/b2/15.){
-    //        Mtx_Flag.at(l)=false;
-    //        std::cout << "false" << "\t" << "TOFSeg" << Mtx_prm.at(l).at(1) << "\t" <<  "SCHSeg" << Mtx_prm.at(l).at(0) << std::endl;
-    //      }
-    //    }
-    //    if(!Mtx_Flag.at(l)) continue;
+  /////////////////////////////////////////////////////////////////////////////////////////////
+  //                                                                                         //
+  //    Matrix Pattern Maker   Checker                                                       //
+  //                                                                                         //
+  /////////////////////////////////////////////////////////////////////////////////////////////
+  TString fileout2 = Form("%s/analyzer_%s/param/MATRIXSFT/SFT_CutFirst_r1%d_Newtable.txt.2019Jan.1_%d",anadir.Data(),Month[month],parcent, file );
+  //  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
+
+  std::ofstream fout2(fileout2.Data()); 
+  for(int l=0; l<Mtx_prm.size(); l++){
+    if(!Mtx_Flag.at(l)) continue;
+    if(Mtx_prm.at(l).at(2)%32==22){
+      fout2 << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" << SFTX_Min.at(l) + 10 <<  "\t"  << SFTX_Max.at(l)+1 << endl;
+      std::cout << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" <<  Mtx_prm.at(l).at(2) + 10 << "to" << SFTX_Min.at(l) + 10 << "\t"  << Mtx_prm.at(l).at(3) + 1 << "to" << SFTX_Max.at(l)+1 << endl;
+    }else{
+      fout2 << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" << SFTX_Min.at(l) + 11 <<  "\t"  << SFTX_Max.at(l)+1 << endl;
+      std::cout << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" <<  Mtx_prm.at(l).at(2) + 11 << "to" << SFTX_Min.at(l) + 11 << "\t"  << Mtx_prm.at(l).at(3) + 1 << "to" << SFTX_Max.at(l)+1 << endl;
+    }
+  }     
+
     //
     //    int min = 0;
     //    int max = 0;
@@ -762,7 +773,6 @@ void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
     //    if(flag11_min) cmin-=11;
     //    if(cmin==255 || cmin>cmax ) std::cout << "ERROR2\t" <<"|| cmax=" << cmax << "\t|| cmin= " << cmin  << std::endl; // Mtx_Flag.at(l)=false;
     //    SFTX_Min.at(l) = cmin;
-  }                         
   double sum=0.;
   double bin=0.;
   bool flag99=false;
@@ -823,7 +833,7 @@ void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
         gPad->SetLogy(0);
       }
     }
-    }
+  }
   //   for(int i=0; i<Hist2Max; i++){
   //     Hist2[i]->Draw("colz");
   //     c1->Print(pdf);

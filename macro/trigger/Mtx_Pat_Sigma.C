@@ -105,9 +105,9 @@ double SigmaCountbyMtx(int month=6,int runnum=0, int bin=256, int matrixnum =1){
 //Matrix Patern txt file PATH -----------------------------------------------------------------------
 //  TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
 //  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
-//  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/%s",anadir.Data(),Month[month],MPG[matrixnum] ); 
+  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/%s",anadir.Data(),Month[month],MPG[matrixnum] ); 
 
-  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_CutFirst_ratio%d_Newtable.txt.2019Jan.1_2",anadir.Data(),Month[month],matrixnum ); 
+//  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_CutFirst_ratio%d_Newtable.txt.2019Jan.1_2",anadir.Data(),Month[month],matrixnum ); 
 
   std::ifstream fin1(filein1);
 
@@ -667,8 +667,8 @@ void Mtx_Pat_Sigma(){
 //  int mtxnum = 1;
 //  int mtxgroup[]={0,1,2};
 //  int mtxgroup[]={1};
-  int mtxnum = 10;
-  int mtxgroup[]={1,2,4,5,6,8,10,20,50,100};
+//  int mtxnum = 10;
+//  int mtxgroup[]={1,2,4,5,6,8,10,20,50,100};
   double SigmaNum[mtxnum];
 
   for(int i=0;i<mtxnum; i++){
