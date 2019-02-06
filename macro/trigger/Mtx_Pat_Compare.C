@@ -4,7 +4,19 @@ const char* MPG[] =
 {
   "SFT_Newtable.txt.2019Jan.1_1",
   "SFT_Newtable.txt.2019Jan.1_2",
-  "SFT_table.txt.2018Jun.3_1"
+  "SFT_table.txt.2018Jun.3_1",
+  "SFT_Newtable.txt.2019Jan.2_2",
+  "SFT_CutFirst_ratio100_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio50_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio20_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio15_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio10_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio8_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio6_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio5_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio4_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio2_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio1_Newtable.txt.2019Jan.1_2"
 };
 
 const char* Month[] =
@@ -69,7 +81,7 @@ bool eq3(int a,int b,int c){
 }
 
 
-void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnum1 =2, int matrixnum2 =1){
+void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnum1 =2, int matrixnum2 =7){
 
   gStyle->SetOptTitle(0);
   gStyle->SetOptStat(0);

@@ -62,7 +62,7 @@ bool eq3(int a,int b,int c){
 }
 
 
-void Matrix_Pattern_Maker(int month,int runnum, int file=1){
+void Matrix_Pattern_Maker(int month,int runnum, int file=2){
 
 //  gStyle->SetOptStat(1111110); 
   gStyle->SetOptFit(1); 
@@ -820,9 +820,9 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
   SigmaTotal = Hist1[5452]->Integral();
   a2 = Hist1[5453]->Integral(65,75);
   b2 = Hist1[5453]->Integral(1,65) + Hist1[5453]->Integral(76,100);
-  std::ofstream fout1;
-  fout1.open(Form("%s/dat/trigger/a2_b2.txt", anadir.Data()));
-  fout1 << a2 << "\t" << b2  << "\t" << a2/b2 <<  std::endl;
+  std::ofstream fout;
+  fout.open(Form("%s/dat/trigger/a2_b2.txt", anadir.Data()));
+  fout << a2 << "\t" << b2  << "\t" << a2/b2 <<  std::endl;
 
   for(int l=0; l < Mtx_prm.size(); l++){
     double PartSigmaTotal;
@@ -836,10 +836,23 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
       continue;
     }
 //    if((double)PartSigmaTotal / SigmaTotal < (double)1/1000/300 || (double)a1/b1 < (double)a2/b2){
-    std::cout << "a1/b1=" << a1/b1 << "\ta2/b2=" << a2/b2 << std::endl;
-    if(b1!=0&&(double)a1/b1 < (double)a2/b2/10.){
-      Mtx_Flag.at(l)=false;
-      std::cout << "false" << "\t" << "TOFSeg" << Mtx_prm.at(l).at(1) << "\t" <<  "SCHSeg" << Mtx_prm.at(l).at(0) << std::endl;
+//    std::cout << "a1/b1=" << a1/b1 << "\ta2/b2=" << a2/b2 << std::endl;
+//    if(b1!=0&&(double)a1/b1 < (double)a2/b2/15.){
+//      Mtx_Flag.at(l)=false;
+//      std::cout << "false" << "\t" << "TOFSeg" << Mtx_prm.at(l).at(1) << "\t" <<  "SCHSeg" << Mtx_prm.at(l).at(0) << std::endl;
+//    }
+    if(b1!=0){
+      std::cout << "a1/b1=" << (double)a1/b1 << "\ta2/b2=" << (double)a2/b2 << "\ta1/b1 / a2/b2=" << (double)(a1/b1)/(a2/b2)<<  std::endl;
+      if((double)a1/b1 < (double)a2/b2/15.){
+        Mtx_Flag.at(l)=false;
+        std::cout << "false" << "\t" << "TOFSeg" << Mtx_prm.at(l).at(1) << "\t" <<  "SCHSeg" << Mtx_prm.at(l).at(0) << std::endl;
+      }
+    }else{
+      std::cout << "a1/0.1=" << (double)a1/0.1 << "\ta2/b2=" << (double)a2/b2 << "\ta1/0.1 / a2/b2=" << (double)(a1/0.1)/(a2/b2)<<  std::endl;
+      if((double)a1/0.1 < (double)a2/b2/15.){
+        Mtx_Flag.at(l)=false;
+        std::cout << "false" << "\t" << "TOFSeg" << Mtx_prm.at(l).at(1) << "\t" <<  "SCHSeg" << Mtx_prm.at(l).at(0) << std::endl;
+      }
     }
     if(!Mtx_Flag.at(l)) continue;
 
@@ -929,20 +942,20 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
   //    New Matrix Pattern Maker                                                             //
   //                                                                                         //
   /////////////////////////////////////////////////////////////////////////////////////////////
-//  TString fileout1 = Form("%s/analyzer_%s/param/MATRIXSFT/SFT_Newtable.txt.2019Jan.1_%d",anadir.Data(),Month[month], file );
-//  //  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
-//
-//  std::ofstream fout1(fileout1.Data()); 
-//  for(int l=0; l<Mtx_prm.size(); l++){
-//    if(!Mtx_Flag.at(l)) continue;
-//    if(Mtx_prm.at(l).at(2)%32==22){
-//      fout1 << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" << SFTX_Min.at(l) + 10 <<  "\t"  << SFTX_Max.at(l)+1 << endl;
-////      std::cout << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" <<  Mtx_prm.at(l).at(2) + 10 << "to" << SFTX_Min.at(l) + 10 << "\t"  << Mtx_prm.at(l).at(3) + 1 << "to" << SFTX_Max.at(l)+1 << endl;
-//    }else{
-//      fout1 << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" << SFTX_Min.at(l) + 11 <<  "\t"  << SFTX_Max.at(l)+1 << endl;
-////      std::cout << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" <<  Mtx_prm.at(l).at(2) + 11 << "to" << SFTX_Min.at(l) + 11 << "\t"  << Mtx_prm.at(l).at(3) + 1 << "to" << SFTX_Max.at(l)+1 << endl;
-//    }
-//  }     
+  TString fileout1 = Form("%s/analyzer_%s/param/MATRIXSFT/SFT_Newtable.txt.2019Jan.2_%d",anadir.Data(),Month[month], file );
+  //  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
+
+  std::ofstream fout1(fileout1.Data()); 
+  for(int l=0; l<Mtx_prm.size(); l++){
+    if(!Mtx_Flag.at(l)) continue;
+    if(Mtx_prm.at(l).at(2)%32==22){
+      fout1 << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" << SFTX_Min.at(l) + 10 <<  "\t"  << SFTX_Max.at(l)+1 << endl;
+//      std::cout << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" <<  Mtx_prm.at(l).at(2) + 10 << "to" << SFTX_Min.at(l) + 10 << "\t"  << Mtx_prm.at(l).at(3) + 1 << "to" << SFTX_Max.at(l)+1 << endl;
+    }else{
+      fout1 << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" << SFTX_Min.at(l) + 11 <<  "\t"  << SFTX_Max.at(l)+1 << endl;
+//      std::cout << Mtx_prm.at(l).at(0) << "\t" << Mtx_prm.at(l).at(1) << "\t" <<  Mtx_prm.at(l).at(2) + 11 << "to" << SFTX_Min.at(l) + 11 << "\t"  << Mtx_prm.at(l).at(3) + 1 << "to" << SFTX_Max.at(l)+1 << endl;
+    }
+  }     
 
   ////-Canvas def---------------------------------------------------------------------------------------
   //
