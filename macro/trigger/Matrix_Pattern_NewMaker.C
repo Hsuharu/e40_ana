@@ -810,6 +810,8 @@ void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
       double y1 = 0.;
       double y2 = Hist1[i]->GetBinContent(Hist1[i]->GetMaximumBin());
       TLine *line99 = new TLine(x1,y1,x1,y2);
+      line99->SetLineColor(2);
+      line99->SetLineWidth(1);
       line99->Draw("same");
       c1->Print(Form("%s/Matrix_Pattern_NewMaker_run%05d_Hist1_%04d.pdf",pdfDhire.Data(),runnum,i));
       if(i==2+Mtx_prm.size()*2+1){
