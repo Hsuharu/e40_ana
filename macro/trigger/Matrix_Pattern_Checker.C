@@ -846,6 +846,7 @@ void Matrix_Pattern_Checker(int month,int runnum, int file=2, int ratio=10){
         std::cout << "false" << "\t" << "TOFSeg" << Mtx_prm.at(l).at(1) << "\t" <<  "SCHSeg" << Mtx_prm.at(l).at(0) << std::endl;
       }
     }
+    }
     
   /////////////////////////////////////////////////////////////////////////////////////////////
   //                                                                                         //
@@ -867,81 +868,81 @@ void Matrix_Pattern_Checker(int month,int runnum, int file=2, int ratio=10){
     }
   }     
 
-    if(!Mtx_Flag.at(l)) continue;
-
-    int min = 0;
-    int max = 0;
-    int cmax = 0;
-    int cmin = 0;
-
-    min = Mtx_prm.at(l).at(2);
-    max = Mtx_prm.at(l).at(3);
-    cmin = min;
-    cmax = max;
-    bool flag10=false;
-    bool flag11=false;
-    bool flag10_min=false;
-    bool flag11_min=false;
-
-    if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max)==0){
-      Mtx_Flag.at(l)=false;
-      continue;
-    }
-    for(int i=0; i<24; i++){
-      if(cmax==0 ||  min>=cmax) continue;
-      if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max)>1000){
-        if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)999/1000) continue;
-      }else if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max)>100){
-        if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)99/100) continue;
-      }else{
-        if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)9/10) continue;
-      }
-      std::cout << Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) << "\t" << Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) << std::endl;
-      flag10=false;
-      flag11=false;
-      if(cmax+1%32==0){
-        cmax-=10;
-        flag10=true;
-      }else{
-        cmax-=11;
-        flag11=true;
-      }
-    }
-    if(flag10) cmax+=10;
-    if(flag11) cmax+=11;
-    if(cmax==0 || cmax<min ) std::cout << "ERROR1\t" <<"|| cmax=" << cmax << "\t|| min= " << min << std::endl; // Mtx_Flag.at(l)=false;
-    SFTX_Max.at(l) = cmax;
-
-    if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)==0){
-      Mtx_Flag.at(l)=false;
-      continue;
-    }
-    for(int i=0; i<24; i++){
-      if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)==0) continue;
-      if(cmin==255 ||  cmin>=cmax) continue;
-      if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)>1000){
-        if((double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)999/1000) continue;
-      }else if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)>100){
-        if((double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)99/100) continue;
-      }else{
-        if((double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)9/10) continue;
-      }
-      std::cout << Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) << "\t" << Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) << std::endl;
-      flag10_min=false;
-      flag11_min=false;
-      if(cmin+1%32==22){
-        cmin+=10;
-        flag10_min=true;
-      }else{
-        cmin+=11;
-        flag11_min=true;
-      }
-    }
-    if(flag10_min) cmin-=10;
-    if(flag11_min) cmin-=11;
-    if(cmin==255 || cmin>cmax ) std::cout << "ERROR2\t" <<"|| cmax=" << cmax << "\t|| cmin= " << cmin  << std::endl; // Mtx_Flag.at(l)=false;
-    SFTX_Min.at(l) = cmin;
-  }                         
+//    if(!Mtx_Flag.at(l)) continue;
+//
+//    int min = 0;
+//    int max = 0;
+//    int cmax = 0;
+//    int cmin = 0;
+//
+//    min = Mtx_prm.at(l).at(2);
+//    max = Mtx_prm.at(l).at(3);
+//    cmin = min;
+//    cmax = max;
+//    bool flag10=false;
+//    bool flag11=false;
+//    bool flag10_min=false;
+//    bool flag11_min=false;
+//
+//    if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max)==0){
+//      Mtx_Flag.at(l)=false;
+//      continue;
+//    }
+//    for(int i=0; i<24; i++){
+//      if(cmax==0 ||  min>=cmax) continue;
+//      if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max)>1000){
+//        if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)999/1000) continue;
+//      }else if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max)>100){
+//        if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)99/100) continue;
+//      }else{
+//        if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)9/10) continue;
+//      }
+//      std::cout << Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) << "\t" << Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) << std::endl;
+//      flag10=false;
+//      flag11=false;
+//      if(cmax+1%32==0){
+//        cmax-=10;
+//        flag10=true;
+//      }else{
+//        cmax-=11;
+//        flag11=true;
+//      }
+//    }
+//    if(flag10) cmax+=10;
+//    if(flag11) cmax+=11;
+//    if(cmax==0 || cmax<min ) std::cout << "ERROR1\t" <<"|| cmax=" << cmax << "\t|| min= " << min << std::endl; // Mtx_Flag.at(l)=false;
+//    SFTX_Max.at(l) = cmax;
+//
+//    if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)==0){
+//      Mtx_Flag.at(l)=false;
+//      continue;
+//    }
+//    for(int i=0; i<24; i++){
+//      if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)==0) continue;
+//      if(cmin==255 ||  cmin>=cmax) continue;
+//      if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)>1000){
+//        if((double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)999/1000) continue;
+//      }else if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)>100){
+//        if((double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)99/100) continue;
+//      }else{
+//        if((double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)9/10) continue;
+//      }
+//      std::cout << Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) << "\t" << Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) << std::endl;
+//      flag10_min=false;
+//      flag11_min=false;
+//      if(cmin+1%32==22){
+//        cmin+=10;
+//        flag10_min=true;
+//      }else{
+//        cmin+=11;
+//        flag11_min=true;
+//      }
+//    }
+//    if(flag10_min) cmin-=10;
+//    if(flag11_min) cmin-=11;
+//    if(cmin==255 || cmin>cmax ) std::cout << "ERROR2\t" <<"|| cmax=" << cmax << "\t|| cmin= " << cmin  << std::endl; // Mtx_Flag.at(l)=false;
+//    SFTX_Min.at(l) = cmin;
+//  }                         
 
 //  for(int i=0; i<Mtx_prm.size(); i++){
 //    if(Mtx_prm.at(i).at(2)+1%32==0){
