@@ -167,21 +167,32 @@ void triggerrate(){
   }
 
   TString filein1=Form("%s/dat/trigger/GateAccept.txt", anadir.Data()); 
+  TString filein3=Form("%s/dat/trigger/GateAccept_matrix2_3.txt", anadir.Data()); 
   TString filein2=Form("%s/dat/trigger/SigmaEffi.txt", anadir.Data()); 
 
   std::ifstream fin1(filein1);
   std::ifstream fin2(filein2);
+  std::ifstream fin3(filein3);
   std::string line;
   std::vector<double> Gate; 
   std::vector<double> Accept; 
+  std::vector<double> Accept_matrix2_3; 
   std::vector<double> SigmaEffi; 
   std::vector<double> Yield    ; 
+  std::vector<double> Yield_matrix2_3    ; 
   while(std::getline(fin1, line)){
     double a=-1., b=-1.;
     std::istringstream input_line( line );
     if( input_line >> a >> b ){
       Gate.push_back(a);
       Accept.push_back(b);
+    }
+  }
+  while(std::getline(fin3, line)){
+    double a=-1., b=-1.;
+    std::istringstream input_line( line );
+    if( input_line >> a >> b ){
+      Accept_matrix2_3.push_back(b);
     }
   }
 
@@ -270,6 +281,7 @@ void triggerrate(){
 
   for(int i=0; i<Gate.size(); i++){
     Yield.push_back(SigmaEffi.at(i)*((Matrix.back()*Accept.at(i)*a1+b1)*a2+b2)*0.99/DAQEff.front());
+    Yield_matrix2_3.push_back(SigmaEffi.at(i)*((Matrix.back()*Accept_matrix2_3.at(i)*a1+b1)*a2+b2)*0.99/DAQEff.front());
   }
   TGraph *graph = new TGraph(Gate.size(),Gate.data(),Yield.data());
   graph->SetTitle("");
@@ -284,6 +296,20 @@ void triggerrate(){
   graph->SetMinimum(0.95);
   graph->Draw("AP");
   c1->Print(Form("%s/Gate_Yield_min0.9.pdf",pdfDhire.Data()));
+
+  TGraph *graph1 = new TGraph(Gate.size(),Gate.data(),Yield_matrix2_3.data());
+  graph1->SetTitle("");
+  graph1->SetMarkerStyle(8);
+  graph1->SetMarkerColor(1);
+  graph1->SetMarkerSize(2);
+  graph1->GetXaxis()->SetTitle("Gate [ns]");
+  graph1->GetYaxis()->SetTitle("Sigma N");
+  graph1->Draw("AP");
+  c1->Print(Form("%s/Gate_Yield_matrix2_3.pdf",pdfDhire.Data()));
+
+  graph1->SetMinimum(0.95);
+  graph1->Draw("AP");
+  c1->Print(Form("%s/Gate_Yield_matrix2_3_min0.9.pdf",pdfDhire.Data()));
 
 
   std::ofstream fout1;
@@ -302,6 +328,12 @@ void triggerrate(){
   fout3.open(Form("%s/dat/trigger/Yield.txt", anadir.Data()));
   for(int i=0; i<Yield.size(); i++){
     fout3 << Yield.at(i) << std::endl;
+  }
+  
+  std::ofstream fout3;
+  fout3.open(Form("%s/dat/trigger/Yield_matrix2_3.txt", anadir.Data()));
+  for(int i=0; i<Yield_matrix2_3.size(); i++){
+    fout3 << Yield_matrix2_3.at(i) << std::endl;
   }
 
 //  std::ofstream fout3;
