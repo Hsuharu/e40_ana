@@ -669,9 +669,8 @@ void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
       continue;
     }
     Hist1[2+Mtx_prm.size()*2]->Fill(a1/PartSigmaTotal);
-    for(int i=0; i<a1 ; i++){
-      Hist1[2+Mtx_prm.size()*2+1]->Fill(a1/PartSigmaTotal);
-    }
+    Hist1[2+Mtx_prm.size()*2+1]->Fill(a1/PartSigmaTotal,a1);
+
 
     //    if(b1!=0){
     //      std::cout << "a1/b1=" << (double)a1/b1 << "\ta2/b2=" << (double)a2/b2 << "\ta1/b1 / a2/b2=" << (double)(a1/b1)/(a2/b2)<<  std::endl;
@@ -761,6 +760,15 @@ void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
     //    if(cmin==255 || cmin>cmax ) std::cout << "ERROR2\t" <<"|| cmax=" << cmax << "\t|| cmin= " << cmin  << std::endl; // Mtx_Flag.at(l)=false;
     //    SFTX_Min.at(l) = cmin;
   }                         
+  double sum=0.;
+  bool flag99=false;
+  for(int i=0; i<120; i++){
+    sum = Hist1[2+Mtx_prm.size()*2+1]->Integral(120-i,120);
+    if(!flag99 && sum/SigmaTotal>0.99){
+      bin = 120-i;
+      flag99 = true;
+    }
+  }
 
   //  /////////////////////////////////////////////////////////////////////////////////////////////
   //  //                                                                                         //
@@ -794,7 +802,19 @@ void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
     Hist1[i]->Draw();
     c1->Print(pdf);
     if(i>2+Mtx_prm.size()*2-1){
+      double x1 = 0.01*(bin-1);
+      double y1 = 0.;
+      double y2 = Hist1[i]->GetBinContent(Hist1[i]->GetMaximumBin());
+      TLine *line99 = new TLine(x1,y1,x1,y2);
+      kine99->Draw("same");
       c1->Print(Form("%s/Matrix_Pattern_NewMaker_run%05d_Hist1_%04d.pdf",pdfDhire.Data(),runnum,i));
+    if(i==2+Mtx_prm.size()*2+1){
+      gPad->SetLogy(1);
+      Hist1[i]->Draw();
+      kine99->Draw("same");
+      c1->Print(Form("%s/Matrix_Pattern_NewMaker_run%05d_Hist1_%04d_log.pdf",pdfDhire.Data(),runnum,i));
+      c1->Print(pdf);
+      gPad->SetLogy(0);
     }
   }
   //   for(int i=0; i<Hist2Max; i++){
