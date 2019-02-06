@@ -330,10 +330,10 @@ void triggerrate(){
     fout3 << Yield.at(i) << std::endl;
   }
   
-  std::ofstream fout3;
-  fout3.open(Form("%s/dat/trigger/Yield_matrix2_3.txt", anadir.Data()));
+  std::ofstream fout4;
+  fout4.open(Form("%s/dat/trigger/Yield_matrix2_3.txt", anadir.Data()));
   for(int i=0; i<Yield_matrix2_3.size(); i++){
-    fout3 << Yield_matrix2_3.at(i) << std::endl;
+    fout4 << Yield_matrix2_3.at(i) << std::endl;
   }
 
 //  std::ofstream fout3;
