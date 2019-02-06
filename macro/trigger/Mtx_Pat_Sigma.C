@@ -2,20 +2,22 @@
 
  const char* MPG[] =
  {
-   "SFT_Newtable.txt.2019Jan.1_1",
-   "SFT_Newtable.txt.2019Jan.1_2",
-   "SFT_table.txt.2018Jun.3_1",
-   "SFT_Newtable.txt.2019Jan.2_2",
-   "SFT_CutFirst_ratio1_Newtable.txt.2019Jan.1_2", //3
-   "SFT_CutFirst_ratio2_Newtable.txt.2019Jan.1_2",
-   "SFT_CutFirst_ratio4_Newtable.txt.2019Jan.1_2",
-   "SFT_CutFirst_ratio5_Newtable.txt.2019Jan.1_2",//6
-   "SFT_CutFirst_ratio6_Newtable.txt.2019Jan.1_2",
-   "SFT_CutFirst_ratio8_Newtable.txt.2019Jan.1_2",
-   "SFT_CutFirst_ratio10_Newtable.txt.2019Jan.1_2",//9
-   "SFT_CutFirst_ratio20_Newtable.txt.2019Jan.1_2",
-   "SFT_CutFirst_ratio50_Newtable.txt.2019Jan.1_2",
-   "SFT_CutFirst_ratio100_Newtable.txt.2019Jan.1_2"
+  "SFT_Newtable.txt.2019Jan.1_1",
+  "SFT_Newtable.txt.2019Jan.1_2",
+  "SFT_table.txt.2018Jun.3_1",
+  "SFT_Newtable.txt.2019Jan.2_2",
+  "SFT_CutFirst_ratio100_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio50_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio20_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio15_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio10_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio8_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio6_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio5_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio4_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio2_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio1_Newtable.txt.2019Jan.1_2",
+  "SFT_CutSecond_Newtable.txt.2019Jan.1_2"
  };
 
  const char* Month[] =
@@ -654,8 +656,8 @@ void Mtx_Pat_Sigma(){
   TString anadir1=Form("%s/work/e40/ana",std::getenv("HOME")); 
   TString pdfDhire1 = Form("%s/pdf/trigger", anadir1.Data());
 
-//  int mtxnum = 1;
-//  int mtxgroup[]={3};
+  int mtxnum = 1;
+  int mtxgroup[]={15};
 
 //  int mtxnum = 7;
 //  int mtxgroup[]={2,4,6,9,10,11,12};
@@ -675,11 +677,11 @@ void Mtx_Pat_Sigma(){
   }
 
   std::ofstream fout1;
-  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix.txt", anadir1.Data()));
+//  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix.txt", anadir1.Data()));
 //  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix1.txt", anadir1.Data()));
 //  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix2.txt", anadir1.Data()));
 //  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix%d.txt", anadir1.Data(),mtxgroup[0]));
-//  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix_matirx%d.txt", anadir1.Data(),mtxgroup[0]));
+  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix_matirxSFT.txt", anadir1.Data()));
   for(int i=0; i<mtxnum; i++){
     fout1 << Form("%d",mtxgroup[i]) << "\t" << SigmaNum[i] << std::endl;
   }
