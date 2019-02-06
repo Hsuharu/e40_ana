@@ -654,8 +654,8 @@ void Mtx_Pat_Sigma(){
   TString anadir1=Form("%s/work/e40/ana",std::getenv("HOME")); 
   TString pdfDhire1 = Form("%s/pdf/trigger", anadir1.Data());
 
-  int mtxnum = 1;
-  int mtxgroup[]={3};
+//  int mtxnum = 1;
+//  int mtxgroup[]={3};
 
 //  int mtxnum = 7;
 //  int mtxgroup[]={2,4,6,9,10,11,12};
@@ -665,6 +665,8 @@ void Mtx_Pat_Sigma(){
 //  int mtxnum = 1;
 //  int mtxgroup[]={0,1,2};
 //  int mtxgroup[]={1};
+  int mtxnum = 10;
+  int mtxgroup[]={1,2,4,5,6,8,10,20,50,100};
   double SigmaNum[mtxnum];
 
   for(int i=0;i<mtxnum; i++){
@@ -673,11 +675,11 @@ void Mtx_Pat_Sigma(){
   }
 
   std::ofstream fout1;
-//  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix.txt", anadir1.Data()));
+  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix.txt", anadir1.Data()));
 //  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix1.txt", anadir1.Data()));
 //  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix2.txt", anadir1.Data()));
 //  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix%d.txt", anadir1.Data(),mtxgroup[0]));
-  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix_matirx%d.txt", anadir1.Data(),mtxgroup[0]));
+//  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix_matirx%d.txt", anadir1.Data(),mtxgroup[0]));
   for(int i=0; i<mtxnum; i++){
     fout1 << Form("%d",mtxgroup[i]) << "\t" << SigmaNum[i] << std::endl;
   }
