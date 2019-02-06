@@ -64,10 +64,14 @@ bool eq3(int a,int b,int c){
 
 void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
 
-  //  gStyle->SetOptStat(1111110); 
-  gStyle->SetOptFit(1); 
-  gStyle->SetOptStat(0);
   gStyle->SetOptTitle(0);
+  gStyle->SetLabelSize(0.04,"XYZ");
+  gStyle->SetTitleSize(0.05,"XYZ");
+  gStyle->SetTitleOffset(1.2,"X");
+  gStyle->SetTitleOffset(1.3,"Y");
+  gStyle->SetPadLeftMargin(0.16);
+  gStyle->SetPadBottomMargin(0.16);
+
 
   //Reset ROOT and connect tree file
   gROOT->Reset();
@@ -564,7 +568,7 @@ void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
   //  TH2D *Hist2[Hist2Max];
   Hist1[0]= new TH1D("MissMass Sigma w/Mtrix","MissMass Sigma w/Mtrix;MissMass[GeV/cc];Counts",100,0.5,1.5);
   Hist1[1]= new TH1D("MissMass Sigma w/Mtrix Sigma","MissMass Sigma w/Mtrix Sigma;MissMass[GeV/cc];Counts",100,0.5,1.5);
-  Hist1[2+Mtx_prm.size()*2]= new TH1D("R1 Ratio","R1 Ratio;Ratio;Counts",100,0,1);
+  Hist1[2+Mtx_prm.size()*2]= new TH1D("R1 Ratio","R1 Ratio;Ratio;Counts",120,0,1.2);
 
   for(int l=0; l < Mtx_prm.size(); l++){
     Hist1[2+Mtx_prm.size()*0+l]= new TH1D(Form("MissMass Sigma w/Matrix Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("MissMass Sigma w/Matrix Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,0.5,1.5);
