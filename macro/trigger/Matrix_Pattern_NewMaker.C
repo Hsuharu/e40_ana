@@ -65,6 +65,7 @@ bool eq3(int a,int b,int c){
 void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
 
   gStyle->SetOptTitle(0);
+  gStyle->SetOptStat(0);
   gStyle->SetLabelSize(0.04,"XYZ");
   gStyle->SetTitleSize(0.05,"XYZ");
   gStyle->SetTitleOffset(1.2,"X");
