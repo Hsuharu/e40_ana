@@ -570,7 +570,7 @@ void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
   Hist1[0]= new TH1D("MissMass Sigma w/Mtrix","MissMass Sigma w/Mtrix;MissMass[GeV/cc];Counts",100,0.5,1.5);
   Hist1[1]= new TH1D("MissMass Sigma w/Mtrix Sigma","MissMass Sigma w/Mtrix Sigma;MissMass[GeV/cc];Counts",100,0.5,1.5);
   Hist1[2+Mtx_prm.size()*2]= new TH1D("R1 Ratio","R1 Ratio;Ratio;Counts",120,0,1.2);
-  Hist1[2+Mtx_prm.size()*2+1]= new TH1D("R1 Ratio weight_ch","R1 Ratio;Ratio;Counts*weght",120,0,1.2);
+  Hist1[2+Mtx_prm.size()*2+1]= new TH1D("R1 Ratio weight_ch","R1 Ratio;Ratio;Counts*weight",120,0,1.2);
 
   for(int l=0; l < Mtx_prm.size(); l++){
     Hist1[2+Mtx_prm.size()*0+l]= new TH1D(Form("MissMass Sigma w/Matrix Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("MissMass Sigma w/Matrix Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,0.5,1.5);
@@ -580,8 +580,8 @@ void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
   //  TLegend *Leg1 = new TLegend(0.78,0.575,0.98,0.935);
 
   //-Event Loop --------------------------------------------------------------------------------------
-//  Long64_t nentries = pik->GetEntries();
-     Long64_t nentries = 100000;
+  Long64_t nentries = pik->GetEntries();
+//     Long64_t nentries = 100000;
 
   //-Event Loop First --------
 
