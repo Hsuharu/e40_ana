@@ -649,9 +649,9 @@ void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
   //- Analysis ---------------------------------------------------------------------------------------
   double SigmaTotal;
   double a2,b2;
-  SigmaTotal = Hist1[0]->Integral();
-  a2 = Hist1[0]->Integral(65,75);
-  b2 = Hist1[0]->Integral(1,64) + Hist1[1]->Integral(76,100);
+  SigmaTotal = Hist1[1]->Integral();
+//  a2 = Hist1[0]->Integral(65,75);
+//  b2 = Hist1[0]->Integral(1,64) + Hist1[0]->Integral(76,100);
   //  std::ofstream fout;
   //  fout.open(Form("%s/dat/trigger/a2_b2.txt", anadir.Data()));
   //  fout << a2 << "\t" << b2  << "\t" << a2/b2 <<  std::endl;
