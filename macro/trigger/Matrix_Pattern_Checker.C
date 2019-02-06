@@ -655,7 +655,7 @@ void Matrix_Pattern_Checker(int month,int runnum, int file=2, int ratio=10){
 
   //-Event Loop --------------------------------------------------------------------------------------
   Long64_t nentries = pik->GetEntries();
-//     Long64_t nentries = 10000;
+//     Long64_t nentries = 100000;
 
   //-Event Loop First --------
   for (Long64_t s=0; s<nentries;s++) {
