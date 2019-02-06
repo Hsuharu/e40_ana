@@ -580,8 +580,8 @@ void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
   //  TLegend *Leg1 = new TLegend(0.78,0.575,0.98,0.935);
 
   //-Event Loop --------------------------------------------------------------------------------------
-  Long64_t nentries = pik->GetEntries();
-//     Long64_t nentries = 100000;
+//  Long64_t nentries = pik->GetEntries();
+     Long64_t nentries = 100000;
 
   //-Event Loop First --------
 
@@ -669,7 +669,10 @@ void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
       continue;
     }
     Hist1[2+Mtx_prm.size()*2]->Fill(a1/PartSigmaTotal);
-    Hist1[2+Mtx_prm.size()*2+1]->Fill(a1/PartSigmaTotal,a1);
+//    Hist1[2+Mtx_prm.size()*2+1]->Fill(a1/PartSigmaTotal,a1);
+    for(int i=0; i<a1; i++){
+      Hist1[2+Mtx_prm.size()*2+1]->Fill(a1/PartSigmaTotal);
+    }
 
 
     //    if(b1!=0){
