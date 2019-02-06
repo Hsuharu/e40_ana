@@ -4,7 +4,8 @@
  {
    "SFT_Newtable.txt.2019Jan.1_1",
    "SFT_Newtable.txt.2019Jan.1_2",
-   "SFT_table.txt.2018Jun.3_1"
+   "SFT_table.txt.2018Jun.3_1",
+   "SFT_Newtable.txt.2019Jan.2_2"
  };
 
  const char* Month[] =
@@ -85,8 +86,8 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
    gROOT->Reset();
    gROOT->Reset();
    TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-   TString pdf = Form("%s/pdf/trigger/Mtx_Pat_Make2_bin%d_%d_run%05d.pdf", anadir.Data(), bin, matrixnum,runnum);
-   TString pdf1 = Form("%s/pdf/trigger/Mtx_Check2_bin%d_%d_run%05d.pdf", anadir.Data(), bin, matrixnum,runnum);
+   TString pdf = Form("%s/pdf/trigger/Mtx_Pat_Make2_bin%d_matrix%d_run%05d.pdf", anadir.Data(), bin, matrixnum,runnum);
+   TString pdf1 = Form("%s/pdf/trigger/Mtx_Check2_bin%d_matrix%d_run%05d.pdf", anadir.Data(), bin, matrixnum,runnum);
    TString pdfDhire = Form("%s/pdf/trigger", anadir.Data());
 
 //Matrix Patern txt file PATH -----------------------------------------------------------------------
@@ -906,7 +907,7 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
          }
        }
        c1->Print(pdf);
-       c1->Print(Form("%s/Mtx_Pat_Make2_bin%d_run%05d_Hist2_box_%04d.pdf",pdfDhire.Data(),bin,runnum,j));
+       c1->Print(Form("%s/Mtx_Pat_Make2_bin%d_%d_run%05d_Hist2_box_%04d.pdf",pdfDhire.Data(),bin,matrixnum,runnum,j));
      }
    }
 
@@ -972,7 +973,7 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
          }
        }
        c1->Print(pdf1);
-       c1->Print(Form("%s/Mtx_Pat_Make2_bin%d_run%05d_Hist2_box2_%04d.pdf",pdfDhire.Data(),bin,runnum,j));
+       c1->Print(Form("%s/Mtx_Pat_Make2_bin%d_matrix%d_run%05d_Hist2_box2_%04d.pdf",pdfDhire.Data(),bin,matrixnum,runnum,j));
      }
    }
 

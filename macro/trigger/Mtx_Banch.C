@@ -18,6 +18,25 @@
 
 #include "DetectorID.hh"
 
+const char* MPG[] =
+{
+  "SFT_Newtable.txt.2019Jan.1_1",
+  "SFT_Newtable.txt.2019Jan.1_2",
+  "SFT_table.txt.2018Jun.3_1",
+  "SFT_Newtable.txt.2019Jan.2_2",
+  "SFT_CutFirst_ratio100_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio50_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio20_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio15_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio10_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio8_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio6_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio5_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio4_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio2_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio1_Newtable.txt.2019Jan.1_2"
+};
+
 const char* Month[] =
 {
   "zero",
@@ -79,7 +98,7 @@ bool eq3(int a,int b,int c){
   return true;
 }
 
-void Mtx_Banch(int month, int runnum){
+void Mtx_Banch(int month=6, int runnum=5268, int matrixnum1 =2, int matrixnum2 =3){
 
   gStyle->SetOptTitle(0);
   gStyle->SetLabelSize(0.04,"XYZ");
@@ -91,8 +110,10 @@ void Mtx_Banch(int month, int runnum){
 
   //Matrix Patern txt file PATH -----------------------------------------------------------------------
   TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
-  TString filein2=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_Newtable.txt.2019Jan.1_2",anadir.Data(),Month[month] ); 
+//  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
+//  TString filein2=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_Newtable.txt.2019Jan.1_2",anadir.Data(),Month[month] ); 
+  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/%s",anadir.Data(),Month[month],MPG[matrixnum1] ); 
+  TString filein2=Form("%s/analyzer_%s/param/MATRIXSFT/%s",anadir.Data(),Month[month],MPG[matrixnum2] ); 
 
   std::ifstream fin1(filein1);
   std::ifstream fin2(filein2);
@@ -186,7 +207,7 @@ void Mtx_Banch(int month, int runnum){
   gROOT->Reset();
   //   TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("rootfile/run05126_DstKuramaEasirocHodoscope.root");
   //  TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
-  TString pdf = Form("%s/pdf/trigger/Mtx_Banch_run%05d.pdf", anadir.Data(),runnum);
+  TString pdf = Form("%s/pdf/trigger/Mtx_Banch_matrix%d_%d_run%05d.pdf", anadir.Data(),matrixnum1,matrixnum2,runnum);
   TString pdfDhire = Form("%s/pdf/trigger", anadir.Data());
   TFile *f = new TFile(Form("%s/analyzer_%s/rootfile/run%05d_Matrix.root", anadir.Data(),Month[month], runnum),"READ");
   TTree *mtx;
@@ -803,7 +824,7 @@ void Mtx_Banch(int month, int runnum){
   gStyle->SetOptStat(0);
     Hist1[i]->Draw();
     c1->Print(pdf);
-    c1->Print(Form("%s/Mtx_Banch_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),runnum,i));
+    c1->Print(Form("%s/Mtx_Banch_matrix%d_%d_run%05d_Hist1_%03d.pdf",pdfDhire.Data(),matrixnum1,matrixnum2,runnum,i));
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
     
   }
@@ -857,7 +878,7 @@ void Mtx_Banch(int month, int runnum){
   g1->Draw("AP");
 
   c1->Print(pdf);
-  c1->Print(Form("%s/Mtx_Banch_run%05d_Graph.pdf",pdfDhire.Data(),runnum));
+  c1->Print(Form("%s/Mtx_Banch_matrix%d_%d_run%05d_Graph.pdf",pdfDhire.Data(), matrixnum1, matrixnum2,runnum));
 
   g2->SetMarkerStyle(8);
   g2->SetMarkerColor(2);
@@ -867,7 +888,7 @@ void Mtx_Banch(int month, int runnum){
   g2->Draw("AP");
 
   c1->Print(pdf);
-  c1->Print(Form("%s/Mtx_Banch_run%05d_Graph_MtxFlg.pdf",pdfDhire.Data(),runnum));
+  c1->Print(Form("%s/Mtx_Banch_matrix%d_%d_run%05d_Graph_MtxFlg.pdf",pdfDhire.Data(), matrixnum1, matrixnum2,runnum));
 
   g3->SetMarkerStyle(8);
   g3->SetMarkerColor(2);
@@ -877,7 +898,7 @@ void Mtx_Banch(int month, int runnum){
   g3->Draw("AP");
 
   c1->Print(pdf);
-  c1->Print(Form("%s/Mtx_Banch_run%05d_Graph_MtxFlg_NewPat.pdf",pdfDhire.Data(),runnum));
+  c1->Print(Form("%s/Mtx_Banch_matrix%d_%d_run%05d_Graph_MtxFlg_NewPat.pdf",pdfDhire.Data(), matrixnum1, matrixnum2,runnum));
 
   g4->SetMarkerStyle(8);
   g4->SetMarkerColor(1);
@@ -890,7 +911,7 @@ void Mtx_Banch(int month, int runnum){
   g4->Draw("AP");
 
   c1->Print(pdf);
-  c1->Print(Form("%s/Mtx_Banch_run%05d_Graph_MtxFlg_NewPat_Accept.pdf",pdfDhire.Data(),runnum));
+  c1->Print(Form("%s/Mtx_Banch_matrix%d_%d_run%05d_Graph_MtxFlg_NewPat_Accept.pdf",pdfDhire.Data(), matrixnum1, matrixnum2,runnum));
 
   g5->SetMarkerStyle(8);
   g5->SetMarkerColor(1);
@@ -903,7 +924,7 @@ void Mtx_Banch(int month, int runnum){
   g5->Draw("AP");
 
   c1->Print(pdf);
-  c1->Print(Form("%s/Mtx_Banch_run%05d_Graph_MtxFlg_OldPat_Accept.pdf",pdfDhire.Data(),runnum));
+  c1->Print(Form("%s/Mtx_Banch_matrix%d_%d_run%05d_Graph_MtxFlg_OldPat_Accept.pdf",pdfDhire.Data(), matrixnum1, matrixnum2,runnum));
 
 
   g5->Draw("AP");
@@ -913,10 +934,10 @@ void Mtx_Banch(int month, int runnum){
   g4->Draw("P");
 
   c1->Print(pdf);
-  c1->Print(Form("%s/Mtx_Banch_run%05d_Graph_MtxFlg_OldAndNewPat_Accept.pdf",pdfDhire.Data(),runnum));
+  c1->Print(Form("%s/Mtx_Banch_matrix%d_%d_run%05d_Graph_MtxFlg_OldAndNewPat_Accept.pdf",pdfDhire.Data(), matrixnum1, matrixnum2,runnum));
 
   std::ofstream fout1;
-  fout1.open(Form("%s/dat/trigger/GateAccept.txt", anadir.Data()));
+  fout1.open(Form("%s/dat/trigger/GateAccept_matrix%d_%d.txt", anadir.Data(), matrixnum1, matrixnum2));
   for(int i=0; i<nGate; i++){
     fout1 << Gate_d[i] << "\t" << MtxEfficiency_Gate[i] << std::endl;
   }

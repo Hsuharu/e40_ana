@@ -5,6 +5,7 @@
    "SFT_Newtable.txt.2019Jan.1_1",
    "SFT_Newtable.txt.2019Jan.1_2",
    "SFT_table.txt.2018Jun.3_1",
+   "SFT_Newtable.txt.2019Jan.2_2",
    "SFT_CutFirst_ratio1_Newtable.txt.2019Jan.1_2", //3
    "SFT_CutFirst_ratio2_Newtable.txt.2019Jan.1_2",
    "SFT_CutFirst_ratio4_Newtable.txt.2019Jan.1_2",
@@ -102,9 +103,9 @@ double SigmaCountbyMtx(int month=6,int runnum=0, int bin=256, int matrixnum =1){
 //Matrix Patern txt file PATH -----------------------------------------------------------------------
 //  TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
 //  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
-//  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/%s",anadir.Data(),Month[month],MPG[matrixnum] ); 
+  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/%s",anadir.Data(),Month[month],MPG[matrixnum] ); 
 
-  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_CutFirst_ratio%d_Newtable.txt.2019Jan.1_2",anadir.Data(),Month[month],matrixnum ); 
+//  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_CutFirst_ratio%d_Newtable.txt.2019Jan.1_2",anadir.Data(),Month[month],matrixnum ); 
 
   std::ifstream fin1(filein1);
 
@@ -654,7 +655,7 @@ void Mtx_Pat_Sigma(){
   TString pdfDhire1 = Form("%s/pdf/trigger", anadir1.Data());
 
   int mtxnum = 1;
-  int mtxgroup[]={15};
+  int mtxgroup[]={3};
 
 //  int mtxnum = 7;
 //  int mtxgroup[]={2,4,6,9,10,11,12};
@@ -675,7 +676,8 @@ void Mtx_Pat_Sigma(){
 //  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix.txt", anadir1.Data()));
 //  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix1.txt", anadir1.Data()));
 //  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix2.txt", anadir1.Data()));
-  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix%d.txt", anadir1.Data(),mtxgroup[0]));
+//  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix%d.txt", anadir1.Data(),mtxgroup[0]));
+  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix_matirx%d.txt", anadir1.Data(),mtxgroup[0]));
   for(int i=0; i<mtxnum; i++){
     fout1 << Form("%d",mtxgroup[i]) << "\t" << SigmaNum[i] << std::endl;
   }
