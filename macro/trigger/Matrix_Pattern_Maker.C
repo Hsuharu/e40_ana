@@ -820,6 +820,9 @@ void Matrix_Pattern_Maker(int month,int runnum, int file=1){
   SigmaTotal = Hist1[5452]->Integral();
   a2 = Hist1[5453]->Integral(65,75);
   b2 = Hist1[5453]->Integral(1,65) + Hist1[5453]->Integral(76,100);
+  std::ofstream fout1;
+  fout1.open(Form("%s/dat/trigger/a2_b2.txt", anadir.Data()));
+  fout1 << a2 << "\t" << b2  << "\t" << a2/b2 <<  std::endl;
 
   for(int l=0; l < Mtx_prm.size(); l++){
     double PartSigmaTotal;
