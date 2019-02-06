@@ -562,7 +562,7 @@ void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
   int chisqr = 0;
 
   //-hist def-----------------------------------------------------------------------------------------
-  Hist1Max = 2+Mtx_prm.size()*2+1;
+  Hist1Max = 2+Mtx_prm.size()*2+2;
   //  Hist2Max = 1214;
   chisqr = 50;
   TH1D *Hist1[Hist1Max];
@@ -570,6 +570,7 @@ void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
   Hist1[0]= new TH1D("MissMass Sigma w/Mtrix","MissMass Sigma w/Mtrix;MissMass[GeV/cc];Counts",100,0.5,1.5);
   Hist1[1]= new TH1D("MissMass Sigma w/Mtrix Sigma","MissMass Sigma w/Mtrix Sigma;MissMass[GeV/cc];Counts",100,0.5,1.5);
   Hist1[2+Mtx_prm.size()*2]= new TH1D("R1 Ratio","R1 Ratio;Ratio;Counts",120,0,1.2);
+  Hist1[2+Mtx_prm.size()*2+1]= new TH1D("R1 Ratio weight_ch","R1 Ratio;Ratio;Counts*weght",120,0,1.2);
 
   for(int l=0; l < Mtx_prm.size(); l++){
     Hist1[2+Mtx_prm.size()*0+l]= new TH1D(Form("MissMass Sigma w/Matrix Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("MissMass Sigma w/Matrix Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,0.5,1.5);
@@ -579,8 +580,8 @@ void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
   //  TLegend *Leg1 = new TLegend(0.78,0.575,0.98,0.935);
 
   //-Event Loop --------------------------------------------------------------------------------------
-  Long64_t nentries = pik->GetEntries();
-//     Long64_t nentries = 100000;
+//  Long64_t nentries = pik->GetEntries();
+     Long64_t nentries = 100000;
 
   //-Event Loop First --------
 
@@ -668,6 +669,9 @@ void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
       continue;
     }
     Hist1[2+Mtx_prm.size()*2]->Fill(a1/PartSigmaTotal);
+    for(int i=0; i<a1 ; i++){
+      Hist1[2+Mtx_prm.size()*2+1]->Fill(a1/PartSigmaTotal);
+    }
 
     //    if(b1!=0){
     //      std::cout << "a1/b1=" << (double)a1/b1 << "\ta2/b2=" << (double)a2/b2 << "\ta1/b1 / a2/b2=" << (double)(a1/b1)/(a2/b2)<<  std::endl;
@@ -789,7 +793,7 @@ void Matrix_Pattern_NewMaker(int month=6,int runnum=0, int file=2){
   for(int i=0; i<Hist1Max; i++){
     Hist1[i]->Draw();
     c1->Print(pdf);
-    if(i==2+Mtx_prm.size()*2){
+    if(i>2+Mtx_prm.size()*2-1){
       c1->Print(Form("%s/Matrix_Pattern_NewMaker_run%05d_Hist1_%04d.pdf",pdfDhire.Data(),runnum,i));
     }
   }
