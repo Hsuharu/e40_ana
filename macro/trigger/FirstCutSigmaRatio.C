@@ -170,7 +170,7 @@ void FirstCutSigmaRatio(){
     c1->Print(Form("%s/SigmabyNumber%d.pdf",pdfDhire.Data(), i+1));
   }
       TLine *line99 = new TLine(0,0.99,110,0.99);
-      TLine *line99_2 = new TLine(0,0.99,60,0.99);
+      TLine *line99_2 = new TLine(0,0.99,55,0.99);
       line99->SetLineColor(2);
       line99->SetLineWidth(1);
       line99_2->SetLineColor(2);
