@@ -61,7 +61,7 @@ void FirstCutSigmaRatio(){
   TString filein1=Form("%s/dat/trigger/SigmaNumberByMatrix123.txt", anadir.Data()); 
   TString filein2=Form("%s/dat/trigger/SigmaNumberByMatrix1.txt", anadir.Data()); 
   TString filein3=Form("%s/dat/trigger/SigmaNumberByMatrix2.txt", anadir.Data()); 
-  TString filein4=Form("%s/dat/trigger/SigmaNumberByMatrixr1.txt", anadir.Data()); 
+  TString filein4=Form("%s/dat/trigger/SigmaNumberByMatrix_r1.txt", anadir.Data()); 
 
   std::ifstream fin(filein);
   std::ifstream fin1(filein1);
@@ -145,7 +145,7 @@ void FirstCutSigmaRatio(){
 
   TCanvas *c1 = new TCanvas("c1","c1",1200,900);
   c1->Print(pdf+"["); 
-  int gnum = 3;
+  int gnum = 4;
   TGraph *g[gnum];
   TGraphErrors *ge[gnum];
   g[0] = new TGraph(FirstCutRatio1.size(),FirstCutRatio1.data(),FirstCutSigmaNum1.data());
