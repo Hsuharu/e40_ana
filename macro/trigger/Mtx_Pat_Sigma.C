@@ -17,7 +17,20 @@
   "SFT_CutFirst_ratio4_Newtable.txt.2019Jan.1_2",
   "SFT_CutFirst_ratio2_Newtable.txt.2019Jan.1_2",
   "SFT_CutFirst_ratio1_Newtable.txt.2019Jan.1_2",
-  "SFT_CutSecond_Newtable.txt.2019Jan.1_2"
+  "SFT_CutSecond_Newtable.txt.2019Jan.1_2",
+  "SFT_CutSecond_900_Newtable.txt.2019Jan.1_2",
+  "SFT_CutSecond_990_Newtable.txt.2019Jan.1_2",
+  "SFT_CutSecond_999_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r110_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r11_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r120_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r125_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r130_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r136_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r140_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r150_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r15_Newtable.txt.2019Jan.1_2",
+  "SFT_Newtable.txt.2019Jan.3_2"
  };
 
  const char* Month[] =
@@ -105,10 +118,10 @@ double SigmaCountbyMtx(int month=6,int runnum=0, int bin=256, int matrixnum =1){
 //Matrix Patern txt file PATH -----------------------------------------------------------------------
 //  TString anadir=Form("%s/work/e40/ana",std::getenv("HOME")); 
 //  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
-//  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/%s",anadir.Data(),Month[month],MPG[matrixnum] ); 
+  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/%s",anadir.Data(),Month[month],MPG[matrixnum] ); 
 
 //  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_CutFirst_ratio%d_Newtable.txt.2019Jan.1_2",anadir.Data(),Month[month],matrixnum ); 
-  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_CutFirst_r1%d_Newtable.txt.2019Jan.1_2",anadir.Data(),Month[month],matrixnum ); 
+//  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_CutFirst_r1%d_Newtable.txt.2019Jan.1_2",anadir.Data(),Month[month],matrixnum ); 
 //  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_CutSecond_%d_Newtable.txt.2019Jan.1_2",anadir.Data(),Month[month],matrixnum ); 
 
   std::ifstream fin1(filein1);
@@ -658,11 +671,11 @@ void Mtx_Pat_Sigma(){
   TString anadir1=Form("%s/work/e40/ana",std::getenv("HOME")); 
   TString pdfDhire1 = Form("%s/pdf/trigger", anadir1.Data());
 
-//  int mtxnum = 1;
-//  int mtxgroup[]={15};
+  int mtxnum = 1;
+  int mtxgroup[]={28};
 
 //  int mtxnum = 3;
-  int mtxnum = 9;
+//  int mtxnum = 9;
 //  int mtxgroup[]={2,4,6,9,10,11,12};
 //  int mtxgroup[]={1,2,5,10,20,50,100};
 //  int mtxgroup[]={1,2,4,6,8,10,20};
@@ -671,7 +684,7 @@ void Mtx_Pat_Sigma(){
 //  int mtxgroup[]={0,1,2};
 //  int mtxgroup[]={1};
 //  int mtxnum = 10;
-  int mtxgroup[]={1,5,10,20,25,30,36,40,50};
+//  int mtxgroup[]={1,5,10,20,25,30,36,40,50};
 //  int mtxgroup[]={900,990,999};
   double SigmaNum[mtxnum];
 
@@ -681,12 +694,13 @@ void Mtx_Pat_Sigma(){
   }
 
   std::ofstream fout1;
-  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix_r1.txt", anadir1.Data()));
+//  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix_r1.txt", anadir1.Data()));
 //  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix_SFTChange.txt", anadir1.Data()));
 //  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix1.txt", anadir1.Data()));
 //  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix2.txt", anadir1.Data()));
 //  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix%d.txt", anadir1.Data(),mtxgroup[0]));
 //  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix_matirxSFT.txt", anadir1.Data()));
+  fout1.open(Form("%s/dat/trigger/SigmaNumberByMatrix_Fin.txt", anadir1.Data()));
   for(int i=0; i<mtxnum; i++){
     fout1 << Form("%d",mtxgroup[i]) << "\t" << SigmaNum[i] << std::endl;
   }

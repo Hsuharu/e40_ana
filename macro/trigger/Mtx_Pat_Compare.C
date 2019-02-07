@@ -29,8 +29,8 @@ const char* MPG[] =
   "SFT_CutFirst_r136_Newtable.txt.2019Jan.1_2",
   "SFT_CutFirst_r140_Newtable.txt.2019Jan.1_2",
   "SFT_CutFirst_r150_Newtable.txt.2019Jan.1_2",
-  "SFT_CutFirst_r15_Newtable.txt.2019Jan.1_2"
-  "SFT_Newtable.txt.2019Jan.3_2",
+  "SFT_CutFirst_r15_Newtable.txt.2019Jan.1_2",
+  "SFT_Newtable.txt.2019Jan.3_2"
 };
 
 const char* Month[] =
