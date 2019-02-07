@@ -170,8 +170,11 @@ void FirstCutSigmaRatio(){
     c1->Print(Form("%s/SigmabyNumber%d.pdf",pdfDhire.Data(), i+1));
   }
       TLine *line99 = new TLine(0,0.99,110,0.99);
+      TLine *line99_2 = new TLine(0,0.99,60,0.99);
       line99->SetLineColor(2);
       line99->SetLineWidth(1);
+      line99_2->SetLineColor(2);
+      line99_2->SetLineWidth(1);
   for(int i=0; i<gnum; i++ ){
     gStyle->SetOptStat(0);
     ge[i]->SetTitle("");
@@ -183,15 +186,27 @@ void FirstCutSigmaRatio(){
     ge[i]->GetXaxis()->SetTitle("Ratio");
     ge[i]->GetYaxis()->SetTitle("Efficiency");
     ge[i]->Draw("AP");
-    line99->Draw("same");
-    c1->Print(pdf);
-    c1->Print(Form("%s/SigmabyRatio%d.pdf",pdfDhire.Data(), i+1));
-    ge[i]->SetMinimum(0.95);
-    line99->Draw();
-    ge[i]->Draw("AP");
-    line99->Draw("same");
-    c1->Print(pdf);
-    c1->Print(Form("%s/SigmabyRatio%dzoom.pdf",pdfDhire.Data(), i+1));
+    if(i!=3){
+      line99->Draw("same");
+      c1->Print(pdf);
+      c1->Print(Form("%s/SigmabyRatio%d.pdf",pdfDhire.Data(), i+1));
+      ge[i]->SetMinimum(0.95);
+      line99->Draw();
+      ge[i]->Draw("AP");
+      line99->Draw("same");
+      c1->Print(pdf);
+      c1->Print(Form("%s/SigmabyRatio%dzoom.pdf",pdfDhire.Data(), i+1));
+    }else{
+      line99_2->Draw("same");
+      c1->Print(pdf);
+      c1->Print(Form("%s/SigmabyRatio%d.pdf",pdfDhire.Data(), i+1));
+      ge[i]->SetMinimum(0.95);
+      line99_2->Draw();
+      ge[i]->Draw("AP");
+      line99_2->Draw("same");
+      c1->Print(pdf);
+      c1->Print(Form("%s/SigmabyRatio%dzoom.pdf",pdfDhire.Data(), i+1));
+    }
   }
   c1->Print(pdf+"]"); 
 
