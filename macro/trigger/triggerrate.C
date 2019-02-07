@@ -200,7 +200,6 @@ void triggerrate(){
     }
   }
 
-  }
   while(std::getline(fin4, line)){
     double a=-1., b=-1.;
     std::istringstream input_line( line );
@@ -368,7 +367,7 @@ void triggerrate(){
   std::ofstream fout5;
   fout5.open(Form("%s/dat/trigger/Yield_matrix2_28.txt", anadir.Data()));
   for(int i=0; i<Yield_matrix2_28.size(); i++){
-    fout4 << Yield_matrix2_28.at(i) << std::endl;
+    fout5 << Yield_matrix2_28.at(i) << std::endl;
   }
 
 //  std::ofstream fout3;
