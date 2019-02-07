@@ -687,7 +687,7 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
       Hist1[34+Mtx_prm2.size()*12+l]= new TH1D(Form("pKurama Cut3 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("pKurama Cut3 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),100,0,2);
       Hist1[34+Mtx_prm2.size()*13+l]= new TH1D(Form("pKurama Cut4 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("pKurama Cut4 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),100,0,2);
       Hist1[34+Mtx_prm2.size()*14+l]= new TH1D(Form("pKurama Cut5 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("pKurama Cut5 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),100,0,2);
-      Hist1[34+Mtx_prm2.size()*15+l]= new TH1D(Form("MissMass Sigma Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("MissMass Sigma; SCH[%d]-TOF[%d]   Missing Mass [Gev/cc];Counts",Mtx_prm2.at(l).at(0),Mtx_prm2.at(l).at(1)),100,0.8,1.4);
+      Hist1[34+Mtx_prm2.size()*15+l]= new TH1D(Form("MissMass Sigma Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("MissMass Sigma; SCH[%d]-TOF[%d]   Missing Mass [Gev/c^{2}];Counts",Mtx_prm2.at(l).at(0),Mtx_prm2.at(l).at(1)),100,0.8,1.4);
       Hist1[34+Mtx_prm2.size()*16+l]= new TH1D(Form("sftxseg all Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("sftx all;SCH[%d]-TOF[%d]    SFTX Segment ;Counts",Mtx_prm2.at(l).at(0),Mtx_prm2.at(l).at(1)),bin,0,NumOfSegSFT_X);
   }                         
 

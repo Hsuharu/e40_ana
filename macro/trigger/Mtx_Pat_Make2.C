@@ -609,7 +609,7 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
     Hist1[31]= new TH1D("m2 Cut4","m2 Cut4",100,-0.4,1.4);
     Hist1[32]= new TH1D("pKurama Cut5","pKurama Cut5",100,0,2);
     Hist1[33]= new TH1D("m2 Cut5","m2 Cut5",100,-0.4,1.4);
-    Hist1[34+Mtx_prm.size()*17]= new TH1D("MissMass Sigma all",";Missing Mass [GeV/cc];Counts",100,0.8,1.4);
+    Hist1[34+Mtx_prm.size()*17]= new TH1D("MissMass Sigma all",";Missing Mass [GeV/c^{2}];Counts",100,0.8,1.4);
 
     for(int l=0; l < Mtx_prm.size(); l++){
       Hist1[34+Mtx_prm.size()*0 +l]= new TH1D(Form("sftxseg Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx Sch;SFTX Segment SCH[%d]-TOF[%d];Counts",Mtx_prm.at(l).at(0),Mtx_prm.at(l).at(1)),bin,0,NumOfSegSFT_X);
@@ -635,7 +635,7 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
       Hist1[34+Mtx_prm.size()*12+l]= new TH1D(Form("pKurama Cut3 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("pKurama Cut3 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,0,2);
       Hist1[34+Mtx_prm.size()*13+l]= new TH1D(Form("pKurama Cut4 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("pKurama Cut4 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,0,2);
       Hist1[34+Mtx_prm.size()*14+l]= new TH1D(Form("pKurama Cut5 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("pKurama Cut5 Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,0,2);
-      Hist1[34+Mtx_prm.size()*15+l]= new TH1D(Form("MissMass Sigma Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("MissMass Sigma Sch[%d]-Tof[%d];[Gev/cc];Counts",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,0.8,1.4);
+      Hist1[34+Mtx_prm.size()*15+l]= new TH1D(Form("MissMass Sigma Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("MissMass Sigma Sch[%d]-Tof[%d];[Gev/c^{2}];Counts",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),100,0.8,1.4);
       Hist1[34+Mtx_prm.size()*16+l]= new TH1D(Form("sftxseg all Sch[%d]-Tof[%d]",Mtx_prm.at(l).at(0)+1,Mtx_prm.at(l).at(1)+1),Form("sftx all;SCH[%d]-TOF[%d]    SFTX Segment ;Counts",Mtx_prm.at(l).at(0),Mtx_prm.at(l).at(1)),bin,0,NumOfSegSFT_X);
     }                         
                               
