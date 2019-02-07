@@ -62,7 +62,7 @@ bool eq3(int a,int b,int c){
 }
 
 
-void Sigma(int month,int runnum, int file=1){
+void Sigma(int month=6,int runnum=0, int file=2){
 
   gStyle->SetOptStat(0);
   gStyle->SetOptTitle(0);
@@ -572,7 +572,7 @@ void Sigma(int month,int runnum, int file=1){
   Hist1[0 ]= new TH1D("MissMass[0] w/Sigma",";Missing Mass [GeV/c^{2}];Counts",100,0.8,1.5);
   Hist1[1 ]= new TH1D("pKurama[0] w/Sigma",";Momentum [GeV/c];Counts",100,0.2,1.4);
   Hist1[2 ]= new TH1D("m2[0]",";m2 [(GeV/c^{2})^{2}];Counts",100,-0.4,1.4);
-  Hist1[3 ]= new TH1D("MissMass[0] all",";Missing Mass [GeV/c^{2};Counts]",100,0.8,1.5);
+  Hist1[3 ]= new TH1D("MissMass[0] all",";Missing Mass [GeV/c^{2}];Counts]",100,0.8,1.5);
 
 //  Hist2[0 ]= new TH2D("pKurama % m2",     "pKurama % m2 "    ,100,-0.4,1.4,100,0,2);
 
