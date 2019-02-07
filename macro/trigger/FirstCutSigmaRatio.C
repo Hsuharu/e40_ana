@@ -183,7 +183,7 @@ void FirstCutSigmaRatio(){
     ge[i]->SetMarkerSize(2);
     ge[i]->SetMaximum(1);
     ge[i]->SetMinimum(0.9);
-    ge[i]->GetXaxis()->SetTitle("Ratio");
+    ge[i]->GetXaxis()->SetTitle("%");
     ge[i]->GetYaxis()->SetTitle("Efficiency");
     ge[i]->Draw("AP");
     if(i!=3){
