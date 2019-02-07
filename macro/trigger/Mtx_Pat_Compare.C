@@ -16,7 +16,21 @@ const char* MPG[] =
   "SFT_CutFirst_ratio5_Newtable.txt.2019Jan.1_2",
   "SFT_CutFirst_ratio4_Newtable.txt.2019Jan.1_2",
   "SFT_CutFirst_ratio2_Newtable.txt.2019Jan.1_2",
-  "SFT_CutFirst_ratio1_Newtable.txt.2019Jan.1_2"
+  "SFT_CutFirst_ratio1_Newtable.txt.2019Jan.1_2",
+  "SFT_CutSecond_Newtable.txt.2019Jan.1_2",
+  "SFT_CutSecond_900_Newtable.txt.2019Jan.1_2",
+  "SFT_CutSecond_990_Newtable.txt.2019Jan.1_2",
+  "SFT_CutSecond_999_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r110_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r11_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r120_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r125_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r130_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r136_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r140_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r150_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r15_Newtable.txt.2019Jan.1_2"
+  "SFT_Newtable.txt.2019Jan.3_2",
 };
 
 const char* Month[] =
@@ -673,10 +687,10 @@ void Mtx_Pat_Compare(int month,int runnum, int bin=256, int file=2, int matrixnu
       Hist1[34+Mtx_prm2.size()*2 +l]->SetLineColor(9); 
       Hist1[34+Mtx_prm2.size()*3 +l]->SetLineColor(kBlue); 
       Hist1[34+Mtx_prm2.size()*4 +l]->SetLineColor(kRed); 
-      Hist1[34+Mtx_prm2.size()*1 +l]->SetFillColor(8); 
-      Hist1[34+Mtx_prm2.size()*2 +l]->SetFillColor(9); 
-      Hist1[34+Mtx_prm2.size()*3 +l]->SetFillColor(kBlue); 
-      Hist1[34+Mtx_prm2.size()*4 +l]->SetFillColor(kRed); 
+//      Hist1[34+Mtx_prm2.size()*1 +l]->SetFillColor(8); 
+//      Hist1[34+Mtx_prm2.size()*2 +l]->SetFillColor(9); 
+//      Hist1[34+Mtx_prm2.size()*3 +l]->SetFillColor(kBlue); 
+//      Hist1[34+Mtx_prm2.size()*4 +l]->SetFillColor(kRed); 
       Hist1[34+Mtx_prm2.size()*5 +l]= new TH1D(Form("m2 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("m2 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),100,-0.4,1.4);
       Hist1[34+Mtx_prm2.size()*6 +l]= new TH1D(Form("m2 Cut2 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("m2 Cut2 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),100,-0.4,1.4);
       Hist1[34+Mtx_prm2.size()*7 +l]= new TH1D(Form("m2 Cut3 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),Form("m2 Cut3 Sch[%d]-Tof[%d]",Mtx_prm2.at(l).at(0)+1,Mtx_prm2.at(l).at(1)+1),100,-0.4,1.4);
