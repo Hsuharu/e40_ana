@@ -62,7 +62,7 @@ bool eq3(int a,int b,int c){
 }
 
 
-void Matrix_Pattern_Checker2(int month,int runnum, int file=2){
+void Matrix_Pattern_Checker2(int month,int runnum, int file=2, int sft1 = 999){
 
 //  gStyle->SetOptStat(1111110); 
   gStyle->SetOptFit(1); 
@@ -871,11 +871,11 @@ void Matrix_Pattern_Checker2(int month,int runnum, int file=2){
     for(int i=0; i<24; i++){
       if(cmax==0 ||  min>=cmax) continue;
       if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max)>1000){
-        if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)999/1000) continue;
+        if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)sft1/1000) continue;
       }else if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max)>100){
-        if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)99/100) continue;
+        if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)sft1/1000) continue;
       }else{
-        if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)9/10) continue;
+        if(cmax>0 && cmax>min && (double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) < (double)sft1/1000) continue;
       }
       std::cout << Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) << "\t" << Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,max) << std::endl;
       flag10=false;
@@ -901,11 +901,11 @@ void Matrix_Pattern_Checker2(int month,int runnum, int file=2){
       if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)==0) continue;
       if(cmin==255 ||  cmin>=cmax) continue;
       if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)>1000){
-        if((double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)999/1000) continue;
+        if((double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)sft1/1000) continue;
       }else if(Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax)>100){
-        if((double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)99/100) continue;
+        if((double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)sft1/1000) continue;
       }else{
-        if((double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)9/10) continue;
+        if((double)Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) / Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) < (double)sft1/1000) continue;
       }
       std::cout << Hist1[34+Mtx_prm.size()*4 +l]->Integral(cmin,cmax) << "\t" << Hist1[34+Mtx_prm.size()*4 +l]->Integral(min,cmax) << std::endl;
       flag10_min=false;
@@ -936,7 +936,7 @@ void Matrix_Pattern_Checker2(int month,int runnum, int file=2){
   //    Matrix Pattern Maker   Checker                                                       //
   //                                                                                         //
   /////////////////////////////////////////////////////////////////////////////////////////////
-  TString fileout2 = Form("%s/analyzer_%s/param/MATRIXSFT/SFT_CutSecond_Newtable.txt.2019Jan.1_%d",anadir.Data(),Month[month], file );
+  TString fileout2 = Form("%s/analyzer_%s/param/MATRIXSFT/SFT_CutSecond_%d_Newtable.txt.2019Jan.1_%d",anadir.Data(),Month[month],sft1, file );
   //  TString filein1=Form("%s/analyzer_%s/param/MATRIXSFT/SFT_table.txt.2018Jun.3_1",anadir.Data(),Month[month] ); 
 
   std::ofstream fout2(fileout2.Data()); 
