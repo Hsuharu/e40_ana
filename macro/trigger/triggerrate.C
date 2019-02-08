@@ -263,10 +263,10 @@ void triggerrate(){
 //  g[8]->GetXaxis()->SetTitle("");
 //  g[8]->GetYaxis()->SetTitle("");
   TH1D *h8 = new TH1D("h8",";L1 [Counts/Spill];DAQ Efficiency",100,0,L1Req.back()*1.1);
-  h8->SetAxisRange(0,DAQEff.back()*1.1,"Y");
+  h8->SetAxisRange(0.8,DAQEff.back()*1.1,"Y");
   h8->Draw();
   g[8]->GetYaxis()->SetDecimals(2);
-  g[8]->SetMinimum(0.8);
+//  g[8]->SetMinimum(0.8);
   g[8]->Draw("P");
   c1->Print(Form("%s/L1_DAQ_pre_%d.pdf",pdfDhire.Data(), 8));
   g[8]->Fit("fit","","R",L1Req.at(0),L1Req.at(L1Req.size()-1));
