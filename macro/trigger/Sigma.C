@@ -760,13 +760,40 @@ void Sigma(int month=6,int runnum=0, int file=2){
     }
   }
 
+  TString filein4=Form("%s/dat/trigger/MissMassDist_matrix%d_chisqr3.txt", anadir.Data(), 28); 
+  std::ifstream fin4(filein4);
+  std::vector<double> cM3x; 
+  std::vector<double> cM3ratio; 
+  std::vector<double> cM3xerr; 
+  std::vector<double> cM3ratioerr; 
+
+  while(std::getline(fin4, line)){
+    double a=-1., b=-1.,c=-1.,d=-1.;
+    std::istringstream input_line( line );
+    if( input_line >> a >> b >> c >> d){
+      cM3x.push_back(a);
+      cM3ratio.push_back(b);
+      cM3xerr.push_back(c);
+      cM3ratioerr.push_back(d);
+    }
+  }
+
+
   TGraphErrors *graphM = new TGraphErrors(cMx.size(),cMx.data(),cMratio.data(),cMxerr.data(),cMratioerr.data());
+  TGraphErrors *graphM3 = new TGraphErrors(cM3x.size(),cM3x.data(),cM3ratio.data(),cM3xerr.data(),cM3ratioerr.data());
   graphM->SetMarkerStyle(20);
   graphM->SetMarkerColor(1);
   graphM->SetMarkerSize(2);
   graphM->Draw("AP");
   c1->Print(pdf);
   c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMissMass_graphM.pdf",pdfDhire.Data(),runnum));
+
+  graphM3->SetMarkerStyle(20);
+  graphM3->SetMarkerColor(2);
+  graphM3->SetMarkerSize(2);
+  graphM3->Draw("AP");
+  c1->Print(pdf);
+  c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMissMass_graphM3.pdf",pdfDhire.Data(),runnum));
 
   Hist1[3]->Draw("hist");
   graphM->Draw("P");
@@ -782,6 +809,10 @@ void Sigma(int month=6,int runnum=0, int file=2){
   graphM->Draw("P");
   c1->Print(pdf);
   c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMissMass_same.pdf",pdfDhire.Data(),runnum));
+
+  graphM3->Draw("P");
+  c1->Print(pdf);
+  c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMissMass_same_MM3.pdf",pdfDhire.Data(),runnum));
   //     for(int i=0; i<Hist2Max; i++){
   //       Hist2[i]->Draw("colz");
   //       c1->Print(pdf);
