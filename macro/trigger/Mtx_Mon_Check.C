@@ -990,7 +990,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
       b1=  Hist1[15+j+nchisqr*2]->GetBinContent(i+1);
       //   x[i]=Hist1[g7]->GetXaxis()->GetBinCenter(i+i);
       cMratio[j][i] = a1/b1 ;
-      cMxerr[j][i] = 1./(double)nBinz/2.;
+      cMxerr[j][i] =0.;// 1./(double)nBinz/2.;
       cMratioerr[j][i] = sqrt(b1*cMratio[j][i]*(1-cMratio[j][i]))/b1;
     }
     graphM[j] = new TGraphErrors(nBinz,&cMx[j][0],&cMratio[j][0],&cMxerr[j][0],&cMratioerr[j][0]);
@@ -1029,8 +1029,9 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     Hist1[15+nchisqr*3+j]->Draw("same");
     c1->Print(pdf);
     c1->Print(pdfc);
-        test2->SetTitle(Form("Missing Mass Ratio(Cut5/Cut3)  Chisq<%d",chisqrG[j]));
-    test2->SetAxisRange(1,1.35,"Y");
+    test2->SetTitle(Form("Missing Mass Ratio(Cut5/Cut3)  Chisq<%d",chisqrG[j]));
+    test2->SetAxisRange(1,1.35,"X");
+    test2->SetAxisRange(0,1,"X");
     test2->Draw();
     graphM[j]->Draw("P");
     c1->Print(pdf);

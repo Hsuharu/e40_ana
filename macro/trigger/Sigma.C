@@ -749,7 +749,7 @@ void Sigma(int month=6,int runnum=0, int file=2){
   std::vector<double> cMxerr; 
   std::vector<double> cMratioerr; 
 
-  while(std::getline(fin2, line)){
+  while(std::getline(fin3, line)){
     double a=-1., b=-1.,c=-1.,d=-1.;
     std::istringstream input_line( line );
     if( input_line >> a >> b >> c >> d){
