@@ -572,7 +572,7 @@ void Sigma(int month=6,int runnum=0, int file=2){
   Hist1[0 ]= new TH1D("MissMass[0] w/Sigma",";Missing Mass [GeV/c^{2}];Counts",100,0.8,1.5);
   Hist1[1 ]= new TH1D("pKurama[0] w/Sigma",";Momentum [GeV/c];Counts",100,0.2,1.4);
   Hist1[2 ]= new TH1D("m2[0]",";m2 [(GeV/c^{2})^{2}];Counts",100,-0.4,1.4);
-  Hist1[3 ]= new TH1D("MissMass[0] all",";Missing Mass [GeV/c^{2}];Counts]",100,0.8,1.5);
+  Hist1[3 ]= new TH1D("MissMass[0] all",";Missing Mass [GeV/c^{2}];Counts",100,0.8,1.5);
   Hist1[4 ]= new TH1D("pKurama[0] w/Sigma Scale",";Momentum [GeV/c];Counts",100,0,2);
 
 //  Hist2[0 ]= new TH2D("pKurama % m2",     "pKurama % m2 "    ,100,-0.4,1.4,100,0,2);
@@ -795,6 +795,7 @@ void Sigma(int month=6,int runnum=0, int file=2){
   c1->Print(pdf);
   c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMissMass_graphM3.pdf",pdfDhire.Data(),runnum));
 
+  Hist1[3]->SetAxisRange(1,1.35,"X");
   Hist1[3]->Draw("hist");
   graphM->Draw("P");
   c1->Print(pdf);
@@ -804,6 +805,7 @@ void Sigma(int month=6,int runnum=0, int file=2){
   c1->Print(pdf);
   c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMissMass.pdf",pdfDhire.Data(),runnum));
 
+  Hist1[3]->SetAxisRange(1,1.35,"X");
   Hist1[3]->SetAxisRange(0,1,"Y");
   Hist1[3]->Draw("hist");
   graphM->Draw("P");
@@ -819,6 +821,8 @@ void Sigma(int month=6,int runnum=0, int file=2){
   //  //     c1->Print(Form("%s/Mtx_Pat_Make_run%05d_Hist2_colz_%04d.pdf",pdfDhire.Data(),runnum,i));
   //     }
   
+  Hist1[3]->SetAxisRange(0,1,"Y");
+  Hist1[3]->SetAxisRange(1,1.35,"X");
   Hist1[3]->Draw("hist");
   graphM->Draw("P");
   c1->Print(pdf);
