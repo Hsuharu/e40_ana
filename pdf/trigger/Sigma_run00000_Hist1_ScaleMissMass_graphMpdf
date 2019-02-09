@@ -1,5 +1,5 @@
 %!PS-Adobe-2.0
-%%Title: /home/had/suharu/work/e40/ana/pdf/trigger/Sigma_run00000_Hist1_ScaleMon_graphpdf: c1
+%%Title: : c1
 %%Creator: ROOT Version 6.12/06
 %%CreationDate: Sat Feb  9 19:27:39 2019
 %%Orientation: Landscape
@@ -77,41 +77,7 @@ newpath  gsave  90 r 0 -594 t  28 20 t .25 .25 scale  gsave
 %%Page: 1 1
  gsave  gsave 
  1 1 Zone
- gsave  0 0 t black[  ] 0 sd 3 lw 1 1 1 c 2948 2149 0 0 bf black 1 1 1 c 2181 1590 472 344 bf black 2181 1590 472 344 bl 1 1 1 c 2181 1590 472 344 bf black 2181 1590 472 344 bl 472 344 m 2181 X s 472 392 m -48 Y s 534 368 m -24 Y s 596 368 m -24 Y s
- 658 368 m -24 Y s 720 392 m -48 Y s 783 368 m -24 Y s 845 368 m -24 Y s 907 368 m -24 Y s 969 392 m -48 Y s 1031 368 m -24 Y s 1093 368 m -24 Y s 1156 368 m -24 Y s 1218 392 m -48 Y s 1280 368 m -24 Y s 1342 368 m -24 Y s 1404 368 m -24 Y s 1466 392
- m -48 Y s 1529 368 m -24 Y s 1591 368 m -24 Y s 1653 368 m -24 Y s 1715 392 m -48 Y s 1777 368 m -24 Y s 1839 368 m -24 Y s 1902 368 m -24 Y s 1964 392 m -48 Y s 2026 368 m -24 Y s 2088 368 m -24 Y s 2150 368 m -24 Y s 2212 392 m -48 Y s 2275 368 m
- -24 Y s 2337 368 m -24 Y s 2399 368 m -24 Y s 2461 392 m -48 Y s 2461 392 m -48 Y s 2523 368 m -24 Y s 2585 368 m -24 Y s 2648 368 m -24 Y s
- gsave  2948 2149 0 0 C 448.613 266.21 t 0 r /Helvetica findfont 81.342 sf 0 0 m (0) show NC gr 
- gsave  2948 2149 0 0 C 663.061 266.21 t 0 r /Helvetica findfont 81.342 sf 0 0 m (0.2) show NC gr 
- gsave  2948 2149 0 0 C 912.016 266.21 t 0 r /Helvetica findfont 81.342 sf 0 0 m (0.4) show NC gr 
- gsave  2948 2149 0 0 C 1160.97 266.21 t 0 r /Helvetica findfont 81.342 sf 0 0 m (0.6) show NC gr 
- gsave  2948 2149 0 0 C 1407.46 266.21 t 0 r /Helvetica findfont 81.342 sf 0 0 m (0.8) show NC gr 
- gsave  2948 2149 0 0 C 1698.32 266.21 t 0 r /Helvetica findfont 81.342 sf 0 0 m (1) show NC gr 
- gsave  2948 2149 0 0 C 1905.37 266.21 t 0 r /Helvetica findfont 81.342 sf 0 0 m (1.2) show NC gr 
- gsave  2948 2149 0 0 C 2154.33 266.21 t 0 r /Helvetica findfont 81.342 sf 0 0 m (1.4) show NC gr 
- gsave  2948 2149 0 0 C 2403.29 266.21 t 0 r /Helvetica findfont 81.342 sf 0 0 m (1.6) show NC gr  472 344 m 1590 Y s 537 344 m -65 X s 504 376 m -32 X s 504 408 m -32 X s 504 439 m -32 X s 504 471 m -32 X s 537 503 m -65 X s 504 535 m -32 X s 504
- 567 m -32 X s 504 598 m -32 X s 504 630 m -32 X s 537 662 m -65 X s 504 694 m -32 X s 504 726 m -32 X s 504 757 m -32 X s 504 789 m -32 X s 537 821 m -65 X s 504 853 m -32 X s 504 885 m -32 X s 504 917 m -32 X s 504 948 m -32 X s 537 980 m -65 X s
- 504 1012 m -32 X s 504 1044 m -32 X s 504 1076 m -32 X s 504 1107 m -32 X s 537 1139 m -65 X s 504 1171 m -32 X s 504 1203 m -32 X s 504 1235 m -32 X s 504 1266 m -32 X s 537 1298 m -65 X s 504 1330 m -32 X s 504 1362 m -32 X s 504 1394 m -32 X s
- 504 1425 m -32 X s 537 1457 m -65 X s 504 1489 m -32 X s 504 1521 m -32 X s 504 1553 m -32 X s 504 1585 m -32 X s 537 1616 m -65 X s 504 1648 m -32 X s 504 1680 m -32 X s 504 1712 m -32 X s 504 1744 m -32 X s 537 1775 m -65 X s 504 1807 m -32 X s
- 504 1839 m -32 X s 504 1871 m -32 X s 504 1903 m -32 X s 537 1934 m -65 X s
- gsave  2948 2149 0 0 C 253.886 315.508 t 0 r /Helvetica findfont 81.342 sf 0 0 m (13.92) show NC gr 
- gsave  2948 2149 0 0 C 209.517 315.508 t 0 r /Symbol findfont 81.342 sf 0 0 m (-) show NC gr 
- gsave  2948 2149 0 0 C 300.719 475.728 t 0 r /Helvetica findfont 81.342 sf 0 0 m (2.78) show NC gr 
- gsave  2948 2149 0 0 C 253.886 633.482 t 0 r /Helvetica findfont 81.342 sf 0 0 m (19.49) show NC gr 
- gsave  2948 2149 0 0 C 300.719 793.701 t 0 r /Helvetica findfont 81.342 sf 0 0 m (36.2) show NC gr 
- gsave  2948 2149 0 0 C 268.675 951.455 t 0 r /Helvetica findfont 81.342 sf 0 0 m (52.91) show NC gr 
- gsave  2948 2149 0 0 C 253.886 1111.67 t 0 r /Helvetica findfont 81.342 sf 0 0 m (69.62) show NC gr 
- gsave  2948 2149 0 0 C 256.351 1269.43 t 0 r /Helvetica findfont 81.342 sf 0 0 m (86.33) show NC gr 
- gsave  2948 2149 0 0 C 209.517 1429.65 t 0 r /Helvetica findfont 81.342 sf 0 0 m (103.03) show NC gr 
- gsave  2948 2149 0 0 C 209.517 1587.4 t 0 r /Helvetica findfont 81.342 sf 0 0 m (119.74) show NC gr 
- gsave  2948 2149 0 0 C 209.517 1747.62 t 0 r /Helvetica findfont 81.342 sf 0 0 m (136.45) show NC gr 
- gsave  2948 2149 0 0 C 209.517 1905.37 t 0 r /Helvetica findfont 81.342 sf 0 0 m (153.16) show NC gr 
- gsave  2948 2149 0 0 C 603.903 1984.25 t 0 r /Helvetica findfont 54.228 sf 0 0 m (186) show NC gr 
- gsave  2948 2149 0 0 C 515.166 1944.81 t 0 r /Helvetica findfont 81.342 sf 0 0 m (10) show NC gr 
- gsave  2948 2149 0 0 C 470.798 1944.81 t 0 r /Symbol findfont 81.342 sf 0 0 m (´) show NC gr  1 1 1 c black /w 39 def /w2 {w 2 div} def /w3 {w 3 div} def 882 476 907 476 932 476 957 476 981 476 1006 476 1031 476 1056 476 1081 476 1106 476 1131 476
- 1156 476 1180 476 1205 476 1230 476 1255 476 1280 476 1305 476 1330 476 1354 476 1379 476 1404 476 1429 476 1454 476 1479 476 1504 476 1529 476 1553 476 1578 476 1603 476 1628 476 1653 476 1678 476 1703 476 1728 476 1752 476 1777 476 1802 476 1827
- 476 1852 476 1877 476 1902 476 1926 476 1951 476 1976 476 2001 476 2026 476 2051 476 2076 476 2101 476 2125 476 2150 476 2175 476 2200 476 2225 476 2250 476 2275 476 2299 476 2324 476 2349 476 2374 476 2399 476 2424 476 2449 476 472 476 472 476 472
- 476 472 476 472 476 472 476 472 476 472 476 472 476 472 476 472 476 472 476 472 476 472 476 472 476 472 1802 472 476 472 476 472 476 83 { m20} R gr showpage
+ gsave  0 0 t black[  ] 0 sd 3 lw 1 1 1 c 2948 2149 0 0 bf gr showpage
  gr 
 %%Trailer
 %%Pages:  1

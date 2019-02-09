@@ -901,7 +901,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   Hist1[4]->SetLineColor(kRed); 
   Hist1[4]->Draw("same");
   c1->Print(pdf);
-  test1->Draw();
+  test2->Draw();
   graph2->Draw("P");
   c1->Print(pdf);
 
@@ -997,7 +997,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     graphM[j]->SetMarkerStyle(20);
     graphM[j]->SetMarkerColor(1);
     graphM[j]->SetMarkerSize(2);
-    test1->Draw();
+    test2->Draw();
     graphM[j]->Draw("P");
     c1->Print(pdf);
   }
@@ -1014,7 +1014,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     Hist1[15+nchisqr*3+j]->SetLineColor(kRed); 
     Hist1[15+nchisqr*3+j]->Draw("same");
     c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_Hist1_Mratio_chisqr%d.pdf",pdfDhire.Data(),matrix,runnum,chisqrG[j]));
-    test1->Draw();
+    test2->Draw();
     graphM[j]->Draw("P");
     c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_graph_Mratio_chisqr%d.pdf",pdfDhire.Data(),matrix,runnum,chisqrG[j]));
   }
@@ -1026,8 +1026,8 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     Hist1[15+nchisqr*3+j]->Draw("same");
     c1->Print(pdf);
     c1->Print(pdfc);
-        test1->SetTitle(Form("Missing Mass Ratio(Cut5/Cut3)  Chisq<%d",chisqrG[j]));
-    test1->Draw();
+        test2->SetTitle(Form("Missing Mass Ratio(Cut5/Cut3)  Chisq<%d",chisqrG[j]));
+    test2->Draw();
     graphM[j]->Draw("P");
     c1->Print(pdf);
     c1->Print(pdfc);
