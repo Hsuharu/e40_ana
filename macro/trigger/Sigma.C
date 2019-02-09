@@ -673,7 +673,7 @@ void Sigma(int month=6,int runnum=0, int file=2){
 
   double max=0.;
   max = Hist1[4]->GetBinContent(Hist1[4]->GetMaximumBin());
-  Hist1[4]->Scale(max);
+  Hist1[4]->Scale(1./max);
   Hist1[4]->Draw("hist");
   c1->Print(pdf);
   c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMon.pdf",pdfDhire.Data(),runnum));
