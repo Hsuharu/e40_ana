@@ -672,7 +672,9 @@ void Sigma(int month=6,int runnum=0, int file=2){
   }
 
   double max=0.;
+  double sum=0.;
   max = Hist1[4]->GetBinContent(Hist1[4]->GetMaximumBin());
+  sum = Hist1[4]->Integral();
   Hist1[4]->Scale(1./max);
   Hist1[4]->Draw("hist");
   c1->Print(pdf);
@@ -709,12 +711,25 @@ void Sigma(int month=6,int runnum=0, int file=2){
     c1->Print(pdf);
     c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMon_same.pdf",pdfDhire.Data(),runnum));
 
+  Hist1[4]->Scale(max/sum);
+  Hist1[4]->Draw("hist");
+  c1->Print(pdf);
+  c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMon.pdf",pdfDhire.Data(),runnum));
+
+    Hist1[4]->Draw("hist");
+    graph->Draw("P");
+    c1->Print(pdf);
+    c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMon_same.pdf",pdfDhire.Data(),runnum));
   //     for(int i=0; i<Hist2Max; i++){
   //       Hist2[i]->Draw("colz");
   //       c1->Print(pdf);
   //  //     c1->Print(Form("%s/Mtx_Pat_Make_run%05d_Hist2_colz_%04d.pdf",pdfDhire.Data(),runnum,i));
   //     }
   
+    Hist1[4]->Draw("hist");
+    graph->Draw("P");
+    c1->Print(pdf);
+    c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMon_same.pdf",pdfDhire.Data(),runnum));
 
   c1->Print(pdf1+"]"); 
 
