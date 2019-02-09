@@ -742,8 +742,8 @@ void Sigma(int month=6,int runnum=0, int file=2){
   c1->Print(pdf);
   c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMissMass.pdf",pdfDhire.Data(),runnum));
 
-  TString filein2=Form("%s/dat/trigger/MissMassDist_matrix%d_chisqr3.txt", anadir.Data(), 2); 
-  std::ifstream fin2(filein2);
+  TString filein3=Form("%s/dat/trigger/MissMassDist_matrix%d_chisqr3.txt", anadir.Data(), 2); 
+  std::ifstream fin3(filein3);
   std::vector<double> cMx; 
   std::vector<double> cMratio; 
   std::vector<double> cMxerr; 
@@ -760,16 +760,16 @@ void Sigma(int month=6,int runnum=0, int file=2){
     }
   }
 
-  TGraphErrors *graph = new TGraphErrors(cMx.size(),cMx.data(),cMratio.data(),cMxerr.data(),cMratioerr.data());
-  graph->SetMarkerStyle(20);
-  graph->SetMarkerColor(1);
-  graph->SetMarkerSize(2);
-  graph->Draw("AP");
+  TGraphErrors *graphM = new TGraphErrors(cMx.size(),cMx.data(),cMratio.data(),cMxerr.data(),cMratioerr.data());
+  graphM->SetMarkerStyle(20);
+  graphM->SetMarkerColor(1);
+  graphM->SetMarkerSize(2);
+  graphM->Draw("AP");
   c1->Print(pdf);
-  c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMissMass_graphpdf",pdfDhire.Data(),runnum));
+  c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMissMass_graphMpdf",pdfDhire.Data(),runnum));
 
   Hist1[0]->Draw("hist");
-  graph->Draw("P");
+  graphM->Draw("P");
   c1->Print(pdf);
   c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMissMass_same.pdf",pdfDhire.Data(),runnum));
   Hist1[0]->Scale(maxM/sumM*4);
@@ -779,7 +779,7 @@ void Sigma(int month=6,int runnum=0, int file=2){
 
   Hist1[0]->SetAxisRange(0,1,"Y");
   Hist1[0]->Draw("hist");
-  graph->Draw("P");
+  graphM->Draw("P");
   c1->Print(pdf);
   c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMissMass_same.pdf",pdfDhire.Data(),runnum));
   //     for(int i=0; i<Hist2Max; i++){
@@ -789,7 +789,7 @@ void Sigma(int month=6,int runnum=0, int file=2){
   //     }
   
     Hist1[0]->Draw("hist");
-    graph->Draw("P");
+    graphM->Draw("P");
     c1->Print(pdf);
     c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMissMass_same.pdf",pdfDhire.Data(),runnum));
 
