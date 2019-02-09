@@ -735,10 +735,10 @@ void Sigma(int month=6,int runnum=0, int file=2){
 
   double maxM=0.;
   double sumM=0.;
-  maxM = Hist1[0]->GetBinContent(Hist1[0]->GetMaximumBin());
-  sumM = Hist1[0]->Integral();
-  Hist1[0]->Scale(1./maxM);
-  Hist1[0]->Draw("hist");
+  maxM = Hist1[3]->GetBinContent(Hist1[3]->GetMaximumBin());
+  sumM = Hist1[3]->Integral();
+  Hist1[3]->Scale(1./maxM);
+  Hist1[3]->Draw("hist");
   c1->Print(pdf);
   c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMissMass.pdf",pdfDhire.Data(),runnum));
 
@@ -766,19 +766,19 @@ void Sigma(int month=6,int runnum=0, int file=2){
   graphM->SetMarkerSize(2);
   graphM->Draw("AP");
   c1->Print(pdf);
-  c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMissMass_graphMpdf",pdfDhire.Data(),runnum));
+  c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMissMass_graphM.pdf",pdfDhire.Data(),runnum));
 
-  Hist1[0]->Draw("hist");
+  Hist1[3]->Draw("hist");
   graphM->Draw("P");
   c1->Print(pdf);
   c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMissMass_same.pdf",pdfDhire.Data(),runnum));
-  Hist1[0]->Scale(maxM/sumM*4);
-  Hist1[0]->Draw("hist");
+  Hist1[3]->Scale(maxM/sumM*4);
+  Hist1[3]->Draw("hist");
   c1->Print(pdf);
   c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMissMass.pdf",pdfDhire.Data(),runnum));
 
-  Hist1[0]->SetAxisRange(0,1,"Y");
-  Hist1[0]->Draw("hist");
+  Hist1[3]->SetAxisRange(0,1,"Y");
+  Hist1[3]->Draw("hist");
   graphM->Draw("P");
   c1->Print(pdf);
   c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMissMass_same.pdf",pdfDhire.Data(),runnum));
@@ -788,7 +788,7 @@ void Sigma(int month=6,int runnum=0, int file=2){
   //  //     c1->Print(Form("%s/Mtx_Pat_Make_run%05d_Hist2_colz_%04d.pdf",pdfDhire.Data(),runnum,i));
   //     }
   
-    Hist1[0]->Draw("hist");
+    Hist1[3]->Draw("hist");
     graphM->Draw("P");
     c1->Print(pdf);
     c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMissMass_same.pdf",pdfDhire.Data(),runnum));
