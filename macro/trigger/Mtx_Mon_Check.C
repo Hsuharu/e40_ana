@@ -901,7 +901,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   Hist1[4]->SetLineColor(kRed); 
   Hist1[4]->Draw("same");
   c1->Print(pdf);
-  test2->Draw();
+  test1->Draw();
   graph2->Draw("P");
   c1->Print(pdf);
 
@@ -985,7 +985,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   for(int j=0;j<nchisqr; j++){
     for(int i = 0; i<nBinz; i++){
       double  a1=0.,b1=0.;
-      cMx[j][i] = 0.35/(double)nBinz/0.35 + (double)i*0.35/nBinz + 1;
+      cMx[j][i] = 0.35/(double)nBinz/2 + (double)i*0.35/nBinz + 1;
       a1=  Hist1[15+j+nchisqr*3]->GetBinContent(i+1);
       b1=  Hist1[15+j+nchisqr*2]->GetBinContent(i+1);
       //   x[i]=Hist1[g7]->GetXaxis()->GetBinCenter(i+i);
@@ -997,6 +997,8 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     graphM[j]->SetMarkerStyle(20);
     graphM[j]->SetMarkerColor(1);
     graphM[j]->SetMarkerSize(2);
+    test2->SetAxisRange(1,1.35,"Y");
+    test2->SetAxisRange(0,1,"Y");
     test2->Draw();
     graphM[j]->Draw("P");
     c1->Print(pdf);
@@ -1014,6 +1016,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     Hist1[15+nchisqr*3+j]->SetLineColor(kRed); 
     Hist1[15+nchisqr*3+j]->Draw("same");
     c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_Hist1_Mratio_chisqr%d.pdf",pdfDhire.Data(),matrix,runnum,chisqrG[j]));
+    test2->SetAxisRange(1,1.35,"Y");
     test2->Draw();
     graphM[j]->Draw("P");
     c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_graph_Mratio_chisqr%d.pdf",pdfDhire.Data(),matrix,runnum,chisqrG[j]));
@@ -1027,6 +1030,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     c1->Print(pdf);
     c1->Print(pdfc);
         test2->SetTitle(Form("Missing Mass Ratio(Cut5/Cut3)  Chisq<%d",chisqrG[j]));
+    test2->SetAxisRange(1,1.35,"Y");
     test2->Draw();
     graphM[j]->Draw("P");
     c1->Print(pdf);
