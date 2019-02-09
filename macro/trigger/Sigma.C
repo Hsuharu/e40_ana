@@ -672,9 +672,36 @@ void Sigma(int month=6,int runnum=0, int file=2){
   double max=0.;
   max = Hist1[1]->GetBinContent(Hist1[1]->GetMaximumBin());
   Hist1[1]->Scale(max);
+  Hist1[1]->Draw();
   c1->Print(pdf);
   c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMon.pdf",pdfDhire.Data(),runnum));
 
+  TString filein1=Form("%s/dat/trigger/MonDist_matrix%d.txt", anadir.Data(), 2); 
+  std::ifstream fin1(filein1);
+  std::vector<double> cx; 
+  std::vector<double> cratio; 
+  std::vector<double> cxerr; 
+  std::vector<double> cratioerr; 
+
+  while(std::getline(fin1, line)){
+    double a=-1., b=-1.,c=0.,d=0.;
+    std::istringstream input_line( line );
+    if( input_line >> a >> b >> c >> d){
+      ce.push_back(a);
+      cratio.push_back(b);
+      cxerr.push_back(c);
+      cratioerr.push_back(d);
+    }
+  }
+
+    TGraphErrors *graph = new TGraphErrors(cx.size(),cx.data(),cratio.data(),cxerr.data(),cratioerr.data());
+    graph->SetMarkerStyle(20);
+    graph->SetMarkerColor(1);
+    graph->SetMarkerSize(2);
+    Hist1[1]->Draw();
+    graph->Draw("P");
+    c1->Print(pdf);
+    c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMon_same.pdf",pdfDhire.Data(),runnum));
 
 
   //     for(int i=0; i<Hist2Max; i++){
