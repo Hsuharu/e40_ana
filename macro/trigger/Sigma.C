@@ -819,10 +819,10 @@ void Sigma(int month=6,int runnum=0, int file=2){
   //  //     c1->Print(Form("%s/Mtx_Pat_Make_run%05d_Hist2_colz_%04d.pdf",pdfDhire.Data(),runnum,i));
   //     }
   
-    Hist1[3]->Draw("hist");
-    graphM->Draw("P");
-    c1->Print(pdf);
-    c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMissMass_same.pdf",pdfDhire.Data(),runnum));
+  Hist1[3]->Draw("hist");
+  graphM->Draw("P");
+  c1->Print(pdf);
+  c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMissMass_same.pdf",pdfDhire.Data(),runnum));
 
   c1->Print(pdf1+"]"); 
 

@@ -1016,7 +1016,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     Hist1[15+nchisqr*3+j]->SetLineColor(kRed); 
     Hist1[15+nchisqr*3+j]->Draw("same");
     c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_Hist1_Mratio_chisqr%d.pdf",pdfDhire.Data(),matrix,runnum,chisqrG[j]));
-    test2->SetAxisRange(1,1.35,"Y");
+    test2->SetAxisRange(0,1,"Y");
     test2->Draw();
     graphM[j]->Draw("P");
     c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_graph_Mratio_chisqr%d.pdf",pdfDhire.Data(),matrix,runnum,chisqrG[j]));
