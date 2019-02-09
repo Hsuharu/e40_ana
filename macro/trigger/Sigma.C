@@ -573,6 +573,7 @@ void Sigma(int month=6,int runnum=0, int file=2){
   Hist1[1 ]= new TH1D("pKurama[0] w/Sigma",";Momentum [GeV/c];Counts",100,0.2,1.4);
   Hist1[2 ]= new TH1D("m2[0]",";m2 [(GeV/c^{2})^{2}];Counts",100,-0.4,1.4);
   Hist1[3 ]= new TH1D("MissMass[0] all",";Missing Mass [GeV/c^{2}];Counts]",100,0.8,1.5);
+  Hist1[4 ]= new TH1D("pKurama[0] w/Sigma Scale",";Momentum [GeV/c];Counts",100,0,2);
 
 //  Hist2[0 ]= new TH2D("pKurama % m2",     "pKurama % m2 "    ,100,-0.4,1.4,100,0,2);
 
@@ -601,6 +602,7 @@ void Sigma(int month=6,int runnum=0, int file=2){
         if(MissMass[0]<1.25&&MissMass[0]>1.15){
           Hist1[0]->Fill(MissMass[0]);
           Hist1[1]->Fill(pKurama[0]);
+          Hist1[4]->Fill(pKurama[0]);
         }
       }
     }
@@ -670,24 +672,24 @@ void Sigma(int month=6,int runnum=0, int file=2){
   }
 
   double max=0.;
-  max = Hist1[1]->GetBinContent(Hist1[1]->GetMaximumBin());
-  Hist1[1]->Scale(max);
-  Hist1[1]->Draw();
+  max = Hist1[4]->GetBinContent(Hist1[4]->GetMaximumBin());
+  Hist1[4]->Scale(max);
+  Hist1[4]->Draw("hist");
   c1->Print(pdf);
   c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMon.pdf",pdfDhire.Data(),runnum));
 
-  TString filein1=Form("%s/dat/trigger/MonDist_matrix%d.txt", anadir.Data(), 2); 
-  std::ifstream fin1(filein1);
+  TString filein2=Form("%s/dat/trigger/MonDist_matrix%d.txt", anadir.Data(), 2); 
+  std::ifstream fin2(filein2);
   std::vector<double> cx; 
   std::vector<double> cratio; 
   std::vector<double> cxerr; 
   std::vector<double> cratioerr; 
 
-  while(std::getline(fin1, line)){
-    double a=-1., b=-1.,c=0.,d=0.;
+  while(std::getline(fin2, line)){
+    double a=-1., b=-1.,c=-1.,d=-1.;
     std::istringstream input_line( line );
     if( input_line >> a >> b >> c >> d){
-      ce.push_back(a);
+      cx.push_back(a);
       cratio.push_back(b);
       cxerr.push_back(c);
       cratioerr.push_back(d);
@@ -698,7 +700,7 @@ void Sigma(int month=6,int runnum=0, int file=2){
     graph->SetMarkerStyle(20);
     graph->SetMarkerColor(1);
     graph->SetMarkerSize(2);
-    Hist1[1]->Draw();
+    Hist1[4]->Draw("hist");
     graph->Draw("P");
     c1->Print(pdf);
     c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMon_same.pdf",pdfDhire.Data(),runnum));
