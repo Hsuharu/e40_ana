@@ -97,7 +97,7 @@ bool eq3(int a,int b,int c){
 
 void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
 
-//  gStyle->SetOptTitle(0);
+  //  gStyle->SetOptTitle(0);
   gStyle->SetOptStat(0);
   gStyle->SetLabelSize(0.04,"XYZ");
   gStyle->SetTitleSize(0.05,"XYZ");
@@ -408,7 +408,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   pik->SetBranchStatus("ytgtKurama");
   //   pik->SetBranchStatus("utgtKurama");
   //   pik->SetBranchStatus("vtgtKurama");
-     pik->SetBranchStatus("thetaKurama");
+  pik->SetBranchStatus("thetaKurama");
   //   pik->SetBranchStatus("xtofKurama");
   //   pik->SetBranchStatus("ytofKurama");
   //   pik->SetBranchStatus("utofKurama");
@@ -536,7 +536,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   pik->SetBranchAddress("ytgtKurama",ytgtKurama);
   //   pik->SetBranchAddress("utgtKurama",utgtKurama);
   //   pik->SetBranchAddress("vtgtKurama",vtgtKurama);
-     pik->SetBranchAddress("thetaKurama",thetaKurama);
+  pik->SetBranchAddress("thetaKurama",thetaKurama);
   //   pik->SetBranchAddress("xtofKurama",xtofKurama);
   //   pik->SetBranchAddress("ytofKurama",ytofKurama);
   //   pik->SetBranchAddress("utofKurama",utofKurama);
@@ -595,9 +595,9 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
 
   //-hist def-----------------------------------------------------------------------------------------
   //   Hist1Max = 1252;
-  Hist1Max = 27;
+  Hist1Max = 15+nchisqr*4;
   //   Hist2Max =  405;
-    Hist2Max =  6;
+  Hist2Max =  6;
   chisqr = 5;
   TH1D *Hist1[Hist1Max];
   TH2D *Hist2[Hist2Max];
@@ -641,7 +641,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
 
   //-Event Loop --------------------------------------------------------------------------------------
   Long64_t nentries = pik->GetEntries();
-//  Long64_t nentries = 10000;
+  //  Long64_t nentries = 10000;
 
   //-Event Loop First --------
   Long64_t nbytes = 0;
@@ -772,7 +772,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   for(int i=0; i<Hist2Max; i++){
     Hist2[i]->Draw("colz");
     c1->Print(pdf);
-//    c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist2_colz_%04d.pdf",pdfDhire.Data(),matrix,runnum,i));
+    //    c1->Print(Form("%s/Mtx_Pos_Mon%d_run%05d_Hist2_colz_%04d.pdf",pdfDhire.Data(),matrix,runnum,i));
   }
   //   for(int j=0; j<Hist2Max; j++){
   //     Hist2[j]->Draw("box");
@@ -916,7 +916,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   //  c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_Hist1_0_1_same.pdf",pdfDhire.Data(),matrix,runnum));
   std::ofstream fout2;
   fout2.open(Form("%s/dat/trigger/MissMassDist_matrix%d_chisqr50.txt", anadir.Data(), matrix));
-    for(int i = 0; i<nBin; i++){
+  for(int i = 0; i<nBin; i++){
     fout2 << mz[i] << "\t" << mz_ratio[i] <<"\t" << mzerr[i] <<"\t" << mz_ratioerr[i] << std::endl;
   }
 
@@ -926,8 +926,9 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   double cxerr[nchisqr][100];
   double cratioerr[nchisqr][100];
   for(int j=0;j<nchisqr; j++){
-  for(int i = 0; i<nBinz; i++){
+    for(int i = 0; i<nBinz; i++){
       double a1=0., b1=0.;
+      cx[j][i] = 2./(double)nBin/2. + (double)i*2./nBin;
       a1=  Hist1[15+j+nchisqr]->GetBinContent(i+1);
       b1=  Hist1[15+j]->GetBinContent(i+1);
       //   x[i]=Hist1[g7]->GetXaxis()->GetBinCenter(i+i);
@@ -945,7 +946,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   }
   std::ofstream fout3;
   fout3.open(Form("%s/dat/trigger/MonDist_matrix%d.txt", anadir.Data(), matrix));
-    for(int i = 0; i<nBin; i++){
+  for(int i = 0; i<nBin; i++){
     fout3 << cx[0][i] << "\t" << cratio[0][i] <<"\t" << cxerr[0][i] <<"\t" << cratioerr[0][i] << std::endl;
   }
 
@@ -977,21 +978,22 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   }
 
   TGraphErrors *graphM[nchisqr];
-  double cMx[nchisqr][100];
-  double cMratio[nchisqr][100];
-  double cMxerr[nchisqr][100];
-  double cMratioerr[nchisqr][100];
+  double cMx[nchisqr][80];
+  double cMratio[nchisqr][80];
+  double cMxerr[nchisqr][80];
+  double cMratioerr[nchisqr][80];
   for(int j=0;j<nchisqr; j++){
-  for(int i = 0; i<nBinz; i++){
+    for(int i = 0; i<nBinz; i++){
       double  a1=0.,b1=0.;
+      cMx[j][i] = 0.35/(double)nBinz/0.35 + (double)i*0.35/nBinz + 1;
       a1=  Hist1[15+j+nchisqr*3]->GetBinContent(i+1);
       b1=  Hist1[15+j+nchisqr*2]->GetBinContent(i+1);
       //   x[i]=Hist1[g7]->GetXaxis()->GetBinCenter(i+i);
       cMratio[j][i] = a1/b1 ;
-      cMxerr[j][i] = 1./(double)nBin/2.;
+      cMxerr[j][i] = 1./(double)nBinz/2.;
       cMratioerr[j][i] = sqrt(b1*cMratio[j][i]*(1-cMratio[j][i]))/b1;
     }
-    graphM[j] = new TGraphErrors(nBin,&cMx[j][0],&cMratio[j][0],&cMxerr[j][0],&cMratioerr[j][0]);
+    graphM[j] = new TGraphErrors(nBinz,&cMx[j][0],&cMratio[j][0],&cMxerr[j][0],&cMratioerr[j][0]);
     graphM[j]->SetMarkerStyle(20);
     graphM[j]->SetMarkerColor(1);
     graphM[j]->SetMarkerSize(2);
@@ -1001,7 +1003,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   }
   std::ofstream fout4;
   fout4.open(Form("%s/dat/trigger/MissMassDist_matrix%d_chisqr3.txt", anadir.Data(), matrix));
-    for(int i = 0; i<nBin; i++){
+  for(int i = 0; i<nBinz; i++){
     fout4 << cMx[0][i] << "\t" << cMratio[0][i] <<"\t" << cMxerr[0][i] <<"\t" << cMratioerr[0][i] << std::endl;
   }
 
@@ -1009,23 +1011,22 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   gStyle->SetOptTitle(0);
   for(int j=0;j<nchisqr; j++){
     Hist1[15+nchisqr*2+j]->Draw();
-    Hist1[15+nchisqr*2+j+nchisqr]->SetLineColor(kRed); 
-    Hist1[15+nchisqr*2+j+nchisqr]->Draw("same");
-    c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_Hist1_ratio_chisqr%d.pdf",pdfDhire.Data(),matrix,runnum,chisqrG[j]));
+    Hist1[15+nchisqr*3+j]->SetLineColor(kRed); 
+    Hist1[15+nchisqr*3+j]->Draw("same");
+    c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_Hist1_Mratio_chisqr%d.pdf",pdfDhire.Data(),matrix,runnum,chisqrG[j]));
     test->Draw();
     graphM[j]->Draw("P");
-    c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_graph_ratio_chisqr%d.pdf",pdfDhire.Data(),matrix,runnum,chisqrG[j]));
+    c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_graph_Mratio_chisqr%d.pdf",pdfDhire.Data(),matrix,runnum,chisqrG[j]));
   }
   gStyle->SetOptTitle(1);
 
-  c1->Print(pdfc+"["); 
   for(int j=0;j<nchisqr; j++){
-    Hist1[15+nchisqr*3+j]->Draw();
-    Hist1[15+nchisqr*3+j+nchisqr]->SetLineColor(kRed); 
-    Hist1[15+nchisqr*3+j+nchisqr]->Draw("same");
+    Hist1[15+nchisqr*2+j]->Draw();
+    Hist1[15+nchisqr*3+j]->SetLineColor(kRed); 
+    Hist1[15+nchisqr*3+j]->Draw("same");
     c1->Print(pdf);
     c1->Print(pdfc);
-//    test->SetTitle(Form("Missing Mass Ratio(Cut5/Cut3)  Chisq<%d",chisqrG[j]));
+    //    test->SetTitle(Form("Missing Mass Ratio(Cut5/Cut3)  Chisq<%d",chisqrG[j]));
     test->Draw();
     graphM[j]->Draw("P");
     c1->Print(pdf);
