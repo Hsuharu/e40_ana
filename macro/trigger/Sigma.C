@@ -580,8 +580,8 @@ void Sigma(int month=6,int runnum=0, int file=2){
   //  TLegend *Leg1 = new TLegend(0.78,0.575,0.98,0.935);
 
   //-Event Loop --------------------------------------------------------------------------------------
-  Long64_t nentries = pik->GetEntries();
-//     Long64_t nentries = 10000;
+//  Long64_t nentries = pik->GetEntries();
+     Long64_t nentries = 100000;
 
   //-Event Loop First --------
   for (Long64_t s=0; s<nentries;s++) {
@@ -668,6 +668,15 @@ void Sigma(int month=6,int runnum=0, int file=2){
     c1->Print(Form("%s/Sigma_run%05d_Hist1_%04d.pdf",pdfDhire.Data(),runnum,i));
     //   if(i==15 || i==16 || i==38) gPad->SetLogy(0);
   }
+
+  double max=0.;
+  max = Hist1[1]->GetBinContent(Hist1[1]->GetMaximumBin());
+  Hist1[1]->Scale(max);
+  c1->Print(pdf);
+  c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMon.pdf",pdfDhire.Data(),runnum));
+
+
+
   //     for(int i=0; i<Hist2Max; i++){
   //       Hist2[i]->Draw("colz");
   //       c1->Print(pdf);
