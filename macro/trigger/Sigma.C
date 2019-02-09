@@ -698,28 +698,28 @@ void Sigma(int month=6,int runnum=0, int file=2){
     }
   }
 
-    TGraphErrors *graph = new TGraphErrors(cx.size(),cx.data(),cratio.data(),cxerr.data(),cratioerr.data());
-    graph->SetMarkerStyle(20);
-    graph->SetMarkerColor(1);
-    graph->SetMarkerSize(2);
-    graph->Draw("AP");
-    c1->Print(pdf);
-    c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMon_graphpdf",pdfDhire.Data(),runnum));
+  TGraphErrors *graph = new TGraphErrors(cx.size(),cx.data(),cratio.data(),cxerr.data(),cratioerr.data());
+  graph->SetMarkerStyle(20);
+  graph->SetMarkerColor(1);
+  graph->SetMarkerSize(2);
+  graph->Draw("AP");
+  c1->Print(pdf);
+  c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMon_graphpdf",pdfDhire.Data(),runnum));
 
-    Hist1[4]->Draw("hist");
-    graph->Draw("P");
-    c1->Print(pdf);
-    c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMon_same.pdf",pdfDhire.Data(),runnum));
-
+  Hist1[4]->Draw("hist");
+  graph->Draw("P");
+  c1->Print(pdf);
+  c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMon_same.pdf",pdfDhire.Data(),runnum));
   Hist1[4]->Scale(max/sum*4);
   Hist1[4]->Draw("hist");
   c1->Print(pdf);
   c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMon.pdf",pdfDhire.Data(),runnum));
 
-    Hist1[4]->Draw("hist");
-    graph->Draw("P");
-    c1->Print(pdf);
-    c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMon_same.pdf",pdfDhire.Data(),runnum));
+  Hist1[4]->SetAxisRange(0,1,"Y");
+  Hist1[4]->Draw("hist");
+  graph->Draw("P");
+  c1->Print(pdf);
+  c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMon_same.pdf",pdfDhire.Data(),runnum));
   //     for(int i=0; i<Hist2Max; i++){
   //       Hist2[i]->Draw("colz");
   //       c1->Print(pdf);
