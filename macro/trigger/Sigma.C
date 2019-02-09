@@ -735,63 +735,63 @@ void Sigma(int month=6,int runnum=0, int file=2){
 
   double maxM=0.;
   double sumM=0.;
-  maxM = Hist1[4]->GetBinContent(Hist1[4]->GetMaximumBin());
-  sumM = Hist1[4]->Integral();
-  Hist1[4]->Scale(1./maxM);
-  Hist1[4]->Draw("hist");
+  maxM = Hist1[0]->GetBinContent(Hist1[0]->GetMaximumBin());
+  sumM = Hist1[0]->Integral();
+  Hist1[0]->Scale(1./maxM);
+  Hist1[0]->Draw("hist");
   c1->Print(pdf);
-  c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMon.pdf",pdfDhire.Data(),runnum));
+  c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMissMass.pdf",pdfDhire.Data(),runnum));
 
-  TString filein2=Form("%s/dat/trigger/MonDist_matrix%d.txt", anadir.Data(), 2); 
+  TString filein2=Form("%s/dat/trigger/MissMassDist_matrix%d.txt", anadir.Data(), 2); 
   std::ifstream fin2(filein2);
-  std::vector<double> cx; 
-  std::vector<double> cratio; 
-  std::vector<double> cxerr; 
-  std::vector<double> cratioerr; 
+  std::vector<double> cMx; 
+  std::vector<double> cMratio; 
+  std::vector<double> cMxerr; 
+  std::vector<double> cMratioerr; 
 
   while(std::getline(fin2, line)){
     double a=-1., b=-1.,c=-1.,d=-1.;
     std::istringstream input_line( line );
     if( input_line >> a >> b >> c >> d){
-      cx.push_back(a);
-      cratio.push_back(b);
-      cxerr.push_back(c);
-      cratioerr.push_back(d);
+      cMx.push_back(a);
+      cMratio.push_back(b);
+      cMxerr.push_back(c);
+      cMratioerr.push_back(d);
     }
   }
 
-  TGraphErrors *graph = new TGraphErrors(cx.size(),cx.data(),cratio.data(),cxerr.data(),cratioerr.data());
+  TGraphErrors *graph = new TGraphErrors(cMx.size(),cMx.data(),cMratio.data(),cMxerr.data(),cMratioerr.data());
   graph->SetMarkerStyle(20);
   graph->SetMarkerColor(1);
   graph->SetMarkerSize(2);
   graph->Draw("AP");
   c1->Print(pdf);
-  c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMon_graphpdf",pdfDhire.Data(),runnum));
+  c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMissMass_graphpdf",pdfDhire.Data(),runnum));
 
-  Hist1[4]->Draw("hist");
+  Hist1[0]->Draw("hist");
   graph->Draw("P");
   c1->Print(pdf);
-  c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMon_same.pdf",pdfDhire.Data(),runnum));
-  Hist1[4]->Scale(maxM/sumM*4);
-  Hist1[4]->Draw("hist");
+  c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMissMass_same.pdf",pdfDhire.Data(),runnum));
+  Hist1[0]->Scale(maxM/sumM*4);
+  Hist1[0]->Draw("hist");
   c1->Print(pdf);
-  c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMon.pdf",pdfDhire.Data(),runnum));
+  c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMissMass.pdf",pdfDhire.Data(),runnum));
 
-  Hist1[4]->SetAxisRange(0,1,"Y");
-  Hist1[4]->Draw("hist");
+  Hist1[0]->SetAxisRange(0,1,"Y");
+  Hist1[0]->Draw("hist");
   graph->Draw("P");
   c1->Print(pdf);
-  c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMon_same.pdf",pdfDhire.Data(),runnum));
+  c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMissMass_same.pdf",pdfDhire.Data(),runnum));
   //     for(int i=0; i<Hist2Max; i++){
   //       Hist2[i]->Draw("colz");
   //       c1->Print(pdf);
   //  //     c1->Print(Form("%s/Mtx_Pat_Make_run%05d_Hist2_colz_%04d.pdf",pdfDhire.Data(),runnum,i));
   //     }
   
-    Hist1[4]->Draw("hist");
+    Hist1[0]->Draw("hist");
     graph->Draw("P");
     c1->Print(pdf);
-    c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMon_same.pdf",pdfDhire.Data(),runnum));
+    c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMissMass_same.pdf",pdfDhire.Data(),runnum));
 
   c1->Print(pdf1+"]"); 
 

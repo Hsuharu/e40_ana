@@ -620,7 +620,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   for(int i=0; i<nchisqr;i++){
     Hist1[15+i]= new TH1D(Form("Momentum Chisq<%d Cut3        ",chisqrG[i]),Form("Momentum Chisq<%d Cut3     ;Momentum[GeV/c];Counts",chisqrG[i]),100,0,2);
     Hist1[15+i+nchisqr]= new TH1D(Form("Momentum Chisq<%d Cut5",chisqrG[i]),Form("Momentum Chisq<%d Cut5     ;Momentum[GeV/c];Counts",chisqrG[i]),100,0,2);
-    Hist1[15+i+nchisqr*2]= new TH1D(Form("MissingMass Chisq<%d Cut3        ",chisqrG[i]),Form("MissingMass Chisq<%d Cut3     ;MissingMass[GeV/c];Counts",chisqrG[i]),80,0,1.35);
+    Hist1[15+i+nchisqr*2]= new TH1D(Form("MissingMass Chisq<%d Cut3        ",chisqrG[i]),Form("MissingMass Chisq<%d Cut3     ;MissingMass[GeV/c];Counts",chisqrG[i]),80,1.0,1.35);
     Hist1[15+i+nchisqr*3]= new TH1D(Form("MissingMass Chisq<%d Cut5",chisqrG[i]),Form("MissingMass Chisq<%d Cut5     ;MissingMass[GeV/c];Counts",chisqrG[i]),80,1.0,1.35);
   }
 
