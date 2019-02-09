@@ -5,6 +5,7 @@
    "SFT_Newtable.txt.2019Jan.1_1",
    "SFT_Newtable.txt.2019Jan.1_2",
    "SFT_table.txt.2018Jun.3_1   "
+   "SFT_Newtable.txt.2019Jan.3_2"
  };
 
  const char* Month[] =

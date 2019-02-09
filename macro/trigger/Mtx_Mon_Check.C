@@ -4,7 +4,33 @@ const char* MPG[] =
 {
   "SFT_Newtable.txt.2019Jan.1_1",
   "SFT_Newtable.txt.2019Jan.1_2",
-  "SFT_table.txt.2018Jun.3_1"
+  "SFT_table.txt.2018Jun.3_1",
+  "SFT_Newtable.txt.2019Jan.2_2",
+  "SFT_CutFirst_ratio100_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio50_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio20_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio15_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio10_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio8_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio6_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio5_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio4_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio2_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_ratio1_Newtable.txt.2019Jan.1_2",
+  "SFT_CutSecond_Newtable.txt.2019Jan.1_2",
+  "SFT_CutSecond_900_Newtable.txt.2019Jan.1_2",
+  "SFT_CutSecond_990_Newtable.txt.2019Jan.1_2",
+  "SFT_CutSecond_999_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r110_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r11_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r120_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r125_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r130_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r136_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r140_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r150_Newtable.txt.2019Jan.1_2",
+  "SFT_CutFirst_r15_Newtable.txt.2019Jan.1_2",
+  "SFT_Newtable.txt.2019Jan.3_2"
 };
 
 const char* Month[] =
@@ -594,6 +620,8 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   for(int i=0; i<nchisqr;i++){
     Hist1[15+i]= new TH1D(Form("Momentum Chisq<%d Cut3        ",chisqrG[i]),Form("Momentum Chisq<%d Cut3     ;Momentum[GeV/c];Counts",chisqrG[i]),100,0,2);
     Hist1[15+i+nchisqr]= new TH1D(Form("Momentum Chisq<%d Cut5",chisqrG[i]),Form("Momentum Chisq<%d Cut5     ;Momentum[GeV/c];Counts",chisqrG[i]),100,0,2);
+    Hist1[15+i+nchisqr*2]= new TH1D(Form("MissingMass Chisq<%d Cut3        ",chisqrG[i]),Form("MissingMass Chisq<%d Cut3     ;MissingMass[GeV/c];Counts",chisqrG[i]),80,0,1.35);
+    Hist1[15+i+nchisqr*3]= new TH1D(Form("MissingMass Chisq<%d Cut5",chisqrG[i]),Form("MissingMass Chisq<%d Cut5     ;MissingMass[GeV/c];Counts",chisqrG[i]),80,1.0,1.35);
   }
 
   Hist2[0 ]= new TH2D("p %% m2 Cut3 w/oCut5                ","p %% m2 Cut3 w/oCut5                ;[(GeV/c^{2})^{2}];[GeV/c]"   ,100,-0.4,1.6,100,0,2);
@@ -690,6 +718,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
         if(chisqrKurama[0] < chisqrG[i]){ // Cut2
           if(qKurama[0]>0){ // Cut3
             Hist1[15+i]->Fill(pKurama[0]);
+            Hist1[15+i+nchisqr*2]->Fill(MissMass[0]);
             for(int l=0; l < Mtx_prm.size(); l++){
               double m = 0;
               double n = 0;
@@ -702,6 +731,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
               if(vpseg[1]==n&&tofsegKurama[0]-1==m){
                 if(sftxsegKurama>min&&sftxsegKurama<max){
                   Hist1[15+i+nchisqr]->Fill(pKurama[0]);
+                  Hist1[15+i+nchisqr*3]->Fill(MissMass[0]);
                 }
               }
             } // Cut3
@@ -884,6 +914,11 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   graph3->Draw("P");
   c1->Print(pdf);
   //  c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_Hist1_0_1_same.pdf",pdfDhire.Data(),matrix,runnum));
+  std::ofstream fout2;
+  fout2.open(Form("%s/dat/trigger/MissMassDist_matrix%d_chisqr50.txt", anadir.Data(), matrix));
+    for(int i = 0; i<nBin; i++){
+    fout2 << mz[i] << "\t" << mz_ratio[i] <<"\t" << mzerr[i] <<"\t" << mz_ratioerr[i] << std::endl;
+  }
 
   TGraphErrors *graph[nchisqr];
   double cx[nchisqr][100];
@@ -891,10 +926,8 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   double cxerr[nchisqr][100];
   double cratioerr[nchisqr][100];
   for(int j=0;j<nchisqr; j++){
-    for(int i = 0; i<nBin; i++){
-      cx[j][i] = 2./(double)nBin/2. + (double)i*2./nBin;
-      double  a1=0.;
-      double  b1=0.;
+  for(int i = 0; i<nBinz; i++){
+      double a1=0., b1=0.;
       a1=  Hist1[15+j+nchisqr]->GetBinContent(i+1);
       b1=  Hist1[15+j]->GetBinContent(i+1);
       //   x[i]=Hist1[g7]->GetXaxis()->GetBinCenter(i+i);
@@ -910,10 +943,10 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     graph[j]->Draw("P");
     c1->Print(pdf);
   }
-  std::ofstream fout1;
-  fout1.open(Form("%s/dat/trigger/MonDist_matrix%d.txt", anadir.Data(), matrix));
+  std::ofstream fout3;
+  fout3.open(Form("%s/dat/trigger/MonDist_matrix%d.txt", anadir.Data(), matrix));
     for(int i = 0; i<nBin; i++){
-    fout1 << cx[0][i] << "\t" << cratio[0][i] <<"\t" << cxerr[0][i] <<"\t" << cratioerr[0][i] << std::endl;
+    fout3 << cx[0][i] << "\t" << cratio[0][i] <<"\t" << cxerr[0][i] <<"\t" << cratioerr[0][i] << std::endl;
   }
 
 
@@ -942,6 +975,65 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     c1->Print(pdf);
     c1->Print(pdfc);
   }
+
+  TGraphErrors *graphM[nchisqr];
+  double cMx[nchisqr][100];
+  double cMratio[nchisqr][100];
+  double cMxerr[nchisqr][100];
+  double cMratioerr[nchisqr][100];
+  for(int j=0;j<nchisqr; j++){
+  for(int i = 0; i<nBinz; i++){
+      double  a1=0.,b1=0.;
+      a1=  Hist1[15+j+nchisqr*3]->GetBinContent(i+1);
+      b1=  Hist1[15+j+nchisqr*2]->GetBinContent(i+1);
+      //   x[i]=Hist1[g7]->GetXaxis()->GetBinCenter(i+i);
+      cMratio[j][i] = a1/b1 ;
+      cMxerr[j][i] = 1./(double)nBin/2.;
+      cMratioerr[j][i] = sqrt(b1*cMratio[j][i]*(1-cMratio[j][i]))/b1;
+    }
+    graphM[j] = new TGraphErrors(nBin,&cMx[j][0],&cMratio[j][0],&cMxerr[j][0],&cMratioerr[j][0]);
+    graphM[j]->SetMarkerStyle(20);
+    graphM[j]->SetMarkerColor(1);
+    graphM[j]->SetMarkerSize(2);
+    test->Draw();
+    graphM[j]->Draw("P");
+    c1->Print(pdf);
+  }
+  std::ofstream fout4;
+  fout4.open(Form("%s/dat/trigger/MissMassDist_matrix%d_chisqr3.txt", anadir.Data(), matrix));
+    for(int i = 0; i<nBin; i++){
+    fout4 << cMx[0][i] << "\t" << cMratio[0][i] <<"\t" << cMxerr[0][i] <<"\t" << cMratioerr[0][i] << std::endl;
+  }
+
+
+  gStyle->SetOptTitle(0);
+  for(int j=0;j<nchisqr; j++){
+    Hist1[15+nchisqr*2+j]->Draw();
+    Hist1[15+nchisqr*2+j+nchisqr]->SetLineColor(kRed); 
+    Hist1[15+nchisqr*2+j+nchisqr]->Draw("same");
+    c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_Hist1_ratio_chisqr%d.pdf",pdfDhire.Data(),matrix,runnum,chisqrG[j]));
+    test->Draw();
+    graphM[j]->Draw("P");
+    c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_graph_ratio_chisqr%d.pdf",pdfDhire.Data(),matrix,runnum,chisqrG[j]));
+  }
+  gStyle->SetOptTitle(1);
+
+  c1->Print(pdfc+"["); 
+  for(int j=0;j<nchisqr; j++){
+    Hist1[15+nchisqr*3+j]->Draw();
+    Hist1[15+nchisqr*3+j+nchisqr]->SetLineColor(kRed); 
+    Hist1[15+nchisqr*3+j+nchisqr]->Draw("same");
+    c1->Print(pdf);
+    c1->Print(pdfc);
+//    test->SetTitle(Form("Missing Mass Ratio(Cut5/Cut3)  Chisq<%d",chisqrG[j]));
+    test->Draw();
+    graphM[j]->Draw("P");
+    c1->Print(pdf);
+    c1->Print(pdfc);
+  }
+
+
+
   c1->Print(pdfc+"]"); 
 
 

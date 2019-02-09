@@ -102,6 +102,8 @@ void triggerrate(){
   std::vector<double> SAC  ;
   std::vector<double> SCH  ;
   std::vector<double> TOF_HT  ;
+  std::vector<double> pi_k  ;
+  
 
 //  std::vector<int> runnumber{5080,5139,5118,5120,5123,5304,5303,5126,5129,5272,5275,5283};
   std::vector<int> runnumber{5272,5275,5283,5298,5299,5300,5301,5302,5303,5304};
@@ -120,6 +122,7 @@ void triggerrate(){
     double preSAC  ;
     double preSCH  ;
     double preTOF_HT  ;
+    double prepi_k  ;
 
     std::tie(SCounts
             ,BCounts
@@ -135,12 +138,14 @@ void triggerrate(){
     preSAC   = param("SAC");
     preSCH   = param("SCH");
     preTOF_HT= param("TOF-HT");
+    prepi_k= param("(BH2,K)-PS");
     preBH2_K = preBH2_K/SCounts;
     preK_Scat= preK_Scat/SCounts;
     preTOF   = preTOF/SCounts;
     preSAC   = preSAC/SCounts;
     preSCH   = preSCH/SCounts;
     preTOF_HT= preTOF_HT/SCounts;
+    prepi_k= prepi_k/SCounts;
 
 //    std::cout << "Run# \t" <<runnumber.at(i) 
 //              << "\t || Spill \t" << SCounts
@@ -164,6 +169,7 @@ void triggerrate(){
     SAC.push_back(preSAC);
     SCH.push_back(preSCH);
     TOF_HT.push_back(preTOF_HT);
+    pi_k.push_back(prepi_k);
   }
 
   TString filein1=Form("%s/dat/trigger/GateAccept.txt", anadir.Data()); 
@@ -221,7 +227,7 @@ void triggerrate(){
 
   TCanvas *c1 = new TCanvas("c1","c1",1200,900);
   c1->Print(pdf+"["); 
-  int gnum = 12;
+  int gnum = 14;
   TGraph *g[gnum];
   TGraph *base = new TGraph(1,&bx[0],&by[0]);
   g[0] = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),DAQEff.data());
@@ -236,6 +242,8 @@ void triggerrate(){
   g[9] = new TGraph(Matrix.size(),Matrix.data(),DAQEff.data());
   g[10] = new TGraph(BH2SUMMparSpillCounts.size(),BH2SUMMparSpillCounts.data(),L1Req.data());
   g[11] = new TGraph(L1Req.size(),Matrix.data(),L1Req.data());
+  g[12] = new TGraph(pi_k.size(),Matrix.data(),pi_k.data());
+  g[13] = new TGraph(pi_k.size(),L1Req.data(),pi_k.data());
   for(int i=0; i<gnum; i++ ){
     gStyle->SetOptStat(0);
     g[i]->SetTitle("");
