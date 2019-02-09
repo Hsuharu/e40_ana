@@ -711,7 +711,7 @@ void Sigma(int month=6,int runnum=0, int file=2){
     c1->Print(pdf);
     c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMon_same.pdf",pdfDhire.Data(),runnum));
 
-  Hist1[4]->Scale(max/sum);
+  Hist1[4]->Scale(max/sum*4);
   Hist1[4]->Draw("hist");
   c1->Print(pdf);
   c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMon.pdf",pdfDhire.Data(),runnum));
