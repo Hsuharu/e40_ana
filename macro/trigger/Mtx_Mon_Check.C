@@ -913,7 +913,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
   std::ofstream fout1;
   fout1.open(Form("%s/dat/trigger/MonDist_matrix%d.txt", anadir.Data(), matrix));
     for(int i = 0; i<nBin; i++){
-    fout1 << cx[0][i] << "\t" << cratio[i][0] <<"\t" << cxerr[i][0] <<"\t" << cratioerr[i][0] << std::endl;
+    fout1 << cx[0][i] << "\t" << cratio[0][i] <<"\t" << cxerr[0][i] <<"\t" << cratioerr[0][i] << std::endl;
   }
 
 

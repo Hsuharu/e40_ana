@@ -581,8 +581,8 @@ void Sigma(int month=6,int runnum=0, int file=2){
   //  TLegend *Leg1 = new TLegend(0.78,0.575,0.98,0.935);
 
   //-Event Loop --------------------------------------------------------------------------------------
-//  Long64_t nentries = pik->GetEntries();
-     Long64_t nentries = 100000;
+  Long64_t nentries = pik->GetEntries();
+//     Long64_t nentries = 100000;
 
   //-Event Loop First --------
   for (Long64_t s=0; s<nentries;s++) {
@@ -700,11 +700,14 @@ void Sigma(int month=6,int runnum=0, int file=2){
     graph->SetMarkerStyle(20);
     graph->SetMarkerColor(1);
     graph->SetMarkerSize(2);
+    graph->Draw("AP");
+    c1->Print(pdf);
+    c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMon_graphpdf",pdfDhire.Data(),runnum));
+
     Hist1[4]->Draw("hist");
     graph->Draw("P");
     c1->Print(pdf);
     c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMon_same.pdf",pdfDhire.Data(),runnum));
-
 
   //     for(int i=0; i<Hist2Max; i++){
   //       Hist2[i]->Draw("colz");
