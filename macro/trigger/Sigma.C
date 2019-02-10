@@ -829,6 +829,8 @@ void Sigma(int month=6,int runnum=0, int file=2){
   graphM->Draw("P");
   c1->Print(pdf);
   c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMissMass_same.pdf",pdfDhire.Data(),runnum));
+  Min->Draw("same");
+  Max->Draw("same");
 
   graphM3->Draw("P");
   c1->Print(pdf);
