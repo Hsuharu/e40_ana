@@ -594,7 +594,7 @@ void Sigma(int month=6,int runnum=0, int file=2){
     if( trigflag[28]<0 ) continue; //Cut1
     if( ntKurama!=1 ) continue; //Cut1
     if( chisqrKurama[0]>50 ) continue; //Cut1
-          Hist1[2]->Fill(m2[0]);
+    Hist1[2]->Fill(m2[0]);
 
     if(m2[0]>0.15 && m2[0]<0.35 && qKurama[0]>0){// && pKurama[0]<0.9){ 
       if( vtx[0]>-20 && vtx[0]<20 && vty[0]>-20 && vty[0]<20 && vtz[0]>-200 && vtz[0]<200 ){
@@ -663,6 +663,14 @@ void Sigma(int month=6,int runnum=0, int file=2){
       Max->SetLineColor(2);
       Min->SetLineWidth(1);
       Max->SetLineWidth(1);
+      Hist1[3]->SetAxisRange(1,1.35,"X");
+      Hist1[i]->Draw();
+      Min->Draw("same");
+      Max->Draw("same");
+      c1->Print(pdf);
+      c1->Print(Form("%s/Sigma_run%05d_Hist1_%04dzoom.pdf",pdfDhire.Data(),runnum,i));
+      Hist1[3]->SetAxisRange(0.8,1.5,"X");
+      Hist1[i]->Draw();
       Min->Draw("same");
       Max->Draw("same");
     }
