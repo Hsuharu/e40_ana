@@ -831,10 +831,10 @@ void Sigma(int month=6,int runnum=0, int file=2){
   Max->Draw("same");
   c1->Print(pdf);
   c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMissMass_same.pdf",pdfDhire.Data(),runnum));
+  
   graphM3->Draw("P");
   Min->Draw("same");
   Max->Draw("same");
-
   c1->Print(pdf);
   c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMissMass_same_MM3.pdf",pdfDhire.Data(),runnum));
   //     for(int i=0; i<Hist2Max; i++){
