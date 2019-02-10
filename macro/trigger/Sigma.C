@@ -840,12 +840,12 @@ void Sigma(int month=6,int runnum=0, int file=2){
   c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMissMass_same_MM3.pdf",pdfDhire.Data(),runnum));
   c1->Print(pdf);
   
-  Hist1[3]->SetAxisRange(0,1,"Y");
-  Hist1[3]->SetAxisRange(1,1.35,"X");
-  Hist1[3]->Draw("hist");
-  graphM->Draw("P");
-  c1->Print(pdf);
-  c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMissMass_same.pdf",pdfDhire.Data(),runnum));
+//  Hist1[3]->SetAxisRange(0,1,"Y");
+//  Hist1[3]->SetAxisRange(1,1.35,"X");
+//  Hist1[3]->Draw("hist");
+//  graphM->Draw("P");
+//  c1->Print(pdf);
+//  c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMissMass_same.pdf",pdfDhire.Data(),runnum));
 
   c1->Print(pdf+"]"); 
 
