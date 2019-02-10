@@ -663,8 +663,8 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
 //  TLegend *Leg1 = new TLegend(0.78,0.575,0.98,0.935);
 
 //-Event Loop --------------------------------------------------------------------------------------
-   Long64_t nentries = pik->GetEntries();
-//   Long64_t nentries = 10000;
+//   Long64_t nentries = pik->GetEntries();
+   Long64_t nentries = 10000;
 
 //-Event Loop First --------
    for (Long64_t s=0; s<nentries;s++) {
@@ -890,32 +890,32 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
          TLine *MtxGateMin = new TLine(x1,TOF_Min_y1,x2,TOF_Min_y2);
          TLine *MtxGateMax = new TLine(x1,TOF_Max_y1,x2,TOF_Max_y2);
 
-         MtxGateMin->SetLineColor(2);
-         MtxGateMax->SetLineColor(2);
+         MtxGateMin->SetLineColor(1);
+         MtxGateMax->SetLineColor(1);
          MtxGateMin->SetLineWidth(1);
          MtxGateMax->SetLineWidth(1);
          MtxGateMin->Draw("same");
          MtxGateMax->Draw("same");
          if(i==0){
            TLine *MtxGateMin_Y = new TLine(x1,TOF_Min_y1,x1,TOF_Max_y1);
-           MtxGateMin_Y->SetLineColor(2);
+           MtxGateMin_Y->SetLineColor(1);
            MtxGateMin_Y->SetLineWidth(1);
            MtxGateMin_Y->Draw("same");
          }else if(i==SCH_Seg.size()-1){
            TLine *MtxGateMin_Y = new TLine(x2,TOF_Min_y1,x2,TOF_Max_y1);
-           MtxGateMin_Y->SetLineColor(2);
+           MtxGateMin_Y->SetLineColor(1);
            MtxGateMin_Y->SetLineWidth(1);
            MtxGateMin_Y->Draw("same");
          }else{
            if(TOF_Min.at(i)-TOF_Min.at(i-1)!=0){
              TLine *MtxGate_Y1 = new TLine(x1,(double)TOF_Min.at(i-1),x1,TOF_Min_y1);
-             MtxGate_Y1->SetLineColor(2);
+             MtxGate_Y1->SetLineColor(1);
              MtxGate_Y1->SetLineWidth(1);
              MtxGate_Y1->Draw("same");
            }
            if(TOF_Max.at(i)-TOF_Max.at(i-1)!=0){
              TLine *MtxGate_Y2 = new TLine(x1,(double)TOF_Max.at(i-1)+1,x1,TOF_Max_y1);
-             MtxGate_Y2->SetLineColor(2);
+             MtxGate_Y2->SetLineColor(1);
              MtxGate_Y2->SetLineWidth(1);
              MtxGate_Y2->Draw("same");
            }
@@ -956,32 +956,32 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
          TLine *MtxGateMin = new TLine(x1,TOF_Min_y1,x2,TOF_Min_y2);
          TLine *MtxGateMax = new TLine(x1,TOF_Max_y1,x2,TOF_Max_y2);
 
-         MtxGateMin->SetLineColor(2);
-         MtxGateMax->SetLineColor(2);
+         MtxGateMin->SetLineColor(1);
+         MtxGateMax->SetLineColor(1);
          MtxGateMin->SetLineWidth(1);
          MtxGateMax->SetLineWidth(1);
          MtxGateMin->Draw("same");
          MtxGateMax->Draw("same");
          if(i==0){
            TLine *MtxGateMin_Y = new TLine(x1,TOF_Min_y1,x1,TOF_Max_y1);
-           MtxGateMin_Y->SetLineColor(2);
+           MtxGateMin_Y->SetLineColor(1);
            MtxGateMin_Y->SetLineWidth(1);
            MtxGateMin_Y->Draw("same");
          }else if(i==SCH_Seg.size()-1){
            TLine *MtxGateMin_Y = new TLine(x2,TOF_Min_y1,x2,TOF_Max_y1);
-           MtxGateMin_Y->SetLineColor(2);
+           MtxGateMin_Y->SetLineColor(1);
            MtxGateMin_Y->SetLineWidth(1);
            MtxGateMin_Y->Draw("same");
          }else{
            if(TOF_Min.at(i)-TOF_Min.at(i-1)!=0){
              TLine *MtxGate_Y1 = new TLine(x1,(double)TOF_Min.at(i-1),x1,TOF_Min_y1);
-             MtxGate_Y1->SetLineColor(2);
+             MtxGate_Y1->SetLineColor(1);
              MtxGate_Y1->SetLineWidth(1);
              MtxGate_Y1->Draw("same");
            }
            if(TOF_Max.at(i)-TOF_Max.at(i-1)!=0){
              TLine *MtxGate_Y2 = new TLine(x1,(double)TOF_Max.at(i-1)+1,x1,TOF_Max_y1);
-             MtxGate_Y2->SetLineColor(2);
+             MtxGate_Y2->SetLineColor(1);
              MtxGate_Y2->SetLineWidth(1);
              MtxGate_Y2->Draw("same");
            }
@@ -1012,8 +1012,8 @@ void Mtx_Pat_Make2(int month,int runnum, int bin, int matrixnum =2){
      y2 = Hist1[34+Mtx_prm.size()*16 +l]->GetBinContent(Hist1[34+Mtx_prm.size()*16 +l]->GetMaximumBin());
      TLine *MtxSftXGateMin = new TLine(min,y1,min,y2);
      TLine *MtxSftXGateMax = new TLine(max,y1,max,y2);
-     MtxSftXGateMin->SetLineColor(2);
-     MtxSftXGateMax->SetLineColor(2);
+     MtxSftXGateMin->SetLineColor(1);
+     MtxSftXGateMax->SetLineColor(1);
      MtxSftXGateMin->SetLineWidth(1);
      MtxSftXGateMax->SetLineWidth(1);
      MtxSftXGateMin->Draw("same");
