@@ -758,7 +758,7 @@ void Sigma(int month=6,int runnum=0, int file=2){
   std::vector<double> cMratioerr; 
 
   while(std::getline(fin3, line)){
-    double a=-1., b=-1.,c=-1.,d=-1.;
+    double a=0., b=-1.,c=-1.,d=-1.;
     std::istringstream input_line( line );
     if( input_line >> a >> b >> c >> d){
       cMx.push_back(a);
@@ -786,6 +786,14 @@ void Sigma(int month=6,int runnum=0, int file=2){
     }
   }
 
+  double y1 = 0.;
+  double y3 = 1.;
+  TLine *Min = new TLine(1.15,y1,1.15,y3);
+  TLine *Max = new TLine(1.25,y1,1.25,y3);
+  Min->SetLineColor(2);
+  Max->SetLineColor(2);
+  Min->SetLineWidth(1);
+  Max->SetLineWidth(1);
 
   TGraphErrors *graphM = new TGraphErrors(cMx.size(),cMx.data(),cMratio.data(),cMxerr.data(),cMratioerr.data());
   TGraphErrors *graphM3 = new TGraphErrors(cM3x.size(),cM3x.data(),cM3ratio.data(),cM3xerr.data(),cM3ratioerr.data());
@@ -810,6 +818,8 @@ void Sigma(int month=6,int runnum=0, int file=2){
   c1->Print(Form("%s/Sigma_run%05d_Hist1_ScaleMissMass_same.pdf",pdfDhire.Data(),runnum));
   Hist1[3]->Scale(maxM/sumM*4);
   Hist1[3]->Draw("hist");
+  Min->Draw("same");
+  Max->Draw("same");
   c1->Print(pdf);
   c1->Print(Form("%s/Sigma_run%05d_Hist1_IntegMissMass.pdf",pdfDhire.Data(),runnum));
 
