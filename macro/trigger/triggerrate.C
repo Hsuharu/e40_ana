@@ -263,6 +263,14 @@ void triggerrate(){
   sort(Matrix.begin(),Matrix.end());
   sort(DAQEff.begin(),DAQEff.end());
   sort(L1Req.begin(),L1Req.end());
+  sort(BH2SUMCounts.begin(),BH2SUMCounts.end());
+
+  TH1D *h10 = new TH1D("h10",";BH2 SUM [Counts/spill];L1 [Counts/spill]",100,0,BH2SUMCounts.back()*1.1);
+  h10->SetAxisRange(0,L1Req.back()*1.1,"Y");
+  h10->Draw();
+  c1->Print(pdf);
+  c1->Print(Form("%s/L1_BH2_%d.pdf",pdfDhire.Data(), 11));
+
 
   TF1 *fit = new TF1("fit","pol1"); 
   fit->SetParameters(10,0.1);
@@ -270,7 +278,7 @@ void triggerrate(){
 //  g[8]->GetYaxis()->SetRangeUser(0,DAQEff.back()*1.1);
 //  g[8]->GetXaxis()->SetTitle("");
 //  g[8]->GetYaxis()->SetTitle("");
-  TH1D *h8 = new TH1D("h8",";L1 [Counts/Spill];DAQ Efficiency",100,0,L1Req.back()*1.1);
+  TH1D *h8 = new TH1D("h8",";L1 [Counts/spill];DAQ Efficiency",100,0,L1Req.back()*1.1);
   h8->SetAxisRange(0.8,DAQEff.back()*1.1,"Y");
   h8->Draw();
   g[8]->GetYaxis()->SetDecimals(2);
@@ -287,7 +295,7 @@ void triggerrate(){
 //  g[11]->GetYaxis()->SetRangeUser(0,L1Req.back()*1.1);
 //  g[11]->GetXaxis()->SetTitle("Matrix [Counts/Spill]");
 //  g[11]->GetYaxis()->SetTitle("L1 [Counts/Spill]");
-  TH1D *h11 = new TH1D("h8",";Matrix [Counts/Spill];L1 [Counts/Spill]",100,0,Matrix.back()*1.1);
+  TH1D *h11 = new TH1D("h11",";Matrix [Counts/spill];L1 [Counts/spill]",100,0,Matrix.back()*1.1);
   h11->SetAxisRange(0,L1Req.back()*1.1,"Y");
   h11->Draw();
   g[11]->GetYaxis()->SetDecimals(2);
