@@ -268,6 +268,7 @@ void triggerrate(){
   TH1D *h10 = new TH1D("h10",";BH2 SUM [Counts/spill];L1 [Counts/spill]",100,0,BH2SUMCounts.back()*1.1);
   h10->SetAxisRange(0,L1Req.back()*1.1,"Y");
   h10->Draw();
+  g[10]->Draw("P");
   c1->Print(pdf);
   c1->Print(Form("%s/L1_BH2_%d.pdf",pdfDhire.Data(), 11));
 
