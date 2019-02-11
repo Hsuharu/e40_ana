@@ -622,6 +622,7 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     Hist1[15+i+nchisqr]= new TH1D(Form("Momentum Chisq<%d Cut5",chisqrG[i]),Form("Momentum Chisq<%d Cut5     ;Momentum[GeV/c];Counts",chisqrG[i]),100,0,2);
     Hist1[15+i+nchisqr*2]= new TH1D(Form("MissingMass Chisq<%d Cut3        ",chisqrG[i]),Form("MissingMass Chisq<%d Cut3     ;MissingMass[GeV/c];Counts",chisqrG[i]),80,1.0,1.35);
     Hist1[15+i+nchisqr*3]= new TH1D(Form("MissingMass Chisq<%d Cut5",chisqrG[i]),Form("MissingMass Chisq<%d Cut5     ;MissingMass[GeV/c];Counts",chisqrG[i]),80,1.0,1.35);
+    Hist1[15+i+nchisqr*3]->SetFillColor(kRed);
   }
 
   Hist2[0 ]= new TH2D("p %% m2 Cut3 w/oCut5                ","p %% m2 Cut3 w/oCut5                ;[(GeV/c^{2})^{2}];[GeV/c]"   ,100,-0.4,1.6,100,0,2);
