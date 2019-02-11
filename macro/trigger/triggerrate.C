@@ -263,9 +263,9 @@ void triggerrate(){
   sort(Matrix.begin(),Matrix.end());
   sort(DAQEff.begin(),DAQEff.end());
   sort(L1Req.begin(),L1Req.end());
-  sort(BH2SUMCounts.begin(),BH2SUMCounts.end());
+  sort(BH2SUMMparSpillCounts.begin(),BH2SUMMparSpillCounts.end());
 
-  TH1D *h10 = new TH1D("h10",";BH2 SUM [Counts/spill];L1 [Counts/spill]",100,0,BH2SUMCounts.back()*1.1);
+  TH1D *h10 = new TH1D("h10",";BH2 SUM [Counts/spill];L1 [Counts/spill]",100,0,BH2SUMMparSpillCounts.back()*1.1);
   h10->SetAxisRange(0,L1Req.back()*1.1,"Y");
   h10->Draw();
   g[10]->Draw("P");
