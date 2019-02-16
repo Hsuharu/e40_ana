@@ -1039,11 +1039,11 @@ void Mtx_Mon_Check(int month,int runnum, int matrix = 2){
     c1->Print(pdfc);
   }
 
-  Hist2[1]->Draw();
+  Hist2[1]->Draw("colz");
   c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_graph_Mratio_thetaCut3.pdf",pdfDhire.Data(),matrix,runnum));
-  Hist2[2]->Draw();
+  Hist2[2]->Draw("colz");
   c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_graph_Mratio_thetaCut5.pdf",pdfDhire.Data(),matrix,runnum));
-  Hist2[3]->Draw();
+  Hist2[3]->Draw("colz");
   c1->Print(Form("%s/Mtx_Mon_Check%d_run%05d_graph_Mratio_thetaCut3woCut5.pdf",pdfDhire.Data(),matrix,runnum));
 
 
